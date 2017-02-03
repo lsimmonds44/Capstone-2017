@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CustomerAccessor.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
