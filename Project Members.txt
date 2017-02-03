@@ -1,15 +1,13 @@
 Place your name in the list below:
 ----------------------------------
-Victor Algarin
-Dan Brown
 Alissa Duffy
-Bill Flood
-Robert Forbes
-Skyler Hiscock
-Ethan Jorgensen
-Christian Lopez
-Nicholas Mikus
+Victor Algarin
 Ariel Sigo
-Michael Takrama
+Christian Lopez
+Ethan Jorgensen
 Aaron Usher
-Eric Walton
+Skyler Hiscock
+Alissa Duffy
+Robert Forbes
+Michael Takrama
+Bobby Thorne
