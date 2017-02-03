@@ -1,0 +1,30 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_update_driver')
+BEGIN
+DROP PROCEDURE sp_update_driver
+Print '' print  ' *** dropping procedure sp_update_driver'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_update_driver'
+GO
+Create PROCEDURE sp_update_driver
+(
+@old_DRIVER_ID[INT],
+@old_DRIVER_LICENSE_NUMBER[NVARCHAR](9),
+@new_DRIVER_LICENSE_NUMBER[NVARCHAR](9),
+@old_LICENSE_EXPIRATION[DATETIME],
+@new_LICENSE_EXPIRATION[DATETIME],
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE driver
+SET DRIVER_LICENSE_NUMBER = @new_DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION = @new_LICENSE_EXPIRATION, ACTIVE = @new_ACTIVE
+WHERE (DRIVER_ID = @old_DRIVER_ID)
+AND (DRIVER_LICENSE_NUMBER = @old_DRIVER_LICENSE_NUMBER)
+AND (LICENSE_EXPIRATION = @old_LICENSE_EXPIRATION)
+AND (ACTIVE = @old_ACTIVE)
+END

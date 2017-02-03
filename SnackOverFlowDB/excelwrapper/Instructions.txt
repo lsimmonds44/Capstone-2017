@@ -1,0 +1,6 @@
+Run refreshQuery.bat in excelwrapper
+Run executeScripts.bat in excelwrapper>create
+Run executeScripts.bat in excelwrapper>update
+Run executeScripts.bat in excelwrapper>get
+Run executeScripts.bat in excelwrapper>JavaGenerated
+Run executeScripts.bat in excelwrapper>delete

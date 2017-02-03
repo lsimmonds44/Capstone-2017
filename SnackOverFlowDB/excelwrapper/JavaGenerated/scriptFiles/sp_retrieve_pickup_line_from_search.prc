@@ -1,0 +1,29 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_retrieve_pickup_line_from_search')
+BEGIN
+Drop PROCEDURE sp_retrieve_pickup_line_from_search
+Print '' print  ' *** dropping procedure sp_retrieve_pickup_line_from_search'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_pickup_line_from_search
+(
+@PICKUP_LINE_ID[INT]=NULL,
+@PICKUP_ID[INT]=NULL,
+@PRODUCT_LOT_ID[INT]=NULL,
+@QUANTITY[INT]=NULL,
+@PICK_UP_STATUS[BIT]=NULL
+)
+AS
+BEGIN
+Select PICKUP_LINE_ID, PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS
+FROM PICKUP_LINE
+WHERE (PICKUP_LINE.PICKUP_LINE_ID=@PICKUP_LINE_ID OR @PICKUP_LINE_ID IS NULL)
+AND (PICKUP_LINE.PICKUP_ID=@PICKUP_ID OR @PICKUP_ID IS NULL)
+AND (PICKUP_LINE.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (PICKUP_LINE.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
+AND (PICKUP_LINE.PICK_UP_STATUS=@PICK_UP_STATUS OR @PICK_UP_STATUS IS NULL)
+END
