@@ -3,7 +3,16 @@ Mason Allen
 Alissa Duffy
 =======
 ----------------------------------
+Ariel Sigo
+Christian Lopez
 Aaron Usher
 Skyler Hiscock
 Alissa Duffy
+<<<<<<< HEAD
 
+=======
+Alissa Duffy
+Aaron Usher
+Skyler Hiscock
+Alissa Duffy
+>>>>>>> 933bdc9db856edaa35feff8d9a0be22c893b156a
