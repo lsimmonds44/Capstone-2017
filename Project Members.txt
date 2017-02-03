@@ -12,7 +12,6 @@ Christian Lopez
 Ariel Sigo
 Michael Takrama
 Bobby Thorne
-<<<<<<< HEAD
 Natacha Ilunga
 Bill Flood
 Dan Brown
