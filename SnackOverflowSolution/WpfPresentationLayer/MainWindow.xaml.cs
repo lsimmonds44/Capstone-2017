@@ -1,4 +1,5 @@
 ﻿using DataObjects;
+using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,13 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        EmployeeManager eMngr = new EmployeeManager();
         Employee _employee = null;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            _employee = new Employee();
-            _employee.EmployeeId = 10001;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,5 +36,49 @@ namespace WpfPresentationLayer
             CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow(_employee.EmployeeId);
             cCCW.ShowDialog();
         }
-    }
-}
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            hideTabs();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (_employee == null)
+            {
+                _employee = eMngr.RetrieveEmployeeByUserName("");
+                showTabs();
+                btnLogin.Content = "Logout"; 
+            }
+            else
+            {
+                _employee = null;
+                btnLogin.Content = "Login";
+                hideTabs();
+            }
+           
+
+        }
+
+        private void showTabs()
+        {
+            tabSetMain.Visibility = Visibility.Visible;
+            tabCommercialCustomer.Visibility = Visibility.Visible;
+            tabEmployee.Visibility = Visibility.Visible;
+            tabUser.Visibility = Visibility.Visible;
+            
+        }
+
+        private void hideTabs()
+        {
+            tabSetMain.Visibility = Visibility.Hidden;
+            tabCommercialCustomer.Visibility = Visibility.Collapsed;
+            tabEmployee.Visibility = Visibility.Collapsed;
+            tabUser.Visibility = Visibility.Collapsed;
+        }
+
+        
+
+
+    } // end of class
+} // end of namespace 

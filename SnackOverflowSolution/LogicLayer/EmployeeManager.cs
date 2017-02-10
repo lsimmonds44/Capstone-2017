@@ -1,4 +1,4 @@
-﻿using DataAccessLayer;
+using DataAccessLayer;
 using DataObjects;
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,16 @@ namespace LogicLayer
 {
     public class EmployeeManager : IEmployeeManager
     {
+        Employee _employee = null;
+
+        public Employee RetrieveEmployeeByUserName(string userName)
+        {
+            _employee = new Employee();
+            _employee.EmployeeId = 10200;
+
+            return _employee;
+        }
+
         
         public Employee RetrieveEmployee(int employeeID)
         {
