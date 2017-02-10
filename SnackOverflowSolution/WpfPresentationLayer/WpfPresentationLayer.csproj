@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,9 +60,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="frmViewOpenOrders.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmProductOrderDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmUpdateEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -73,8 +84,16 @@
     <Compile Include="CreateCommercialCustomerWindow.xaml.cs">
       <DependentUpon>CreateCommercialCustomerWindow.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="frmViewOpenOrders.xaml.cs">
       <DependentUpon>frmViewOpenOrders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductOrderDetails.xaml.cs">
+      <DependentUpon>frmProductOrderDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateEmployee.xaml.cs">
+      <DependentUpon>frmUpdateEmployee.xaml</DependentUpon>
+
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -100,5 +100,77 @@ namespace DataAccessLayer
             return employees;
 
         }
+        /// <summary>
+        /// Ariel Sigo
+        /// Created 2017/02/07
+        /// </summary>
+        /// <param name="Employee_ID"></param>
+        /// <param name="oldUser_ID"></param>
+        /// <param name="newUser_ID"></param>
+        /// <param name="oldSalary"></param>
+        /// <param name="newSalary"></param>
+        /// <param name="oldActive"></param>
+        /// <param name="newActive"></param>
+        /// <param name="oldDate_Of_Birth"></param>
+        /// <param name="newDate_Of_Birth"></param>
+        /// <returns>returns count of rows affected of updated employees</returns>
+        public static int UpdateEmployee(int Employee_ID, int oldUser_ID, int newUser_ID, decimal oldSalary, decimal newSalary, bool oldActive, bool newActive, DateTime oldDate_Of_Birth, DateTime newDate_Of_Birth)
+        {
+            var count = 0;
+
+            // sql connection object
+            var conn = DBConnection.GetConnection();
+
+            // command text
+            var cmdText = @"sp_update_employee";
+
+            // create a command object
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //set command type if needed
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // add parameters
+            cmd.Parameters.Add("@Employee_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@OldUser_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@NewUser_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@OldSalary", SqlDbType.Money);
+            cmd.Parameters.Add("@NewSalary", SqlDbType.Money);
+            cmd.Parameters.Add("@OldActive", SqlDbType.Bit);
+            cmd.Parameters.Add("@NewActive", SqlDbType.Bit);
+            cmd.Parameters.Add("@OldDate_Of_Birth", SqlDbType.Date);
+            cmd.Parameters.Add("@NewDate_Of_Birth", SqlDbType.Date);
+
+            // set parameter values
+            cmd.Parameters["@OldUser_ID"].Value = oldUser_ID;
+            cmd.Parameters["@NewUser_ID"].Value = newUser_ID;
+            cmd.Parameters["@OldSalary"].Value = oldSalary;
+            cmd.Parameters["@NewSalary"].Value = newSalary;
+            cmd.Parameters["@OldActive"].Value = oldActive;
+            cmd.Parameters["@NewActive"].Value = newActive;
+            cmd.Parameters["@OldDate_Of_Birth"].Value = oldDate_Of_Birth;
+            cmd.Parameters["@NewDate_Of_Birth"].Value = newDate_Of_Birth;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // let the execution begin!
+                count = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close(); // good housekeeping approved!
+            }
+            return count;
+        }
+
+
+
     }
 }

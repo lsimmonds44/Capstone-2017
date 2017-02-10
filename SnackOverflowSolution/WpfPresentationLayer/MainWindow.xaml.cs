@@ -22,7 +22,9 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        EmployeeManager eMngr = new EmployeeManager();
+        private EmployeeManager _employeeManager = new EmployeeManager();
+
+
         Employee _employee = null;
 
 
@@ -37,6 +39,21 @@ namespace WpfPresentationLayer
             cCCW.ShowDialog();
         }
 
+/// <summary>
+/// Ariel Sigo
+/// Created 2017/10/02
+/// 
+/// Button that leads to update employee form
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
+        private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
+        {
+            frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
+            fUE.ShowDialog();
+        }
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             hideTabs();
@@ -46,7 +63,7 @@ namespace WpfPresentationLayer
         {
             if (_employee == null)
             {
-                _employee = eMngr.RetrieveEmployeeByUserName("");
+                _employee = _employeeManager.RetrieveEmployeeByUserName("");
                 showTabs();
                 btnLogin.Content = "Logout"; 
             }

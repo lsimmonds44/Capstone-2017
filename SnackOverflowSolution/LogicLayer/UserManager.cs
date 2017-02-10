@@ -28,5 +28,20 @@ namespace LogicLayer
             }
             return user;
         }
+
+        public Employee editEmployee(int oldEmployee_ID, int oldUser_ID, decimal oldSalary, bool oldActive, DateTime oldDate_Of_Birth)
+        {
+            Employee employeeEdit = new Employee()
+        
+            {
+                EmployeeId = oldEmployee_ID,
+                UserId = oldUser_ID,
+                Salary = oldSalary,
+                Active = oldActive,
+                DateOfBirth = oldDate_Of_Birth
+               
+            };
+            return employeeEdit;
+        }
     }
 }

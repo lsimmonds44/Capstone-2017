@@ -1,8 +1,6 @@
-﻿using DataObjects;
-using DataAccessLayer;
+﻿using DataAccessLayer;
+using DataObjects;
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class ProductOrderManager
+
+    public class ProductOrderManager : IProductOrderManager
     {
         public List<ProductOrder> RetrieveProductOrdersByStatus(String Status)
         {
@@ -46,6 +45,33 @@ namespace LogicLayer
                 );
             }
             return ProductOrderList;
+	
+		}
+
+
+
+
+
+        /// <summary>
+        /// Victor Algarin
+        /// Created 2017/02/08
+        /// 
+        /// Retrieves the details for a specific order through an order id
+        /// </summary>
+        public ProductOrder retrieveProductOrderDetails(int orderID)
+        {
+		ProductOrder order = null;
+            try
+            {
+                order = ProductOrderAccessor.RetrieveOrderByID(orderID);
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("There was a problem retrieving the product order details.");
+            }
+
+            return order;
         }
     }
 }
