@@ -44,6 +44,7 @@
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="PackageAccessor.cs" />
     <Compile Include="PackageLineAccessor.cs" />
+    <Compile Include="ProductOrderAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

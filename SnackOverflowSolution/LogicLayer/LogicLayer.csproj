@@ -47,9 +47,11 @@
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
+    <Compile Include="IProductOrderManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
+    <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>

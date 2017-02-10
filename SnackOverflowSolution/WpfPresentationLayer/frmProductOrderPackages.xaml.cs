@@ -22,7 +22,7 @@ using System.Windows.Shapes;
 
 namespace WpfPresentationLayer
 {
-    public partial class ProductOrderPackages : Window
+    public partial class frmProductOrderPackages : Window
     {
 
         int _orderId;
@@ -35,7 +35,7 @@ namespace WpfPresentationLayer
         /// Constructor for the window
         /// </summary>
         /// <param name="orderId">The orderID that the packages should relate to</param>
-        public ProductOrderPackages(int orderId)
+        public frmProductOrderPackages(int orderId)
         {
             _orderId = orderId;
             _packageManager = new PackageManager();
