@@ -1,0 +1,22 @@
+﻿<Window x:Name="frmOrderPackages" x:Class="WpfPresentationLayer.ProductOrderPackages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Order Packages" Height="250" Width="300" MinHeight="250" MinWidth="300" MaxWidth="300" MaxHeight="250" Loaded="frmOrderPackages_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="listPackages" Grid.Row="0" 
+                  Grid.Column="0" 
+                  Grid.ColumnSpan="2" 
+                  Margin="5" MouseDoubleClick="listPackages_MouseDoubleClick"/>
+
+        <Button x:Name="btnAddPackage" Grid.Row="1" Content="Add" Margin="20 10" Click="btnAddPackage_Click"/>
+
+    </Grid>
+</Window>

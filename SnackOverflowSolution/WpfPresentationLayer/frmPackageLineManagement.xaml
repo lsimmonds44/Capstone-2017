@@ -1,0 +1,30 @@
+﻿<Window x:Name="frmPackageLines" x:Class="WpfPresentationLayer.PackageLineManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Package Lines" Height="300" Width="400" Loaded="frmPackageLines_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="listPackageLines" Grid.Row="0" 
+                  Grid.Column="0" 
+                  Grid.ColumnSpan="4" 
+                  Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">Product Lot #:</Label>
+        <TextBox x:Name="txtProductLot" Grid.Row="1" Grid.Column="1" Margin="5" ToolTip="Enter the product lot number for this line"/>
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">Quantity:</Label>
+        <TextBox x:Name="txtQuantity" Grid.Row="1" Grid.Column="4" Margin="5" ToolTip="Enter the quantity of this product that is included in the package (Must be a number)"/>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">Price Paid:</Label>
+        <TextBox x:Name="txtPricePaid" Grid.Row="2" Grid.Column="1" Margin="5" ToolTip="Enter the price that was paid for this line of the package (Do not include the $)"/>
+        <Button x:Name="btnAddPackageLine" Grid.Row="2" Grid.Column="3" Margin="5" Content="Add" Click="btnAddPackageLine_Click"/>
+    </Grid>
+</Window>
