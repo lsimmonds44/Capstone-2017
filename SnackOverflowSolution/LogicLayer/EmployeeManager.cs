@@ -1,4 +1,5 @@
-﻿using DataObjects;
+using DataAccessLayer;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,39 @@ namespace LogicLayer
 
             return _employee;
         }
-    } // end class
-} // end namespace
+
+        
+        public Employee RetrieveEmployee(int employeeID)
+        {
+            Employee employee = null;
+
+            try
+            {
+                employee = EmployeeAccessor.RetrieveEmployee(employeeID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employee;
+        }
+
+        public List<Employee> RetrieveEmployeeList()
+        {
+            List<Employee> employees = null;
+            try
+            {
+                employees = EmployeeAccessor.RetrieveEmployeeList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return employees;
+        }
+
+    }
+}

@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    interface IEmployeeManager
+       
+    public interface IEmployeeManager
     {
-        Employee RetrieveEmployeeByUserName(string userName);
+		 Employee RetrieveEmployeeByUserName(string userName);
+        Employee RetrieveEmployee(int employeeID);
+
+        List<Employee> RetrieveEmployeeList();
     }
 }
