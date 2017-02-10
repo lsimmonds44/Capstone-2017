@@ -22,14 +22,17 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
         private EmployeeManager _employeeManager = new EmployeeManager();
+=======
+        EmployeeManager eMngr = new EmployeeManager();
+>>>>>>> origin/master
         Employee _employee = null;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            _employee = new Employee();
-            _employee.EmployeeId = 10001;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,6 +41,7 @@ namespace WpfPresentationLayer
             cCCW.ShowDialog();
         }
 
+<<<<<<< HEAD
 /// <summary>
 /// Ariel Sigo
 /// Created 2017/10/02
@@ -53,3 +57,50 @@ namespace WpfPresentationLayer
         }
     }
 }
+=======
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            hideTabs();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (_employee == null)
+            {
+                _employee = eMngr.RetrieveEmployeeByUserName("");
+                showTabs();
+                btnLogin.Content = "Logout"; 
+            }
+            else
+            {
+                _employee = null;
+                btnLogin.Content = "Login";
+                hideTabs();
+            }
+           
+
+        }
+
+        private void showTabs()
+        {
+            tabSetMain.Visibility = Visibility.Visible;
+            tabCommercialCustomer.Visibility = Visibility.Visible;
+            tabEmployee.Visibility = Visibility.Visible;
+            tabUser.Visibility = Visibility.Visible;
+            
+        }
+
+        private void hideTabs()
+        {
+            tabSetMain.Visibility = Visibility.Hidden;
+            tabCommercialCustomer.Visibility = Visibility.Collapsed;
+            tabEmployee.Visibility = Visibility.Collapsed;
+            tabUser.Visibility = Visibility.Collapsed;
+        }
+
+        
+
+
+    } // end of class
+} // end of namespace 
+>>>>>>> origin/master
