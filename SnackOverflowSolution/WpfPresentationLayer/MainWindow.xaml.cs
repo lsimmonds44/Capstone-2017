@@ -1,4 +1,5 @@
 ﻿using DataObjects;
+using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private EmployeeManager _employeeManager = new EmployeeManager();
         Employee _employee = null;
 
         public MainWindow()
@@ -34,6 +36,20 @@ namespace WpfPresentationLayer
         {
             CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow(_employee.EmployeeId);
             cCCW.ShowDialog();
+        }
+
+/// <summary>
+/// Ariel Sigo
+/// Created 2017/10/02
+/// 
+/// Button that leads to update employee form
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
+        private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
+        {
+            frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
+            fUE.ShowDialog();
         }
     }
 }
