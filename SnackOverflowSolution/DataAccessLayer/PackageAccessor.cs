@@ -47,15 +47,15 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@ORDER_ID", SqlDbType.Int);
 
             // Setting parameters for orderid
-            cmd.Parameters["@ORDER_ID"].Value = package.orderId;
+            cmd.Parameters["@ORDER_ID"].Value = package.OrderId;
 
             /* 
              * Since deliveryId can be null I'm checking if the package has a null deliveryid
              * and then storing it appropriately
              */
-            if (package.deliveryId != null)
+            if (package.DeliveryId != null)
             {
-                cmd.Parameters["@DELIVERY_ID"].Value = package.deliveryId;
+                cmd.Parameters["@DELIVERY_ID"].Value = package.DeliveryId;
             }
             else
             {
@@ -123,18 +123,18 @@ namespace DataAccessLayer
                         // Creating a package from the current record
                         var package = new Package()
                         {
-                            packageId = reader.GetInt32(0),
-                            orderId = reader.GetInt32(2)
+                            PackageId = reader.GetInt32(0),
+                            OrderId = reader.GetInt32(2)
                         };
 
                         // Attempting to set the delivery id since it can be null
                         try
                         {
-                            package.deliveryId = reader.GetInt32(1);
+                            package.DeliveryId = reader.GetInt32(1);
                         }
                         catch
                         {
-                            package.deliveryId = null;
+                            package.DeliveryId = null;
                         }
 
                         // Adding the package to the list
@@ -152,6 +152,45 @@ namespace DataAccessLayer
             }
             return packages;
 
+        }
+
+        public static List<Package> RetrievePackage(Package PackageInstance)
+        {
+            List<Package> PackageList = new List<Package>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_PACKAGE_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@PACKAGE_ID", PackageInstance.PackageId);
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", PackageInstance.DeliveryId);
+            cmd.Parameters.AddWithValue("@ORDER_ID", PackageInstance.OrderId);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var foundPackageInstance = new Package()
+                    {
+                        PackageId = reader.GetInt32(0),
+                        DeliveryId = reader.GetInt32(1),
+                        OrderId = reader.GetInt32(2)
+                    };
+                    PackageList.Add(PackageInstance);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error: " + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return PackageList;
         }
 
     }

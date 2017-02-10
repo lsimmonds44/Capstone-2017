@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfPresentationLayer.ViewOrdersByStatus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="View Open Orders" Height="387" Width="580.246">
+    <Grid Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lvOpenOrders" Margin="10,10,10,39">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Order Id"/>
+                    <GridViewColumn Header="Customer Id"/>
+                    <GridViewColumn Header="Order Date"/>
+                    <GridViewColumn Header="Date Expected"/>
+                    <GridViewColumn Header="Order Status"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="lblStatus" Content="Status: " HorizontalAlignment="Left" Margin="10,322,-327,0" VerticalAlignment="Top" Width="552"/>
+
+    </Grid>
+</Window>

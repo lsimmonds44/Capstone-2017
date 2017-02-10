@@ -57,8 +57,8 @@ namespace LogicLayer
             bool result = false;
             Package package = new Package()
             {
-                orderId = orderID,
-                deliveryId = deliveryID
+                OrderId = orderID,
+                DeliveryId = deliveryID
             };
 
             try
@@ -91,12 +91,12 @@ namespace LogicLayer
 
                 foreach(Package p in packages){
                     try{
-                        p.packageLineList = PackageLineAccessor.RetrievePackageLinesInPackage(p.packageId);
+                        p.PackageLineList = PackageLineAccessor.RetrievePackageLinesInPackage(p.PackageId);
                     }
                     catch
                     {
                         // If we cant get the package lines from the db set it to an empty list
-                        p.packageLineList = new List<PackageLine>();
+                        p.PackageLineList = new List<PackageLine>();
                     }
                 }
             }

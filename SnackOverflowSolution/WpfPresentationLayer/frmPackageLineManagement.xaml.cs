@@ -100,7 +100,7 @@ namespace WpfPresentationLayer
                 //Creating a package line to pass to the manager
                 PackageLine pl = new PackageLine()
                 {
-                    packageId = _package.packageId,
+                    packageId = _package.PackageId,
                     productLotId = productLotID,
                     quantity = quantity,
                     pricePaid = price
@@ -147,8 +147,8 @@ namespace WpfPresentationLayer
         {
             try
             {
-                _package.packageLineList = _packageLineManager.RetrievePackageLinesInPackage(_package.packageId);
-                listPackageLines.ItemsSource = _package.packageLineList;
+                _package.PackageLineList = _packageLineManager.RetrievePackageLinesInPackage(_package.PackageId);
+                listPackageLines.ItemsSource = _package.PackageLineList;
             }
             catch
             {

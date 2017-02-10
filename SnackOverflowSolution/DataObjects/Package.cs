@@ -16,10 +16,10 @@ namespace DataObjects
     {
 
         //The delivery id is a nullable int s as it can be null in the database
-        public int? deliveryId { get; set; }
-        public int orderId { get; set; }
-        public int packageId { get; set; }
-        public List<PackageLine> packageLineList { get; set; }
+        public int? DeliveryId { get; set; }
+        public int? OrderId { get; set; }
+        public int PackageId { get; set; }
+        public List<PackageLine> PackageLineList { get; set; }
 
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace DataObjects
         /// <returns>a string representation of the package</returns>
         public override string ToString()
         {
-            return "Package: " + packageId;
+            return "Package: " + PackageId;
         }
 
     }
