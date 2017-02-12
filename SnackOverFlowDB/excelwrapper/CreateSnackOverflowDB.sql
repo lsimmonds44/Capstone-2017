@@ -1466,4 +1466,35 @@ ALTER TABLE [dbo].[WISHLIST_LINE] with nocheck
   ON UPDATE CASCADE
   ON DELETE CASCADE
 GO
+Print '' print  ' *** creating procedure sp_retrieve_app_user_from_search'
+GO
+Create PROCEDURE sp_retrieve_user_by_username
+(
+@USER_NAME[NVARCHAR](64)
+)
+AS
+BEGIN
+SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, USER_NAME, ACTIVE
+FROM app_user
+WHERE USER_NAME = @USER_NAME 
+END
+
+GO
+
+GO
+print '' print'***Creating sp_authenticate_user'
+GO
+CREATE PROCEDURE [dbo].[sp_authenticate_user]
+	(
+	@USER_NAME		[NVARCHAR](50),
+	@PASSWORD_HASH 	[NVARCHAR](64)
+	)
+As 
+	BEGIN
+		SELECT COUNT(USER_NAME)
+		FROM APP_USER
+		WHERE USER_NAME = @USER_NAME
+		AND PASSWORD_HASH = @PASSWORD_HASH
+	END
+GO
 

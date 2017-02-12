@@ -23,10 +23,10 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
-
+        private UserManager _userManager = new UserManager();
 
         Employee _employee = null;
-
+        User _user = null;
 
         public MainWindow()
         {
@@ -59,24 +59,82 @@ namespace WpfPresentationLayer
             hideTabs();
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/11/17
+        /// 
+        /// When this button is pushed it first checks to see if there is a user logged in
+        /// If there is not it will use the username and password text field and check if
+        /// it matches with any user if so it then recieves the user's info
+        /// 
+        /// Needs work on returning employee info so tabs can be 
+        /// filtered and not just show all
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (_employee == null)
             {
-                _employee = _employeeManager.RetrieveEmployeeByUserName("");
-                showTabs();
-                btnLogin.Content = "Logout"; 
+                String result = _userManager.LogIn(tfUsername.Text, tfPassword.Password);
+
+                if (result.Equals("Found"))
+                {
+
+                    lblPassword.Visibility = Visibility.Collapsed;
+                    lblUsername.Visibility = Visibility.Collapsed;
+                    tfUsername.Visibility = Visibility.Collapsed;
+                    tfPassword.Visibility = Visibility.Collapsed;
+                    tfPassword.Password = "";
+                    btnLogin.Content = "Logout";
+                    btnLogin.IsDefault = false;
+                    tfPassword.Background = Brushes.White;
+                    tfUsername.Background = Brushes.White;
+                    _user = _userManager.RetrieveUserByUserName(tfUsername.Text);
+                    _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
+                    statusMessage.Content = "Welcome " + _user.UserName;
+                    showTabs(); // This needs to be updated so it will show just one that is 
+                                // assigned to the employee
+
+
+                }
+                else if (result.Equals("Invalid Username"))
+                {
+                    statusMessage.Content = result;
+                    tfUsername.Background = Brushes.Red;
+                    tfPassword.Background = Brushes.White;
+                }
+                else if (result.Equals("Invalid Password"))
+                {
+                    statusMessage.Content = result;
+                    tfPassword.Background = Brushes.Red;
+                    tfUsername.Background = Brushes.White;
+                }
+                else if (result.Equals("UserNotFound"))
+                {
+                    statusMessage.Content = "Username and Password Did not match.";
+                    tfPassword.Background = Brushes.Red;
+                    tfUsername.Background = Brushes.White;
+                }
             }
             else
             {
                 _employee = null;
+                _user = null;
                 btnLogin.Content = "Login";
+                btnLogin.IsDefault = true;
+
+                statusMessage.Content = "Please Log in to continue...";
                 hideTabs();
+                lblPassword.Visibility = Visibility.Visible;
+                lblUsername.Visibility = Visibility.Visible;
+                tfUsername.Visibility = Visibility.Visible;
+                tfPassword.Visibility = Visibility.Visible;
+
             }
-           
+
 
         }
-
         private void showTabs()
         {
             tabSetMain.Visibility = Visibility.Visible;
