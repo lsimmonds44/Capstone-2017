@@ -101,5 +101,63 @@ namespace DataAccessLayer
             }
             return user;
         }
+
+        public static bool UserNameCheck(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/11/17
+        /// 
+        /// Creates a new user when a user first uses the app
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="passwordHash"></param>
+        /// <returns></returns>
+        public bool CreateNewUser(User user,string passwordHash)
+        {
+            var result = false;
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_app_user";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@FIRST_NAME", SqlDbType.NVarChar,150);
+            cmd.Parameters.Add("@LAST_NAME", SqlDbType.NVarChar, 100);
+            cmd.Parameters.Add("@PHONE", SqlDbType.NVarChar, 15);
+            cmd.Parameters.Add("@E_MAIL_ADDRESS", SqlDbType.NVarChar, 15);
+            cmd.Parameters.Add("@E_MAIL_PREFERENCES", SqlDbType.Bit);
+            cmd.Parameters.Add("@PASSWORD_HASH", SqlDbType.NVarChar, 64);
+            cmd.Parameters.Add("@PASSWORD_SALT", SqlDbType.NVarChar,64);
+            cmd.Parameters.Add("@USER_NAME", SqlDbType.NVarChar, 50);
+            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
+            // values
+            cmd.Parameters["@FIRST_NAME"].Value = user.FirstName;
+            cmd.Parameters["@LAST_NAME"].Value = user.LastName;
+            cmd.Parameters["@PHONE"].Value = user.Phone;
+            cmd.Parameters["@E_MAIL_ADDRESS"].Value = user.EmailAddress;
+            cmd.Parameters["@E_MAIL_PREFERENCES"].Value = user.EmailPreferences;
+            cmd.Parameters["@PASSWORD_HASH"].Value = passwordHash;
+            cmd.Parameters["@PASSWORD_SALT"].Value = "abc";
+            cmd.Parameters["@USER_NAME"].Value = user.UserName;
+            cmd.Parameters["@Active"].Value = user.Active;
+
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                result = true;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error: " + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+        }
     }
 }
