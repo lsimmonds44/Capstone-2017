@@ -2,9 +2,12 @@
 using DataObjects;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LogicLayer
@@ -80,6 +83,71 @@ namespace LogicLayer
             }
             result = s.ToString();
             return result;
+        }
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/12/17
+        /// 
+        /// This will test the Text Fields to make sure that
+        /// bad data is not entered when creating a new user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
+        public string CreateNewUser(User user, string password, string confirmPassword)
+        {
+            UserAccessor userAccessor = new UserAccessor();
+            if (user.UserName.Length > 20 || user.UserName.Length < 4)
+            {
+                return "Invalid Username";
+            }
+            if (password.Length < 7)
+            {
+                return "Invalid Password";
+            }
+            if (password != confirmPassword)
+            {
+                return "Password No Match";
+            }
+           
+            if(user.FirstName==null || user.FirstName.Equals("")||user.FirstName.Equals(" "))
+            {
+                return "Invalid First";
+            }
+            if (user.LastName == null || user.LastName.Equals("") || user.LastName.Equals(" "))
+            {
+                return "Invalid Last";
+            }
+            if (user.Phone.Length!=10)
+            {
+                return "Invalid Phone";
+            }
+            try
+            {
+                MailAddress m = new MailAddress(user.EmailAddress);
+            }
+            catch
+            {
+                return "Invalid Email";
+            }
+
+            //if (!UserAccessor.UserNameCheck(user.UserName))
+            //{
+            //    //need to add sp_UserName_Check to see if another user has the same username
+            //      return "Used Username"
+            //}
+            try
+            {
+                if (userAccessor.CreateNewUser(user, HashSha256(password)))
+                {
+                    return "Created";
+                }
+            }catch(Exception ex)
+            {
+                return "Used Username";
+            }
+            return "UnableToCreate";
         }
 
         public String LogIn(String userName, string password)

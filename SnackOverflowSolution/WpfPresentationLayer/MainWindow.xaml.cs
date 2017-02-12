@@ -152,8 +152,10 @@ namespace WpfPresentationLayer
             tabUser.Visibility = Visibility.Collapsed;
         }
 
-        
-
-
+        private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewUser fCU = new CreateNewUser();
+            fCU.ShowDialog();
+        }
     } // end of class
 } // end of namespace 

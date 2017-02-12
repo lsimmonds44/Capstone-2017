@@ -43,6 +43,7 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
+            <Button Name="btnCreateNewUser" Grid.Column="0" Grid.Row="0" Content="Add User" Margin="3 4 0 0" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnCreateNewUser_Click" />
             <TextBox Name="tfUsername" Grid.Column="2" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1"/>
             <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <PasswordBox Name="tfPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0"/>
