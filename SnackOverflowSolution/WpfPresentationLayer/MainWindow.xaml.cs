@@ -23,7 +23,8 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
-        private UserManager _userManager = new UserManager();
+        private IUserManager _userManager = new TestUserManager(); // will need to change when in prod
+        private ISupplierManager _supplierManager = new SupplierManager();
 
         Employee _employee = null;
         User _user = null;
@@ -157,5 +158,25 @@ namespace WpfPresentationLayer
             CreateNewUser fCU = new CreateNewUser();
             fCU.ShowDialog();
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/01/31
+        /// 
+        /// Open a frmAddSupplier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
+        private void btnCreateSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager);
+            var addSupplierResult = addSupplierFrm.ShowDialog();
+            if (addSupplierResult == true)
+            {
+                MessageBox.Show("Supplier added!");
+            }
+        }
+
     } // end of class
 } // end of namespace 
