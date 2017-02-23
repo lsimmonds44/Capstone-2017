@@ -25,7 +25,7 @@ namespace LogicLayer
             {
                 newUser = new User()
                 {
-                    UserId = 10000,
+                    UserId = 10001,
                     FirstName = "Test",
                     LastName = "User",
                     Phone = "1234567890",

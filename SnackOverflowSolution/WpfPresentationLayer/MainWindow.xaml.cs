@@ -23,8 +23,9 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
-        private IUserManager _userManager = new TestUserManager(); // will need to change when in prod
+        private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
+        private IProductLotManager _productLotManager = new ProductLotManager();
 
         Employee _employee = null;
         User _user = null;
@@ -175,6 +176,34 @@ namespace WpfPresentationLayer
             if (addSupplierResult == true)
             {
                 MessageBox.Show("Supplier added!");
+            }
+        }
+
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/15
+        /// 
+        /// Open a frmAddInspection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
+                var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(10001)),
+                    new GradeManager(), _employee, new TestProductManager(), _supplierManager, new InspectionManager());
+                var addInspectionResult = addInspectionFrm.ShowDialog();
+                if (addInspectionResult == true)
+                {
+                    MessageBox.Show("Inspection Added");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
