@@ -92,7 +92,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (_employee == null)
+            if (_user == null)
             {
 
                 try
@@ -124,7 +124,6 @@ namespace WpfPresentationLayer
             }
             else
             {
-                _employee = null;
                 _user = null;
                 btnLogin.Content = "Login";
                 btnLogin.IsDefault = true;
