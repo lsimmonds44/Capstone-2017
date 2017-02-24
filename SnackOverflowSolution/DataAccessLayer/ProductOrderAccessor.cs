@@ -111,5 +111,49 @@ namespace DataAccessLayer
             }
             return ProductsByStatusList;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/02/16
+        /// 
+        /// Updates the status for the provided order
+        /// </summary>
+        /// <param name="orderID">The ProductOrderId related to the product order that should be updated</param>
+        /// <param name="newStatus">The new status that should be given to the product order</param>
+        /// <returns>int rows affected</returns>
+        public static int UpdateProductOrderStatus(int orderID, string newStatus)
+        {
+            int result = 0;
+
+            // Getting a SqlCommand object
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_product_order_status";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // Adding parameters
+
+            cmd.Parameters.AddWithValue("@ORDER_ID", orderID);
+            cmd.Parameters.AddWithValue("@NEW_ORDER_STATUS_ID", newStatus);
+
+            // Attempting to run the stored procedure
+            try
+            {
+                conn.Open();
+                // Storing the amount of rows that were affected by the stored procedure
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
     }
 }

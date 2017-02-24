@@ -27,14 +27,27 @@ namespace LogicLayer
         public bool CreatePackageLine(PackageLine line)
         {
             bool result = false;
-
-
             try
             {
-                if (PackageLineAccessor.CreatePackageLine(line) == 1)
+                ProductLot lot = ProductLotAccessor.RetrieveProductLot(line.productLotId);
+
+                int? newAvailableQuantity = lot.availableQuantity - line.quantity;
+
+                //Trying to take the quantity in the package line out of the product lot table to update stock levels
+                if (ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, lot.availableQuantity, newAvailableQuantity) > 0)
                 {
-                    result = true;
+                    //if the product lot quantity could be updated then create the package line
+                    if (PackageLineAccessor.CreatePackageLine(line) > 0)
+                    {
+                        result = true;
+                    }
+                    else //Trying to add the quantity back to the product lot since the package line couldn't be created
+                    {
+                        ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, newAvailableQuantity, lot.availableQuantity);
+                    }
                 }
+
+
             }
             catch (Exception)
             {
@@ -57,6 +70,7 @@ namespace LogicLayer
 
             try
             {
+
                 lines = PackageLineAccessor.RetrievePackageLinesInPackage(packageID);
             }
             catch (Exception)

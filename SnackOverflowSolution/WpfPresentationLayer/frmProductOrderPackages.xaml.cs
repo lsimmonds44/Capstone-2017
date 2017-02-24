@@ -27,6 +27,7 @@ namespace WpfPresentationLayer
 
         int _orderId;
         IPackageManager _packageManager;
+        IProductOrderManager _orderManager;
 
         /// <summary>
         /// Robert Forbes
@@ -39,6 +40,7 @@ namespace WpfPresentationLayer
         {
             _orderId = orderId;
             _packageManager = new PackageManager();
+            _orderManager = new ProductOrderManager();
             InitializeComponent();
         }
 
@@ -78,7 +80,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show("The package could not be added, please try again");
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("There was a problem adding the package to the database, please try again");
             }
@@ -114,9 +116,37 @@ namespace WpfPresentationLayer
         private void listPackages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Package selected = (Package)listPackages.SelectedItem;
-            if(selected != null){
+            if (selected != null)
+            {
                 PackageLineManagementWindow lineManagement = new PackageLineManagementWindow(selected);
                 lineManagement.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/02/16
+        /// 
+        /// Marks the order as ready for shipment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnReadyForShipment_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (_orderManager.UpdateProductOrderStatus(_orderId, "Ready For Shipment"))
+                {
+                    MessageBox.Show("The order status has successfully been marked as ready for shipment");
+                }
+                else
+                {
+                    MessageBox.Show("The order status could not be updated");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a problem communicating with the database, please try again");
             }
         }
 

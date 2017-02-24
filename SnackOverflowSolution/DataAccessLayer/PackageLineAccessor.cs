@@ -1,9 +1,4 @@
 ﻿using DataObjects;
-///<summary>
-///Robert Forbes
-///2017/02/07
-///
-///</summary>
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    ///<summary>
+    ///Robert Forbes
+    ///2017/02/07
+    ///
+    ///</summary>
     public class PackageLineAccessor
     {
 

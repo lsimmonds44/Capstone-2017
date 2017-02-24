@@ -96,7 +96,8 @@ namespace WpfPresentationLayer
 
 
 
-            if(valid == true){
+            if (valid == true)
+            {
                 //Creating a package line to pass to the manager
                 PackageLine pl = new PackageLine()
                 {
