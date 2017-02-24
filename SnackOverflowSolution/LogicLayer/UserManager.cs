@@ -189,9 +189,9 @@ namespace LogicLayer
                 {
                     return "Created";
                 }
-            }catch(Exception )
+            }catch(Exception ex)
             {
-                return "Used Username";
+                throw ex;
             }
             return "UnableToCreate";
         }

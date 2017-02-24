@@ -237,6 +237,55 @@ namespace DataAccessLayer
             }
         }
         
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/02/24
+        /// 
+        /// Accesses DB to get Employee by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public static Employee RetrieveEmployeeByUsername(string userName)
+        {
+            Employee emp = null;
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_employee_by_username";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_NAME", SqlDbType.NVarChar, 50);
+            cmd.Parameters["@USER_NAME"].Value = userName;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    emp = new Employee
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        Salary = reader.GetDecimal(2),
+                        Active = reader.GetBoolean(3),
+                        DateOfBirth = reader.GetDateTime(4)
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return emp;
+        }
+
 
         public void ReadList(SqlDataReader reader)
         {

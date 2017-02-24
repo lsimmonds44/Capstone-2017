@@ -13,13 +13,24 @@ namespace LogicLayer
         Employee _employee;
         public List<Employee> employees { get; set; }
 
-
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/02/24
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public Employee RetrieveEmployeeByUserName(string userName)
         {
-            _employee = new Employee();
-            _employee.EmployeeId = 10200;
-
-            return _employee;
+            try
+            {
+                return EmployeeAccessor.RetrieveEmployeeByUsername(userName);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         
