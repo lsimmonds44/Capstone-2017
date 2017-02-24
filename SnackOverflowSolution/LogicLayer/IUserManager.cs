@@ -9,6 +9,8 @@ namespace LogicLayer
 {
     public interface IUserManager
     {
-        User RetrieveUserByUserName(string userName); 
+        User RetrieveUserByUserName(string userName);
+
+        string LogIn(string p1, string p2);
     }
 }

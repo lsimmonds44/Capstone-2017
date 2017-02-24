@@ -11,6 +11,15 @@ namespace DataAccessLayer
 {
     public class CustomerAccessor
     {
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/06/02
+        /// 
+        /// Create Commercial Customer method that uses a stored procedure to access the database
+        /// </summary>
+        /// <param name="cc"></param>
+        /// <returns></returns>
         public bool CreateCommercialCustomer(CommercialCustomer cc)
         {
             var result = false;
@@ -46,8 +55,5 @@ namespace DataAccessLayer
             }
             return result;
         }
-
-
-
-    }
-}
+    } // End of class
+} // end of namespace

@@ -13,14 +13,10 @@ namespace LogicLayer
 
         public List<Employee> employees { get; set; }
 
-        Employee _employee = null;
 
         public Employee RetrieveEmployeeByUserName(string userName)
         {
-            _employee = new Employee();
-            _employee.EmployeeId = 10200;
-
-            return _employee;
+            throw new NotImplementedException();
         }
 
         
