@@ -1,4 +1,4 @@
-﻿using DataObjects;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class EmployeeAccessor
+    public class EmployeeAccessor : IDataAccessor
     {
+        public Employee EmployeeInstance { get; set; }
+        public List<Employee> EmployeeList { get; set; }
         public static Employee RetrieveEmployee(int employeeID)
         {
 
@@ -79,9 +81,9 @@ namespace DataAccessLayer
                         {
                             EmployeeId = reader.GetInt32(0),
                             UserId = reader.GetInt32(1),
-                            Salary = reader.GetDecimal(3),
-                            Active = reader.GetBoolean(4),
-                            DateOfBirth = reader.GetDateTime(5)
+                            Salary = reader.GetDecimal(2),
+                            Active = reader.GetBoolean(3),
+                            DateOfBirth = reader.GetDateTime(4)
                         });
                     }
 
@@ -170,7 +172,115 @@ namespace DataAccessLayer
             return count;
         }
 
+        public string CreateScript
+        {
+            get
+            {
+                return "sp_create_employee";
+            }
+        }
 
+        public string DeactivateScript
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string RetrieveListScript
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string RetrieveSearchScript
+        {
+            get
+            {
+                return "sp_retrieve_employee_from_search";
+            }
+        }
+
+        public string RetrieveSingleScript
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UpdateScript
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        
+
+        public void ReadList(SqlDataReader reader)
+        {
+            EmployeeList = new List<Employee>();
+            while(reader.Read())
+            {
+                EmployeeList.Add(new Employee()
+                {
+                    EmployeeId = reader.GetInt32(0),
+                    UserId = reader.GetInt32(1),
+                    Salary = reader.GetDecimal(2),
+                    Active = reader.GetBoolean(3),
+                    DateOfBirth = reader.GetDateTime(4)
+                });
+            }
+        }
+
+        public void ReadSingle(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCreateParameters(SqlCommand cmd)
+        {
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
+            cmd.Parameters["@SALARY"].Scale = 2;
+            cmd.Parameters["@SALARY"].Precision = 8;
+            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
+            cmd.Parameters["@USER_ID"].Value = this.EmployeeInstance.UserId;
+            cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
+            cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
+            cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
+        }
+
+        public void SetKeyParameters(SqlCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetRetrieveSearchParameters(SqlCommand cmd)
+        {
+            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
+            cmd.Parameters["@SALARY"].Scale = 2;
+            cmd.Parameters["@SALARY"].Precision = 8;
+            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
+            cmd.Parameters["@EMPLOYEE_ID"].Value = this.EmployeeInstance.EmployeeId;
+            cmd.Parameters["@USER_ID"].Value = this.EmployeeInstance.UserId;
+            cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
+            cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
+            cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
+        }
+
+        public void SetUpdateParameters(SqlCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

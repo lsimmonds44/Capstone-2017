@@ -9,11 +9,92 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DataAccessLayer;
 
 namespace LogicLayer
 {
     public class UserManager : IUserManager
     {
+        public User userInstance { get; set; }
+        public static String HashSha256(string source)
+        {
+            byte[] data;
+            string result = "";
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                data = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(source));
+            }
+            var s = new StringBuilder();
+            foreach (byte stringByte in data)
+            {
+                s.Append(stringByte.ToString("x2"));
+            }
+            result = s.ToString();
+            return result;
+        }
+
+        public static String RandomString(int size)
+        {
+            byte[] data = new byte[size];
+            string result = "";
+            Random rng = new System.Random();
+            rng.NextBytes(data);
+            var s = new StringBuilder();
+            foreach (byte stringByte in data)
+            {
+                s.Append(stringByte.ToString("x2"));
+            }
+            result = s.ToString();
+            return result;
+        }
+
+        public List<String> roles
+        {
+            get
+            {
+                var returnList = new List<String>();
+                /*foreach(AppUserUserRole roleAssignment in currentUser.APP_USER_USER_ROLE_List)
+                {
+                    returnList.Add(roleAssignment.USER_ROLE_ID);
+                }*/
+                returnList.Add("All");
+                return returnList;
+
+
+            }
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/11/17
+        /// William Flood
+        /// 2/12/17
+        /// Salts the password before hashing
+        /// 
+        /// This returns true or false from the 1 or 0 that is recieved from 
+        /// the UserAccessor layer.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool AuthenticateUser(string userName, string password)
+        {
+            bool userFound;
+            UserAccessor accessor = new UserAccessor();
+            String foo = accessor.RetrieveUserSalt(userName);
+            String bar = HashSha256(password + foo);
+            accessor.UserInstance = null;
+            if(accessor.Login(userName, bar))
+            {
+                userInstance = accessor.UserInstance;
+                userFound=true;
+            } else
+            {
+                userFound=false;
+            }
+            return userFound;
+            
+        }
 
         public User RetrieveUserByUserName(string username)
         {
@@ -44,46 +125,7 @@ namespace LogicLayer
             };
             return employeeEdit;
         }
-
-        /// <summary>
-        /// Bobby Thorne
-        /// 2/11/17
-        /// 
-        /// This returns true or false from the 1 or 0 that is recieved from 
-        /// the UserAccessor layer.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public static bool AuthenticateUser(string username, string password)
-        {
-            string passwordHash = HashSha256(password);
-            if (UserAccessor.AuthenticateUser(username, passwordHash) == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static String HashSha256(string source)
-        {
-            byte[] data;
-            string result = "";
-            using (SHA256 sha1Hash = SHA256.Create())
-            {
-                data = sha1Hash.ComputeHash(Encoding.UTF8.GetBytes(source));
-            }
-            var s = new StringBuilder();
-            foreach (byte stringByte in data)
-            {
-                s.Append(stringByte.ToString("x2"));
-            }
-            result = s.ToString();
-            return result;
-        }
+        
         /// <summary>
         /// Bobby Thorne
         /// 2/12/17
@@ -119,7 +161,7 @@ namespace LogicLayer
             {
                 return "Invalid Last";
             }
-            if (user.Phone.Length!=10)
+            if (user.Phone.Length>15)
             {
                 return "Invalid Phone";
             }
@@ -131,6 +173,10 @@ namespace LogicLayer
             {
                 return "Invalid Email";
             }
+            user.PasswordSalt = RandomString(32);
+            user.PasswordHash = HashSha256(password + user.PasswordSalt);
+            UserAccessor accessor = new UserAccessor();
+            accessor.UserInstance = user;
 
             //if (!UserAccessor.UserNameCheck(user.UserName))
             //{
@@ -139,7 +185,8 @@ namespace LogicLayer
             //}
             try
             {
-                if (userAccessor.CreateNewUser(user, HashSha256(password)))
+                
+                if (1==DatabaseMainAccessor.Create(accessor))
                 {
                     return "Created";
                 }
@@ -150,39 +197,17 @@ namespace LogicLayer
             return "UnableToCreate";
         }
 
-        public String LogIn(String userName, string password)
+        public List<User> RetrieveFullUserList()
         {
-
-            if (userName.Length > 20 || userName.Length < 4)
-            {
-                return "Invalid Username";
-            }
-            if (password.Length < 7)
-            {
-                //May check more advanced complexity rules later
-                return "Invalid Password";
-            }
-            var hashedPassword = HashSha256(password);
-            password = null;
+            var accessor = new UserAccessor();
             try
             {
-                int result = UserAccessor.AuthenticateUser(userName, hashedPassword);
-
-                if (0 == result)
-                {
-                    return "UserNotFound";
-                }
-                else
-                {
-
-                }
-                return "Found";
-            }
-            catch
+                DatabaseMainAccessor.RetrieveList(accessor);
+                return accessor.UserList;
+            } catch
             {
                 throw;
             }
         }
-
     }
 }

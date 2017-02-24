@@ -41,16 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="DummyLocationManager.cs" />
+    <Compile Include="DummyProductManager.cs" />
+    <Compile Include="DummySupplierManager.cs" />
+    <Compile Include="DummyWarehouseManager.cs" />
     <Compile Include="EmployeeManager.cs" />
+    <Compile Include="ICharityManager.cs" />
     <Compile Include="iCustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
+    <Compile Include="ILocationManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
+    <Compile Include="IProductLotManager.cs" />
+    <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
+    <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="IWarehouseManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
+    <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />

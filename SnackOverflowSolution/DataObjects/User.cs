@@ -12,11 +12,12 @@ namespace DataObjects
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String Phone { get; set; }
-        public int PreferredAddressId { get; set; }
+        public int? PreferredAddressId { get; set; }
         public String EmailAddress { get; set; }
         public bool EmailPreferences { get; set; }
         public String UserName { get; set; }
         public bool Active { get; set; }
-
+        public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
     }
 }
