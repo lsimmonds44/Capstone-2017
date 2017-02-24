@@ -44,6 +44,7 @@
     <Compile Include="Delivery.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeOrderResponsibility.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
     <Compile Include="ProductOrder.cs" />

@@ -45,10 +45,12 @@
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="iCustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
+    <Compile Include="ILocationManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="LocationManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
