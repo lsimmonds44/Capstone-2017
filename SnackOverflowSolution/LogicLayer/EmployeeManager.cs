@@ -18,7 +18,7 @@ namespace LogicLayer
         public Employee RetrieveEmployeeByUserName(string userName)
         {
             _employee = new Employee();
-            _employee.EmployeeId = 10001;
+            _employee.EmployeeId = 10000;
 
             return _employee;
         }

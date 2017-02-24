@@ -25,7 +25,7 @@ namespace WpfPresentationLayer
         private EmployeeManager _employeeManager = new EmployeeManager();
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
-        private IProductLotManager _productLotManager = new ProductLotManager();
+        private IProductLotManager _productLotManager = new TestProductLotManager();
 
         Employee _employee = null;
         User _user = null;

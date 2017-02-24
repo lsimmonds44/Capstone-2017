@@ -16,7 +16,7 @@ namespace LogicLayer
                 ProductLotId = 10000,
                 ProductId = 1,
                 SupplierId = supplier.SupplierId,
-                WarehoueId = 1,
+                WarehouseId = 1,
                 LocationId = 1,
                 AvailableQuantity = 500,
                 Quantity = 1000,

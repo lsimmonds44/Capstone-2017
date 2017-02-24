@@ -48,7 +48,7 @@ namespace DataAccessLayer
                     pl = new ProductLot
                     {
                         ProductLotId = reader.GetInt32(0),
-                        WarehoueId = reader.GetInt32(1),
+                        WarehouseId = reader.GetInt32(1),
                         SupplierId = reader.GetInt32(2),
                         LocationId = reader.GetInt32(3),
                         ProductId = reader.GetInt32(4),
