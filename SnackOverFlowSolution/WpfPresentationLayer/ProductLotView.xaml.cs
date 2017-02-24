@@ -97,11 +97,11 @@ namespace WpfPresentationLayer
             {
                 ProductLot toSave = new ProductLot()
                 {
-                    ProductID = productList[cbxProductIDVal.SelectedIndex].ProductID,
-                    LocationID = locationList[cbxLocationIDVal.SelectedIndex].LocationID,
-                    SupplierID = supplierList[cbxSupplierIDVal.SelectedIndex].SupplierID,
-                    SupplyManagerID = (int)employeeList[cbxSupplyManagerIDVal.SelectedIndex].EmployeeId,
-                    WarehouseID = warehouseList[cbxWarehouseIDVal.SelectedIndex].WarehouseID,
+                    ProductId = productList[cbxProductIDVal.SelectedIndex].ProductId,
+                    LocationId = locationList[cbxLocationIDVal.SelectedIndex].LocationId,
+                    SupplierId = supplierList[cbxSupplierIDVal.SelectedIndex].SupplierID,
+                    SupplyManagerId = (int)employeeList[cbxSupplyManagerIDVal.SelectedIndex].EmployeeId,
+                    WarehouseId = warehouseList[cbxWarehouseIDVal.SelectedIndex].WarehouseID,
                     Quantity = quantityRead,
                     DateReceived = dpkDateReceivedVal.SelectedDate,
                     ExpirationDate = dpkExpirationDateVal.SelectedDate

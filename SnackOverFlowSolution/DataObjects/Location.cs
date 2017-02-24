@@ -8,7 +8,9 @@ namespace DataObjects
 {
     public class Location
     {
-        public int LocationID { get; set; }
         public String Description { get; set; }
+        public int? LocationId { get; set; }
+        public string Sescription { get; set; }
+        public bool IsActive { get; set; }
     }
 }

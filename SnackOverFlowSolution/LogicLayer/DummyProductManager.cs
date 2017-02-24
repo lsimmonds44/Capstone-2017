@@ -12,7 +12,18 @@ namespace LogicLayer
         int dummyProductID = 10000;
         public List<Product> ListProducts()
         {
-            return new List<Product>(new Product[] { new Product { ProductID = 10000 } });
+            return new List<Product>(new Product[] { new Product { ProductId = 10000 } });
+        }
+
+
+        public int DeleteProduct(int productID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product RetrieveProductById(int productId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

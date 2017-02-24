@@ -14,7 +14,7 @@ namespace LogicLayer
         bool AuthenticateUser(string text, string password);
         List<User> RetrieveFullUserList();
         List<String> roles { get; }
-        User RetrieveUserByUserName(string userName);
+
 
         /// <summary>
         /// Christian Lopez

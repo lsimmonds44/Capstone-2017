@@ -13,6 +13,14 @@ namespace DataAccessLayer
     {
         public Employee EmployeeInstance { get; set; }
         public List<Employee> EmployeeList { get; set; }
+        /// <summary>
+        /// Daniel Brown 
+        /// Created 02/08/2017
+        /// 
+        /// Retrieve a single employee from the database
+        /// </summary>
+        /// <param name="employeeID">The employee ID of the employee to be retrieved</param>
+        /// <returns>An employee object</returns>
         public static Employee RetrieveEmployee(int employeeID)
         {
 
@@ -58,12 +66,19 @@ namespace DataAccessLayer
 
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// Created 02/08/2017
+        /// 
+        /// Retrieve a list of all employees
+        /// </summary>
+        /// <returns>List of Employee Objects</returns>
         public static List<Employee> RetrieveEmployeeList()
         {
             List<Employee> employees = new List<Employee>();
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_employee_list";
+            var cmdText = @"sp_retrieve_employeelist";
 
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -102,6 +117,8 @@ namespace DataAccessLayer
             return employees;
 
         }
+        
+        
         /// <summary>
         /// Ariel Sigo
         /// Created 2017/02/07

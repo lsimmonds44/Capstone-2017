@@ -9,7 +9,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using DataAccessLayer;
 
 namespace LogicLayer
 {
@@ -190,7 +189,7 @@ namespace LogicLayer
                 {
                     return "Created";
                 }
-            }catch(Exception ex)
+            }catch(Exception )
             {
                 return "Used Username";
             }
@@ -238,6 +237,12 @@ namespace LogicLayer
             }
 
             return userAddress;
+        }
+
+
+        public string LogIn(string p1, string p2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

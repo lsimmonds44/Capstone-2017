@@ -57,8 +57,8 @@ namespace WpfPresentationLayer
 
             try
             {
-                txtProduct.Text = _productManager.retrieveProductById(_productLot.ProductId).Name;
-                Supplier s = _supplierManager.RetrieveSupplierBySupplierID(_productLot.SupplierId);
+                txtProduct.Text = _productManager.RetrieveProductById((int)_productLot.ProductId).Name;
+                Supplier s = _supplierManager.RetrieveSupplierBySupplierID((int)_productLot.SupplierId);
                 txtSupplier.Text = _supplierManager.RetrieveSupplierName(s.UserId);
                 txtFarm.Text = s.FarmName;
             }
@@ -83,7 +83,7 @@ namespace WpfPresentationLayer
             try
             {
                 validateInputs();
-                if (_inspectionManager.CreateInspection(_currentEmp.EmployeeId, _productLot.ProductLotId, cboGradeSelect.Text, DateTime.Now, DateTime.Now.AddDays(7.0)))
+                if (_inspectionManager.CreateInspection((int)_currentEmp.EmployeeId, (int)_productLot.ProductLotId, cboGradeSelect.Text, DateTime.Now, DateTime.Now.AddDays(7.0)))
                 {
                     this.DialogResult = true;
                 }

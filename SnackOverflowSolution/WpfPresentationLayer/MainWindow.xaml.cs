@@ -41,20 +41,28 @@ namespace WpfPresentationLayer
             _employeeManager = new EmployeeManager();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Eric Walton
+        /// 2017/06/02
+        /// 
+        /// Button to load Create Commercial Customer Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
             CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
             cCCW.ShowDialog();
         }
 
-/// <summary>
-/// Ariel Sigo
-/// Created 2017/10/02
-/// 
-/// Button that leads to update employee form
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+        /// <summary>
+        /// Ariel Sigo
+        /// Created 2017/10/02
+        /// 
+        /// Button that leads to update employee form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
         {
             frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
@@ -85,7 +93,7 @@ namespace WpfPresentationLayer
         {
             if (_employee == null)
             {
-                
+
                 try
                 {
                     if (_userManager.AuthenticateUser(tfUsername.Text, tfPassword.Password))
@@ -104,11 +112,12 @@ namespace WpfPresentationLayer
                         _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
-                                    // assigned to the employee
+                        // assigned to the employee
 
 
                     }
-                } catch (System.Data.SqlClient.SqlException ex)
+                }
+                catch (System.Data.SqlClient.SqlException ex)
                 {
                     ErrorAlert.ShowDatabaseError();
                 }
@@ -129,7 +138,6 @@ namespace WpfPresentationLayer
 
             }
 
-
         }
         private void showTabs()
         {
@@ -137,7 +145,7 @@ namespace WpfPresentationLayer
             tabCommercialCustomer.Visibility = Visibility.Visible;
             tabEmployee.Visibility = Visibility.Visible;
             tabUser.Visibility = Visibility.Visible;
-            
+
         }
 
         private void hideTabs()

@@ -10,21 +10,27 @@ namespace LogicLayer
 {
     public class EmployeeManager : IEmployeeManager
     {
-
+        Employee _employee;
         public List<Employee> employees { get; set; }
 
-        Employee _employee = null;
 
         public Employee RetrieveEmployeeByUserName(string userName)
         {
             _employee = new Employee();
-            _employee.EmployeeId = 10000;
+            _employee.EmployeeId = 10200;
 
             return _employee;
         }
 
         
-
+        /// <summary>
+        /// Daniel brown
+        /// Created 02/08/2017
+        /// 
+        /// Retrieve a single employee
+        /// </summary>
+        /// <param name="employeeID">The Id of the employee to be retrieved</param>
+        /// <returns>A single Employee Object</returns>
         public Employee RetrieveEmployee(int employeeID)
         {
             Employee employee = null;
@@ -40,7 +46,14 @@ namespace LogicLayer
 
             return employee;
         }
-
+        
+        /// <summary>
+        /// Daniel Brown
+        /// Created 02/08/2017
+        /// 
+        /// retrieve a list of all active employees
+        /// </summary>
+        /// <returns>A list of Employee objects</returns>
         public List<Employee> RetrieveEmployeeList()
         {
             List<Employee> employees = null;
@@ -76,7 +89,7 @@ namespace LogicLayer
         /// 
         /// Refreshes Employee List
         /// </summary>
-        private void refreshEmployeeList()
+        private void RefreshEmployeeList()
         {
             try
             {
@@ -88,6 +101,7 @@ namespace LogicLayer
                 throw;
             }
         }
+        
         /// <summary>
         /// Ariel Sigo
         /// Created 2017/07/02
@@ -111,7 +125,7 @@ namespace LogicLayer
             try
             {
                 result = (1 == EmployeeAccessor.UpdateEmployee(Employee_ID, oldUser_ID, newUser_ID, oldSalary, newSalary, oldActive, newActive, oldDate_Of_Birth, newDate_Of_Birth));
-                refreshEmployeeList();
+                RefreshEmployeeList();
             }
             catch (Exception)
             {
@@ -134,7 +148,7 @@ namespace LogicLayer
             try
             {
                 result = (1 == EmployeeAccessor.UpdateEmployee((int)newEmp.EmployeeId, (int)oldEmp.UserId, (int)newEmp.UserId, (decimal)oldEmp.Salary, (decimal)newEmp.Salary, (bool)oldEmp.Active, (bool)newEmp.Active, (DateTime)oldEmp.DateOfBirth, (DateTime)newEmp.DateOfBirth));
-                refreshEmployeeList();
+                RefreshEmployeeList();
             }
             catch (Exception)
             {

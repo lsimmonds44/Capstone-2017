@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Daniel Brown
+    /// 02/08/17
+    /// 
+    /// An Employee of the system
+    /// </summary>
     public class Employee
     {
         public int? EmployeeId { get; set; }

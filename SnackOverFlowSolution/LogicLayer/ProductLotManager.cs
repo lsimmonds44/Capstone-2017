@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class ProductLotManager : IProductLotManager
-    {
-
-namespace LogicLayer
-{
     /// <summary>
     /// Christian Lopez
     /// Created on 2017/02/15
@@ -56,6 +51,12 @@ namespace LogicLayer
                 }
             }
             return pl;
+        }
+
+
+        public bool AddProduct(ProductLot p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

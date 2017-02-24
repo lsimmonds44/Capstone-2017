@@ -15,7 +15,7 @@ namespace LogicLayer
             {
                 ProductLotId = 10000,
                 ProductId = 1,
-                SupplierId = supplier.SupplierId,
+                SupplierId = supplier.SupplierID,
                 WarehouseId = 1,
                 LocationId = 1,
                 AvailableQuantity = 500,
@@ -24,6 +24,16 @@ namespace LogicLayer
                 DateReceived = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddDays(7.0)
             };
+        }
+
+        public int AddProductLot(ProductLot toAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddProduct(ProductLot p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

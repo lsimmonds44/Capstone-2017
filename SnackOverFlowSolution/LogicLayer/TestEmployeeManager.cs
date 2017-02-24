@@ -32,5 +32,16 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public int CreateEmployee(Employee employeeInstance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> SearchEmployees(Employee searchParameters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace DataAccessLayer
 	///
     /// Contains the access methods for Product Lots
     /// </summary>
-    public class ProductLotAccessor
+    public class ProductLotAccessor : IDataAccessor
     {
 		
 		
@@ -78,12 +78,12 @@ namespace DataAccessLayer
             {
                 ProductLotList.Add(new ProductLot()
                 {
-                    ProductLotID = reader.GetInt32(0),
-                    WarehouseID = reader.GetInt32(1),
-                    SupplierID = reader.GetInt32(2),
-                    LocationID = reader.GetInt32(3),
-                    ProductID = reader.GetInt32(4),
-                    SupplyManagerID = reader.GetInt32(5),
+                    ProductLotId = reader.GetInt32(0),
+                    WarehouseId = reader.GetInt32(1),
+                    SupplierId = reader.GetInt32(2),
+                    LocationId = reader.GetInt32(3),
+                    ProductId = reader.GetInt32(4),
+                    SupplyManagerId = reader.GetInt32(5),
                     Quantity = reader.GetInt32(6),
                     DateReceived = reader.GetDateTime(8),
                     ExpirationDate = reader.GetDateTime(9)
@@ -99,12 +99,12 @@ namespace DataAccessLayer
 
                 ProductLotInstance = new ProductLot()
                 {
-                    ProductLotID = reader.GetInt32(0),
-                    WarehouseID = reader.GetInt32(1),
-                    SupplierID = reader.GetInt32(2),
-                    LocationID = reader.GetInt32(3),
-                    ProductID = reader.GetInt32(4),
-                    SupplyManagerID = reader.GetInt32(5),
+                    ProductLotId = reader.GetInt32(0),
+                    WarehouseId = reader.GetInt32(1),
+                    SupplierId = reader.GetInt32(2),
+                    LocationId = reader.GetInt32(3),
+                    ProductId = reader.GetInt32(4),
+                    SupplyManagerId = reader.GetInt32(5),
                     Quantity = reader.GetInt32(6),
                     DateReceived = reader.GetDateTime(8),
                     ExpirationDate = reader.GetDateTime(9)
@@ -129,7 +129,7 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierId;
+            cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
 
             try
             {
@@ -191,21 +191,21 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@new_AVAILABLE_QUANTITY", SqlDbType.Int);
             cmd.Parameters.Add("@new_DATE_RECEIVED", SqlDbType.DateTime);
             cmd.Parameters.Add("@new_EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@old_PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotID;
-            cmd.Parameters["@old_WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseID;
-            cmd.Parameters["@old_SUPPLIER_ID"].Value = ProductLotInstance.SupplierID;
-            cmd.Parameters["@old_LOCATION_ID"].Value = ProductLotInstance.LocationID;
-            cmd.Parameters["@old_PRODUCT_ID"].Value = ProductLotInstance.ProductID;
-            cmd.Parameters["@old_SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerID;
+            cmd.Parameters["@old_PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
+            cmd.Parameters["@old_WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
+            cmd.Parameters["@old_SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
+            cmd.Parameters["@old_LOCATION_ID"].Value = ProductLotInstance.LocationId;
+            cmd.Parameters["@old_PRODUCT_ID"].Value = ProductLotInstance.ProductId;
+            cmd.Parameters["@old_SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
             cmd.Parameters["@old_QUANTITY"].Value = ProductLotInstance.Quantity;
             cmd.Parameters["@old_AVAILABLE_QUANTITY"].Value = 0;
             cmd.Parameters["@old_DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
             cmd.Parameters["@old_EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
-            cmd.Parameters["@new_WAREHOUSE_ID"].Value = ProductLotValidatorInstance.WarehouseID;
-            cmd.Parameters["@new_SUPPLIER_ID"].Value = ProductLotValidatorInstance.SupplierID;
-            cmd.Parameters["@new_LOCATION_ID"].Value = ProductLotValidatorInstance.LocationID;
-            cmd.Parameters["@new_PRODUCT_ID"].Value = ProductLotValidatorInstance.ProductID;
-            cmd.Parameters["@new_SUPPLY_MANAGER_ID"].Value = ProductLotValidatorInstance.SupplyManagerID;
+            cmd.Parameters["@new_WAREHOUSE_ID"].Value = ProductLotValidatorInstance.WarehouseId;
+            cmd.Parameters["@new_SUPPLIER_ID"].Value = ProductLotValidatorInstance.SupplierId;
+            cmd.Parameters["@new_LOCATION_ID"].Value = ProductLotValidatorInstance.LocationId;
+            cmd.Parameters["@new_PRODUCT_ID"].Value = ProductLotValidatorInstance.ProductId;
+            cmd.Parameters["@new_SUPPLY_MANAGER_ID"].Value = ProductLotValidatorInstance.SupplyManagerId;
             cmd.Parameters["@new_QUANTITY"].Value = ProductLotValidatorInstance.Quantity;
             cmd.Parameters["@new_AVAILABLE_QUANTITY"].Value = 0;
             cmd.Parameters["@new_DATE_RECEIVED"].Value = ProductLotValidatorInstance.DateReceived;
@@ -223,11 +223,11 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@AVAILABLE_QUANTITY", SqlDbType.Int);
             cmd.Parameters.Add("@DATE_RECEIVED", SqlDbType.DateTime);
             cmd.Parameters.Add("@EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseID;
-            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierID;
-            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationID;
-            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductID;
-            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerID;
+            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
+            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
+            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationId;
+            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductId;
+            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
             cmd.Parameters["@QUANTITY"].Value = ProductLotInstance.Quantity;
             cmd.Parameters["@AVAILABLE_QUANTITY"].Value = 0;
             cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
@@ -237,7 +237,7 @@ namespace DataAccessLayer
         public void SetKeyParameters(SqlCommand cmd)
         {
             cmd.Parameters.Add("@PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotID;
+            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
         }
 
         public void SetRetrieveSearchParameters(SqlCommand cmd)
@@ -252,12 +252,12 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@AVAILABLE_QUANTITY", SqlDbType.Int);
             cmd.Parameters.Add("@DATE_RECEIVED", SqlDbType.DateTime);
             cmd.Parameters.Add("@EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotID;
-            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseID;
-            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierID;
-            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationID;
-            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductID;
-            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerID;
+            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
+            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
+            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
+            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationId;
+            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductId;
+            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
             cmd.Parameters["@QUANTITY"].Value = ProductLotInstance.Quantity;
             cmd.Parameters["@AVAILABLE_QUANTITY"].Value = 0;
             cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
