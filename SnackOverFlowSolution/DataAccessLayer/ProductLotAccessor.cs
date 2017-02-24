@@ -50,16 +50,16 @@ namespace DataAccessLayer
 
                     lot = new ProductLot()
                     {
-                        productLotId = reader.GetInt32(0),
-                        warehouseId = reader.GetInt32(1),
-                        supplierId = reader.GetInt32(2),
-                        locationId = reader.GetInt32(3),
-                        productId = reader.GetInt32(4),
-                        supplyManagerId = reader.GetInt32(5),
-                        quantity = reader.GetInt32(6),
-                        availableQuantity = reader.GetInt32(7),
-                        dateRecieved = reader.GetDateTime(8),
-                        expirationDate = reader.GetDateTime(9)
+                        ProductLotId = reader.GetInt32(0),
+                        WarehouseId = reader.GetInt32(1),
+                        SupplierId = reader.GetInt32(2),
+                        LocationId = reader.GetInt32(3),
+                        ProductId = reader.GetInt32(4),
+                        SupplyManagerId = reader.GetInt32(5),
+                        Quantity = reader.GetInt32(6),
+                        AvailableQuantity = reader.GetInt32(7),
+                        DateReceived = reader.GetDateTime(8),
+                        ExpirationDate = reader.GetDateTime(9)
 
                     };
                     reader.Close();
@@ -120,13 +120,7 @@ namespace DataAccessLayer
 
             return result;
         }
-    /// Christian Lopez
-    /// Created on 2017/02/15
-    /// 
-    /// Contains the access methods for Product Lots
-    /// </summary>
-    public class ProductLotAccessor
-    {
+
         /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/15

@@ -31,10 +31,10 @@ namespace LogicLayer
             {
                 ProductLot lot = ProductLotAccessor.RetrieveProductLot(line.productLotId);
 
-                int? newAvailableQuantity = lot.availableQuantity - line.quantity;
+                int? newAvailableQuantity = lot.AvailableQuantity - line.quantity;
 
                 //Trying to take the quantity in the package line out of the product lot table to update stock levels
-                if (ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, lot.availableQuantity, newAvailableQuantity) > 0)
+                if (ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, lot.AvailableQuantity, newAvailableQuantity) > 0)
                 {
                     //if the product lot quantity could be updated then create the package line
                     if (PackageLineAccessor.CreatePackageLine(line) > 0)
@@ -43,7 +43,7 @@ namespace LogicLayer
                     }
                     else //Trying to add the quantity back to the product lot since the package line couldn't be created
                     {
-                        ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, newAvailableQuantity, lot.availableQuantity);
+                        ProductLotAccessor.UpdateProductLotAvailableQuantity(line.productLotId, newAvailableQuantity, lot.AvailableQuantity);
                     }
                 }
 
