@@ -784,18 +784,6 @@ INSERT [dbo].[PRODUCT_ORDER]([CUSTOMER_ID], [ORDER_TYPE_ID], [ADDRESS_TYPE], [DE
 VALUES(10000, 'An Order Type', 'An Address Type', 'A Delivery Type', 20.15, '01-02-17 12:30:30', '04-02-17 12:30:30', 5.20, 10000, 'An order status' ,0)
 GO
 
-print '' print '*** inserting data into PACKAGE'
-GO
-INSERT [dbo].[PACKAGE]([ORDER_ID])
-VALUES(10000)
-GO
-
-print '' print '*** inserting data into PACKAGE_LINE'
-GO
-INSERT [dbo].[PACKAGE_LINE]([PACKAGE_ID], [PRODUCT_LOT_ID], [QUANTITY], [PRICE_PAID])
-VALUES(10000, 10000, 10, 10.50)
-GO
-
 print '' print '*** inserting data into PRODUCT'
 GO
 INSERT [dbo].[PRODUCT]([NAME], [DESCRIPTION], [UNIT_PRICE], [ACTIVE], [UNIT_OF_MEASUREMENT], [DELIVERY_CHARGE_PER_UNIT])
@@ -812,6 +800,12 @@ print '' print '*** inserting data into ORDER_LINE'
 GO
 INSERT [dbo].[ORDER_LINE]([PRODUCT_ID], [QUANTITY], [GRADE_ID], [PRICE], [UNIT_DISCOUNT], [TOTAL_DELIVERY_CHARGE])
 VALUES(10000, 10, 'A Grade', 5.0, 0.0, 5)
+GO
+
+print '' print '*** inserting data into ORDER_STATUS'
+GO
+INSERT [dbo].[ORDER_STATUS]([ORDER_STATUS_ID])
+VALUES("Ready For Shipment")
 GO
 
 

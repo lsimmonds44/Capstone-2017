@@ -9,14 +9,15 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListView x:Name="listPackages" Grid.Row="0" 
                   Grid.Column="0" 
-                  Grid.ColumnSpan="2" 
+                  Grid.ColumnSpan="3" 
                   Margin="5" MouseDoubleClick="listPackages_MouseDoubleClick"/>
 
-        <Button x:Name="btnAddPackage" Grid.Row="1" Content="Add" Margin="20 10" Click="btnAddPackage_Click"/>
-
+        <Button x:Name="btnAddPackage" Grid.Row="1" Content="Add" Margin="10" Click="btnAddPackage_Click"/>
+        <Button x:Name="btnReadyForShipment" Grid.Row="1" Grid.Column="1" Content="Ready For Shipment" Margin="10" Click="btnReadyForShipment_Click"/>
     </Grid>
 </Window>

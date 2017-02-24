@@ -14,8 +14,6 @@ namespace DataObjects
 {
     public class Package
     {
-
-        //The delivery id is a nullable int s as it can be null in the database
         public int? DeliveryId { get; set; }
         public int? OrderId { get; set; }
         public int PackageId { get; set; }

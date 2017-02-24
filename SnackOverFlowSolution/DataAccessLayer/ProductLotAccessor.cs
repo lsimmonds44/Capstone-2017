@@ -10,7 +10,7 @@ using System.Data;
 namespace DataAccessLayer
 {
     /// <summary>
-    /// Christian Lopez
+	/// Christian Lopez
     /// Created on 2017/02/15
     /// Edited on 2017/02/24 by William Flood
 	///
@@ -112,6 +112,110 @@ namespace DataAccessLayer
             }
         }
         /// <summary>
+        /// Robert Forbes
+        /// 2017/02/16
+        /// 
+        /// Gets a product lot object using the productlotid 
+        /// </summary>
+        /// <param name="productLotID">the id to search on</param>
+        /// <returns>A product lot</returns>
+        public static ProductLot RetrieveProductLot(int? productLotID)
+        {
+            ProductLot lot = new ProductLot();
+
+            // Getting a SqlCommand object
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_lot";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotID);
+
+            // Attempting to run the stored procedure
+			try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+				reader.Read();
+
+                    lot = new ProductLot()
+                    {
+                        ProductLotId = reader.GetInt32(0),
+                        WarehouseId = reader.GetInt32(1),
+                        SupplierId = reader.GetInt32(2),
+                        LocationId = reader.GetInt32(3),
+                        ProductId = reader.GetInt32(4),
+                        SupplyManagerId = reader.GetInt32(5),
+                        Quantity = reader.GetInt32(6),
+                        AvailableQuantity = reader.GetInt32(7),
+                        DateReceived = reader.GetDateTime(8),
+                        ExpirationDate = reader.GetDateTime(9)
+
+                    };
+                    reader.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+			}
+            finally
+            {
+                conn.Close();
+            }
+			    return lot;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/02/16
+        /// 
+        /// Updates the available quantity in the product lot table
+        /// </summary>
+        /// <param name="productLotID">The product lot to be updated</param>
+        /// <param name="oldAvailableQuantity">The quantity that already exists in the database</param>
+        /// <param name="newAvailableQuantity">The new quantity to insert into the database</param>
+        /// <returns>int rows affected</returns>
+        public static int UpdateProductLotAvailableQuantity(int? productLotID, int? oldAvailableQuantity, int? newAvailableQuantity)
+        {
+            int result = 0;
+
+            // Getting a SqlCommand object
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_product_lot_available_quantity";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotID);
+            cmd.Parameters.AddWithValue("@old_AVAILABLE_QUANTITY", oldAvailableQuantity);
+            cmd.Parameters.AddWithValue("@new_AVAILABLE_QUANTITY", newAvailableQuantity);
+
+            // Attempting to run the stored procedure
+            try
+            {
+                conn.Open();
+                // Storing the amount of rows that were affected by the stored procedure
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+			}
+
+            return result;
+        }
+
+        /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/15
         /// 
@@ -130,7 +234,6 @@ namespace DataAccessLayer
 
             cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
             cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
-
             try
             {
                 conn.Open();
@@ -164,7 +267,6 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-
             return productLot;
         }
 		

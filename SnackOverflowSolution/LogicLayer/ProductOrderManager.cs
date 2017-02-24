@@ -73,5 +73,34 @@ namespace LogicLayer
 
             return order;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/02/16
+        /// 
+        /// updates the status of the order
+        /// </summary>
+        /// <param name="productOrderID">The ProductOrderID of the order to be updated</param>
+        /// <param name="status">The status to assign to the order</param>
+        /// <returns>bool representing whether the update was successful</returns>
+        public bool UpdateProductOrderStatus(int productOrderID, string status)
+        {
+            bool result = false;
+
+            try
+            {
+                if (ProductOrderAccessor.UpdateProductOrderStatus(productOrderID, status) > 0)
+                {
+                    result = true;
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+        }
     }
 }
