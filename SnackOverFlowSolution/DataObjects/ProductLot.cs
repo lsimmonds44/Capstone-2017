@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Christian Lopez
+    /// 2017/02/20
+    /// 
+    /// The DTO for a Product Lot
+    /// </summary>
     public class ProductLot
     {
-        public int ProductLotID { get; set; }
-        public int WarehouseID { get; set; }
-        public int SupplierID { get; set; }
-        public int LocationID { get; set; }
-        public int ProductID { get; set; }
-        public int SupplyManagerID { get; set; }
+        public int ProductLotId { get; set; }
+        public int WarehouseId { get; set; }
+        public int SupplierId { get; set; }
+        public int LocationId { get; set; }
+        public int ProductId { get; set; }
+        public int SupplyManagerId { get; set; }
         public int Quantity { get; set; }
-        public DateTime? DateReceived { get; set; }
-        public DateTime? ExpirationDate { get; set; }
+        public int AvailableQuantity { get; set; }
+        public DateTime DateReceived { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 }

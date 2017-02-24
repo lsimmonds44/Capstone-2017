@@ -195,5 +195,64 @@ namespace DataAccessLayer
             }
             return (null!=UserInstance);
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/01
+        /// 
+        /// Access DB to get UserAddress by given address ID
+        /// </summary>
+        /// <param name="preferredAddressId">The ID for the address</param>
+        /// <returns>The associated UserAddress</returns>
+        public static UserAddress RetrieveUserAddress(int? preferredAddressId)
+        {
+
+            UserAddress userAddress = null;
+
+            if (null == preferredAddressId)
+            {
+                return userAddress;
+            }
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_address";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ADDRESS_ID", SqlDbType.Int);
+            cmd.Parameters["@USER_ADDRESS_ID"].Value = preferredAddressId;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userAddress = new UserAddress()
+                    {
+                        UserAddressId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        AddressLineOne = reader.GetString(2),
+                        AddressLineTwo = reader.GetString(3),
+                        City = reader.GetString(4),
+                        State = reader.GetString(5),
+                        Zip = reader.GetString(6)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return userAddress;
+        }
     }
 }

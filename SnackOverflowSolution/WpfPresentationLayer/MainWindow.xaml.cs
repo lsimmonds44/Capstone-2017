@@ -23,10 +23,12 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
-        private UserManager _userManager = new UserManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
         List<Employee> employeeList;
         List<Charity> charityList;
+        private IUserManager _userManager = new UserManager();
+        private ISupplierManager _supplierManager = new SupplierManager();
+        private IProductLotManager _productLotManager = new TestProductLotManager();
         Employee _employee = null;
         User _user = null;
         private ICharityManager _charityManager;
@@ -247,5 +249,53 @@ namespace WpfPresentationLayer
             productLotView.ShowDialog();
             tabProductLot_Selected(sender, e);
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/01/31
+        /// 
+        /// Open a frmAddSupplier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
+        private void btnCreateSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager);
+            var addSupplierResult = addSupplierFrm.ShowDialog();
+            if (addSupplierResult == true)
+            {
+                MessageBox.Show("Supplier added!");
+            }
+        }
+
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/15
+        /// 
+        /// Open a frmAddInspection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
+                var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(_user.UserId)),
+                    new GradeManager(), _employee, new TestProductManager(), _supplierManager, new InspectionManager());
+                var addInspectionResult = addInspectionFrm.ShowDialog();
+                if (addInspectionResult == true)
+                {
+                    MessageBox.Show("Inspection Added");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     } // end of class
 } // end of namespace 

@@ -171,7 +171,30 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="2" Grid.Column="3" Content="Add Product Lot" Width="180" Margin="0 10 0 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
+                    <Button Grid.Row="2" Grid.Column="3" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
+                    <Button Name="btnCreateInspection" Grid.Row="0" Grid.Column="1" Content="Create Inspection" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
+            <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Name="btnCreateSupplier" Grid.Row="0" Grid.Column="1" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
+                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="2" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" IsEnabled="False"/>
+
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

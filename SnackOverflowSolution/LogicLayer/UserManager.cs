@@ -197,6 +197,7 @@ namespace LogicLayer
             return "UnableToCreate";
         }
 
+		
         public List<User> RetrieveFullUserList()
         {
             var accessor = new UserAccessor();
@@ -208,6 +209,35 @@ namespace LogicLayer
             {
                 throw;
             }
+        }
+		
+
+
+		
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/01
+        /// 
+        /// Retrieve the corresponding User Address
+        /// </summary>
+        /// <param name="prefferedAddressId"></param>
+        /// <returns></returns>
+        public UserAddress RetrieveUserAddress(int? prefferedAddressId)
+        {
+
+            UserAddress userAddress = null;
+
+            try
+            {
+                userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("Unable to access Data");
+            }
+
+            return userAddress;
         }
     }
 }

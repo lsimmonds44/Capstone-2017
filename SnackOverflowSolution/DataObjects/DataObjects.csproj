@@ -46,6 +46,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeOrderResponsibility.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Inspection.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
     <Compile Include="Product.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Supplier.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Warehouse.cs" />
+    <Compile Include="UserAddress.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
