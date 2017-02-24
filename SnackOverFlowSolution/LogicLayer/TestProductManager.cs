@@ -29,5 +29,10 @@ namespace LogicLayer
                 Active = true
             };
         }
+
+        public int DeleteProduct(int productID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

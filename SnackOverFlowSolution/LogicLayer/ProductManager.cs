@@ -47,5 +47,11 @@ namespace LogicLayer
 
 
 
+
+
+        public DataObjects.Product retrieveProductById(int productId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -41,14 +41,14 @@ namespace WpfPresentationLayer
             cCCW.ShowDialog();
         }
 
-/// <summary>
-/// Ariel Sigo
-/// Created 2017/10/02
-/// 
-/// Button that leads to update employee form
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+        /// <summary>
+        /// Ariel Sigo
+        /// Created 2017/10/02
+        /// 
+        /// Button that leads to update employee form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
         {
             frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
@@ -96,7 +96,7 @@ namespace WpfPresentationLayer
                     _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
                     statusMessage.Content = "Welcome " + _user.UserName;
                     showTabs(); // This needs to be updated so it will show just one that is 
-                                // assigned to the employee
+                    // assigned to the employee
 
 
                 }
@@ -143,7 +143,7 @@ namespace WpfPresentationLayer
             tabCommercialCustomer.Visibility = Visibility.Visible;
             tabEmployee.Visibility = Visibility.Visible;
             tabUser.Visibility = Visibility.Visible;
-            
+
         }
 
         private void hideTabs()

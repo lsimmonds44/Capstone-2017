@@ -48,7 +48,7 @@
             <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <PasswordBox Name="tfPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0"/>
             <Label Name="lblPassword" Grid.Column="3" Grid.Row="1" Content="Password" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3 4 20 0" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click"/>
+            <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3.4,0,0,24.6" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click" Height="21" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <TabControl Name="tabSetMain" Grid.Row="2" >
             <TabItem Name="tabCommercialCustomer" Header="Commercial Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
@@ -64,18 +64,18 @@
                               ItemsSource="{Binding}" IsReadOnly="True">
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="1" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click"/>
-                            <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="2" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="1" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click"/>
+                        <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="2" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
 
-                        </Grid> 
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Name="tabEmployee" Header="Employee" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto">
@@ -173,7 +173,7 @@
             <StatusBarItem Grid.Column="0" Name="statusMessage" Margin="10 0" Content="Please Log in to continue...."  VerticalAlignment="Top"/>
             <StatusBarItem Grid.Column="1"  Name="statusUpdate" Margin="10 0" Content="Messages will appear here...."  VerticalAlignment="Top"/>
         </StatusBar>
-            
-        </Grid>
+
+    </Grid>
 
 </Window>
