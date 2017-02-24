@@ -33,5 +33,10 @@ namespace LogicLayer
             }
             return pl;
         }
+
+        public bool AddProduct(ProductLot p)
+        {
+            return ProductLotAccessor.CreateProductLot(p);
+        }
     }
 }
