@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataObjects;
 
 namespace LogicLayer
 {
@@ -18,6 +19,7 @@ namespace LogicLayer
         /// <param name="productID"></param>
         /// <returns></returns>
         int DeleteProduct(int productID);
-
+		
+        Product retrieveProductById(int productId);
     }
 }
