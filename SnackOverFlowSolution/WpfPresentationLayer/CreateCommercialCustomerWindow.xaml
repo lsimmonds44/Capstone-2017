@@ -1,0 +1,45 @@
+﻿<Window x:Class="WpfPresentationLayer.CreateCommercialCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateCommercialCustomerWindow" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="340"/>
+            <ColumnDefinition Width="90px"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="lblUserName" Grid.Row="0" Grid.Column="0" Content="User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFUserName" Grid.Row="0" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" ToolTip="Enter user name to find user"/>
+        <Button Name="btnFindUser" Grid.Row="0" Grid.Column="2" Content="Search" Width="80" FontSize="18" Height="40" Click="findUserButton_Click"></Button>
+        <Label Name="lblName" Grid.Row="1" Grid.Column="0" Content="Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFName" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+        <Label Name="lblPhone" Grid.Row="2" Grid.Column="0" Content="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFPhone" Grid.Row="2" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+        <Label Name="lblUserId" Grid.Row="3" Grid.Column="0" Content="User Id" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFUserId" Grid.Row="3" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+        <Label Name="lblApprovedBy" Grid.Row="4" Grid.Column="0" Content="Approval Employee ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFApprovedBy" Grid.Row="4" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+        <Label Name="lblFedTaxId" Grid.Row="5" Grid.Column="0" Content="Federal Tax Id" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="tFFedTaxId" Grid.Row="5" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center"/>
+        <Label Name="lblIsApproved" Grid.Row="6" Grid.Column="0" Content="Approved" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Label Name="lblActive" Grid.Row="6" Grid.Column="0" Content="Active" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold"/>
+        <CheckBox Name="cbIsApproved" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0" IsChecked="True" />
+        <CheckBox Name="cbActive" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 10" IsChecked="True"/>
+        <Button Name="btnCancel" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin=" 10 0 0 0" Content="Cancel" FontSize="18" Width="100" Height="40" Click="btnCancel_Click" />
+        <Button Name="btnCreate" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Content="Create Account" FontSize="18" Width="160" Height="40" Click="btnCreate_Click" IsEnabled="False"/>
+
+    </Grid>
+</Window>
