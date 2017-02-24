@@ -25,5 +25,11 @@ namespace LogicLayer
                 ExpirationDate = DateTime.Now.AddDays(7.0)
             };
         }
+
+
+        public bool AddProduct(ProductLot p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

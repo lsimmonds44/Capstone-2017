@@ -25,7 +25,7 @@ namespace WpfPresentationLayer
         private EmployeeManager _employeeManager = new EmployeeManager();
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
-        private IProductLotManager _productLotManager = new TestProductLotManager();
+        private IProductLotManager _productLotManager = new ProductLotManager();
 
         Employee _employee = null;
         User _user = null;
@@ -90,21 +90,29 @@ namespace WpfPresentationLayer
 
                 if (result.Equals("Found"))
                 {
+                    try
+                    {
+                        lblPassword.Visibility = Visibility.Collapsed;
+                        lblUsername.Visibility = Visibility.Collapsed;
+                        tfUsername.Visibility = Visibility.Collapsed;
+                        tfPassword.Visibility = Visibility.Collapsed;
+                        tfPassword.Password = "";
+                        btnLogin.Content = "Logout";
+                        btnLogin.IsDefault = false;
+                        tfPassword.Background = Brushes.White;
+                        tfUsername.Background = Brushes.White;
+                        _user = _userManager.RetrieveUserByUserName(tfUsername.Text);
+                        _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
+                        statusMessage.Content = "Welcome " + _user.UserName;
+                        showTabs(); // This needs to be updated so it will show just one that is 
+                        // assigned to the employee
+                    }
+                    catch (Exception ex)
+                    {
 
-                    lblPassword.Visibility = Visibility.Collapsed;
-                    lblUsername.Visibility = Visibility.Collapsed;
-                    tfUsername.Visibility = Visibility.Collapsed;
-                    tfPassword.Visibility = Visibility.Collapsed;
-                    tfPassword.Password = "";
-                    btnLogin.Content = "Logout";
-                    btnLogin.IsDefault = false;
-                    tfPassword.Background = Brushes.White;
-                    tfUsername.Background = Brushes.White;
-                    _user = _userManager.RetrieveUserByUserName(tfUsername.Text);
-                    _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
-                    statusMessage.Content = "Welcome " + _user.UserName;
-                    showTabs(); // This needs to be updated so it will show just one that is 
-                    // assigned to the employee
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+
 
 
                 }
@@ -202,7 +210,7 @@ namespace WpfPresentationLayer
             {
                 // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
                 var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(_user.UserId)),
-                    new GradeManager(), _employee, new TestProductManager(), _supplierManager, new InspectionManager());
+                    new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
                 var addInspectionResult = addInspectionFrm.ShowDialog();
                 if (addInspectionResult == true)
                 {

@@ -145,7 +145,7 @@ namespace LogicLayer
                 }
             }catch(Exception ex)
             {
-                return "Used Username";
+                return "Used Username. Error: " + ex.Message;
             }
             return "UnableToCreate";
         }
