@@ -1,0 +1,30 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_create_vehicle')
+BEGIN
+DROP PROCEDURE sp_create_vehicle
+Print '' print  ' *** dropping procedure sp_create_vehicle'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_create_vehicle'
+GO
+Create PROCEDURE sp_create_vehicle
+(
+@VIN[NVARCHAR](20),
+@MAKE[NVARCHAR](15),
+@MODEL[NVARCHAR](20),
+@MILEAGE[INT],
+@YEAR[NVARCHAR](4),
+@COLOR[NVARCHAR](20),
+@ACTIVE[BIT],
+@LATEST_REPAIR_DATE[DATE]= NULL,
+@LAST_DRIVER_ID[INT]= NULL,
+@VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO VEHICLE (VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID)
+VALUES
+(@VIN, @MAKE, @MODEL, @MILEAGE, @YEAR, @COLOR, @ACTIVE, @LATEST_REPAIR_DATE, @LAST_DRIVER_ID, @VEHICLE_TYPE_ID)
+END

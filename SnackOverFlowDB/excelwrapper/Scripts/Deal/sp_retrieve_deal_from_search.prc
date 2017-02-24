@@ -1,0 +1,29 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_retrieve_deal_from_search')
+BEGIN
+Drop PROCEDURE sp_retrieve_deal_from_search
+Print '' print  ' *** dropping procedure sp_retrieve_deal_from_search'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_from_search'
+GO
+Create PROCEDURE sp_retrieve_deal_from_search
+(
+@DEAL_ID[INT]=NULL,
+@DESCRIPTION[NVARCHAR](200)=NULL,
+@CODE[NCHAR](10)=NULL,@CODE_ESCAPE[BIT] = NULL,
+@AMOUNT[DECIMAL](5)=NULL,@AMOUNT_ESCAPE[BIT] = NULL,
+@PERCENT_OFF[DECIMAL](5)=NULL,@PERCENT_OFF_ESCAPE[BIT] = NULL
+)
+AS
+BEGIN
+Select DEAL_ID, DESCRIPTION, CODE, AMOUNT, PERCENT_OFF
+FROM DEAL
+WHERE (DEAL.DEAL_ID=@DEAL_ID OR @DEAL_ID IS NULL)
+AND (DEAL.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+AND (DEAL.CODE=@CODE OR @CODE IS NULL OR @CODE_ESCAPE = 1)
+AND (DEAL.AMOUNT=@AMOUNT OR @AMOUNT IS NULL OR @AMOUNT_ESCAPE = 1)
+AND (DEAL.PERCENT_OFF=@PERCENT_OFF OR @PERCENT_OFF IS NULL OR @PERCENT_OFF_ESCAPE = 1)
+END

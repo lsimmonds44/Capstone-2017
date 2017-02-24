@@ -1,0 +1,27 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_retrieve_driver_from_search')
+BEGIN
+Drop PROCEDURE sp_retrieve_driver_from_search
+Print '' print  ' *** dropping procedure sp_retrieve_driver_from_search'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_driver_from_search'
+GO
+Create PROCEDURE sp_retrieve_driver_from_search
+(
+@DRIVER_ID[INT]=NULL,
+@DRIVER_LICENSE_NUMBER[NVARCHAR](9)=NULL,
+@LICENSE_EXPIRATION[DATETIME]=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select DRIVER_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE
+FROM DRIVER
+WHERE (DRIVER.DRIVER_ID=@DRIVER_ID OR @DRIVER_ID IS NULL)
+AND (DRIVER.DRIVER_LICENSE_NUMBER=@DRIVER_LICENSE_NUMBER OR @DRIVER_LICENSE_NUMBER IS NULL)
+AND (DRIVER.LICENSE_EXPIRATION=@LICENSE_EXPIRATION OR @LICENSE_EXPIRATION IS NULL)
+AND (DRIVER.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
