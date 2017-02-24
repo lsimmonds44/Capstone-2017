@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Robert Forbes
-    /// 2017/02/16
-    /// Beginning of the product lot class, lists are not currently included as that would require the DTOs for thos objects
-    /// And Im sure someone else is working on a full version
+    /// Christian Lopez
+    /// 2017/02/20
+    /// 
+    /// The DTO for a Product Lot
     /// </summary>
     public class ProductLot
     {
-        public DateTime expirationDate { get; set; }
-        public DateTime dateRecieved { get; set; }
-        public int? availableQuantity { get; set; }
-        public int? quantity { get; set; }
-        public int? supplyManagerId { get; set; }
-        public int? productId { get; set; }
-        public int? supplierId { get; set; }
-        public int? locationId { get; set; }
-        public int? warehouseId { get; set; }
-        public int? productLotId { get; set; }
+        public int ProductLotId { get; set; }
+        public int WarehouseId { get; set; }
+        public int SupplierId { get; set; }
+        public int LocationId { get; set; }
+        public int ProductId { get; set; }
+        public int SupplyManagerId { get; set; }
+        public int Quantity { get; set; }
+        public int AvailableQuantity { get; set; }
+        public DateTime DateReceived { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 }

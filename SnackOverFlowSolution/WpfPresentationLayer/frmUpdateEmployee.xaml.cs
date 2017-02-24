@@ -27,11 +27,19 @@ namespace WpfPresentationLayer
         private EmployeeManager _employeeManager;
         private List<Employee> employeeList = new List<Employee>();
         private UserManager _userManager = new UserManager();
+        private IEmployeeManager _employeeManager1;
         public frmUpdateEmployee(EmployeeManager employeeManager, Employee employee)
         {
             InitializeComponent();
             _employeeManager = employeeManager;
             _employee = employee;
+        }
+
+        public frmUpdateEmployee(IEmployeeManager _employeeManager1, Employee _employee)
+        {
+            // TODO: Complete member initialization
+            this._employeeManager1 = _employeeManager1;
+            this._employee = _employee;
         }
         /// <summary>
         /// Ariel Sigo

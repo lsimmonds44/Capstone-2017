@@ -145,12 +145,12 @@ namespace LogicLayer
                 }
             }catch(Exception ex)
             {
-                return "Used Username";
+                return "Used Username. Error: " + ex.Message;
             }
             return "UnableToCreate";
         }
 
-        public String LogIn(String userName, string password)
+        public string LogIn(String userName, string password)
         {
 
             if (userName.Length > 20 || userName.Length < 4)
@@ -184,5 +184,32 @@ namespace LogicLayer
             }
         }
 
+
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/01
+        /// 
+        /// Retrieve the corresponding User Address
+        /// </summary>
+        /// <param name="prefferedAddressId"></param>
+        /// <returns></returns>
+        public UserAddress RetrieveUserAddress(int? prefferedAddressId)
+        {
+
+            UserAddress userAddress = null;
+
+            try
+            {
+                userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("Unable to access Data");
+            }
+
+            return userAddress;
+        }
     }
 }
