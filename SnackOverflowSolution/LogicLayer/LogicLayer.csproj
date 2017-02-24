@@ -46,6 +46,7 @@
     <Compile Include="GradeManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
+    <Compile Include="ILocationManager.cs" />
     <Compile Include="IGradeManager.cs" />
     <Compile Include="IInspectionManager.cs" />
     <Compile Include="InspectionManager.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="LocationManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
     <Compile Include="ProductManager.cs" />
