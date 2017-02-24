@@ -13,7 +13,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="1" Content="To Add Commercial Customer" Width="180" Margin="0 10 0 0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="To Add Commercial Customer" Width="180" Margin="0 10 0 0" VerticalAlignment="Top" Click="Button_Click_Create_CommercialCustomer"/>
         <Button Grid.Row="0" Grid.Column="2" Content="Update Employee Information" Width="180" Margin="0 10 0 0" VerticalAlignment="Bottom" Click="Button_Click_Update_Employee"  />
 
         <Menu Grid.Row="0">
@@ -64,17 +64,16 @@
                               ItemsSource="{Binding}" IsReadOnly="True">
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="1" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click"/>
-                        <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="2" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
-
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="1" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
+                            <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="2" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
                     </Grid>
                 </Grid>
             </TabItem>

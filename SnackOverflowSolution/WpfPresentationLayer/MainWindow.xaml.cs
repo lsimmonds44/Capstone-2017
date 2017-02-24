@@ -35,7 +35,15 @@ namespace WpfPresentationLayer
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Eric Walton
+        /// 2017/06/02
+        /// 
+        /// Button to load Create Commercial Customer Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
             CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow(_employee.EmployeeId);
             cCCW.ShowDialog();

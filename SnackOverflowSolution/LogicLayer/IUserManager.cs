@@ -11,6 +11,7 @@ namespace LogicLayer
     {
         User RetrieveUserByUserName(string userName);
 
+
         /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/01
