@@ -73,5 +73,43 @@ namespace DataAccessLayer
 
             return productLot;
         }
+
+        public static bool CreateProductLot(ProductLot p)
+        {
+            bool result = false;
+
+            var conn = DBConnection.GetConnection();
+
+            var cmdText = "sp_create_productlot";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@WAREHOUSE_ID", p.WarehouseId);
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", p.SupplierId);
+            cmd.Parameters.AddWithValue("@LOCATION_ID", p.LocationId);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", p.ProductId);
+            cmd.Parameters.AddWithValue("@SUPPLY_MANAGER_ID", p.SupplyManagerId);
+            cmd.Parameters.AddWithValue("@QUANTITY", p.Quantity);
+            cmd.Parameters.AddWithValue("@AVAILABLE_QUANTITY", p.AvailableQuantity);
+            cmd.Parameters.AddWithValue("@DATE_RECEIVED", p.DateReceived);
+            cmd.Parameters.AddWithValue("@EXPIRATION_DATE", p.ExpirationDate);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                result = true;
+            }
+            catch
+            {
+                throw new ApplicationException("There was an error executing sp_create_productlot.");
+            }
+
+            return result;
+        }
     }
 }
