@@ -43,18 +43,32 @@
   <ItemGroup>
     <Compile Include="CustomerManager.cs" />
     <Compile Include="EmployeeManager.cs" />
-    <Compile Include="iCustomerManager.cs" />
+    <Compile Include="GradeManager.cs" />
+    <Compile Include="ICustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
+    <Compile Include="IGradeManager.cs" />
+    <Compile Include="IInspectionManager.cs" />
+    <Compile Include="InspectionManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
+    <Compile Include="IProductLotManager.cs" />
+    <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
+    <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="LocationManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
+    <Compile Include="ProductManager.cs" />
+    <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestEmployeeManager.cs" />
+    <Compile Include="SupplierManager.cs" />
+    <Compile Include="TestProductLotManager.cs" />
+    <Compile Include="TestProductManager.cs" />
+    <Compile Include="TestUserManager.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>

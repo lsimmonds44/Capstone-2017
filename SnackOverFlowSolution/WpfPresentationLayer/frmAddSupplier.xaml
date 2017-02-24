@@ -1,0 +1,162 @@
+﻿<Window x:Class="WpfPresentationLayer.frmAddSupplier"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Create Supplier" Height="540" Width="450" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="230" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Name="lblUsername" Content="UserName: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Name="txtUsername" Margin="0 0 3 0" MaxLength="50" TextChanged="txtUsername_TextChanged"/>
+            <Button Grid.Column="2" Name="btnLookup" Content="Lookup" Margin="0 0 10 0" Click="btnLookup_Click"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Name="lblName" Content="Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="1" Name="lblPhone" Content="Phone: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="2" Name="lblFarmName" Content="Farm Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="3" Name="lblFarmAddress" Content="Farm Address: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="65" />
+                    <ColumnDefinition Width="75" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Name="lblFarmCity" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Name="txtFarmCity" Margin="0 5 0 5" MaxLength="50" IsEnabled="False"/>
+                <Label Grid.Column="2" Name="lblFarmState" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox Name="cboFarmState" Grid.Column="3" Margin="0 5 10 5" SelectedIndex="0" VerticalAlignment="Center" Padding="5" MaxDropDownHeight="200" IsEnabled="False">
+                    <ComboBoxItem Content="AL" />
+                    <ComboBoxItem Content="AK" />
+                    <ComboBoxItem Content="AR" />
+                    <ComboBoxItem Content="AZ" />
+                    <ComboBoxItem Content="CA" />
+                    <ComboBoxItem Content="CO" />
+                    <ComboBoxItem Content="CT" />
+                    <ComboBoxItem Content="DE" />
+                    <ComboBoxItem Content="FL" />
+                    <ComboBoxItem Content="GA" />
+                    <ComboBoxItem Content="HI" />
+                    <ComboBoxItem Content="IA" />
+                    <ComboBoxItem Content="ID" />
+                    <ComboBoxItem Content="IL" />
+                    <ComboBoxItem Content="IN" />
+                    <ComboBoxItem Content="KS" />
+                    <ComboBoxItem Content="KY" />
+                    <ComboBoxItem Content="LA" />
+                    <ComboBoxItem Content="MA" />
+                    <ComboBoxItem Content="MD" />
+                    <ComboBoxItem Content="ME" />
+                    <ComboBoxItem Content="MI" />
+                    <ComboBoxItem Content="MN" />
+                    <ComboBoxItem Content="MO" />
+                    <ComboBoxItem Content="MS" />
+                    <ComboBoxItem Content="MT" />
+                    <ComboBoxItem Content="NC" />
+                    <ComboBoxItem Content="ND" />
+                    <ComboBoxItem Content="NE" />
+                    <ComboBoxItem Content="NH" />
+                    <ComboBoxItem Content="NJ" />
+                    <ComboBoxItem Content="NM" />
+                    <ComboBoxItem Content="NV" />
+                    <ComboBoxItem Content="NY" />
+                    <ComboBoxItem Content="OH" />
+                    <ComboBoxItem Content="OK" />
+                    <ComboBoxItem Content="OR" />
+                    <ComboBoxItem Content="PA" />
+                    <ComboBoxItem Content="RI" />
+                    <ComboBoxItem Content="SC" />
+                    <ComboBoxItem Content="SD" />
+                    <ComboBoxItem Content="TN" />
+                    <ComboBoxItem Content="TX" />
+                    <ComboBoxItem Content="UT" />
+                    <ComboBoxItem Content="VA" />
+                    <ComboBoxItem Content="VT" />
+                    <ComboBoxItem Content="WA" />
+                    <ComboBoxItem Content="WI" />
+                    <ComboBoxItem Content="WV" />
+                    <ComboBoxItem Content="WY" />
+                </ComboBox>
+            </Grid>
+            <Label Grid.Column="0" Grid.Row="5" Name="lblFarmTaxID" Content="Farm Tax ID: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="0" Name="txtName" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Name="txtPhone" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Name="txtFarmName" Margin="0 5 10 5" MaxLength="300" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Name="txtFarmAddress" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Name="txtFarmTaxId" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
+        </Grid>
+        <Grid Grid.Row="3" IsEnabled="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Name="lblAvailableProducts" Content="Available Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0 0 0"/>
+                <DataGrid Grid.Row="1" Name="dgAvailableProducts" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
+                          SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10 0 0 0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="availableProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1" Name="btnAddToApproved" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15"/>
+                <Button Grid.Row="2" Name="btnRemoveFromApproved" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" />
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Name="lblApprovedProducts" Content="Approved Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 10 0"/>
+                <DataGrid Grid.Row="1" Name="dgApprovedProducts" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
+                          SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0 0 10 0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="approvedProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="btnCancel" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
+            <Button Grid.Column="1" Name="btnSubmit" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
+        </Grid>
+    </Grid>
+</Window>

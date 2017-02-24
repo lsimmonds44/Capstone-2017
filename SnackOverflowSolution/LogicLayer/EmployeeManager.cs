@@ -13,18 +13,21 @@ namespace LogicLayer
 
         public List<Employee> employees { get; set; }
 
-        Employee _employee = null;
 
         public Employee RetrieveEmployeeByUserName(string userName)
         {
-            _employee = new Employee();
-            _employee.EmployeeId = 10200;
-
-            return _employee;
+            throw new NotImplementedException();
         }
 
         
-
+        /// <summary>
+        /// Daniel brown
+        /// Created 02/08/2017
+        /// 
+        /// Retrieve a single employee
+        /// </summary>
+        /// <param name="employeeID">The Id of the employee to be retrieved</param>
+        /// <returns>A single Employee Object</returns>
         public Employee RetrieveEmployee(int employeeID)
         {
             Employee employee = null;
@@ -40,7 +43,14 @@ namespace LogicLayer
 
             return employee;
         }
-
+        
+        /// <summary>
+        /// Daniel Brown
+        /// Created 02/08/2017
+        /// 
+        /// retrieve a list of all active employees
+        /// </summary>
+        /// <returns>A list of Employee objects</returns>
         public List<Employee> RetrieveEmployeeList()
         {
             List<Employee> employees = null;
@@ -56,6 +66,7 @@ namespace LogicLayer
 
             return employees;
         }
+        
         /// <summary>
         /// Ariel Sigo
         /// Created 2017/10/02
@@ -74,6 +85,7 @@ namespace LogicLayer
                 throw;
             }
         }
+        
         /// <summary>
         /// Ariel Sigo
         /// Created 2017/07/02
