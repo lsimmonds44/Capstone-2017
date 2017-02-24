@@ -1,0 +1,10 @@
+USE [SnackOverflowDB]
+GO
+print '' print ' *** Inserting Employee Test Records ***'
+INSERT INTO [dbo].[EMPLOYEE]
+  ([USER_ID], [SALARY], [ACTIVE], [DATE_OF_BIRTH])
+   VALUES
+      ('1', '10000', '03/21/1991'),
+      ('2', '20000', '11/30/1979'),
+      ('3', '15000', '08/19/1989')
+GO
