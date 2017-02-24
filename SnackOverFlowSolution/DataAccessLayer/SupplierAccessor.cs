@@ -105,14 +105,14 @@ namespace DataAccessLayer
                     reader.Read();
                     s = new Supplier
                     {
-                        SupplierId = reader.GetInt32(0),
+                        SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
                         ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmCity = reader.GetString(5),
                         FarmState = reader.GetString(6),
-                        FarmTaxId = reader.GetString(7)
+                        FarmTaxID = reader.GetString(7)
                     };
                 }
                 reader.Close();
@@ -151,14 +151,14 @@ namespace DataAccessLayer
                     reader.Read();
                     s = new Supplier
                     {
-                        SupplierId = reader.GetInt32(0),
+                        SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
                         ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmCity = reader.GetString(5),
                         FarmState = reader.GetString(6),
-                        FarmTaxId = reader.GetString(7)
+                        FarmTaxID = reader.GetString(7)
                     };
                 }
                 reader.Close();

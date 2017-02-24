@@ -15,7 +15,7 @@ namespace LogicLayer
             {
                 ProductLotId = 10000,
                 ProductId = 1,
-                SupplierId = supplier.SupplierId,
+                SupplierId = supplier.SupplierID,
                 WarehouseId = 1,
                 LocationId = 1,
                 AvailableQuantity = 500,
@@ -26,6 +26,10 @@ namespace LogicLayer
             };
         }
 
+        public int AddProductLot(ProductLot toAdd)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool AddProduct(ProductLot p)
         {

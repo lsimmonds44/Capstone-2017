@@ -23,16 +23,23 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
+        private IProductOrderManager _orderManager = new ProductOrderManager();
+        List<Employee> employeeList;
+        List<Charity> charityList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
 
         Employee _employee = null;
         User _user = null;
+        private ICharityManager _charityManager;
 
         public MainWindow()
         {
             InitializeComponent();
+            _userManager = new UserManager();
+            _charityManager = new CharityManager();
+            _employeeManager = new EmployeeManager();
         }
 
         /// <summary>
@@ -45,7 +52,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
-            CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow(_employee.EmployeeId);
+            CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
             cCCW.ShowDialog();
         }
 
@@ -67,6 +74,7 @@ namespace WpfPresentationLayer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             hideTabs();
+            tabSetMain.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -86,12 +94,12 @@ namespace WpfPresentationLayer
         {
             if (_employee == null)
             {
-                String result = _userManager.LogIn(tfUsername.Text, tfPassword.Password);
 
-                if (result.Equals("Found"))
+                try
                 {
-                    try
+                    if (_userManager.AuthenticateUser(tfUsername.Text, tfPassword.Password))
                     {
+
                         lblPassword.Visibility = Visibility.Collapsed;
                         lblUsername.Visibility = Visibility.Collapsed;
                         tfUsername.Visibility = Visibility.Collapsed;
@@ -101,38 +109,17 @@ namespace WpfPresentationLayer
                         btnLogin.IsDefault = false;
                         tfPassword.Background = Brushes.White;
                         tfUsername.Background = Brushes.White;
-                        _user = _userManager.RetrieveUserByUserName(tfUsername.Text);
-                        _employee = _employeeManager.RetrieveEmployeeByUserName(tfUsername.Text); //need to add user to employee
+                        _user = _userManager.userInstance;
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
-                        // assigned to the employee
+                        // assigned to the employe
+
+
                     }
-                    catch (Exception ex)
-                    {
-
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
-
-
-
                 }
-                else if (result.Equals("Invalid Username"))
+                catch (System.Data.SqlClient.SqlException ex)
                 {
-                    statusMessage.Content = result;
-                    tfUsername.Background = Brushes.Red;
-                    tfPassword.Background = Brushes.White;
-                }
-                else if (result.Equals("Invalid Password"))
-                {
-                    statusMessage.Content = result;
-                    tfPassword.Background = Brushes.Red;
-                    tfUsername.Background = Brushes.White;
-                }
-                else if (result.Equals("UserNotFound"))
-                {
-                    statusMessage.Content = "Username and Password Did not match.";
-                    tfPassword.Background = Brushes.Red;
-                    tfUsername.Background = Brushes.White;
+                    ErrorAlert.ShowDatabaseError();
                 }
             }
             else
@@ -150,7 +137,6 @@ namespace WpfPresentationLayer
                 tfPassword.Visibility = Visibility.Visible;
 
             }
-
 
         }
         private void showTabs()
@@ -174,6 +160,102 @@ namespace WpfPresentationLayer
         {
             CreateNewUser fCU = new CreateNewUser();
             fCU.ShowDialog();
+        }
+        
+        private void tabCharity_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                charityList = _charityManager.RetrieveCharityList();
+                dgrdCharity.DataContext = charityList;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+        }
+
+        private void btnViewCharity_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgrdCharity.SelectedIndex >= 0)
+            {
+                var CharityViewInstance = new CharityView(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                CharityViewInstance.ShowDialog();
+                tabCharity_Selected(sender, e);
+            }
+
+        }
+
+        private void btnAddCharity_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                List<Employee> employeeSearchList = _employeeManager.SearchEmployees(new Employee() { UserId = _user.UserId});
+                int employeeId;
+                if(employeeSearchList.Count > 0)
+                {
+                    employeeId = (int)employeeSearchList[0].EmployeeId;
+                    var CharityViewInstance = new CharityView(_charityManager, employeeId);
+                    CharityViewInstance.SetEditable();
+                    CharityViewInstance.ShowDialog();
+                    tabCharity_Selected(sender, e);
+                } else
+                {
+                    MessageBox.Show("You are not authorized to enter new charities.");
+                }
+            } catch (System.Data.SqlClient.SqlException ex)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+        }
+
+        private void tabEmployee_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                employeeList = _employeeManager.RetrieveEmployeeList();
+                dgrdEmployee.DataContext = employeeList;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+        }
+
+        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var EmployeeViewInstance = new EmployeeView(_employeeManager);
+            EmployeeViewInstance.SetEditable();
+            EmployeeViewInstance.ShowDialog();
+            tabEmployee_Selected(sender, e);
+        }
+
+        private void tabOrder_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnViewEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgrdEmployee.SelectedIndex >= 0)
+            {
+                var EmployeeViewInstance = new EmployeeView(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                EmployeeViewInstance.ShowDialog();
+                tabEmployee_Selected(sender, e);
+            }
+        }
+
+        private void tabProductLot_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddProductLot_Click(object sender, RoutedEventArgs e)
+        {
+            var productLotView = new ProductLotView();
+            productLotView.SetEditable();
+            productLotView.ShowDialog();
+            tabProductLot_Selected(sender, e);
         }
 
         /// <summary>

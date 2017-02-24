@@ -1,0 +1,31 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_retrieve_employee_message_from_search')
+BEGIN
+Drop PROCEDURE sp_retrieve_employee_message_from_search
+Print '' print  ' *** dropping procedure sp_retrieve_employee_message_from_search'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_message_from_search'
+GO
+Create PROCEDURE sp_retrieve_employee_message_from_search
+(
+@MESSAGE_ID[INT]=NULL,
+@SENDER_ID[INT]=NULL,
+@RECEIVER_ID[INT]=NULL,
+@SENT[DATETIME]=NULL,
+@VIEWED[BIT]=NULL,
+@MESSAGE[NVARCHAR](4000)=NULL
+)
+AS
+BEGIN
+Select MESSAGE_ID, SENDER_ID, RECEIVER_ID, SENT, VIEWED, MESSAGE
+FROM EMPLOYEE_MESSAGE
+WHERE (EMPLOYEE_MESSAGE.MESSAGE_ID=@MESSAGE_ID OR @MESSAGE_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.SENDER_ID=@SENDER_ID OR @SENDER_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.RECEIVER_ID=@RECEIVER_ID OR @RECEIVER_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.SENT=@SENT OR @SENT IS NULL)
+AND (EMPLOYEE_MESSAGE.VIEWED=@VIEWED OR @VIEWED IS NULL)
+AND (EMPLOYEE_MESSAGE.MESSAGE=@MESSAGE OR @MESSAGE IS NULL)
+END

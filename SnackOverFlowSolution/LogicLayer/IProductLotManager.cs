@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    /// <summary>
-    /// Christian Lopez
-    /// Created on 2017/02/15
-    /// 
-    /// The interface for the ProductLot Manager
-    /// </summary>
     public interface IProductLotManager
     {
+        int AddProductLot(ProductLot toAdd);
         ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier);
 
         bool AddProduct(ProductLot p);

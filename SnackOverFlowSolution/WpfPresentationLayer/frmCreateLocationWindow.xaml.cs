@@ -37,8 +37,8 @@ namespace WpfPresentationLayer
             }
 
             Location location = new Location() {
-                description = txtDescription.Text,
-                isActive = (bool)chkActive.IsChecked
+                Description = txtDescription.Text,
+                IsActive = (bool)chkActive.IsChecked
                 };
             try
             {

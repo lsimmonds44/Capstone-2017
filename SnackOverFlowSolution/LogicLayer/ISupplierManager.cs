@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    /// <summary>
-    /// Christian Lopez
-    /// Created on 2017/02/02
-    /// 
-    /// Interface that contains methods for a supplier manager class
-    /// </summary>
     public interface ISupplierManager
     {
+        List<Supplier> ListSuppliers();
         /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/02

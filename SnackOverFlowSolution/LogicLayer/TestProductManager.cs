@@ -34,5 +34,15 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public List<Product> ListProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product RetrieveProductById(int productId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace LogicLayer
 {
     public class EmployeeManager : IEmployeeManager
     {
-
+        Employee _employee;
         public List<Employee> employees { get; set; }
 
         /// <summary>
@@ -80,14 +80,27 @@ namespace LogicLayer
 
             return employees;
         }
-        
+
+        public int CreateEmployee(Employee employeeInstance)
+        {
+            var accessor = new EmployeeAccessor();
+            accessor.EmployeeInstance = employeeInstance;
+            try
+            {
+                return DatabaseMainAccessor.Create(accessor);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         /// <summary>
         /// Ariel Sigo
         /// Created 2017/10/02
         /// 
         /// Refreshes Employee List
         /// </summary>
-        private void refreshEmployeeList()
+        private void RefreshEmployeeList()
         {
             try
             {
@@ -123,7 +136,7 @@ namespace LogicLayer
             try
             {
                 result = (1 == EmployeeAccessor.UpdateEmployee(Employee_ID, oldUser_ID, newUser_ID, oldSalary, newSalary, oldActive, newActive, oldDate_Of_Birth, newDate_Of_Birth));
-                refreshEmployeeList();
+                RefreshEmployeeList();
             }
             catch (Exception)
             {
@@ -145,8 +158,8 @@ namespace LogicLayer
             // know whether the operation succeeded
             try
             {
-                result = (1 == EmployeeAccessor.UpdateEmployee(newEmp.EmployeeId, oldEmp.UserId, newEmp.UserId, oldEmp.Salary, newEmp.Salary, oldEmp.Active, newEmp.Active, oldEmp.DateOfBirth, newEmp.DateOfBirth));
-                refreshEmployeeList();
+                result = (1 == EmployeeAccessor.UpdateEmployee((int)newEmp.EmployeeId, (int)oldEmp.UserId, (int)newEmp.UserId, (decimal)oldEmp.Salary, (decimal)newEmp.Salary, (bool)oldEmp.Active, (bool)newEmp.Active, (DateTime)oldEmp.DateOfBirth, (DateTime)newEmp.DateOfBirth));
+                RefreshEmployeeList();
             }
             catch (Exception)
             {
@@ -155,6 +168,18 @@ namespace LogicLayer
             return result;
         }
 
-
+        public List<Employee> SearchEmployees(Employee searchParameters)
+        {
+            var accessor = new EmployeeAccessor();
+            accessor.EmployeeInstance = searchParameters;
+            try
+            {
+                DatabaseMainAccessor.RetrieveBySearch(accessor);
+                return accessor.EmployeeList;
+            } catch
+            {
+                throw;
+            }
+        }
     }
 }

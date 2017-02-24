@@ -129,5 +129,10 @@ namespace LogicLayer
 
             return name;
         }
+
+        public List<Supplier> ListSuppliers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

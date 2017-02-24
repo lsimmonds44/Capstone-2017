@@ -41,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="DummyLocationManager.cs" />
+    <Compile Include="DummyProductManager.cs" />
+    <Compile Include="DummySupplierManager.cs" />
+    <Compile Include="DummyWarehouseManager.cs" />
     <Compile Include="EmployeeManager.cs" />
-    <Compile Include="GradeManager.cs" />
-    <Compile Include="ICustomerManager.cs" />
+    <Compile Include="ICharityManager.cs" />
+    <Compile Include="iCustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
+    <Compile Include="GradeManager.cs" />
     <Compile Include="IGradeManager.cs" />
     <Compile Include="IInspectionManager.cs" />
     <Compile Include="InspectionManager.cs" />
@@ -57,6 +63,7 @@
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="IWarehouseManager.cs" />
     <Compile Include="LocationManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />

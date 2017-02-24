@@ -47,5 +47,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public List<Location> ListLocations()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

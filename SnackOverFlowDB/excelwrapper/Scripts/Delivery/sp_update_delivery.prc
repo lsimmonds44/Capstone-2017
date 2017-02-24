@@ -1,0 +1,39 @@
+USE [SnackOverflowDB]
+GO
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_update_delivery')
+BEGIN
+DROP PROCEDURE sp_update_delivery
+Print '' print  ' *** dropping procedure sp_update_delivery'
+End
+GO
+
+Print '' print  ' *** creating procedure sp_update_delivery'
+GO
+Create PROCEDURE sp_update_delivery
+(
+@old_DELIVERY_ID[INT],
+@old_ROUTE_ID[INT],
+@new_ROUTE_ID[INT],
+@old_DEVLIVERY_DATE[DATETIME],
+@new_DEVLIVERY_DATE[DATETIME],
+@old_VERIFICATION[VARBINARY]=null,
+@new_VERIFICATION[VARBINARY],
+@old_STATUS_ID[NVARCHAR](50),
+@new_STATUS_ID[NVARCHAR](50),
+@old_DELIVERY_TYPE_ID[NVARCHAR](50),
+@new_DELIVERY_TYPE_ID[NVARCHAR](50),
+@old_ORDER_ID[INT],
+@new_ORDER_ID[INT]
+)
+AS
+BEGIN
+UPDATE delivery
+SET ROUTE_ID = @new_ROUTE_ID, DEVLIVERY_DATE = @new_DEVLIVERY_DATE, VERIFICATION = @new_VERIFICATION, STATUS_ID = @new_STATUS_ID, DELIVERY_TYPE_ID = @new_DELIVERY_TYPE_ID, ORDER_ID = @new_ORDER_ID
+WHERE (DELIVERY_ID = @old_DELIVERY_ID)
+AND (ROUTE_ID = @old_ROUTE_ID)
+AND (DEVLIVERY_DATE = @old_DEVLIVERY_DATE)
+AND (VERIFICATION = @old_VERIFICATION OR ISNULL(VERIFICATION, @old_VERIFICATION) IS NULL)
+AND (STATUS_ID = @old_STATUS_ID)
+AND (DELIVERY_TYPE_ID = @old_DELIVERY_TYPE_ID)
+AND (ORDER_ID = @old_ORDER_ID)
+END

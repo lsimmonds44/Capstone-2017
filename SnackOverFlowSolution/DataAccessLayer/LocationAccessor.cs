@@ -38,8 +38,8 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@IS_ACTIVE", SqlDbType.Bit);
 
             // set parameter values
-            cmd.Parameters["@DESCRIPTION"].Value = location.description;
-            cmd.Parameters["@IS_ACTIVE"].Value = location.isActive;
+            cmd.Parameters["@DESCRIPTION"].Value = location.Description;
+            cmd.Parameters["@IS_ACTIVE"].Value = location.IsActive;
 
             // try-catch-finally
 
@@ -84,11 +84,11 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@new_IS_ACTIVE", SqlDbType.Bit);
 
             // set parameter values
-            cmd.Parameters["@old_LOCATION_ID"].Value = oldLocation.locationId;
-            cmd.Parameters["@old_DESCRIPTION"].Value = oldLocation.description;
-            cmd.Parameters["@new_DESCRIPTION"].Value = newLocation.description;
-            cmd.Parameters["@old_IS_ACTIVE"].Value = oldLocation.isActive;
-            cmd.Parameters["@new_IS_ACTIVE"].Value = newLocation.isActive;
+            cmd.Parameters["@old_LOCATION_ID"].Value = oldLocation.LocationId;
+            cmd.Parameters["@old_DESCRIPTION"].Value = oldLocation.Description;
+            cmd.Parameters["@new_DESCRIPTION"].Value = newLocation.Description;
+            cmd.Parameters["@old_IS_ACTIVE"].Value = oldLocation.IsActive;
+            cmd.Parameters["@new_IS_ACTIVE"].Value = newLocation.IsActive;
 
             // try-catch-finally
 
@@ -132,9 +132,9 @@ namespace DataAccessLayer
                     reader.Read();
                     location = new Location()
                     {
-                        locationId = reader.GetInt32(0),
-                        description = reader.GetString(1),
-                        isActive = reader.GetBoolean(2)
+                        LocationId = reader.GetInt32(0),
+                        Description = reader.GetString(1),
+                        IsActive = reader.GetBoolean(2)
                     };
                 }
                 reader.Close();
@@ -170,9 +170,9 @@ namespace DataAccessLayer
                     {
                         locations.Add(new Location()
                         {
-                            locationId = reader.GetInt32(0),
-                            description = reader.GetString(1),
-                            isActive = reader.GetBoolean(2)
+                            LocationId = reader.GetInt32(0),
+                            Description = reader.GetString(1),
+                            IsActive = reader.GetBoolean(2)
                         });
                     }
                 }

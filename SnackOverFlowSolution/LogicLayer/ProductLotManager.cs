@@ -1,6 +1,6 @@
+using System;
 ﻿using DataObjects;
 using DataAccessLayer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,25 @@ namespace LogicLayer
     /// </summary>
     public class ProductLotManager : IProductLotManager
     {
+		/// <summary>
+		/// William Flood
+		/// Created on 2017/02/15
+		/// 
+		/// Manages the logic regarding adding a Product Lots
+		/// </summary>
+        public int AddProductLot(ProductLot toAdd)
+        {
+            var accessor = new ProductLotAccessor();
+            accessor.ProductLotInstance = toAdd;
+            try
+            {
+                return DatabaseMainAccessor.Create(accessor);
+            } catch
+            {
+                throw;
+            }
+		}
+		
         public ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier)
         {
             ProductLot pl = null;
@@ -34,9 +53,10 @@ namespace LogicLayer
             return pl;
         }
 
+
         public bool AddProduct(ProductLot p)
         {
-            return ProductLotAccessor.CreateProductLot(p);
+            throw new NotImplementedException();
         }
     }
 }

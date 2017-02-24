@@ -1,14 +1,15 @@
-﻿using System;
+using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataObjects;
 
 namespace LogicLayer
 {
     public interface IProductManager
     {
+        List<Product> ListProducts();
 
         /// <summary>
         /// Dan Brown
@@ -20,6 +21,6 @@ namespace LogicLayer
         /// <returns></returns>
         int DeleteProduct(int productID);
 		
-        Product retrieveProductById(int productId);
+        Product RetrieveProductById(int productId);
     }
 }

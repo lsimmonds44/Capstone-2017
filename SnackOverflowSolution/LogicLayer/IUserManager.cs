@@ -9,7 +9,11 @@ namespace LogicLayer
 {
     public interface IUserManager
     {
+        User userInstance { get; set; }
         User RetrieveUserByUserName(string userName);
+        bool AuthenticateUser(string text, string password);
+        List<User> RetrieveFullUserList();
+        List<String> roles { get; }
 
 
         /// <summary>

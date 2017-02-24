@@ -14,10 +14,10 @@ namespace DataObjects
     /// </summary>
     public class Employee
     {
-        public int EmployeeId { get; set; }
-        public int UserId { get; set; }
-        public decimal Salary { get; set; }
-        public bool Active { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public int? EmployeeId { get; set; }
+        public int? UserId { get; set; }
+        public decimal? Salary { get; set; }
+        public bool? Active { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 }

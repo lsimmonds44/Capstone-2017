@@ -39,18 +39,18 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
-            User _user = new User();
+            User _user = new User() {
+                UserId = 0,
+                FirstName = tFFirstName.Text,
+                LastName = tFLastName.Text,
+                Phone = tFPhone.Text,
+                EmailAddress = tFEmailAddress.Text,
+                EmailPreferences = (bool)cbEmailPreferences.IsChecked,
+                UserName = tFUserName.Text,
+                Active = true
+            };
             UserManager _userManager = new UserManager();
             string result;
-            _user.UserId = 0;
-            _user.FirstName = tFFirstName.Text;
-            _user.LastName = tFLastName.Text;
-            _user.Phone = tFPhone.Text;
-            _user.PreferredAddressId = 1;
-            _user.EmailAddress = tFEmailAddress.Text;
-            _user.EmailPreferences = (bool)cbEmailPreferences.IsChecked;
-            _user.UserName = tFUserName.Text;
-            _user.Active = true;
 
             tFPassword.Background = Brushes.White;
             tfConfirmPassword.Background = Brushes.White;
@@ -63,14 +63,6 @@ namespace WpfPresentationLayer
             result = _userManager.CreateNewUser(_user, tFPassword.Password,tfConfirmPassword.Password);
             if (result.Equals("Created"))
             {
-                tFPassword.Background = Brushes.White;
-                tfConfirmPassword.Background = Brushes.White;
-                tFUserName.Background = Brushes.White;
-                tFFirstName.Background = Brushes.White;
-                tFLastName.Background = Brushes.White;
-                tFPhone.Background = Brushes.White;
-                tFEmailAddress.Background = Brushes.White;
-
                 this.DialogResult = true;
             }
             else if (result.Equals("Password No Match"))

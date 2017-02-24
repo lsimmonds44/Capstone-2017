@@ -86,5 +86,32 @@ namespace LogicLayer
             }
             return result;
         }
+
+        public User userInstance
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool AuthenticateUser(string text, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> RetrieveFullUserList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> roles
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

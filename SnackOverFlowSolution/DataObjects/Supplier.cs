@@ -11,14 +11,13 @@ namespace DataObjects
         // Represents a Supplier
         // Created by Christian Lopez on 2017/02/01
         // Last modified by Christian Lopez on 2017/02/02
-
-        public int SupplierId { get; set; }
-        public int UserId { get; set; }
+        public int SupplierID { get; set; }
         public bool IsApproved { get; set; }
         public int ApprovedBy { get; set; }
+        public String FarmTaxID { get; set; }
+        public int UserId { get; set; }
         public string FarmName { get; set; }
         public string FarmCity { get; set; }
         public string FarmState { get; set; }
-        public string FarmTaxId { get; set; }
     }
 }
