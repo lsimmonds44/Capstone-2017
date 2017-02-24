@@ -27,7 +27,7 @@ namespace DataAccessLayer
         /// <returns></returns>
         public static ProductLot RetrieveNewestProductLot(Supplier supplier)
         {
-            ProductLot pl = null;
+            ProductLot productLot = null;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_product_lot_by_supplier_id";
@@ -45,7 +45,7 @@ namespace DataAccessLayer
                 {
                     // Although sp returns a list, we only want the newest one (largest ID returned first)
                     reader.Read();
-                    pl = new ProductLot
+                    productLot = new ProductLot
                     {
                         ProductLotId = reader.GetInt32(0),
                         WarehouseId = reader.GetInt32(1),
@@ -71,7 +71,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return pl;
+            return productLot;
         }
     }
 }

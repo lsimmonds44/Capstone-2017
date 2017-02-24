@@ -24,20 +24,22 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmAddInspection : Window
     {
-        private IGradeManager _gMgr;
-        private ProductLot _pl;
+        private IGradeManager _gradeManager;
+        private ProductLot _productLot;
         private Employee _currentEmp;
-        private IProductManager _pm;
-        private ISupplierManager _sm;
-        private IInspectionManager _im;
-        public frmAddInspection(ProductLot pl, IGradeManager gm, Employee currentEmp, IProductManager pm, ISupplierManager sm, IInspectionManager im)
+        private IProductManager _productManager;
+        private ISupplierManager _supplierManager;
+        private IInspectionManager _inspectionManager;
+        public frmAddInspection(ProductLot productLot, IGradeManager gradeManager, 
+            Employee currentEmp, IProductManager productManager, ISupplierManager supplierManager,
+            IInspectionManager InspectionManager)
         {
-            _gMgr = gm;
-            _pl = pl;
+            _gradeManager = gradeManager;
+            _productLot = productLot;
             _currentEmp = currentEmp;
-            _pm = pm;
-            _sm = sm;
-            _im = im;
+            _productManager = productManager;
+            _supplierManager = supplierManager;
+            _inspectionManager = InspectionManager;
             InitializeComponent();
         }
 
@@ -45,7 +47,7 @@ namespace WpfPresentationLayer
         {
             try
             {
-                string[] grades = _gMgr.RetrieveGradeList();
+                string[] grades = _gradeManager.RetrieveGradeList();
                 cboGradeSelect.ItemsSource = grades;
             }
             catch (Exception ex)
@@ -55,9 +57,9 @@ namespace WpfPresentationLayer
 
             try
             {
-                txtProduct.Text = _pm.retrieveProductById(_pl.ProductId).Name;
-                Supplier s = _sm.RetrieveSupplierBySupplierID(_pl.SupplierId);
-                txtSupplier.Text = _sm.RetrieveSupplierName(s.UserId);
+                txtProduct.Text = _productManager.retrieveProductById(_productLot.ProductId).Name;
+                Supplier s = _supplierManager.RetrieveSupplierBySupplierID(_productLot.SupplierId);
+                txtSupplier.Text = _supplierManager.RetrieveSupplierName(s.UserId);
                 txtFarm.Text = s.FarmName;
             }
             catch (Exception ex)
@@ -81,7 +83,7 @@ namespace WpfPresentationLayer
             try
             {
                 validateInputs();
-                if (_im.CreateInspection(_currentEmp.EmployeeId, _pl.ProductLotId, cboGradeSelect.Text, DateTime.Now, DateTime.Now.AddDays(7.0)))
+                if (_inspectionManager.CreateInspection(_currentEmp.EmployeeId, _productLot.ProductLotId, cboGradeSelect.Text, DateTime.Now, DateTime.Now.AddDays(7.0)))
                 {
                     this.DialogResult = true;
                 }

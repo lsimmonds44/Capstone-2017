@@ -26,8 +26,8 @@ namespace WpfPresentationLayer
     {
 
         User _currentUser;
-        IUserManager _uMgr;
-        ISupplierManager _sMgr;
+        IUserManager _userManager;
+        ISupplierManager _supplierManager;
         bool supplierFound = false;
 
         /// <summary>
@@ -37,13 +37,13 @@ namespace WpfPresentationLayer
         /// Constructor for the form
         /// </summary>
         /// <param name="currentEmp">The current User</param>
-        /// <param name="uMgr">Something implementing the IUserManager interface</param>
-        /// <param name="sMgr">Something implementing the ISupplierManager interface</param>
-        public frmAddSupplier(User currentUser, IUserManager uMgr, ISupplierManager sMgr)
+        /// <param name="userManager">Something implementing the IUserManager interface</param>
+        /// <param name="supplierManager">Something implementing the ISupplierManager interface</param>
+        public frmAddSupplier(User currentUser, IUserManager userManager, ISupplierManager supplierManager)
         {
             _currentUser = currentUser;
-            _uMgr = uMgr;
-            _sMgr = sMgr;
+            _userManager = userManager;
+            _supplierManager = supplierManager;
             InitializeComponent();
         }
 
@@ -57,7 +57,7 @@ namespace WpfPresentationLayer
             {
                 try
                 {
-                    supplierUser = _uMgr.RetrieveUserByUserName(txtUsername.Text);
+                    supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
                 }
                 catch (Exception ex)
                 {
@@ -81,11 +81,11 @@ namespace WpfPresentationLayer
             else
             {
                 supplierFound = true;
-                UserAddress ua = null;
+                UserAddress userAddress = null;
                 // Try to get the user's preferred address
                 try
                 {
-                    ua = _uMgr.RetrieveUserAddress(supplierUser.PreferredAddressId);
+                    userAddress = _userManager.RetrieveUserAddress(supplierUser.PreferredAddressId);
                 }
                 catch (Exception ex)
                 {
@@ -96,7 +96,7 @@ namespace WpfPresentationLayer
                 // (name, phone for double checking) and assume the user's address
                 // will be the same as the farm address, but that can be changed
                 txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
-                if (ua == null)
+                if (userAddress == null)
                 {
                     txtFarmAddress.Text = "";
                     txtFarmCity.Text = "";
@@ -104,14 +104,14 @@ namespace WpfPresentationLayer
                 }
                 else
                 {
-                    txtFarmAddress.Text = ua.AddressLineOne + " " + ua.AddressLineTwo;
-                    txtFarmCity.Text = ua.City;
+                    txtFarmAddress.Text = userAddress.AddressLineOne + " " + userAddress.AddressLineTwo;
+                    txtFarmCity.Text = userAddress.City;
 
                     // Need to get index to populate the correct drop down with
                     // the user's state
-                    if (getDropdown(ua.State) != -1)
+                    if (getDropdown(userAddress.State) != -1)
                     {
-                        cboFarmState.SelectedIndex = getDropdown(ua.State);
+                        cboFarmState.SelectedIndex = getDropdown(userAddress.State);
                     }
                     else
                     {
@@ -197,10 +197,10 @@ namespace WpfPresentationLayer
                 try
                 {
                     validateInputs();
-                    User supplierUser = _uMgr.RetrieveUserByUserName(txtUsername.Text);
+                    User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
 
                     // Actually try to create the supplier
-                    if (_sMgr.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text,
+                    if (_supplierManager.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text,
                         txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
                     {
                         this.DialogResult = true;
