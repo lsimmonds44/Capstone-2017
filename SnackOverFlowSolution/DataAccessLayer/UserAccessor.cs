@@ -83,6 +83,7 @@ namespace DataAccessLayer
             }
         }
 
+
         public void ReadSingle(SqlDataReader reader)
         {
             UserInstance = null;
@@ -102,9 +103,67 @@ namespace DataAccessLayer
             };
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/02/01
+        /// 
+        /// Access DB to get User by given username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static User RetrieveUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            User user = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_app_user_by_username";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar, 50);
+            cmd.Parameters["@USERNAME"].Value = username;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    user = new User()
+                    {
+                        UserId = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        Phone = reader.GetString(3),
+                        //PreferredAddressId = reader.GetInt32(4),
+                        EmailAddress = reader.GetString(5),
+                        EmailPreferences = reader.GetBoolean(6),
+                        UserName = reader.GetString(7),
+                        Active = reader.GetBoolean(8)
+                    };
+                    if (!reader.IsDBNull(4))
+                    {
+                        user.PreferredAddressId = reader.GetInt32(4);
+                    }
+                    else
+                    {
+                        user.PreferredAddressId = null;
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return user;
         }
 
         public void SetCreateParameters(SqlCommand cmd)

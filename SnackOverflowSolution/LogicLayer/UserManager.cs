@@ -83,16 +83,17 @@ namespace LogicLayer
             String foo = accessor.RetrieveUserSalt(userName);
             String bar = HashSha256(password + foo);
             accessor.UserInstance = null;
-            if(accessor.Login(userName, bar))
+            if (accessor.Login(userName, bar))
             {
                 userInstance = accessor.UserInstance;
-                userFound=true;
-            } else
+                userFound = true;
+            }
+            else
             {
-                userFound=false;
+                userFound = false;
             }
             return userFound;
-            
+
         }
 
         public User RetrieveUserByUserName(string username)
@@ -113,18 +114,18 @@ namespace LogicLayer
         public Employee editEmployee(int oldEmployee_ID, int oldUser_ID, decimal oldSalary, bool oldActive, DateTime oldDate_Of_Birth)
         {
             Employee employeeEdit = new Employee()
-        
+
             {
                 EmployeeId = oldEmployee_ID,
                 UserId = oldUser_ID,
                 Salary = oldSalary,
                 Active = oldActive,
                 DateOfBirth = oldDate_Of_Birth
-               
+
             };
             return employeeEdit;
         }
-        
+
         /// <summary>
         /// Bobby Thorne
         /// 2/12/17
@@ -151,8 +152,8 @@ namespace LogicLayer
             {
                 return "Password No Match";
             }
-           
-            if(user.FirstName==null || user.FirstName.Equals("")||user.FirstName.Equals(" "))
+
+            if (user.FirstName == null || user.FirstName.Equals("") || user.FirstName.Equals(" "))
             {
                 return "Invalid First";
             }
@@ -160,7 +161,7 @@ namespace LogicLayer
             {
                 return "Invalid Last";
             }
-            if (user.Phone.Length>15)
+            if (user.Phone.Length > 15)
             {
                 return "Invalid Phone";
             }
@@ -184,19 +185,20 @@ namespace LogicLayer
             //}
             try
             {
-                
-                if (1==DatabaseMainAccessor.Create(accessor))
+
+                if (1 == DatabaseMainAccessor.Create(accessor))
                 {
                     return "Created";
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
             return "UnableToCreate";
         }
 
-		
+
         public List<User> RetrieveFullUserList()
         {
             var accessor = new UserAccessor();
@@ -204,15 +206,16 @@ namespace LogicLayer
             {
                 DatabaseMainAccessor.RetrieveList(accessor);
                 return accessor.UserList;
-            } catch
+            }
+            catch
             {
                 throw;
             }
         }
-		
 
 
-		
+
+
         /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/01
@@ -221,21 +224,24 @@ namespace LogicLayer
         /// </summary>
         /// <param name="prefferedAddressId"></param>
         /// <returns></returns>
+        /// <remarks>Last modified by Christian Lopez 2017/02/25</remarks>
         public UserAddress RetrieveUserAddress(int? prefferedAddressId)
         {
 
             UserAddress userAddress = null;
-
-            try
+            if (prefferedAddressId != null)
             {
-                userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
+                }
+                catch (Exception)
+                {
 
-                throw new ApplicationException("Unable to access Data");
-            }
+                    throw new ApplicationException("Unable to access Data");
+                }
 
+            }
             return userAddress;
         }
 
