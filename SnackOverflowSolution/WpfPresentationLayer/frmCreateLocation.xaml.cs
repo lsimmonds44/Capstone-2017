@@ -17,12 +17,12 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
-    /// Interaction logic for frmCreateLocationWindow.xaml
+    /// Interaction logic for frmCreateLocation.xaml
     /// </summary>
-    public partial class frmCreateLocationWindow : Window
+    public partial class frmCreateLocation : Window
     {
         ILocationManager locationMgr;
-        public frmCreateLocationWindow(ILocationManager iLocationManager)
+        public frmCreateLocation(ILocationManager iLocationManager)
         {
             locationMgr = iLocationManager;
             InitializeComponent();
