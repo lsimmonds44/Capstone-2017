@@ -60,7 +60,7 @@
                     <DataGrid x:Name="dgCommercialCustomers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
                               ItemsSource="{Binding}" IsReadOnly="True">
                     </DataGrid>
-                    <Grid>
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>

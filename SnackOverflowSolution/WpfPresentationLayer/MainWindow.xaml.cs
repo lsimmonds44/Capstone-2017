@@ -52,8 +52,16 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
-            CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
-            cCCW.ShowDialog();
+            try
+            {
+                CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
+                cCCW.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error: An employee must be logged in to create a commercial customer.");
+            }
+            
         }
 
         /// <summary>
