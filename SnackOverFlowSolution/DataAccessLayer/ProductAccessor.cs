@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -49,6 +50,63 @@ namespace DataAccessLayer
             }
 
             return rowsAffected;
+        }
+
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created on 2017/02/15
+        /// 
+        /// Retrieves a product from the database
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <returns>product</returns>
+
+        public static Product RetrieveProductbyId(int ProductID)
+        {
+            {
+                var product = new Product();
+
+                var conn = DBConnection.GetConnection();
+                var cmdText = @"sp_retrieve_product";
+                var cmd = new SqlCommand(cmdText, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.Int);
+                cmd.Parameters["@PRODUCT_ID"].Value = ProductID;
+
+                try
+                {
+                    conn.Open();
+                    var reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            // ProductID, Name, Description, UnitPrice, ImageName, DeliveryChargePerUnit
+
+                            product = new Product()
+                            {
+                                ProductId = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                UnitPrice = reader.GetDecimal(3),
+                                //ImageName = reader.GetString(4),
+                                DeliveryChargePerUnit = reader.GetDecimal(5)
+                            };
+                        }
+                        reader.Close();
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return product;
+            }
         }
 
 

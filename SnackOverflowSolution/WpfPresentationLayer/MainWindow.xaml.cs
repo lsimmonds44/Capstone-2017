@@ -363,5 +363,19 @@ namespace WpfPresentationLayer
         {
             tfPassword.Background = Brushes.White;
         }
+        
+        /// <summary>
+        /// Laura Simmonds
+        /// 2017/27/02
+        /// Button links tab to View Product window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void viewProductBtn(object sender, RoutedEventArgs e)
+        {
+            frmViewProduct viewProduct = new frmViewProduct();
+            viewProduct.ShowDialog();
+
+        }
     } // end of class
 } // end of namespace 

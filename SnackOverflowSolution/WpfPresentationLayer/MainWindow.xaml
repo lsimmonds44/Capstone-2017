@@ -143,6 +143,31 @@
                     <Button Grid.Row="1" Grid.Column="3" Content="Update Employee Information" Width="180" Margin="0 10 0 0" VerticalAlignment="Bottom" Click="Button_Click_Update_Employee"  />
                 </Grid>
             </TabItem>
+            <TabItem Name="tabProduct" Header="Product" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" GotFocus="Commercial_Customer_Got_Focus"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgProduct" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
+                              ItemsSource="{Binding}" IsReadOnly="True">
+                    </DataGrid>
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="1" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="viewProductBtn"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
             <TabItem Header="Product Lot" Selector.Selected="tabProductLot_Selected">
                 <Grid Name="grdProductLot">
                     <Grid.RowDefinitions>

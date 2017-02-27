@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfPresentationLayer.frmViewProduct"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="View Product" Height="450" Width="620">
+
+    <Grid>
+        <Image x:Name="imgProduct" HorizontalAlignment="Left" Height="175" Margin="47,64,0,0" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="139" Margin="278,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="293"/>
+        <Label x:Name="lblProduct" Content="Product" HorizontalAlignment="Left" Margin="47,33,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="150,315,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtProductID" HorizontalAlignment="Left" Height="23" Margin="150,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtProductName" HorizontalAlignment="Left" Height="23" Margin="150,352,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPrice" Content="Price" HorizontalAlignment="Left" Margin="85,315,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblProductName" Content="Product Name" HorizontalAlignment="Left" Margin="34,352,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblProductID" Content="Product ID" HorizontalAlignment="Left" Margin="55,269,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="278,33,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnViewProdct" Content="ViewProduct" HorizontalAlignment="Left" Margin="376,352,0,0" VerticalAlignment="Top" Width="75" Click="btnViewProdct_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="496,352,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+
+    </Grid>
+</Window>
