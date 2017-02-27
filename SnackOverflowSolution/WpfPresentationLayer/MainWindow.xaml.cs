@@ -22,6 +22,7 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ICustomerManager _customerManager = new CustomerManager();
         private EmployeeManager _employeeManager = new EmployeeManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
         List<Employee> employeeList;
@@ -52,6 +53,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
+            _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
             try
             {
                 CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
@@ -309,6 +311,27 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/26/02
+        /// Commercial tab got focus
+        /// Loads a list of all commercial customers on a data grid.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Commercial_Customer_Got_Focus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                dgCommercialCustomers.ItemsSource = commercialCustomers;
+            }
+            catch (Exception)
+            {
+                ErrorAlert.ShowDatabaseError();
             }
         }
 

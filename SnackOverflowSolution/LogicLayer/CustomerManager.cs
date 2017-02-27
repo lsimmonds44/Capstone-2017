@@ -10,6 +10,7 @@ namespace LogicLayer
 {
     public class CustomerManager : ICustomerManager
     {
+        CustomerAccessor _customerAccessor = new CustomerAccessor();
         /// <summary>
         /// Eric Walton
         /// 2017/06/02
@@ -23,7 +24,6 @@ namespace LogicLayer
         /// <returns></returns>
         public bool CreateCommercialAccount(CommercialCustomer cc)
         {
-            CustomerAccessor _customerAccessor = new CustomerAccessor();
             bool result = false;
             try
             {
@@ -35,6 +35,31 @@ namespace LogicLayer
             }
             return result;
         }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/26/02
+        /// Retrieves a list of all commercial customers
+        /// If succesful returns list
+        /// If unsuccesful throws error
+        /// </summary>
+        /// <returns></returns>
+        public List<CommercialCustomer> RetrieveCommercialCustomers()
+        {
+            List<CommercialCustomer> commercialCustomers = null;
+            try
+            {
+                commercialCustomers = _customerAccessor.RetrieveAllCommercialCustomers();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+            return commercialCustomers;
+        }
+
 
     } // end of class
 } // end of namespace

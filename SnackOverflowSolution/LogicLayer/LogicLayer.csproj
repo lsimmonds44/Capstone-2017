@@ -49,7 +49,7 @@
     <Compile Include="DummyWarehouseManager.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="ICharityManager.cs" />
-    <Compile Include="iCustomerManager.cs" />
+    <Compile Include="ICustomerManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
     <Compile Include="GradeManager.cs" />

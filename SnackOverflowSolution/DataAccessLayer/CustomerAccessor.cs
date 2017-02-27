@@ -54,6 +54,54 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return result;
-        }
+        } // End of CreteCommercialCustomer
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/26/02
+        /// Accessor method to Retrieve a list of all Commercial Customers
+        /// If succesful returns list
+        /// If unsuccessful throws error
+        /// </summary>
+        /// <returns></returns>
+        public List<CommercialCustomer> RetrieveAllCommercialCustomers()
+        {
+            var commercialCustomers = new List<CommercialCustomer>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_commercial_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+    try 
+	{	        
+		   conn.Open();
+           var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        commercialCustomers.Add(new CommercialCustomer()
+                        {
+                            Commercial_Id = reader.GetInt32(0),
+                            User_Id = reader.GetInt32(1),
+                            IsApproved = reader.GetBoolean(2),
+                            ApprovedBy = reader.GetInt32(3),
+                            FedTaxId = reader.GetInt32(4),
+                            Active = reader.GetBoolean(5)
+                        });
+                    }
+                    reader.Close();
+                }
+	}
+	catch (Exception)
+	{
+		throw;
+	}
+            finally
+            {
+                conn.Close();
+            }
+            return commercialCustomers;
+        } // End of RetrieveAllCommercialCustomers
     } // End of class
 } // end of namespace
