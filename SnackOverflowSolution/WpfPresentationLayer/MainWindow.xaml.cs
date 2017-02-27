@@ -32,6 +32,7 @@ namespace WpfPresentationLayer
         private IProductLotManager _productLotManager = new ProductLotManager();
 
         Employee _employee = null;
+
         User _user = null;
         private ICharityManager _charityManager;
 
@@ -119,7 +120,25 @@ namespace WpfPresentationLayer
                         btnLogin.IsDefault = false;
                         tfPassword.Background = Brushes.White;
                         tfUsername.Background = Brushes.White;
-                        _user = _userManager.userInstance;
+                        try
+                        {
+                            _user = _userManager.userInstance;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to find user.");
+                            btnLogin_Click(sender,e);
+                        }
+                        try
+                        {
+                            _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Enters here if user that access this is not an employee.
+                            // For now it does nothing. 
+                            MessageBox.Show("Employee table is empty or DB connection error.");
+                        }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
                         // assigned to the employe
