@@ -119,7 +119,6 @@ namespace WpfPresentationLayer
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
                         tfPassword.Background = Brushes.White;
-                        tfUsername.Background = Brushes.White;
                         try
                         {
                             _user = _userManager.userInstance;
@@ -127,7 +126,7 @@ namespace WpfPresentationLayer
                         catch (Exception ex)
                         {
                             MessageBox.Show("Failed to find user.");
-                            btnLogin_Click(sender,e);
+                            btnLogin_Click(sender, e);
                         }
                         try
                         {
@@ -144,6 +143,12 @@ namespace WpfPresentationLayer
                         // assigned to the employe
 
 
+                    }
+                    else
+                    {
+                        statusMessage.Content = "Username and Password did not match.";
+                        tfPassword.Password = "";
+                        tfPassword.Background = Brushes.Red;
                     }
                 }
                 catch (System.Data.SqlClient.SqlException ex)
@@ -354,5 +359,9 @@ namespace WpfPresentationLayer
             }
         }
 
+        private void tfPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            tfPassword.Background = Brushes.White;
+        }
     } // end of class
 } // end of namespace 

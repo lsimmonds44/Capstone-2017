@@ -43,7 +43,7 @@
             </Grid.RowDefinitions>
             <TextBox Name="tfUsername" Grid.Column="2" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1"/>
             <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <PasswordBox Name="tfPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0"/>
+            <PasswordBox Name="tfPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" KeyDown="tfPassword_KeyDown"/>
             <Label Name="lblPassword" Grid.Column="3" Grid.Row="1" Content="Password" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3.4,0,0,24.6" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click" Height="21" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
