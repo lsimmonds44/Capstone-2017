@@ -120,7 +120,7 @@ namespace DataAccessLayer
         public static int CreateProduct(Product product)
         {
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_create_new_product";
+            const string cmdText = @"sp_create_product";
             var cmd = new SqlCommand(cmdText, conn);
             var count = 0;
 

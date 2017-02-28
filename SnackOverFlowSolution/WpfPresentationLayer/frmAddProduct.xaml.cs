@@ -68,11 +68,20 @@ namespace WpfPresentationLayer
 
             GetUserInput();
 
-            if (1 == productManager.CreateProduct(_product))
+            try
             {
-                MessageBox.Show("Product Created Successfully");
-                ClearFields();
+                if (1 == productManager.CreateProduct(_product))
+                {
+                    MessageBox.Show("Product Created Successfully");
+                    ClearFields();
+                }
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 USE [SnackOverflowDB]
 GO
-IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_create_new_product')
+IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND  name = 'sp_create_product')
 BEGIN
 DROP PROCEDURE sp_create_new_product
 Print '' print  ' *** dropping procedure sp_create_new_product'
