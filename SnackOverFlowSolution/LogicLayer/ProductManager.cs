@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,19 +50,34 @@ namespace LogicLayer
 
 
 
-        public DataObjects.Product retrieveProductById(int productId)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<DataObjects.Product> ListProducts()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Laura Simmonds
+        /// Created on 2017/02/20
+        /// 
+        /// Retrieves a product from the database
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns>product</returns>
+        
         public DataObjects.Product RetrieveProductById(int productId)
         {
-            throw new NotImplementedException();
+            Product products = null;
+
+            try
+            {
+                products = ProductAccessor.RetrieveProductbyId(productId);
+            }
+            catch (Exception)
+            {
+                throw; // new ApplicationException("There was a problem retrieving the product details. ");
+            }
+            return products;
         }
     }
 }

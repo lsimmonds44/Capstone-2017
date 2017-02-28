@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="frmViewProduct.xaml.cs">
+      <DependentUpon>frmViewProduct.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateCommercialCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +169,10 @@
     <Compile Include="EmployeeView.xaml.cs" />
     <Compile Include="ErrorAlert.cs" />
     <Page Include="ProductLotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmViewProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

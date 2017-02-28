@@ -363,5 +363,35 @@ namespace WpfPresentationLayer
         {
             tfPassword.Background = Brushes.White;
         }
+        
+        /// <summary>
+        /// Laura Simmonds
+        /// 2017/27/02
+        /// Button links tab to View Product window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void viewProductBtn(object sender, RoutedEventArgs e)
+        {
+            frmViewProduct viewProduct = new frmViewProduct();
+            viewProduct.ShowDialog();
+
+        }
+
+        private void tabProductLot_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var productLots = _productLotManager.RetrieveProductLots();
+                dgProductLots.ItemsSource = productLots;
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("There was an error: " + ex.Message);
+            }
+        }
+
+        
     } // end of class
 } // end of namespace 

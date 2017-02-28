@@ -35,5 +35,14 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<ProductLot> RetrieveProductLots()
+        {
+            return new List<ProductLot> {
+                RetrieveNewestProductLotBySupplier(new Supplier()),
+                RetrieveNewestProductLotBySupplier(new Supplier()),
+                RetrieveNewestProductLotBySupplier(new Supplier())};
+        }
     }
 }

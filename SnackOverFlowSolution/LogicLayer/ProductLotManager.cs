@@ -58,5 +58,28 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/27
+        /// 
+        /// Gets a list of product lots from the database
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductLot> RetrieveProductLots()
+        {
+            List<ProductLot> lots = null;
+            try
+            {
+                lots = ProductLotAccessor.RetrieveProductLots();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return lots;
+        }
     }
 }
