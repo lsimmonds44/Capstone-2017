@@ -32,6 +32,7 @@ namespace WpfPresentationLayer
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
+        private IProductManager _productManager = new ProductManager();
 
         Employee _employee = null;
 
@@ -443,5 +444,10 @@ namespace WpfPresentationLayer
             }
         }
 
+        private void BtnAddProduct_OnClick(object sender, RoutedEventArgs e)
+        {
+            var frmAddProduct = new frmAddProduct(_user, _productManager);
+            frmAddProduct.ShowDialog();
+        }
     } // end of class
 } // end of namespace 

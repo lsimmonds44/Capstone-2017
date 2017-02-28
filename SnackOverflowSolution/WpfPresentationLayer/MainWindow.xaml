@@ -171,11 +171,13 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="1" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="viewProductBtn"/>
+                        <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="2" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="viewProductBtn"/>
+                        <Button Name="btnAddProduct" Grid.Row="0" Grid.Column="1" Content="Add Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="BtnAddProduct_OnClick"/>
                     </Grid>
                 </Grid>
             </TabItem>
