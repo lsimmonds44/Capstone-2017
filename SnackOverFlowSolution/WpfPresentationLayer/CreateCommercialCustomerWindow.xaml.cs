@@ -107,6 +107,7 @@ namespace WpfPresentationLayer
                 {
                     _customerMngr.CreateCommercialAccount(_commercialCustomer);
                     MessageBox.Show(_userToUpdate.UserName + "'s Commercial Customer account created.");
+                    this.DialogResult = true;
                 }
                 catch (Exception)
                 {

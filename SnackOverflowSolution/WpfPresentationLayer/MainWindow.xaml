@@ -57,8 +57,15 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dgCommercialCustomers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                              ItemsSource="{Binding}" IsReadOnly="True">
+                    <DataGrid Name="dgCommercialCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="100"/>
+                            <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="100"/>
+                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="100"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="100"/>
+                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FedTaxId}" Width="100"/>
+                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="100"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -195,7 +202,7 @@
 
                     </Grid>
                     <DataGrid x:Name="dgProductLots" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
+                    	ItemsSource="{Binding}" IsReadOnly="False" CanUserDeleteRows="False" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >

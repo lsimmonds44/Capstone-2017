@@ -28,6 +28,7 @@ namespace WpfPresentationLayer
         List<ProductOrder> _currentOpenOrders;
         List<Employee> employeeList;
         List<Charity> charityList;
+        private List<CommercialCustomer> _commercialCustomers;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
@@ -59,7 +60,11 @@ namespace WpfPresentationLayer
             try
             {
                 CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
-                cCCW.ShowDialog();
+                if (cCCW.ShowDialog() == true)
+                {
+                    _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                    dgCommercialCustomer.ItemsSource = _commercialCustomers;
+                }
             }
             catch (Exception)
             {
@@ -351,8 +356,8 @@ namespace WpfPresentationLayer
         {
             try
             {
-                var commercialCustomers = _customerManager.RetrieveCommercialCustomers();
-                dgCommercialCustomers.ItemsSource = commercialCustomers;
+                _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                dgCommercialCustomer.ItemsSource = _commercialCustomers;
             }
             catch (Exception)
             {
