@@ -22,5 +22,7 @@ namespace LogicLayer
         int DeleteProduct(int productID);
 		
         Product RetrieveProductById(int productId);
+
+        int CreateProduct(Product product);
     }
 }

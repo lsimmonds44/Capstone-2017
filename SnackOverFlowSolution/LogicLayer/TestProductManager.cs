@@ -44,5 +44,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public int CreateProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

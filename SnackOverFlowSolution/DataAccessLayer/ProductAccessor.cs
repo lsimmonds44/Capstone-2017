@@ -109,6 +109,44 @@ namespace DataAccessLayer
             }
         }
 
+        /// <summary>
+        /// Created by Michael Takrama 
+        /// Created on 2/15/2017
+        /// 
+        /// Adds New Product
+        /// </summary>
+        /// <param name="product">Product Object to be Created</param>
+        /// <returns>Returns and integer indicating write success</returns>
+        public static int CreateProduct(Product product)
+        {
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_create_new_product";
+            var cmd = new SqlCommand(cmdText, conn);
+            var count = 0;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Name", product.Name);
+            cmd.Parameters.AddWithValue("@Description", product.Description);
+            cmd.Parameters.AddWithValue("@Unit_Price", product.UnitPrice);
+            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary);
+            cmd.Parameters.AddWithValue("@Active", product.Active);
+            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement);
+            cmd.Parameters.AddWithValue("@Delivery_Charge_Per_Unit", product.DeliveryChargePerUnit);
+
+            try
+            {
+                conn.Open();
+                count = cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+        }
+
+
 
 
     }

@@ -10,6 +10,27 @@ namespace LogicLayer
 {
     public class ProductManager : IProductManager
     {
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// Created on 2017-02-10
+        /// 
+        /// Creates a new Product
+        /// </summary>
+        /// <param name="product">Product Object to be created</param>
+        /// <returns>Success integer</returns>
+        public int CreateProduct(Product product)
+        {
+
+            int result = 0;
+
+            result = ProductAccessor.CreateProduct(product);
+
+            return result;
+
+        }
+
+
         
          ///<summary> 
          ///Dan Brown
