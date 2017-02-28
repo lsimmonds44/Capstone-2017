@@ -216,7 +216,25 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            
+            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="lvOpenOrders" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_MouseDoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="75" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
+                                <GridViewColumn Width="75" Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}"/>
+                                <GridViewColumn Width="140" Header="Order Date" DisplayMemberBinding="{Binding OrderDate}"/>
+                                <GridViewColumn Width="140" Header="Date Expected" DisplayMemberBinding="{Binding DateExpected}"/>
+                                <GridViewColumn Width="100" Header="Order Status" DisplayMemberBinding="{Binding OrderStatusId}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="lblStatus" Content="Status: " HorizontalAlignment="Left" Margin="10,322,-327,0" VerticalAlignment="Top" Width="552"/>
+                </Grid>
+            </TabItem>
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">
             <Grid>

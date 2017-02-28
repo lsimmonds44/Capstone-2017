@@ -30,6 +30,7 @@ namespace WpfPresentationLayer
 
         public frmProductOrderDetails(int orderID)
         {
+            InitializeComponent();
             this.orderID = orderID;
             displayDetails();
         }
@@ -67,6 +68,11 @@ namespace WpfPresentationLayer
         {
             frmProductOrderPackages pakMgr = new frmProductOrderPackages(this.orderID);
             pakMgr.ShowDialog();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

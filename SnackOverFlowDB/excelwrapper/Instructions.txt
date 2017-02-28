@@ -4,3 +4,6 @@ Run executeScripts.bat in excelwrapper>update
 Run executeScripts.bat in excelwrapper>get
 Run executeScripts.bat in excelwrapper>JavaGenerated
 Run executeScripts.bat in excelwrapper>delete
+
+**Updated Instructions for combined script**
+Run "CreateSnackOverflowDB.bat", OR run "No Pause - CreateSnackOverflowDB.bat" to run scripts without pauses

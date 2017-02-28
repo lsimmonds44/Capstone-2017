@@ -51,7 +51,7 @@
         <TextBox x:Name="txtUserAddress" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15"/>
         <TextBox x:Name="txtAddressType" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15"/>
 
-        <Button x:Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close" Margin="20"/>
+        <Button x:Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close" Margin="20" Click="btnClose_Click"/>
         <Button x:Name="btnPackaging" Grid.Row="7" Grid.Column="5" Content="Packaging" Margin="20" Click="btnPackaging_Click" />
 
 
