@@ -327,20 +327,24 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dgProductLots.SelectedIndex != -1)
             {
-                // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
-                var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(_user.UserId)),
-                    new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
-                var addInspectionResult = addInspectionFrm.ShowDialog();
-                if (addInspectionResult == true)
+                try
                 {
-                    MessageBox.Show("Inspection Added");
+                    // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
+                    //_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(_user.UserId))
+                    var addInspectionFrm = new frmAddInspection((ProductLot)dgProductLots.SelectedItem,
+                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
+                    var addInspectionResult = addInspectionFrm.ShowDialog();
+                    if (addInspectionResult == true)
+                    {
+                        MessageBox.Show("Inspection Added");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

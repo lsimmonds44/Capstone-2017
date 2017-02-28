@@ -202,7 +202,7 @@
 
                     </Grid>
                     <DataGrid x:Name="dgProductLots" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="False" CanUserDeleteRows="False" />
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
