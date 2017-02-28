@@ -24,5 +24,10 @@ namespace LogicLayer
         Product RetrieveProductById(int productId);
 
         int CreateProduct(Product product);
+
+        List<BrowseProductViewModel> RetrieveProductsToBrowseProducts();
+
+        List<BrowseProductViewModel> FilterProducts(List<string> vendors, List<string> categories, double min,
+            double max);
     }
 }

@@ -75,14 +75,22 @@
     <Compile Include="frmAddProduct.xaml.cs">
       <DependentUpon>frmAddProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmBrowseProducts.xaml.cs">
+      <DependentUpon>frmBrowseProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WpfExtensionMethods.cs" />
     <Page Include="CreateCommercialCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateNewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmBrowseProducts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

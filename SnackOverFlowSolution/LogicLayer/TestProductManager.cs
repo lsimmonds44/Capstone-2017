@@ -49,5 +49,16 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<BrowseProductViewModel> RetrieveProductsToBrowseProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BrowseProductViewModel> FilterProducts(List<string> vendors, List<string> categories, double min, double max)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

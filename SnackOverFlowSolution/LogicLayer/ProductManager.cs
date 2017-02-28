@@ -67,11 +67,6 @@ namespace LogicLayer
             return result;
         }
 
-
-
-
-
-
         public List<DataObjects.Product> ListProducts()
         {
             throw new NotImplementedException();
@@ -85,7 +80,6 @@ namespace LogicLayer
         /// </summary>
         /// <param name="productID"></param>
         /// <returns>product</returns>
-        
         public DataObjects.Product RetrieveProductById(int productId)
         {
             Product products = null;
@@ -100,5 +94,99 @@ namespace LogicLayer
             }
             return products;
         }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// Created on 2/10/2017
+        /// 
+        /// Retrieves Product List
+        /// </summary>
+        /// <returns></returns>
+        public List<BrowseProductViewModel> RetrieveProductsToBrowseProducts()
+        {
+
+            var productList = ProductAccessor.RetrieveProductsToBrowseProducts();
+
+            return productList;
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga 
+        /// Created on 2/10/2017
+        /// 
+        /// Filters Products From Presentation Layer
+        /// </summary>
+        /// <param name="vendors">Vendor Filters</param>
+        /// <param name="categories">Category Filters</param>
+        /// <param name="min">Price Minimum Value</param>
+        /// <param name="max">Price Maximum Value</param>
+        /// <returns>List of Filterd Products</returns>
+        public List<BrowseProductViewModel> FilterProducts(List<string> vendors, List<string> categories, double min, double max)
+        {
+
+            var productsInDb = RetrieveProductsToBrowseProducts();
+
+            var vendorFiltered = FilterByVendor(productsInDb, vendors);
+
+            var categoryFiltered = FilterByCategory(vendorFiltered, categories);
+
+            var priceFiltered = FilterByPrice(categoryFiltered, min, max);
+
+            return priceFiltered;
+
+        }
+
+
+        /// <summary>
+        /// Create by Natacha Ilunga 
+        /// Creatd on 2/10/2017
+        /// 
+        /// Filters Products by Vendor/Supplier
+        /// </summary>
+        /// <param name="productsToFilter">Products to be filtered</param>
+        /// <param name="vendors">Vendor filter criteria</param>
+        /// <returns></returns>
+        private List<BrowseProductViewModel> FilterByVendor(List<BrowseProductViewModel> productsToFilter, List<String> vendors)
+        {
+            if (vendors.Any())
+                return productsToFilter.Where(unfiltered => vendors.Any(vendor => vendor.Equals(unfiltered.Supplier_Name))).ToList();
+            return productsToFilter;
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// Created on 2/10/2017
+        /// 
+        /// Filters Products By Price
+        /// </summary>
+        /// <param name="productsToFilter">Products to be filtered</param>
+        /// <param name="min">Minimum Price</param>
+        /// <param name="max">Maximum Price</param>
+        /// <returns></returns>
+        private List<BrowseProductViewModel> FilterByPrice(List<BrowseProductViewModel> productsToFilter, double min, double max)
+        {
+            if (min != 0 && max != 0)
+                return productsToFilter.Where(unfiltered => min <= unfiltered.Price && unfiltered.Price <= max).ToList();
+            return productsToFilter;
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga 
+        /// Created on 2/10/2017
+        /// 
+        /// Filters Products By Product Category
+        /// </summary>
+        /// <param name="productsToFilter">Products to be filtered</param>
+        /// <param name="categories">Filter Categories</param>
+        /// <returns>List of Filtered Productsby Category</returns>
+        private List<BrowseProductViewModel> FilterByCategory(List<BrowseProductViewModel> productsToFilter, List<string> categories)
+        {
+            if (categories.Any())
+                return productsToFilter.Where(unfiltered => categories.Any(category => category.Equals(unfiltered.CategoryID))).ToList();
+            return productsToFilter;
+        }
+
+
+        
     }
 }

@@ -52,6 +52,55 @@ namespace DataAccessLayer
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Created by Natacha Ilunga 
+        /// Created on 2/10/17
+        /// 
+        /// Retrieves Products from DB to Browse Product View Model
+        /// </summary>
+        /// <returns></returns>
+        public static List<BrowseProductViewModel> RetrieveProductsToBrowseProducts()
+        {
+            var productsInDB = new List<BrowseProductViewModel>();
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_retrieve_products_to_customer";
+            var cmd = new SqlCommand(cmdText, conn) { CommandType = CommandType.StoredProcedure };
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var product = new BrowseProductViewModel()
+                        {
+                            ProductId = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Description = reader.GetString(2),
+                            GradeID = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                            Price = reader.IsDBNull(4) ? double.MinValue : (double)reader.GetDecimal(4),
+                            SupplierID = reader.IsDBNull(5) ? int.MinValue : reader.GetInt32(5),
+                            Supplier_Name = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                            CategoryID = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                            Image_Binary = reader["image_binary"] as byte[]
+                        };
+
+                        productsInDB.Add(product);
+                    }
+                    reader.Close();
+                }
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return productsInDB;
+        }
+
 
         /// <summary>
         /// Laura Simmonds

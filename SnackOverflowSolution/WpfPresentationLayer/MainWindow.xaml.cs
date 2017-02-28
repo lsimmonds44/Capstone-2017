@@ -45,6 +45,7 @@ namespace WpfPresentationLayer
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
+            DisposeFiles();
         }
 
         /// <summary>
@@ -448,6 +449,42 @@ namespace WpfPresentationLayer
         {
             var frmAddProduct = new frmAddProduct(_user, _productManager);
             frmAddProduct.ShowDialog();
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// Created on 02-28-2017
+        /// 
+        /// Navigate to Browse Products Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBrowseProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var frmBrowseProducts = new frmBrowseProducts(_user, _productManager);
+            frmBrowseProducts.Show();
+        }
+
+        
+        /// <summary>
+        /// Created by Michael Takrama, Natacha Ilunga
+        /// Creatd on 02-28-2017
+        /// 
+        /// Method to cleanup cached files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void DisposeFiles()
+        {
+            try
+            {
+                this.DisposeImages();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+
         }
     } // end of class
 } // end of namespace 
