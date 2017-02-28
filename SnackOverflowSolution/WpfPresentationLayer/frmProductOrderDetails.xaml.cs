@@ -56,6 +56,7 @@ namespace WpfPresentationLayer
                 txtDiscount.Text = prodOrd.Discount.ToString();
                 txtOrderStatus.Text = prodOrd.OrderStatusId;
                 txtUserAddress.Text = prodOrd.UserAddressId.ToString();
+                txtHasArrived.Text = prodOrd.HasArrived.ToString();
 
             }
             catch (Exception e)
