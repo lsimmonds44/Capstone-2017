@@ -46,11 +46,12 @@ namespace DataAccessLayer
                         AddressType = reader.GetString(3),
                         DeliveryTypeId = reader.GetString(4),
                         Amount = reader.GetDecimal(5),
-                        DateExpected = reader.GetDateTime(6),
-                        Discount = reader.GetDecimal(7),
-                        OrderStatusId = reader.GetString(8),
-                        UserAddressId = reader.GetInt32(9),
-                        HasArrived = reader.GetBoolean(10)
+                        OrderDate = reader.GetDateTime(6),
+                        DateExpected = reader.GetDateTime(7),
+                        Discount = reader.GetDecimal(8),
+                        OrderStatusId = reader.GetString(9),
+                        UserAddressId = reader.GetInt32(10),
+                        HasArrived = reader.GetBoolean(11)
                     };
                     reader.Close();
                 }

@@ -2,7 +2,7 @@
 setlocal enableDelayedExpansion
 set x=20
 echo !x!
-for %%f in (.\scriptFiles\*) DO (
+for %%f in (delete\scriptFiles\*) DO (
 set /a x = !x! - 1
 if !x! EQU 0 (
 PAUSE
@@ -14,3 +14,4 @@ echo !filename!
 sqlcmd -S localhost -E -i !filename!
 )
 PAUSE
+exit

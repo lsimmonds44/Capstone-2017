@@ -25,6 +25,7 @@ namespace WpfPresentationLayer
         private ICustomerManager _customerManager = new CustomerManager();
         private EmployeeManager _employeeManager = new EmployeeManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
+        List<ProductOrder> _currentOpenOrders;
         List<Employee> employeeList;
         List<Charity> charityList;
         private IUserManager _userManager = new UserManager();
@@ -378,6 +379,47 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        ///     Mason Allen
+        ///     ListView that displays current open orders.  Double clicking an item will display the order details.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabOpenOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus("Open");
+                lvOpenOrders.Items.Clear();
+
+                for (int i = 0; i < _currentOpenOrders.Count; i++)
+                {
+                    this.lvOpenOrders.Items.Add(_currentOpenOrders[i]);
+                }
+                lblStatus.Content += "Success";
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content += ex.ToString();
+            }
+        }
+        private void lvOpenOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                ProductOrder selectedItem = (ProductOrder)lvOpenOrders.SelectedItem;
+                int index = selectedItem.OrderId;
+
+                var detailsWindow = new frmProductOrderDetails(index);
+                detailsWindow.Show();
+            }
+            catch (Exception)
+            {
+                lblStatus.Content = "Nothing selected";
+            }
+
+        }
+
         private void tabProductLot_GotFocus(object sender, RoutedEventArgs e)
         {
             try
@@ -392,6 +434,5 @@ namespace WpfPresentationLayer
             }
         }
 
-        
     } // end of class
 } // end of namespace 

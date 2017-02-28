@@ -11,7 +11,7 @@ namespace DataObjects
 {
     public class ProductOrder
     {
-        public int? OrderId { get; set; }
+        public int OrderId { get; set; }
         public int? CustomerId { get; set; }
         public String OrderTypeId { get; set; }
         public String AddressType { get; set; }
