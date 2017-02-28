@@ -7,21 +7,40 @@ Print '' print  ' *** dropping procedure sp_create_product'
 End
 GO
 
-Print '' print  ' *** creating procedure sp_create_product'
+print '' print '*** Creating sp_create_product'
 GO
-Create PROCEDURE sp_create_product
-(
-@NAME[NVARCHAR](50),
-@DESCRIPTION[NVARCHAR](200),
-@UNIT_PRICE[DECIMAL](10,2),
-@IMAGE_NAME[VARCHAR](50)= NULL,
-@ACTIVE[BIT],
-@UNIT_OF_MEASUREMENT[NVARCHAR](20),
-@DELIVERY_CHARGE_PER_UNIT[DECIMAL](5,2)
-)
+CREATE PROCEDURE [dbo].[sp_create_product]
+	(
+			@Name				[nvarchar](50)	,
+			@Description		[nvarchar](200)	,
+			@Unit_Price			[decimal](10,2)	,
+			@Image_Binary		[image]			,
+			@Active				[bit]			,
+			@Unit_Of_Measurement [nvarchar](20)	,
+			@DELIVERY_CHARGE_PER_UNIT	[decimal](5,2)	
+	)
 AS
-BEGIN
-INSERT INTO PRODUCT (NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT)
-VALUES
-(@NAME, @DESCRIPTION, @UNIT_PRICE, @IMAGE_NAME, @ACTIVE, @UNIT_OF_MEASUREMENT, @DELIVERY_CHARGE_PER_UNIT)
-END
+	BEGIN
+		INSERT INTO [dbo].[Product]
+		(
+			Name						,				
+			Description					,
+			Unit_Price					,
+			Image_Binary				,
+			Active						,
+			Unit_Of_Measurement 		,
+			DELIVERY_CHARGE_PER_UNIT	
+		)
+		VALUES
+		(
+			@Name						,				
+			@Description				,
+			@Unit_Price					,
+			@Image_Binary				,
+			@Active						,
+			@Unit_Of_Measurement 		,
+			@DELIVERY_CHARGE_PER_UNIT	
+		)	
+		RETURN @@ROWCOUNT
+	END
+GO
