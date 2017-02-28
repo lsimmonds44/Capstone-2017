@@ -78,7 +78,7 @@ namespace DataAccessLayer
             List<Employee> employees = new List<Employee>();
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_employeelist";
+            var cmdText = @"sp_retrieve_employee_list";
 
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;

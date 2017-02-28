@@ -420,5 +420,19 @@ namespace WpfPresentationLayer
 
         }
 
+        private void tabProductLot_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var productLots = _productLotManager.RetrieveProductLots();
+                dgProductLots.ItemsSource = productLots;
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("There was an error: " + ex.Message);
+            }
+        }
+
     } // end of class
 } // end of namespace 

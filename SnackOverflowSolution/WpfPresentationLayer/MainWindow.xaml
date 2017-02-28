@@ -168,7 +168,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabProductLot" Header="Product Lot" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
+            <TabItem Name="tabProductLot" Header="Product Lot" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" GotFocus="tabProductLot_GotFocus" >
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -190,6 +190,8 @@
                         <Button Name="btnCreateInspection" Grid.Row="2" Grid.Column="2" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
 
                     </Grid>
+                    <DataGrid x:Name="dgProductLots" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
@@ -216,6 +218,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+
             <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -235,6 +238,7 @@
                     <Label x:Name="lblStatus" Content="Status: " HorizontalAlignment="Left" Margin="10,322,-327,0" VerticalAlignment="Top" Width="552"/>
                 </Grid>
             </TabItem>
+
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">
             <Grid>

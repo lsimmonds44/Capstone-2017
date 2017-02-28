@@ -13,5 +13,7 @@ namespace LogicLayer
         ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier);
 
         bool AddProduct(ProductLot p);
+
+        List<ProductLot> RetrieveProductLots();
     }
 }
