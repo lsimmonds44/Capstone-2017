@@ -273,6 +273,26 @@
                 </Grid>
             </TabItem>
 
+            <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabPackages_Loaded" GotFocus="tabPackages_GotFocus">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid x:Name="dgPackages" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionMode="Single"
+                              IsSynchronizedWithCurrentItem="True" CanUserReorderColumns="False" ItemsSource="{Binding}" CanUserDeleteRows="False" IsReadOnly="True"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="PackageID" Binding="{Binding PackageId}" Width="*"/>
+                            <DataGridTextColumn Header="DeliveryID" Binding="{Binding DeliveryId}" Width="*"/>
+                            <DataGridTextColumn Header="OrderID" Binding="{Binding OrderId}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">
             <Grid>

@@ -21,5 +21,6 @@ namespace LogicLayer
 
         List<Package> RetrievePackagesInOrder(int orderID);
 
+        List<Package> RetrieveAllPackages();
     }
 }

@@ -40,6 +40,9 @@ namespace WpfPresentationLayer
         User _user = null;
         private ICharityManager _charityManager;
 
+        private IPackageManager _packageManager = new PackageManager();
+        List<Package> _packageList = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -483,6 +486,54 @@ namespace WpfPresentationLayer
                 //MessageBox.Show(ex.Message);
             }
 
+        }
+
+
+        
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Tab the shows a list of all packages in the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabPackages_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshPackageList();
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Updates the items source for the package list datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabPackages_GotFocus(object sender, RoutedEventArgs e)
+        {
+            RefreshPackageList();
+            dgPackages.ItemsSource = _packageList;
+            dgPackages.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Updates the locally stored list of packages
+        /// </summary>
+        private void RefreshPackageList()
+        {
+            try
+            {
+                _packageList = _packageManager.RetrieveAllPackages();
+            }
+            catch {
+                MessageBox.Show("Unable to retrieve packages from database");
+            }
         }
 
 

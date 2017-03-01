@@ -108,5 +108,41 @@ namespace LogicLayer
             return packages;
         }
 
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Retrieves all the packages stored in the database, also retrieves all packge lines for the packages
+        /// </summary>
+        /// <returns>A list of packages</returns>
+        public List<Package> RetrieveAllPackages()
+        {
+            List<Package> packages = new List<Package>();
+
+            try
+            {
+                packages = PackageAccessor.RetrieveAllPackages();
+
+                foreach (Package p in packages)
+                {
+                    try
+                    {
+                        p.PackageLineList = PackageLineAccessor.RetrievePackageLinesInPackage(p.PackageId);
+                    }
+                    catch
+                    {
+                        // If we cant get the package lines from the db set it to an empty list
+                        p.PackageLineList = new List<PackageLine>();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return packages;
+        }
     }
 }

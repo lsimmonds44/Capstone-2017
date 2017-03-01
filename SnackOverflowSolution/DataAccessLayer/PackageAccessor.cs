@@ -193,5 +193,68 @@ namespace DataAccessLayer
             return PackageList;
         }
 
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Get all packages stored in the database
+        /// </summary>
+        /// <returns>A list of packages</returns>
+        public static List<Package> RetrieveAllPackages()
+        {
+            // an empty list to add the found packages to
+            List<Package> packages = new List<Package>();
+
+            // Creating an sql command object
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_package_list";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // Attempting to run the stored procedure
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    // Looping through all returned results until there aren't any left
+                    while (reader.Read())
+                    {
+                        // Creating a package from the current record
+                        var package = new Package()
+                        {
+                            PackageId = reader.GetInt32(0),
+                            OrderId = reader.GetInt32(2)
+                        };
+
+                        // Attempting to set the delivery id since it can be null
+                        try
+                        {
+                            package.DeliveryId = reader.GetInt32(1);
+                        }
+                        catch
+                        {
+                            package.DeliveryId = null;
+                        }
+
+                        // Adding the package to the list
+                        packages.Add(package);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return packages;
+        }
+
     }
 }

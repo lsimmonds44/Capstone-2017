@@ -780,26 +780,6 @@ CONSTRAINT [PK_WISHLIST_LINE] PRIMARY KEY ([CUSTOMER_ID] ASC, [PRODUCT_ID] ASC)
 )
 GO
 
-print '' print '*** inserting data into PRODUCT_ORDER'
-GO
-INSERT [dbo].[PRODUCT_ORDER]([CUSTOMER_ID], [ORDER_TYPE_ID], [ADDRESS_TYPE], [DELIVERY_TYPE_ID], [AMOUNT], [ORDER_DATE], [DATE_EXPECTED], [DISCOUNT], [USER_ADDRESS_ID], [ORDER_STATUS_ID],[HAS_ARRIVED])
-VALUES(10000, 'An Order Type', 'An Address Type', 'A Delivery Type', 20.15, '01-02-17 12:30:30', '04-02-17 12:30:30', 5.20, 10000, 'An order status' ,0)
-GO
-
-print '' print '*** inserting data into ORDER_LINE'
-GO
-INSERT [dbo].[ORDER_LINE]([PRODUCT_ID], [QUANTITY], [GRADE_ID], [PRICE], [UNIT_DISCOUNT], [TOTAL_DELIVERY_CHARGE])
-VALUES(10000, 10, 'Grade A', 5.0, 0.0, 5)
-GO
-
-print '' print '*** inserting data into ORDER_STATUS'
-GO
-INSERT [dbo].[ORDER_STATUS]([ORDER_STATUS_ID])
-VALUES("Ready For Shipment")
-GO
-
-
-
 print '' print '*** Creating Foreign Key AGREEMENT_PRODUCT_ID'
 GO
 ALTER TABLE [dbo].[AGREEMENT] with nocheck
