@@ -181,7 +181,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabProductLot" Header="Product Lot" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" GotFocus="tabProductLot_GotFocus" >
+            <TabItem Name="tabProductLot" Header="Product Lot" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabProductLot_Selected" >
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

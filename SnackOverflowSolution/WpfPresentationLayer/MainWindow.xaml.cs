@@ -28,6 +28,7 @@ namespace WpfPresentationLayer
         List<ProductOrder> _currentOpenOrders;
         List<Employee> employeeList;
         List<Charity> charityList;
+        private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
@@ -288,7 +289,16 @@ namespace WpfPresentationLayer
 
         private void tabProductLot_Selected(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                _productLotList = _productLotManager.RetrieveProductLots();
+                dgProductLots.ItemsSource = _productLotList;
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show("There was an error: " + ex.Message);
+            }
         }
 
         private void AddProductLot_Click(object sender, RoutedEventArgs e)
@@ -432,19 +442,6 @@ namespace WpfPresentationLayer
 
         }
 
-        private void tabProductLot_GotFocus(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var productLots = _productLotManager.RetrieveProductLots();
-                dgProductLots.ItemsSource = productLots;
-            }
-            catch (Exception ex)
-            {
-                
-                MessageBox.Show("There was an error: " + ex.Message);
-            }
-        }
 
         private void BtnAddProduct_OnClick(object sender, RoutedEventArgs e)
         {
@@ -487,6 +484,7 @@ namespace WpfPresentationLayer
             }
 
         }
+
 
         
     } // end of class

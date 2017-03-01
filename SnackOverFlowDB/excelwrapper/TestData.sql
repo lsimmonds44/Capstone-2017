@@ -52,7 +52,7 @@ GO
 INSERT INTO [dbo].[Employee]
 	(User_ID, Salary, Active, Date_Of_Birth)
 	VALUES
-	(10001, 2000, 1, '2012-05-05')
+	(10000, 2000, 1, '2012-05-05')
 GO
 
 /* ********************* End of User Test Data ************************** */
