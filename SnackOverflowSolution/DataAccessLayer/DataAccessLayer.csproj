@@ -59,6 +59,7 @@
     <Compile Include="UserAccessor.cs" />
     <Compile Include="IDataAccessor.cs" />
     <Compile Include="DataBaseMainAccessor.cs" />
+    <Compile Include="VehicleAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataObjects\DataObjects.csproj">

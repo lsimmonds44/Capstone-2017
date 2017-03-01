@@ -81,6 +81,9 @@
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmViewVehicle.xaml.cs">
+      <DependentUpon>frmViewVehicle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfExtensionMethods.cs" />
     <Page Include="CreateCommercialCustomerWindow.xaml">
       <SubType>Designer</SubType>
@@ -127,6 +130,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EmployeeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmViewVehicle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

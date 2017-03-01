@@ -63,6 +63,7 @@
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="IVehicleManager.cs" />
     <Compile Include="IWarehouseManager.cs" />
     <Compile Include="LocationManager.cs" />
     <Compile Include="PackageLineManager.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="TestProductManager.cs" />
     <Compile Include="TestUserManager.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="VehicleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
