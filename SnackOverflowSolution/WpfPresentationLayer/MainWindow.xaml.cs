@@ -310,7 +310,24 @@ namespace WpfPresentationLayer
         {
             var productLotView = new ProductLotView();
             productLotView.SetEditable();
-            productLotView.ShowDialog();
+            var addResult = productLotView.ShowDialog();
+            if (addResult == true)
+            {
+                try
+                {
+                    var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierBySupplierID(productLotView.supplierId)),
+                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
+                    var addInspectionResult = addInspectionFrm.ShowDialog();
+                    if (addInspectionResult == true)
+                    {
+                        MessageBox.Show("Inspection Added");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
             tabProductLot_Selected(sender, e);
         }
 

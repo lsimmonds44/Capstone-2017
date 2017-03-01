@@ -26,6 +26,7 @@ namespace WpfPresentationLayer
         List<Supplier> supplierList;
         List<Employee> employeeList;
         List<Warehouse> warehouseList;
+        public int supplierId { get; private set; }
         public ProductLotView()
         {
             InitializeComponent();
@@ -110,6 +111,16 @@ namespace WpfPresentationLayer
                 {
                     (new ProductLotManager()).AddProductLot(toSave);
                     MessageBox.Show("Product Lot Added");
+                    try
+                    {
+                        supplierId = supplierList[cbxSupplierIDVal.SelectedIndex].SupplierID;
+                    }
+                    catch (Exception)
+                    {
+                        
+                        throw;
+                    }
+                    this.DialogResult = true;
                 } catch (System.Data.SqlClient.SqlException ex)
                 {
                     ErrorAlert.ShowDatabaseError();
