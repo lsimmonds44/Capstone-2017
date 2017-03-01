@@ -49,6 +49,7 @@
     <Compile Include="LocationAccessor.cs" />
     <Compile Include="GradeAccessor.cs" />
     <Compile Include="InspectionAccessor.cs" />
+    <Compile Include="OrderStatusAccessor.cs" />
     <Compile Include="PackageAccessor.cs" />
     <Compile Include="PackageLineAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />

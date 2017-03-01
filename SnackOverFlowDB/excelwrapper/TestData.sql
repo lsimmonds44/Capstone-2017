@@ -174,6 +174,23 @@ INSERT INTO [dbo].[Product_Grade_Price]
 	(10004, 'Grade A', 100)
 GO
 
+/* Status Test Data */
+print '*** Inserting Status Test Data ***'
+INSERT INTO [dbo].[Status]
+	(STATUS_ID)
+	VALUES
+	("Open"),
+	("Ready For Shipment")
+GO
+
+/* Order Status Test Data */
+print '*** Inserting Order_Status Test Data ***'
+INSERT INTO [dbo].[Order_Status]
+	(ORDER_STATUS_ID)
+	VALUES
+	("Open"),
+	("Ready For Shipment")
+GO
 
 
 

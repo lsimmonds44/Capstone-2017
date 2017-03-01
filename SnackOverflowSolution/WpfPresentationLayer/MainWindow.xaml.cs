@@ -42,6 +42,8 @@ namespace WpfPresentationLayer
 
         private IPackageManager _packageManager = new PackageManager();
         List<Package> _packageList = null;
+        private IOrderStatusManager _orderStatusManager = new OrderStatusManager();
+        List<string> _orderStatusList = null;
 
         public MainWindow()
         {
@@ -408,26 +410,42 @@ namespace WpfPresentationLayer
         ///     Mason Allen
         ///     ListView that displays current open orders.  Double clicking an item will display the order details.
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Modified to work with drop down to select status
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tabOpenOrders_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus("Open");
-                lvOpenOrders.Items.Clear();
-
-                for (int i = 0; i < _currentOpenOrders.Count; i++)
+                _orderStatusList = _orderStatusManager.RetrieveAllOrderStatus();
+                cboOrderStatus.ItemsSource = _orderStatusList;
+                cboOrderStatus.SelectedIndex = 0;
+                if (cboOrderStatus.SelectedItem != null)
                 {
-                    this.lvOpenOrders.Items.Add(_currentOpenOrders[i]);
+
+                    _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus((string)cboOrderStatus.SelectedItem);
+                    lvOpenOrders.Items.Clear();
+
+                    for (int i = 0; i < _currentOpenOrders.Count; i++)
+                    {
+                        this.lvOpenOrders.Items.Add(_currentOpenOrders[i]);
+                    }
+                    lblStatus.Content = "Status: Success";
                 }
-                lblStatus.Content += "Success";
             }
             catch (Exception ex)
             {
                 lblStatus.Content += ex.ToString();
             }
         }
+
+
+
         private void lvOpenOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -443,6 +461,36 @@ namespace WpfPresentationLayer
                 lblStatus.Content = "Nothing selected";
             }
 
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// 
+        /// Updates the list of orders to match the new combo box selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (cboOrderStatus.SelectedItem != null)
+                {
+                    _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus((string)cboOrderStatus.SelectedItem);
+                    lvOpenOrders.Items.Clear();
+
+                    for (int i = 0; i < _currentOpenOrders.Count; i++)
+                    {
+                        this.lvOpenOrders.Items.Add(_currentOpenOrders[i]);
+                    }
+                    lblStatus.Content = "Status: Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content += ex.ToString();
+            }
         }
 
 
@@ -535,6 +583,8 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Unable to retrieve packages from database");
             }
         }
+
+        
 
 
         

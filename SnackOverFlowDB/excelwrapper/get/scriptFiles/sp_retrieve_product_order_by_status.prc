@@ -11,7 +11,7 @@ Print '' print  ' *** creating procedure sp_retrieve_product_order_by_status'
 GO
 Create PROCEDURE sp_retrieve_product_order_by_status
 (
-@Status[NVARCHAR](10)
+@Status[NVARCHAR](50)
 )
 AS
 BEGIN
