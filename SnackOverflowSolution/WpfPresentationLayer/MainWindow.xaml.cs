@@ -350,15 +350,16 @@ namespace WpfPresentationLayer
             }
         }
 
+        
         /// <summary>
         /// Eric Walton
-        /// 2017/26/02
-        /// Commercial tab got focus
-        /// Loads a list of all commercial customers on a data grid.
+        /// 2017/28/02
+        /// Commercial Customer tab selected 
+        /// Retrieves updated list of commercial customers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Commercial_Customer_Got_Focus(object sender, RoutedEventArgs e)
+        private void tabCommercialCustomer_Selected(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -486,5 +487,7 @@ namespace WpfPresentationLayer
             }
 
         }
+
+        
     } // end of class
 } // end of namespace 
