@@ -139,8 +139,10 @@ namespace DataAccessLayer
                                 Name = reader.GetString(1),
                                 Description = reader.GetString(2),
                                 UnitPrice = reader.GetDecimal(3),
-                                //ImageName = reader.GetString(4),
-                                DeliveryChargePerUnit = reader.GetDecimal(5)
+                                ImageName = reader.GetString(4),
+                                Active = reader.GetBoolean(5),
+                                UnitOfMeasurement = reader.GetString(6),
+                                DeliveryChargePerUnit = reader.GetDecimal(7)
                             };
                         }
                         reader.Close();
