@@ -42,6 +42,9 @@ namespace WpfPresentationLayer
         /// <param name="product">Product Object</param>
         public static void SaveToTempFile(BrowseProductViewModel product)
         {
+            //Create folder location
+            System.IO.Directory.CreateDirectory(FilePath);
+
             if (product.Image_Binary == null)
                 return;
             if (product.Image_Binary.Length == 0)
@@ -66,6 +69,8 @@ namespace WpfPresentationLayer
             ////Saving image to file
             BitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(image));
+
+
 
             using (
                 var fileStream =
