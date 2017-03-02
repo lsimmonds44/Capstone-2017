@@ -32,5 +32,26 @@ namespace LogicLayer
 
             return vehicle;
         }
+
+        /// <summary>
+        /// Mason Allen
+        /// Created 03/01/2017
+        /// Creates a new vehicle record
+        /// </summary>
+        /// <param name="newVehicle"></param>
+        /// <returns>An int of 1 for success, 0 for fail</returns>
+        public int CreateVehicle(Vehicle newVehicle)
+        {
+            int success;
+            try
+            {
+                success = VehicleAccessor.CreateVehicle(newVehicle);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("There was a problem saving the requested vehicle");
+            }
+            return success;
+        }
     }
 }

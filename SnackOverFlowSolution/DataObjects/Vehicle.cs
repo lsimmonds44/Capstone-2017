@@ -16,8 +16,8 @@ namespace DataObjects
         public string Year { get; set; }
         public string Color { get; set; }
         public bool Active { get; set; }
-        public DateTime LatestRepair { get; set; }
-        public int LastDriver { get; set; }
+        public DateTime? LatestRepair { get; set; }
+        public int? LastDriver { get; set; }
         public string VehicleTypeID { get; set; }
     }
 }

@@ -601,9 +601,16 @@ namespace WpfPresentationLayer
             }
         }
 
-        
-
-
+        /// <summary>
+        /// Mason Allen
+        /// 03/01/2017
+        /// Opens new window to create a new vehicle record
+        /// </summary>
+        private void btnAddNewVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            var addNewVehicleWindow = new frmAddNewVehicle();
+            addNewVehicleWindow.Show();
+        }
         
     } // end of class
 } // end of namespace 

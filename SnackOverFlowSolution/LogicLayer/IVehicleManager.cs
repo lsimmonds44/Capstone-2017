@@ -10,5 +10,7 @@ namespace LogicLayer
     public interface IVehicleManager
     {
         Vehicle RetreiveVehicleById(int vehicleId);
+
+        int CreateVehicle(Vehicle newVehicle);
     }
 }

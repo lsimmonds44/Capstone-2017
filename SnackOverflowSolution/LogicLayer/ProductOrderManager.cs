@@ -13,39 +13,46 @@ namespace LogicLayer
     {
         public List<ProductOrder> RetrieveProductOrdersByStatus(String Status)
         {
-            List<ProductOrder> ProductOrderList = ProductOrderAccessor.RetrieveProductOrdersByStatus(Status);
-            foreach (ProductOrder ProductOrderFound in ProductOrderList)
+            List<ProductOrder> ProductOrderList;
+            try
             {
-                ProductOrderFound.BackorderPreorderList = BackorderPreorderAccessor.RetrieveBackorderPreorder(
-                    new BackorderPreorder
-                    {
-                        OrderId = ProductOrderFound.OrderId
-                    }
-                );
+                ProductOrderList = ProductOrderAccessor.RetrieveProductOrdersByStatus(Status);
+                foreach (ProductOrder ProductOrderFound in ProductOrderList)
+                {
+                    ProductOrderFound.BackorderPreorderList = BackorderPreorderAccessor.RetrieveBackorderPreorder(
+                        new BackorderPreorder
+                        {
+                            OrderId = ProductOrderFound.OrderId
+                        }
+                    );
 
-                ProductOrderFound.DeliveryList = DeliveryAccessor.RetrieveDelivery(
-                    new Delivery
-                    {
-                        OrderId = ProductOrderFound.OrderId
-                    }
-                );
+                    ProductOrderFound.DeliveryList = DeliveryAccessor.RetrieveDelivery(
+                        new Delivery
+                        {
+                            OrderId = ProductOrderFound.OrderId
+                        }
+                    );
 
-                ProductOrderFound.EmployeeOrderResponsibilityList = EmployeeOrderResponsibilityAccessor.RetrieveEmployeeOrderResponsibility(
-                    new EmployeeOrderResponsibility
-                    {
-                        OrderId = ProductOrderFound.OrderId
-                    }
-                );
+                    ProductOrderFound.EmployeeOrderResponsibilityList = EmployeeOrderResponsibilityAccessor.RetrieveEmployeeOrderResponsibility(
+                        new EmployeeOrderResponsibility
+                        {
+                            OrderId = ProductOrderFound.OrderId
+                        }
+                    );
 
-                ProductOrderFound.PackageList = PackageAccessor.RetrievePackage(
-                    new Package
-                    {
-                        OrderId = ProductOrderFound.OrderId
-                    }
-                );
+                    ProductOrderFound.PackageList = PackageAccessor.RetrievePackage(
+                        new Package
+                        {
+                            OrderId = ProductOrderFound.OrderId
+                        }
+                    );
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return ProductOrderList;
-	
 		}
 
 

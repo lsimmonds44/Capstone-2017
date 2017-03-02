@@ -57,6 +57,7 @@
     <Compile Include="Supplier.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="VehicleType.cs" />
     <Compile Include="Warehouse.cs" />
     <Compile Include="UserAddress.cs" />
   </ItemGroup>

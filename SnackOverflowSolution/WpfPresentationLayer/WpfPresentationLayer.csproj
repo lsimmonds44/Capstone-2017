@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="frmAddVehicle.xaml.cs">
+      <DependentUpon>frmAddVehicle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmAddProduct.xaml.cs">
       <DependentUpon>frmAddProduct.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateNewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmAddVehicle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

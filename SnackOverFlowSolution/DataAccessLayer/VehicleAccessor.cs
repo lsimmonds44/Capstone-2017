@@ -70,6 +70,51 @@ namespace DataAccessLayer
             return vehicle;
         }
 
-         
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 03/01/2017
+        /// 
+        /// Creates a new vehicle
+        /// </summary>
+        /// <param name="newVehicle">Vehicle Object to be Created</param>
+        /// <returns>Returns an int of 1 if successful, 0 if not</returns>
+        public static int CreateVehicle(Vehicle newVehicle)
+        {
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_create_vehicle";
+            var cmd = new SqlCommand(cmdText, conn);
+            var count = 0;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@VIN", newVehicle.VIN);
+            cmd.Parameters.AddWithValue("@MAKE", newVehicle.Make);
+            cmd.Parameters.AddWithValue("@MODEL", newVehicle.Model);
+            cmd.Parameters.AddWithValue("@MILEAGE", newVehicle.Mileage);
+            cmd.Parameters.AddWithValue("@YEAR", newVehicle.Year);
+            cmd.Parameters.AddWithValue("@COLOR", newVehicle.Color);
+            cmd.Parameters.AddWithValue("@ACTIVE", newVehicle.Active);
+            cmd.Parameters.AddWithValue("@LATEST_REPAIR_DATE", newVehicle.LatestRepair);
+            cmd.Parameters.AddWithValue("@LAST_DRIVER_ID", newVehicle.LastDriver);
+            cmd.Parameters.AddWithValue("@VEHICLE_TYPE_ID", newVehicle.VehicleTypeID);
+
+            try
+            {
+                conn.Open();
+                count = cmd.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+        }
+ 
     }
 }
