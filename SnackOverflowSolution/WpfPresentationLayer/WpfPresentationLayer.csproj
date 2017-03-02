@@ -81,6 +81,12 @@
     <Compile Include="frmBrowseProducts.xaml.cs">
       <DependentUpon>frmBrowseProducts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmManageStock.xaml.cs">
+      <DependentUpon>frmManageStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageStockSubAdjustQty.xaml.cs">
+      <DependentUpon>frmManageStockSubAdjustQty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
     </Compile>
@@ -117,6 +123,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmAddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmManageStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmManageStockSubAdjustQty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

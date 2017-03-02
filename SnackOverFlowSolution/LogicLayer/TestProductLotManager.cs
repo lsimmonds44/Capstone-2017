@@ -44,5 +44,11 @@ namespace LogicLayer
                 RetrieveNewestProductLotBySupplier(new Supplier()),
                 RetrieveNewestProductLotBySupplier(new Supplier())};
         }
+
+
+        public int UpdateProductLotAvailableQuantity(ProductLot oldProductLot, ProductLot newProductLot)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

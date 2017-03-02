@@ -81,5 +81,24 @@ namespace LogicLayer
 
             return lots;
         }
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 3/2/2017
+        /// 
+        /// Updates Product Lot Available Quantity
+        /// </summary>
+        /// <param name="oldProductLot"></param>
+        /// <param name="newProductLot"></param>
+        /// <returns></returns>
+        public int UpdateProductLotAvailableQuantity(ProductLot oldProductLot, ProductLot newProductLot)
+        {
+            int result = 0;
+
+            result = ProductLotAccessor.UpdateProductLotAvailableQuantity(oldProductLot.ProductLotId, oldProductLot.AvailableQuantity,
+                newProductLot.AvailableQuantity);
+
+            return result;
+        }
     }
 }

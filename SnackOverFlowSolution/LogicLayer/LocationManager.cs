@@ -38,9 +38,19 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Created by Bill Flood
+        /// Edited by Michael Takrama on 3/2/2017
+        /// 
+        /// Retrieves locatio by id
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <returns></returns>
         public Location RetrieveLocationByID(int locationId)
         {
-            throw new NotImplementedException();
+            var location = LocationAccessor.RetrieveLocationById(locationId);
+
+            return location;
         }
 
         public int UpdateLocation(Location oldLocation, Location newLocation)

@@ -48,6 +48,7 @@
     <Compile Include="EmployeeOrderResponsibility.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Inspection.cs" />
+    <Compile Include="ManageStockViewModel.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
     <Compile Include="Product.cs" />

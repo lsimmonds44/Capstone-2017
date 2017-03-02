@@ -611,6 +611,11 @@ namespace WpfPresentationLayer
             var addNewVehicleWindow = new frmAddNewVehicle();
             addNewVehicleWindow.Show();
         }
-        
+
+        private void BtnManageStock_OnClick(object sender, RoutedEventArgs e)
+        {
+            frmManageStock fms = new frmManageStock();
+            fms.ShowDialog();
+        }
     } // end of class
 } // end of namespace 

@@ -195,12 +195,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Button Name="btnCreateSupplier" Grid.Row="0" Grid.Column="1" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
                         <Button Name="btnCreateInspection" Grid.Row="2" Grid.Column="2" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
+                        <Button Name="btnManageStock" Grid.Row="2" Grid.Column="3" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="BtnManageStock_OnClick" />
 
                     </Grid>
                     <DataGrid x:Name="dgProductLots" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
