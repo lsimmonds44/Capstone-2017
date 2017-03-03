@@ -58,9 +58,27 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/03
+        /// 
+        /// Get a list of locations from the location accessor
+        /// </summary>
+        /// <returns></returns>
         public List<Location> ListLocations()
         {
-            throw new NotImplementedException();
+            List<Location> locations = null;
+            try
+            {
+                locations = LocationAccessor.RetrieveAllLocations();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+
+            return locations;
         }
     }
 }

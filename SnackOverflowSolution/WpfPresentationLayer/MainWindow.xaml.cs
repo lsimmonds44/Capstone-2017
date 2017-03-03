@@ -32,6 +32,7 @@ namespace WpfPresentationLayer
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private List<Vehicle> _vehicleList;
+        private List<Supplier> _supplierList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
@@ -320,7 +321,7 @@ namespace WpfPresentationLayer
 
         private void AddProductLot_Click(object sender, RoutedEventArgs e)
         {
-            var productLotView = new ProductLotView();
+            var productLotView = new frmAddProductLot();
             productLotView.SetEditable();
             var addResult = productLotView.ShowDialog();
             if (addResult == true)
@@ -723,6 +724,19 @@ namespace WpfPresentationLayer
             {
 
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void tabSupplier_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplierList = _supplierManager.ListSuppliers();
+                dgSuppliers.ItemsSource = _supplierList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
     } // end of class
