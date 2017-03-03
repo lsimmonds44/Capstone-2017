@@ -313,5 +313,50 @@ namespace DataAccessLayer
 
             return userAddress;
         }
+
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/02/28
+        /// 
+        /// Allows a user to update one's password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="oldSalt"></param>
+        /// <param name="oldHash"></param>
+        /// <param name="newSalt"></param>
+        /// <param name="newHash"></param>
+        /// <returns></returns>
+        public int UpdatePassword(String username, String oldSalt, String oldHash, String newSalt, String newHash)
+        {
+
+            var results = 0;
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand(@"sp_update_user_password", conn);
+            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@OLD_SALT", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@OLD_HASH", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@NEW_SALT", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@NEW_HASH", SqlDbType.NVarChar);
+            cmd.Parameters["@USERNAME"].Value = username;
+            cmd.Parameters["@OLD_SALT"].Value = oldSalt;
+            cmd.Parameters["@OLD_HASH"].Value = oldHash;
+            cmd.Parameters["@NEW_SALT"].Value = newSalt;
+            cmd.Parameters["@NEW_HASH"].Value = newHash;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                results = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return results;
+        }
     }
 }

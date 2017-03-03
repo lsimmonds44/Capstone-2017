@@ -27,5 +27,7 @@ namespace LogicLayer
         UserAddress RetrieveUserAddress(int? prefferedAddressId);
 
         string LogIn(string p1, string p2);
+
+        int ChangePassword(String userName, String oldPassword, String newPassword, String confirmPassword);
     }
 }

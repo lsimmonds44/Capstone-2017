@@ -93,6 +93,9 @@
     <Compile Include="frmViewVehicle.xaml.cs">
       <DependentUpon>frmViewVehicle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PasswordChangeView.xaml.cs">
+      <DependentUpon>PasswordChangeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfExtensionMethods.cs" />
     <Page Include="CreateCommercialCustomerWindow.xaml">
       <SubType>Designer</SubType>
@@ -211,6 +214,10 @@
     <Compile Include="CharityView.xaml.cs" />
     <Compile Include="EmployeeView.xaml.cs" />
     <Compile Include="ErrorAlert.cs" />
+    <Page Include="PasswordChangeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ProductLotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

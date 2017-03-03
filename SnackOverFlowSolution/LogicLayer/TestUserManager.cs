@@ -109,6 +109,11 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        public int ChangePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> roles
         {
             get { throw new NotImplementedException(); }

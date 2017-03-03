@@ -250,5 +250,42 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Created by William Flood
+        /// 2017/03/02
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
+        public int ChangePassword(String userName, String oldPassword, String newPassword, String confirmPassword)
+        {
+            var returnValue = 0;
+            if (newPassword.Equals(confirmPassword))
+            {
+                var accessor = new UserAccessor();
+                String oldSalt = accessor.RetrieveUserSalt(userName);
+                String oldHash = HashSha256(oldPassword + oldSalt);
+                String foo = RandomString(32);
+                String bar = HashSha256(newPassword + foo);
+                try
+                {
+                    returnValue = accessor.UpdatePassword(userName, oldSalt, oldHash, foo, bar);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                returnValue = 0;
+            }
+            return returnValue;
+        }
+
+
     }
 }

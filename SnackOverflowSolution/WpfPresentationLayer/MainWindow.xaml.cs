@@ -659,5 +659,16 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Application Submitted!");
             }
         }
+
+        /// <summary>
+        /// Opens a window to allow a user to change one's password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            var updateScreen = new PasswordChangeView(_user.UserName);
+            updateScreen.Show();
+        }
     } // end of class
 } // end of namespace 
