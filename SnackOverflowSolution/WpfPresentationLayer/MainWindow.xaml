@@ -234,7 +234,6 @@
                     </Grid>
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -266,7 +265,6 @@
                     <Label x:Name="lblStatus" Grid.Row="2" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabCustomerView" Header="Customer Public View" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -287,7 +285,6 @@
 
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabPackages_Loaded" GotFocus="tabPackages_GotFocus">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -333,6 +330,26 @@
                         <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="editVehicleClick"/>
                     </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem Name="tabDeliveries" Header="Deliveries" GotFocus="tabDeliveries_GotFocus" >
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="lvDeliveries" Margin="10 10 10 39">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Date"/>
+                                    <GridViewColumn Header="VehicleId" Width="60"/>
+                                    <GridViewColumn Header="Status"/>
+                                    <GridViewColumn Header="DeliveryType" Width="75"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">

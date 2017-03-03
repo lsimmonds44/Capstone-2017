@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="DeliveryManager.cs" />
     <Compile Include="DummyLocationManager.cs" />
     <Compile Include="DummyProductManager.cs" />
     <Compile Include="DummySupplierManager.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="ICharityManager.cs" />
     <Compile Include="ICustomerManager.cs" />
+    <Compile Include="IDeliveryManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
     <Compile Include="GradeManager.cs" />
