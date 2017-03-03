@@ -690,5 +690,19 @@ namespace WpfPresentationLayer
                 }
             }
         }
+
+        private void tabUser_Selected(object sender, RoutedEventArgs e)
+        {
+            if ("ADMIN" == _user.UserName)
+            {
+                btnResetPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnResetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            var passwordResetWindow = new ResetPassword(_userManager, "JeremyPanther");
+            passwordResetWindow.Show();
+        }
     } // end of class
 } // end of namespace 
