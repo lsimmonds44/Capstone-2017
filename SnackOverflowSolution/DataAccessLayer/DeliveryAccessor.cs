@@ -20,7 +20,7 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@DELIVERY_ID", DeliveryInstance.DeliveryId);
             cmd.Parameters.AddWithValue("@ROUTE_ID", DeliveryInstance.RouteId);
-            cmd.Parameters.AddWithValue("@DEVLIVERY_DATE", DeliveryInstance.DevliveryDate);
+            cmd.Parameters.AddWithValue("@DEVLIVERY_DATE", DeliveryInstance.DeliveryDate);
             cmd.Parameters.AddWithValue("@VERIFICATION", DeliveryInstance.Verification);
             cmd.Parameters.AddWithValue("@STATUS_ID", DeliveryInstance.StatusId);
             cmd.Parameters.AddWithValue("@DELIVERY_TYPE_ID", DeliveryInstance.DeliveryTypeId);
@@ -38,7 +38,7 @@ namespace DataAccessLayer
                     {
                         DeliveryId = reader.GetInt32(0),
                         RouteId = reader.GetInt32(1),
-                        DevliveryDate = reader.GetDateTime(2),
+                        DeliveryDate = reader.GetDateTime(2),
                         Verification = reader.IsDBNull(3) ? null : (Stream)reader.GetStream(3),
                         StatusId = reader.GetString(4),
                         DeliveryTypeId = reader.GetString(5),
@@ -50,6 +50,51 @@ namespace DataAccessLayer
             catch (SqlException ex)
             {
                 throw new Exception("Error: " + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return DeliveryList;
+        }
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/02/17
+        /// 
+        /// Retrieves every delivery in database.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Delivery> RetrieveDeliveries()
+        {
+            List<Delivery> DeliveryList = new List<Delivery>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_delivery_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var DeliveryInstance = new Delivery()
+                    {
+                        DeliveryId = reader.GetInt32(0),
+                        RouteId = reader.GetInt32(1),
+                        DeliveryDate = reader.GetDateTime(2),
+                        Verification = reader.IsDBNull(3) ? null : (Stream)reader.GetStream(3),
+                        StatusId = reader.GetString(4),
+                        DeliveryTypeId = reader.GetString(5),
+                        OrderId = reader.GetInt32(6)
+
+
+                    };
+                    DeliveryList.Add(DeliveryInstance);
+                }
+            }
+            catch
+            {
+                throw;
             }
             finally
             {

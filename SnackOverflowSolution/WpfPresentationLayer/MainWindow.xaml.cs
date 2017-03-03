@@ -36,6 +36,8 @@ namespace WpfPresentationLayer
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
         private IProductManager _productManager = new ProductManager();
+        private IDeliveryManager _deliveryManager;
+        private List<Delivery> _deliveries;
 
         Employee _employee = null;
 
@@ -53,6 +55,7 @@ namespace WpfPresentationLayer
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
+            _deliveryManager = new DeliveryManager();
             DisposeFiles();
         }
 
@@ -688,6 +691,31 @@ namespace WpfPresentationLayer
                         ErrorAlert.ShowDatabaseError();
                     }
                 }
+            }
+        }
+
+        private void tabDeliveries_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+                lvDeliveries.Items.Clear();
+
+                for (int i = 0; i < _deliveries.Count; i++)
+                {
+                    lvDeliveries.Items.Add(_deliveries[i].DeliveryDate);
+                    lvDeliveries.Items.Add(_deliveryManager.RetrieveVehicleByDelivery(_deliveries[i].DeliveryId.Value).ToString());
+                    lvDeliveries.Items.Add(_deliveries[i].StatusId);
+                    lvDeliveries.Items.Add(_deliveries[i].DeliveryTypeId);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
     } // end of class
