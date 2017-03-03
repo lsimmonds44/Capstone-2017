@@ -51,14 +51,20 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "Editing the record for " + _employee.UserId;
+            if (_employee == null)
+            {
+                MessageBox.Show("no employee selected");
+            }
+            else
+            {
+                this.Title = "Editing the record for " + _employee.UserId;
 
-            txtEmployeeID.Text = _employee.EmployeeId.ToString();
-            txtUserID.Text = _employee.UserId.ToString();
-            txtSalary.Text = _employee.Salary.ToString();
-            txtDateOfBirth.Text = _employee.DateOfBirth.ToString();
-            chkActive.IsChecked = _employee.Active; 
-            
+                txtEmployeeID.Text = _employee.EmployeeId.ToString();
+                txtUserID.Text = _employee.UserId.ToString();
+                txtSalary.Text = _employee.Salary.ToString();
+                txtDateOfBirth.Text = _employee.DateOfBirth.ToString();
+                chkActive.IsChecked = _employee.Active;
+            }
 
         }
         /// <summary>

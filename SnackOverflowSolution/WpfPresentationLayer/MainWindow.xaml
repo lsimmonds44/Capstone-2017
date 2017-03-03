@@ -48,6 +48,7 @@
             <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3.4,0,0,24.6" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click" Height="21" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <TabControl Name="tabSetMain" Grid.Row="2" >
+            <TabItem Name="Default" Visibility="Hidden"/>
             <TabItem Name="tabCommercialCustomer" Header="Commercial Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabCommercialCustomer_Selected"  >
                 <Grid>
                     <Grid.RowDefinitions>
@@ -210,7 +211,7 @@
                     	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                 </Grid>
             </TabItem>
-            <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" >
+            <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplier_Selected">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -219,6 +220,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgSuppliers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -229,13 +232,12 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnAddProductLot" Grid.Row="0" Grid.Column="2" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
+                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="2" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
                         <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="3" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" IsEnabled="False"/>
                         <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="1" Content="Apply for Account" Margin="10 0 5 0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" />
                     </Grid>
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -267,7 +269,6 @@
                     <Label x:Name="lblStatus" Grid.Row="2" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabCustomerView" Header="Customer Public View" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -288,7 +289,6 @@
 
                 </Grid>
             </TabItem>
-
             <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabPackages_Loaded" GotFocus="tabPackages_GotFocus">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -334,6 +334,26 @@
                         <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="editVehicleClick"/>
                     </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem Name="tabDeliveries" Header="Deliveries" GotFocus="tabDeliveries_GotFocus" >
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="lvDeliveries" Margin="10 10 10 39">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Date"/>
+                                    <GridViewColumn Header="VehicleId" Width="60"/>
+                                    <GridViewColumn Header="Status"/>
+                                    <GridViewColumn Header="DeliveryType" Width="75"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">

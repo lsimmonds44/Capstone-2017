@@ -32,10 +32,13 @@ namespace WpfPresentationLayer
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private List<Vehicle> _vehicleList;
+        private List<Supplier> _supplierList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
         private IProductManager _productManager = new ProductManager();
+        private IDeliveryManager _deliveryManager;
+        private List<Delivery> _deliveries;
 
         Employee _employee = null;
 
@@ -53,6 +56,7 @@ namespace WpfPresentationLayer
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
+            _deliveryManager = new DeliveryManager();
             DisposeFiles();
         }
 
@@ -93,8 +97,15 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
         {
-            frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
-            fUE.ShowDialog();
+            try
+            {
+                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                fUE.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Please Select an Employee to Edit.");
+            }
         }
 
 
@@ -310,7 +321,7 @@ namespace WpfPresentationLayer
 
         private void AddProductLot_Click(object sender, RoutedEventArgs e)
         {
-            var productLotView = new ProductLotView();
+            var productLotView = new frmAddProductLot();
             productLotView.SetEditable();
             var addResult = productLotView.ShowDialog();
             if (addResult == true)
@@ -691,6 +702,7 @@ namespace WpfPresentationLayer
             }
         }
 
+		
         private void tabUser_Selected(object sender, RoutedEventArgs e)
         {
             if ("ADMIN" == _user.UserName)
@@ -703,6 +715,44 @@ namespace WpfPresentationLayer
         {
             var passwordResetWindow = new ResetPassword(_userManager, "JeremyPanther");
             passwordResetWindow.Show();
+	    }
+		
+        private void tabDeliveries_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+                lvDeliveries.Items.Clear();
+
+                for (int i = 0; i < _deliveries.Count; i++)
+                {
+                    lvDeliveries.Items.Add(_deliveries[i].DeliveryDate);
+                    lvDeliveries.Items.Add(_deliveryManager.RetrieveVehicleByDelivery(_deliveries[i].DeliveryId.Value).ToString());
+                    lvDeliveries.Items.Add(_deliveries[i].StatusId);
+                    lvDeliveries.Items.Add(_deliveries[i].DeliveryTypeId);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void tabSupplier_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplierList = _supplierManager.ListSuppliers();
+                dgSuppliers.ItemsSource = _supplierList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     } // end of class
 } // end of namespace 

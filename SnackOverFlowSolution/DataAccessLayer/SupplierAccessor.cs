@@ -251,6 +251,67 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// Created 2017/03/03
+        /// 
+        /// Get a list of all suppliers, regardless of status and approval.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Supplier> RetrieveAllSuppliers()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_supplier_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Supplier s = new Supplier
+                        {
+                            SupplierID = reader.GetInt32(0),
+                            UserId = reader.GetInt32(1),
+                            IsApproved = reader.GetBoolean(2),
+                            FarmName = reader.GetString(4),
+                            FarmCity = reader.GetString(5),
+                            FarmState = reader.GetString(6),
+                            FarmTaxID = reader.GetString(7),
+                            Active = reader.GetBoolean(8)
+                        };
+                        if (!reader.IsDBNull(3))
+                        {
+                            s.ApprovedBy = reader.GetInt32(3);
+                        }
+                        else
+                        {
+                            s.ApprovedBy = null;
+                        }
+                        suppliers.Add(s);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return suppliers;
+
+        }
+
+
+        /// <summary>
+        /// Christian Lopez
         /// Created 2017/02/23
         /// 
         /// Retrieve the supplier name by userId
