@@ -358,5 +358,33 @@ namespace DataAccessLayer
             }
             return results;
         }
+
+        public int ResetPassword(String username, String salt, String passwordHash)
+        {
+            var results = 0;
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand(@"sp_reset_user_password", conn);
+            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@PASSWORD_SALT", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@PASSWORD_HASH", SqlDbType.NVarChar);
+            cmd.Parameters["@USERNAME"].Value = username;
+            cmd.Parameters["@PASSWORD_SALT"].Value = salt;
+            cmd.Parameters["@PASSWORD_HASH"].Value = passwordHash;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                results = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return results;
+        }
     }
 }

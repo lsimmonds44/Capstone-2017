@@ -45,11 +45,11 @@ namespace WpfPresentationLayer
 
         public void SetEditable()
         {
-            dpDateReceived.Visibility = Visibility.Collapsed;
-            dpExpirationDate.Visibility = Visibility.Collapsed;
+            dpDateReceived.Visibility = Visibility.Visible;
+            dpExpirationDate.Visibility = Visibility.Visible;
             txtLocationID.Visibility = Visibility.Collapsed;
             txtProduct.Visibility = Visibility.Collapsed;
-            txtQuantity.Visibility = Visibility.Collapsed;
+            txtQuantity.Visibility = Visibility.Visible;
             txtSupplier.Visibility = Visibility.Collapsed;
             txtSupplyManagerID.Visibility = Visibility.Collapsed;
             txtWarehouseID.Visibility = Visibility.Collapsed;

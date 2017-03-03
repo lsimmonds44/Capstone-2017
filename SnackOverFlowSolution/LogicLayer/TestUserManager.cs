@@ -118,5 +118,16 @@ namespace LogicLayer
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public string NewPassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ResetPassword(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

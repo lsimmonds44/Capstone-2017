@@ -286,6 +286,28 @@ namespace LogicLayer
             return returnValue;
         }
 
+        public String NewPassword()
+        {
+            return RandomString(5);
+        }
 
+
+
+
+        public int ResetPassword(string userName, string password)
+        {
+            int results = 0;
+            String foo = RandomString(32);
+            String bar = HashSha256(password+foo);
+            try
+            {
+                results = (new UserAccessor()).ResetPassword(userName,foo,bar);
+            }
+            catch
+            {
+                throw;
+            }
+            return results;
+        }
     }
 }
