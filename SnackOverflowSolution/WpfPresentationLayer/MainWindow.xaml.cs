@@ -25,11 +25,13 @@ namespace WpfPresentationLayer
         private ICustomerManager _customerManager = new CustomerManager();
         private EmployeeManager _employeeManager = new EmployeeManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
+        private IVehicleManager _vehicleManager = new VehicleManager();
         List<ProductOrder> _currentOpenOrders;
         List<Employee> employeeList;
         List<Charity> charityList;
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
+        private List<Vehicle> _vehicleList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
@@ -616,6 +618,28 @@ namespace WpfPresentationLayer
         {
             frmManageStock fms = new frmManageStock();
             fms.ShowDialog();
+        }
+
+        /// <summary>
+        /// Eric Walton 
+        /// 2017/02/03
+        /// Triggers when vehicle management tab is selected
+        /// Will populate a list of vehicles once complete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabVehicle_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _vehicleList = _vehicleManager.RetrieveAllVehicles();
+                dgVehicle.ItemsSource = _vehicleList;
+            }
+            catch (Exception)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+            
         }
     } // end of class
 } // end of namespace 

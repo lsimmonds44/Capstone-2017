@@ -53,5 +53,27 @@ namespace LogicLayer
             }
             return success;
         }
+
+        /// <summary>
+        /// Eric Walton 
+        /// 2017/02/03
+        /// Retrieves all vehicles
+        /// </summary>
+        /// <returns></returns>
+        public List<Vehicle> RetrieveAllVehicles()
+        {
+            var vehicles = new List<Vehicle>();
+            try
+            {
+                vehicles = VehicleAccessor.RetrieveAllVehicles();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return vehicles;
+        }
     }
 }

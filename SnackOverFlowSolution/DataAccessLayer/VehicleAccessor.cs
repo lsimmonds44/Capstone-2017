@@ -19,7 +19,7 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="vehicleId">Pertains to the specific vehicle that will be retreived from the DB</param>
         /// <returns>Vehicle</returns>
-        
+
         public static Vehicle RetreiveVehicleByVehicleId(int vehicleId)
         {
             var vehicle = new Vehicle();
@@ -40,7 +40,7 @@ namespace DataAccessLayer
                 {
                     reader.Read();
 
-                    vehicle = new Vehicle() 
+                    vehicle = new Vehicle()
                     {
                         VehicleID = reader.GetInt32(0),
                         VIN = reader.GetString(1),
@@ -52,7 +52,7 @@ namespace DataAccessLayer
                         Active = reader.GetBoolean(7),
                         LatestRepair = reader.GetDateTime(8),
                         LastDriver = reader.GetInt32(9),
-                        VehicleTypeID = reader.GetString(10)                  
+                        VehicleTypeID = reader.GetString(10)
                     };
                     reader.Close();
                 }
@@ -60,7 +60,7 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
             finally
@@ -115,6 +115,52 @@ namespace DataAccessLayer
 
             return count;
         }
- 
-    }
-}
+
+        public static List<Vehicle> RetrieveAllVehicles()
+        {
+            var vehicles = new List<Vehicle>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_vehicle_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        vehicles.Add(new Vehicle()
+                        {
+                            VehicleID = reader.GetInt32(0),
+                            VIN = reader.GetString(1),
+                            Make = reader.GetString(2),
+                            Model = reader.GetString(3),
+                            Mileage = reader.GetInt32(4),
+                            Year = reader.GetString(5),
+                            Color = reader.GetString(6),
+                            Active = reader.GetBoolean(7),
+                            LatestRepair = reader.GetDateTime(8),
+                            LastDriver = reader.GetInt32(9),
+                            VehicleTypeID = reader.GetString(10)
+                        });
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return vehicles;
+        }
+
+
+    } // End of class
+} // End of namespace

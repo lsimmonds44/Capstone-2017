@@ -307,8 +307,31 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabVehicleManagement" Header="Vehicle Management" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto">
-                <Button x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="57,44,1024,576" Click="btnAddNewVehicle_Click"/>
+            <TabItem Name="tabVehicleManagement" Header="Vehicle Management" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabVehicle_Selected">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True">
+                        
+                    </DataGrid>
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
+                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                    </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="3" Name="MainStatusBar">
