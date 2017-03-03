@@ -169,5 +169,59 @@ namespace DataAccessLayer
         }
 
 
+            /// <summary>
+            /// Aaron Usher
+            /// Created: 2017/02/17
+            /// 
+            /// Gets a vehicle based on a specific deliveryId.
+            /// </summary>
+            /// <param name="deliveryId">The deliveryId.</param>
+            /// <returns>The vehicle.</returns>
+            public static Vehicle RetrieveVehicleByDelivery(int deliveryId)
+            {
+                Vehicle vehicle = null;
+                var conn = DBConnection.GetConnection();
+                var cmdText = @"sp_retrieve_vehicle_from_delivery";
+                var cmd = new SqlCommand(cmdText, conn);
+
+                cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
+
+                try
+                {
+                    conn.Open();
+                    var reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        vehicle = new Vehicle()
+                        {
+                            VehicleID = reader.GetInt32(0),
+                            VIN = reader.GetString(1),
+                            Make = reader.GetString(2),
+                            Model = reader.GetString(3),
+                            Mileage = reader.GetInt32(4),
+                            Year = reader.GetString(5),
+                            Color = reader.GetString(6),
+                            Active = reader.GetBoolean(7),
+                            LatestRepair = reader.IsDBNull(8) ? (DateTime?)null : reader.GetDateTime(8),
+                            LastDriver = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9),
+                            VehicleTypeID = reader.GetString(10)
+                        };
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                return vehicle;
+            }
+        
+
+
     } // End of class
 } // End of namespace

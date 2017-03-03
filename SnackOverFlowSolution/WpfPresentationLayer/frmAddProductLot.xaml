@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfPresentationLayer.ProductLotView"
+﻿<Window x:Class="WpfPresentationLayer.frmAddProductLot"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,25 +21,23 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Name="lblProductLotID" Grid.Column="0" Grid.Row="0">Product Lot ID</Label>
         <Label Name="lblWarehouseID" Grid.Column="2" Grid.Row="0">Warehouse ID</Label>
-        <Label Name="lblSupplierID" Grid.Column="0" Grid.Row="1">Supplier ID</Label>
+        <Label Name="lblSupplier" Grid.Column="0" Grid.Row="0">Supplier</Label>
         <Label Name="lblLocationID" Grid.Column="2" Grid.Row="1">Location ID</Label>
-        <Label Name="lblProductID" Grid.Column="0" Grid.Row="2">Product ID</Label>
+        <Label Name="lblProduct" Grid.Column="0" Grid.Row="1">Product</Label>
         <Label Name="lblSupplyManagerID" Grid.Column="2" Grid.Row="2">Supply Manager ID</Label>
-        <Label Name="lblQuantity" Grid.Column="0" Grid.Row="3">Quantity</Label>
+        <Label Name="lblQuantity" Grid.Column="0" Grid.Row="2">Quantity</Label>
         <Label Name="lblDateReceived" Grid.Column="2" Grid.Row="3">Date Received</Label>
-        <Label Name="lblExpirationDate" Grid.Column="0" Grid.Row="4">Expiring</Label>
+        <Label Name="lblExpirationDate" Grid.Column="0" Grid.Row="3">Expiring</Label>
 
-        <Label Name="lblProductLotIDVal" Grid.Column="1" Grid.Row="0"></Label>
-        <Label Name="lblWarehouseIDVal" Grid.Column="3" Grid.Row="0"></Label>
-        <Label Name="lblSupplierIDVal" Grid.Column="1" Grid.Row="1"></Label>
-        <Label Name="lblLocationIDVal" Grid.Column="3" Grid.Row="1"></Label>
-        <Label Name="lblProductIDVal" Grid.Column="1" Grid.Row="2"></Label>
-        <Label Name="lblSupplyManagerIDVal" Grid.Column="3" Grid.Row="2"></Label>
-        <Label Name="lblQuantityVal" Grid.Column="1" Grid.Row="3"></Label>
-        <Label Name="lblDateReceivedVal" Grid.Column="3" Grid.Row="3"></Label>
-        <Label Name="lblExpirationDateVal" Grid.Column="1" Grid.Row="4"></Label>
+        <TextBox Name="txtWarehouseID" Grid.Column="3" Grid.Row="0" Margin="5 2"></TextBox>
+        <TextBox Name="txtSupplier" Grid.Column="1" Grid.Row="0" Margin="5 2"></TextBox>
+        <TextBox Name="txtLocationID" Grid.Column="3" Grid.Row="1" Margin="5 2"></TextBox>
+        <TextBox Name="txtProduct" Grid.Column="1" Grid.Row="1" Margin="5 2"></TextBox>
+        <TextBox Name="txtSupplyManagerID" Grid.Column="3" Grid.Row="2" Margin="5 2"></TextBox>
+        <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2" Margin="5 2"></TextBox>
+        <DatePicker Name="dpDateReceived" Grid.Column="3" Grid.Row="3" Margin="5 2"></DatePicker>
+        <DatePicker Name="dpExpirationDate" Grid.Column="1" Grid.Row="3" Margin="5 2"></DatePicker>
 
         <ComboBox Name="cbxWarehouseIDVal" Grid.Column="3" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
@@ -76,9 +74,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox Name="txtQuantityVal" Grid.Column="1" Grid.Row="3" Visibility="Collapsed"></TextBox>
-        <DatePicker Name="dpkDateReceivedVal" Grid.Column="3" Grid.Row="3" Visibility="Collapsed"></DatePicker>
-        <DatePicker Name="dpkExpirationDateVal" Grid.Column="1" Grid.Row="4" Visibility="Collapsed"></DatePicker>
         <Button Name="btnPost" Grid.Column="3" Visibility="Collapsed" Grid.Row="5" Click="btnPost_Click">Add</Button>
     </Grid>
 </Window>
