@@ -38,7 +38,9 @@ namespace WpfPresentationLayer
         private IProductLotManager _productLotManager = new ProductLotManager();
         private IProductManager _productManager = new ProductManager();
         private IDeliveryManager _deliveryManager;
+        private IWarehouseManager _warehouseManager = new WarehouseManager();
         private List<Delivery> _deliveries;
+        private List<Warehouse> _warehouseList;
 
         Employee _employee = null;
 
@@ -726,6 +728,27 @@ namespace WpfPresentationLayer
             {
                 _supplierList = _supplierManager.ListSuppliers();
                 dgSuppliers.ItemsSource = _supplierList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/03
+        /// 
+        /// Handles logic of what happens when the warehouse tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabWarehouse_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _warehouseList = _warehouseManager.ListWarehouses();
+                dgWarehouses.ItemsSource = _warehouseList;
             }
             catch (Exception ex)
             {
