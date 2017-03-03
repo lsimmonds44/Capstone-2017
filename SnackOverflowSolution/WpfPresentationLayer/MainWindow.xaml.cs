@@ -313,7 +313,7 @@ namespace WpfPresentationLayer
 
         private void AddProductLot_Click(object sender, RoutedEventArgs e)
         {
-            var productLotView = new ProductLotView();
+            var productLotView = new frmAddProductLot();
             productLotView.SetEditable();
             var addResult = productLotView.ShowDialog();
             if (addResult == true)
