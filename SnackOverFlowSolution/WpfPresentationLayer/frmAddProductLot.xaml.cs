@@ -17,32 +17,42 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
-    /// Interaction logic for ProductLotView.xaml
+    /// Interaction logic for frmAddProductLot.xaml
     /// </summary>
-    public partial class ProductLotView : Window
+    public partial class frmAddProductLot : Window
     {
+        private IProductLotManager _productLotManager;
+
         List<Location> locationList;
         List<Product> productList;
         List<Supplier> supplierList;
         List<Employee> employeeList;
         List<Warehouse> warehouseList;
         public int supplierId { get; private set; }
-        public ProductLotView()
+        public frmAddProductLot()
         {
             InitializeComponent();
+            _productLotManager = new ProductLotManager();
+            FillDefaultValues();
+        }
+
+        private void FillDefaultValues()
+        {
+            txtQuantity.Text = "1";
+            dpExpirationDate.SelectedDate = DateTime.Now;
+            dpDateReceived.SelectedDate = DateTime.Now;
         }
 
         public void SetEditable()
         {
-            lblDateReceivedVal.Visibility = Visibility.Collapsed;
-            lblExpirationDateVal.Visibility = Visibility.Collapsed;
-            lblLocationIDVal.Visibility = Visibility.Collapsed;
-            lblProductIDVal.Visibility = Visibility.Collapsed;
-            lblProductLotIDVal.Visibility = Visibility.Collapsed;
-            lblQuantityVal.Visibility = Visibility.Collapsed;
-            lblSupplierIDVal.Visibility = Visibility.Collapsed;
-            lblSupplyManagerIDVal.Visibility = Visibility.Collapsed;
-            lblWarehouseIDVal.Visibility = Visibility.Collapsed;
+            dpDateReceived.Visibility = Visibility.Collapsed;
+            dpExpirationDate.Visibility = Visibility.Collapsed;
+            txtLocationID.Visibility = Visibility.Collapsed;
+            txtProduct.Visibility = Visibility.Collapsed;
+            txtQuantity.Visibility = Visibility.Collapsed;
+            txtSupplier.Visibility = Visibility.Collapsed;
+            txtSupplyManagerID.Visibility = Visibility.Collapsed;
+            txtWarehouseID.Visibility = Visibility.Collapsed;
             btnPost.Visibility = Visibility.Visible;
 
             try
@@ -62,10 +72,8 @@ namespace WpfPresentationLayer
                 warehouseList = (new DummyWarehouseManager()).ListWarehouses();
                 cbxWarehouseIDVal.ItemsSource = warehouseList;
                 cbxWarehouseIDVal.Visibility = Visibility.Visible;
-                txtQuantityVal.Visibility = Visibility.Visible;
-                dpkDateReceivedVal.Visibility = Visibility.Visible;
-                dpkExpirationDateVal.Visibility = Visibility.Visible;
-            } catch (System.Data.SqlClient.SqlException ex)
+            }
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 ErrorAlert.ShowDatabaseError();
             }
@@ -79,17 +87,17 @@ namespace WpfPresentationLayer
             shouldPost = shouldPost && cbxSupplierIDVal.SelectedIndex >= 0;
             shouldPost = shouldPost && cbxSupplyManagerIDVal.SelectedIndex >= 0;
             shouldPost = shouldPost && cbxWarehouseIDVal.SelectedIndex >= 0;
-            if(!Int32.TryParse(txtQuantityVal.Text, out quantityRead) && quantityRead >= 0)
+            if(!Int32.TryParse(txtQuantity.Text, out quantityRead) && quantityRead >= 0)
             {
                 shouldPost = false;
                 MessageBox.Show("Quantity needs a whole number value");
             }
-            if (null == dpkDateReceivedVal.SelectedDate)
+            if (null == dpDateReceived.SelectedDate)
             {
                 shouldPost = false;
                 MessageBox.Show("Add a date for Date Received");
             }
-            if (null == dpkExpirationDateVal.SelectedDate)
+            if (null == dpExpirationDate.SelectedDate)
             {
                 shouldPost = false;
                 MessageBox.Show("Add a date for the Expiration Date");
@@ -104,12 +112,12 @@ namespace WpfPresentationLayer
                     SupplyManagerId = (int)employeeList[cbxSupplyManagerIDVal.SelectedIndex].EmployeeId,
                     WarehouseId = warehouseList[cbxWarehouseIDVal.SelectedIndex].WarehouseID,
                     Quantity = quantityRead,
-                    DateReceived = dpkDateReceivedVal.SelectedDate,
-                    ExpirationDate = dpkExpirationDateVal.SelectedDate
+                    DateReceived = dpDateReceived.SelectedDate,
+                    ExpirationDate = dpExpirationDate.SelectedDate
                 };
                 try
                 {
-                    (new ProductLotManager()).AddProductLot(toSave);
+                    _productLotManager.AddProductLot(toSave);
                     MessageBox.Show("Product Lot Added");
                     try
                     {
@@ -126,7 +134,6 @@ namespace WpfPresentationLayer
                     ErrorAlert.ShowDatabaseError();
                 }
             }
-            ProductLot newProductLot = new ProductLot();
         }
     }
 }
