@@ -82,7 +82,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabUser" Header="User" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto">
+            <TabItem Name="tabUser" Header="User" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabUser_Selected">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -92,20 +92,21 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dgUsers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                              ItemsSource="{Binding}" IsReadOnly="True">
+                              ItemsSource="{Binding}" IsReadOnly="True" >
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnCreateUserAccount" Grid.Row="0" Grid.Column="1" Content="Create Account" Click="btnCreateNewUser_Click" Margin="10 0 0 0" HorizontalAlignment="left"/>
-                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="2" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
-
+                        <Button Name="btnResetPassword" Visibility="Collapsed" Grid.Row="0" Grid.Column="1" Click="btnResetPassword_Click">Reset Password</Button>
+                        <Button Name="btnCreateUserAccount" Grid.Row="0" Grid.Column="2" Content="Create Account" Click="btnCreateNewUser_Click" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="3" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
                     </Grid>
                 </Grid>
             </TabItem>
