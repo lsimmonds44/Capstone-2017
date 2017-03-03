@@ -47,7 +47,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxSupplierIDVal" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
+        <ComboBox Name="cbxSupplierIDVal" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding SupplierID}"></Label>
@@ -61,7 +61,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxProductIDVal" Grid.Column="1" Grid.Row="2" Visibility="Collapsed">
+        <ComboBox Name="cbxProductIDVal" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding ProductId}"></Label>

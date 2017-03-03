@@ -69,7 +69,7 @@ namespace WpfPresentationLayer
                 employeeList = (new EmployeeManager()).RetrieveEmployeeList();
                 cbxSupplyManagerIDVal.ItemsSource = employeeList;
                 cbxSupplyManagerIDVal.Visibility = Visibility.Visible;
-                warehouseList = (new DummyWarehouseManager()).ListWarehouses();
+                warehouseList = (new WarehouseManager()).ListWarehouses();
                 cbxWarehouseIDVal.ItemsSource = warehouseList;
                 cbxWarehouseIDVal.Visibility = Visibility.Visible;
             }
