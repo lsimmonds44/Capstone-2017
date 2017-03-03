@@ -131,21 +131,28 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        vehicles.Add(new Vehicle()
-                        {
-                            VehicleID = reader.GetInt32(0),
-                            VIN = reader.GetString(1),
-                            Make = reader.GetString(2),
-                            Model = reader.GetString(3),
-                            Mileage = reader.GetInt32(4),
-                            Year = reader.GetString(5),
-                            Color = reader.GetString(6),
-                            Active = reader.GetBoolean(7),
-                            LatestRepair = reader.GetDateTime(8),
-                            LastDriver = reader.GetInt32(9),
-                            VehicleTypeID = reader.GetString(10)
-                        });
-                    }
+                        
+                            var tempVehicle = new Vehicle();
+                            tempVehicle.VehicleID = reader.GetInt32(0);
+                            tempVehicle.VIN = reader.GetString(1);
+                            tempVehicle.Make = reader.GetString(2);
+                            tempVehicle.Model = reader.GetString(3);
+                            tempVehicle.Mileage = reader.GetInt32(4);
+                            tempVehicle.Year = reader.GetString(5);
+                            tempVehicle.Color = reader.GetString(6);
+                            tempVehicle.Active = reader.GetBoolean(7);
+                            if (!reader.IsDBNull(8))
+                            {
+                                tempVehicle.LatestRepair = reader.GetDateTime(8);
+                            }
+                            if (!reader.IsDBNull(9))
+                            {
+                                tempVehicle.LastDriver = reader.GetInt32(9);
+                            }
+                            tempVehicle.VehicleTypeID = reader.GetString(10);
+
+                            vehicles.Add(tempVehicle);
+                        }       
                     reader.Close();
                 }
             }
