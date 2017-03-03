@@ -150,12 +150,19 @@ namespace DataAccessLayer
             return location;
         }
 
+        /// <summary>
+        /// Bill Flood
+        /// 
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Last Modified by Christian Lopez 2017/03/03</remarks>
         public static List<Location> RetrieveAllLocations()
         {
             List<Location> locations = new List<Location>();
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_locationlist";
+            var cmdText = @"sp_retrieve_location_list";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

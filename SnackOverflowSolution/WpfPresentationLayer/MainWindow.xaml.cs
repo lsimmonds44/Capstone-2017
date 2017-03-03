@@ -32,6 +32,7 @@ namespace WpfPresentationLayer
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private List<Vehicle> _vehicleList;
+        private List<Supplier> _supplierList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
@@ -716,6 +717,19 @@ namespace WpfPresentationLayer
             {
 
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void tabSupplier_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplierList = _supplierManager.ListSuppliers();
+                dgSuppliers.ItemsSource = _supplierList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
     } // end of class

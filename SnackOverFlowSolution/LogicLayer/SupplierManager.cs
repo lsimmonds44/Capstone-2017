@@ -130,9 +130,27 @@ namespace LogicLayer
             return name;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/03
+        /// 
+        /// Logic for returning a list of suppliers.
+        /// </summary>
+        /// <returns></returns>
         public List<Supplier> ListSuppliers()
         {
-            throw new NotImplementedException();
+            List<Supplier> suppliers = null;
+            try
+            {
+                suppliers = SupplierAccessor.RetrieveAllSuppliers();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return suppliers;
         }
 
         /// <summary>

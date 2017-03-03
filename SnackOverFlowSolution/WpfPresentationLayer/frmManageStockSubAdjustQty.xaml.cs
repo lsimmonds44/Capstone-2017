@@ -57,6 +57,7 @@ namespace WpfPresentationLayer
             else
             {
                 MessageBox.Show("Illegal Argument");
+                newQuantity = (int)_oldProductLot.AvailableQuantity;
             }
         }
 
