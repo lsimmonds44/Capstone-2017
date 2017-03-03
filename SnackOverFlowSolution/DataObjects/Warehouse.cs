@@ -9,10 +9,10 @@ namespace DataObjects
     public class Warehouse
     {
         public int WarehouseID { get; set; }
-        public String AddressOne { get; set; }
-        public String AddressTwo {get;set;}
-        public String City {get;set;}
-        public String State {get;set;}
-        public String Zip {get;set;}
+        public string AddressOne { get; set; }
+        public string AddressTwo {get;set;}
+        public string City {get;set;}
+        public string State {get;set;}
+        public string Zip {get;set;}
     }
 }

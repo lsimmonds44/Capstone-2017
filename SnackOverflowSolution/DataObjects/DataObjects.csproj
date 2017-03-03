@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BackorderPreorder.cs" />
     <Compile Include="BrowseProductViewModel.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Charity.cs" />
     <Compile Include="CommercialCustomer.cs" />
     <Compile Include="Delivery.cs" />
