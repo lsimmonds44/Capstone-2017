@@ -30,14 +30,15 @@
         <Label Name="lblDateReceived" Grid.Column="2" Grid.Row="3">Date Received</Label>
         <Label Name="lblExpirationDate" Grid.Column="0" Grid.Row="3">Expiring</Label>
 
-        <TextBox Name="txtWarehouseID" Grid.Column="3" Grid.Row="0" Margin="5 2"></TextBox>
-        <TextBox Name="txtSupplier" Grid.Column="1" Grid.Row="0" Margin="5 2"></TextBox>
-        <TextBox Name="txtLocationID" Grid.Column="3" Grid.Row="1" Margin="5 2"></TextBox>
-        <TextBox Name="txtProduct" Grid.Column="1" Grid.Row="1" Margin="5 2"></TextBox>
-        <TextBox Name="txtSupplyManagerID" Grid.Column="3" Grid.Row="2" Margin="5 2"></TextBox>
-        <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2" Margin="5 2"></TextBox>
+        <Label Name="lblWarehouseIDVal" Grid.Column="3" Grid.Row="0" Margin="5 2"></Label>
+        <Label Name="lblSupplierVal" Grid.Column="1" Grid.Row="0" Margin="5 2"></Label>
+        <Label Name="lblLocationIDVal" Grid.Column="3" Grid.Row="1" Margin="5 2"></Label>
+        <Label Name="lblProductVal" Grid.Column="1" Grid.Row="1" Margin="5 2"></Label>
+        <Label Name="lblSupplyManagerIDVal" Grid.Column="3" Grid.Row="2" Margin="5 2"></Label>
+        <Label Name="lblQuantityVal" Grid.Column="1" Grid.Row="2" Margin="5 2"></Label>
         <DatePicker Name="dpDateReceived" Grid.Column="3" Grid.Row="3" Margin="5 2"></DatePicker>
         <DatePicker Name="dpExpirationDate" Grid.Column="1" Grid.Row="3" Margin="5 2"></DatePicker>
+        <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2" Visibility="Hidden"></TextBox>
 
         <ComboBox Name="cbxWarehouseIDVal" Grid.Column="3" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>

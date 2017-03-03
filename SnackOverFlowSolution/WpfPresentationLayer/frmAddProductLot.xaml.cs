@@ -47,23 +47,23 @@ namespace WpfPresentationLayer
         {
             dpDateReceived.Visibility = Visibility.Visible;
             dpExpirationDate.Visibility = Visibility.Visible;
-            txtLocationID.Visibility = Visibility.Collapsed;
-            txtProduct.Visibility = Visibility.Collapsed;
-            txtQuantity.Visibility = Visibility.Visible;
-            txtSupplier.Visibility = Visibility.Collapsed;
-            txtSupplyManagerID.Visibility = Visibility.Collapsed;
-            txtWarehouseID.Visibility = Visibility.Collapsed;
+            lblLocationIDVal.Visibility = Visibility.Collapsed;
+            lblProductVal.Visibility = Visibility.Collapsed;
+            lblQuantityVal.Visibility = Visibility.Visible;
+            lblSupplierVal.Visibility = Visibility.Collapsed;
+            lblSupplyManagerIDVal.Visibility = Visibility.Collapsed;
+            lblWarehouseIDVal.Visibility = Visibility.Collapsed;
             btnPost.Visibility = Visibility.Visible;
 
             try
             {
-                locationList = (new DummyLocationManager()).ListLocations();
+                locationList = (new LocationManager()).ListLocations();
                 cbxLocationIDVal.ItemsSource = locationList;
                 cbxLocationIDVal.Visibility = Visibility.Visible;
                 productList = (new DummyProductManager()).ListProducts();
                 cbxProductIDVal.ItemsSource = productList;
                 cbxProductIDVal.Visibility = Visibility.Visible;
-                supplierList = (new DummySupplierManager()).ListSuppliers();
+                supplierList = (new SupplierManager()).ListSuppliers();
                 cbxSupplierIDVal.ItemsSource = supplierList;
                 cbxSupplierIDVal.Visibility = Visibility.Visible;
                 employeeList = (new EmployeeManager()).RetrieveEmployeeList();
