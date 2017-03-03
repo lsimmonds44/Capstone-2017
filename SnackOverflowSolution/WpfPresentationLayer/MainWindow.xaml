@@ -48,6 +48,7 @@
             <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3.4,0,0,24.6" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click" Height="21" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <TabControl Name="tabSetMain" Grid.Row="2" >
+            <TabItem Name="Default" Visibility="Hidden"/>
             <TabItem Name="tabCommercialCustomer" Header="Commercial Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabCommercialCustomer_Selected"  >
                 <Grid>
                     <Grid.RowDefinitions>
