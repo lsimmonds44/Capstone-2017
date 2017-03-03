@@ -96,8 +96,15 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
         {
-            frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employee);
-            fUE.ShowDialog();
+            try
+            {
+                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                fUE.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Please Select an Employee to Edit.");
+            }
         }
 
 
