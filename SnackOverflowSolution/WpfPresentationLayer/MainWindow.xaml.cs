@@ -732,5 +732,18 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 03/02/2017
+        /// 
+        /// Loads the create a new product category window
+        /// </summary>
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            frmProductCategory prodCategoryWindow = new frmProductCategory();
+            prodCategoryWindow.Show();
+        }
+
     } // end of class
 } // end of namespace 

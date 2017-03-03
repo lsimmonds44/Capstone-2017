@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryManager.cs" />
     <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
     <Compile Include="DeliveryManager.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="DummySupplierManager.cs" />
     <Compile Include="DummyWarehouseManager.cs" />
     <Compile Include="EmployeeManager.cs" />
+    <Compile Include="ICategoryManager.cs" />
     <Compile Include="ICharityManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IDeliveryManager.cs" />

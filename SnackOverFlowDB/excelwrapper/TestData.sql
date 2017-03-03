@@ -110,12 +110,12 @@ GO
 /* Inserting Category Test Data :No Identitiy Column */
 print '*** Inserting Category Test Data ***'
 INSERT INTO [dbo].[Category]
-	(Category_ID)
+	(Category_ID, Description)
 	VALUES
-	('Vegetable'),
-	('Fruit'),
-	('Root Product'),
-	('Spice')
+	('Vegetable', 'A plant or part of a plant as used in food'),
+	('Fruit', 'Seed-bearing structure in flowering plants'),
+	('Root Product', 'Tuberous items such as potatos and whatnot'),
+	('Spice', 'Seasonings and such')
 GO
 
 /* Inserting Product_Category Test Data */

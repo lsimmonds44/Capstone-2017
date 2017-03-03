@@ -81,6 +81,9 @@
     <Compile Include="frmBrowseProducts.xaml.cs">
       <DependentUpon>frmBrowseProducts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateCategory.xaml.cs">
+      <DependentUpon>frmCreateCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmManageStock.xaml.cs">
       <DependentUpon>frmManageStock.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmBrowseProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCreateCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
