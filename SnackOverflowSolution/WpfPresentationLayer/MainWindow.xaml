@@ -330,7 +330,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
-                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="editVehicleClick"/>
                     </Grid>
                 </Grid>
             </TabItem>

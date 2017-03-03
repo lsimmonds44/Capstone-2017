@@ -610,7 +610,7 @@ namespace WpfPresentationLayer
         /// </summary>
         private void btnAddNewVehicle_Click(object sender, RoutedEventArgs e)
         {
-            var addNewVehicleWindow = new frmAddNewVehicle();
+            var addNewVehicleWindow = new frmAddEditVehicle();
             addNewVehicleWindow.Show();
         }
 
@@ -669,6 +669,26 @@ namespace WpfPresentationLayer
         {
             var updateScreen = new PasswordChangeView(_user.UserName);
             updateScreen.Show();
+        }
+
+        private void editVehicleClick(object sender, RoutedEventArgs e)
+        {
+            if (dgVehicle.SelectedItem != null)
+            {
+                var addNewVehicleWindow = new frmAddEditVehicle((Vehicle)dgVehicle.SelectedItem);
+                if (addNewVehicleWindow.ShowDialog() == true)
+                {
+                    try
+                    {
+                        _vehicleList = _vehicleManager.RetrieveAllVehicles();
+                        dgVehicle.ItemsSource = _vehicleList;
+                    }
+                    catch (Exception)
+                    {
+                        ErrorAlert.ShowDatabaseError();
+                    }
+                }
+            }
         }
     } // end of class
 } // end of namespace 
