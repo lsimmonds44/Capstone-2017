@@ -641,5 +641,23 @@ namespace WpfPresentationLayer
             }
             
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/02
+        /// 
+        /// Uses frmAddSupplier, but this calling does not automatically set the approved status that the other one does.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnApplyForSupplierAct_Click(object sender, RoutedEventArgs e)
+        {
+            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, "Applying");
+            var addSupplierResult = addSupplierFrm.ShowDialog();
+            if (addSupplierResult == true)
+            {
+                MessageBox.Show("Application Submitted!");
+            }
+        }
     } // end of class
 } // end of namespace 

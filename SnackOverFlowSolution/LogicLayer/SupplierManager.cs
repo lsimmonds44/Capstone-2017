@@ -134,5 +134,38 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/02
+        /// 
+        /// The logic to apply for a supplier account (add a supplier but is not approved)
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="farmName"></param>
+        /// <param name="farmCity"></param>
+        /// <param name="farmState"></param>
+        /// <param name="farmTaxId"></param>
+        /// <returns></returns>
+        public bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId)
+        {
+            bool wasAdded = false;
+
+            try
+            {
+                if (1 == SupplierAccessor.ApplyForSupplierAccount(userId, false, farmName,
+                    farmCity, farmState, farmTaxId))
+                {
+                    wasAdded = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return wasAdded;
+        }
     }
 }

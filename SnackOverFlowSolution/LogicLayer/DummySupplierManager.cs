@@ -35,5 +35,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

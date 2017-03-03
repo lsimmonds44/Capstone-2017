@@ -29,6 +29,7 @@ namespace WpfPresentationLayer
         IUserManager _userManager;
         ISupplierManager _supplierManager;
         bool supplierFound = false;
+        string _type;
 
         /// <summary>
         /// Christian Lopez
@@ -39,11 +40,12 @@ namespace WpfPresentationLayer
         /// <param name="currentEmp">The current User</param>
         /// <param name="userManager">Something implementing the IUserManager interface</param>
         /// <param name="supplierManager">Something implementing the ISupplierManager interface</param>
-        public frmAddSupplier(User currentUser, IUserManager userManager, ISupplierManager supplierManager)
+        public frmAddSupplier(User currentUser, IUserManager userManager, ISupplierManager supplierManager, string type = "Adding")
         {
             _currentUser = currentUser;
             _userManager = userManager;
             _supplierManager = supplierManager;
+            _type = type;
             InitializeComponent();
         }
 
@@ -194,28 +196,57 @@ namespace WpfPresentationLayer
             }
             else
             {
-                try
+                if (_type.Equals("Adding"))
                 {
-                    validateInputs();
-                    User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
+                    try
+                    {
+                        validateInputs();
+                        User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
 
-                    // Actually try to create the supplier
-                    if (_supplierManager.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text,
-                        txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
-                    {
-                        this.DialogResult = true;
+                        // Actually try to create the supplier
+                        if (_supplierManager.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text,
+                            txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
+                        {
+                            this.DialogResult = true;
+                        }
+                        else
+                        {
+                            // If an error was thrown, should go to catch block. This would occur if the number of rows
+                            // affected were not one
+                            MessageBox.Show("There was an error, where more than one row was affected! Please " +
+                                "contact your Database Admin.");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        // If an error was thrown, should go to catch block. This would occur if the number of rows
-                        // affected were not one
-                        MessageBox.Show("There was an error, where more than one row was affected! Please " +
-                            "contact your Database Admin.");
+                        MessageBox.Show(ex.Message);
                     }
                 }
-                catch (Exception ex)
+                else if (_type.Equals("Applying"))
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        validateInputs();
+                        User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
+
+                        // Actually try to create the supplier
+                        if (_supplierManager.ApplyForSupplierAccount(supplierUser.UserId, txtFarmName.Text, txtFarmCity.Text, 
+                            cboFarmState.Text,txtFarmTaxId.Text))
+                        {
+                            this.DialogResult = true;
+                        }
+                        else
+                        {
+                            // If an error was thrown, should go to catch block. This would occur if the number of rows
+                            // affected were not one
+                            MessageBox.Show("There was an error, where more than one row was affected! Please " +
+                                "contact your Database Admin.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }
@@ -245,6 +276,27 @@ namespace WpfPresentationLayer
             // If the username is changed, cannot guarantee that the information is
             // correct. Reset by clicking the lookup button.
             supplierFound = false;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 
+        /// Sets the screen depending on the type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_type.Equals("Adding"))
+            {
+                btnSubmit.Content = "Submit";
+                this.Title = "Create Supplier";
+            }
+            else if (_type.Equals("Applying"))
+            {
+                btnSubmit.Content = "Apply";
+                this.Title = "Apply for Account";
+            }
         }
 
 

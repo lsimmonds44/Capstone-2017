@@ -51,10 +51,24 @@ namespace LogicLayer
         /// Christian Lopez
         /// Created on 2017/02/15
         /// 
-        /// Method Signature to retrieve a suppliers name
+        /// Method Signature to retrieve a supplier's name
         /// </summary>
         /// <param name="userId">the userId for the supplier</param>
         /// <returns>The supplier's name</returns>
         string RetrieveSupplierName(int userId);
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created on 2017/03/02
+        /// 
+        /// Method signature to apply for supplier account
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="farmName"></param>
+        /// <param name="farmCity"></param>
+        /// <param name="farmState"></param>
+        /// <param name="farmTaxId"></param>
+        /// <returns></returns>
+        bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId);
     }
 }

@@ -78,6 +78,61 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// Created 2017/03/02
+        /// 
+        /// Connection to DB to store an applied for supplier account.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="isApproved"></param>
+        /// <param name="farmName"></param>
+        /// <param name="farmCity"></param>
+        /// <param name="farmState"></param>
+        /// <param name="farmTaxId"></param>
+        /// <returns></returns>
+        public static int ApplyForSupplierAccount(int userId, bool isApproved, string farmName,
+            string farmCity, string farmState, string farmTaxId)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_supplier_not_approved";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
+            cmd.Parameters.Add("@FARM_NAME", SqlDbType.NVarChar, 300);
+            cmd.Parameters.Add("@FARM_CITY", SqlDbType.NVarChar, 50);
+            cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
+            cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
+
+            cmd.Parameters["@USER_ID"].Value = userId;
+            cmd.Parameters["@IS_APPROVED"].Value = isApproved;
+            cmd.Parameters["@FARM_NAME"].Value = farmName;
+            cmd.Parameters["@FARM_CITY"].Value = farmCity;
+            cmd.Parameters["@FARM_STATE"].Value = farmState;
+            cmd.Parameters["@FARM_TAX_ID"].Value = farmTaxId;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Christian Lopez
         /// Created on 2017/02/15
         /// 
         /// Retrieve and return a supplier based on a given user ID
@@ -108,12 +163,21 @@ namespace DataAccessLayer
                         SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        ApprovedBy = reader.GetInt32(3),
+                        //ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmCity = reader.GetString(5),
                         FarmState = reader.GetString(6),
-                        FarmTaxID = reader.GetString(7)
+                        FarmTaxID = reader.GetString(7),
+                        Active = reader.GetBoolean(8)
                     };
+                    if (!reader.IsDBNull(3))
+                    {
+                        s.ApprovedBy = reader.GetInt32(3);
+                    }
+                    else
+                    {
+                        s.ApprovedBy = null;
+                    }
                 }
                 reader.Close();
             }
@@ -154,12 +218,21 @@ namespace DataAccessLayer
                         SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        ApprovedBy = reader.GetInt32(3),
+                        //ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmCity = reader.GetString(5),
                         FarmState = reader.GetString(6),
-                        FarmTaxID = reader.GetString(7)
+                        FarmTaxID = reader.GetString(7),
+                        Active = reader.GetBoolean(8)
                     };
+                    if (!reader.IsDBNull(3))
+                    {
+                        s.ApprovedBy = reader.GetInt32(3);
+                    }
+                    else
+                    {
+                        s.ApprovedBy = null;
+                    }
                 }
                 reader.Close();
             }
@@ -176,7 +249,14 @@ namespace DataAccessLayer
             return s;
         }
 
-
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/02/23
+        /// 
+        /// Retrieve the supplier name by userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static string RetrieveSupplierName(int userId)
         {
             string name = null;
