@@ -73,20 +73,81 @@ namespace WpfPresentationLayer
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
             _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
-            try
+            if (cboCustomerType.SelectedItem as String == "Commercial")
             {
-                CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
-                if (cCCW.ShowDialog() == true)
+
+
+                try
                 {
-                    _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
-                    dgCommercialCustomer.ItemsSource = _commercialCustomers;
+                    CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
+                    if (cCCW.ShowDialog() == true)
+                    {
+                        _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                        dgCustomer.ItemsSource = _commercialCustomers;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error: An employee must be logged in to create a commercial customer.");
                 }
             }
-            catch (Exception)
+            else if (cboCustomerType.SelectedItem as String == "Residential")
             {
-                MessageBox.Show("Error: An employee must be logged in to create a commercial customer.");
+                // If creating a residential customer is added to desktop code will go here to create one.
             }
-            
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Invoked when the customer type combo box is initialized
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboCustomerTypeInitialized(object sender, EventArgs e)
+        {
+            cboCustomerType.Items.Add("Commercial");
+            cboCustomerType.Items.Add("Residential");
+            cboCustomerType.SelectedItem = "Commercial";
+            refreshCustomerList();
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Invoked when the customer type combo box is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboCustomerTypeSelected(object sender, EventArgs e)
+        {
+            refreshCustomerList();
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Refreshes the customer list from the database
+        /// </summary>
+        private void refreshCustomerList()
+        {
+            if (cboCustomerType.SelectedItem as String == "Commercial")
+            {
+                try
+                {
+                    _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                    dgCustomer.ItemsSource = _commercialCustomers;
+                }
+                catch (Exception)
+                {
+                    ErrorAlert.ShowDatabaseError();
+                }
+            }
+            else if (cboCustomerType.SelectedItem as String == "Residential")
+            {
+                // When functionality to retrieve list of residential customers the code will go here.
+            }
+
         }
 
         /// <summary>
@@ -394,28 +455,6 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
-        }
-
-        
-        /// <summary>
-        /// Eric Walton
-        /// 2017/28/02
-        /// Commercial Customer tab selected 
-        /// Retrieves updated list of commercial customers
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tabCommercialCustomer_Selected(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
-                dgCommercialCustomer.ItemsSource = _commercialCustomers;
-            }
-            catch (Exception)
-            {
-                ErrorAlert.ShowDatabaseError();
             }
         }
 
@@ -789,6 +828,10 @@ namespace WpfPresentationLayer
             frmProductCategory prodCategoryWindow = new frmProductCategory();
             prodCategoryWindow.Show();
         }
+
+        
+
+        
 
     } // end of class
 } // end of namespace 
