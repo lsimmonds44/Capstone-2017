@@ -315,6 +315,49 @@ namespace DataAccessLayer
         }
 
         /// <summary>
+        /// Bobby Thorne
+        /// 3/4/2017
+        /// 
+        /// returns username of the email that is provided
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public string RetrieveUsernameByEmail(string email)
+        {
+            string username="";
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_app_username_by_email";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@E_MAIL_ADDRESS", SqlDbType.NVarChar,50);
+            cmd.Parameters["@E_MAIL_ADDRESS"].Value = email;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    username = reader.GetString(0);
+
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return username;
+        }
+
+        /// <summary>
         /// William Flood
         /// Created on 2017/02/28
         /// 

@@ -129,5 +129,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public string RetrieveUsernameByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -829,9 +829,14 @@ namespace WpfPresentationLayer
             prodCategoryWindow.Show();
         }
 
-        
-
-        
-
+        private void RequestUsername_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null)
+            {
+                frmRequestUsername requestUsername = new frmRequestUsername();
+                requestUsername.Show();
+            }
+            else { MessageBox.Show("Must not be signed in to use this feature"); }
+        }
     } // end of class
 } // end of namespace 

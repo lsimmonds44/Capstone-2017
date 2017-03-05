@@ -309,5 +309,19 @@ namespace LogicLayer
             }
             return results;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/4/2017
+        /// 
+        /// Retrieves username from the user accessor
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public string RetrieveUsernameByEmail(string email)
+        {
+
+            return (new UserAccessor()).RetrieveUsernameByEmail(email);
+        }
     }
 }

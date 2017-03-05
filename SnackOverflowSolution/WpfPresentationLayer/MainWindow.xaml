@@ -22,6 +22,7 @@
                 <MenuItem Name="mnuPrefernces" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="User Settings">
+                <MenuItem Name="mnuRequestUsername" Header="Request Username" Click="RequestUsername_Click" HorizontalAlignment="Left" Width="Auto"/>
                 <MenuItem Name="mnuChangePassword" Header="Change Password" Click="ChangePassword" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Help" >
