@@ -168,6 +168,12 @@ namespace LogicLayer
             try
             {
                 MailAddress m = new MailAddress(user.EmailAddress);
+                string username = "";
+                username = userAccessor.RetrieveUsernameByEmail(user.EmailAddress);
+                if (username != "")
+                {
+                    return "Invalid Email";
+                }
             }
             catch
             {
