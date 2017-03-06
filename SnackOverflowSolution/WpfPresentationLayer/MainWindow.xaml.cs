@@ -75,8 +75,6 @@ namespace WpfPresentationLayer
             _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
             if (cboCustomerType.SelectedItem as String == "Commercial")
             {
-
-
                 try
                 {
                     CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
@@ -145,7 +143,24 @@ namespace WpfPresentationLayer
             }
             else if (cboCustomerType.SelectedItem as String == "Residential")
             {
+                dgCustomer.ItemsSource = null;
                 // When functionality to retrieve list of residential customers the code will go here.
+            }
+        }
+        /// <summary>
+        /// Eric Walton
+        /// 2017/05/03
+        /// Invoked when the create order button is clicked on the customers tab.
+        /// Loads the create order window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void createOrderClick(object sender, RoutedEventArgs e)
+        {
+            frmCreateOrder createOrderWindow = new frmCreateOrder();
+            if (createOrderWindow.ShowDialog() == true)
+            {
+                
             }
 
         }
@@ -838,5 +853,7 @@ namespace WpfPresentationLayer
             }
             else { MessageBox.Show("Must not be signed in to use this feature"); }
         }
+
+        
     } // end of class
 } // end of namespace 

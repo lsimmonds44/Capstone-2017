@@ -82,9 +82,9 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerTypeSelected" Initialized="cboCustomerTypeInitialized" />
-                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left"/>
+                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick"/>
                         <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
-                        <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
                     </Grid>
                 </Grid>
             </TabItem>
