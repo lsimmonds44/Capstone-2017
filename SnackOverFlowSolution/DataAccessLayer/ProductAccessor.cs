@@ -197,8 +197,50 @@ namespace DataAccessLayer
             return count;
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 02/17/2017
+        /// 
+        /// Writes an updated product unit price to the database
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <param name="oldPrice"></param>
+        /// <param name="newPrice"></param>
+        /// <returns></returns>
+        public static int UpdateProductPrice(int productID, decimal oldPrice, decimal newPrice)
+        {
+            int result = 0;
 
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_product_price";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.Add("@ProductID", SqlDbType.Int);
+            cmd.Parameters.Add("@OldPrice", SqlDbType.Decimal);
+            cmd.Parameters.Add("@NewPrice", SqlDbType.Decimal);
+
+            cmd.Parameters["@ProductID"].Value = productID;
+            cmd.Parameters["@OldPrice"].Value = oldPrice;
+            cmd.Parameters["@NewPrice"].Value = newPrice;
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw new ApplicationException("A problem occurred updating the product price.");
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
 
     }
 }

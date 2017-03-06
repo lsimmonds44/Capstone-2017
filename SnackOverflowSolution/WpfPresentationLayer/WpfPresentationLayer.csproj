@@ -83,12 +83,17 @@
     </Compile>
     <Compile Include="frmCharityApproval.xaml.cs">
       <DependentUpon>frmCharityApproval.xaml</DependentUpon>
+    <Compile Include="frmCreateOrder.xaml.cs">
+      <DependentUpon>frmCreateOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmManageStock.xaml.cs">
       <DependentUpon>frmManageStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmManageStockSubAdjustQty.xaml.cs">
       <DependentUpon>frmManageStockSubAdjustQty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmRequestUsername.xaml.cs">
+      <DependentUpon>frmRequestUsername.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
@@ -120,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCharityApproval.xaml">
+		<SubType>Designer</SubType>
+		<Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCreateCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,11 +148,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmCreateOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmManageStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmManageStockSubAdjustQty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmRequestUsername.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,7 +245,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="frmAddProductLot.xaml">
+    <Page Include="frmProductLotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,8 +259,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmAddProductLot.xaml.cs">
-      <DependentUpon>frmAddProductLot.xaml</DependentUpon>
+    <Compile Include="frmProductLotView.xaml.cs">
+      <DependentUpon>frmProductLotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

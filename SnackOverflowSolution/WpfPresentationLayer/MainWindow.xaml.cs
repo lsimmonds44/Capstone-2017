@@ -38,7 +38,9 @@ namespace WpfPresentationLayer
         private IProductLotManager _productLotManager = new ProductLotManager();
         private IProductManager _productManager = new ProductManager();
         private IDeliveryManager _deliveryManager;
+        private IWarehouseManager _warehouseManager = new WarehouseManager();
         private List<Delivery> _deliveries;
+        private List<Warehouse> _warehouseList;
 
         Employee _employee = null;
 
@@ -71,20 +73,96 @@ namespace WpfPresentationLayer
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
             _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
-            try
+            if (cboCustomerType.SelectedItem as String == "Commercial")
             {
-                CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
-                if (cCCW.ShowDialog() == true)
+                try
                 {
-                    _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
-                    dgCommercialCustomer.ItemsSource = _commercialCustomers;
+                    CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
+                    if (cCCW.ShowDialog() == true)
+                    {
+                        _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                        dgCustomer.ItemsSource = _commercialCustomers;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error: An employee must be logged in to create a commercial customer.");
                 }
             }
-            catch (Exception)
+            else if (cboCustomerType.SelectedItem as String == "Residential")
             {
-                MessageBox.Show("Error: An employee must be logged in to create a commercial customer.");
+                // If creating a residential customer is added to desktop code will go here to create one.
             }
-            
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Invoked when the customer type combo box is initialized
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboCustomerTypeInitialized(object sender, EventArgs e)
+        {
+            cboCustomerType.Items.Add("Commercial");
+            cboCustomerType.Items.Add("Residential");
+            cboCustomerType.SelectedItem = "Commercial";
+            refreshCustomerList();
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Invoked when the customer type combo box is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboCustomerTypeSelected(object sender, EventArgs e)
+        {
+            refreshCustomerList();
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/03
+        /// Refreshes the customer list from the database
+        /// </summary>
+        private void refreshCustomerList()
+        {
+            if (cboCustomerType.SelectedItem as String == "Commercial")
+            {
+                try
+                {
+                    _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                    dgCustomer.ItemsSource = _commercialCustomers;
+                }
+                catch (Exception)
+                {
+                    ErrorAlert.ShowDatabaseError();
+                }
+            }
+            else if (cboCustomerType.SelectedItem as String == "Residential")
+            {
+                dgCustomer.ItemsSource = null;
+                // When functionality to retrieve list of residential customers the code will go here.
+            }
+        }
+        /// <summary>
+        /// Eric Walton
+        /// 2017/05/03
+        /// Invoked when the create order button is clicked on the customers tab.
+        /// Loads the create order window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void createOrderClick(object sender, RoutedEventArgs e)
+        {
+            frmCreateOrder createOrderWindow = new frmCreateOrder();
+            if (createOrderWindow.ShowDialog() == true)
+            {
+                
+            }
+
         }
 
         /// <summary>
@@ -392,28 +470,6 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
-        }
-
-        
-        /// <summary>
-        /// Eric Walton
-        /// 2017/28/02
-        /// Commercial Customer tab selected 
-        /// Retrieves updated list of commercial customers
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tabCommercialCustomer_Selected(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
-                dgCommercialCustomer.ItemsSource = _commercialCustomers;
-            }
-            catch (Exception)
-            {
-                ErrorAlert.ShowDatabaseError();
             }
         }
 
@@ -755,6 +811,49 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/03
+        /// 
+        /// Handles logic of what happens when the warehouse tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabWarehouse_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _warehouseList = _warehouseManager.ListWarehouses();
+                dgWarehouses.ItemsSource = _warehouseList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 03/02/2017
+        /// 
+        /// Loads the create a new product category window
+        /// </summary>
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            frmProductCategory prodCategoryWindow = new frmProductCategory();
+            prodCategoryWindow.Show();
+        }
+
+        private void RequestUsername_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null)
+            {
+                frmRequestUsername requestUsername = new frmRequestUsername();
+                requestUsername.Show();
+            }
+            else { MessageBox.Show("Must not be signed in to use this feature"); }
+        }
+
         private void btnApproveDeny_Click(object sender, RoutedEventArgs e)
         {
             if (dgrdCharity.SelectedIndex >= 0)
@@ -764,5 +863,6 @@ namespace WpfPresentationLayer
                 tabCharity_Selected(sender, e);
             }
         }
+		
     } // end of class
 } // end of namespace 
