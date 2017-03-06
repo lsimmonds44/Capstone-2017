@@ -754,5 +754,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void btnApproveDeny_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgrdCharity.SelectedIndex >= 0)
+            {
+                var frmCharityApproval = new frmCharityApproval(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                frmCharityApproval.ShowDialog();
+                tabCharity_Selected(sender, e);
+            }
+        }
     } // end of class
 } // end of namespace 

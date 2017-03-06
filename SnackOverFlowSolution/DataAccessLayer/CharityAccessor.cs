@@ -76,7 +76,8 @@ namespace DataAccessLayer
                     ContactLastName = reader.GetString(5),
                     PhoneNumber = reader.GetString(6),
                     Email = reader.GetString(7),
-                    ContactHours = reader.GetString(8)
+                    ContactHours = reader.GetString(8),
+                    Status = reader.GetString(9)
                 });
             }
         }
@@ -92,7 +93,8 @@ namespace DataAccessLayer
                 ContactLastName = reader.GetString(4),
                 PhoneNumber = reader.GetString(5),
                 Email = reader.GetString(6),
-                ContactHours = reader.GetString(7)
+                ContactHours = reader.GetString(7),
+                Status = reader.GetString(8)
             };
         }
 
@@ -106,6 +108,7 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@PHONE_NUMBER", SqlDbType.NVarChar, 20);
             cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar, 100);
             cmd.Parameters.Add("@CONTACT_HOURS", SqlDbType.NVarChar, 150);
+            cmd.Parameters.Add("@STATUS", SqlDbType.NVarChar, 10);
             cmd.Parameters["@USER_ID"].Value = CharityInstance.UserID;
             cmd.Parameters["@EMPLOYEE_ID"].Value = CharityInstance.EmployeeID;
             cmd.Parameters["@CHARITY_NAME"].Value = CharityInstance.CharityName;
@@ -114,6 +117,7 @@ namespace DataAccessLayer
             cmd.Parameters["@PHONE_NUMBER"].Value = CharityInstance.PhoneNumber;
             cmd.Parameters["@EMAIL"].Value = CharityInstance.Email;
             cmd.Parameters["@CONTACT_HOURS"].Value = CharityInstance.ContactHours;
+            cmd.Parameters["@STATUS"].Value = CharityInstance.Status;
         }
 
         public void SetKeyParameters(SqlCommand cmd)
@@ -130,5 +134,74 @@ namespace DataAccessLayer
         {
             throw new NotImplementedException();
         }
+
+        public int ApproveCharity(Charity charity)
+        {
+
+            int rowsAffected = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_charity_approve";
+
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@old_CHARITY_ID",SqlDbType.Int);
+            cmd.Parameters["@old_CHARITY_ID"].Value = charity.CharityID;
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+
+            return rowsAffected;
+        }
+
+        public int DenyCharity(Charity charity)
+        {
+
+            int rowsAffected = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_charity_deny";
+
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@old_CHARITY_ID", SqlDbType.Int);
+            cmd.Parameters["@old_CHARITY_ID"].Value = charity.CharityID;
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+
+            return rowsAffected;
+        }
+
     }
 }

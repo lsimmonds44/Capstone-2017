@@ -17,6 +17,7 @@ namespace DataObjects
         public String PhoneNumber { get; set; }
         public String Email { get; set; }
         public String ContactHours { get; set; }
+        public String Status { get; set; }
 
     }
 }

@@ -63,6 +63,7 @@ namespace WpfPresentationLayer
             lblEmployeeIDVal.Content = charity.EmployeeID;
             lblPhoneNumberVal.Content = charity.PhoneNumber;
             lblUserIDVal.Content = charity.UserID;
+            lblStatusVal.Content = charity.Status;
             inAddMode = false;
         }
 

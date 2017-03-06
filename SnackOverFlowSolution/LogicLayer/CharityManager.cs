@@ -23,7 +23,6 @@ namespace LogicLayer
             }
         }
 
-
         public int AddCharity(Charity charityInstance)
         {
             var accessor = new CharityAccessor();
@@ -36,6 +35,50 @@ namespace LogicLayer
             {
                 throw;
             }
+        }
+
+        public bool ApproveCharity(Charity charityInstance)
+        {
+            bool result = false;
+            CharityAccessor accessor = new CharityAccessor();
+
+            try
+            {
+                if (accessor.ApproveCharity(charityInstance) > 0)
+                {
+                    result = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+            return result;
+        }
+
+        public bool DenyCharity(Charity charityInstance)
+        {
+            bool result = false;
+            CharityAccessor accessor = new CharityAccessor();
+
+            try
+            {
+                if (accessor.DenyCharity(charityInstance) > 0)
+                {
+                    result = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+            return result;
         }
     }
 }

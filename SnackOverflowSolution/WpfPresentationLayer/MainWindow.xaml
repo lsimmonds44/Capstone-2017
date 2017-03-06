@@ -122,13 +122,16 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Name="dgrdCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single">
+                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Name="dgrdCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn  Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Name="btnAddCharity" Grid.Row="1" Grid.Column="2" Click="btnAddCharity_Click">Add</Button>
                     <Button Name="btnViewCharity" Grid.Row="1" Grid.Column="3" Click="btnViewCharity_Click">View</Button>
+                    <Button Name="btnApproveDeny" Content="Approve / Deny" Grid.Row="1" Grid.Column="1" Click="btnApproveDeny_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Employee" Name="tabEmployee"  Selector.Selected="tabEmployee_Selected">

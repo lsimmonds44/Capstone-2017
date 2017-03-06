@@ -12,5 +12,9 @@ namespace LogicLayer
         List<Charity> RetrieveCharityList();
         
         int AddCharity(Charity charityInstance);
+
+        bool ApproveCharity(Charity charityInstance);
+
+        bool DenyCharity(Charity charityInstance);
     }
 }
