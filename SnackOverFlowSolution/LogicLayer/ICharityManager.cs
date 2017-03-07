@@ -16,5 +16,7 @@ namespace LogicLayer
         bool ApproveCharity(Charity charityInstance);
 
         bool DenyCharity(Charity charityInstance);
+
+        bool AddCharityApplication(Charity charityInstance);
     }
 }

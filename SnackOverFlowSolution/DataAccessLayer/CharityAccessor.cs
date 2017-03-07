@@ -66,11 +66,11 @@ namespace DataAccessLayer
         {
             CharityList = new List<Charity>();
             while (reader.Read()) {
-                CharityList.Add(new Charity
+                Charity c = new Charity()
                 {
                     CharityID = reader.GetInt32(0),
                     UserID = reader.GetInt32(1),
-                    EmployeeID = reader.GetInt32(2),
+                    //EmployeeID = reader.GetInt32(2),
                     CharityName = reader.GetString(3),
                     ContactFirstName = reader.GetString(4),
                     ContactLastName = reader.GetString(5),
@@ -78,7 +78,17 @@ namespace DataAccessLayer
                     Email = reader.GetString(7),
                     ContactHours = reader.GetString(8),
                     Status = reader.GetString(9)
-                });
+                };
+                if (!reader.IsDBNull(2))
+                {
+                    c.EmployeeID = reader.GetInt32(2);
+                }
+                else
+                {
+                    c.EmployeeID = null;
+                }
+                CharityList.Add(c);
+
             }
         }
 
@@ -201,6 +211,57 @@ namespace DataAccessLayer
 
 
             return rowsAffected;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/08
+        /// 
+        /// Handles the process of adding an application to the DB
+        /// </summary>
+        /// <param name="charity"></param>
+        /// <returns></returns>
+        public static int CreateCharityApplication(Charity charity)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_charity_application";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@CHARITY_NAME", SqlDbType.NVarChar, 200);
+            cmd.Parameters.Add("@CONTACT_FIRST_NAME", SqlDbType.NVarChar, 150);
+            cmd.Parameters.Add("@CONTACT_LAST_NAME", SqlDbType.NVarChar, 150);
+            cmd.Parameters.Add("@PHONE_NUMBER", SqlDbType.NVarChar, 20);
+            cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar, 100);
+            cmd.Parameters.Add("@CONTACT_HOURS", SqlDbType.NVarChar, 150);
+
+            cmd.Parameters["@USER_ID"].Value = charity.UserID;
+            cmd.Parameters["@CHARITY_NAME"].Value = charity.CharityName;
+            cmd.Parameters["@CONTACT_FIRST_NAME"].Value = charity.ContactFirstName;
+            cmd.Parameters["@CONTACT_LAST_NAME"].Value = charity.ContactLastName;
+            cmd.Parameters["@PHONE_NUMBER"].Value = charity.PhoneNumber;
+            cmd.Parameters["@EMAIL"].Value = charity.Email;
+            cmd.Parameters["@CONTACT_HOURS"].Value = charity.ContactHours;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
 
     }

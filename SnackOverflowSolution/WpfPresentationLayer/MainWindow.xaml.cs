@@ -339,7 +339,14 @@ namespace WpfPresentationLayer
                     tabCharity_Selected(sender, e);
                 } else
                 {
-                    MessageBox.Show("You are not authorized to enter new charities.");
+                    var applyForCharityFrm = new CharityView(_user, _charityManager);
+                    var result = applyForCharityFrm.ShowDialog();
+                    if (result == true)
+                    {
+                        MessageBox.Show("Application submitted");
+                        tabCharity_Selected(sender, e);
+                    }
+                    
                 }
             } catch (System.Data.SqlClient.SqlException ex)
             {

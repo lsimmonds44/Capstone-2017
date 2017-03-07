@@ -80,5 +80,33 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/08
+        /// 
+        /// Handles the logic of creating an application for a charity.
+        /// </summary>
+        /// <param name="charityInstance"></param>
+        /// <returns></returns>
+        public bool AddCharityApplication(Charity charityInstance)
+        {
+            bool result = false;
+
+            try
+            {
+                if (CharityAccessor.CreateCharityApplication(charityInstance) == 1)
+                {
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+            return result;
+        }
     }
 }

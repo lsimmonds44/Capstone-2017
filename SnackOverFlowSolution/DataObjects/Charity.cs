@@ -10,7 +10,7 @@ namespace DataObjects
     {
         public int CharityID { get; set; }
         public int UserID { get; set; }
-        public int EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
         public String CharityName { get; set; }
         public String ContactFirstName { get; set; }
         public String ContactLastName { get; set; }
