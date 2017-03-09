@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgreementAccessor.cs" />
     <Compile Include="BackorderPreorderAccessor.cs" />
     <Compile Include="CategoryAccessor.cs" />
     <Compile Include="CharityAccessor.cs" />

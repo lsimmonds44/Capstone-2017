@@ -26,10 +26,16 @@ namespace WpfPresentationLayer
     {
 
         User _currentUser;
+        Supplier _supplierToEdit;
         IUserManager _userManager;
         ISupplierManager _supplierManager;
+        IProductManager _productManager;
+        IAgreementManager _agreementManager;
         bool supplierFound = false;
         string _type;
+        List<Product> _notAgreedProducts;
+        List<Product> _agreedProducts = new List<Product>();
+        List<Agreement> _agreements;
 
         /// <summary>
         /// Christian Lopez
@@ -40,12 +46,27 @@ namespace WpfPresentationLayer
         /// <param name="currentEmp">The current User</param>
         /// <param name="userManager">Something implementing the IUserManager interface</param>
         /// <param name="supplierManager">Something implementing the ISupplierManager interface</param>
-        public frmAddSupplier(User currentUser, IUserManager userManager, ISupplierManager supplierManager, string type = "Adding")
+        /// <remarks>Last modified by Christian Lopez 2017/03/08</remarks>
+        public frmAddSupplier(User currentUser, IUserManager userManager, ISupplierManager supplierManager, 
+                IProductManager productManager, IAgreementManager agreementManager, string type = "Adding", Supplier supplierToEdit = null)
         {
             _currentUser = currentUser;
+            _supplierToEdit = supplierToEdit;
             _userManager = userManager;
             _supplierManager = supplierManager;
-            _type = type;
+            _productManager = productManager;
+            _agreementManager = agreementManager;
+            if (null == _supplierToEdit)
+            {
+                _type = type;
+            }
+            else
+            {
+                _type = "Edit";
+                supplierFound = true;
+                btnLookup.IsEnabled = false;
+            }
+            
             InitializeComponent();
         }
 
@@ -129,6 +150,13 @@ namespace WpfPresentationLayer
                 txtFarmName.IsEnabled = true;
                 txtFarmTaxId.IsEnabled = true;
                 cboFarmState.IsEnabled = true;
+                productSection.IsEnabled = true;
+                foreach (Product p in _agreedProducts)
+                {
+                    _notAgreedProducts.Remove(p);
+                }
+                dgAvailableProducts.ItemsSource = _notAgreedProducts;
+                dgApprovedProducts.ItemsSource = _agreedProducts;
 
             }
 
@@ -149,6 +177,8 @@ namespace WpfPresentationLayer
             cboFarmState.SelectedIndex = 0;
             cboFarmState.IsEnabled = false;
             supplierFound = false;
+            productSection.IsEnabled = false;
+            dgAvailableProducts.ItemsSource = null;
         }
 
         private int getDropdown(string stateAbr)
@@ -207,7 +237,18 @@ namespace WpfPresentationLayer
                         if (_supplierManager.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text,
                             txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
                         {
-                            this.DialogResult = true;
+                            //this.DialogResult = true;
+                            try
+                            {
+                                addAgreedProducts(supplierUser);
+                                this.DialogResult = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                
+                                MessageBox.Show(ex.Message);
+                            }
+                            
                         }
                         else
                         {
@@ -233,7 +274,18 @@ namespace WpfPresentationLayer
                         if (_supplierManager.ApplyForSupplierAccount(supplierUser.UserId, txtFarmName.Text, txtFarmCity.Text, 
                             cboFarmState.Text,txtFarmTaxId.Text))
                         {
-                            this.DialogResult = true;
+                            //this.DialogResult = true;
+                            try
+                            {
+                                addAgreedProducts(supplierUser);
+                                this.DialogResult = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                
+                                MessageBox.Show(ex.Message);
+                            }
+                            
                         }
                         else
                         {
@@ -247,6 +299,31 @@ namespace WpfPresentationLayer
                     {
                         MessageBox.Show(ex.Message);
                     }
+                }
+            }
+        }
+
+        private void addAgreedProducts(User supplierUser)
+        {
+            foreach (Product p in _agreedProducts)
+            {
+                
+                try
+                {
+                    if (_type.Equals("Adding"))
+                    {
+                        _agreementManager.CreateAgreementsForSupplier(_supplierManager.RetrieveSupplierByUserId(supplierUser.UserId), p, _currentUser.UserId);
+                    }
+                    else if (_type.Equals("Applying"))
+                    {
+                        _agreementManager.CreateAgreementsForSupplier(_supplierManager.RetrieveSupplierByUserId(supplierUser.UserId), p);
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+
+                    throw new ApplicationException("Could not store " + p.Name + " as an agreement. Error: " + ex.Message);
                 }
             }
         }
@@ -297,8 +374,77 @@ namespace WpfPresentationLayer
                 btnSubmit.Content = "Apply";
                 this.Title = "Apply for Account";
             }
+            try
+            {
+                _notAgreedProducts = _productManager.RetrieveProducts();
+                if (_type.Equals("Adding") || _type.Equals("Applying"))
+                {
+                    //If adding or applying for an account, then there cannot be any already approved products.
+                    _agreedProducts = new List<Product>();
+                }
+                else if (null != _supplierToEdit)
+                {
+                    _agreements = _agreementManager.RetrieveAgreementsBySupplierId(_supplierToEdit.SupplierID);
+                    foreach (Agreement a in _agreements)
+                    {
+                        _agreedProducts.Add(_productManager.RetrieveProductById(a.ProductId));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            
+
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/08
+        /// 
+        /// Logic to take an product from the not approved list to the approved list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddToApproved_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgAvailableProducts.SelectedIndex)
+            {
+                MessageBox.Show("Please select a Product to add!");
+            }
+            else
+            {
+                _agreedProducts.Add((Product)(dgAvailableProducts.SelectedItem));
+                _notAgreedProducts.Remove((Product)(dgAvailableProducts.SelectedItem));
+                refreshTables();
+            }
+        }
+
+        
+
+        private void btnRemoveFromApproved_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgApprovedProducts.SelectedIndex)
+            {
+                MessageBox.Show("Please select a Product to remove!");
+            }
+            else
+            {
+                _agreedProducts.Remove((Product)(dgApprovedProducts.SelectedItem));
+                _notAgreedProducts.Add((Product)(dgApprovedProducts.SelectedItem));
+                refreshTables();
+            }
+        }
+        
+        private void refreshTables()
+        {
+            dgAvailableProducts.ItemsSource = null;
+            dgApprovedProducts.ItemsSource = null;
+            dgAvailableProducts.ItemsSource = _notAgreedProducts;
+            dgApprovedProducts.ItemsSource = _agreedProducts;
+        }
 
     }
 }

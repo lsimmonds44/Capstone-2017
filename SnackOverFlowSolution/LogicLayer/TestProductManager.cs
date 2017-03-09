@@ -60,5 +60,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<Product> RetrieveProducts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
