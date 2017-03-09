@@ -329,5 +329,28 @@ namespace LogicLayer
 
             return (new UserAccessor()).RetrieveUsernameByEmail(email);
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/09
+        /// 
+        /// Tries to get a user from the Accessor by the userId.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public User RetrieveUser(int userId)
+        {
+            User user = null;
+            try
+            {
+                user = UserAccessor.RetrieveUserByUserId(userId);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            return user;
+        }
     }
 }

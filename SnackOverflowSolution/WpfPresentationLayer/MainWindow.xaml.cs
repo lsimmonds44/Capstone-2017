@@ -873,6 +873,33 @@ namespace WpfPresentationLayer
                 tabCharity_Selected(sender, e);
             }
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/09
+        /// 
+        /// Launch form to edit existing supplier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgSuppliers.SelectedIndex)
+            {
+                MessageBox.Show("Select a supplier to edit.");
+            }
+            else
+            {
+                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                    _agreementManager, "Editing", (Supplier)dgSuppliers.SelectedItem);
+                var result = frmEditSupplier.ShowDialog();
+                if (result == true)
+                {
+                    MessageBox.Show("Supplier Edited.");
+                    tabSupplier_Selected(sender, e);
+                }
+            }
+        }
 		
     } // end of class
 } // end of namespace 

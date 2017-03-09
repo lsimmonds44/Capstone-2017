@@ -26,7 +26,19 @@ namespace LogicLayer
         /// <returns></returns>
         public List<Agreement> RetrieveAgreementsBySupplierId(int supplierId)
         {
-            throw new NotImplementedException();
+            List<Agreement> agreements = new List<Agreement>();
+
+            try
+            {
+                agreements = AgreementAccessor.retrieveAgreementsBySupplierId(supplierId);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+
+            return agreements;
         }
 
         /// <summary>
@@ -67,5 +79,60 @@ namespace LogicLayer
             return success;
         }
 
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/09
+        /// 
+        /// Deactivates a specified agreement.
+        /// </summary>
+        /// <param name="agreement"></param>
+        /// <param name="approverId"></param>
+        /// <returns></returns>
+        public bool UpdateAgreement(Agreement oldAgreement, Agreement newAgreement)
+        {
+            bool success = false;
+            try
+            {
+                if (1 == AgreementAccessor.UpdateAgreement(oldAgreement, newAgreement))
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/09
+        /// 
+        /// Creates an Agreement based on the inputs.
+        /// </summary>
+        /// <param name="agreementId"></param>
+        /// <param name="productId"></param>
+        /// <param name="supplierId"></param>
+        /// <param name="dateSubmitted"></param>
+        /// <param name="isApproved"></param>
+        /// <param name="isActive"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public Agreement MakeAgreement(int agreementId, int productId, int supplierId, DateTime dateSubmitted, bool isApproved, bool isActive, int? approvedBy = null)
+        {
+            return new Agreement()
+            {
+                AgreementId = agreementId,
+                ProductId = productId,
+                SupplierId = supplierId,
+                DateSubmitted = dateSubmitted,
+                IsApproved = isApproved,
+                Active = isActive,
+                ApprovedBy = approvedBy
+            };
+        }
     }
 }

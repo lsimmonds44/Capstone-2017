@@ -134,5 +134,38 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/09
+        /// 
+        /// Test Method for returning a user by userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public User RetrieveUser(int userId)
+        {
+            User newUser = null;
+
+            
+                newUser = new User()
+                {
+                    UserId = userId,
+                    FirstName = "Test",
+                    LastName = "User",
+                    Phone = "1234567890",
+                    PreferredAddressId = 1,
+                    EmailAddress = "test@test.com",
+                    EmailPreferences = true,
+                    UserName = "test",
+                    Active = true
+                };
+            
+            
+                throw new ApplicationException("Unable to find user " + userId);
+            
+
+            return newUser;
+        }
     }
 }

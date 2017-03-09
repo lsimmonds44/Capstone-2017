@@ -20,5 +20,6 @@ namespace DataObjects
         public DateTime DateSubmitted { get; set; }
         public bool IsApproved { get; set; }
         public int? ApprovedBy { get; set; }
+        public bool Active { get; set; }
     }
 }

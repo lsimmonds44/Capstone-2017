@@ -24,7 +24,7 @@ namespace LogicLayer
         /// <param name="farmState">The state where the farm is</param>
         /// <param name="farmTaxId">The farm tax ID</param>
         /// <returns></returns>
-        bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName,
+        bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
             string farmCity, string farmState, string farmTaxId);
 
         /// <summary>
@@ -69,6 +69,6 @@ namespace LogicLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId);
+        bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId);
     }
 }
