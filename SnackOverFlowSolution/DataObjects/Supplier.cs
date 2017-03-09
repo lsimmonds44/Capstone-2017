@@ -17,6 +17,7 @@ namespace DataObjects
         public String FarmTaxID { get; set; }
         public int UserId { get; set; }
         public string FarmName { get; set; }
+        public string FarmAddress { get; set; }
         public string FarmCity { get; set; }
         public string FarmState { get; set; }
         public bool Active { get; set; }

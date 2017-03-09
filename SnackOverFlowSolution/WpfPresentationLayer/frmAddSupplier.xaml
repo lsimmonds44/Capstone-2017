@@ -46,11 +46,11 @@
                     <ColumnDefinition Width="75" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Name="lblFarmCity" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Grid.Column="1" Name="txtFarmCity" Margin="0 5 0 5" MaxLength="50" IsEnabled="False"/>
+                <TextBox Grid.Column="1" Name="txtFarmCity" Margin="0 5 0 5" MaxLength="50" IsEnabled="False" />
                 <Label Grid.Column="2" Name="lblFarmState" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <ComboBox Name="cboFarmState" Grid.Column="3" Margin="0 5 10 5" SelectedIndex="0" VerticalAlignment="Center" Padding="5" MaxDropDownHeight="200" IsEnabled="False">
-                    <ComboBoxItem Content="AL" />
                     <ComboBoxItem Content="AK" />
+                    <ComboBoxItem Content="AL" />
                     <ComboBoxItem Content="AR" />
                     <ComboBoxItem Content="AZ" />
                     <ComboBoxItem Content="CA" />
@@ -108,7 +108,7 @@
             <TextBox Grid.Column="1" Grid.Row="3" Name="txtFarmAddress" Margin="0 5 10 5" IsEnabled="False"/>
             <TextBox Grid.Column="1" Grid.Row="5" Name="txtFarmTaxId" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
         </Grid>
-        <Grid Grid.Row="3" IsEnabled="False">
+        <Grid Name="productSection" Grid.Row="3" IsEnabled="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
@@ -133,8 +133,8 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="1" Name="btnAddToApproved" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15"/>
-                <Button Grid.Row="2" Name="btnRemoveFromApproved" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" />
+                <Button Grid.Row="1" Name="btnAddToApproved" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15" Click="btnAddToApproved_Click"/>
+                <Button Grid.Row="2" Name="btnRemoveFromApproved" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" Click="btnRemoveFromApproved_Click" />
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>

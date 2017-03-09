@@ -30,14 +30,14 @@ namespace LogicLayer
         /// <param name="farmState">The state where the farm is</param>
         /// <param name="farmTaxId">The tax ID for the farm</param>
         /// <returns>Whether or not it was updated</returns>
-        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName,
+        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
             string farmCity, string farmState, string farmTaxId)
         {
             bool wasAdded = false;
 
             try
             {
-                if (1 == SupplierAccessor.CreateNewSupplier(userId, isApproved, approvedBy, farmName,
+                if (1 == SupplierAccessor.CreateNewSupplier(userId, isApproved, approvedBy, farmName, farmAddress,
                     farmCity, farmState, farmTaxId))
                 {
                     wasAdded = true;
@@ -165,13 +165,13 @@ namespace LogicLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        public bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId)
+        public bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
         {
             bool wasAdded = false;
 
             try
             {
-                if (1 == SupplierAccessor.ApplyForSupplierAccount(userId, false, farmName,
+                if (1 == SupplierAccessor.ApplyForSupplierAccount(userId, false, farmName, farmAddress,
                     farmCity, farmState, farmTaxId))
                 {
                     wasAdded = true;

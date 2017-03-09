@@ -29,5 +29,7 @@ namespace LogicLayer
 
         List<BrowseProductViewModel> FilterProducts(List<string> vendors, List<string> categories, double min,
             double max);
+
+        List<Product> RetrieveProducts();
     }
 }

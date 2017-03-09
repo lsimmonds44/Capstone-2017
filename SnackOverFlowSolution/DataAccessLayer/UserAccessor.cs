@@ -429,5 +429,63 @@ namespace DataAccessLayer
             }
             return results;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/09
+        /// 
+        /// Attempts to retrieve a user from the DB associated with the userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static User RetrieveUserByUserId(int userId)
+        {
+            User user = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_app_user";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            
+            cmd.Parameters["@USER_ID"].Value = userId;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    user = new User()
+                    {
+                        UserId = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        Phone = reader.GetString(3),
+                        EmailAddress = reader.GetString(5),
+                        EmailPreferences = reader.GetBoolean(6),
+                        UserName = reader.GetString(9),
+                        Active = reader.GetBoolean(10)
+                    };
+                    if (!reader.IsDBNull(4))
+                    {
+                        user.PreferredAddressId = reader.GetInt32(4);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return user;
+        }
     }
 }

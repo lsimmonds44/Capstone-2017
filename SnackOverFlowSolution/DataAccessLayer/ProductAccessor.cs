@@ -301,5 +301,58 @@ namespace DataAccessLayer
                 });
             }
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/08
+        /// 
+        /// Get a list of all products in the database
+        /// </summary>
+        public static List<Product> RetrieveProductList() 
+        {
+            List<Product> products = new List<Product>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Product p = new Product()
+                        {
+                            ProductId = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Description = reader.GetString(2),
+                            UnitPrice = reader.GetDecimal(3),
+                            ImageName = reader.GetString(4),
+                            Active = reader.GetBoolean(5),
+                            UnitOfMeasurement = reader.GetString(6),
+                            DeliveryChargePerUnit = reader.GetDecimal(7)
+                        };
+                        products.Add(p);
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return products;
+        }
+
     }
 }

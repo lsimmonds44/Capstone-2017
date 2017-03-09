@@ -31,5 +31,7 @@ namespace LogicLayer
         int ChangePassword(String userName, String oldPassword, String newPassword, String confirmPassword);
         String NewPassword();
         int ResetPassword(String userName, String password);
+
+        User RetrieveUser(int userId);
     }
 }

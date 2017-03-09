@@ -31,7 +31,7 @@ namespace DataAccessLayer
         /// <param name="farmTaxId">The tax ID</param>
         /// <returns>A 1 if successful</returns>
         /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
-        public static int CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName,
+        public static int CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
             string farmCity, string farmState, string farmTaxId)
         {
             int rows = 0;
@@ -45,6 +45,7 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
             cmd.Parameters.Add("@APPROVED_BY", SqlDbType.Int);
             cmd.Parameters.Add("@FARM_NAME", SqlDbType.NVarChar, 300);
+            cmd.Parameters.Add("@FARM_ADDRESS", SqlDbType.NVarChar, 300);
             cmd.Parameters.Add("@FARM_CITY", SqlDbType.NVarChar, 50);
             cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
             cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
@@ -53,6 +54,7 @@ namespace DataAccessLayer
             cmd.Parameters["@IS_APPROVED"].Value = isApproved;
             cmd.Parameters["@APPROVED_BY"].Value = approvedBy;
             cmd.Parameters["@FARM_NAME"].Value = farmName;
+            cmd.Parameters["@FARM_ADDRESS"].Value = farmAddress;
             cmd.Parameters["@FARM_CITY"].Value = farmCity;
             cmd.Parameters["@FARM_STATE"].Value = farmState;
             cmd.Parameters["@FARM_TAX_ID"].Value = farmTaxId;
@@ -89,7 +91,7 @@ namespace DataAccessLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        public static int ApplyForSupplierAccount(int userId, bool isApproved, string farmName,
+        public static int ApplyForSupplierAccount(int userId, bool isApproved, string farmName, string farmAddress,
             string farmCity, string farmState, string farmTaxId)
         {
             int rows = 0;
@@ -102,6 +104,7 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
             cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
             cmd.Parameters.Add("@FARM_NAME", SqlDbType.NVarChar, 300);
+            cmd.Parameters.Add("@FARM_ADDRESS", SqlDbType.NVarChar, 300);
             cmd.Parameters.Add("@FARM_CITY", SqlDbType.NVarChar, 50);
             cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
             cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
@@ -109,6 +112,7 @@ namespace DataAccessLayer
             cmd.Parameters["@USER_ID"].Value = userId;
             cmd.Parameters["@IS_APPROVED"].Value = isApproved;
             cmd.Parameters["@FARM_NAME"].Value = farmName;
+            cmd.Parameters["@FARM_ADDRESS"].Value = farmAddress;
             cmd.Parameters["@FARM_CITY"].Value = farmCity;
             cmd.Parameters["@FARM_STATE"].Value = farmState;
             cmd.Parameters["@FARM_TAX_ID"].Value = farmTaxId;
@@ -165,10 +169,11 @@ namespace DataAccessLayer
                         IsApproved = reader.GetBoolean(2),
                         //ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
-                        FarmCity = reader.GetString(5),
-                        FarmState = reader.GetString(6),
-                        FarmTaxID = reader.GetString(7),
-                        Active = reader.GetBoolean(8)
+                        FarmAddress = reader.GetString(5),
+                        FarmCity = reader.GetString(6),
+                        FarmState = reader.GetString(7),
+                        FarmTaxID = reader.GetString(8),
+                        Active = reader.GetBoolean(9)
                     };
                     if (!reader.IsDBNull(3))
                     {
@@ -220,10 +225,11 @@ namespace DataAccessLayer
                         IsApproved = reader.GetBoolean(2),
                         //ApprovedBy = reader.GetInt32(3),
                         FarmName = reader.GetString(4),
-                        FarmCity = reader.GetString(5),
-                        FarmState = reader.GetString(6),
-                        FarmTaxID = reader.GetString(7),
-                        Active = reader.GetBoolean(8)
+                        FarmAddress = reader.GetString(5),
+                        FarmCity = reader.GetString(6),
+                        FarmState = reader.GetString(7),
+                        FarmTaxID = reader.GetString(8),
+                        Active = reader.GetBoolean(9)
                     };
                     if (!reader.IsDBNull(3))
                     {
@@ -278,10 +284,11 @@ namespace DataAccessLayer
                             UserId = reader.GetInt32(1),
                             IsApproved = reader.GetBoolean(2),
                             FarmName = reader.GetString(4),
-                            FarmCity = reader.GetString(5),
-                            FarmState = reader.GetString(6),
-                            FarmTaxID = reader.GetString(7),
-                            Active = reader.GetBoolean(8)
+                            FarmAddress = reader.GetString(5),
+                            FarmCity = reader.GetString(6),
+                            FarmState = reader.GetString(7),
+                            FarmTaxID = reader.GetString(8),
+                            Active = reader.GetBoolean(9)
                         };
                         if (!reader.IsDBNull(3))
                         {

@@ -16,7 +16,7 @@ namespace LogicLayer
         }
 
 
-        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmCity, string farmState, string farmTaxId)
+        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +37,7 @@ namespace LogicLayer
         }
 
 
-        public bool ApplyForSupplierAccount(int userId, string farmName, string farmCity, string farmState, string farmTaxId)
+        public bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
         {
             throw new NotImplementedException();
         }

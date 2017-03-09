@@ -39,6 +39,7 @@ namespace WpfPresentationLayer
         private IProductManager _productManager = new ProductManager();
         private IDeliveryManager _deliveryManager;
         private IWarehouseManager _warehouseManager = new WarehouseManager();
+        private IAgreementManager _agreementManager = new AgreementManager();
         private List<Delivery> _deliveries;
         private List<Warehouse> _warehouseList;
 
@@ -440,11 +441,12 @@ namespace WpfPresentationLayer
         /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
         private void btnCreateSupplier_Click(object sender, RoutedEventArgs e)
         {
-            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager);
+            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager, _agreementManager);
             var addSupplierResult = addSupplierFrm.ShowDialog();
             if (addSupplierResult == true)
             {
                 MessageBox.Show("Supplier added!");
+                tabSupplier_Selected(sender, e);
             }
         }
 
@@ -726,11 +728,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnApplyForSupplierAct_Click(object sender, RoutedEventArgs e)
         {
-            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, "Applying");
+            var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager, _agreementManager, "Applying");
             var addSupplierResult = addSupplierFrm.ShowDialog();
             if (addSupplierResult == true)
             {
                 MessageBox.Show("Application Submitted!");
+                tabSupplier_Selected(sender, e);
             }
         }
 
@@ -871,6 +874,33 @@ namespace WpfPresentationLayer
                 var frmCharityApproval = new frmCharityApproval(_charityManager, charityList[dgrdCharity.SelectedIndex]);
                 frmCharityApproval.ShowDialog();
                 tabCharity_Selected(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/09
+        /// 
+        /// Launch form to edit existing supplier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgSuppliers.SelectedIndex)
+            {
+                MessageBox.Show("Select a supplier to edit.");
+            }
+            else
+            {
+                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                    _agreementManager, "Editing", (Supplier)dgSuppliers.SelectedItem);
+                var result = frmEditSupplier.ShowDialog();
+                if (result == true)
+                {
+                    MessageBox.Show("Supplier Edited.");
+                    tabSupplier_Selected(sender, e);
+                }
             }
         }
 		

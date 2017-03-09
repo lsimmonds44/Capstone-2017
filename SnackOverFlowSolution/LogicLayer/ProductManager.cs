@@ -195,6 +195,26 @@ namespace LogicLayer
         }
 
 
-        
+
+
+        /// <summary>
+        /// Christian Lopez
+        /// Created 2017/03/08
+        /// 
+        /// Tries to get a list of products from the accessor
+        /// </summary>
+        /// <returns></returns>
+        public List<Product> RetrieveProducts()
+        {
+            try
+            {
+                return ProductAccessor.RetrieveProductList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+        }
     }
 }
