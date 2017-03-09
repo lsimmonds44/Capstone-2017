@@ -47,7 +47,7 @@ namespace WpfPresentationLayer
             inAddMode = true;
             txtEmployeeID.Text = employeeID.ToString();
             txtEmployeeID.IsEnabled = false;
-
+            lblStatus.Visibility = Visibility.Collapsed;
         }
 
         public CharityView(ICharityManager charityManager, DataObjects.Charity charity)
@@ -159,7 +159,7 @@ namespace WpfPresentationLayer
                         EmployeeID = employeeID,
                         PhoneNumber = txtPhoneNumber.Text,
                         UserID = _userList[cbxUserID.SelectedIndex].UserId,
-
+                        Status = "PENDING"
                     };
 
                     if (inAddMode)

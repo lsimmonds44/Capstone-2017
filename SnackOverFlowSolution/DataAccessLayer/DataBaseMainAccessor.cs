@@ -133,7 +133,7 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="accessor">An IDataAccessor specific to the entity used</param>
 
-        public static void RetrieveList(IDataAccessor accessor)
+        public static void RetrieveList(IRetriever accessor)
         {
             var conn = DBConnection.GetConnection();
             var cmd = new SqlCommand(accessor.RetrieveListScript, conn);

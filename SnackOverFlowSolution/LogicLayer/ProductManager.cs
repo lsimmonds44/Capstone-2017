@@ -69,7 +69,15 @@ namespace LogicLayer
 
         public List<DataObjects.Product> ListProducts()
         {
-            throw new NotImplementedException();
+            var accessor = new ProductAccessor();
+            try
+            {
+                DatabaseMainAccessor.RetrieveList(accessor);
+                return accessor.ProductList;
+            } catch (System.Data.SqlClient.SqlException ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

@@ -47,6 +47,7 @@
     <Compile Include="DeliveryAccessor.cs" />
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="EmployeeOrderResponsibilityAccessor.cs" />
+    <Compile Include="IRetriever.cs" />
     <Compile Include="LocationAccessor.cs" />
     <Compile Include="GradeAccessor.cs" />
     <Compile Include="InspectionAccessor.cs" />

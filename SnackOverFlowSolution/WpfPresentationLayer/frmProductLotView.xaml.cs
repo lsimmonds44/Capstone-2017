@@ -60,7 +60,7 @@ namespace WpfPresentationLayer
                 locationList = (new LocationManager()).ListLocations();
                 cbxLocationIDVal.ItemsSource = locationList;
                 cbxLocationIDVal.Visibility = Visibility.Visible;
-                productList = (new DummyProductManager()).ListProducts();
+                productList = (new ProductManager()).ListProducts();
                 cbxProductIDVal.ItemsSource = productList;
                 cbxProductIDVal.Visibility = Visibility.Visible;
                 supplierList = (new SupplierManager()).ListSuppliers();

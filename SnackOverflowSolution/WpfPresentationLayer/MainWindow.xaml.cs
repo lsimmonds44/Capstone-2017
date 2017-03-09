@@ -246,7 +246,7 @@ namespace WpfPresentationLayer
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
                         // assigned to the employe
-
+                        mnuChangePassword.Visibility = Visibility.Visible;
 
                     }
                     else
@@ -273,7 +273,7 @@ namespace WpfPresentationLayer
                 lblUsername.Visibility = Visibility.Visible;
                 tfUsername.Visibility = Visibility.Visible;
                 tfPassword.Visibility = Visibility.Visible;
-
+                mnuChangePassword.Visibility = Visibility.Collapsed;
             }
 
         }
@@ -741,8 +741,11 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void ChangePassword(object sender, RoutedEventArgs e)
         {
-            var updateScreen = new PasswordChangeView(_user.UserName);
-            updateScreen.Show();
+            if (null != _user)
+            {
+                var updateScreen = new PasswordChangeView(_user.UserName);
+                updateScreen.Show();
+            }
         }
 
         private void editVehicleClick(object sender, RoutedEventArgs e)
