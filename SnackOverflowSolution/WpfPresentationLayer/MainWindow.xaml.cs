@@ -903,6 +903,69 @@ namespace WpfPresentationLayer
                 }
             }
         }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/09/2017
+        /// 
+        /// Supplier Tab Select Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabSupplierCatlog_Selected(object sender, RoutedEventArgs e)
+        {
+            //Load Supplier Data
+            try
+            {
+                var suppliersData = _supplierManager.ListSuppliers();
+                DgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Problem Loading Supplier Catalogue Data " + ex);
+            }
+            
+        }
+
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/09/2017
+        /// 
+        /// Parase Supplier Object into SupplierCatalogue view model.
+        /// </summary>
+        /// <param name="suppliersList"></param>
+        /// <returns></returns>
+        private List<SupplierCatalogueViewModel> parseIntoSupplierCatalogue( List<Supplier> suppliersList )
+        {
+            List<SupplierCatalogueViewModel> viewModelList = new List<SupplierCatalogueViewModel>();
+            SupplierCatalogueViewModel viewModel;
+
+            foreach ( var k in suppliersList )
+            {
+                viewModel = new SupplierCatalogueViewModel()
+                {
+                    SupplierID = k.SupplierID,
+                    FarmName = k.FarmName,
+                    FarmAddress = k.FarmAddress,
+                    FarmCity = k.FarmCity,
+                    FarmState = k.FarmState,
+                    FarmTaxID = k.FarmTaxID,
+                    IsApproved = k.IsApproved,
+                    UserId = k.UserId,
+                    UserData = _userManager.RetrieveUser(k.UserId)
+                };
+                viewModelList.Add(viewModel);
+            }
+
+
+ 
+
+
+            return viewModelList;
+        }
+
 		
     } // end of class
 } // end of namespace 
