@@ -20,12 +20,12 @@ INSERT INTO [dbo].[App_User]
 	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active)
 	VALUES
 	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1),
-	('Elga', 'Ilunga', '970742222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1),
-	('John', 'Myers', '9707422225', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jmyers', 1),
-	('Francis', 'Zak', '9707422225', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1),
-	('Celine', 'Dion', '9707422225', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1),
-	('Will', 'Smith', '9707422225', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1),
-	('Cust-John', 'Aaron', '9707422225', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1)
+	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1),
+	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jmyers', 1),
+	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1),
+	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1),
+	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1),
+	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1)
 GO
 
 /* Customer Test Data */
@@ -109,6 +109,7 @@ GO
 
 /* Inserting Category Test Data :No Identitiy Column */
 print '*** Inserting Category Test Data ***'
+GO
 INSERT INTO [dbo].[Category]
 	(Category_ID, Description)
 	VALUES
@@ -119,6 +120,7 @@ INSERT INTO [dbo].[Category]
 GO
 
 /* Inserting Product_Category Test Data */
+GO
 INSERT INTO [dbo].[Product_Category]
 	(Product_ID, Category_ID)
 	VALUES
@@ -142,12 +144,12 @@ GO
 /* Supplier Test Data :Seed-10000*/
 print '*** Inserting Supplier Test Data ***'
 INSERT INTO [dbo].[Supplier]
-	(User_ID, IS_Approved, Approved_BY, Farm_Name, Farm_City, Farm_State, Farm_Tax_ID)
+	(User_ID, IS_Approved, Approved_BY, Farm_Name, Farm_Address, Farm_City, Farm_State, Farm_Tax_ID,Active)
 	VALUES
-	(10002,1,10001,'Glasgow Foods', 'Cedar Rapids', 'IA', '2322'),
-	(10003,1,10001,'Trapp Foods', 'Cedar Rapids', 'IA', '2322'),
-	(10004,1,10001,'Browmich Foods', 'Cedar Rapids', 'IA', '2322'),
-	(10005,1,10001,'Hench Foods', 'Cedar Rapids', 'IA', '2322')
+	(10002,1,10001,'Glasgow Foods', 'Glasgow Drive', 'Cedar Rapids', 'IA', '2322',1),
+	(10003,1,10001,'Trapp Foods', '6301 Trapp Drive', 'Cedar Rapids', 'IA', '2322',1),
+	(10004,1,10001,'Browmich Foods', '212 Browmich Drive', 'Cedar Rapids', 'IA', '2322',1),
+	(10005,1,10001,'Hench Foods', '222 Hench AV', 'Cedar Rapids', 'IA', '2322',1)
 GO
 
 /* Product_Lot Test Data */
