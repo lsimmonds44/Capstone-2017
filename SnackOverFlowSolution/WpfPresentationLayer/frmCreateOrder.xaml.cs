@@ -26,8 +26,11 @@ namespace WpfPresentationLayer
         private CommercialCustomer _cCustomer;
         private IUserManager _userManager = new UserManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
+        private IOrderLineManager _orderLineManager = new OrderLineManager();
         private User _cCUser;
-        private ProductOrder _orderNum;
+        private int _orderNum;
+        private List<ProductLot> _productLots;
+        List<OrderLine> localOrderLines = new List<OrderLine>(); // This can be replaced with a list from the database once the retrieve orderlines is done.
 
         public frmCreateOrder()
         {
@@ -71,7 +74,7 @@ namespace WpfPresentationLayer
             dpOrderDate.SelectedDate = DateTime.Now;
             cboDeliveryType.Items.Add("Truck");
             dpExpectedDate.SelectedDate = DateTime.Now.AddDays(5);
-            
+
         }
 
         /// <summary>
@@ -88,7 +91,7 @@ namespace WpfPresentationLayer
             {
                 valid = false;
                 MessageBox.Show("The customer Id field is empty go back to customer tab on main menu select a customer and try again.");
-            } 
+            }
             if (cboDeliveryType.SelectedItem == null)
             {
                 valid = false;
@@ -128,17 +131,40 @@ namespace WpfPresentationLayer
         /// <returns></returns>
         private bool createOrder(ProductOrder order)
         {
+            bool result = false;
             try
             {
-              tfOrderNumber.Text = _orderManager.createProductOrder(order).ToString();
+                _orderNum = _orderManager.createProductOrder(order);
+                tfOrderNumber.Text = _orderNum.ToString();
+                result = true;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Failed to initialize an order. " + e);
             }
-            return false;
+            return result;
         }
 
+        private void displayProductLots()
+        {
+            ProductLotManager pLM = new ProductLotManager();
+            
+            try
+            {
+                _productLots = pLM.RetrieveProductLots();
+                foreach (var product in _productLots)
+                {
+                    cboProducts.Items.Add(product.ProductName);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error retrieving product lots");
+            }
+            
+
+
+        }
 
         /// <summary>
         /// Eric Walton
@@ -152,10 +178,17 @@ namespace WpfPresentationLayer
             var order = validateOrder();
             if (order != null)
             {
-                createOrder(order);
+                if (createOrder(order))
+                {
+                    btnAddOrderLine.IsEnabled = true;
+                    cboProducts.IsEnabled = true;
+                    displayProductLots();
+                } 
             }
-            
+
         }
+
+
 
 
         /// <summary>
@@ -173,6 +206,55 @@ namespace WpfPresentationLayer
             int.TryParse(input, out result);
             return result;
         }
+
+        private void productSelected(object sender, EventArgs e)
+        {
+            ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
+            tfAvailableProduct.Text = selectedProduct.Quantity.ToString();
+        }
+
+        private void AddOrderLineClick(object sender, RoutedEventArgs e)
+        {
+            if (tfQty.Text.Length > 0)
+            {
+                if (parseToInt(tfQty.Text) <= parseToInt(tfAvailableProduct.Text))
+                {
+
+
+                    OrderLine oLine = new OrderLine();
+                    oLine.ProductOrderID = _orderNum;
+                    oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
+                    oLine.Quantity = parseToInt(tfQty.Text);
+                    oLine.GradeID = "Grade A";
+                    oLine.Price = 100;
+                    oLine.UnitDiscount = (decimal)0.0;
+                    try
+                    {
+                        MessageBox.Show(_orderLineManager.CreateOrderLine(oLine).ToString());
+                        RefreshOrderLine();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Failed to add product to order.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Quantity must be lower or equal to available product.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Need to enter a quantity.");
+            }
+
+        }
+
+        public void RefreshOrderLine()
+        {
+            dgOrderLines.ItemsSource = localOrderLines;
+        }
+        
 
 
     } // end of class

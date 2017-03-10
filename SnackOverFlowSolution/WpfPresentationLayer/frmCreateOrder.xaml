@@ -41,7 +41,7 @@
             <Label Name="lblExpectedDate" Grid.Row="4" Grid.Column="2" Content="Estimated Delivery Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <DatePicker Name="dpExpectedDate" Grid.Row="4" Grid.Column="3" Margin="0 0 10 0" IsEnabled="False" />
         </Grid>
-        <DataGrid Name="dgOrderLines" Grid.Row="1" Margin="10 0 10 0"/>
+        <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" Grid.Row="1" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" Margin="10 0 10 0"/>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>
@@ -56,10 +56,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Name="lblProduct" Grid.Row="1" Grid.Column="0" Content="Products" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Name="cboProducts" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="4 4 60 4" IsEnabled="False" />
+            <ComboBox Name="cboProducts" Grid.Row="1" Grid.Column="1"  Margin="8 8 8 8" IsEnabled="False" DropDownClosed="productSelected"  />
+            <Label Name="lblAvailableProduct" Grid.Row="1" Grid.Column="2" Content="Available" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+            <TextBox Name="tfAvailableProduct" Grid.Row="1" Grid.Column="2" Margin="90 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" IsEnabled="False"/>
             <Label Name="lblProductQty" Grid.Row="1" Grid.Column="2" Content="Qty" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <TextBox Name="tfQty" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"/>
-            <Button Name="btnAddOrderLine" Grid.Row="1" Grid.Column="3" Content="Add" Width="50" Margin="10 4 10 4" HorizontalAlignment="Right" IsEnabled="False" />
+            <Button Name="btnAddOrderLine" Grid.Row="1" Grid.Column="3" Content="Add" Width="50" Margin="10 4 10 4" HorizontalAlignment="Right" IsEnabled="False" Click="AddOrderLineClick" />
             <Label Name="lblAmount" Grid.Row="2" Grid.Column="2" Content="Order Total" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <TextBox Name="tfOrderAmount" Grid.Row="2" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
         </Grid>
@@ -74,7 +76,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button Name="btnCancel" Grid.Row="0" Grid.Column="1" Content="Cancel" Margin="10 0 0 0" HorizontalAlignment="left" />
-            <Button Name="btnCreateOrder" Grid.Row="0" Grid.Column="2" Content="Start Order" Margin="10 0 10 0" HorizontalAlignment="left" Click="StartOrderClick" />
+            <Button Name="btnStartOrder" Grid.Row="0" Grid.Column="2" Content="Start Order" Margin="10 0 10 0" HorizontalAlignment="left" Click="StartOrderClick" />
         </Grid>
     </Grid>
 </Window>

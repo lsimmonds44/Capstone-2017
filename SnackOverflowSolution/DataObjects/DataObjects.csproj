@@ -53,6 +53,7 @@
     <Compile Include="MaintenanceSchedule.cs" />
     <Compile Include="MaintenanceScheduleLine.cs" />
     <Compile Include="ManageStockViewModel.cs" />
+    <Compile Include="OrderLine.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
     <Compile Include="Product.cs" />

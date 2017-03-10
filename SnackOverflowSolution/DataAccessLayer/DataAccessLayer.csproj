@@ -54,6 +54,7 @@
     <Compile Include="InspectionAccessor.cs" />
     <Compile Include="MaintenanceScheduleAccessor.cs" />
     <Compile Include="MaintenanceScheduleLineAccessor.cs" />
+    <Compile Include="OrderLineAccessor.cs" />
     <Compile Include="OrderStatusAccessor.cs" />
     <Compile Include="PackageAccessor.cs" />
     <Compile Include="PackageLineAccessor.cs" />

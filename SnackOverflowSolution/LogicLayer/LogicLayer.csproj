@@ -66,6 +66,7 @@
     <Compile Include="IMaintenanceSchedule.cs" />
     <Compile Include="IMaintenanceScheduleLineManager.cs" />
     <Compile Include="InspectionManager.cs" />
+    <Compile Include="IOrderLineManager.cs" />
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="LocationManager.cs" />
     <Compile Include="MaintenanceScheduleLineManager.cs" />
     <Compile Include="MaintenanceScheduleManager.cs" />
+    <Compile Include="OrderLineManager.cs" />
     <Compile Include="OrderStatusManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
