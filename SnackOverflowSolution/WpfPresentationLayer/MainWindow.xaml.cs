@@ -1010,6 +1010,18 @@ namespace WpfPresentationLayer
 
             return viewModelList;
         }
+
+        private void btnAddMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle selectedVehicle;
+            if (dgVehicle.SelectedItem != null)
+            {
+                selectedVehicle = (Vehicle)dgVehicle.SelectedItem;
+                frmAddMaintenanceRecord addMaint = new frmAddMaintenanceRecord(selectedVehicle.VehicleID);
+                addMaint.Show();
+            }
+            
+        }
 		
     } // end of class
 } // end of namespace 

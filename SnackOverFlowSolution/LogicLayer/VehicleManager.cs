@@ -36,20 +36,24 @@ namespace LogicLayer
         /// <summary>
         /// Mason Allen
         /// Created 03/01/2017
+        /// Updated on 03/09/17 to include maintenance schedule creation on new vehicle creation
         /// Creates a new vehicle record
         /// </summary>
         /// <param name="newVehicle"></param>
         /// <returns>An int of 1 for success, 0 for fail</returns>
         public int CreateVehicle(Vehicle newVehicle)
         {
+            int newVehicleId;
             int success;
             try
             {
-                success = VehicleAccessor.CreateVehicle(newVehicle);
+                newVehicleId = VehicleAccessor.CreateVehicle(newVehicle);
+                success = MaintenanceScheduleAccessor.CreateMaintenanceSchedule(newVehicleId);
             }
             catch (Exception)
             {
-                throw new ApplicationException("There was a problem saving the requested vehicle");
+                throw;
+                //throw new ApplicationException("There was a problem saving the requested vehicle");
             }
             return success;
         }

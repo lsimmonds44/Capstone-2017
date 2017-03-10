@@ -83,7 +83,7 @@ namespace DataAccessLayer
             var conn = DBConnection.GetConnection();
             const string cmdText = @"sp_create_vehicle";
             var cmd = new SqlCommand(cmdText, conn);
-            var count = 0;
+            int newVehicleId = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@VIN", newVehicle.VIN);
@@ -100,7 +100,7 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                newVehicleId = Convert.ToInt32(cmd.ExecuteScalar());
             }
 
             catch (Exception)
@@ -113,7 +113,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return count;
+            return newVehicleId;
         }
 
         public static List<Vehicle> RetrieveAllVehicles()

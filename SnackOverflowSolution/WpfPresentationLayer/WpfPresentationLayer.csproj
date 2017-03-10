@@ -75,6 +75,9 @@
     <Compile Include="frmAddEditVehicle.xaml.cs">
       <DependentUpon>frmAddEditVehicle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmAddMaintenanceRecord.xaml.cs">
+      <DependentUpon>frmAddMaintenanceRecord.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmAddProduct.xaml.cs">
       <DependentUpon>frmAddProduct.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmAddEditVehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmAddMaintenanceRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

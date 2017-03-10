@@ -63,6 +63,8 @@
     <Compile Include="GradeManager.cs" />
     <Compile Include="IGradeManager.cs" />
     <Compile Include="IInspectionManager.cs" />
+    <Compile Include="IMaintenanceSchedule.cs" />
+    <Compile Include="IMaintenanceScheduleLineManager.cs" />
     <Compile Include="InspectionManager.cs" />
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="IVehicleTypeManager.cs" />
     <Compile Include="IWarehouseManager.cs" />
     <Compile Include="LocationManager.cs" />
+    <Compile Include="MaintenanceScheduleLineManager.cs" />
+    <Compile Include="MaintenanceScheduleManager.cs" />
     <Compile Include="OrderStatusManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
