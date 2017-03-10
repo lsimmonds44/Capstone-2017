@@ -129,9 +129,16 @@ namespace LogicLayer
         /// <summary>
         /// Bobby Thorne
         /// 2/12/17
+        /// Update
+        /// Bobby Thorne
+        /// 3/10/2017
         /// 
         /// This will test the Text Fields to make sure that
         /// bad data is not entered when creating a new user
+        /// 
+        /// Update
+        /// added a catch for phone number and if username is
+        /// already used
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
@@ -143,6 +150,23 @@ namespace LogicLayer
             if (user.UserName.Length > 20 || user.UserName.Length < 4)
             {
                 return "Invalid Username";
+            }
+            try
+            {
+                if (RetrieveUserByUserName(user.UserName) != null)
+                {
+                    return "Used Username";
+                }
+
+            }
+            catch { }
+            if (user.FirstName.Length < 2 || user.FirstName.Length > 50)
+            {
+                return "Invalid FirstName";
+            }
+            if (user.LastName.Length < 2 || user.LastName.Length > 50)
+            {
+                return "Invalid LastName";
             }
             if (password.Length < 7)
             {
@@ -161,7 +185,7 @@ namespace LogicLayer
             {
                 return "Invalid Last";
             }
-            if (user.Phone.Length > 15)
+            if (!IsPhoneNumber(user.Phone))
             {
                 return "Invalid Phone";
             }
@@ -172,7 +196,7 @@ namespace LogicLayer
                 username = userAccessor.RetrieveUsernameByEmail(user.EmailAddress);
                 if (username != "")
                 {
-                    return "Invalid Email";
+                    return "Used Email";
                 }
             }
             catch
@@ -197,13 +221,14 @@ namespace LogicLayer
                     return "Created";
                 }
             }
-            catch 
+            catch
             {
-                return "Used Username";
+                return "UnableToCreate";
             }
-            return "UnableToCreate";
-        }
 
+            return "UnableToCreate";
+
+        }
 
         public List<User> RetrieveFullUserList()
         {
@@ -351,6 +376,21 @@ namespace LogicLayer
                 throw ex;
             }
             return user;
+        }
+
+        private static bool IsPhoneNumber(string number)
+        {
+
+            try
+            {
+                Int32.Parse(number);
+            }
+            catch
+            {
+                return false;
+            }
+            if (number.Length == 10) { return true; }
+            else { return false; }
         }
     }
 }
