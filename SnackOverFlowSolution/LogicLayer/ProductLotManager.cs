@@ -72,6 +72,11 @@ namespace LogicLayer
             try
             {
                 lots = ProductLotAccessor.RetrieveProductLots();
+                IProductManager productManager = new ProductManager();
+                foreach (var lot in lots) {
+                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                    lot.ProductName = productInLot.Name;
+                }
             }
             catch (Exception)
             {
