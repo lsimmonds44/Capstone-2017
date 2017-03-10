@@ -903,6 +903,14 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// William Flood
+        /// Created 2017/03/09
+        /// 
+        /// Retrieve criteria to filter product lots
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterProductLots_Click(object sender, RoutedEventArgs e)
         {
             var filterWindow = new ProductLotSearchView(_productLotSearchCriteria);

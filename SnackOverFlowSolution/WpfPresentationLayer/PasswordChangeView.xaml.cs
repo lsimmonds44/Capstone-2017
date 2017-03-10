@@ -16,18 +16,35 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
+    /// William Flood
+    /// Created 2017/03/09
+    /// 
     /// Interaction logic for PasswordChangeView.xaml
     /// </summary>
     public partial class PasswordChangeView : Window
     {
         private string userName;
 
+        /// <summary>
+        /// William Flood
+        /// Created 2017/03/09
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
         public PasswordChangeView(String userName)
         {
             this.userName = userName;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// William Flood
+        /// Created 2017/03/09
+        /// 
+        /// Sets the search critera based on user input, and closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             if(txtNewPassword.Password.Length < 8)
