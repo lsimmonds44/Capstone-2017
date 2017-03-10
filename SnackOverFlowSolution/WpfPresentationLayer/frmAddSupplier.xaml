@@ -109,6 +109,7 @@
             <TextBox Grid.Column="1" Grid.Row="2" Name="txtFarmName" Margin="0 5 10 5" MaxLength="300" IsEnabled="False"/>
             <TextBox Grid.Column="1" Grid.Row="3" Name="txtFarmAddress" Margin="0 5 10 5" IsEnabled="False"/>
             <TextBox Grid.Column="1" Grid.Row="5" Name="txtFarmTaxId" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
+            <CheckBox Grid.Column="1" Grid.Row="6" Name="chkActive" Margin="0" VerticalAlignment="Center" IsChecked="True" IsEnabled="False" />
         </Grid>
         <Grid Name="productSection" Grid.Row="3" IsEnabled="False">
             <Grid.ColumnDefinitions>
