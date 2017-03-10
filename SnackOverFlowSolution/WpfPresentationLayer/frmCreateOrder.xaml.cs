@@ -254,6 +254,11 @@ namespace WpfPresentationLayer
         {
             dgOrderLines.ItemsSource = localOrderLines;
         }
+
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
         
 
 

@@ -75,7 +75,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnCancel" Grid.Row="0" Grid.Column="1" Content="Cancel" Margin="10 0 0 0" HorizontalAlignment="left" />
+            <Button Name="btnCancel" Grid.Row="0" Grid.Column="1" Content="Cancel" Margin="10 0 0 0" HorizontalAlignment="left" Click="CancelClick" />
             <Button Name="btnStartOrder" Grid.Row="0" Grid.Column="2" Content="Start Order" Margin="10 0 10 0" HorizontalAlignment="left" Click="StartOrderClick" />
         </Grid>
     </Grid>
