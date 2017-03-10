@@ -257,6 +257,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="40" />
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
                     <Grid>
@@ -277,7 +278,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label x:Name="lblStatus" Grid.Row="2" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
+                    <Grid Grid.Row="2"> 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnCreateDeliveries" Grid.Column="1" Margin="5" Content="Create Deliveries" Click="btnCreateDeliveries_Click"/>
+                    </Grid>
+                    <Label x:Name="lblStatus" Grid.Row="3" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
                 </Grid>
             </TabItem>
             <TabItem Name="tabCustomerView" Header="Customer Public View" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
@@ -300,7 +308,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabPackages_Loaded" GotFocus="tabPackages_GotFocus">
+            <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabPackages_Selected">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

@@ -1,0 +1,28 @@
+﻿<Window x:Name="frmCreateDeliveryFromOrder" x:Class="WpfPresentationLayer.frmCreateDeliveryForOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="frmCreateDeliveryForOrder" Height="350" Width="550" Loaded="frmCreateDeliveryFromOrder_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="Unassigned Packages" FontSize="15" HorizontalAlignment="Center"/>
+        <Label Content="New Delivery" FontSize="15" HorizontalAlignment="Center" Grid.Column="2"/>
+        <ListView x:Name="lvUnassignedPackages" Grid.Row="1" Grid.RowSpan="4" Margin="5"/>
+        <ListView x:Name="lvProposedPackages" Grid.Row="1" Grid.RowSpan="4" Margin="5" Grid.Column="2"/>
+        <Button x:Name="btnAddPackageToProposed" Grid.Column="1" Grid.Row="2" Margin="5 15" Content="-->" Click="btnAddPackageToProposed_Click"/>
+        <Button x:Name="btnRemovePackageFromProposed" Grid.Column="1" Grid.Row="3" Margin="5 15" Content="&lt;--" Click="btnRemovePackageFromProposed_Click"/>
+        <DatePicker x:Name="dpDeliveryDate" Grid.Column="0" Grid.Row="5" Margin="5" Grid.ColumnSpan="2" IsTodayHighlighted="False"/>
+        <Button x:Name="btnCreateDelivery" Grid.Column="2" Grid.Row="5" Margin="25 10" Content="Create Delivery" Click="btnCreateDelivery_Click"/>
+    </Grid>
+</Window>

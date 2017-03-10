@@ -636,26 +636,13 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// 2017/03/09
         /// 
-        /// Tab the shows a list of all packages in the database
+        /// Tab that shows all packages in the database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabPackages_Loaded(object sender, RoutedEventArgs e)
-        {
-            RefreshPackageList();
-        }
-
-        /// <summary>
-        /// Robert Forbes
-        /// 2017/03/01
-        /// 
-        /// Updates the items source for the package list datagrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tabPackages_GotFocus(object sender, RoutedEventArgs e)
+        private void tabPackages_Selected(object sender, RoutedEventArgs e)
         {
             RefreshPackageList();
             dgPackages.ItemsSource = _packageList;
@@ -901,6 +888,34 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Supplier Edited.");
                     tabSupplier_Selected(sender, e);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/09
+        /// 
+        /// Button click event to open a delivery management window for the selected order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateDeliveries_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvOpenOrders.SelectedItem != null)
+            {
+                if(((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment")){
+                    frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
+                    deliveryWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a delivery that is ready for shipment");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select a delivery that is ready for shipment");
             }
         }
 		

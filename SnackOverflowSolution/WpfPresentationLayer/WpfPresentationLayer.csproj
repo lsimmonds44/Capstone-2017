@@ -87,6 +87,9 @@
     <Compile Include="frmCreateCategory.xaml.cs">
       <DependentUpon>frmCreateCategory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateDeliveryForOrder.xaml.cs">
+      <DependentUpon>frmCreateDeliveryForOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmCreateOrder.xaml.cs">
       <DependentUpon>frmCreateOrder.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCreateCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCreateDeliveryForOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

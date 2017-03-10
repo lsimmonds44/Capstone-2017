@@ -144,5 +144,34 @@ namespace LogicLayer
 
             return packages;
         }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/09
+        /// 
+        /// Updates the oldPackage to the values of the newPackage
+        /// </summary>
+        /// <param name="deliveryId">The new delivery id</param>
+        /// <param name="packageId">The package to update</param>
+        /// <returns></returns>
+        public bool UpdatePackageDelivery(int packageId, int deliveryId)
+        {
+            bool result = false;
+
+            try
+            {
+                if (PackageAccessor.UpdatePackageDelivery(packageId, deliveryId) == 1)
+                {
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
     }
 }

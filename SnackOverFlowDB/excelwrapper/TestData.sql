@@ -180,7 +180,8 @@ INSERT INTO [dbo].[Status]
 	(STATUS_ID)
 	VALUES
 	("Open"),
-	("Ready For Shipment")
+	("Ready For Shipment"),
+	("Ready For Assignment")
 GO
 
 /* Order Status Test Data */
@@ -190,6 +191,15 @@ INSERT INTO [dbo].[Order_Status]
 	VALUES
 	("Open"),
 	("Ready For Shipment")
+GO
+
+/* Order Status Test Data */
+print '*** Inserting Delivery_Type Test Data ***'
+INSERT INTO [dbo].[Delivery_Type]
+	(DELIVERY_TYPE_ID)
+	VALUES
+	("Drop off"),
+	("Pick up")
 GO
 
 

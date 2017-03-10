@@ -48,7 +48,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/02/02
         /// 
-        /// When the window loads this method calls loadPackages() to update the list of packages
+        /// When the window loads this method calls LoadPackages() to update the list of packages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
