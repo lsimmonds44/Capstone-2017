@@ -256,5 +256,61 @@ namespace DataAccessLayer
             return packages;
         }
 
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/09
+        /// 
+        /// Updates the delivery Id of the passed in package
+        /// </summary>
+        /// <returns>int rows affected</returns>
+        public static int UpdatePackageDelivery(int packageId, int deliveryId)
+        {
+            // Result represents the number of rows affected
+            int result = 0;
+
+
+            // Getting a SqlCommand object
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_package_delivery";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@PACKAGE_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@new_DELIVERY_ID", SqlDbType.Int);
+            cmd.Parameters["@PACKAGE_ID"].Value = packageId;
+
+            /* 
+             * Since deliveryId can be null I'm checking if the package has a null deliveryid
+             * and then storing it appropriately
+             */
+            if (deliveryId != null)
+            {
+                cmd.Parameters["@new_DELIVERY_ID"].Value = deliveryId;
+            }
+            else
+            {
+                cmd.Parameters["@new_DELIVERY_ID"].Value = DBNull.Value;
+            }
+
+            // Attempting to run the stored procedure
+            try
+            {
+                conn.Open();
+                // Storing the amount of rows that were affected by the stored procedure
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+            return result;
+        }
     }
 }

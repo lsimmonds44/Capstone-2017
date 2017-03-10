@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,21 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmCreateOrder : Window
     {
+
+        private int _employee_Id;
+        private CommercialCustomer _cCustomer;
+
         public frmCreateOrder()
         {
             InitializeComponent();
         }
+        public frmCreateOrder(int employee_Id, CommercialCustomer customer)
+        {
+            InitializeComponent();
+            _employee_Id = employee_Id;
+            _cCustomer = customer;
+        }
+
+
     }
 }

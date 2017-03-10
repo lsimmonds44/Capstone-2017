@@ -160,7 +160,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void createOrderClick(object sender, RoutedEventArgs e)
         {
-            frmCreateOrder createOrderWindow = new frmCreateOrder();
+            frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
             if (createOrderWindow.ShowDialog() == true)
             {
                 
@@ -646,26 +646,13 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// 2017/03/09
         /// 
-        /// Tab the shows a list of all packages in the database
+        /// Tab that shows all packages in the database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabPackages_Loaded(object sender, RoutedEventArgs e)
-        {
-            RefreshPackageList();
-        }
-
-        /// <summary>
-        /// Robert Forbes
-        /// 2017/03/01
-        /// 
-        /// Updates the items source for the package list datagrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tabPackages_GotFocus(object sender, RoutedEventArgs e)
+        private void tabPackages_Selected(object sender, RoutedEventArgs e)
         {
             RefreshPackageList();
             dgPackages.ItemsSource = _packageList;
@@ -935,5 +922,94 @@ namespace WpfPresentationLayer
                 ErrorAlert.ShowDatabaseError();
             }
         }
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/09
+        /// 
+        /// Button click event to open a delivery management window for the selected order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateDeliveries_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvOpenOrders.SelectedItem != null)
+            {
+                if(((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment")){
+                    frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
+                    deliveryWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a delivery that is ready for shipment");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select a delivery that is ready for shipment");
+            }
+        }
+
+        /// Created by Natacha Ilunga
+        /// 03/09/2017
+        /// 
+        /// Supplier Tab Select Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabSupplierCatlog_Selected(object sender, RoutedEventArgs e)
+        {
+            //Load Supplier Data
+            try
+            {
+                var suppliersData = _supplierManager.ListSuppliers();
+                DgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Problem Loading Supplier Catalogue Data " + ex);
+            }
+            
+        }
+
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/09/2017
+        /// 
+        /// Parase Supplier Object into SupplierCatalogue view model.
+        /// </summary>
+        /// <param name="suppliersList"></param>
+        /// <returns></returns>
+        private List<SupplierCatalogueViewModel> parseIntoSupplierCatalogue( List<Supplier> suppliersList )
+        {
+            List<SupplierCatalogueViewModel> viewModelList = new List<SupplierCatalogueViewModel>();
+            SupplierCatalogueViewModel viewModel;
+
+            foreach ( var k in suppliersList )
+            {
+                viewModel = new SupplierCatalogueViewModel()
+                {
+                    SupplierID = k.SupplierID,
+                    FarmName = k.FarmName,
+                    FarmAddress = k.FarmAddress,
+                    FarmCity = k.FarmCity,
+                    FarmState = k.FarmState,
+                    FarmTaxID = k.FarmTaxID,
+                    IsApproved = k.IsApproved,
+                    UserId = k.UserId,
+                    UserData = _userManager.RetrieveUser(k.UserId)
+                };
+                viewModelList.Add(viewModel);
+            }
+
+
+ 
+
+
+            return viewModelList;
+        }
+		
     } // end of class
 } // end of namespace 

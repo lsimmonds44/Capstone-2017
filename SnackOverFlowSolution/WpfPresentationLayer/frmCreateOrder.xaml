@@ -37,9 +37,9 @@
             <Label Name="lblDeliveryType" Grid.Row="3" Grid.Column="2" Content="Delivery Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <ComboBox Name="cboDeliveryType" Grid.Row="3" Grid.Column="3" Width="250" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Name="lblExpectedDate" Grid.Row="4" Grid.Column="2" Content="Estimated Delivery Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <DatePicker Name="dpExpectedDate" Grid.Row="4" Grid.Column="3" />
+            <DatePicker Name="dpExpectedDate" Grid.Row="4" Grid.Column="3" Margin="0 0 10 0" />
         </Grid>
-        <DataGrid Name="dgOrderLines" Grid.Row="1" />
+        <DataGrid Name="dgOrderLines" Grid.Row="1" Margin="10 0 10 0"/>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>

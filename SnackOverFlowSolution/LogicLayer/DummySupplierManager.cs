@@ -41,5 +41,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

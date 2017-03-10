@@ -264,7 +264,136 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
+
+            <!--Supplier Catalog Tab-->
+            <TabItem Name="tabSupplierCatalog" Header="Supplier Catalog" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierCatlog_Selected">
+                <Grid Background="GhostWhite">
+                    <!--Grid Definitions-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36*"/>
+                        <RowDefinition Height="36"/>
+                    </Grid.RowDefinitions>
+                    <!--End of Grid Definitions-->
+
+                    <!--Top Border-->
+                    <Border Background="LightBlue" Grid.Column="3" Grid.ColumnSpan="17" Grid.Row="0" FlowDirection="LeftToRight"
+                            BorderBrush="Black" BorderThickness="0 0 0 2">
+                        <StackPanel Orientation="Horizontal" >
+                            <!--Search Controls-->
+                            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1" Margin="10 5 5 5"
+                                Grid.ColumnSpan="6">
+                                <TextBox Name="txtSearchCriteria" Width="250"/>
+                                <Button Content="Search" Width="100" Margin="5 0 5 0"/>
+                            </StackPanel>
+                            <!--End of Search Controls-->
+                        </StackPanel>
+                    </Border>
+                    <!--End of Top Border-->
+
+                    <!--Top Border Left Edge-->
+                    <Border Background="LightBlue" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" FlowDirection="LeftToRight">
+                        <StackPanel Orientation="Horizontal" >
+                            <!--Software Logo-->
+                            <Image Height="36"/>
+                            <!--End of Software Logo-->
+                        </StackPanel>
+                    </Border>
+                    <!--End of Top Border Left Edge-->
+
+                    <!--Side Border-->
+                    <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17" Background="LightBlue"
+                            BorderBrush="Black" BorderThickness="0 0 2 0">
+                        <StackPanel Orientation="Vertical">
+                            <Button Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Content="Add Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Content="Edit Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                        </StackPanel>
+                    </Border>
+                    <!--End of Side Border-->
+
+                    <!--Supplier Catalogue-->
+                    <DataGrid Name="DgSupplierCatalogue" GridLinesVisibility="Horizontal"
+                      RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
+                      AutoGenerateColumns="False"
+                      Grid.Column="4" Grid.ColumnSpan="8" Grid.RowSpan="15" Grid.Row="2"
+                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                      CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="50*"/>
+                            <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="100*"/>
+                            <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddressString}" Width="100*"/>
+                            <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="75*"/>
+                            <DataGridTextColumn Header="Is Approved" Binding="{Binding IsApprovedString}" Width="100*"/>
+                            <DataGridTextColumn Header="Active?" Binding="{Binding ActiveString}" Width="100*"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedByName}" Width="100*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--End of Supplier Catalogue-->
+
+                    <!--Product DataGrid-->
+                    <DataGrid Name="DgProductList" GridLinesVisibility="Horizontal"
+                      RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
+                      AutoGenerateColumns="False"
+                      Grid.Column="13" Grid.ColumnSpan="6" Grid.RowSpan="15" Grid.Row="2"
+                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                      CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Image" Binding="{Binding SupplierID}" Width="60*"/>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding SupplierID}" Width="100*"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding SupplierID}" Width="100*"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding SupplierID}" Width="100*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--End of Product DataGrid-->
+                </Grid>
+            </TabItem>
+            <!--End of Supplier Catalog Tab-->
+
+
+
+
+
+
+                    <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -272,6 +401,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="40" />
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
                     <Grid>
@@ -292,7 +422,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label x:Name="lblStatus" Grid.Row="2" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
+                    <Grid Grid.Row="2"> 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnCreateDeliveries" Grid.Column="1" Margin="5" Content="Create Deliveries" Click="btnCreateDeliveries_Click"/>
+                    </Grid>
+                    <Label x:Name="lblStatus" Grid.Row="3" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
                 </Grid>
             </TabItem>
             <TabItem Name="tabCustomerView" Header="Customer Public View" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
@@ -315,7 +452,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabPackages_Loaded" GotFocus="tabPackages_GotFocus">
+            <TabItem Name="tabPackages" Header="Packages" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabPackages_Selected">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

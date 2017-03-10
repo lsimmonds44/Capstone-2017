@@ -28,8 +28,8 @@ Create PROCEDURE sp_update_supplier
 @new_FARM_STATE[NCHAR](50),
 @old_FARM_TAX_ID[NVARCHAR](64),
 @new_FARM_TAX_ID[NVARCHAR](64),
-@new_ACTIVE[BIT],
-@old_ACTIVE[BIT]
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
 )
 AS
 BEGIN

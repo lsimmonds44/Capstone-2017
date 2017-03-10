@@ -185,5 +185,24 @@ namespace LogicLayer
 
             return wasAdded;
         }
+
+        public bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier)
+        {
+            bool success = false;
+
+            try
+            {
+                if(1 == SupplierAccessor.UpdateSupplier(oldSupplier, newSupplier))
+                {
+                    success = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return success;
+        }
     }
 }

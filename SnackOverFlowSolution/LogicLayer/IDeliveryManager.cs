@@ -1,6 +1,7 @@
 ﻿using DataObjects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace LogicLayer
         List<Delivery> RetrieveDeliveries();
 
         Vehicle RetrieveVehicleByDelivery(int vehicleID);
+
+        bool CreateDelivery(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId);
+
+        int CreateDeliveryAndRetrieveDeliveryId(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId);
 
     }
 }

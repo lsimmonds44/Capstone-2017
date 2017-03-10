@@ -22,5 +22,7 @@ namespace LogicLayer
         List<Package> RetrievePackagesInOrder(int orderID);
 
         List<Package> RetrieveAllPackages();
+
+        bool UpdatePackageDelivery(int packageId, int deliveryId);
     }
 }
