@@ -37,6 +37,14 @@ namespace LogicLayer
             }
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// Created 03/04/2017
+        /// 
+        /// Approves a charity application
+        /// </summary>
+        /// <param name="charityInstance"></param>
+        /// <returns></returns>
         public bool ApproveCharity(Charity charityInstance)
         {
             bool result = false;
@@ -59,6 +67,14 @@ namespace LogicLayer
             return result;
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// Created 03/04/2017
+        /// 
+        /// Denies a charity application
+        /// </summary>
+        /// <param name="charityInstance"></param>
+        /// <returns></returns>
         public bool DenyCharity(Charity charityInstance)
         {
             bool result = false;
