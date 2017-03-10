@@ -136,49 +136,87 @@ namespace WpfPresentationLayer
 
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
-            int userID;
-            int employeeID;
+            int employeeIDParsed;
+            int? employeeID = null;
             bool shouldPost = true;
             if (!_inApplyMode)
             {
-                if (!Int32.TryParse(txtEmployeeID.Text, out employeeID))
+                if (txtCharityName.Text.Equals(""))
                 {
-                    shouldPost = false;
+                    MessageBox.Show("Charity name cannot be blank");
+                    txtCharityName.Focus();
+                    return;
+                }
+                if (txtContactFirstName.Text.Equals(""))
+                {
+                    MessageBox.Show("First Name cannot be blank");
+                    txtContactFirstName.Focus();
+                    return;
+                }
+                if (txtContactLastName.Text.Equals(""))
+                {
+                    MessageBox.Show("Last Name cannot be blank");
+                    txtContactLastName.Focus();
+                    return;
+                }
+                if (txtPhoneNumber.Text.Equals(""))
+                {
+                    MessageBox.Show("Phone Number cannot be blank");
+                    txtPhoneNumber.Focus();
+                    return;
+                }
+                if (txtEmail.Text.Equals(""))
+                {
+                    MessageBox.Show("Email cannot be blank");
+                    txtEmail.Focus();
+                    return;
+                }
+                if (txtContactHours.Text.Equals(""))
+                {
+                    MessageBox.Show("Contact Hours cannot be blank");
+                    txtContactHours.Focus();
+                    return;
+                }
+                if (Int32.TryParse(txtEmployeeID.Text, out employeeIDParsed))
+                {
+                        employeeID = employeeIDParsed;
+                }
+                else
+                {
                     MessageBox.Show("Employee ID needs an integer value");
+                    txtEmployeeID.Focus();
+                    return;
                 }
 
-                if (shouldPost)
+                var charityAsEntered = new Charity()
                 {
-                    var charityAsEntered = new Charity()
-                    {
-                        CharityName = txtCharityName.Text,
-                        ContactFirstName = txtContactFirstName.Text,
-                        ContactHours = txtContactHours.Text,
-                        ContactLastName = txtContactLastName.Text,
-                        Email = txtEmail.Text,
-                        EmployeeID = employeeID,
-                        PhoneNumber = txtPhoneNumber.Text,
-                        UserID = _userList[cbxUserID.SelectedIndex].UserId,
-                        Status = "PENDING"
-                    };
+                    CharityName = txtCharityName.Text,
+                    ContactFirstName = txtContactFirstName.Text,
+                    ContactHours = txtContactHours.Text,
+                    ContactLastName = txtContactLastName.Text,
+                    Email = txtEmail.Text,
+                    EmployeeID = employeeID,
+                    PhoneNumber = txtPhoneNumber.Text,
+                    UserID = _userList[cbxUserID.SelectedIndex].UserId,
+                    Status = "PENDING"
+                };
 
-                    if (inAddMode)
+                if (inAddMode)
+                {
+                    try
                     {
-                        try
+                        charityManager.AddCharity(charityAsEntered);
+                        MessageBox.Show("Charity Added");
+                    }
+                    catch (System.Data.SqlClient.SqlException ex)
+                    {
+                        if (2627 == ex.Number)
                         {
-                            charityManager.AddCharity(charityAsEntered);
-                            MessageBox.Show("Charity Added");
+                            MessageBox.Show("Unique key constraint violated");
                         }
-                        catch (System.Data.SqlClient.SqlException ex)
+                        else
                         {
-                            if (2627 == ex.Number)
-                            {
-                                MessageBox.Show("Unique key constraint violated");
-                            }
-                            else
-                            {
-                                ErrorAlert.ShowDatabaseError();
-                            }
+                            ErrorAlert.ShowDatabaseError();
                         }
                     }
                 }
