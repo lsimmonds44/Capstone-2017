@@ -145,6 +145,14 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// Created 03/04/2017
+        /// 
+        /// Alters the status of a charity to approved
+        /// </summary>
+        /// <param name="charity"></param>
+        /// <returns></returns>
         public int ApproveCharity(Charity charity)
         {
 
@@ -179,6 +187,14 @@ namespace DataAccessLayer
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// Created 03/04/2017
+        /// 
+        /// Alters the status of a charity to denied
+        /// </summary>
+        /// <param name="charity"></param>
+        /// <returns></returns>
         public int DenyCharity(Charity charity)
         {
 
