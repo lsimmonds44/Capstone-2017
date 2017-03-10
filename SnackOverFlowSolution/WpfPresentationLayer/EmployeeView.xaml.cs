@@ -96,6 +96,7 @@ namespace WpfPresentationLayer
                             UserId = _userList[cbxUserID.SelectedIndex].UserId
                         });
                         MessageBox.Show("Employee Added");
+                        this.Close();
                     }
                     catch (System.Data.SqlClient.SqlException ex)
                     {
