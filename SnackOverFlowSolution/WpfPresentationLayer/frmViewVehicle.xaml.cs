@@ -25,10 +25,7 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmViewVehicle : Window
     {
-        public frmViewVehicle()
-        {
-            InitializeComponent();
-        }
+
 
         private int vehicleId;
 

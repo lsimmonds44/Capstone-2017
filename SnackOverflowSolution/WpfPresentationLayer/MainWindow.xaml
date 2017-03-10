@@ -481,7 +481,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_MouseDoubleClick">
 
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">

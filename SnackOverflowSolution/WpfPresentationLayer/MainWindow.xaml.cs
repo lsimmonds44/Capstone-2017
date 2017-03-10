@@ -1111,5 +1111,15 @@ namespace WpfPresentationLayer
         {
             btnCheckApplicationStatusDone_Click(sender, e);
         }
+
+        private void dgVehicle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgVehicle.SelectedItem != null)
+            {
+                Vehicle vehicle = (Vehicle)dgVehicle.SelectedItem;
+                frmViewVehicle vehicleWindow = new frmViewVehicle(vehicle.VehicleID);
+                vehicleWindow.ShowDialog();
+            }
+        }
     } // end of class
 } // end of namespace 
