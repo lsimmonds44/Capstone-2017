@@ -13,6 +13,7 @@ namespace DataObjects
     {
         public int OrderId { get; set; }
         public int? CustomerId { get; set; }
+        public int? EmployeeId { get; set; }
         public String OrderTypeId { get; set; }
         public String AddressType { get; set; }
         public String DeliveryTypeId { get; set; }

@@ -11,8 +11,7 @@ namespace LogicLayer
     {
         ProductOrder retrieveProductOrderDetails(int orderID);
 		List<ProductOrder> RetrieveProductOrdersByStatus(String Status);
-
         bool UpdateProductOrderStatus(int productOrderID, string status);
-
+        int createProductOrder(ProductOrder productOrder);
     }
 }
