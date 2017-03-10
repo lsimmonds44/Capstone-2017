@@ -781,8 +781,16 @@ namespace WpfPresentationLayer
 
         private void btnResetPassword_Click(object sender, RoutedEventArgs e)
         {
-            var passwordResetWindow = new ResetPassword(_userManager, "JeremyPanther");
-            passwordResetWindow.Show();
+            try
+            {
+                List<User> userList = _userManager.RetrieveFullUserList();
+                var passwordResetWindow = new ResetPassword(_userManager, userList);
+                passwordResetWindow.Show();
+            }
+            catch
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
 	    }
 		
         private void tabDeliveries_GotFocus(object sender, RoutedEventArgs e)

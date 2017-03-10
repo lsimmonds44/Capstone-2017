@@ -64,7 +64,7 @@
         <ComboBox Name="cbxProductIDVal" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding ProductId}"></Label>
+                    <Label Content="{Binding Name}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

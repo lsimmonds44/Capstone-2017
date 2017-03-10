@@ -1,4 +1,5 @@
-﻿using LogicLayer;
+﻿using DataObjects;
+using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,14 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class ResetPassword : Window
     {
+        List<User> _users;
         IUserManager _userManager;
-        public ResetPassword(IUserManager _userManager, String userName)
+        public ResetPassword(IUserManager _userManager, List<User> _users)
         {
             this._userManager = _userManager;
             InitializeComponent();
-            lblUserNameVal.Content = userName;
+            this._users = _users;
+            cbxUsers.ItemsSource = this._users;
             txtPassword.Text = _userManager.NewPassword();
         }
 
@@ -33,7 +36,7 @@ namespace WpfPresentationLayer
         {
             try
             {
-                if (1 == _userManager.ResetPassword((String)lblUserNameVal.Content, txtPassword.Text))
+                if (1 == _userManager.ResetPassword((String)_users[cbxUsers.SelectedIndex].UserName, txtPassword.Text))
                 {
                     MessageBox.Show("User Password Changed");
                 }
