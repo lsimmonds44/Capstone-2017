@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="CreateNewUser" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+        Title="CreateNewUser" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
     </Window.Background>
@@ -22,9 +22,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="340"/>
-            <ColumnDefinition Width="90px"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Label Name="lblUserName" Grid.Row="0" Grid.Column="0" Content="Username" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
@@ -54,5 +54,12 @@
         <Button Name="btnCancel" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin=" 10 0 0 0" Content="Cancel" FontSize="18" Width="100" Height="40" Click="btnCancelCreateNewUser_Click" />
         <Button Name="btnCreateUser" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Content="Create User" FontSize="18" Width="160" Height="40" Click="btnCreateNewUser_Click" />
 
+        <Label Name="lblUserWarning" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="Username invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblPasswordWarning" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="Password invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblConfirmPasswordWarning" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="ConfirmPassword invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblFirstNameWarning" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="Firstname invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblLastNameWarning" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="lastname invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblPhoneWarning" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="phone invalid" Visibility="Hidden" Foreground="Red"/>
+        <Label Name="lblEmailWarning" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="Email invalid" Visibility="Hidden" Foreground="Red"/>
     </Grid>
 </Window>
