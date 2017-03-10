@@ -34,14 +34,17 @@ namespace LogicLayer
         private string requestUsernameEmailBody(string username)
         {
 
-            return "Here is your SnackOverFlow Account username.\n\n" + username + " \n\n Have a great day!";
+            return "Here is your SnackOverFlow Account username.<p><b><font size = '5'>" + username + "</font></b><p> Have a great day!</body></ html > ";
         }
 
         /// <summary>
         /// Bobby Thorne
         /// 3/4/2017
+        /// updated
+        /// 3/10/2017
         /// 
         /// Sends the email for requestUsernameEmail
+        /// This is html enabled so it can be styled if needed
         /// </summary>
         /// <param name="email"></param>
         /// <param name="username"></param>
@@ -58,7 +61,7 @@ namespace LogicLayer
                 mail.To.Add(email);
                 mail.Subject = requestUsernameSubject();
                 mail.Body = requestUsernameEmailBody(username);
-
+                mail.IsBodyHtml = true;
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("snackoverflow2017@gmail.com", "SnackTime");
                 SmtpServer.EnableSsl = true;
