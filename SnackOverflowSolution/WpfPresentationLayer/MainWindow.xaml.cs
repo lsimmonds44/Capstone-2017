@@ -42,6 +42,7 @@ namespace WpfPresentationLayer
         private IAgreementManager _agreementManager = new AgreementManager();
         private List<Delivery> _deliveries;
         private List<Warehouse> _warehouseList;
+        private ProductLotSearchCriteria _productLotSearchCriteria;
 
         Employee _employee = null;
 
@@ -61,6 +62,7 @@ namespace WpfPresentationLayer
             _employeeManager = new EmployeeManager();
             _deliveryManager = new DeliveryManager();
             DisposeFiles();
+            _productLotSearchCriteria = new ProductLotSearchCriteria() { Expired = false };
         }
 
         /// <summary>
@@ -395,8 +397,16 @@ namespace WpfPresentationLayer
         {
             try
             {
-                _productLotList = _productLotManager.RetrieveProductLots();
-                dgProductLots.ItemsSource = _productLotList;
+                List<ProductLot> productLotList;
+                if (_productLotSearchCriteria.Expired)
+                {
+                    productLotList = _productLotManager.RetrieveExpiredProductLots();
+                }
+                else
+                {
+                    productLotList = _productLotManager.RetrieveProductLots();
+                }
+                dgProductLots.ItemsSource = productLotList;
             }
             catch (Exception ex)
             {
@@ -903,6 +913,27 @@ namespace WpfPresentationLayer
                 }
             }
         }
-		
+
+        private void FilterProductLots_Click(object sender, RoutedEventArgs e)
+        {
+            var filterWindow = new ProductLotSearchView(_productLotSearchCriteria);
+            filterWindow.ShowDialog();
+            try
+            {
+                List<ProductLot> productLotList;
+                if(_productLotSearchCriteria.Expired)
+                {
+                    productLotList = _productLotManager.RetrieveExpiredProductLots();
+                }
+                else
+                {
+                    productLotList = _productLotManager.RetrieveProductLots();
+                }
+                    dgProductLots.ItemsSource = productLotList;
+            } catch
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+        }
     } // end of class
 } // end of namespace 

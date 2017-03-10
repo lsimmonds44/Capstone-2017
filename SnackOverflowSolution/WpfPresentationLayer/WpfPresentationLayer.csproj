@@ -108,6 +108,10 @@
     <Compile Include="PasswordChangeView.xaml.cs">
       <DependentUpon>PasswordChangeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProductLotSearchCriteria.cs" />
+    <Compile Include="ProductLotSearchView.xaml.cs">
+      <DependentUpon>ProductLotSearchView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResetPassword.xaml.cs">
       <DependentUpon>ResetPassword.xaml</DependentUpon>
     </Compile>
@@ -254,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmViewProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductLotSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

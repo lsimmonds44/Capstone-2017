@@ -88,6 +88,35 @@ namespace LogicLayer
         }
 
         /// <summary>
+        /// William Flood
+        /// 2017/03/09
+        /// 
+        /// Gets a list of expired product lots from the database
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductLot> RetrieveExpiredProductLots()
+        {
+            List<ProductLot> lots = null;
+            try
+            {
+                lots = ProductLotAccessor.RetrieveExpiredProductLots();
+                IProductManager productManager = new ProductManager();
+                foreach (var lot in lots)
+                {
+                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                    lot.ProductName = productInLot.Name;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return lots;
+        }
+
+        /// <summary>
         /// Created by Michael Takrama
         /// 3/2/2017
         /// 

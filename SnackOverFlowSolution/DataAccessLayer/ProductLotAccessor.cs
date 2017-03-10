@@ -271,6 +271,59 @@ namespace DataAccessLayer
         }
 
         /// <summary>
+        /// Created 2017/03/09 by William Flood
+        /// 
+        /// Returns a list of expired product lots
+        /// </summary>
+        /// <returns></returns>
+        public static List<ProductLot> RetrieveExpiredProductLots()
+        {
+            List<ProductLot> lots = new List<ProductLot>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_expired_product_lot_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ProductLot lot = new ProductLot
+                        {
+                            ProductLotId = reader.GetInt32(0),
+                            WarehouseId = reader.GetInt32(1),
+                            SupplierId = reader.GetInt32(2),
+                            LocationId = reader.GetInt32(3),
+                            ProductId = reader.GetInt32(4),
+                            SupplyManagerId = reader.GetInt32(5),
+                            Quantity = reader.GetInt32(6),
+                            AvailableQuantity = reader.GetInt32(7),
+                            DateReceived = reader.GetDateTime(8),
+                            ExpirationDate = reader.GetDateTime(9)
+                        };
+                        lots.Add(lot);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return lots;
+        }
+
+        /// <summary>
         /// Christian Lopez
         /// 2017/02/27
         /// 

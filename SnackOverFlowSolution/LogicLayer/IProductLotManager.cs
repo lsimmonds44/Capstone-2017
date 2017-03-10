@@ -17,5 +17,7 @@ namespace LogicLayer
         List<ProductLot> RetrieveProductLots();
 
         int UpdateProductLotAvailableQuantity(ProductLot oldProductLot, ProductLot newProductLot);
+
+        List<ProductLot> RetrieveExpiredProductLots();
     }
 }

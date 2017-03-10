@@ -50,5 +50,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public List<ProductLot> RetrieveExpiredProductLots()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
