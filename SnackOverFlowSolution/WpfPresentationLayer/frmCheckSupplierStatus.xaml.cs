@@ -27,6 +27,19 @@ namespace WpfPresentationLayer
         private SupplierManager _supplierManager;
         private ProductManager _productManager;
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/10/2017
+        /// 
+        /// Initailized the checkSupplierStatus window
+        /// More work is needed to add an ability to apply after
+        /// this window if they choose to
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userManager"></param>
+        /// <param name="supplierManager"></param>
+        /// <param name="productManager"></param>
+        /// <param name="agreementManager"></param>
         public frmCheckSupplierStatus(User user, IUserManager userManager, ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager)
         {
             InitializeComponent();

@@ -1025,14 +1025,23 @@ namespace WpfPresentationLayer
             
         }
 
-        private void btnCheckSupplierStatus_Click(object sender, RoutedEventArgs e)
-        {
-            if (_user != null)
-            {
+        //private void btnCheckSupplierStatus_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_user != null)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/10/2017
+        /// 
+        /// When clicked it will bring up Applications that they have submitted
+        /// that have been approved and also pending
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckApplicationStatus_Click(object sender, RoutedEventArgs e)
         {
             bool isApproved = false;
@@ -1060,6 +1069,14 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/10/20174
+        /// 
+        /// Button that reverts back to the original status of the tab
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckApplicationStatusDone_Click(object sender, RoutedEventArgs e)
         {
             btnCheckStatus.Visibility = Visibility.Visible;
@@ -1067,6 +1084,14 @@ namespace WpfPresentationLayer
             btnCheckStatusDone.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/10/2017
+        /// 
+        /// This will cancel applications that have been submitted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelApplication_Click(object sender, RoutedEventArgs e)
         {
             btnCheckStatus.Visibility = Visibility.Visible;
@@ -1074,6 +1099,14 @@ namespace WpfPresentationLayer
             btnCheckStatusDone.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/10/2017
+        /// 
+        /// This cleans up tab when it no longer has focus such as when logged out
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabMyAccount_LostFocus(object sender, RoutedEventArgs e)
         {
             btnCheckApplicationStatusDone_Click(sender, e);
