@@ -242,6 +242,15 @@ namespace WpfPresentationLayer
                         try
                         {
                             _user = _userManager.userInstance;
+
+                            if ("ADMIN" == _user.UserName)
+                            {
+                                btnResetPassword.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                btnResetPassword.Visibility = Visibility.Collapsed;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -290,6 +299,7 @@ namespace WpfPresentationLayer
                 tfPassword.Visibility = Visibility.Visible;
                 mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
+                btnResetPassword.Visibility = Visibility.Collapsed;
             }
 
         }
@@ -787,6 +797,10 @@ namespace WpfPresentationLayer
             if ("ADMIN" == _user.UserName)
             {
                 btnResetPassword.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnResetPassword.Visibility = Visibility.Collapsed;
             }
         }
 

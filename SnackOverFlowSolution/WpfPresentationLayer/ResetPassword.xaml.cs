@@ -29,7 +29,6 @@ namespace WpfPresentationLayer
             InitializeComponent();
             this._users = _users;
             cbxUsers.ItemsSource = this._users;
-            txtPassword.Text = _userManager.NewPassword();
         }
 
         private void btnPost_Click(object sender, RoutedEventArgs e)
@@ -49,6 +48,11 @@ namespace WpfPresentationLayer
             {
                 ErrorAlert.ShowDatabaseError();
             }
+        }
+
+        private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
+        {
+            txtPassword.Text = _userManager.NewPassword();
         }
     }
 }
