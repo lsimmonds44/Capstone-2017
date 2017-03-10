@@ -87,6 +87,9 @@
     <Compile Include="frmCharityApproval.xaml.cs">
       <DependentUpon>frmCharityApproval.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmCheckSupplierStatus.xaml.cs">
+      <DependentUpon>frmCheckSupplierStatus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmCreateCategory.xaml.cs">
       <DependentUpon>frmCreateCategory.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCharityApproval.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCheckSupplierStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

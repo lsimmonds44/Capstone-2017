@@ -45,7 +45,7 @@ namespace WpfPresentationLayer
         private ProductLotSearchCriteria _productLotSearchCriteria;
 
         Employee _employee = null;
-
+        Supplier _supplier = null;
         User _user = null;
         private ICharityManager _charityManager;
 
@@ -223,6 +223,7 @@ namespace WpfPresentationLayer
                         lblUsername.Visibility = Visibility.Collapsed;
                         tfUsername.Visibility = Visibility.Collapsed;
                         tfPassword.Visibility = Visibility.Collapsed;
+                        mnuRequestUsername.Visibility = Visibility.Collapsed;
                         tfPassword.Password = "";
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
@@ -276,6 +277,7 @@ namespace WpfPresentationLayer
                 lblUsername.Visibility = Visibility.Visible;
                 tfUsername.Visibility = Visibility.Visible;
                 tfPassword.Visibility = Visibility.Visible;
+                mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
             }
 
@@ -1022,6 +1024,59 @@ namespace WpfPresentationLayer
             }
             
         }
-		
+
+        private void btnCheckSupplierStatus_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user != null)
+            {
+
+            }
+        }
+
+        private void btnCheckApplicationStatus_Click(object sender, RoutedEventArgs e)
+        {
+            bool isApproved = false;
+            if (_user != null)
+            {
+                btnCheckStatusDone.Visibility = Visibility.Visible;
+                btnCancelApplication.Visibility = Visibility.Visible;
+                dgMyAccount.Visibility = Visibility.Visible;
+
+                try
+                {
+                    _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+                    isApproved = _supplier.IsApproved;
+
+                }
+                catch
+                {
+                    frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user,_userManager,_supplierManager,_productManager,_agreementManager);
+                    checkSupplierStatus.Show();
+                }
+                if (_supplier != null)
+                {
+                    
+                }
+            }
+        }
+
+        private void btnCheckApplicationStatusDone_Click(object sender, RoutedEventArgs e)
+        {
+            btnCheckStatus.Visibility = Visibility.Visible;
+            btnCancelApplication.Visibility = Visibility.Collapsed;
+            btnCheckStatusDone.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancelApplication_Click(object sender, RoutedEventArgs e)
+        {
+            btnCheckStatus.Visibility = Visibility.Visible;
+            btnCancelApplication.Visibility = Visibility.Collapsed;
+            btnCheckStatusDone.Visibility = Visibility.Collapsed;
+        }
+
+        private void tabMyAccount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            btnCheckApplicationStatusDone_Click(sender, e);
+        }
     } // end of class
 } // end of namespace 
