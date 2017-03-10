@@ -158,7 +158,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void createOrderClick(object sender, RoutedEventArgs e)
         {
-            frmCreateOrder createOrderWindow = new frmCreateOrder();
+            frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
             if (createOrderWindow.ShowDialog() == true)
             {
                 

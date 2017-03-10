@@ -553,6 +553,7 @@ print '' print '*** creating table PRODUCT_ORDER'
 GO
 Create Table [dbo].[PRODUCT_ORDER] (
 [ORDER_ID][INT]IDENTITY(10000, 1) NOT NULL,
+[EMPLOYEE_ID][INT],
 [CUSTOMER_ID][INT] NOT NULL,
 [ORDER_TYPE_ID][NVARCHAR](250) NOT NULL,
 [ADDRESS_TYPE][NVARCHAR](50) NOT NULL,
@@ -1268,13 +1269,14 @@ ALTER TABLE [dbo].[PRODUCT_LOT] with nocheck
   References [dbo].[EMPLOYEE](EMPLOYEE_ID)
 GO
 
+/*
 print '' print '*** Creating Foreign Key PRODUCT_ORDER_CUSTOMER_ID'
 GO
 ALTER TABLE [dbo].[PRODUCT_ORDER] with nocheck
   ADD CONSTRAINT[fk_PRODUCT_ORDER_CUSTOMER_ID] FOREIGN KEY ([CUSTOMER_ID])
   References [dbo].[CUSTOMER](CUSTOMER_ID)
 GO
-
+*/
 print '' print '*** Creating Foreign Key PRODUCT_ORDER_ORDER_TYPE_ID'
 GO
 ALTER TABLE [dbo].[PRODUCT_ORDER] with nocheck
