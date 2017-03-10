@@ -361,5 +361,75 @@ namespace DataAccessLayer
 
             return name;
         }
+        /// <summary>
+        /// Author: Skyler Hiscock
+        /// Created: 2017/03/09
+        /// </summary>
+        /// <param name="oldSupplier"></param>
+        /// <param name="newSupplier"></param>
+        /// <returns></returns>
+
+        public static int UpdateSupplier(Supplier oldSupplier, Supplier newSupplier)
+        {
+            var results = 0;
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand(@"sp_update_supplier", conn);
+
+            cmd.Parameters.Add("@old_SUPPLIER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@old_USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@new_USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@old_IS_APPROVED", SqlDbType.Bit);
+            cmd.Parameters.Add("@new_IS_APPROVED", SqlDbType.Bit);
+            cmd.Parameters.Add("@old_APPROVED_BY", SqlDbType.Int);
+            cmd.Parameters.Add("@new_APPROVED_BY", SqlDbType.Int);
+            cmd.Parameters.Add("@old_FARM_NAME", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@new_FARM_NAME", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@old_FARM_ADDRESS", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@new_FARM_ADDRESS", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@old_FARM_CITY", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@new_FARM_CITY", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@old_FARM_STATE", SqlDbType.NChar);
+            cmd.Parameters.Add("@new_FARM_STATE", SqlDbType.NChar);
+            cmd.Parameters.Add("@old_FARM_TAX_ID", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@new_FARM_TAX_ID", SqlDbType.NVarChar);
+            cmd.Parameters.Add("@old_ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.Add("@new_ACTIVE", SqlDbType.Bit);
+
+            cmd.Parameters["@old_SUPPLIER_ID"].Value = oldSupplier.SupplierID;
+            cmd.Parameters["@old_USER_ID"].Value = oldSupplier.UserId;
+            cmd.Parameters["@new_USER_ID"].Value = newSupplier.UserId;
+            cmd.Parameters["@old_IS_APPROVED"].Value = oldSupplier.IsApproved;
+            cmd.Parameters["@new_IS_APPROVED"].Value = newSupplier.IsApproved;
+            cmd.Parameters["@old_APPROVED_BY"].Value = oldSupplier.ApprovedBy;
+            cmd.Parameters["@new_APPROVED_BY"].Value = newSupplier.ApprovedBy;
+            cmd.Parameters["@old_FARM_NAME"].Value = oldSupplier.FarmName;
+            cmd.Parameters["@new_FARM_NAME"].Value = newSupplier.FarmName;
+            cmd.Parameters["@old_FARM_ADDRESS"].Value = oldSupplier.FarmAddress;
+            cmd.Parameters["@new_FARM_ADDRESS"].Value = newSupplier.FarmAddress;
+            cmd.Parameters["@old_FARM_CITY"].Value = oldSupplier.FarmCity;
+            cmd.Parameters["@new_FARM_CITY"].Value = newSupplier.FarmCity;
+            cmd.Parameters["@old_FARM_STATE"].Value = oldSupplier.FarmState;
+            cmd.Parameters["@new_FARM_STATE"].Value = newSupplier.FarmState;
+            cmd.Parameters["@old_FARM_TAX_ID"].Value = oldSupplier.FarmTaxID;
+            cmd.Parameters["@new_FARM_TAX_ID"].Value = newSupplier.FarmTaxID;
+            cmd.Parameters["@old_ACTIVE"].Value = oldSupplier.Active;
+            cmd.Parameters["@new_ACTIVE"].Value = newSupplier.Active;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                results = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return results;
+        }
     }
 }

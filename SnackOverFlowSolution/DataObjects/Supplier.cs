@@ -21,5 +21,28 @@ namespace DataObjects
         public string FarmCity { get; set; }
         public string FarmState { get; set; }
         public bool Active { get; set; }
+
+        /// <summary>
+        /// Skyler Hiscock
+        /// created 2017/03/09
+        /// 
+        /// Returns clone of Supplier
+        /// </summary>
+        /// <returns>Supplier</returns>
+        public Supplier Clone()
+        {
+            return new Supplier{
+                SupplierID = this.SupplierID,
+                IsApproved = this.IsApproved,
+                ApprovedBy = this.ApprovedBy,
+                FarmTaxID = this.FarmTaxID,
+                UserId = this.UserId,
+                FarmName = this.FarmName,
+                FarmAddress = this.FarmAddress,
+                FarmCity = this.FarmCity,
+                FarmState = this.FarmState,
+                Active = this.Active
+            };
+        }
     }
 }

@@ -70,5 +70,16 @@ namespace LogicLayer
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
         bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId);
+
+        /// <summary>
+        /// Skyler Hiscock
+        /// Created on 2017/03/09
+        /// 
+        /// Method signature to update supplier account
+        /// </summary>
+        /// <param name="oldSupplier"></param>
+        /// <param name="newSupplier"></param>
+        /// <returns></returns>
+        bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier);
     }
 }

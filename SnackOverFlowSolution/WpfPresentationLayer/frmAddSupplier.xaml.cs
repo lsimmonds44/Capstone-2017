@@ -149,6 +149,7 @@ namespace WpfPresentationLayer
                 txtFarmTaxId.IsEnabled = true;
                 cboFarmState.IsEnabled = true;
                 productSection.IsEnabled = true;
+                chkActive.IsEnabled = true;
                 foreach (Product p in _agreedProducts)
                 {
                     _notAgreedProducts.Remove(p);
@@ -174,6 +175,8 @@ namespace WpfPresentationLayer
             txtFarmTaxId.IsEnabled = false;
             cboFarmState.SelectedIndex = 0;
             cboFarmState.IsEnabled = false;
+            chkActive.IsChecked = true;
+            chkActive.IsEnabled = false;
             supplierFound = false;
             productSection.IsEnabled = false;
             dgAvailableProducts.ItemsSource = null;
@@ -221,7 +224,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <remarks>Last modified 2017/03/09 by Christian Lopez</remarks>
+        /// <remarks>Last modified 2017/03/09 by Skyler Hiscock</remarks>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             // The process of submitting information to make a supplier in the DB
@@ -241,7 +244,7 @@ namespace WpfPresentationLayer
                         User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
 
                         // Actually try to create the supplier
-                        if (_supplierManager.CreateNewSupplier(supplierUser.UserId, true, _currentUser.UserId, txtFarmName.Text, txtFarmAddress.Text,
+                        if (_supplierManager.CreateNewSupplier(supplierUser.UserId, (bool)chkActive.IsChecked, _currentUser.UserId, txtFarmName.Text, txtFarmAddress.Text,
                             txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
                         {
                             //this.DialogResult = true;
@@ -315,6 +318,12 @@ namespace WpfPresentationLayer
                     try
                     {
 
+                        Supplier newSupplier = _supplierToEdit.Clone();
+                        newSupplier.Active = (bool)chkActive.IsChecked;
+                        if (!_supplierManager.UpdateSupplierAccount(_supplierToEdit, newSupplier))
+                        {
+                            MessageBox.Show("Unable to update supplier information.");
+                        }
 
                         foreach (Agreement a in _agreements)
                         {
@@ -347,7 +356,7 @@ namespace WpfPresentationLayer
                         {
                             if (!a.IsApproved)
                             {
-                                Agreement update = 
+                                Agreement update =
                                     _agreementManager.MakeAgreement(a.AgreementId, a.ProductId, a.SupplierId, DateTime.Now, true, a.Active, _currentUser.UserId);
                                 if (!_agreementManager.UpdateAgreement(a, update))
                                 {
@@ -452,6 +461,8 @@ namespace WpfPresentationLayer
                 txtFarmTaxId.Text = _supplierToEdit.FarmTaxID;
                 cboFarmState.SelectedIndex = getDropdown(_supplierToEdit.FarmState);
                 productSection.IsEnabled = true;
+                chkActive.IsChecked = _supplierToEdit.Active;
+                chkActive.IsEnabled = true;
             }
             try
             {
