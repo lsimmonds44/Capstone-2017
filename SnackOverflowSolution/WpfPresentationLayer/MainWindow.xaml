@@ -49,7 +49,7 @@
             <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Margin="3.4,0,0,24.6" Padding="10 0" FontSize="10" HorizontalAlignment="Left"  IsDefault="True" Click="btnLogin_Click" Height="21" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <TabControl Name="tabSetMain" Grid.Row="2" >
-            
+
             <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto"  >
                 <Grid>
                     <Grid.RowDefinitions>
@@ -147,12 +147,13 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="296*"></ColumnDefinition>
+                        <ColumnDefinition Width="12*"></ColumnDefinition>
+                        <ColumnDefinition Width="285*"/>
+                        <ColumnDefinition Width="296*"></ColumnDefinition>
+                        <ColumnDefinition Width="297*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="4" Name="dgrdEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single">
+                    <DataGrid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="5" Name="dgrdEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" Width="100"/>
                             <DataGridTextColumn Header="UserID" Binding="{Binding UserId}" Width="100"/>
@@ -161,8 +162,8 @@
                             <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}" Width="150"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Name="btnAddEmployee" Grid.Row="1" Grid.Column="2" Width="180" Margin="0 10 0 0" VerticalAlignment="Bottom" Click="btnAddEmployee_Click">Add</Button>
-                    <Button Grid.Row="1" Grid.Column="3" Content="Update Employee Information" Width="180" Margin="0 10 0 0" VerticalAlignment="Bottom" Click="Button_Click_Update_Employee"  />
+                    <Button Name="btnAddEmployee" Grid.Row="1" Grid.Column="3" Width="180" Margin="58,0" VerticalAlignment="Bottom" Click="btnAddEmployee_Click">Add</Button>
+                    <Button Grid.Row="1" Grid.Column="4" Content="Update Employee Information" Width="180" Margin="59,0,58,0" VerticalAlignment="Bottom" Click="Button_Click_Update_Employee"  />
                 </Grid>
             </TabItem>
             <TabItem Name="tabProduct" Header="Product" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto"   >
@@ -203,6 +204,20 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgProductLots" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
+                               AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="100" Binding="{Binding ProductLotId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Product" Width="100" Binding="{Binding ProductName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Warehouse" Width="100" Binding="{Binding WarehouseId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier" Width="100" Binding="{Binding SupplierId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="100" Binding="{Binding LocationId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supply Manager" Width="100" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Quantity" Width="100" Binding="{Binding Quantity}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Received" Width="100" Binding="{Binding DateReceived}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Expiring" Width="100" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -218,8 +233,6 @@
                         <Button Name="btnManageStock" Grid.Row="2" Grid.Column="3" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="BtnManageStock_OnClick" />
 
                     </Grid>
-                    <DataGrid x:Name="dgProductLots" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplier_Selected">
@@ -338,7 +351,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True">
-                        
+
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
