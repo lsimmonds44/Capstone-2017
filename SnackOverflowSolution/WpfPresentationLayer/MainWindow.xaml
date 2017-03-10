@@ -59,7 +59,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="CustomerSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="100"/>
                             <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="100"/>
@@ -82,7 +82,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerTypeSelected" Initialized="cboCustomerTypeInitialized" />
-                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick"/>
+                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick" IsEnabled="False"/>
                         <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
                         <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
                     </Grid>
@@ -481,7 +481,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_MouseDoubleClick">
 
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">

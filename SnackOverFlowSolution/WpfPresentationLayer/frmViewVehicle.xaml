@@ -37,18 +37,18 @@
         <Label Content="Active:" Grid.Row="3" Grid.Column="4" Margin="70 25 1 10" />
         <Label Content="Repair Date:" Grid.Row="4" Grid.Column="4" Margin="40 25 1 10" />
         <Label Content="Last Driver:" Grid.Row="5" Grid.Column="4" Margin="45 25 1 10" />
-        
-        <TextBox x:Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtVIN" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtMake" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtModel" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtYear" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtColor" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtType" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtMileage" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtActive" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtRepairDate" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
-        <TextBox x:Name="txtLastDriver" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Opacity="0" IsReadOnly="True" />
+
+        <TextBox x:Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox x:Name="txtVIN" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox x:Name="txtMake" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtModel" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtYear" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtColor" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtType" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtMileage" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtActive" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtRepairDate" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox x:Name="txtLastDriver" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
         
         <Button x:Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close"  Margin="20" Click="btnClose_Click" IsCancel="True"/>
         

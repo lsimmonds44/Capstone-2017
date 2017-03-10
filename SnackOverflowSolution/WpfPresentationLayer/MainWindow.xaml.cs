@@ -165,7 +165,18 @@ namespace WpfPresentationLayer
             {
                 
             }
+        }
 
+        /// <summary>
+        /// Eric Walton
+        /// 2017/10/3
+        /// Enables the create order button when a customer is selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CustomerSelected(object sender, SelectionChangedEventArgs e)
+        {
+            btnCreateOrder.IsEnabled = true;
         }
 
         /// <summary>
@@ -1127,5 +1138,17 @@ namespace WpfPresentationLayer
         {
             btnCheckApplicationStatusDone_Click(sender, e);
         }
+
+        private void dgVehicle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgVehicle.SelectedItem != null)
+            {
+                Vehicle vehicle = (Vehicle)dgVehicle.SelectedItem;
+                frmViewVehicle vehicleWindow = new frmViewVehicle(vehicle.VehicleID);
+                vehicleWindow.ShowDialog();
+            }
+        }
+
+        
     } // end of class
 } // end of namespace 
