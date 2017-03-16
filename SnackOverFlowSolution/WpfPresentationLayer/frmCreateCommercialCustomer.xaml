@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfPresentationLayer.CreateCommercialCustomerWindow"
+﻿<Window x:Class="WpfPresentationLayer.frmCreateCommercialCustomer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CreateCommercialCustomerWindow" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Create Commercial Customer Account" Height="500" Width="700" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
     </Window.Background>

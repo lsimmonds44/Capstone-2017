@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
-    /// Interaction logic for CreateCommercialCustomerWindow.xaml
+    /// Interaction logic for frmCreateCommercialCustomer.xaml
     /// </summary>
-    public partial class CreateCommercialCustomerWindow : Window
+    public partial class frmCreateCommercialCustomer : Window
     {
         UserManager _userMngr = new UserManager();
         CustomerManager _customerMngr = new CustomerManager();
@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
         /// 
         /// </summary>
         /// <param name="employeeId"></param>
-        public CreateCommercialCustomerWindow(int employeeId)
+        public frmCreateCommercialCustomer(int employeeId)
         {
             InitializeComponent();
             tFApprovedBy.Text = employeeId.ToString();

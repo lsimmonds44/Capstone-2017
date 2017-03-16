@@ -30,8 +30,7 @@ namespace WpfPresentationLayer
         private User _cCUser;
         private int _orderNum;
         private List<ProductLot> _productLots;
-        List<OrderLine> localOrderLines = new List<OrderLine>(); // This can be replaced with a list from the database once the retrieve orderlines is done.
-
+       
         public frmCreateOrder()
         {
             InitializeComponent();
@@ -230,8 +229,7 @@ namespace WpfPresentationLayer
                     oLine.UnitDiscount = (decimal)0.0;
                     try
                     {
-                        MessageBox.Show(_orderLineManager.CreateOrderLine(oLine).ToString());
-                        RefreshOrderLine();
+                        _orderLineManager.CreateOrderLine(oLine);
                     }
                     catch (Exception)
                     {
@@ -247,12 +245,13 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Need to enter a quantity.");
             }
-
+            RefreshOrderLines();
         }
 
-        public void RefreshOrderLine()
+        public void RefreshOrderLines()
         {
-            dgOrderLines.ItemsSource = localOrderLines;
+
+            dgOrderLines.ItemsSource = _orderLineManager.RetrieveOrderLineListByProductOrderId(_orderNum);
         }
 
         private void CancelClick(object sender, RoutedEventArgs e)

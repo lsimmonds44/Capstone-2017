@@ -34,7 +34,7 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@GRADE_ID", oLine.GradeID);
             cmd.Parameters.AddWithValue("@PRICE", oLine.Price);
             cmd.Parameters.AddWithValue("@UNIT_DISCOUNT", oLine.UnitDiscount);
-            
+
             try
             {
                 conn.Open();
@@ -49,6 +49,52 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return result;
+        }
+
+        public static List<OrderLine> RetrieveOrderLinesByOrderId(int OrderId)
+        {
+            List<OrderLine> orderLines = new List<OrderLine>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_orderline_list_by_order_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue(@"PRODUCT_ORDER_ID", OrderId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        OrderLine orderLine = new OrderLine();
+                        orderLine.OrderLineID = reader.GetInt32(0);
+                        orderLine.ProductOrderID = reader.GetInt32(1);
+                        if (!reader.IsDBNull(2))
+                        {
+                            orderLine.ProductID = reader.GetInt32(2);
+                        }
+                        orderLine.Quantity = reader.GetInt32(3);
+                        orderLine.GradeID = reader.GetString(4);
+                        orderLine.Price = reader.GetDecimal(5);
+                        orderLine.UnitDiscount = reader.GetDecimal(6);
+                        orderLines.Add(orderLine);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return orderLines;
         }
 
     } // end of class

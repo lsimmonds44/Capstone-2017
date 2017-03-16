@@ -125,7 +125,7 @@
       <DependentUpon>ResetPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfExtensionMethods.cs" />
-    <Page Include="CreateCommercialCustomerWindow.xaml">
+    <Page Include="frmCreateCommercialCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,8 +239,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreateCommercialCustomerWindow.xaml.cs">
-      <DependentUpon>CreateCommercialCustomerWindow.xaml</DependentUpon>
+    <Compile Include="frmCreateCommercialCustomer.xaml.cs">
+      <DependentUpon>frmCreateCommercialCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateNewUser.xaml.cs">
       <DependentUpon>CreateNewUser.xaml</DependentUpon>

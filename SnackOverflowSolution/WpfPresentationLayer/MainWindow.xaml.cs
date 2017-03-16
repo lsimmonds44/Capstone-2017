@@ -80,7 +80,7 @@ namespace WpfPresentationLayer
             {
                 try
                 {
-                    CreateCommercialCustomerWindow cCCW = new CreateCommercialCustomerWindow((int)_employee.EmployeeId);
+                    frmCreateCommercialCustomer cCCW = new frmCreateCommercialCustomer((int)_employee.EmployeeId);
                     if (cCCW.ShowDialog() == true)
                     {
                         _commercialCustomers = _customerManager.RetrieveCommercialCustomers();

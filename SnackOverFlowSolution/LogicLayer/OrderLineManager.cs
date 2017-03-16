@@ -22,7 +22,6 @@ namespace LogicLayer
         public int CreateOrderLine(OrderLine orderLine)
         {
             int result = 0;
-
             try
             {
                result = OrderLineAccessor.CreateOrderLine(orderLine);
@@ -31,8 +30,25 @@ namespace LogicLayer
             {
                 throw;
             }
-
             return result;
         }
-    }
-}
+
+
+
+
+
+        public List<OrderLine> RetrieveOrderLineListByProductOrderId(int ProductOrderId)
+        {
+            List<OrderLine> result = null;
+            try
+            {
+                result = OrderLineAccessor.RetrieveOrderLinesByOrderId(ProductOrderId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return result;
+        }
+    } // end of class
+} // end of namespace

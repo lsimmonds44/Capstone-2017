@@ -10,5 +10,6 @@ namespace LogicLayer
     public interface IOrderLineManager
     {
         int CreateOrderLine(OrderLine orderLine);
+        List<OrderLine> RetrieveOrderLineListByProductOrderId(int ProductOrderId);
     }
 }
