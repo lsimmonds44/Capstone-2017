@@ -204,7 +204,30 @@ INSERT INTO [dbo].[Delivery_Type]
 	("Pick up")
 GO
 
+/* Supplier Invoice Test Data */
+print '*** Inserting Supplier_Invoice Test Data ***'
+GO
+INSERT INTO [dbo].[Supplier_Invoice]
+	(SUPPLIER_ID, INVOICE_DATE, SUB_TOTAL, TAX_AMOUNT, TOTAL)
+VALUES
+	(10000, '2017-03-20', 50.00, 2.00, 52.00),
+	(10000, '2017-03-21', 20.00, 0.50, 20.50),
+	(10001, '2017-03-22', 1050.30, 105.00, 1155.30),
+	(10003, '2017-03-21', 5.00, 0.35, 5.35)
+GO
 
+/*Supplier Invoice Line Test Data */
+print '*** Inserting Supplier_Invoice_Line Test Data ***'
+GO
+INSERT INTO [dbo].[Supplier_Invoice_Line]
+	(SUPPLIER_INVOICE_ID, PRODUCT_LOT_ID, QUANTITY_SOLD, PRICE_EACH, ITEM_TOTAL)
+VALUES
+	(10000, 10003, 2, 800.00, 1600.00),
+	(10000, 10001, 5, 600.00, 3000.00),
+	(10001, 10004, 10, 100.00, 1000.00),
+	(10002, 10001, 7, 600.00, 4300.00),
+	(10003, 10000, 1, 500.00, 500.00)
+GO
 
 
 
