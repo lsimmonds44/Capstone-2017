@@ -1474,15 +1474,5370 @@ SELECT USER_NAME
 FROM app_user
 WHERE E_MAIL_ADDRESS = @E_MAIL_ADDRESS 
 END
+GO
 
+Print '' print  ' *** creating CREATE stored procedures'
 GO
 
 
+Print '' print  ' *** creating procedure sp_create_agreement'
+GO
+Create PROCEDURE sp_create_agreement
+(
+@PRODUCT_ID[INT],
+@SUPPLIER_ID[INT],
+@DATE_SUBMITTED[DATETIME],
+@IS_APPROVED[BIT],
+@APPROVED_BY[INT]
+)
+AS
+BEGIN
+INSERT INTO AGREEMENT (PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APPROVED_BY)
+VALUES
+(@PRODUCT_ID, @SUPPLIER_ID, @DATE_SUBMITTED, @IS_APPROVED, @APPROVED_BY)
+END
+
+Print '' print  ' *** creating procedure sp_create_agreement_application'
+GO
+Create PROCEDURE sp_create_agreement_application
+(
+@PRODUCT_ID[INT],
+@SUPPLIER_ID[INT],
+@DATE_SUBMITTED[DATETIME],
+@IS_APPROVED[BIT]
+)
+AS
+BEGIN
+INSERT INTO AGREEMENT (PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED)
+VALUES
+(@PRODUCT_ID, @SUPPLIER_ID, @DATE_SUBMITTED, @IS_APPROVED)
+END
+
+Print '' print  ' *** creating procedure sp_create_app_user'
+GO
+Create PROCEDURE sp_create_app_user
+(
+@FIRST_NAME[NVARCHAR](150),
+@LAST_NAME[NVARCHAR](100)= NULL,
+@PHONE[NVARCHAR](15),
+@PREFERRED_ADDRESS_ID[INT]=NULL,
+@E_MAIL_ADDRESS[NVARCHAR](50),
+@E_MAIL_PREFERENCES[BIT],
+@PASSWORD_HASH[NVARCHAR](64),
+@PASSWORD_SALT[NVARCHAR](64),
+@USER_NAME[NVARCHAR](50),
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO APP_USER (FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE)
+VALUES
+(@FIRST_NAME, @LAST_NAME, @PHONE, @PREFERRED_ADDRESS_ID, @E_MAIL_ADDRESS, @E_MAIL_PREFERENCES, @PASSWORD_HASH, @PASSWORD_SALT, @USER_NAME, @ACTIVE)
+END
+
+Print '' print  ' *** creating procedure sp_create_backorder_preorder'
+GO
+Create PROCEDURE sp_create_backorder_preorder
+(
+@ORDER_ID[INT],
+@CUSTOMER_ID[INT],
+@AMOUNT[DECIMAL](10,2),
+@DATE_PLACED[DATETIME],
+@DATE_EXPECTED[DATETIME],
+@HAS_ARRIVED[BIT],
+@ADDRESS_1[NVARCHAR](50),
+@ADDRESS_2[NVARCHAR](50),
+@CITY[NVARCHAR](50),
+@STATE[NCHAR](2),
+@ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+INSERT INTO BACKORDER_PREORDER (ORDER_ID, CUSTOMER_ID, AMOUNT, DATE_PLACED, DATE_EXPECTED, HAS_ARRIVED, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP)
+VALUES
+(@ORDER_ID, @CUSTOMER_ID, @AMOUNT, @DATE_PLACED, @DATE_EXPECTED, @HAS_ARRIVED, @ADDRESS_1, @ADDRESS_2, @CITY, @STATE, @ZIP)
+END
+
+Print '' print  ' *** creating procedure sp_create_category'
+GO
+Create PROCEDURE sp_create_category
+(
+	@CATEGORY_ID	[NVARCHAR](200),
+	@DESCRIPTION	[NVARCHAR](750)
+)
+AS
+	BEGIN
+		INSERT INTO CATEGORY (CATEGORY_ID, DESCRIPTION)
+		VALUES
+		(@CATEGORY_ID, @DESCRIPTION)
+		RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_create_charity'
+GO
+Create PROCEDURE sp_create_charity
+(
+@USER_ID[INT],
+@EMPLOYEE_ID[INT],
+@CHARITY_NAME[NVARCHAR](200),
+@CONTACT_FIRST_NAME[NVARCHAR](150),
+@CONTACT_LAST_NAME[NVARCHAR](150),
+@PHONE_NUMBER[NVARCHAR](20),
+@EMAIL[NVARCHAR](100),
+@CONTACT_HOURS[NVARCHAR](150),
+@STATUS[NVARCHAR](10)
+)
+AS
+BEGIN
+INSERT INTO CHARITY (USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS)
+VALUES
+(@USER_ID, @EMPLOYEE_ID, @CHARITY_NAME, @CONTACT_FIRST_NAME, @CONTACT_LAST_NAME, @PHONE_NUMBER, @EMAIL, @CONTACT_HOURS, @STATUS)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_charity_application'
+GO
+Create PROCEDURE sp_create_charity_application
+(
+@USER_ID[INT],
+@CHARITY_NAME[NVARCHAR](200),
+@CONTACT_FIRST_NAME[NVARCHAR](150),
+@CONTACT_LAST_NAME[NVARCHAR](150),
+@PHONE_NUMBER[NVARCHAR](20),
+@EMAIL[NVARCHAR](100),
+@CONTACT_HOURS[NVARCHAR](150)
+)
+AS
+BEGIN
+INSERT INTO CHARITY (USER_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS)
+VALUES
+(@USER_ID, @CHARITY_NAME, @CONTACT_FIRST_NAME, @CONTACT_LAST_NAME, @PHONE_NUMBER, @EMAIL, @CONTACT_HOURS)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_charity_products'
+GO
+Create PROCEDURE sp_create_charity_products
+(
+@CHARITY_ID[INT],
+@PRODUCT_LOT_ID[INT],
+@QUANTITY[INT]
+)
+AS
+BEGIN
+INSERT INTO CHARITY_PRODUCTS (CHARITY_ID, PRODUCT_LOT_ID, QUANTITY)
+VALUES
+(@CHARITY_ID, @PRODUCT_LOT_ID, @QUANTITY)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_commercial'
+GO
+Create PROCEDURE sp_create_commercial
+(
+@USER_ID[INT],
+@IS_APPROVED[BIT],
+@APPROVED_BY[INT],
+@FEDERAL_TAX_ID[INT],
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO COMMERCIAL ([USER_ID],[IS_APPROVED],[APPROVED_BY],[FEDERAL_TAX_ID],[ACTIVE])
+VALUES
+(@USER_ID,@IS_APPROVED,@APPROVED_BY,@FEDERAL_TAX_ID,@ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_customer'
+GO
+Create PROCEDURE sp_create_customer
+(
+@CUSTOMER_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO CUSTOMER (CUSTOMER_ID)
+VALUES
+(@CUSTOMER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_deal'
+GO
+Create PROCEDURE sp_create_deal
+(
+@DESCRIPTION[NVARCHAR](200),
+@CODE[NCHAR](10)= NULL,
+@AMOUNT[DECIMAL](5,2)= NULL,
+@PERCENT_OFF[DECIMAL](5,2)= NULL
+)
+AS
+BEGIN
+INSERT INTO DEAL (DESCRIPTION, CODE, AMOUNT, PERCENT_OFF)
+VALUES
+(@DESCRIPTION, @CODE, @AMOUNT, @PERCENT_OFF)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_deal_category'
+GO
+Create PROCEDURE sp_create_deal_category
+(
+@DEAL_ID[INT],
+@CATEGORY_ID[NVARCHAR](200),
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO DEAL_CATEGORY (DEAL_ID, CATEGORY_ID, ACTIVE)
+VALUES
+(@DEAL_ID, @CATEGORY_ID, @ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_deal_product'
+GO
+Create PROCEDURE sp_create_deal_product
+(
+@DEAL_ID[INT],
+@PRODUCT_ID[INT],
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO DEAL_PRODUCT (DEAL_ID, PRODUCT_ID, ACTIVE)
+VALUES
+(@DEAL_ID, @PRODUCT_ID, @ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_delivery'
+GO
+Create PROCEDURE sp_create_delivery
+(
+@ROUTE_ID[INT],
+@DEVLIVERY_DATE[DATETIME],
+@VERIFICATION[VARBINARY]= NULL,
+@STATUS_ID[NVARCHAR](50),
+@DELIVERY_TYPE_ID[NVARCHAR](50),
+@ORDER_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO DELIVERY (ROUTE_ID, DEVLIVERY_DATE, VERIFICATION, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID)
+VALUES
+(@ROUTE_ID, @DEVLIVERY_DATE, @VERIFICATION, @STATUS_ID, @DELIVERY_TYPE_ID, @ORDER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_delivery_return_delivery_id'
+GO
+Create PROCEDURE sp_create_delivery_return_delivery_id
+(
+@ROUTE_ID[INT],
+@DEVLIVERY_DATE[DATETIME],
+@VERIFICATION[VARBINARY]= NULL,
+@STATUS_ID[NVARCHAR](50),
+@DELIVERY_TYPE_ID[NVARCHAR](50),
+@ORDER_ID[INT],
+@DELIVERY_ID[INT] OUTPUT
+
+)
+AS
+BEGIN
+INSERT INTO DELIVERY (ROUTE_ID, DEVLIVERY_DATE, VERIFICATION, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID)
+VALUES
+(@ROUTE_ID, @DEVLIVERY_DATE, @VERIFICATION, @STATUS_ID, @DELIVERY_TYPE_ID, @ORDER_ID)
+SELECT @DELIVERY_ID = SCOPE_IDENTITY()
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_delivery_type'
+GO
+Create PROCEDURE sp_create_delivery_type
+(
+@DELIVERY_TYPE_ID[NVARCHAR](50),
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO DELIVERY_TYPE (DELIVERY_TYPE_ID, ACTIVE)
+VALUES
+(@DELIVERY_TYPE_ID, @ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_dispatcher_message'
+GO
+Create PROCEDURE sp_create_dispatcher_message
+(
+@EMPLOYEE_ID[INT],
+@MESSAGE_NAME[NVARCHAR](100),
+@DRIVER_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO DISPATCHER_MESSAGE (EMPLOYEE_ID, MESSAGE_NAME, DRIVER_ID)
+VALUES
+(@EMPLOYEE_ID, @MESSAGE_NAME, @DRIVER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_driver'
+GO
+Create PROCEDURE sp_create_driver
+(
+@DRIVER_ID[INT],
+@DRIVER_LICENSE_NUMBER[NVARCHAR](9),
+@LICENSE_EXPIRATION[DATETIME],
+@ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO DRIVER (DRIVER_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE)
+VALUES
+(@DRIVER_ID, @DRIVER_LICENSE_NUMBER, @LICENSE_EXPIRATION, @ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_employee'
+GO
+Create PROCEDURE sp_create_employee
+(
+@USER_ID[INT],
+@SALARY[DECIMAL](8,2)= NULL,
+@ACTIVE[BIT],
+@DATE_OF_BIRTH[DATE]
+)
+AS
+BEGIN
+INSERT INTO EMPLOYEE (USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH)
+VALUES
+(@USER_ID, @SALARY, @ACTIVE, @DATE_OF_BIRTH)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_employee_message'
+GO
+Create PROCEDURE sp_create_employee_message
+(
+@SENDER_ID[INT],
+@RECEIVER_ID[INT],
+@SENT[DATETIME],
+@VIEWED[BIT],
+@MESSAGE[NVARCHAR](4000)
+)
+AS
+BEGIN
+INSERT INTO EMPLOYEE_MESSAGE (SENDER_ID, RECEIVER_ID, SENT, VIEWED, MESSAGE)
+VALUES
+(@SENDER_ID, @RECEIVER_ID, @SENT, @VIEWED, @MESSAGE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_employee_order_responsibility'
+GO
+Create PROCEDURE sp_create_employee_order_responsibility
+(
+@ORDER_ID[INT],
+@EMPLOYEE_ID[INT],
+@DESCRIPTION[NVARCHAR](200)
+)
+AS
+BEGIN
+INSERT INTO EMPLOYEE_ORDER_RESPONSIBILITY (ORDER_ID, EMPLOYEE_ID, DESCRIPTION)
+VALUES
+(@ORDER_ID, @EMPLOYEE_ID, @DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_employee_role'
+GO
+Create PROCEDURE sp_create_employee_role
+(
+@EMPLOYEE_ID[INT],
+@ROLE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+INSERT INTO EMPLOYEE_ROLE (EMPLOYEE_ID, ROLE_ID)
+VALUES
+(@EMPLOYEE_ID, @ROLE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_grade'
+GO
+Create PROCEDURE sp_create_grade
+(
+@GRADE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+INSERT INTO GRADE (GRADE_ID)
+VALUES
+(@GRADE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_inspection'
+GO
+Create PROCEDURE sp_create_inspection
+(
+@EMPLOYEE_ID[INT],
+@PRODUCT_LOT_ID[INT],
+@GRADE_ID[NVARCHAR](250),
+@DATE_PERFORMED[DATETIME],
+@EXPIRATION_DATE[DATETIME]
+)
+AS
+BEGIN
+INSERT INTO INSPECTION (EMPLOYEE_ID, PRODUCT_LOT_ID, GRADE_ID, DATE_PERFORMED, EXPIRATION_DATE)
+VALUES
+(@EMPLOYEE_ID, @PRODUCT_LOT_ID, @GRADE_ID, @DATE_PERFORMED, @EXPIRATION_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_location'
+GO
+Create PROCEDURE sp_create_location
+(
+@DESCRIPTION[NVARCHAR](250),
+@IS_ACTIVE[BIT]
+)
+AS
+BEGIN
+INSERT INTO LOCATION (DESCRIPTION, IS_ACTIVE)
+VALUES
+(@DESCRIPTION, @IS_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_maintenance_schedule'
+GO
+Create PROCEDURE sp_create_maintenance_schedule
+(
+@VEHICLE_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO MAINTENANCE_SCHEDULE (VEHICLE_ID)
+VALUES
+(@VEHICLE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_maintenance_schedule_line'
+GO
+Create PROCEDURE sp_create_maintenance_schedule_line
+(
+@MAINTENANCE_SCHEDULE_ID[INT],
+@DESCRIPTION[NVARCHAR](250),
+@MAINTENANCE_DATE[DATE]
+)
+AS
+BEGIN
+INSERT INTO MAINTENANCE_SCHEDULE_LINE (MAINTENANCE_SCHEDULE_ID, DESCRIPTION, MAINTENANCE_DATE)
+VALUES
+(@MAINTENANCE_SCHEDULE_ID, @DESCRIPTION, @MAINTENANCE_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_message_line'
+GO
+Create PROCEDURE sp_create_message_line
+(
+@DISPATCHER_MESSAGE_ID[INT],
+@MESSAGE_LINE_TEXT[NVARCHAR](250)
+)
+AS
+BEGIN
+INSERT INTO MESSAGE_LINE (DISPATCHER_MESSAGE_ID, MESSAGE_LINE_TEXT)
+VALUES
+(@DISPATCHER_MESSAGE_ID, @MESSAGE_LINE_TEXT)
+END
+GO
+
+print '' print '*** Creating sp_create_new_product'
+GO
+CREATE PROCEDURE [dbo].[sp_create_new_product]
+	(
+			@Name				[nvarchar](50)	,
+			@Description		[nvarchar](200)	,
+			@Unit_Price			[decimal](10,2)	,
+			@Image_Binary		[image]			,
+			@Active				[bit]			,
+			@Unit_Of_Measurement [nvarchar](20)	,
+			@DELIVERY_CHARGE_PER_UNIT	[decimal](5,2)	
+	)
+AS
+	BEGIN
+		INSERT INTO [dbo].[Product]
+		(
+			Name						,				
+			Description					,
+			Unit_Price					,
+			Image_Binary				,
+			Active						,
+			Unit_Of_Measurement 		,
+			DELIVERY_CHARGE_PER_UNIT	
+		)
+		VALUES
+		(
+			@Name						,				
+			@Description				,
+			@Unit_Price					,
+			@Image_Binary				,
+			@Active						,
+			@Unit_Of_Measurement 		,
+			@DELIVERY_CHARGE_PER_UNIT	
+		)	
+		RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_create_order_line'
+GO
+Create PROCEDURE sp_create_order_line
+(
+@PRODUCT_ORDER_ID[INT],
+@PRODUCT_ID[INT],
+@QUANTITY[INT],
+@GRADE_ID[NVARCHAR](250),
+@PRICE[DECIMAL](5,2),
+@UNIT_DISCOUNT[DECIMAL](5,2)
+)
+AS
+BEGIN
+INSERT INTO ORDER_LINE (PRODUCT_ORDER_ID, PRODUCT_ID, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT)
+VALUES
+(@PRODUCT_ORDER_ID, @PRODUCT_ID, @QUANTITY, @GRADE_ID, @PRICE, @UNIT_DISCOUNT)
+SELECT SCOPE_IDENTITY()
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_order_status'
+GO
+Create PROCEDURE sp_create_order_status
+(
+@ORDER_STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO ORDER_STATUS (ORDER_STATUS_ID)
+VALUES
+(@ORDER_STATUS_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_order_type'
+GO
+Create PROCEDURE sp_create_order_type
+(
+@ORDER_TYPE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+INSERT INTO ORDER_TYPE (ORDER_TYPE_ID)
+VALUES
+(@ORDER_TYPE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_package'
+GO
+Create PROCEDURE sp_create_package
+(
+@DELIVERY_ID[INT],
+@ORDER_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO PACKAGE (DELIVERY_ID, ORDER_ID)
+VALUES
+(@DELIVERY_ID, @ORDER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_package_line'
+GO
+Create PROCEDURE sp_create_package_line
+(
+@PACKAGE_ID[INT],
+@PRODUCT_LOT_ID[INT],
+@QUANTITY[INT],
+@PRICE_PAID[DECIMAL](5,2)
+)
+AS
+BEGIN
+INSERT INTO PACKAGE_LINE (PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID)
+VALUES
+(@PACKAGE_ID, @PRODUCT_LOT_ID, @QUANTITY, @PRICE_PAID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_pickup'
+GO
+Create PROCEDURE sp_create_pickup
+(
+@SUPPLIER_ID[INT],
+@WAREHOUSE_ID[INT],
+@DRIVER_ID[INT]= NULL,
+@EMPLOYEE_ID[INT]= NULL
+)
+AS
+BEGIN
+INSERT INTO PICKUP (SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID)
+VALUES
+(@SUPPLIER_ID, @WAREHOUSE_ID, @DRIVER_ID, @EMPLOYEE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_pickup_line'
+GO
+Create PROCEDURE sp_create_pickup_line
+(
+@PICKUP_ID[INT],
+@PRODUCT_LOT_ID[INT],
+@QUANTITY[INT],
+@PICK_UP_STATUS[BIT]
+)
+AS
+BEGIN
+INSERT INTO PICKUP_LINE (PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS)
+VALUES
+(@PICKUP_ID, @PRODUCT_LOT_ID, @QUANTITY, @PICK_UP_STATUS)
+END
+GO
+
+print '' print '*** Creating sp_create_product'
+GO
+CREATE PROCEDURE [dbo].[sp_create_product]
+	(
+			@Name				[nvarchar](50)	,
+			@Description		[nvarchar](200)	,
+			@Unit_Price			[decimal](10,2)	,
+			@Image_Binary		[image]			,
+			@Active				[bit]			,
+			@Unit_Of_Measurement [nvarchar](20)	,
+			@DELIVERY_CHARGE_PER_UNIT	[decimal](5,2)	
+	)
+AS
+	BEGIN
+		INSERT INTO [dbo].[Product]
+		(
+			Name						,				
+			Description					,
+			Unit_Price					,
+			Image_Binary				,
+			Active						,
+			Unit_Of_Measurement 		,
+			DELIVERY_CHARGE_PER_UNIT	
+		)
+		VALUES
+		(
+			@Name						,				
+			@Description				,
+			@Unit_Price					,
+			@Image_Binary				,
+			@Active						,
+			@Unit_Of_Measurement 		,
+			@DELIVERY_CHARGE_PER_UNIT	
+		)	
+		RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_create_product_category'
+GO
+Create PROCEDURE sp_create_product_category
+(
+@PRODUCT_ID[INT],
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID)
+VALUES
+(@PRODUCT_ID, @CATEGORY_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_product_grade_price'
+GO
+Create PROCEDURE sp_create_product_grade_price
+(
+@PRODUCT_ID[INT],
+@GRADE_ID[NVARCHAR](250),
+@PRICE[DECIMAL](5,2)
+)
+AS
+BEGIN
+INSERT INTO PRODUCT_GRADE_PRICE (PRODUCT_ID, GRADE_ID, PRICE)
+VALUES
+(@PRODUCT_ID, @GRADE_ID, @PRICE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_product_lot'
+GO
+Create PROCEDURE sp_create_product_lot
+(
+@WAREHOUSE_ID[INT],
+@SUPPLIER_ID[INT],
+@LOCATION_ID[INT],
+@PRODUCT_ID[INT],
+@SUPPLY_MANAGER_ID[INT],
+@QUANTITY[INT],
+@AVAILABLE_QUANTITY[INT],
+@DATE_RECEIVED[DATETIME],
+@EXPIRATION_DATE[DATETIME]
+)
+AS
+BEGIN
+INSERT INTO PRODUCT_LOT (WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE)
+VALUES
+(@WAREHOUSE_ID, @SUPPLIER_ID, @LOCATION_ID, @PRODUCT_ID, @SUPPLY_MANAGER_ID, @QUANTITY, @AVAILABLE_QUANTITY, @DATE_RECEIVED, @EXPIRATION_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_product_order'
+GO
+Create PROCEDURE sp_create_product_order
+(
+@CUSTOMER_ID[INT],
+@EMPLOYEE_ID[INT],
+@ORDER_TYPE_ID[NVARCHAR](250),
+@ADDRESS_TYPE[NVARCHAR],
+@DELIVERY_TYPE_ID[NVARCHAR](50),
+@AMOUNT[DECIMAL](6,2),
+@ORDER_DATE[DATETIME],
+@DATE_EXPECTED[DATETIME],
+@DISCOUNT[DECIMAL](5,2),
+@ORDER_STATUS_ID[NVARCHAR](50),
+@USER_ADDRESS_ID[INT],
+@HAS_ARRIVED[BIT]
+)
+AS
+BEGIN
+INSERT INTO PRODUCT_ORDER (CUSTOMER_ID, EMPLOYEE_ID, ORDER_TYPE_ID, ADDRESS_TYPE, DELIVERY_TYPE_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED, DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED)
+VALUES
+(@CUSTOMER_ID, @EMPLOYEE_ID, @ORDER_TYPE_ID, @ADDRESS_TYPE, @DELIVERY_TYPE_ID, @AMOUNT, @ORDER_DATE, @DATE_EXPECTED, @DISCOUNT, @ORDER_STATUS_ID, @USER_ADDRESS_ID, @HAS_ARRIVED)
+SELECT SCOPE_IDENTITY()
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_product_review'
+GO
+Create PROCEDURE sp_create_product_review
+(
+@PRODUCT_ID[INT],
+@USER_ID[INT],
+@SUPPLIER_ID[INT],
+@RATING[INT],
+@NOTES[NVARCHAR](1000)
+)
+AS
+BEGIN
+INSERT INTO PRODUCT_REVIEW (PRODUCT_ID, USER_ID, SUPPLIER_ID, RATING, NOTES)
+VALUES
+(@PRODUCT_ID, @USER_ID, @SUPPLIER_ID, @RATING, @NOTES)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_repair'
+GO
+Create PROCEDURE sp_create_repair
+(
+@VEHICLE_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO REPAIR (VEHICLE_ID)
+VALUES
+(@VEHICLE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_repair_line'
+GO
+Create PROCEDURE sp_create_repair_line
+(
+@REPAIR_ID[INT],
+@REPAIR_DESCRIPTION[NVARCHAR](250)
+)
+AS
+BEGIN
+INSERT INTO REPAIR_LINE (REPAIR_ID, REPAIR_DESCRIPTION)
+VALUES
+(@REPAIR_ID, @REPAIR_DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_role'
+GO
+Create PROCEDURE sp_create_role
+(
+@ROLE_ID[NVARCHAR](250),
+@DESCRIPTION[NVARCHAR](1000)
+)
+AS
+BEGIN
+INSERT INTO ROLE (ROLE_ID, DESCRIPTION)
+VALUES
+(@ROLE_ID, @DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_route'
+GO
+Create PROCEDURE sp_create_route
+(
+@VEHICLE_ID[INT],
+@DRIVER_ID[INT],
+@ASSIGNED_DATE[DATETIME]
+)
+AS
+BEGIN
+INSERT INTO ROUTE (VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE)
+VALUES
+(@VEHICLE_ID, @DRIVER_ID, @ASSIGNED_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_shipping_address'
+GO
+Create PROCEDURE sp_create_shipping_address
+(
+@USER_ID[INT],
+@ADDRESS1[NVARCHAR](100),
+@ADDRESS2[NVARCHAR](100)= NULL,
+@CITY[NVARCHAR](50),
+@STATE[NCHAR](2),
+@ZIP[NVARCHAR](10),
+@ADDRESS_NAME[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO SHIPPING_ADDRESS (USER_ID, ADDRESS1, ADDRESS2, CITY, STATE, ZIP, ADDRESS_NAME)
+VALUES
+(@USER_ID, @ADDRESS1, @ADDRESS2, @CITY, @STATE, @ZIP, @ADDRESS_NAME)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_status'
+GO
+Create PROCEDURE sp_create_status
+(
+@STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO STATUS (STATUS_ID)
+VALUES
+(@STATUS_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_supplier'
+GO
+Create PROCEDURE sp_create_supplier
+(
+@USER_ID[INT],
+@IS_APPROVED[BIT],
+@APPROVED_BY[INT],
+@FARM_NAME[NVARCHAR](300),
+@FARM_ADDRESS[NVARCHAR](300),
+@FARM_CITY[NVARCHAR](50),
+@FARM_STATE[NCHAR](2),
+@FARM_TAX_ID[NVARCHAR](64)
+)
+AS
+BEGIN
+INSERT INTO SUPPLIER (USER_ID, IS_APPROVED, APPROVED_BY, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID)
+VALUES
+(@USER_ID, @IS_APPROVED, @APPROVED_BY, @FARM_NAME, @FARM_ADDRESS, @FARM_CITY, @FARM_STATE, @FARM_TAX_ID)
+
+RETURN @@ROWCOUNT
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_supplier_not_approved'
+GO
+Create PROCEDURE sp_create_supplier_not_approved
+(
+@USER_ID[INT],
+@IS_APPROVED[BIT],
+@FARM_NAME[NVARCHAR](300),
+@FARM_ADDRESS[NVARCHAR](300),
+@FARM_CITY[NVARCHAR](50),
+@FARM_STATE[NCHAR](2),
+@FARM_TAX_ID[NVARCHAR](64)
+)
+AS
+BEGIN
+INSERT INTO SUPPLIER (USER_ID, IS_APPROVED, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID)
+VALUES
+(@USER_ID, @IS_APPROVED, @FARM_NAME, @FARM_ADDRESS, @FARM_CITY, @FARM_STATE, @FARM_TAX_ID)
+
+RETURN @@ROWCOUNT
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_user_address'
+GO
+Create PROCEDURE sp_create_user_address
+(
+@USER_ADDRESS_ID[INT],
+@USER_ID[INT],
+@ADDRESS_LINE_1[NVARCHAR](50),
+@ADDRESS_LINE_2[NVARCHAR](50),
+@CITY[NVARCHAR](50),
+@STATE[NCHAR](2),
+@ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+INSERT INTO USER_ADDRESS (USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP)
+VALUES
+(@USER_ADDRESS_ID, @USER_ID, @ADDRESS_LINE_1, @ADDRESS_LINE_2, @CITY, @STATE, @ZIP)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_user_cart_line'
+GO
+Create PROCEDURE sp_create_user_cart_line
+(
+@PRODUCT_ID[INT],
+@USER_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO USER_CART_LINE (PRODUCT_ID, USER_ID)
+VALUES
+(@PRODUCT_ID, @USER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_vehicle'
+GO
+Create PROCEDURE sp_create_vehicle
+(
+@VIN[NVARCHAR](20),
+@MAKE[NVARCHAR](15),
+@MODEL[NVARCHAR](20),
+@MILEAGE[INT],
+@YEAR[NVARCHAR](4),
+@COLOR[NVARCHAR](20),
+@ACTIVE[BIT],
+@LATEST_REPAIR_DATE[DATE]= NULL,
+@LAST_DRIVER_ID[INT]= NULL,
+@VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO VEHICLE (VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID)
+VALUES
+(@VIN, @MAKE, @MODEL, @MILEAGE, @YEAR, @COLOR, @ACTIVE, @LATEST_REPAIR_DATE, @LAST_DRIVER_ID, @VEHICLE_TYPE_ID);
+SET NOCOUNT OFF
+SELECT @@identity
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_vehicle_type'
+GO
+Create PROCEDURE sp_create_vehicle_type
+(
+@VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+INSERT INTO VEHICLE_TYPE (VEHICLE_TYPE_ID)
+VALUES
+(@VEHICLE_TYPE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_warehouse'
+GO
+Create PROCEDURE sp_create_warehouse
+(
+@ADDRESS_1[NVARCHAR](50),
+@ADDRESS_2[NVARCHAR](50),
+@CITY[NVARCHAR](50),
+@STATE[NCHAR](2),
+@ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+INSERT INTO WAREHOUSE (ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP)
+VALUES
+(@ADDRESS_1, @ADDRESS_2, @CITY, @STATE, @ZIP)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_create_wishlist_line'
+GO
+Create PROCEDURE sp_create_wishlist_line
+(
+@CUSTOMER_ID[INT],
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+INSERT INTO WISHLIST_LINE (CUSTOMER_ID, PRODUCT_ID)
+VALUES
+(@CUSTOMER_ID, @PRODUCT_ID)
+END
+GO
+
+Print '' print  ' *** creating DELETE stored procedures'
+GO
+
+Print '' print  ' *** creating procedure sp_delete_agreement'
+GO
+Create PROCEDURE sp_delete_agreement
+(
+@AGREEMENT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM agreement
+WHERE AGREEMENT_ID = @AGREEMENT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_app_user'
+GO
+Create PROCEDURE sp_delete_app_user
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM app_user
+WHERE USER_ID = @USER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_backorder_preorder'
+GO
+Create PROCEDURE sp_delete_backorder_preorder
+(
+@BACKORDER_PREORDER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM backorder_preorder
+WHERE BACKORDER_PREORDER_ID = @BACKORDER_PREORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_category'
+GO
+Create PROCEDURE sp_delete_category
+(
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+DELETE FROM category
+WHERE CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_charity'
+GO
+Create PROCEDURE sp_delete_charity
+(
+@CHARITY_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM charity
+WHERE CHARITY_ID = @CHARITY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_charity_products'
+GO
+Create PROCEDURE sp_delete_charity_products
+(
+@CHARITY_ID[INT],
+@PRODUCT_LOT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM charity_products
+WHERE CHARITY_ID = @CHARITY_ID
+AND PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_commercial'
+GO
+Create PROCEDURE sp_delete_commercial
+(
+@COMMERCIAL_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM commercial
+WHERE COMMERCIAL_ID = @COMMERCIAL_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_customer'
+GO
+Create PROCEDURE sp_delete_customer
+(
+@CUSTOMER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM customer
+WHERE CUSTOMER_ID = @CUSTOMER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_deal'
+GO
+Create PROCEDURE sp_delete_deal
+(
+@DEAL_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM deal
+WHERE DEAL_ID = @DEAL_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_deal_category'
+GO
+Create PROCEDURE sp_delete_deal_category
+(
+@DEAL_ID[INT],
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+DELETE FROM deal_category
+WHERE DEAL_ID = @DEAL_ID
+AND CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_deal_product'
+GO
+Create PROCEDURE sp_delete_deal_product
+(
+@DEAL_ID[INT],
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM deal_product
+WHERE DEAL_ID = @DEAL_ID
+AND PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_delivery'
+GO
+Create PROCEDURE sp_delete_delivery
+(
+@DELIVERY_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM delivery
+WHERE DELIVERY_ID = @DELIVERY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_delivery_type'
+GO
+Create PROCEDURE sp_delete_delivery_type
+(
+@DELIVERY_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+DELETE FROM delivery_type
+WHERE DELIVERY_TYPE_ID = @DELIVERY_TYPE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_dispatcher_message'
+GO
+Create PROCEDURE sp_delete_dispatcher_message
+(
+@DISPATCHER_MESSAGE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM dispatcher_message
+WHERE DISPATCHER_MESSAGE_ID = @DISPATCHER_MESSAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_driver'
+GO
+Create PROCEDURE sp_delete_driver
+(
+@DRIVER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM driver
+WHERE DRIVER_ID = @DRIVER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_employee'
+GO
+Create PROCEDURE sp_delete_employee
+(
+@EMPLOYEE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM employee
+WHERE EMPLOYEE_ID = @EMPLOYEE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_employee_message'
+GO
+Create PROCEDURE sp_delete_employee_message
+(
+@MESSAGE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM employee_message
+WHERE MESSAGE_ID = @MESSAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_employee_order_responsibility'
+GO
+Create PROCEDURE sp_delete_employee_order_responsibility
+(
+@ORDER_ID[INT],
+@EMPLOYEE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM employee_order_responsibility
+WHERE ORDER_ID = @ORDER_ID
+AND EMPLOYEE_ID = @EMPLOYEE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_employee_role'
+GO
+Create PROCEDURE sp_delete_employee_role
+(
+@EMPLOYEE_ID[INT],
+@ROLE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+DELETE FROM employee_role
+WHERE EMPLOYEE_ID = @EMPLOYEE_ID
+AND ROLE_ID = @ROLE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_grade'
+GO
+Create PROCEDURE sp_delete_grade
+(
+@GRADE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+DELETE FROM grade
+WHERE GRADE_ID = @GRADE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_inspection'
+GO
+Create PROCEDURE sp_delete_inspection
+(
+@INSPECTION_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM inspection
+WHERE INSPECTION_ID = @INSPECTION_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_location'
+GO
+Create PROCEDURE sp_delete_location
+(
+@LOCATION_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM location
+WHERE LOCATION_ID = @LOCATION_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_maintenance_schedule'
+GO
+Create PROCEDURE sp_delete_maintenance_schedule
+(
+@MAINTENANCE_SCHEDULE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM maintenance_schedule
+WHERE MAINTENANCE_SCHEDULE_ID = @MAINTENANCE_SCHEDULE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_maintenance_schedule_line'
+GO
+Create PROCEDURE sp_delete_maintenance_schedule_line
+(
+@MAINTENANCE_SCHEDULE_LINE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM maintenance_schedule_line
+WHERE MAINTENANCE_SCHEDULE_LINE_ID = @MAINTENANCE_SCHEDULE_LINE_ID
+END
+
+Print '' print  ' *** creating procedure sp_delete_message_line'
+GO
+Create PROCEDURE sp_delete_message_line
+(
+@MESSAGE_LINE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM message_line
+WHERE MESSAGE_LINE_ID = @MESSAGE_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_order_status'
+GO
+Create PROCEDURE sp_delete_order_status
+(
+@ORDER_STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+DELETE FROM order_status
+WHERE ORDER_STATUS_ID = @ORDER_STATUS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_order_type'
+GO
+Create PROCEDURE sp_delete_order_type
+(
+@ORDER_TYPE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+DELETE FROM order_type
+WHERE ORDER_TYPE_ID = @ORDER_TYPE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_package'
+GO
+Create PROCEDURE sp_delete_package
+(
+@PACKAGE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM package
+WHERE PACKAGE_ID = @PACKAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_package_line'
+GO
+Create PROCEDURE sp_delete_package_line
+(
+@PACKAGE_LINE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM package_line
+WHERE PACKAGE_LINE_ID = @PACKAGE_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_pickup'
+GO
+Create PROCEDURE sp_delete_pickup
+(
+@PICKUP_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM pickup
+WHERE PICKUP_ID = @PICKUP_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_pickup_line'
+GO
+Create PROCEDURE sp_delete_pickup_line
+(
+@PICKUP_LINE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM pickup_line
+WHERE PICKUP_LINE_ID = @PICKUP_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product'
+GO
+Create PROCEDURE sp_delete_product
+(
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM product
+WHERE PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product_category'
+GO
+Create PROCEDURE sp_delete_product_category
+(
+@PRODUCT_ID[INT],
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+DELETE FROM product_category
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product_grade_price'
+GO
+Create PROCEDURE sp_delete_product_grade_price
+(
+@PRODUCT_ID[INT],
+@GRADE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+DELETE FROM product_grade_price
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND GRADE_ID = @GRADE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product_lot'
+GO
+Create PROCEDURE sp_delete_product_lot
+(
+@PRODUCT_LOT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM product_lot
+WHERE PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product_order'
+GO
+Create PROCEDURE sp_delete_product_order
+(
+@ORDER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM product_order
+WHERE ORDER_ID = @ORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_product_review'
+GO
+Create PROCEDURE sp_delete_product_review
+(
+@REVIEW_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM product_review
+WHERE REVIEW_ID = @REVIEW_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_repair'
+GO
+Create PROCEDURE sp_delete_repair
+(
+@REPAIR_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM repair
+WHERE REPAIR_ID = @REPAIR_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_repair_line'
+GO
+Create PROCEDURE sp_delete_repair_line
+(
+@REPAIR_LINE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM repair_line
+WHERE REPAIR_LINE_ID = @REPAIR_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_role'
+GO
+Create PROCEDURE sp_delete_role
+(
+@ROLE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+DELETE FROM role
+WHERE ROLE_ID = @ROLE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_route'
+GO
+Create PROCEDURE sp_delete_route
+(
+@ROUTE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM route
+WHERE ROUTE_ID = @ROUTE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_shipping_address'
+GO
+Create PROCEDURE sp_delete_shipping_address
+(
+@ADDRESS_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM shipping_address
+WHERE ADDRESS_ID = @ADDRESS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_status'
+GO
+Create PROCEDURE sp_delete_status
+(
+@STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+DELETE FROM status
+WHERE STATUS_ID = @STATUS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_supplier'
+GO
+Create PROCEDURE sp_delete_supplier
+(
+@SUPPLIER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM supplier
+WHERE SUPPLIER_ID = @SUPPLIER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_user_address'
+GO
+Create PROCEDURE sp_delete_user_address
+(
+@USER_ADDRESS_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM user_address
+WHERE USER_ADDRESS_ID = @USER_ADDRESS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_user_cart_line'
+GO
+Create PROCEDURE sp_delete_user_cart_line
+(
+@PRODUCT_ID[INT],
+@USER_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM user_cart_line
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND USER_ID = @USER_ID
+END
+GO
+
+print '' print  ' *** creating procedure sp_delete_vehicle'
+GO
+Create PROCEDURE sp_delete_vehicle
+(
+@VEHICLE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM vehicle
+WHERE VEHICLE_ID = @VEHICLE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_vehicle_type'
+GO
+Create PROCEDURE sp_delete_vehicle_type
+(
+@VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+DELETE FROM vehicle_type
+WHERE VEHICLE_TYPE_ID = @VEHICLE_TYPE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_warehouse'
+GO
+Create PROCEDURE sp_delete_warehouse
+(
+@WAREHOUSE_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM warehouse
+WHERE WAREHOUSE_ID = @WAREHOUSE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_wishlist_line'
+GO
+Create PROCEDURE sp_delete_wishlist_line
+(
+@CUSTOMER_ID[INT],
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+DELETE FROM wishlist_line
+WHERE CUSTOMER_ID = @CUSTOMER_ID
+AND PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating RETRIEVE stored procedures'
+GO
+
+Print '' print  ' *** creating procedure sp_login'
+GO
+Create PROCEDURE sp_login (
+    @Username[NVARCHAR](64),
+    @Password_Hash[NVARCHAR](64)
+)
+AS
+BEGIN
+SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+FROM app_user
+WHERE USER_NAME = @Username
+AND PASSWORD_HASH = @Password_Hash
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_agreement'
+GO
+Create PROCEDURE sp_retrieve_agreement
+(
+@AGREEMENT_ID[INT]
+)
+AS
+BEGIN
+SELECT AGREEMENT_ID, PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APPROVED_BY, ACTIVE
+FROM agreement
+WHERE AGREEMENT_ID = @AGREEMENT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_agreement_list_by_supplier_id'
+GO
+Create PROCEDURE sp_retrieve_agreement_list_by_supplier_id
+(
+@SUPPLIER_ID [INT]
+)
+AS
+BEGIN
+SELECT AGREEMENT_ID, PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APPROVED_BY, ACTIVE
+FROM agreement
+WHERE SUPPLIER_ID = @SUPPLIER_ID
+AND ACTIVE = 1
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_agreement_list'
+GO
+Create PROCEDURE sp_retrieve_agreement_list
+AS
+BEGIN
+SELECT AGREEMENT_ID, PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APPROVED_BY, ACTIVE
+FROM agreement
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_app_user'
+GO
+Create PROCEDURE sp_retrieve_app_user
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+FROM app_user
+WHERE USER_ID = @USER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_app_user_by_username'
+GO
+Create PROCEDURE sp_retrieve_app_user_by_username
+(
+@USERNAME [NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, USER_NAME, ACTIVE
+FROM app_user
+WHERE USER_NAME = @USERNAME
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_app_user_list'
+GO
+Create PROCEDURE sp_retrieve_app_user_list
+AS
+BEGIN
+SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+FROM app_user
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_backorder_preorder'
+GO
+Create PROCEDURE sp_retrieve_backorder_preorder
+(
+@BACKORDER_PREORDER_ID[INT]
+)
+AS
+BEGIN
+SELECT BACKORDER_PREORDER_ID, ORDER_ID, CUSTOMER_ID, AMOUNT, DATE_PLACED, DATE_EXPECTED, HAS_ARRIVED, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP
+FROM backorder_preorder
+WHERE BACKORDER_PREORDER_ID = @BACKORDER_PREORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_category'
+GO
+Create PROCEDURE sp_retrieve_category
+(
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+SELECT CATEGORY_ID
+FROM category
+WHERE CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_category_list'
+GO
+Create PROCEDURE sp_retrieve_category_list
+AS
+BEGIN
+SELECT CATEGORY_ID
+FROM category
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity'
+GO
+Create PROCEDURE sp_retrieve_charity
+(
+@CHARITY_ID[INT]
+)
+AS
+BEGIN
+SELECT CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
+FROM charity
+WHERE CHARITY_ID = @CHARITY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_products'
+GO
+Create PROCEDURE sp_retrieve_charity_products
+(
+@CHARITY_ID[INT],
+@PRODUCT_LOT_ID[INT]
+)
+AS
+BEGIN
+SELECT CHARITY_ID, PRODUCT_LOT_ID, QUANTITY
+FROM charity_products
+WHERE CHARITY_ID = @CHARITY_ID
+AND PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_products_list'
+GO
+Create PROCEDURE sp_retrieve_charity_products_list
+AS
+BEGIN
+SELECT CHARITY_ID, PRODUCT_LOT_ID, QUANTITY
+FROM charity_products
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_list'
+GO
+Create PROCEDURE sp_retrieve_charity_list
+AS
+BEGIN
+SELECT CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
+FROM charity
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_commercial'
+GO
+Create PROCEDURE sp_retrieve_commercial
+(
+@COMMERCIAL_ID[INT]
+)
+AS
+BEGIN
+SELECT COMMERCIAL_ID, USER_ID
+FROM commercial
+WHERE COMMERCIAL_ID = @COMMERCIAL_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_commercial_list'
+GO
+Create PROCEDURE sp_retrieve_commercial_list
+AS
+BEGIN
+SELECT COMMERCIAL_ID, USER_ID, IS_APPROVED, APPROVED_BY, FEDERAL_TAX_ID, ACTIVE
+FROM commercial
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_customer'
+GO
+Create PROCEDURE sp_retrieve_customer
+(
+@CUSTOMER_ID[INT]
+)
+AS
+BEGIN
+SELECT CUSTOMER_ID
+FROM customer
+WHERE CUSTOMER_ID = @CUSTOMER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_customer_list'
+GO
+Create PROCEDURE sp_retrieve_customer_list
+AS
+BEGIN
+SELECT CUSTOMER_ID
+FROM customer
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal'
+GO
+Create PROCEDURE sp_retrieve_deal
+(
+@DEAL_ID[INT]
+)
+AS
+BEGIN
+SELECT DEAL_ID, DESCRIPTION, CODE, AMOUNT, PERCENT_OFF
+FROM deal
+WHERE DEAL_ID = @DEAL_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_category'
+GO
+Create PROCEDURE sp_retrieve_deal_category
+(
+@DEAL_ID[INT],
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+SELECT DEAL_ID, CATEGORY_ID, ACTIVE
+FROM deal_category
+WHERE DEAL_ID = @DEAL_ID
+AND CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_category_list'
+GO
+Create PROCEDURE sp_retrieve_deal_category_list
+AS
+BEGIN
+SELECT DEAL_ID, CATEGORY_ID, ACTIVE
+FROM deal_category
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_product'
+GO
+Create PROCEDURE sp_retrieve_deal_product
+(
+@DEAL_ID[INT],
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+SELECT DEAL_ID, PRODUCT_ID, ACTIVE
+FROM deal_product
+WHERE DEAL_ID = @DEAL_ID
+AND PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_product_list'
+GO
+Create PROCEDURE sp_retrieve_deal_product_list
+AS
+BEGIN
+SELECT DEAL_ID, PRODUCT_ID, ACTIVE
+FROM deal_product
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_list'
+GO
+Create PROCEDURE sp_retrieve_deal_list
+AS
+BEGIN
+SELECT DEAL_ID, DESCRIPTION, CODE, AMOUNT, PERCENT_OFF
+FROM deal
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery'
+GO
+Create PROCEDURE sp_retrieve_delivery
+(
+@DELIVERY_ID[INT]
+)
+AS
+BEGIN
+SELECT DELIVERY_ID, ROUTE_ID, DEVLIVERY_DATE, VERIFICATION, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID
+FROM delivery
+WHERE DELIVERY_ID = @DELIVERY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery_type'
+GO
+Create PROCEDURE sp_retrieve_delivery_type
+(
+@DELIVERY_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT DELIVERY_TYPE_ID, ACTIVE
+FROM delivery_type
+WHERE DELIVERY_TYPE_ID = @DELIVERY_TYPE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery_type_list'
+GO
+Create PROCEDURE sp_retrieve_delivery_type_list
+AS
+BEGIN
+SELECT DELIVERY_TYPE_ID, ACTIVE
+FROM delivery_type
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery_list'
+GO
+Create PROCEDURE sp_retrieve_delivery_list
+AS
+BEGIN
+SELECT DELIVERY_ID, ROUTE_ID, DEVLIVERY_DATE, VERIFICATION, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID
+FROM delivery
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_dispatcher_message'
+GO
+Create PROCEDURE sp_retrieve_dispatcher_message
+(
+@DISPATCHER_MESSAGE_ID[INT]
+)
+AS
+BEGIN
+SELECT DISPATCHER_MESSAGE_ID, EMPLOYEE_ID, MESSAGE_NAME, DRIVER_ID
+FROM dispatcher_message
+WHERE DISPATCHER_MESSAGE_ID = @DISPATCHER_MESSAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_dispatcher_message_list'
+GO
+Create PROCEDURE sp_retrieve_dispatcher_message_list
+AS
+BEGIN
+SELECT DISPATCHER_MESSAGE_ID, EMPLOYEE_ID, MESSAGE_NAME, DRIVER_ID
+FROM dispatcher_message
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_driver'
+GO
+Create PROCEDURE sp_retrieve_driver
+(
+@DRIVER_ID[INT]
+)
+AS
+BEGIN
+SELECT DRIVER_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE
+FROM driver
+WHERE DRIVER_ID = @DRIVER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_driver_list'
+GO
+Create PROCEDURE sp_retrieve_driver_list
+AS
+BEGIN
+SELECT DRIVER_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE
+FROM driver
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee'
+GO
+Create PROCEDURE sp_retrieve_employee
+(
+@EMPLOYEE_ID[INT]
+)
+AS
+BEGIN
+SELECT EMPLOYEE_ID, USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH
+FROM employee
+WHERE EMPLOYEE_ID = @EMPLOYEE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_by_username'
+GO
+Create PROCEDURE sp_retrieve_employee_by_username
+(
+@USER_NAME[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT e.EMPLOYEE_ID, e.USER_ID, e.SALARY, e.ACTIVE, e.DATE_OF_BIRTH
+FROM employee e
+WHERE e.USER_ID IN
+	(SELECT a.USER_ID
+	FROM APP_USER a
+	WHERE a.USER_NAME = @USER_NAME)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_message'
+GO
+Create PROCEDURE sp_retrieve_employee_message
+(
+@MESSAGE_ID[INT]
+)
+AS
+BEGIN
+SELECT MESSAGE_ID, SENDER_ID, RECEIVER_ID, SENT, VIEWED, MESSAGE
+FROM employee_message
+WHERE MESSAGE_ID = @MESSAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_message_list'
+GO
+Create PROCEDURE sp_retrieve_employee_message_list
+AS
+BEGIN
+SELECT MESSAGE_ID, SENDER_ID, RECEIVER_ID, SENT, VIEWED, MESSAGE
+FROM employee_message
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_order_responsibility'
+GO
+Create PROCEDURE sp_retrieve_employee_order_responsibility
+(
+@ORDER_ID[INT],
+@EMPLOYEE_ID[INT]
+)
+AS
+BEGIN
+SELECT ORDER_ID, EMPLOYEE_ID, DESCRIPTION
+FROM employee_order_responsibility
+WHERE ORDER_ID = @ORDER_ID
+AND EMPLOYEE_ID = @EMPLOYEE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_order_responsibility_list'
+GO
+Create PROCEDURE sp_retrieve_employee_order_responsibility_list
+AS
+BEGIN
+SELECT ORDER_ID, EMPLOYEE_ID, DESCRIPTION
+FROM employee_order_responsibility
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_role'
+GO
+Create PROCEDURE sp_retrieve_employee_role
+(
+@EMPLOYEE_ID[INT],
+@ROLE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+SELECT EMPLOYEE_ID, ROLE_ID
+FROM employee_role
+WHERE EMPLOYEE_ID = @EMPLOYEE_ID
+AND ROLE_ID = @ROLE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_role_list'
+GO
+Create PROCEDURE sp_retrieve_employee_role_list
+AS
+BEGIN
+SELECT EMPLOYEE_ID, ROLE_ID
+FROM employee_role
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_list'
+GO
+Create PROCEDURE sp_retrieve_employee_list
+AS
+BEGIN
+SELECT EMPLOYEE_ID, USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH
+FROM employee
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_expired_product_lot_list'
+GO
+Create PROCEDURE sp_retrieve_expired_product_lot_list
+AS
+BEGIN
+SELECT PRODUCT_LOT_ID, WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE
+FROM product_lot
+WHERE EXPIRATION_DATE < GETDATE()
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_grade'
+GO
+Create PROCEDURE sp_retrieve_grade
+(
+@GRADE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+SELECT GRADE_ID
+FROM grade
+WHERE GRADE_ID = @GRADE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_grade_list'
+GO
+Create PROCEDURE sp_retrieve_grade_list
+AS
+BEGIN
+SELECT GRADE_ID
+FROM grade
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_inspection'
+GO
+Create PROCEDURE sp_retrieve_inspection
+(
+@INSPECTION_ID[INT]
+)
+AS
+BEGIN
+SELECT INSPECTION_ID, EMPLOYEE_ID, PRODUCT_LOT_ID, GRADE_ID, DATE_PERFORMED, EXPIRATION_DATE
+FROM inspection
+WHERE INSPECTION_ID = @INSPECTION_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_inspection_list'
+GO
+Create PROCEDURE sp_retrieve_inspection_list
+AS
+BEGIN
+SELECT INSPECTION_ID, EMPLOYEE_ID, PRODUCT_LOT_ID, GRADE_ID, DATE_PERFORMED, EXPIRATION_DATE
+FROM inspection
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_location'
+GO
+Create PROCEDURE sp_retrieve_location
+(
+@LOCATION_ID[INT]
+)
+AS
+BEGIN
+SELECT LOCATION_ID, DESCRIPTION, IS_ACTIVE
+FROM location
+WHERE LOCATION_ID = @LOCATION_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_location_list'
+GO
+Create PROCEDURE sp_retrieve_location_list
+AS
+BEGIN
+SELECT LOCATION_ID, DESCRIPTION, IS_ACTIVE
+FROM location
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_maintenance_schedule'
+GO
+Create PROCEDURE sp_retrieve_maintenance_schedule
+(
+@MAINTENANCE_SCHEDULE_ID[INT]
+)
+AS
+BEGIN
+SELECT MAINTENANCE_SCHEDULE_ID, VEHICLE_ID
+FROM maintenance_schedule
+WHERE MAINTENANCE_SCHEDULE_ID = @MAINTENANCE_SCHEDULE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_maintenance_schedule_list'
+GO
+Create PROCEDURE sp_retrieve_maintenance_schedule_list
+AS
+BEGIN
+SELECT MAINTENANCE_SCHEDULE_ID, VEHICLE_ID
+FROM maintenance_schedule
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_message_line'
+GO
+Create PROCEDURE sp_retrieve_message_line
+(
+@MESSAGE_LINE_ID[INT]
+)
+AS
+BEGIN
+SELECT MESSAGE_LINE_ID, DISPATCHER_MESSAGE_ID, MESSAGE_LINE_TEXT
+FROM message_line
+WHERE MESSAGE_LINE_ID = @MESSAGE_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_message_line_list'
+GO
+Create PROCEDURE sp_retrieve_message_line_list
+AS
+BEGIN
+SELECT MESSAGE_LINE_ID, DISPATCHER_MESSAGE_ID, MESSAGE_LINE_TEXT
+FROM message_line
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_status'
+GO
+Create PROCEDURE sp_retrieve_order_status
+(
+@ORDER_STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT ORDER_STATUS_ID
+FROM order_status
+WHERE ORDER_STATUS_ID = @ORDER_STATUS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_status_list'
+GO
+Create PROCEDURE sp_retrieve_order_status_list
+AS
+BEGIN
+SELECT ORDER_STATUS_ID
+FROM order_status
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_type'
+GO
+Create PROCEDURE sp_retrieve_order_type
+(
+@ORDER_TYPE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+SELECT ORDER_TYPE_ID
+FROM order_type
+WHERE ORDER_TYPE_ID = @ORDER_TYPE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_type_list'
+GO
+Create PROCEDURE sp_retrieve_order_type_list
+AS
+BEGIN
+SELECT ORDER_TYPE_ID
+FROM order_type
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package'
+GO
+Create PROCEDURE sp_retrieve_package
+(
+@PACKAGE_ID[INT]
+)
+AS
+BEGIN
+SELECT PACKAGE_ID, DELIVERY_ID, ORDER_ID
+FROM package
+WHERE PACKAGE_ID = @PACKAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_line'
+GO
+Create PROCEDURE sp_retrieve_package_line
+(
+@PACKAGE_LINE_ID[INT]
+)
+AS
+BEGIN
+SELECT PACKAGE_LINE_ID, PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID
+FROM package_line
+WHERE PACKAGE_LINE_ID = @PACKAGE_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_lines_in_package_list'
+GO
+Create PROCEDURE sp_retrieve_package_lines_in_package_list
+(
+	@PACKAGE_ID	int
+)
+AS
+BEGIN
+SELECT PACKAGE_LINE_ID, package_line.PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID
+FROM package_line
+WHERE package_line.PACKAGE_ID = @PACKAGE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_line_list'
+GO
+Create PROCEDURE sp_retrieve_package_line_list
+AS
+BEGIN
+SELECT PACKAGE_LINE_ID, PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID
+FROM package_line
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_list'
+GO
+Create PROCEDURE sp_retrieve_package_list
+AS
+BEGIN
+SELECT PACKAGE_ID, DELIVERY_ID, ORDER_ID
+FROM package
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_packages_in_order_list'
+GO
+Create PROCEDURE sp_retrieve_packages_in_order_list
+(
+	@ORDER_ID	int
+	)
+AS
+BEGIN
+SELECT PACKAGE_ID, DELIVERY_ID, ORDER_ID
+FROM package
+WHERE ORDER_ID = @ORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup'
+GO
+Create PROCEDURE sp_retrieve_pickup
+(
+@PICKUP_ID[INT]
+)
+AS
+BEGIN
+SELECT PICKUP_ID, SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID
+FROM pickup
+WHERE PICKUP_ID = @PICKUP_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_line'
+GO
+Create PROCEDURE sp_retrieve_pickup_line
+(
+@PICKUP_LINE_ID[INT]
+)
+AS
+BEGIN
+SELECT PICKUP_LINE_ID, PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS
+FROM pickup_line
+WHERE PICKUP_LINE_ID = @PICKUP_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_line_list'
+GO
+Create PROCEDURE sp_retrieve_pickup_line_list
+AS
+BEGIN
+SELECT PICKUP_LINE_ID, PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS
+FROM pickup_line
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_list'
+GO
+Create PROCEDURE sp_retrieve_pickup_list
+AS
+BEGIN
+SELECT PICKUP_ID, SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID
+FROM pickup
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product'
+GO
+Create PROCEDURE sp_retrieve_product
+(
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT
+FROM product
+WHERE PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_category'
+GO
+Create PROCEDURE sp_retrieve_product_category
+(
+@PRODUCT_ID[INT],
+@CATEGORY_ID[NVARCHAR](200)
+)
+AS
+BEGIN
+SELECT PRODUCT_ID, CATEGORY_ID
+FROM product_category
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND CATEGORY_ID = @CATEGORY_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_category_list'
+GO
+Create PROCEDURE sp_retrieve_product_category_list
+AS
+BEGIN
+SELECT PRODUCT_ID, CATEGORY_ID
+FROM product_category
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_grade_price'
+GO
+Create PROCEDURE sp_retrieve_product_grade_price
+(
+@PRODUCT_ID[INT],
+@GRADE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+SELECT PRODUCT_ID, GRADE_ID, PRICE
+FROM product_grade_price
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND GRADE_ID = @GRADE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_grade_price_list'
+GO
+Create PROCEDURE sp_retrieve_product_grade_price_list
+AS
+BEGIN
+SELECT PRODUCT_ID, GRADE_ID, PRICE
+FROM product_grade_price
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_lot'
+GO
+Create PROCEDURE sp_retrieve_product_lot
+(
+@PRODUCT_LOT_ID[INT]
+)
+AS
+BEGIN
+SELECT PRODUCT_LOT_ID, WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE
+FROM product_lot
+WHERE PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_lot_by_supplier_id'
+GO
+Create PROCEDURE sp_retrieve_product_lot_by_supplier_id
+(
+@SUPPLIER_ID[INT]
+)
+AS
+BEGIN
+SELECT PRODUCT_LOT_ID, WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE
+FROM product_lot
+WHERE SUPPLIER_ID = @SUPPLIER_ID
+ORDER BY PRODUCT_LOT_ID DESC
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_lot_list'
+GO
+Create PROCEDURE sp_retrieve_product_lot_list
+AS
+BEGIN
+SELECT PRODUCT_LOT_ID, WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE
+FROM product_lot
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_order'
+GO
+Create PROCEDURE sp_retrieve_product_order
+(
+@ORDER_ID[INT]
+)
+AS
+BEGIN
+SELECT ORDER_ID, CUSTOMER_ID, ORDER_TYPE_ID, ADDRESS_TYPE, DELIVERY_TYPE_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED, DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+FROM product_order
+WHERE ORDER_ID = @ORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_order_by_status'
+GO
+Create PROCEDURE sp_retrieve_product_order_by_status
+(
+@Status[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT ORDER_ID, CUSTOMER_ID, ORDER_TYPE_ID, ADDRESS_TYPE, DELIVERY_TYPE_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED, DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+FROM product_order
+WHERE ORDER_STATUS_ID = @Status
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_orderline_list_by_order_id'
+GO
+Create PROCEDURE sp_retrieve_product_orderline_list_by_order_id
+(
+@PRODUCT_ORDER_ID[INT]
+)
+AS
+BEGIN
+SELECT ORDER_LINE_ID, PRODUCT_ORDER_ID, PRODUCT_ID, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT
+FROM ORDER_LINE
+WHERE PRODUCT_ORDER_ID = @PRODUCT_ORDER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_order_list'
+GO
+Create PROCEDURE sp_retrieve_product_order_list
+AS
+BEGIN
+SELECT ORDER_ID, CUSTOMER_ID, ORDER_TYPE_ID, ADDRESS_TYPE, DELIVERY_TYPE_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED, DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+FROM product_order
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_review'
+GO
+Create PROCEDURE sp_retrieve_product_review
+(
+@REVIEW_ID[INT]
+)
+AS
+BEGIN
+SELECT REVIEW_ID, PRODUCT_ID, USER_ID, SUPPLIER_ID, RATING, NOTES
+FROM product_review
+WHERE REVIEW_ID = @REVIEW_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_review_list'
+GO
+Create PROCEDURE sp_retrieve_product_review_list
+AS
+BEGIN
+SELECT REVIEW_ID, PRODUCT_ID, USER_ID, SUPPLIER_ID, RATING, NOTES
+FROM product_review
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_list'
+GO
+Create PROCEDURE sp_retrieve_product_list
+AS
+BEGIN
+SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT, IMAGE_BINARY
+FROM product
+END
+GO
+
+print '' print'*** Creating sp_retrieve_products_to_customer'
+GO
+CREATE PROCEDURE [dbo].[sp_retrieve_products_to_customer]
+AS
+	BEGIN
+		SELECT pd.product_id, pd.name, pd.description, pgp.grade_id, pgp.price, sp.supplier_id, sp.farm_name, pc.category_id, pd.image_binary
+		FROM Product pd 
+		LEFT JOIN Product_Lot pl ON (pl.product_id = pd.product_id)
+		LEFT JOIN Supplier sp ON (sp.supplier_id = pl.supplier_id)
+		LEFT JOIN Product_Grade_Price pgp ON (pgp.product_id = pd.product_id)
+		LEFT JOIN Product_Category pc ON (pc.product_id = pd.product_id)
+		WHERE pd.active = 1
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair'
+GO
+Create PROCEDURE sp_retrieve_repair
+(
+@REPAIR_ID[INT]
+)
+AS
+BEGIN
+SELECT REPAIR_ID, VEHICLE_ID
+FROM repair
+WHERE REPAIR_ID = @REPAIR_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair_line'
+GO
+Create PROCEDURE sp_retrieve_repair_line
+(
+@REPAIR_LINE_ID[INT]
+)
+AS
+BEGIN
+SELECT REPAIR_LINE_ID, REPAIR_ID, REPAIR_DESCRIPTION
+FROM repair_line
+WHERE REPAIR_LINE_ID = @REPAIR_LINE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair_line_list'
+GO
+Create PROCEDURE sp_retrieve_repair_line_list
+AS
+BEGIN
+SELECT REPAIR_LINE_ID, REPAIR_ID, REPAIR_DESCRIPTION
+FROM repair_line
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair_list'
+GO
+Create PROCEDURE sp_retrieve_repair_list
+AS
+BEGIN
+SELECT REPAIR_ID, VEHICLE_ID
+FROM repair
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_role'
+GO
+Create PROCEDURE sp_retrieve_role
+(
+@ROLE_ID[NVARCHAR](250)
+)
+AS
+BEGIN
+SELECT ROLE_ID, DESCRIPTION
+FROM role
+WHERE ROLE_ID = @ROLE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_role_list'
+GO
+Create PROCEDURE sp_retrieve_role_list
+AS
+BEGIN
+SELECT ROLE_ID, DESCRIPTION
+FROM role
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_route'
+GO
+Create PROCEDURE sp_retrieve_route
+(
+@ROUTE_ID[INT]
+)
+AS
+BEGIN
+SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+FROM route
+WHERE ROUTE_ID = @ROUTE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_route_list'
+GO
+Create PROCEDURE sp_retrieve_route_list
+AS
+BEGIN
+SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+FROM route
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_shipping_address'
+GO
+Create PROCEDURE sp_retrieve_shipping_address
+(
+@ADDRESS_ID[INT]
+)
+AS
+BEGIN
+SELECT ADDRESS_ID, USER_ID, ADDRESS1, ADDRESS2, CITY, STATE, ZIP, ADDRESS_NAME
+FROM shipping_address
+WHERE ADDRESS_ID = @ADDRESS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_shipping_address_list'
+GO
+Create PROCEDURE sp_retrieve_shipping_address_list
+AS
+BEGIN
+SELECT ADDRESS_ID, USER_ID, ADDRESS1, ADDRESS2, CITY, STATE, ZIP, ADDRESS_NAME
+FROM shipping_address
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_status'
+GO
+Create PROCEDURE sp_retrieve_status
+(
+@STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT STATUS_ID
+FROM status
+WHERE STATUS_ID = @STATUS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_status_list'
+GO
+Create PROCEDURE sp_retrieve_status_list
+AS
+BEGIN
+SELECT STATUS_ID
+FROM status
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_supplier'
+GO
+Create PROCEDURE sp_retrieve_supplier
+(
+@SUPPLIER_ID[INT]
+)
+AS
+BEGIN
+SELECT SUPPLIER_ID, USER_ID, IS_APPROVED, APPROVED_BY, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID, ACTIVE
+FROM supplier
+WHERE SUPPLIER_ID = @SUPPLIER_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_supplier_by_user_id'
+GO
+Create PROCEDURE sp_retrieve_supplier_by_user_id
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT SUPPLIER_ID, USER_ID, IS_APPROVED, APPROVED_BY, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID, ACTIVE
+FROM supplier
+WHERE USER_ID = @USER_ID
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_supplier_name'
+GO
+Create PROCEDURE sp_retrieve_supplier_name
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT FIRST_NAME, LAST_NAME
+FROM APP_USER
+WHERE USER_ID = @USER_ID
+END
+
+
+Print '' print  ' *** creating procedure sp_retrieve_supplier_list'
+GO
+Create PROCEDURE sp_retrieve_supplier_list
+AS
+BEGIN
+SELECT SUPPLIER_ID, USER_ID, IS_APPROVED, APPROVED_BY, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID, ACTIVE
+FROM supplier
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_user_address'
+GO
+Create PROCEDURE sp_retrieve_user_address
+(
+@USER_ADDRESS_ID[INT]
+)
+AS
+BEGIN
+SELECT USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+FROM user_address
+WHERE USER_ADDRESS_ID = @USER_ADDRESS_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_user_address_list'
+GO
+Create PROCEDURE sp_retrieve_user_address_list
+AS
+BEGIN
+SELECT USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+FROM user_address
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_user_cart_line'
+GO
+Create PROCEDURE sp_retrieve_user_cart_line
+(
+@PRODUCT_ID[INT],
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT PRODUCT_ID, USER_ID
+FROM user_cart_line
+WHERE PRODUCT_ID = @PRODUCT_ID
+AND USER_ID = @USER_ID
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_user_cart_line_list'
+GO
+Create PROCEDURE sp_retrieve_user_cart_line_list
+AS
+BEGIN
+SELECT PRODUCT_ID, USER_ID
+FROM user_cart_line
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_user_salt'
+GO
+Create PROCEDURE sp_retrieve_user_salt (
+    @Username[NVARCHAR](64)
+)
+AS
+BEGIN
+    SELECT PASSWORD_SALT
+    FROM APP_USER
+    WHERE USER_NAME = @Username
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle'
+GO
+Create PROCEDURE sp_retrieve_vehicle
+(
+@VEHICLE_ID[INT]
+)
+AS
+BEGIN
+SELECT VEHICLE_ID, VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID
+FROM vehicle
+WHERE VEHICLE_ID = @VEHICLE_ID
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle_type'
+GO
+Create PROCEDURE sp_retrieve_vehicle_type
+(
+@VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+SELECT VEHICLE_TYPE_ID
+FROM vehicle_type
+WHERE VEHICLE_TYPE_ID = @VEHICLE_TYPE_ID
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle_type_list'
+GO
+Create PROCEDURE sp_retrieve_vehicle_type_list
+AS
+BEGIN
+SELECT VEHICLE_TYPE_ID
+FROM vehicle_type
+END
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle_list'
+GO
+Create PROCEDURE sp_retrieve_vehicle_list
+AS
+BEGIN
+SELECT VEHICLE_ID, VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID
+FROM vehicle
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_warehouse'
+GO
+Create PROCEDURE sp_retrieve_warehouse
+(
+@WAREHOUSE_ID[INT]
+)
+AS
+BEGIN
+SELECT WAREHOUSE_ID, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP
+FROM warehouse
+WHERE WAREHOUSE_ID = @WAREHOUSE_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_warehouse_list'
+GO
+Create PROCEDURE sp_retrieve_warehouse_list
+AS
+BEGIN
+SELECT WAREHOUSE_ID, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP
+FROM warehouse
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_wishlist_line'
+GO
+Create PROCEDURE sp_retrieve_wishlist_line
+(
+@CUSTOMER_ID[INT],
+@PRODUCT_ID[INT]
+)
+AS
+BEGIN
+SELECT CUSTOMER_ID, PRODUCT_ID
+FROM wishlist_line
+WHERE CUSTOMER_ID = @CUSTOMER_ID
+AND PRODUCT_ID = @PRODUCT_ID
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_wishlist_line_list'
+GO
+Create PROCEDURE sp_retrieve_wishlist_line_list
+AS
+BEGIN
+SELECT CUSTOMER_ID, PRODUCT_ID
+FROM wishlist_line
+END
+GO
+
+Print '' print  ' *** creating SEARCH stored procedures'
+GO
+
+Print '' print  ' *** creating procedure sp_log_in_user'
+GO
+CREATE PROCEDURE sp_log_in_user
+(
+@USER_NAME [NVARCHAR](20),
+@PASSWORD_HASH [NVARCHAR](200)
+)
+AS
+BEGIN
+    SELECT USER_NAME, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, ACTIVE
+    FROM APP_USER
+    WHERE USER_NAME = @USER_NAME
+    AND PASSWORD_HASH = @PASSWORD_HASH
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_agreement_from_search'
+GO
+Create PROCEDURE sp_retrieve_agreement_from_search
+(
+@AGREEMENT_ID[INT]=NULL,
+@PRODUCT_ID[INT]=NULL,
+@SUPPLIER_ID[INT]=NULL,
+@DATE_SUBMITTED[DATETIME]=NULL,
+@IS_APPROVED[BIT]=NULL,
+@APPROVED_BY[INT]=NULL
+)
+AS
+BEGIN
+Select AGREEMENT_ID, PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APPROVED_BY
+FROM AGREEMENT
+WHERE (AGREEMENT.AGREEMENT_ID=@AGREEMENT_ID OR @AGREEMENT_ID IS NULL)
+AND (AGREEMENT.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (AGREEMENT.SUPPLIER_ID=@SUPPLIER_ID OR @SUPPLIER_ID IS NULL)
+AND (AGREEMENT.DATE_SUBMITTED=@DATE_SUBMITTED OR @DATE_SUBMITTED IS NULL)
+AND (AGREEMENT.IS_APPROVED=@IS_APPROVED OR @IS_APPROVED IS NULL)
+AND (AGREEMENT.APPROVED_BY=@APPROVED_BY OR @APPROVED_BY IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_app_user_from_search'
+GO
+Create PROCEDURE sp_retrieve_app_user_from_search
+(
+@USER_ID[INT]=NULL,
+@FIRST_NAME[NVARCHAR](150)=NULL,
+@LAST_NAME[NVARCHAR](100)=NULL,@LAST_NAME_ESCAPE[BIT] = NULL,
+@PHONE[NVARCHAR](15)=NULL,
+@PREFERRED_ADDRESS_ID[INT]=NULL,@PREFERRED_ADDRESS_ID_ESCAPE[BIT] = NULL,
+@E_MAIL_ADDRESS[NVARCHAR](50)=NULL,
+@E_MAIL_PREFERENCES[BIT]=NULL,
+@PASSWORD_HASH[NVARCHAR](64)=NULL,
+@PASSWORD_SALT[NVARCHAR](64)=NULL,
+@USER_NAME[NVARCHAR](50)=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+FROM APP_USER
+WHERE (APP_USER.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (APP_USER.FIRST_NAME=@FIRST_NAME OR @FIRST_NAME IS NULL)
+AND (APP_USER.LAST_NAME=@LAST_NAME OR @LAST_NAME IS NULL OR @LAST_NAME_ESCAPE = 1)
+AND (APP_USER.PHONE=@PHONE OR @PHONE IS NULL)
+AND (APP_USER.PREFERRED_ADDRESS_ID=@PREFERRED_ADDRESS_ID OR @PREFERRED_ADDRESS_ID IS NULL OR @PREFERRED_ADDRESS_ID_ESCAPE = 1)
+AND (APP_USER.E_MAIL_ADDRESS=@E_MAIL_ADDRESS OR @E_MAIL_ADDRESS IS NULL)
+AND (APP_USER.E_MAIL_PREFERENCES=@E_MAIL_PREFERENCES OR @E_MAIL_PREFERENCES IS NULL)
+AND (APP_USER.PASSWORD_HASH=@PASSWORD_HASH OR @PASSWORD_HASH IS NULL)
+AND (APP_USER.PASSWORD_SALT=@PASSWORD_SALT OR @PASSWORD_SALT IS NULL)
+AND (APP_USER.USER_NAME=@USER_NAME OR @USER_NAME IS NULL)
+AND (APP_USER.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_backorder_preorder_from_search'
+GO
+Create PROCEDURE sp_retrieve_backorder_preorder_from_search
+(
+@BACKORDER_PREORDER_ID[INT]=NULL,@BACKORDER_PREORDER_ID_ESCAPE[BIT] = NULL,
+@ORDER_ID[INT]=NULL,
+@CUSTOMER_ID[INT]=NULL,
+@AMOUNT[DECIMAL](10)=NULL,
+@DATE_PLACED[DATETIME]=NULL,
+@DATE_EXPECTED[DATETIME]=NULL,
+@HAS_ARRIVED[BIT]=NULL,
+@ADDRESS_1[NVARCHAR](50)=NULL,
+@ADDRESS_2[NVARCHAR](50)=NULL,
+@CITY[NVARCHAR](50)=NULL,
+@STATE[NCHAR](2)=NULL,
+@ZIP[NVARCHAR](10)=NULL
+)
+AS
+BEGIN
+Select BACKORDER_PREORDER_ID, ORDER_ID, CUSTOMER_ID, AMOUNT, DATE_PLACED, DATE_EXPECTED, HAS_ARRIVED, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP
+FROM BACKORDER_PREORDER
+WHERE (BACKORDER_PREORDER.BACKORDER_PREORDER_ID=@BACKORDER_PREORDER_ID OR @BACKORDER_PREORDER_ID IS NULL OR @BACKORDER_PREORDER_ID_ESCAPE = 1)
+AND (BACKORDER_PREORDER.ORDER_ID=@ORDER_ID OR @ORDER_ID IS NULL)
+AND (BACKORDER_PREORDER.CUSTOMER_ID=@CUSTOMER_ID OR @CUSTOMER_ID IS NULL)
+AND (BACKORDER_PREORDER.AMOUNT=@AMOUNT OR @AMOUNT IS NULL)
+AND (BACKORDER_PREORDER.DATE_PLACED=@DATE_PLACED OR @DATE_PLACED IS NULL)
+AND (BACKORDER_PREORDER.DATE_EXPECTED=@DATE_EXPECTED OR @DATE_EXPECTED IS NULL)
+AND (BACKORDER_PREORDER.HAS_ARRIVED=@HAS_ARRIVED OR @HAS_ARRIVED IS NULL)
+AND (BACKORDER_PREORDER.ADDRESS_1=@ADDRESS_1 OR @ADDRESS_1 IS NULL)
+AND (BACKORDER_PREORDER.ADDRESS_2=@ADDRESS_2 OR @ADDRESS_2 IS NULL)
+AND (BACKORDER_PREORDER.CITY=@CITY OR @CITY IS NULL)
+AND (BACKORDER_PREORDER.STATE=@STATE OR @STATE IS NULL)
+AND (BACKORDER_PREORDER.ZIP=@ZIP OR @ZIP IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_category_from_search'
+GO
+Create PROCEDURE sp_retrieve_category_from_search
+(
+@CATEGORY_ID[NVARCHAR](200)=NULL
+)
+AS
+BEGIN
+Select CATEGORY_ID
+FROM CATEGORY
+WHERE (CATEGORY.CATEGORY_ID=@CATEGORY_ID OR @CATEGORY_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_from_search'
+GO
+Create PROCEDURE sp_retrieve_charity_from_search
+(
+@CHARITY_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@EMPLOYEE_ID[INT]=NULL,
+@CHARITY_NAME[NVARCHAR](200)=NULL,
+@CONTACT_FIRST_NAME[NVARCHAR](150)=NULL,
+@CONTACT_LAST_NAME[NVARCHAR](150)=NULL,
+@PHONE_NUMBER[NVARCHAR](20)=NULL,
+@EMAIL[NVARCHAR](100)=NULL,
+@CONTACT_HOURS[NVARCHAR](150)=NULL,
+@STATUS[NVARCHAR](10)=Null
+)
+AS
+BEGIN
+Select CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
+FROM CHARITY
+WHERE (CHARITY.CHARITY_ID=@CHARITY_ID OR @CHARITY_ID IS NULL)
+AND (CHARITY.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (CHARITY.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (CHARITY.CHARITY_NAME=@CHARITY_NAME OR @CHARITY_NAME IS NULL)
+AND (CHARITY.CONTACT_FIRST_NAME=@CONTACT_FIRST_NAME OR @CONTACT_FIRST_NAME IS NULL)
+AND (CHARITY.CONTACT_LAST_NAME=@CONTACT_LAST_NAME OR @CONTACT_LAST_NAME IS NULL)
+AND (CHARITY.PHONE_NUMBER=@PHONE_NUMBER OR @PHONE_NUMBER IS NULL)
+AND (CHARITY.EMAIL=@EMAIL OR @EMAIL IS NULL)
+AND (CHARITY.CONTACT_HOURS=@CONTACT_HOURS OR @CONTACT_HOURS IS NULL)
+AND (CHARITY.STATUS=@STATUS OR @STATUS IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_products_from_search'
+GO
+Create PROCEDURE sp_retrieve_charity_products_from_search
+(
+@CHARITY_ID[INT]=NULL,
+@PRODUCT_LOT_ID[INT]=NULL,
+@QUANTITY[INT]=NULL
+)
+AS
+BEGIN
+Select CHARITY_ID, PRODUCT_LOT_ID, QUANTITY
+FROM CHARITY_PRODUCTS
+WHERE (CHARITY_PRODUCTS.CHARITY_ID=@CHARITY_ID OR @CHARITY_ID IS NULL)
+AND (CHARITY_PRODUCTS.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (CHARITY_PRODUCTS.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_commercial_from_search'
+GO
+Create PROCEDURE sp_retrieve_commercial_from_search
+(
+@COMMERCIAL_ID[INT]=NULL,
+@USER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select COMMERCIAL_ID, USER_ID
+FROM COMMERCIAL
+WHERE (COMMERCIAL.COMMERCIAL_ID=@COMMERCIAL_ID OR @COMMERCIAL_ID IS NULL)
+AND (COMMERCIAL.USER_ID=@USER_ID OR @USER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_customer_from_search'
+GO
+Create PROCEDURE sp_retrieve_customer_from_search
+(
+@CUSTOMER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select CUSTOMER_ID
+FROM CUSTOMER
+WHERE (CUSTOMER.CUSTOMER_ID=@CUSTOMER_ID OR @CUSTOMER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_category_from_search'
+GO
+Create PROCEDURE sp_retrieve_deal_category_from_search
+(
+@DEAL_ID[INT]=NULL,
+@CATEGORY_ID[NVARCHAR](200)=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select DEAL_ID, CATEGORY_ID, ACTIVE
+FROM DEAL_CATEGORY
+WHERE (DEAL_CATEGORY.DEAL_ID=@DEAL_ID OR @DEAL_ID IS NULL)
+AND (DEAL_CATEGORY.CATEGORY_ID=@CATEGORY_ID OR @CATEGORY_ID IS NULL)
+AND (DEAL_CATEGORY.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_from_search'
+GO
+Create PROCEDURE sp_retrieve_deal_from_search
+(
+@DEAL_ID[INT]=NULL,
+@DESCRIPTION[NVARCHAR](200)=NULL,
+@CODE[NCHAR](10)=NULL,@CODE_ESCAPE[BIT] = NULL,
+@AMOUNT[DECIMAL](5)=NULL,@AMOUNT_ESCAPE[BIT] = NULL,
+@PERCENT_OFF[DECIMAL](5)=NULL,@PERCENT_OFF_ESCAPE[BIT] = NULL
+)
+AS
+BEGIN
+Select DEAL_ID, DESCRIPTION, CODE, AMOUNT, PERCENT_OFF
+FROM DEAL
+WHERE (DEAL.DEAL_ID=@DEAL_ID OR @DEAL_ID IS NULL)
+AND (DEAL.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+AND (DEAL.CODE=@CODE OR @CODE IS NULL OR @CODE_ESCAPE = 1)
+AND (DEAL.AMOUNT=@AMOUNT OR @AMOUNT IS NULL OR @AMOUNT_ESCAPE = 1)
+AND (DEAL.PERCENT_OFF=@PERCENT_OFF OR @PERCENT_OFF IS NULL OR @PERCENT_OFF_ESCAPE = 1)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_deal_product_from_search'
+GO
+Create PROCEDURE sp_retrieve_deal_product_from_search
+(
+@DEAL_ID[INT]=NULL,
+@PRODUCT_ID[INT]=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select DEAL_ID, PRODUCT_ID, ACTIVE
+FROM DEAL_PRODUCT
+WHERE (DEAL_PRODUCT.DEAL_ID=@DEAL_ID OR @DEAL_ID IS NULL)
+AND (DEAL_PRODUCT.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (DEAL_PRODUCT.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery_from_search'
+GO
+Create PROCEDURE sp_retrieve_delivery_from_search
+(
+@DELIVERY_ID[INT]=NULL,
+@ROUTE_ID[INT]=NULL,
+@DEVLIVERY_DATE[DATETIME]=NULL,
+@VERIFICATION[VARBINARY]=NULL,@VERIFICATION_ESCAPE[BIT] = NULL,
+@STATUS_ID[NVARCHAR](50)=NULL,
+@DELIVERY_TYPE_ID[NVARCHAR](50)=NULL,
+@ORDER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select DELIVERY_ID, ROUTE_ID, DEVLIVERY_DATE, VERIFICATION, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID
+FROM DELIVERY
+WHERE (DELIVERY.DELIVERY_ID=@DELIVERY_ID OR @DELIVERY_ID IS NULL)
+AND (DELIVERY.ROUTE_ID=@ROUTE_ID OR @ROUTE_ID IS NULL)
+AND (DELIVERY.DEVLIVERY_DATE=@DEVLIVERY_DATE OR @DEVLIVERY_DATE IS NULL)
+AND (DELIVERY.VERIFICATION=@VERIFICATION OR @VERIFICATION IS NULL OR @VERIFICATION_ESCAPE = 1)
+AND (DELIVERY.STATUS_ID=@STATUS_ID OR @STATUS_ID IS NULL)
+AND (DELIVERY.DELIVERY_TYPE_ID=@DELIVERY_TYPE_ID OR @DELIVERY_TYPE_ID IS NULL)
+AND (DELIVERY.ORDER_ID=@ORDER_ID OR @ORDER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_delivery_type_from_search'
+GO
+Create PROCEDURE sp_retrieve_delivery_type_from_search
+(
+@DELIVERY_TYPE_ID[NVARCHAR](50)=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select DELIVERY_TYPE_ID, ACTIVE
+FROM DELIVERY_TYPE
+WHERE (DELIVERY_TYPE.DELIVERY_TYPE_ID=@DELIVERY_TYPE_ID OR @DELIVERY_TYPE_ID IS NULL)
+AND (DELIVERY_TYPE.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_dispatcher_message_from_search'
+GO
+Create PROCEDURE sp_retrieve_dispatcher_message_from_search
+(
+@DISPATCHER_MESSAGE_ID[INT]=NULL,
+@EMPLOYEE_ID[INT]=NULL,
+@MESSAGE_NAME[NVARCHAR](100)=NULL,
+@DRIVER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select DISPATCHER_MESSAGE_ID, EMPLOYEE_ID, MESSAGE_NAME, DRIVER_ID
+FROM DISPATCHER_MESSAGE
+WHERE (DISPATCHER_MESSAGE.DISPATCHER_MESSAGE_ID=@DISPATCHER_MESSAGE_ID OR @DISPATCHER_MESSAGE_ID IS NULL)
+AND (DISPATCHER_MESSAGE.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (DISPATCHER_MESSAGE.MESSAGE_NAME=@MESSAGE_NAME OR @MESSAGE_NAME IS NULL)
+AND (DISPATCHER_MESSAGE.DRIVER_ID=@DRIVER_ID OR @DRIVER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_driver_from_search'
+GO
+Create PROCEDURE sp_retrieve_driver_from_search
+(
+@DRIVER_ID[INT]=NULL,
+@DRIVER_LICENSE_NUMBER[NVARCHAR](9)=NULL,
+@LICENSE_EXPIRATION[DATETIME]=NULL,
+@ACTIVE[BIT]=NULL
+)
+AS
+BEGIN
+Select DRIVER_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE
+FROM DRIVER
+WHERE (DRIVER.DRIVER_ID=@DRIVER_ID OR @DRIVER_ID IS NULL)
+AND (DRIVER.DRIVER_LICENSE_NUMBER=@DRIVER_LICENSE_NUMBER OR @DRIVER_LICENSE_NUMBER IS NULL)
+AND (DRIVER.LICENSE_EXPIRATION=@LICENSE_EXPIRATION OR @LICENSE_EXPIRATION IS NULL)
+AND (DRIVER.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_from_search'
+GO
+Create PROCEDURE sp_retrieve_employee_from_search
+(
+@EMPLOYEE_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@SALARY[DECIMAL](8)=NULL,@SALARY_ESCAPE[BIT] = NULL,
+@ACTIVE[BIT]=NULL,
+@DATE_OF_BIRTH[DATE]=NULL
+)
+AS
+BEGIN
+Select EMPLOYEE_ID, USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH
+FROM EMPLOYEE
+WHERE (EMPLOYEE.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (EMPLOYEE.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (EMPLOYEE.SALARY=@SALARY OR @SALARY IS NULL OR @SALARY_ESCAPE = 1)
+AND (EMPLOYEE.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+AND (EMPLOYEE.DATE_OF_BIRTH=@DATE_OF_BIRTH OR @DATE_OF_BIRTH IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_message_from_search'
+GO
+Create PROCEDURE sp_retrieve_employee_message_from_search
+(
+@MESSAGE_ID[INT]=NULL,
+@SENDER_ID[INT]=NULL,
+@RECEIVER_ID[INT]=NULL,
+@SENT[DATETIME]=NULL,
+@VIEWED[BIT]=NULL,
+@MESSAGE[NVARCHAR](4000)=NULL
+)
+AS
+BEGIN
+Select MESSAGE_ID, SENDER_ID, RECEIVER_ID, SENT, VIEWED, MESSAGE
+FROM EMPLOYEE_MESSAGE
+WHERE (EMPLOYEE_MESSAGE.MESSAGE_ID=@MESSAGE_ID OR @MESSAGE_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.SENDER_ID=@SENDER_ID OR @SENDER_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.RECEIVER_ID=@RECEIVER_ID OR @RECEIVER_ID IS NULL)
+AND (EMPLOYEE_MESSAGE.SENT=@SENT OR @SENT IS NULL)
+AND (EMPLOYEE_MESSAGE.VIEWED=@VIEWED OR @VIEWED IS NULL)
+AND (EMPLOYEE_MESSAGE.MESSAGE=@MESSAGE OR @MESSAGE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_order_responsibility_from_search'
+GO
+Create PROCEDURE sp_retrieve_employee_order_responsibility_from_search
+(
+@ORDER_ID[INT]=NULL,
+@EMPLOYEE_ID[INT]=NULL,
+@DESCRIPTION[NVARCHAR](200)=NULL
+)
+AS
+BEGIN
+Select ORDER_ID, EMPLOYEE_ID, DESCRIPTION
+FROM EMPLOYEE_ORDER_RESPONSIBILITY
+WHERE (EMPLOYEE_ORDER_RESPONSIBILITY.ORDER_ID=@ORDER_ID OR @ORDER_ID IS NULL)
+AND (EMPLOYEE_ORDER_RESPONSIBILITY.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (EMPLOYEE_ORDER_RESPONSIBILITY.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_employee_role_from_search'
+GO
+Create PROCEDURE sp_retrieve_employee_role_from_search
+(
+@EMPLOYEE_ID[INT]=NULL,
+@ROLE_ID[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select EMPLOYEE_ID, ROLE_ID
+FROM EMPLOYEE_ROLE
+WHERE (EMPLOYEE_ROLE.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (EMPLOYEE_ROLE.ROLE_ID=@ROLE_ID OR @ROLE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_grade_from_search'
+GO
+Create PROCEDURE sp_retrieve_grade_from_search
+(
+@GRADE_ID[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select GRADE_ID
+FROM GRADE
+WHERE (GRADE.GRADE_ID=@GRADE_ID OR @GRADE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_inspection_from_search'
+GO
+Create PROCEDURE sp_retrieve_inspection_from_search
+(
+@INSPECTION_ID[INT]=NULL,
+@EMPLOYEE_ID[INT]=NULL,
+@PRODUCT_LOT_ID[INT]=NULL,
+@GRADE_ID[NVARCHAR](250)=NULL,
+@DATE_PERFORMED[DATETIME]=NULL,
+@EXPIRATION_DATE[DATETIME]=NULL
+)
+AS
+BEGIN
+Select INSPECTION_ID, EMPLOYEE_ID, PRODUCT_LOT_ID, GRADE_ID, DATE_PERFORMED, EXPIRATION_DATE
+FROM INSPECTION
+WHERE (INSPECTION.INSPECTION_ID=@INSPECTION_ID OR @INSPECTION_ID IS NULL)
+AND (INSPECTION.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL)
+AND (INSPECTION.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (INSPECTION.GRADE_ID=@GRADE_ID OR @GRADE_ID IS NULL)
+AND (INSPECTION.DATE_PERFORMED=@DATE_PERFORMED OR @DATE_PERFORMED IS NULL)
+AND (INSPECTION.EXPIRATION_DATE=@EXPIRATION_DATE OR @EXPIRATION_DATE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_location_from_search'
+GO
+Create PROCEDURE sp_retrieve_location_from_search
+(
+@LOCATION_ID[INT]=NULL,
+@DESCRIPTION[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select LOCATION_ID, DESCRIPTION
+FROM LOCATION
+WHERE (LOCATION.LOCATION_ID=@LOCATION_ID OR @LOCATION_ID IS NULL)
+AND (LOCATION.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_maintenance_schedule_from_search'
+GO
+Create PROCEDURE sp_retrieve_maintenance_schedule_from_search
+(
+@MAINTENANCE_SCHEDULE_ID[INT]=NULL,
+@VEHICLE_ID[INT]=NULL
+)
+AS
+BEGIN
+Select MAINTENANCE_SCHEDULE_ID, VEHICLE_ID
+FROM MAINTENANCE_SCHEDULE
+WHERE (MAINTENANCE_SCHEDULE.MAINTENANCE_SCHEDULE_ID=@MAINTENANCE_SCHEDULE_ID OR @MAINTENANCE_SCHEDULE_ID IS NULL)
+AND (MAINTENANCE_SCHEDULE.VEHICLE_ID=@VEHICLE_ID OR @VEHICLE_ID IS NULL)
+END
+GO
+
+
+Print '' print  ' *** creating procedure sp_retrieve_maintenance_schedule_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_maintenance_schedule_line_from_search
+(
+@MAINTENANCE_SCHEDULE_LINE_ID[INT]=NULL,
+@MAINTENANCE_SCHEDULE_ID[INT]=NULL,
+@DESCRIPTION[NVARCHAR](250)=NULL,
+@MAINTENANCE_DATE[DATE]=NULL
+)
+AS
+BEGIN
+Select MAINTENANCE_SCHEDULE_LINE_ID, MAINTENANCE_SCHEDULE_ID, DESCRIPTION, MAINTENANCE_DATE
+FROM MAINTENANCE_SCHEDULE_LINE
+WHERE (MAINTENANCE_SCHEDULE_LINE.MAINTENANCE_SCHEDULE_LINE_ID=@MAINTENANCE_SCHEDULE_LINE_ID OR @MAINTENANCE_SCHEDULE_LINE_ID IS NULL)
+AND (MAINTENANCE_SCHEDULE_LINE.MAINTENANCE_SCHEDULE_ID=@MAINTENANCE_SCHEDULE_ID OR @MAINTENANCE_SCHEDULE_ID IS NULL)
+AND (MAINTENANCE_SCHEDULE_LINE.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+AND (MAINTENANCE_SCHEDULE_LINE.MAINTENANCE_DATE=@MAINTENANCE_DATE OR @MAINTENANCE_DATE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_message_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_message_line_from_search
+(
+@MESSAGE_LINE_ID[INT]=NULL,
+@DISPATCHER_MESSAGE_ID[INT]=NULL,
+@MESSAGE_LINE_TEXT[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select MESSAGE_LINE_ID, DISPATCHER_MESSAGE_ID, MESSAGE_LINE_TEXT
+FROM MESSAGE_LINE
+WHERE (MESSAGE_LINE.MESSAGE_LINE_ID=@MESSAGE_LINE_ID OR @MESSAGE_LINE_ID IS NULL)
+AND (MESSAGE_LINE.DISPATCHER_MESSAGE_ID=@DISPATCHER_MESSAGE_ID OR @DISPATCHER_MESSAGE_ID IS NULL)
+AND (MESSAGE_LINE.MESSAGE_LINE_TEXT=@MESSAGE_LINE_TEXT OR @MESSAGE_LINE_TEXT IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_status_from_search'
+GO
+Create PROCEDURE sp_retrieve_order_status_from_search
+(
+@ORDER_STATUS_ID[NVARCHAR](50)=NULL
+)
+AS
+BEGIN
+Select ORDER_STATUS_ID
+FROM ORDER_STATUS
+WHERE (ORDER_STATUS.ORDER_STATUS_ID=@ORDER_STATUS_ID OR @ORDER_STATUS_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_order_type_from_search'
+GO
+Create PROCEDURE sp_retrieve_order_type_from_search
+(
+@ORDER_TYPE_ID[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select ORDER_TYPE_ID
+FROM ORDER_TYPE
+WHERE (ORDER_TYPE.ORDER_TYPE_ID=@ORDER_TYPE_ID OR @ORDER_TYPE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_from_search'
+GO
+Create PROCEDURE sp_retrieve_package_from_search
+(
+@PACKAGE_ID[INT]=NULL,
+@DELIVERY_ID[INT]=NULL,
+@ORDER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select PACKAGE_ID, DELIVERY_ID, ORDER_ID
+FROM PACKAGE
+WHERE (PACKAGE.PACKAGE_ID=@PACKAGE_ID OR @PACKAGE_ID IS NULL)
+AND (PACKAGE.DELIVERY_ID=@DELIVERY_ID OR @DELIVERY_ID IS NULL)
+AND (PACKAGE.ORDER_ID=@ORDER_ID OR @ORDER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_package_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_package_line_from_search
+(
+@PACKAGE_LINE_ID[INT]=NULL,
+@PACKAGE_ID[INT]=NULL,
+@PRODUCT_LOT_ID[INT]=NULL,
+@QUANTITY[INT]=NULL,
+@PRICE_PAID[DECIMAL](5)=NULL
+)
+AS
+BEGIN
+Select PACKAGE_LINE_ID, PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID
+FROM PACKAGE_LINE
+WHERE (PACKAGE_LINE.PACKAGE_LINE_ID=@PACKAGE_LINE_ID OR @PACKAGE_LINE_ID IS NULL)
+AND (PACKAGE_LINE.PACKAGE_ID=@PACKAGE_ID OR @PACKAGE_ID IS NULL)
+AND (PACKAGE_LINE.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (PACKAGE_LINE.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
+AND (PACKAGE_LINE.PRICE_PAID=@PRICE_PAID OR @PRICE_PAID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_from_search'
+GO
+Create PROCEDURE sp_retrieve_pickup_from_search
+(
+@PICKUP_ID[INT]=NULL,
+@SUPPLIER_ID[INT]=NULL,
+@WAREHOUSE_ID[INT]=NULL,
+@DRIVER_ID[INT]=NULL,@DRIVER_ID_ESCAPE[BIT] = NULL,
+@EMPLOYEE_ID[INT]=NULL,@EMPLOYEE_ID_ESCAPE[BIT] = NULL
+)
+AS
+BEGIN
+Select PICKUP_ID, SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID
+FROM PICKUP
+WHERE (PICKUP.PICKUP_ID=@PICKUP_ID OR @PICKUP_ID IS NULL)
+AND (PICKUP.SUPPLIER_ID=@SUPPLIER_ID OR @SUPPLIER_ID IS NULL)
+AND (PICKUP.WAREHOUSE_ID=@WAREHOUSE_ID OR @WAREHOUSE_ID IS NULL)
+AND (PICKUP.DRIVER_ID=@DRIVER_ID OR @DRIVER_ID IS NULL OR @DRIVER_ID_ESCAPE = 1)
+AND (PICKUP.EMPLOYEE_ID=@EMPLOYEE_ID OR @EMPLOYEE_ID IS NULL OR @EMPLOYEE_ID_ESCAPE = 1)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_pickup_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_pickup_line_from_search
+(
+@PICKUP_LINE_ID[INT]=NULL,
+@PICKUP_ID[INT]=NULL,
+@PRODUCT_LOT_ID[INT]=NULL,
+@QUANTITY[INT]=NULL,
+@PICK_UP_STATUS[BIT]=NULL
+)
+AS
+BEGIN
+Select PICKUP_LINE_ID, PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS
+FROM PICKUP_LINE
+WHERE (PICKUP_LINE.PICKUP_LINE_ID=@PICKUP_LINE_ID OR @PICKUP_LINE_ID IS NULL)
+AND (PICKUP_LINE.PICKUP_ID=@PICKUP_ID OR @PICKUP_ID IS NULL)
+AND (PICKUP_LINE.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (PICKUP_LINE.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
+AND (PICKUP_LINE.PICK_UP_STATUS=@PICK_UP_STATUS OR @PICK_UP_STATUS IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_category_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_category_from_search
+(
+@PRODUCT_ID[INT]=NULL,
+@CATEGORY_ID[NVARCHAR](200)=NULL
+)
+AS
+BEGIN
+Select PRODUCT_ID, CATEGORY_ID
+FROM PRODUCT_CATEGORY
+WHERE (PRODUCT_CATEGORY.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (PRODUCT_CATEGORY.CATEGORY_ID=@CATEGORY_ID OR @CATEGORY_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_from_search
+(
+@PRODUCT_ID[INT]=NULL,
+@NAME[NVARCHAR](50)=NULL,
+@DESCRIPTION[NVARCHAR](200)=NULL,
+@UNIT_PRICE[DECIMAL](10)=NULL,
+@IMAGE_NAME[VARCHAR](50)=NULL,@IMAGE_NAME_ESCAPE[BIT] = NULL,
+@ACTIVE[BIT]=NULL,
+@UNIT_OF_MEASUREMENT[NVARCHAR](20)=NULL,
+@DELIVERY_CHARGE_PER_UNIT[DECIMAL](5)=NULL
+)
+AS
+BEGIN
+Select PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT
+FROM PRODUCT
+WHERE (PRODUCT.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (PRODUCT.NAME=@NAME OR @NAME IS NULL)
+AND (PRODUCT.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+AND (PRODUCT.UNIT_PRICE=@UNIT_PRICE OR @UNIT_PRICE IS NULL)
+AND (PRODUCT.IMAGE_NAME=@IMAGE_NAME OR @IMAGE_NAME IS NULL OR @IMAGE_NAME_ESCAPE = 1)
+AND (PRODUCT.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+AND (PRODUCT.UNIT_OF_MEASUREMENT=@UNIT_OF_MEASUREMENT OR @UNIT_OF_MEASUREMENT IS NULL)
+AND (PRODUCT.DELIVERY_CHARGE_PER_UNIT=@DELIVERY_CHARGE_PER_UNIT OR @DELIVERY_CHARGE_PER_UNIT IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_grade_price_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_grade_price_from_search
+(
+@PRODUCT_ID[INT]=NULL,
+@GRADE_ID[NVARCHAR](250)=NULL,
+@PRICE[DECIMAL](5)=NULL
+)
+AS
+BEGIN
+Select PRODUCT_ID, GRADE_ID, PRICE
+FROM PRODUCT_GRADE_PRICE
+WHERE (PRODUCT_GRADE_PRICE.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (PRODUCT_GRADE_PRICE.GRADE_ID=@GRADE_ID OR @GRADE_ID IS NULL)
+AND (PRODUCT_GRADE_PRICE.PRICE=@PRICE OR @PRICE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_lot_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_lot_from_search
+(
+@PRODUCT_LOT_ID[INT]=NULL,
+@WAREHOUSE_ID[INT]=NULL,
+@SUPPLIER_ID[INT]=NULL,
+@LOCATION_ID[INT]=NULL,
+@PRODUCT_ID[INT]=NULL,
+@SUPPLY_MANAGER_ID[INT]=NULL,
+@QUANTITY[INT]=NULL,
+@AVAILABLE_QUANTITY[INT]=NULL,
+@DATE_RECEIVED[DATETIME]=NULL,
+@EXPIRATION_DATE[DATETIME]=NULL
+)
+AS
+BEGIN
+Select PRODUCT_LOT_ID, WAREHOUSE_ID, SUPPLIER_ID, LOCATION_ID, PRODUCT_ID, SUPPLY_MANAGER_ID, QUANTITY, AVAILABLE_QUANTITY, DATE_RECEIVED, EXPIRATION_DATE
+FROM PRODUCT_LOT
+WHERE (PRODUCT_LOT.PRODUCT_LOT_ID=@PRODUCT_LOT_ID OR @PRODUCT_LOT_ID IS NULL)
+AND (PRODUCT_LOT.WAREHOUSE_ID=@WAREHOUSE_ID OR @WAREHOUSE_ID IS NULL)
+AND (PRODUCT_LOT.SUPPLIER_ID=@SUPPLIER_ID OR @SUPPLIER_ID IS NULL)
+AND (PRODUCT_LOT.LOCATION_ID=@LOCATION_ID OR @LOCATION_ID IS NULL)
+AND (PRODUCT_LOT.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (PRODUCT_LOT.SUPPLY_MANAGER_ID=@SUPPLY_MANAGER_ID OR @SUPPLY_MANAGER_ID IS NULL)
+AND (PRODUCT_LOT.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
+AND (PRODUCT_LOT.AVAILABLE_QUANTITY=@AVAILABLE_QUANTITY OR @AVAILABLE_QUANTITY IS NULL)
+AND (PRODUCT_LOT.DATE_RECEIVED=@DATE_RECEIVED OR @DATE_RECEIVED IS NULL)
+AND (PRODUCT_LOT.EXPIRATION_DATE=@EXPIRATION_DATE OR @EXPIRATION_DATE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_order_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_order_from_search
+(
+@ORDER_ID[INT]=NULL,
+@CUSTOMER_ID[INT]=NULL,
+@ORDER_TYPE_ID[NVARCHAR](250)=NULL,
+@ADDRESS_TYPE[NVARCHAR]=NULL,
+@DELIVERY_TYPE_ID[NVARCHAR](50)=NULL,
+@AMOUNT[DECIMAL](6)=NULL,
+@ORDER_DATE[DATETIME]=NULL,
+@DATE_EXPECTED[DATETIME]=NULL,
+@DISCOUNT[DECIMAL](5)=NULL,
+@ORDER_STATUS_ID[NVARCHAR](50)=NULL,
+@USER_ADDRESS_ID[INT]=NULL,
+@HAS_ARRIVED[BIT]=NULL
+)
+AS
+BEGIN
+Select ORDER_ID, CUSTOMER_ID, ORDER_TYPE_ID, ADDRESS_TYPE, DELIVERY_TYPE_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED, DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+FROM PRODUCT_ORDER
+WHERE (PRODUCT_ORDER.ORDER_ID=@ORDER_ID OR @ORDER_ID IS NULL)
+AND (PRODUCT_ORDER.CUSTOMER_ID=@CUSTOMER_ID OR @CUSTOMER_ID IS NULL)
+AND (PRODUCT_ORDER.ORDER_TYPE_ID=@ORDER_TYPE_ID OR @ORDER_TYPE_ID IS NULL)
+AND (PRODUCT_ORDER.ADDRESS_TYPE=@ADDRESS_TYPE OR @ADDRESS_TYPE IS NULL)
+AND (PRODUCT_ORDER.DELIVERY_TYPE_ID=@DELIVERY_TYPE_ID OR @DELIVERY_TYPE_ID IS NULL)
+AND (PRODUCT_ORDER.AMOUNT=@AMOUNT OR @AMOUNT IS NULL)
+AND (PRODUCT_ORDER.ORDER_DATE=@ORDER_DATE OR @ORDER_DATE IS NULL)
+AND (PRODUCT_ORDER.DATE_EXPECTED=@DATE_EXPECTED OR @DATE_EXPECTED IS NULL)
+AND (PRODUCT_ORDER.DISCOUNT=@DISCOUNT OR @DISCOUNT IS NULL)
+AND (PRODUCT_ORDER.ORDER_STATUS_ID=@ORDER_STATUS_ID OR @ORDER_STATUS_ID IS NULL)
+AND (PRODUCT_ORDER.USER_ADDRESS_ID=@USER_ADDRESS_ID OR @USER_ADDRESS_ID IS NULL)
+AND (PRODUCT_ORDER.HAS_ARRIVED=@HAS_ARRIVED OR @HAS_ARRIVED IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_review_from_search'
+GO
+Create PROCEDURE sp_retrieve_product_review_from_search
+(
+@REVIEW_ID[INT]=NULL,
+@PRODUCT_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@SUPPLIER_ID[INT]=NULL,
+@RATING[INT]=NULL,
+@NOTES[NVARCHAR](1000)=NULL
+)
+AS
+BEGIN
+Select REVIEW_ID, PRODUCT_ID, USER_ID, SUPPLIER_ID, RATING, NOTES
+FROM PRODUCT_REVIEW
+WHERE (PRODUCT_REVIEW.REVIEW_ID=@REVIEW_ID OR @REVIEW_ID IS NULL)
+AND (PRODUCT_REVIEW.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (PRODUCT_REVIEW.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (PRODUCT_REVIEW.SUPPLIER_ID=@SUPPLIER_ID OR @SUPPLIER_ID IS NULL)
+AND (PRODUCT_REVIEW.RATING=@RATING OR @RATING IS NULL)
+AND (PRODUCT_REVIEW.NOTES=@NOTES OR @NOTES IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair_from_search'
+GO
+Create PROCEDURE sp_retrieve_repair_from_search
+(
+@REPAIR_ID[INT]=NULL,
+@VEHICLE_ID[INT]=NULL
+)
+AS
+BEGIN
+Select REPAIR_ID, VEHICLE_ID
+FROM REPAIR
+WHERE (REPAIR.REPAIR_ID=@REPAIR_ID OR @REPAIR_ID IS NULL)
+AND (REPAIR.VEHICLE_ID=@VEHICLE_ID OR @VEHICLE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_repair_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_repair_line_from_search
+(
+@REPAIR_LINE_ID[INT]=NULL,
+@REPAIR_ID[INT]=NULL,
+@REPAIR_DESCRIPTION[NVARCHAR](250)=NULL
+)
+AS
+BEGIN
+Select REPAIR_LINE_ID, REPAIR_ID, REPAIR_DESCRIPTION
+FROM REPAIR_LINE
+WHERE (REPAIR_LINE.REPAIR_LINE_ID=@REPAIR_LINE_ID OR @REPAIR_LINE_ID IS NULL)
+AND (REPAIR_LINE.REPAIR_ID=@REPAIR_ID OR @REPAIR_ID IS NULL)
+AND (REPAIR_LINE.REPAIR_DESCRIPTION=@REPAIR_DESCRIPTION OR @REPAIR_DESCRIPTION IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_role_from_search'
+GO
+Create PROCEDURE sp_retrieve_role_from_search
+(
+@ROLE_ID[NVARCHAR](250)=NULL,
+@DESCRIPTION[NVARCHAR](1000)=NULL
+)
+AS
+BEGIN
+Select ROLE_ID, DESCRIPTION
+FROM ROLE
+WHERE (ROLE.ROLE_ID=@ROLE_ID OR @ROLE_ID IS NULL)
+AND (ROLE.DESCRIPTION=@DESCRIPTION OR @DESCRIPTION IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_route_from_search'
+GO
+Create PROCEDURE sp_retrieve_route_from_search
+(
+@ROUTE_ID[INT]=NULL,
+@VEHICLE_ID[INT]=NULL,
+@DRIVER_ID[INT]=NULL,
+@ASSIGNED_DATE[DATETIME]=NULL
+)
+AS
+BEGIN
+Select ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+FROM ROUTE
+WHERE (ROUTE.ROUTE_ID=@ROUTE_ID OR @ROUTE_ID IS NULL)
+AND (ROUTE.VEHICLE_ID=@VEHICLE_ID OR @VEHICLE_ID IS NULL)
+AND (ROUTE.DRIVER_ID=@DRIVER_ID OR @DRIVER_ID IS NULL)
+AND (ROUTE.ASSIGNED_DATE=@ASSIGNED_DATE OR @ASSIGNED_DATE IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_shipping_address_from_search'
+GO
+Create PROCEDURE sp_retrieve_shipping_address_from_search
+(
+@ADDRESS_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@ADDRESS1[NVARCHAR](100)=NULL,
+@ADDRESS2[NVARCHAR](100)=NULL,@ADDRESS2_ESCAPE[BIT] = NULL,
+@CITY[NVARCHAR](50)=NULL,
+@STATE[NCHAR](2)=NULL,
+@ZIP[NVARCHAR](10)=NULL,
+@ADDRESS_NAME[NVARCHAR](50)=NULL
+)
+AS
+BEGIN
+Select ADDRESS_ID, USER_ID, ADDRESS1, ADDRESS2, CITY, STATE, ZIP, ADDRESS_NAME
+FROM SHIPPING_ADDRESS
+WHERE (SHIPPING_ADDRESS.ADDRESS_ID=@ADDRESS_ID OR @ADDRESS_ID IS NULL)
+AND (SHIPPING_ADDRESS.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (SHIPPING_ADDRESS.ADDRESS1=@ADDRESS1 OR @ADDRESS1 IS NULL)
+AND (SHIPPING_ADDRESS.ADDRESS2=@ADDRESS2 OR @ADDRESS2 IS NULL OR @ADDRESS2_ESCAPE = 1)
+AND (SHIPPING_ADDRESS.CITY=@CITY OR @CITY IS NULL)
+AND (SHIPPING_ADDRESS.STATE=@STATE OR @STATE IS NULL)
+AND (SHIPPING_ADDRESS.ZIP=@ZIP OR @ZIP IS NULL)
+AND (SHIPPING_ADDRESS.ADDRESS_NAME=@ADDRESS_NAME OR @ADDRESS_NAME IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_status_from_search'
+GO
+Create PROCEDURE sp_retrieve_status_from_search
+(
+@STATUS_ID[NVARCHAR](50)=NULL
+)
+AS
+BEGIN
+Select STATUS_ID
+FROM STATUS
+WHERE (STATUS.STATUS_ID=@STATUS_ID OR @STATUS_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_supplier_from_search'
+GO
+Create PROCEDURE sp_retrieve_supplier_from_search
+(
+@SUPPLIER_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@IS_APPROVED[BIT]=NULL,
+@APPROVED_BY[INT]=NULL,
+@FARM_TAX_ID[NVARCHAR](64)=NULL
+)
+AS
+BEGIN
+Select SUPPLIER_ID, USER_ID, IS_APPROVED, APPROVED_BY, FARM_TAX_ID
+FROM SUPPLIER
+WHERE (SUPPLIER.SUPPLIER_ID=@SUPPLIER_ID OR @SUPPLIER_ID IS NULL)
+AND (SUPPLIER.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (SUPPLIER.IS_APPROVED=@IS_APPROVED OR @IS_APPROVED IS NULL)
+AND (SUPPLIER.APPROVED_BY=@APPROVED_BY OR @APPROVED_BY IS NULL)
+AND (SUPPLIER.FARM_TAX_ID=@FARM_TAX_ID OR @FARM_TAX_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_user_address_from_search'
+GO
+Create PROCEDURE sp_retrieve_user_address_from_search
+(
+@USER_ADDRESS_ID[INT]=NULL,
+@USER_ID[INT]=NULL,
+@ADDRESS_LINE_1[NVARCHAR](50)=NULL,
+@ADDRESS_LINE_2[NVARCHAR](50)=NULL,
+@CITY[NVARCHAR](50)=NULL,
+@STATE[NCHAR](2)=NULL,
+@ZIP[NVARCHAR](10)=NULL
+)
+AS
+BEGIN
+Select USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+FROM USER_ADDRESS
+WHERE (USER_ADDRESS.USER_ADDRESS_ID=@USER_ADDRESS_ID OR @USER_ADDRESS_ID IS NULL)
+AND (USER_ADDRESS.USER_ID=@USER_ID OR @USER_ID IS NULL)
+AND (USER_ADDRESS.ADDRESS_LINE_1=@ADDRESS_LINE_1 OR @ADDRESS_LINE_1 IS NULL)
+AND (USER_ADDRESS.ADDRESS_LINE_2=@ADDRESS_LINE_2 OR @ADDRESS_LINE_2 IS NULL)
+AND (USER_ADDRESS.CITY=@CITY OR @CITY IS NULL)
+AND (USER_ADDRESS.STATE=@STATE OR @STATE IS NULL)
+AND (USER_ADDRESS.ZIP=@ZIP OR @ZIP IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_user_cart_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_user_cart_line_from_search
+(
+@PRODUCT_ID[INT]=NULL,
+@USER_ID[INT]=NULL
+)
+AS
+BEGIN
+Select PRODUCT_ID, USER_ID
+FROM USER_CART_LINE
+WHERE (USER_CART_LINE.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+AND (USER_CART_LINE.USER_ID=@USER_ID OR @USER_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle_from_search'
+GO
+Create PROCEDURE sp_retrieve_vehicle_from_search
+(
+@VEHICLE_ID[INT]=NULL,
+@VIN[NVARCHAR](20)=NULL,
+@MAKE[NVARCHAR](15)=NULL,
+@MODEL[NVARCHAR](20)=NULL,
+@MILEAGE[INT]=NULL,
+@YEAR[NVARCHAR](4)=NULL,
+@COLOR[NVARCHAR](20)=NULL,
+@ACTIVE[BIT]=NULL,
+@LATEST_REPAIR_DATE[DATE]=NULL,@LATEST_REPAIR_DATE_ESCAPE[BIT] = NULL,
+@LAST_DRIVER_ID[INT]=NULL,@LAST_DRIVER_ID_ESCAPE[BIT] = NULL,
+@VEHICLE_TYPE_ID[NVARCHAR](50)=NULL
+)
+AS
+BEGIN
+Select VEHICLE_ID, VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID
+FROM VEHICLE
+WHERE (VEHICLE.VEHICLE_ID=@VEHICLE_ID OR @VEHICLE_ID IS NULL)
+AND (VEHICLE.VIN=@VIN OR @VIN IS NULL)
+AND (VEHICLE.MAKE=@MAKE OR @MAKE IS NULL)
+AND (VEHICLE.MODEL=@MODEL OR @MODEL IS NULL)
+AND (VEHICLE.MILEAGE=@MILEAGE OR @MILEAGE IS NULL)
+AND (VEHICLE.YEAR=@YEAR OR @YEAR IS NULL)
+AND (VEHICLE.COLOR=@COLOR OR @COLOR IS NULL)
+AND (VEHICLE.ACTIVE=@ACTIVE OR @ACTIVE IS NULL)
+AND (VEHICLE.LATEST_REPAIR_DATE=@LATEST_REPAIR_DATE OR @LATEST_REPAIR_DATE IS NULL OR @LATEST_REPAIR_DATE_ESCAPE = 1)
+AND (VEHICLE.LAST_DRIVER_ID=@LAST_DRIVER_ID OR @LAST_DRIVER_ID IS NULL OR @LAST_DRIVER_ID_ESCAPE = 1)
+AND (VEHICLE.VEHICLE_TYPE_ID=@VEHICLE_TYPE_ID OR @VEHICLE_TYPE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_vehicle_type_from_search'
+GO
+Create PROCEDURE sp_retrieve_vehicle_type_from_search
+(
+@VEHICLE_TYPE_ID[NVARCHAR](50)=NULL
+)
+AS
+BEGIN
+Select VEHICLE_TYPE_ID
+FROM VEHICLE_TYPE
+WHERE (VEHICLE_TYPE.VEHICLE_TYPE_ID=@VEHICLE_TYPE_ID OR @VEHICLE_TYPE_ID IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_warehouse_from_search'
+GO
+Create PROCEDURE sp_retrieve_warehouse_from_search
+(
+@WAREHOUSE_ID[INT]=NULL,
+@ADDRESS_1[NVARCHAR](50)=NULL,
+@ADDRESS_2[NVARCHAR](50)=NULL,
+@CITY[NVARCHAR](50)=NULL,
+@STATE[NCHAR](2)=NULL,
+@ZIP[NVARCHAR](10)=NULL
+)
+AS
+BEGIN
+Select WAREHOUSE_ID, ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP
+FROM WAREHOUSE
+WHERE (WAREHOUSE.WAREHOUSE_ID=@WAREHOUSE_ID OR @WAREHOUSE_ID IS NULL)
+AND (WAREHOUSE.ADDRESS_1=@ADDRESS_1 OR @ADDRESS_1 IS NULL)
+AND (WAREHOUSE.ADDRESS_2=@ADDRESS_2 OR @ADDRESS_2 IS NULL)
+AND (WAREHOUSE.CITY=@CITY OR @CITY IS NULL)
+AND (WAREHOUSE.STATE=@STATE OR @STATE IS NULL)
+AND (WAREHOUSE.ZIP=@ZIP OR @ZIP IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_wishlist_line_from_search'
+GO
+Create PROCEDURE sp_retrieve_wishlist_line_from_search
+(
+@CUSTOMER_ID[INT]=NULL,
+@PRODUCT_ID[INT]=NULL
+)
+AS
+BEGIN
+Select CUSTOMER_ID, PRODUCT_ID
+FROM WISHLIST_LINE
+WHERE (WISHLIST_LINE.CUSTOMER_ID=@CUSTOMER_ID OR @CUSTOMER_ID IS NULL)
+AND (WISHLIST_LINE.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
+END
+GO
+
+Print '' print ' *** creating UPDATE stored procedures'
+GO
+
+Print '' print  ' *** creating procedure sp_reset_user_password'
+GO
+Create PROCEDURE sp_reset_user_password
+(
+@USERNAME[NVARCHAR](50)
+,@PASSWORD_SALT[NVARCHAR](64)
+,@PASSWORD_HASH[NVARCHAR](64)
+)
+AS
+    UPDATE APP_USER
+    SET PASSWORD_SALT = @PASSWORD_SALT
+    ,PASSWORD_HASH = @PASSWORD_HASH
+    WHERE USER_NAME = @USERNAME
+GO
+
+Print '' print  ' *** creating procedure sp_update_agreement'
+GO
+Create PROCEDURE sp_update_agreement
+(
+@old_AGREEMENT_ID[INT],
+@old_PRODUCT_ID[INT],
+@new_PRODUCT_ID[INT],
+@old_SUPPLIER_ID[INT],
+@new_SUPPLIER_ID[INT],
+@old_DATE_SUBMITTED[DATETIME],
+@new_DATE_SUBMITTED[DATETIME],
+@old_IS_APPROVED[BIT],
+@new_IS_APPROVED[BIT],
+@old_APPROVED_BY[INT] = NULL,
+@new_APPROVED_BY[INT] = NULL,
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+IF @old_APPROVED_BY IS NOT NULL
+BEGIN
+	UPDATE agreement
+	SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
+	WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
+	AND (PRODUCT_ID = @old_PRODUCT_ID)
+	AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+	AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)
+	AND (IS_APPROVED = @old_IS_APPROVED)
+	AND (APPROVED_BY = @old_APPROVED_BY)
+	AND (ACTIVE = @old_ACTIVE)
+	END
+ELSE IF @old_APPROVED_BY IS NULL
+BEGIN
+	UPDATE agreement
+	SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
+	WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
+	AND (PRODUCT_ID = @old_PRODUCT_ID)
+	AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+	AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)
+	AND (IS_APPROVED = @old_IS_APPROVED)
+	AND (ACTIVE = @old_ACTIVE)
+	AND (APPROVED_BY IS NULL)
+	END
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_app_user'
+GO
+Create PROCEDURE sp_update_app_user
+(
+@old_USER_ID[INT],
+@old_FIRST_NAME[NVARCHAR](150),
+@new_FIRST_NAME[NVARCHAR](150),
+@old_LAST_NAME[NVARCHAR](100)=null,
+@new_LAST_NAME[NVARCHAR](100),
+@old_PHONE[NVARCHAR](15),
+@new_PHONE[NVARCHAR](15),
+@old_PREFERRED_ADDRESS_ID[INT],
+@new_PREFERRED_ADDRESS_ID[INT],
+@old_E_MAIL_ADDRESS[NVARCHAR](50),
+@new_E_MAIL_ADDRESS[NVARCHAR](50),
+@old_E_MAIL_PREFERENCES[BIT],
+@new_E_MAIL_PREFERENCES[BIT],
+@old_PASSWORD_HASH[NVARCHAR](64),
+@new_PASSWORD_HASH[NVARCHAR](64),
+@old_PASSWORD_SALT[NVARCHAR](64),
+@new_PASSWORD_SALT[NVARCHAR](64),
+@old_USER_NAME[NVARCHAR](50),
+@new_USER_NAME[NVARCHAR](50),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE app_user
+SET FIRST_NAME = @new_FIRST_NAME, LAST_NAME = @new_LAST_NAME, PHONE = @new_PHONE, PREFERRED_ADDRESS_ID = @new_PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS = @new_E_MAIL_ADDRESS, E_MAIL_PREFERENCES = @new_E_MAIL_PREFERENCES, PASSWORD_HASH = @new_PASSWORD_HASH, PASSWORD_SALT = @new_PASSWORD_SALT, USER_NAME = @new_USER_NAME, ACTIVE = @new_ACTIVE
+WHERE (USER_ID = @old_USER_ID)
+AND (FIRST_NAME = @old_FIRST_NAME)
+AND (LAST_NAME = @old_LAST_NAME OR ISNULL(LAST_NAME, @old_LAST_NAME) IS NULL)
+AND (PHONE = @old_PHONE)
+AND (PREFERRED_ADDRESS_ID = @old_PREFERRED_ADDRESS_ID)
+AND (E_MAIL_ADDRESS = @old_E_MAIL_ADDRESS)
+AND (E_MAIL_PREFERENCES = @old_E_MAIL_PREFERENCES)
+AND (PASSWORD_HASH = @old_PASSWORD_HASH)
+AND (PASSWORD_SALT = @old_PASSWORD_SALT)
+AND (USER_NAME = @old_USER_NAME)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_backorder_preorder'
+GO
+Create PROCEDURE sp_update_backorder_preorder
+(
+@old_BACKORDER_PREORDER_ID[INT]=null,
+@old_ORDER_ID[INT],
+@new_ORDER_ID[INT],
+@old_CUSTOMER_ID[INT],
+@new_CUSTOMER_ID[INT],
+@old_AMOUNT[DECIMAL](10,2),
+@new_AMOUNT[DECIMAL](10,2),
+@old_DATE_PLACED[DATETIME],
+@new_DATE_PLACED[DATETIME],
+@old_DATE_EXPECTED[DATETIME],
+@new_DATE_EXPECTED[DATETIME],
+@old_HAS_ARRIVED[BIT],
+@new_HAS_ARRIVED[BIT],
+@old_ADDRESS_1[NVARCHAR](50),
+@new_ADDRESS_1[NVARCHAR](50),
+@old_ADDRESS_2[NVARCHAR](50),
+@new_ADDRESS_2[NVARCHAR](50),
+@old_CITY[NVARCHAR](50),
+@new_CITY[NVARCHAR](50),
+@old_STATE[NCHAR](2),
+@new_STATE[NCHAR](2),
+@old_ZIP[NVARCHAR](10),
+@new_ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+UPDATE backorder_preorder
+SET ORDER_ID = @new_ORDER_ID, CUSTOMER_ID = @new_CUSTOMER_ID, AMOUNT = @new_AMOUNT, DATE_PLACED = @new_DATE_PLACED, DATE_EXPECTED = @new_DATE_EXPECTED, HAS_ARRIVED = @new_HAS_ARRIVED, ADDRESS_1 = @new_ADDRESS_1, ADDRESS_2 = @new_ADDRESS_2, CITY = @new_CITY, STATE = @new_STATE, ZIP = @new_ZIP
+WHERE (BACKORDER_PREORDER_ID = @old_BACKORDER_PREORDER_ID OR ISNULL(BACKORDER_PREORDER_ID, @old_BACKORDER_PREORDER_ID) IS NULL)
+AND (ORDER_ID = @old_ORDER_ID)
+AND (CUSTOMER_ID = @old_CUSTOMER_ID)
+AND (AMOUNT = @old_AMOUNT)
+AND (DATE_PLACED = @old_DATE_PLACED)
+AND (DATE_EXPECTED = @old_DATE_EXPECTED)
+AND (HAS_ARRIVED = @old_HAS_ARRIVED)
+AND (ADDRESS_1 = @old_ADDRESS_1)
+AND (ADDRESS_2 = @old_ADDRESS_2)
+AND (CITY = @old_CITY)
+AND (STATE = @old_STATE)
+AND (ZIP = @old_ZIP)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_charity'
+GO
+Create PROCEDURE sp_update_charity
+(
+@old_CHARITY_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_EMPLOYEE_ID[INT],
+@new_EMPLOYEE_ID[INT],
+@old_CHARITY_NAME[NVARCHAR](200),
+@new_CHARITY_NAME[NVARCHAR](200),
+@old_CONTACT_FIRST_NAME[NVARCHAR](150),
+@new_CONTACT_FIRST_NAME[NVARCHAR](150),
+@old_CONTACT_LAST_NAME[NVARCHAR](150),
+@new_CONTACT_LAST_NAME[NVARCHAR](150),
+@old_PHONE_NUMBER[NVARCHAR](20),
+@new_PHONE_NUMBER[NVARCHAR](20),
+@old_EMAIL[NVARCHAR](100),
+@new_EMAIL[NVARCHAR](100),
+@old_CONTACT_HOURS[NVARCHAR](150),
+@new_CONTACT_HOURS[NVARCHAR](150),
+@old_STATUS[NVARCHAR](10),
+@new_STATUS[NVARCHAR](10)
+
+)
+AS
+BEGIN
+UPDATE charity
+SET USER_ID = @new_USER_ID, EMPLOYEE_ID = @new_EMPLOYEE_ID, CHARITY_NAME = @new_CHARITY_NAME, CONTACT_FIRST_NAME = @new_CONTACT_FIRST_NAME, CONTACT_LAST_NAME = @new_CONTACT_LAST_NAME, PHONE_NUMBER = @new_PHONE_NUMBER, EMAIL = @new_EMAIL, CONTACT_HOURS = @new_CONTACT_HOURS, STATUS = @new_STATUS
+WHERE (CHARITY_ID = @old_CHARITY_ID)
+AND (USER_ID = @old_USER_ID)
+AND (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+AND (CHARITY_NAME = @old_CHARITY_NAME)
+AND (CONTACT_FIRST_NAME = @old_CONTACT_FIRST_NAME)
+AND (CONTACT_LAST_NAME = @old_CONTACT_LAST_NAME)
+AND (PHONE_NUMBER = @old_PHONE_NUMBER)
+AND (EMAIL = @old_EMAIL)
+AND (CONTACT_HOURS = @old_CONTACT_HOURS)
+AND (STATUS = @old_STATUS)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_charity_approve'
+GO
+Create PROCEDURE [dbo].[sp_update_charity_approve]
+(
+@old_CHARITY_ID[INT]
+)
+AS
+	BEGIN
+		UPDATE [CHARITY]
+			SET STATUS = "Approved"
+			WHERE CHARITY_ID = @old_CHARITY_ID
+			RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_update_charity_deny'
+GO
+Create PROCEDURE [dbo].[sp_update_charity_deny]
+(
+@old_CHARITY_ID[INT]
+)
+AS
+	BEGIN
+		UPDATE [CHARITY]
+			SET STATUS = "Denied"
+			WHERE CHARITY_ID = @old_CHARITY_ID
+			RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_update_charity_products'
+GO
+Create PROCEDURE sp_update_charity_products
+(
+@old_CHARITY_ID[INT],
+@old_PRODUCT_LOT_ID[INT],
+@old_QUANTITY[INT],
+@new_QUANTITY[INT]
+)
+AS
+BEGIN
+UPDATE charity_products
+SET QUANTITY = @new_QUANTITY
+WHERE (CHARITY_ID = @old_CHARITY_ID)
+AND (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+AND (QUANTITY = @old_QUANTITY)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_commercial'
+GO
+Create PROCEDURE sp_update_commercial
+(
+@old_COMMERCIAL_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT]
+)
+AS
+BEGIN
+UPDATE commercial
+SET USER_ID = @new_USER_ID
+WHERE (COMMERCIAL_ID = @old_COMMERCIAL_ID)
+AND (USER_ID = @old_USER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_deal'
+GO
+Create PROCEDURE sp_update_deal
+(
+@old_DEAL_ID[INT],
+@old_DESCRIPTION[NVARCHAR](200),
+@new_DESCRIPTION[NVARCHAR](200),
+@old_CODE[NCHAR](10)=null,
+@new_CODE[NCHAR](10),
+@old_AMOUNT[DECIMAL](5,2)=null,
+@new_AMOUNT[DECIMAL](5,2),
+@old_PERCENT_OFF[DECIMAL](5,2)=null,
+@new_PERCENT_OFF[DECIMAL](5,2)
+)
+AS
+BEGIN
+UPDATE deal
+SET DESCRIPTION = @new_DESCRIPTION, CODE = @new_CODE, AMOUNT = @new_AMOUNT, PERCENT_OFF = @new_PERCENT_OFF
+WHERE (DEAL_ID = @old_DEAL_ID)
+AND (DESCRIPTION = @old_DESCRIPTION)
+AND (CODE = @old_CODE OR ISNULL(CODE, @old_CODE) IS NULL)
+AND (AMOUNT = @old_AMOUNT OR ISNULL(AMOUNT, @old_AMOUNT) IS NULL)
+AND (PERCENT_OFF = @old_PERCENT_OFF OR ISNULL(PERCENT_OFF, @old_PERCENT_OFF) IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_deal_category'
+GO
+Create PROCEDURE sp_update_deal_category
+(
+@old_DEAL_ID[INT],
+@old_CATEGORY_ID[NVARCHAR](200),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE deal_category
+SET ACTIVE = @new_ACTIVE
+WHERE (DEAL_ID = @old_DEAL_ID)
+AND (CATEGORY_ID = @old_CATEGORY_ID)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_deal_product'
+GO
+Create PROCEDURE sp_update_deal_product
+(
+@old_DEAL_ID[INT],
+@old_PRODUCT_ID[INT],
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE deal_product
+SET ACTIVE = @new_ACTIVE
+WHERE (DEAL_ID = @old_DEAL_ID)
+AND (PRODUCT_ID = @old_PRODUCT_ID)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_delivery'
+GO
+Create PROCEDURE sp_update_delivery
+(
+@old_DELIVERY_ID[INT],
+@old_ROUTE_ID[INT],
+@new_ROUTE_ID[INT],
+@old_DEVLIVERY_DATE[DATETIME],
+@new_DEVLIVERY_DATE[DATETIME],
+@old_VERIFICATION[VARBINARY]=null,
+@new_VERIFICATION[VARBINARY],
+@old_STATUS_ID[NVARCHAR](50),
+@new_STATUS_ID[NVARCHAR](50),
+@old_DELIVERY_TYPE_ID[NVARCHAR](50),
+@new_DELIVERY_TYPE_ID[NVARCHAR](50),
+@old_ORDER_ID[INT],
+@new_ORDER_ID[INT]
+)
+AS
+BEGIN
+UPDATE delivery
+SET ROUTE_ID = @new_ROUTE_ID, DEVLIVERY_DATE = @new_DEVLIVERY_DATE, VERIFICATION = @new_VERIFICATION, STATUS_ID = @new_STATUS_ID, DELIVERY_TYPE_ID = @new_DELIVERY_TYPE_ID, ORDER_ID = @new_ORDER_ID
+WHERE (DELIVERY_ID = @old_DELIVERY_ID)
+AND (ROUTE_ID = @old_ROUTE_ID)
+AND (DEVLIVERY_DATE = @old_DEVLIVERY_DATE)
+AND (VERIFICATION = @old_VERIFICATION OR ISNULL(VERIFICATION, @old_VERIFICATION) IS NULL)
+AND (STATUS_ID = @old_STATUS_ID)
+AND (DELIVERY_TYPE_ID = @old_DELIVERY_TYPE_ID)
+AND (ORDER_ID = @old_ORDER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_delivery_type'
+GO
+Create PROCEDURE sp_update_delivery_type
+(
+@old_DELIVERY_TYPE_ID[NVARCHAR](50),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE delivery_type
+SET ACTIVE = @new_ACTIVE
+WHERE (DELIVERY_TYPE_ID = @old_DELIVERY_TYPE_ID)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_dispatcher_message'
+GO
+Create PROCEDURE sp_update_dispatcher_message
+(
+@old_DISPATCHER_MESSAGE_ID[INT],
+@old_EMPLOYEE_ID[INT],
+@new_EMPLOYEE_ID[INT],
+@old_MESSAGE_NAME[NVARCHAR](100),
+@new_MESSAGE_NAME[NVARCHAR](100),
+@old_DRIVER_ID[INT],
+@new_DRIVER_ID[INT]
+)
+AS
+BEGIN
+UPDATE dispatcher_message
+SET EMPLOYEE_ID = @new_EMPLOYEE_ID, MESSAGE_NAME = @new_MESSAGE_NAME, DRIVER_ID = @new_DRIVER_ID
+WHERE (DISPATCHER_MESSAGE_ID = @old_DISPATCHER_MESSAGE_ID)
+AND (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+AND (MESSAGE_NAME = @old_MESSAGE_NAME)
+AND (DRIVER_ID = @old_DRIVER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_driver'
+GO
+Create PROCEDURE sp_update_driver
+(
+@old_DRIVER_ID[INT],
+@old_DRIVER_LICENSE_NUMBER[NVARCHAR](9),
+@new_DRIVER_LICENSE_NUMBER[NVARCHAR](9),
+@old_LICENSE_EXPIRATION[DATETIME],
+@new_LICENSE_EXPIRATION[DATETIME],
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE driver
+SET DRIVER_LICENSE_NUMBER = @new_DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION = @new_LICENSE_EXPIRATION, ACTIVE = @new_ACTIVE
+WHERE (DRIVER_ID = @old_DRIVER_ID)
+AND (DRIVER_LICENSE_NUMBER = @old_DRIVER_LICENSE_NUMBER)
+AND (LICENSE_EXPIRATION = @old_LICENSE_EXPIRATION)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_employee'
+GO
+Create PROCEDURE sp_update_employee
+(
+@old_EMPLOYEE_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_SALARY[DECIMAL](8,2)=null,
+@new_SALARY[DECIMAL](8,2),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT],
+@old_DATE_OF_BIRTH[DATE],
+@new_DATE_OF_BIRTH[DATE]
+)
+AS
+BEGIN
+UPDATE employee
+SET USER_ID = @new_USER_ID, SALARY = @new_SALARY, ACTIVE = @new_ACTIVE, DATE_OF_BIRTH = @new_DATE_OF_BIRTH
+WHERE (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+AND (USER_ID = @old_USER_ID)
+AND (SALARY = @old_SALARY OR ISNULL(SALARY, @old_SALARY) IS NULL)
+AND (ACTIVE = @old_ACTIVE)
+AND (DATE_OF_BIRTH = @old_DATE_OF_BIRTH)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_employee_message'
+GO
+Create PROCEDURE sp_update_employee_message
+(
+@old_MESSAGE_ID[INT],
+@old_SENDER_ID[INT],
+@new_SENDER_ID[INT],
+@old_RECEIVER_ID[INT],
+@new_RECEIVER_ID[INT],
+@old_SENT[DATETIME],
+@new_SENT[DATETIME],
+@old_VIEWED[BIT],
+@new_VIEWED[BIT],
+@old_MESSAGE[NVARCHAR](4000),
+@new_MESSAGE[NVARCHAR](4000)
+)
+AS
+BEGIN
+UPDATE employee_message
+SET SENDER_ID = @new_SENDER_ID, RECEIVER_ID = @new_RECEIVER_ID, SENT = @new_SENT, VIEWED = @new_VIEWED, MESSAGE = @new_MESSAGE
+WHERE (MESSAGE_ID = @old_MESSAGE_ID)
+AND (SENDER_ID = @old_SENDER_ID)
+AND (RECEIVER_ID = @old_RECEIVER_ID)
+AND (SENT = @old_SENT)
+AND (VIEWED = @old_VIEWED)
+AND (MESSAGE = @old_MESSAGE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_employee_order_responsibility'
+GO
+Create PROCEDURE sp_update_employee_order_responsibility
+(
+@old_ORDER_ID[INT],
+@old_EMPLOYEE_ID[INT],
+@old_DESCRIPTION[NVARCHAR](200),
+@new_DESCRIPTION[NVARCHAR](200)
+)
+AS
+BEGIN
+UPDATE employee_order_responsibility
+SET DESCRIPTION = @new_DESCRIPTION
+WHERE (ORDER_ID = @old_ORDER_ID)
+AND (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+AND (DESCRIPTION = @old_DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_inspection'
+GO
+Create PROCEDURE sp_update_inspection
+(
+@old_INSPECTION_ID[INT],
+@old_EMPLOYEE_ID[INT],
+@new_EMPLOYEE_ID[INT],
+@old_PRODUCT_LOT_ID[INT],
+@new_PRODUCT_LOT_ID[INT],
+@old_GRADE_ID[NVARCHAR](250),
+@new_GRADE_ID[NVARCHAR](250),
+@old_DATE_PERFORMED[DATETIME],
+@new_DATE_PERFORMED[DATETIME],
+@old_EXPIRATION_DATE[DATETIME],
+@new_EXPIRATION_DATE[DATETIME]
+)
+AS
+BEGIN
+UPDATE inspection
+SET EMPLOYEE_ID = @new_EMPLOYEE_ID, PRODUCT_LOT_ID = @new_PRODUCT_LOT_ID, GRADE_ID = @new_GRADE_ID, DATE_PERFORMED = @new_DATE_PERFORMED, EXPIRATION_DATE = @new_EXPIRATION_DATE
+WHERE (INSPECTION_ID = @old_INSPECTION_ID)
+AND (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+AND (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+AND (GRADE_ID = @old_GRADE_ID)
+AND (DATE_PERFORMED = @old_DATE_PERFORMED)
+AND (EXPIRATION_DATE = @old_EXPIRATION_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_location'
+GO
+Create PROCEDURE sp_update_location
+(
+@old_LOCATION_ID[INT],
+@old_DESCRIPTION[NVARCHAR](250),
+@new_DESCRIPTION[NVARCHAR](250),
+@old_IS_ACTIVE[BIT],
+@new_IS_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE location
+SET DESCRIPTION = @new_DESCRIPTION,
+	IS_ACTIVE = @new_IS_ACTIVE
+WHERE (LOCATION_ID = @old_LOCATION_ID)
+AND (DESCRIPTION = @old_DESCRIPTION)
+AND (IS_ACTIVE = @old_IS_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_maintenance_schedule'
+GO
+Create PROCEDURE sp_update_maintenance_schedule
+(
+@old_MAINTENANCE_SCHEDULE_ID[INT],
+@old_VEHICLE_ID[INT],
+@new_VEHICLE_ID[INT]
+)
+AS
+BEGIN
+UPDATE maintenance_schedule
+SET VEHICLE_ID = @new_VEHICLE_ID
+WHERE (MAINTENANCE_SCHEDULE_ID = @old_MAINTENANCE_SCHEDULE_ID)
+AND (VEHICLE_ID = @old_VEHICLE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_maintenance_schedule_line'
+GO
+Create PROCEDURE sp_update_maintenance_schedule_line
+(
+@old_MAINTENANCE_SCHEDULE_LINE_ID[INT],
+@old_MAINTENANCE_SCHEDULE_ID[INT],
+@new_MAINTENANCE_SCHEDULE_ID[INT],
+@old_DESCRIPTION[NVARCHAR](250),
+@new_DESCRIPTION[NVARCHAR](250),
+@old_MAINTENANCE_DATE[DATE],
+@new_MAINTENANCE_DATE[DATE]
+)
+AS
+BEGIN
+UPDATE maintenance_schedule_line
+SET MAINTENANCE_SCHEDULE_ID = @new_MAINTENANCE_SCHEDULE_ID, DESCRIPTION = @new_DESCRIPTION, MAINTENANCE_DATE = @new_MAINTENANCE_DATE
+WHERE (MAINTENANCE_SCHEDULE_LINE_ID = @old_MAINTENANCE_SCHEDULE_LINE_ID)
+AND (MAINTENANCE_SCHEDULE_ID = @old_MAINTENANCE_SCHEDULE_ID)
+AND (DESCRIPTION = @old_DESCRIPTION)
+AND (MAINTENANCE_DATE = @old_MAINTENANCE_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_message_line'
+GO
+Create PROCEDURE sp_update_message_line
+(
+@old_MESSAGE_LINE_ID[INT],
+@old_DISPATCHER_MESSAGE_ID[INT],
+@new_DISPATCHER_MESSAGE_ID[INT],
+@old_MESSAGE_LINE_TEXT[NVARCHAR](250),
+@new_MESSAGE_LINE_TEXT[NVARCHAR](250)
+)
+AS
+BEGIN
+UPDATE message_line
+SET DISPATCHER_MESSAGE_ID = @new_DISPATCHER_MESSAGE_ID, MESSAGE_LINE_TEXT = @new_MESSAGE_LINE_TEXT
+WHERE (MESSAGE_LINE_ID = @old_MESSAGE_LINE_ID)
+AND (DISPATCHER_MESSAGE_ID = @old_DISPATCHER_MESSAGE_ID)
+AND (MESSAGE_LINE_TEXT = @old_MESSAGE_LINE_TEXT)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_package'
+GO
+Create PROCEDURE sp_update_package
+(
+@old_PACKAGE_ID[INT],
+@old_DELIVERY_ID[INT],
+@new_DELIVERY_ID[INT],
+@old_ORDER_ID[INT],
+@new_ORDER_ID[INT]
+)
+AS
+BEGIN
+UPDATE package
+SET DELIVERY_ID = @new_DELIVERY_ID, ORDER_ID = @new_ORDER_ID
+WHERE (PACKAGE_ID = @old_PACKAGE_ID)
+AND (DELIVERY_ID = @old_DELIVERY_ID)
+AND (ORDER_ID = @old_ORDER_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_package_delivery'
+GO
+Create PROCEDURE sp_update_package_delivery
+(
+@PACKAGE_ID[INT],
+@new_DELIVERY_ID[INT]
+)
+AS
+BEGIN
+UPDATE package
+SET DELIVERY_ID = @new_DELIVERY_ID
+WHERE (PACKAGE_ID = @PACKAGE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_package_line'
+GO
+Create PROCEDURE sp_update_package_line
+(
+@old_PACKAGE_LINE_ID[INT],
+@old_PACKAGE_ID[INT],
+@new_PACKAGE_ID[INT],
+@old_PRODUCT_LOT_ID[INT],
+@new_PRODUCT_LOT_ID[INT],
+@old_QUANTITY[INT],
+@new_QUANTITY[INT],
+@old_PRICE_PAID[DECIMAL](5,2),
+@new_PRICE_PAID[DECIMAL](5,2)
+)
+AS
+BEGIN
+UPDATE package_line
+SET PACKAGE_ID = @new_PACKAGE_ID, PRODUCT_LOT_ID = @new_PRODUCT_LOT_ID, QUANTITY = @new_QUANTITY, PRICE_PAID = @new_PRICE_PAID
+WHERE (PACKAGE_LINE_ID = @old_PACKAGE_LINE_ID)
+AND (PACKAGE_ID = @old_PACKAGE_ID)
+AND (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+AND (QUANTITY = @old_QUANTITY)
+AND (PRICE_PAID = @old_PRICE_PAID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_pickup'
+GO
+Create PROCEDURE sp_update_pickup
+(
+@old_PICKUP_ID[INT],
+@old_SUPPLIER_ID[INT],
+@new_SUPPLIER_ID[INT],
+@old_WAREHOUSE_ID[INT],
+@new_WAREHOUSE_ID[INT],
+@old_DRIVER_ID[INT]=null,
+@new_DRIVER_ID[INT],
+@old_EMPLOYEE_ID[INT]=null,
+@new_EMPLOYEE_ID[INT]
+)
+AS
+BEGIN
+UPDATE pickup
+SET SUPPLIER_ID = @new_SUPPLIER_ID, WAREHOUSE_ID = @new_WAREHOUSE_ID, DRIVER_ID = @new_DRIVER_ID, EMPLOYEE_ID = @new_EMPLOYEE_ID
+WHERE (PICKUP_ID = @old_PICKUP_ID)
+AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+AND (WAREHOUSE_ID = @old_WAREHOUSE_ID)
+AND (DRIVER_ID = @old_DRIVER_ID OR ISNULL(DRIVER_ID, @old_DRIVER_ID) IS NULL)
+AND (EMPLOYEE_ID = @old_EMPLOYEE_ID OR ISNULL(EMPLOYEE_ID, @old_EMPLOYEE_ID) IS NULL)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_pickup_line'
+GO
+Create PROCEDURE sp_update_pickup_line
+(
+@old_PICKUP_LINE_ID[INT],
+@old_PICKUP_ID[INT],
+@new_PICKUP_ID[INT],
+@old_PRODUCT_LOT_ID[INT],
+@new_PRODUCT_LOT_ID[INT],
+@old_QUANTITY[INT],
+@new_QUANTITY[INT],
+@old_PICK_UP_STATUS[BIT],
+@new_PICK_UP_STATUS[BIT]
+)
+AS
+BEGIN
+UPDATE pickup_line
+SET PICKUP_ID = @new_PICKUP_ID, PRODUCT_LOT_ID = @new_PRODUCT_LOT_ID, QUANTITY = @new_QUANTITY, PICK_UP_STATUS = @new_PICK_UP_STATUS
+WHERE (PICKUP_LINE_ID = @old_PICKUP_LINE_ID)
+AND (PICKUP_ID = @old_PICKUP_ID)
+AND (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+AND (QUANTITY = @old_QUANTITY)
+AND (PICK_UP_STATUS = @old_PICK_UP_STATUS)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product'
+GO
+Create PROCEDURE sp_update_product
+(
+@old_PRODUCT_ID[INT],
+@old_NAME[NVARCHAR](50),
+@new_NAME[NVARCHAR](50),
+@old_DESCRIPTION[NVARCHAR](200),
+@new_DESCRIPTION[NVARCHAR](200),
+@old_UNIT_PRICE[DECIMAL](10,2),
+@new_UNIT_PRICE[DECIMAL](10,2),
+@old_IMAGE_NAME[VARCHAR](50)=null,
+@new_IMAGE_NAME[VARCHAR](50),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT],
+@old_UNIT_OF_MEASUREMENT[NVARCHAR](20),
+@new_UNIT_OF_MEASUREMENT[NVARCHAR](20),
+@old_DELIVERY_CHARGE_PER_UNIT[DECIMAL](5,2),
+@new_DELIVERY_CHARGE_PER_UNIT[DECIMAL](5,2)
+)
+AS
+BEGIN
+UPDATE product
+SET NAME = @new_NAME, DESCRIPTION = @new_DESCRIPTION, UNIT_PRICE = @new_UNIT_PRICE, IMAGE_NAME = @new_IMAGE_NAME, ACTIVE = @new_ACTIVE, UNIT_OF_MEASUREMENT = @new_UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT = @new_DELIVERY_CHARGE_PER_UNIT
+WHERE (PRODUCT_ID = @old_PRODUCT_ID)
+AND (NAME = @old_NAME)
+AND (DESCRIPTION = @old_DESCRIPTION)
+AND (UNIT_PRICE = @old_UNIT_PRICE)
+AND (IMAGE_NAME = @old_IMAGE_NAME OR ISNULL(IMAGE_NAME, @old_IMAGE_NAME) IS NULL)
+AND (ACTIVE = @old_ACTIVE)
+AND (UNIT_OF_MEASUREMENT = @old_UNIT_OF_MEASUREMENT)
+AND (DELIVERY_CHARGE_PER_UNIT = @old_DELIVERY_CHARGE_PER_UNIT)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_grade_price'
+GO
+Create PROCEDURE sp_update_product_grade_price
+(
+@old_PRODUCT_ID[INT],
+@old_GRADE_ID[NVARCHAR](250),
+@old_PRICE[DECIMAL](5,2),
+@new_PRICE[DECIMAL](5,2)
+)
+AS
+BEGIN
+UPDATE product_grade_price
+SET PRICE = @new_PRICE
+WHERE (PRODUCT_ID = @old_PRODUCT_ID)
+AND (GRADE_ID = @old_GRADE_ID)
+AND (PRICE = @old_PRICE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_lot'
+GO
+Create PROCEDURE sp_update_product_lot
+(
+@old_PRODUCT_LOT_ID[INT],
+@old_WAREHOUSE_ID[INT],
+@new_WAREHOUSE_ID[INT],
+@old_SUPPLIER_ID[INT],
+@new_SUPPLIER_ID[INT],
+@old_LOCATION_ID[INT],
+@new_LOCATION_ID[INT],
+@old_PRODUCT_ID[INT],
+@new_PRODUCT_ID[INT],
+@old_SUPPLY_MANAGER_ID[INT],
+@new_SUPPLY_MANAGER_ID[INT],
+@old_QUANTITY[INT],
+@new_QUANTITY[INT],
+@old_AVAILABLE_QUANTITY[INT],
+@new_AVAILABLE_QUANTITY[INT],
+@old_DATE_RECEIVED[DATETIME],
+@new_DATE_RECEIVED[DATETIME],
+@old_EXPIRATION_DATE[DATETIME],
+@new_EXPIRATION_DATE[DATETIME]
+)
+AS
+BEGIN
+UPDATE product_lot
+SET WAREHOUSE_ID = @new_WAREHOUSE_ID, SUPPLIER_ID = @new_SUPPLIER_ID, LOCATION_ID = @new_LOCATION_ID, PRODUCT_ID = @new_PRODUCT_ID, SUPPLY_MANAGER_ID = @new_SUPPLY_MANAGER_ID, QUANTITY = @new_QUANTITY, AVAILABLE_QUANTITY = @new_AVAILABLE_QUANTITY, DATE_RECEIVED = @new_DATE_RECEIVED, EXPIRATION_DATE = @new_EXPIRATION_DATE
+WHERE (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+AND (WAREHOUSE_ID = @old_WAREHOUSE_ID)
+AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+AND (LOCATION_ID = @old_LOCATION_ID)
+AND (PRODUCT_ID = @old_PRODUCT_ID)
+AND (SUPPLY_MANAGER_ID = @old_SUPPLY_MANAGER_ID)
+AND (QUANTITY = @old_QUANTITY)
+AND (AVAILABLE_QUANTITY = @old_AVAILABLE_QUANTITY)
+AND (DATE_RECEIVED = @old_DATE_RECEIVED)
+AND (EXPIRATION_DATE = @old_EXPIRATION_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_lot_available_quantity'
+GO
+Create PROCEDURE sp_update_product_lot_available_quantity
+(
+@PRODUCT_LOT_ID[INT],
+@old_AVAILABLE_QUANTITY[INT],
+@new_AVAILABLE_QUANTITY[INT]
+)
+AS
+BEGIN
+UPDATE product_lot
+SET AVAILABLE_QUANTITY = @new_AVAILABLE_QUANTITY
+WHERE (PRODUCT_LOT_ID = @PRODUCT_LOT_ID)
+AND AVAILABLE_QUANTITY = @old_AVAILABLE_QUANTITY
+RETURN @@ROWCOUNT
+END
+
+Print '' print  ' *** creating procedure sp_update_product_order'
+GO
+Create PROCEDURE sp_update_product_order
+(
+@old_ORDER_ID[INT],
+@old_CUSTOMER_ID[INT],
+@new_CUSTOMER_ID[INT],
+@old_ORDER_TYPE_ID[NVARCHAR](250),
+@new_ORDER_TYPE_ID[NVARCHAR](250),
+@old_ADDRESS_TYPE[NVARCHAR],
+@new_ADDRESS_TYPE[NVARCHAR],
+@old_DELIVERY_TYPE_ID[NVARCHAR](50),
+@new_DELIVERY_TYPE_ID[NVARCHAR](50),
+@old_AMOUNT[DECIMAL](6,2),
+@new_AMOUNT[DECIMAL](6,2),
+@old_ORDER_DATE[DATETIME],
+@new_ORDER_DATE[DATETIME],
+@old_DATE_EXPECTED[DATETIME],
+@new_DATE_EXPECTED[DATETIME],
+@old_DISCOUNT[DECIMAL](5,2),
+@new_DISCOUNT[DECIMAL](5,2),
+@old_ORDER_STATUS_ID[NVARCHAR](50),
+@new_ORDER_STATUS_ID[NVARCHAR](50),
+@old_USER_ADDRESS_ID[INT],
+@new_USER_ADDRESS_ID[INT],
+@old_HAS_ARRIVED[BIT],
+@new_HAS_ARRIVED[BIT]
+)
+AS
+BEGIN
+UPDATE product_order
+SET CUSTOMER_ID = @new_CUSTOMER_ID, ORDER_TYPE_ID = @new_ORDER_TYPE_ID, ADDRESS_TYPE = @new_ADDRESS_TYPE, DELIVERY_TYPE_ID = @new_DELIVERY_TYPE_ID, AMOUNT = @new_AMOUNT, ORDER_DATE = @new_ORDER_DATE, DATE_EXPECTED = @new_DATE_EXPECTED, DISCOUNT = @new_DISCOUNT, ORDER_STATUS_ID = @new_ORDER_STATUS_ID, USER_ADDRESS_ID = @new_USER_ADDRESS_ID, HAS_ARRIVED = @new_HAS_ARRIVED
+WHERE (ORDER_ID = @old_ORDER_ID)
+AND (CUSTOMER_ID = @old_CUSTOMER_ID)
+AND (ORDER_TYPE_ID = @old_ORDER_TYPE_ID)
+AND (ADDRESS_TYPE = @old_ADDRESS_TYPE)
+AND (DELIVERY_TYPE_ID = @old_DELIVERY_TYPE_ID)
+AND (AMOUNT = @old_AMOUNT)
+AND (ORDER_DATE = @old_ORDER_DATE)
+AND (DATE_EXPECTED = @old_DATE_EXPECTED)
+AND (DISCOUNT = @old_DISCOUNT)
+AND (ORDER_STATUS_ID = @old_ORDER_STATUS_ID)
+AND (USER_ADDRESS_ID = @old_USER_ADDRESS_ID)
+AND (HAS_ARRIVED = @old_HAS_ARRIVED)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_order_status'
+GO
+Create PROCEDURE sp_update_product_order_status
+(
+@ORDER_ID[INT],
+@NEW_ORDER_STATUS_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+UPDATE product_order
+SET ORDER_STATUS_ID = @NEW_ORDER_STATUS_ID
+WHERE (ORDER_ID = @ORDER_ID)
+RETURN @@ROWCOUNT
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_price'
+GO
+Create PROCEDURE sp_update_product_price
+(
+	@PRODUCT_ID[INT],
+	@old_PRICE[DECIMAL](5,2),
+	@new_PRICE[DECIMAL](5,2)
+)
+AS
+	BEGIN
+		UPDATE product_grade_price
+		SET PRICE = @new_PRICE
+		WHERE (PRODUCT_ID = @PRODUCT_ID)
+		AND (PRICE = @old_PRICE)
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_update_product_review'
+GO
+Create PROCEDURE sp_update_product_review
+(
+@old_REVIEW_ID[INT],
+@old_PRODUCT_ID[INT],
+@new_PRODUCT_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_SUPPLIER_ID[INT],
+@new_SUPPLIER_ID[INT],
+@old_RATING[INT],
+@new_RATING[INT],
+@old_NOTES[NVARCHAR](1000),
+@new_NOTES[NVARCHAR](1000)
+)
+AS
+BEGIN
+UPDATE product_review
+SET PRODUCT_ID = @new_PRODUCT_ID, USER_ID = @new_USER_ID, SUPPLIER_ID = @new_SUPPLIER_ID, RATING = @new_RATING, NOTES = @new_NOTES
+WHERE (REVIEW_ID = @old_REVIEW_ID)
+AND (PRODUCT_ID = @old_PRODUCT_ID)
+AND (USER_ID = @old_USER_ID)
+AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+AND (RATING = @old_RATING)
+AND (NOTES = @old_NOTES)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_repair'
+GO
+Create PROCEDURE sp_update_repair
+(
+@old_REPAIR_ID[INT],
+@old_VEHICLE_ID[INT],
+@new_VEHICLE_ID[INT]
+)
+AS
+BEGIN
+UPDATE repair
+SET VEHICLE_ID = @new_VEHICLE_ID
+WHERE (REPAIR_ID = @old_REPAIR_ID)
+AND (VEHICLE_ID = @old_VEHICLE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_repair_line'
+GO
+Create PROCEDURE sp_update_repair_line
+(
+@old_REPAIR_LINE_ID[INT],
+@old_REPAIR_ID[INT],
+@new_REPAIR_ID[INT],
+@old_REPAIR_DESCRIPTION[NVARCHAR](250),
+@new_REPAIR_DESCRIPTION[NVARCHAR](250)
+)
+AS
+BEGIN
+UPDATE repair_line
+SET REPAIR_ID = @new_REPAIR_ID, REPAIR_DESCRIPTION = @new_REPAIR_DESCRIPTION
+WHERE (REPAIR_LINE_ID = @old_REPAIR_LINE_ID)
+AND (REPAIR_ID = @old_REPAIR_ID)
+AND (REPAIR_DESCRIPTION = @old_REPAIR_DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_role'
+GO
+Create PROCEDURE sp_update_role
+(
+@old_ROLE_ID[NVARCHAR](250),
+@old_DESCRIPTION[NVARCHAR](1000),
+@new_DESCRIPTION[NVARCHAR](1000)
+)
+AS
+BEGIN
+UPDATE role
+SET DESCRIPTION = @new_DESCRIPTION
+WHERE (ROLE_ID = @old_ROLE_ID)
+AND (DESCRIPTION = @old_DESCRIPTION)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_route'
+GO
+Create PROCEDURE sp_update_route
+(
+@old_ROUTE_ID[INT],
+@old_VEHICLE_ID[INT],
+@new_VEHICLE_ID[INT],
+@old_DRIVER_ID[INT],
+@new_DRIVER_ID[INT],
+@old_ASSIGNED_DATE[DATETIME],
+@new_ASSIGNED_DATE[DATETIME]
+)
+AS
+BEGIN
+UPDATE route
+SET VEHICLE_ID = @new_VEHICLE_ID, DRIVER_ID = @new_DRIVER_ID, ASSIGNED_DATE = @new_ASSIGNED_DATE
+WHERE (ROUTE_ID = @old_ROUTE_ID)
+AND (VEHICLE_ID = @old_VEHICLE_ID)
+AND (DRIVER_ID = @old_DRIVER_ID)
+AND (ASSIGNED_DATE = @old_ASSIGNED_DATE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_shipping_address'
+GO
+Create PROCEDURE sp_update_shipping_address
+(
+@old_ADDRESS_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_ADDRESS1[NVARCHAR](100),
+@new_ADDRESS1[NVARCHAR](100),
+@old_ADDRESS2[NVARCHAR](100)=null,
+@new_ADDRESS2[NVARCHAR](100),
+@old_CITY[NVARCHAR](50),
+@new_CITY[NVARCHAR](50),
+@old_STATE[NCHAR](2),
+@new_STATE[NCHAR](2),
+@old_ZIP[NVARCHAR](10),
+@new_ZIP[NVARCHAR](10),
+@old_ADDRESS_NAME[NVARCHAR](50),
+@new_ADDRESS_NAME[NVARCHAR](50)
+)
+AS
+BEGIN
+UPDATE shipping_address
+SET USER_ID = @new_USER_ID, ADDRESS1 = @new_ADDRESS1, ADDRESS2 = @new_ADDRESS2, CITY = @new_CITY, STATE = @new_STATE, ZIP = @new_ZIP, ADDRESS_NAME = @new_ADDRESS_NAME
+WHERE (ADDRESS_ID = @old_ADDRESS_ID)
+AND (USER_ID = @old_USER_ID)
+AND (ADDRESS1 = @old_ADDRESS1)
+AND (ADDRESS2 = @old_ADDRESS2 OR ISNULL(ADDRESS2, @old_ADDRESS2) IS NULL)
+AND (CITY = @old_CITY)
+AND (STATE = @old_STATE)
+AND (ZIP = @old_ZIP)
+AND (ADDRESS_NAME = @old_ADDRESS_NAME)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_supplier'
+GO
+Create PROCEDURE sp_update_supplier
+(
+@old_SUPPLIER_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_IS_APPROVED[BIT],
+@new_IS_APPROVED[BIT],
+@old_APPROVED_BY[INT],
+@new_APPROVED_BY[INT],
+@old_FARM_NAME[NVARCHAR](300),
+@new_FARM_NAME[NVARCHAR](300),
+@old_FARM_ADDRESS[NVARCHAR](300),
+@new_FARM_ADDRESS[NVARCHAR](300),
+@old_FARM_CITY[NVARCHAR](50),
+@new_FARM_CITY[NVARCHAR](50),
+@old_FARM_STATE[NCHAR](50),
+@new_FARM_STATE[NCHAR](50),
+@old_FARM_TAX_ID[NVARCHAR](64),
+@new_FARM_TAX_ID[NVARCHAR](64),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT]
+)
+AS
+BEGIN
+UPDATE supplier
+SET USER_ID = @new_USER_ID, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, FARM_NAME = @new_FARM_NAME, 
+FARM_ADDRESS = @new_FARM_ADDRESS, FARM_CITY = @new_FARM_CITY,
+FARM_STATE = @new_FARM_STATE, FARM_TAX_ID = @new_FARM_TAX_ID, ACTIVE = @new_ACTIVE
+WHERE (SUPPLIER_ID = @old_SUPPLIER_ID)
+AND (USER_ID = @old_USER_ID)
+AND (IS_APPROVED = @old_IS_APPROVED)
+AND (APPROVED_BY = @old_APPROVED_BY)
+AND (FARM_NAME = @old_FARM_NAME)
+AND (FARM_ADDRESS = @old_FARM_ADDRESS)
+AND (FARM_CITY = @old_FARM_CITY)
+AND (FARM_STATE = @old_FARM_STATE)
+AND (FARM_TAX_ID = @old_FARM_TAX_ID)
+AND (ACTIVE = @old_ACTIVE)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_user_address'
+GO
+Create PROCEDURE sp_update_user_address
+(
+@old_USER_ADDRESS_ID[INT],
+@old_USER_ID[INT],
+@new_USER_ID[INT],
+@old_ADDRESS_LINE_1[NVARCHAR](50),
+@new_ADDRESS_LINE_1[NVARCHAR](50),
+@old_ADDRESS_LINE_2[NVARCHAR](50),
+@new_ADDRESS_LINE_2[NVARCHAR](50),
+@old_CITY[NVARCHAR](50),
+@new_CITY[NVARCHAR](50),
+@old_STATE[NCHAR](2),
+@new_STATE[NCHAR](2),
+@old_ZIP[NVARCHAR](10),
+@new_ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+UPDATE user_address
+SET USER_ID = @new_USER_ID, ADDRESS_LINE_1 = @new_ADDRESS_LINE_1, ADDRESS_LINE_2 = @new_ADDRESS_LINE_2, CITY = @new_CITY, STATE = @new_STATE, ZIP = @new_ZIP
+WHERE (USER_ADDRESS_ID = @old_USER_ADDRESS_ID)
+AND (USER_ID = @old_USER_ID)
+AND (ADDRESS_LINE_1 = @old_ADDRESS_LINE_1)
+AND (ADDRESS_LINE_2 = @old_ADDRESS_LINE_2)
+AND (CITY = @old_CITY)
+AND (STATE = @old_STATE)
+AND (ZIP = @old_ZIP)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_user_password'
+GO
+Create PROCEDURE sp_update_user_password
+(
+@USERNAME[NVARCHAR](50)
+,@OLD_SALT[NVARCHAR](64)
+,@OLD_HASH[NVARCHAR](64)
+,@NEW_SALT[NVARCHAR](64)
+,@NEW_HASH[NVARCHAR](64)
+)
+AS
+    UPDATE APP_USER
+    SET PASSWORD_SALT = @NEW_SALT
+    ,PASSWORD_HASH = @NEW_HASH
+    WHERE USER_NAME = @USERNAME
+    AND PASSWORD_SALT = @OLD_SALT
+    AND PASSWORD_HASH = @OLD_HASH
+GO
+
+Print '' print  ' *** creating procedure sp_update_vehicle'
+GO
+Create PROCEDURE sp_update_vehicle
+(
+@old_VEHICLE_ID[INT],
+@old_VIN[NVARCHAR](20),
+@new_VIN[NVARCHAR](20),
+@old_MAKE[NVARCHAR](15),
+@new_MAKE[NVARCHAR](15),
+@old_MODEL[NVARCHAR](20),
+@new_MODEL[NVARCHAR](20),
+@old_MILEAGE[INT],
+@new_MILEAGE[INT],
+@old_YEAR[NVARCHAR](4),
+@new_YEAR[NVARCHAR](4),
+@old_COLOR[NVARCHAR](20),
+@new_COLOR[NVARCHAR](20),
+@old_ACTIVE[BIT],
+@new_ACTIVE[BIT],
+@old_LATEST_REPAIR_DATE[DATE]=null,
+@new_LATEST_REPAIR_DATE[DATE],
+@old_LAST_DRIVER_ID[INT]=null,
+@new_LAST_DRIVER_ID[INT],
+@old_VEHICLE_TYPE_ID[NVARCHAR](50),
+@new_VEHICLE_TYPE_ID[NVARCHAR](50)
+)
+AS
+BEGIN
+UPDATE vehicle
+SET VIN = @new_VIN, MAKE = @new_MAKE, MODEL = @new_MODEL, MILEAGE = @new_MILEAGE, YEAR = @new_YEAR, COLOR = @new_COLOR, ACTIVE = @new_ACTIVE, LATEST_REPAIR_DATE = @new_LATEST_REPAIR_DATE, LAST_DRIVER_ID = @new_LAST_DRIVER_ID, VEHICLE_TYPE_ID = @new_VEHICLE_TYPE_ID
+WHERE (VEHICLE_ID = @old_VEHICLE_ID)
+AND (VIN = @old_VIN)
+AND (MAKE = @old_MAKE)
+AND (MODEL = @old_MODEL)
+AND (MILEAGE = @old_MILEAGE)
+AND (YEAR = @old_YEAR)
+AND (COLOR = @old_COLOR)
+AND (ACTIVE = @old_ACTIVE)
+AND (LATEST_REPAIR_DATE = @old_LATEST_REPAIR_DATE OR ISNULL(LATEST_REPAIR_DATE, @old_LATEST_REPAIR_DATE) IS NULL)
+AND (LAST_DRIVER_ID = @old_LAST_DRIVER_ID OR ISNULL(LAST_DRIVER_ID, @old_LAST_DRIVER_ID) IS NULL)
+AND (VEHICLE_TYPE_ID = @old_VEHICLE_TYPE_ID)
+END
+GO
+
+Print '' print  ' *** creating procedure sp_update_warehouse'
+GO
+Create PROCEDURE sp_update_warehouse
+(
+@old_WAREHOUSE_ID[INT],
+@old_ADDRESS_1[NVARCHAR](50),
+@new_ADDRESS_1[NVARCHAR](50),
+@old_ADDRESS_2[NVARCHAR](50),
+@new_ADDRESS_2[NVARCHAR](50),
+@old_CITY[NVARCHAR](50),
+@new_CITY[NVARCHAR](50),
+@old_STATE[NCHAR](2),
+@new_STATE[NCHAR](2),
+@old_ZIP[NVARCHAR](10),
+@new_ZIP[NVARCHAR](10)
+)
+AS
+BEGIN
+UPDATE warehouse
+SET ADDRESS_1 = @new_ADDRESS_1, ADDRESS_2 = @new_ADDRESS_2, CITY = @new_CITY, STATE = @new_STATE, ZIP = @new_ZIP
+WHERE (WAREHOUSE_ID = @old_WAREHOUSE_ID)
+AND (ADDRESS_1 = @old_ADDRESS_1)
+AND (ADDRESS_2 = @old_ADDRESS_2)
+AND (CITY = @old_CITY)
+AND (STATE = @old_STATE)
+AND (ZIP = @old_ZIP)
+END
+GO
+
+
+print '' print '***Inserting APP_USER Admin data'
+GO
 INSERT INTO APP_USER (FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE)
 VALUES
 ('', '', '', NULL, '', 0, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'ADMIN', 1)
 GO
 
+
+print '' print '***Inserting Vehicle_Type sample data'
 INSERT INTO VEHICLE_TYPE(VEHICLE_TYPE_ID)
 VALUES
 ('Truck'),
