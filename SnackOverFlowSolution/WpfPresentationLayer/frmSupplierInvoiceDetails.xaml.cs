@@ -37,7 +37,7 @@ namespace WpfPresentationLayer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblInvoiceId.Content = _supplierInvoice.SupplierInvoiceId;
+            lblInvoiceId.Content = "Invoice " + _supplierInvoice.SupplierInvoiceId;
             lblTotalAmount.Content = _supplierInvoice.Total.ToString("c");
             lblAmountPaidAmount.Content = _supplierInvoice.AmountPaid.ToString("c");
             Supplier supplierAssociated = null;
@@ -70,9 +70,53 @@ namespace WpfPresentationLayer
             
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/22
+        /// 
+        /// Refactored error message
+        /// </summary>
+        /// <param name="ex"></param>
         private static void ErrorMessage(Exception ex)
         {
             MessageBox.Show("Error: " + ex.Message);
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/23
+        /// 
+        /// Approve the current invoice, and return to the selection screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnApprove_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_supplierInvoice.Approved)
+            {
+                try
+                {
+                    if (_supplierInvoiceManager.ApproveSupplierInvoice(_supplierInvoice.SupplierId))
+                    {
+                        MessageBox.Show("Approved Supplier Invoice.");
+                        this.DialogResult = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to approve the invoice.");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    ErrorMessage(ex);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The invoice is already approved.");
+            }
+            
         }
     }
 }

@@ -29,5 +29,13 @@ namespace LogicLayer
         /// <param name="invoiceId"></param>
         /// <returns></returns>
         List<SupplierInvoiceLine> RetrieveSupplierInvoiceLinesByInvoiceId(int invoiceId);
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/23
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
+        bool ApproveSupplierInvoice(int invoiceId);
     }
 }

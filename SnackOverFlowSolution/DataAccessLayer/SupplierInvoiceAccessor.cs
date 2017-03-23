@@ -50,7 +50,8 @@ namespace DataAccessLayer
                             TaxAmount = reader.GetDecimal(4),
                             Total = reader.GetDecimal(5),
                             AmountPaid = reader.GetDecimal(6),
-                            Active = reader.GetBoolean(7)
+                            Approved = reader.GetBoolean(7),
+                            Active = reader.GetBoolean(8)
                         };
                         invoices.Add(supplierInvoice);
                     }
@@ -127,5 +128,44 @@ namespace DataAccessLayer
             return lines;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/23
+        /// 
+        /// Tries to make a connection to approve the invoice associated with the given id
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
+        public static int UpdateApproveSupplierInvoice(int invoiceId)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_approve_supplier_invoice_by_supplier_invoice_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@SUPPLIER_INVOICE_ID", SqlDbType.Int);
+            cmd.Parameters["@SUPPLIER_INVOICE_ID"].Value = invoiceId;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
     }
+
 }

@@ -55,5 +55,33 @@ namespace LogicLayer
                 throw;
             }
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/23
+        /// 
+        /// Attempts to approve the invoice with the given invoice id
+        /// </summary>
+        /// <param name="invoiceId"></param>
+        /// <returns></returns>
+        public bool ApproveSupplierInvoice(int invoiceId)
+        {
+            bool result = false;
+
+            try
+            {
+                if (1 == SupplierInvoiceAccessor.UpdateApproveSupplierInvoice(invoiceId))
+                {
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return result;
+        }
     }
 }

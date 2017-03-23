@@ -566,7 +566,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnApproveInvoice" Grid.Row="0" Grid.Column="3" Content="Approve Invoice" Margin="10 0 5 0" HorizontalAlignment="left" IsEnabled="False"/>
+                        <Button Name="btnApproveInvoice" Grid.Row="0" Grid.Column="3" Content="Approve Invoice" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnApproveInvoice_Click" />
                     </Grid>
                 </Grid>
             </TabItem>

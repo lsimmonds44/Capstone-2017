@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Name="btnBack" Grid.Column="0" Content="Back" Margin="100 0 10 10" IsCancel="True"/>
-            <Button Name="btnApprove" Grid.Column="1" Content="Approve" Margin="10 0 100 10" IsEnabled="False"/>
+            <Button Name="btnApprove" Grid.Column="1" Content="Approve" Margin="10 0 100 10" Click="btnApprove_Click" />
         </Grid>
     </Grid>
 </Window>

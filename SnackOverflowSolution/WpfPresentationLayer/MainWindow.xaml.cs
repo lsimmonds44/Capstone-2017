@@ -1186,10 +1186,61 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/22
+        /// 
+        /// Handles what happens if the datagrid is double clicked. Launches the detail window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>Last modified by Christian Lopez 2017/03/23</remarks>
         private void dgSupplierInvoices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var supplierInvoiceDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgSupplierInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager);
-            supplierInvoiceDetail.ShowDialog();
+            if (!(dgSupplierInvoices.SelectedIndex < 0))
+            {
+                var supplierInvoiceDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgSupplierInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager);
+                var result = supplierInvoiceDetail.ShowDialog();
+                if (result == true)
+                {
+                    tabSupplierInvoice_Selected(sender, e);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an invoice to view.");
+            }
+            
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/23
+        /// 
+        /// Logic to approve the selected invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnApproveInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(dgSupplierInvoices.SelectedIndex < 0)) {
+                try
+                {
+                    if (_supplierInvoiceManager.ApproveSupplierInvoice(((SupplierInvoice)dgSupplierInvoices.SelectedItem).SupplierInvoiceId))
+                    {
+                        tabSupplierInvoice_Selected(sender, e);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to approve the invoice.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
 
         

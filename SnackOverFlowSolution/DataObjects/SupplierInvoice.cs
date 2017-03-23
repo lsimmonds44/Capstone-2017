@@ -21,6 +21,7 @@ namespace DataObjects
         public decimal TaxAmount { get; set; }
         public decimal Total { get; set; }
         public decimal AmountPaid { get; set; }
+        public bool Approved { get; set; }
         public bool Active { get; set; }
         
     }
