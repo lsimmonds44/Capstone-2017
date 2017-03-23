@@ -61,12 +61,12 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="CustomerSelected">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="100"/>
-                            <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="100"/>
-                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="100"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="100"/>
-                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FedTaxId}" Width="100"/>
-                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="100"/>
+                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="*"/>
+                            <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="*"/>
+                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="*"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FedTaxId}" Width="*"/>
+                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
