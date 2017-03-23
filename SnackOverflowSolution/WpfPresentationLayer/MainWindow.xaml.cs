@@ -53,6 +53,8 @@ namespace WpfPresentationLayer
         List<Package> _packageList = null;
         private IOrderStatusManager _orderStatusManager = new OrderStatusManager();
         List<string> _orderStatusList = null;
+        ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
+        List<SupplierInvoice> _supplierInvoiceList;
 
         public MainWindow()
         {
@@ -1161,6 +1163,33 @@ namespace WpfPresentationLayer
                 frmViewVehicle vehicleWindow = new frmViewVehicle(vehicle.VehicleID);
                 vehicleWindow.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/22
+        /// 
+        /// Handles what happens when the supplier invoice tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabSupplierInvoice_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoices();
+                dgSupplierInvoices.ItemsSource = _supplierInvoiceList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void dgSupplierInvoices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var supplierInvoiceDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgSupplierInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager);
+            supplierInvoiceDetail.ShowDialog();
         }
 
         

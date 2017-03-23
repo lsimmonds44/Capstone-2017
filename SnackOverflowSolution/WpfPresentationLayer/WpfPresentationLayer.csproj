@@ -108,6 +108,9 @@
     <Compile Include="frmRequestUsername.xaml.cs">
       <DependentUpon>frmRequestUsername.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmSupplierInvoiceDetails.xaml.cs">
+      <DependentUpon>frmSupplierInvoiceDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmRequestUsername.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmSupplierInvoiceDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
