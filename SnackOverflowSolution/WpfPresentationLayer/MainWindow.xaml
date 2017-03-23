@@ -225,14 +225,16 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnFilterLots" Grid.Row="0" Grid.Column="1" Content="Filter Product Lots" Margin="10 0 5 0" VerticalAlignment="Top" Click="FilterProductLots_Click"/>
-                        <Button Name="btnCreateLot" Grid.Row="0" Grid.Column="2" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
-                        <Button Name="btnCreateInspection" Grid.Row="0" Grid.Column="3" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
-                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="4" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="BtnManageStock_OnClick" />
+                        <Button Name="btnSplitLot" Grid.Row="0" Grid.Column="1" Content="Split Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnSplitLot_Click"/>
+                        <Button Name="btnFilterLots" Grid.Row="0" Grid.Column="2" Content="Filter Product Lots" Margin="10 0 5 0" VerticalAlignment="Top" Click="FilterProductLots_Click"/>
+                        <Button Name="btnCreateLot" Grid.Row="0" Grid.Column="3" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
+                        <Button Name="btnCreateInspection" Grid.Row="0" Grid.Column="4" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
+                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="5" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="BtnManageStock_OnClick" />
 
                     </Grid>
                 </Grid>

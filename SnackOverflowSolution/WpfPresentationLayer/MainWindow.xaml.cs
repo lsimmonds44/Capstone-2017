@@ -1243,6 +1243,63 @@ namespace WpfPresentationLayer
             }
         }
 
-        
+
+        /// <summary>
+        /// Ethan Jorgensen
+        /// 2017/03/20
+        /// 
+        /// Allows splitting a product lot into two smaller lots
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSplitLot_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(dgProductLots.SelectedIndex < 0))
+            {
+                try
+                {
+                    // Call showDialog so that we know we have a result to use after this
+
+                    var selectedItem = (ProductLot) dgProductLots.SelectedItem;
+                    var frm = new frmSplitProductLot(selectedItem);
+                    var result = frm.ShowDialog();
+
+                    if (result ?? false)
+                    {
+                        _productLotManager.AddProductLot(new ProductLot()
+                        {
+                            AvailableQuantity = frm.OldQty - (selectedItem.Quantity - selectedItem.AvailableQuantity),
+                            DateReceived = selectedItem.DateReceived,
+                            ExpirationDate = selectedItem.ExpirationDate,
+                            LocationId = selectedItem.LocationId,
+                            ProductId = selectedItem.ProductId,
+                            ProductName = selectedItem.ProductName,
+                            Quantity = frm.OldQty,
+                            SupplierId = selectedItem.SupplierId,
+                            SupplyManagerId = selectedItem.SupplyManagerId,
+                            WarehouseId = selectedItem.WarehouseId
+                        });
+                        _productLotManager.AddProductLot(new ProductLot()
+                        {
+                            AvailableQuantity = frm.NewQty,
+                            DateReceived = selectedItem.DateReceived,
+                            ExpirationDate = selectedItem.ExpirationDate,
+                            LocationId = selectedItem.LocationId,
+                            ProductId = selectedItem.ProductId,
+                            ProductName = selectedItem.ProductName,
+                            Quantity = frm.NewQty,
+                            SupplierId = selectedItem.SupplierId,
+                            SupplyManagerId = selectedItem.SupplyManagerId,
+                            WarehouseId = selectedItem.WarehouseId
+                        });
+                        _productLotManager.DeleteProductLot(selectedItem);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
     } // end of class
 } // end of namespace 

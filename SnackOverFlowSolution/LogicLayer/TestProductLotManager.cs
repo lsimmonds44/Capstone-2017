@@ -55,5 +55,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public bool DeleteProductLot(ProductLot lot)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

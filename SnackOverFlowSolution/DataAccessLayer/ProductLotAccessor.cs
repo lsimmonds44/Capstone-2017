@@ -470,5 +470,33 @@ namespace DataAccessLayer
             cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
             cmd.Parameters["@EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
         }
+
+        public static bool DeleteProductLot(ProductLot lot)
+        {
+            var result = false;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_delete_product_lot";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", lot.ProductLotId);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery() == 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
     }
 }

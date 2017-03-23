@@ -134,5 +134,21 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Ethan Jorgensen
+        /// 2017/03/23
+        /// 
+        /// Sets a product lot inactive.
+        /// </summary>
+        /// <returns></returns>
+        public bool DeleteProductLot(ProductLot lot)
+        {
+            bool result = false;
+
+            result = ProductLotAccessor.DeleteProductLot(lot);
+
+            return result;
+        }
     }
 }
