@@ -73,6 +73,7 @@
     <Compile Include="IProductLotManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
+    <Compile Include="ISupplierInvoiceManager.cs" />
     <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="IVehicleManager.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierInvoiceManager.cs" />
     <Compile Include="TestEmployeeManager.cs" />
     <Compile Include="SupplierManager.cs" />
     <Compile Include="TestProductLotManager.cs" />

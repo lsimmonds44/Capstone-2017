@@ -208,8 +208,11 @@ namespace WpfPresentationLayer
 
         private void productSelected(object sender, EventArgs e)
         {
-            ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
-            tfAvailableProduct.Text = selectedProduct.Quantity.ToString();
+            if (cboProducts.SelectedIndex >= 0)
+            {
+                ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
+                tfAvailableProduct.Text = selectedProduct.Quantity.ToString();
+            }
         }
 
         private void AddOrderLineClick(object sender, RoutedEventArgs e)
@@ -223,6 +226,7 @@ namespace WpfPresentationLayer
                     OrderLine oLine = new OrderLine();
                     oLine.ProductOrderID = _orderNum;
                     oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
+                    oLine.ProductName = cboProducts.SelectedItem.ToString();
                     oLine.Quantity = parseToInt(tfQty.Text);
                     oLine.GradeID = "Grade A";
                     oLine.Price = 100;
@@ -231,9 +235,9 @@ namespace WpfPresentationLayer
                     {
                         _orderLineManager.CreateOrderLine(oLine);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to add product to order.");
+                        MessageBox.Show("Failed to add product to order." + ex);
                     }
                 }
                 else

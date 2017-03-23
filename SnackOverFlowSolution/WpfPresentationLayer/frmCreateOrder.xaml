@@ -41,7 +41,17 @@
             <Label Name="lblExpectedDate" Grid.Row="4" Grid.Column="2" Content="Estimated Delivery Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <DatePicker Name="dpExpectedDate" Grid.Row="4" Grid.Column="3" Margin="0 0 10 0" IsEnabled="False" />
         </Grid>
-        <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" Grid.Row="1" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" Margin="10 0 10 0"/>
+        <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" Grid.Row="1" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="10 0 10 0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                <DataGridTextColumn Header="Order Line ID" Binding="{Binding OrderLineID}" Width="*"/>
+                <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" Width="*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                <DataGridTextColumn Header="Grade" Binding="{Binding GradeID}" Width="*"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding UnitDiscount}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>

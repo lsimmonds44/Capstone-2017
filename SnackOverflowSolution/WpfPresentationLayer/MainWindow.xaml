@@ -1,7 +1,7 @@
 <Window x:Class="WpfPresentationLayer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Snack Overflow" Height="800" Width="1200" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Snack Overflow" Height="800" Width="1300" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -61,12 +61,12 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="CustomerSelected">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="100"/>
-                            <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="100"/>
-                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="100"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="100"/>
-                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FedTaxId}" Width="100"/>
-                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="100"/>
+                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding Commercial_Id}" Width="*"/>
+                            <DataGridTextColumn Header="User ID" Binding="{Binding User_Id}" Width="*"/>
+                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="*"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FedTaxId}" Width="*"/>
+                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
@@ -246,7 +246,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dgSuppliers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    <DataGrid Name="dgSuppliers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
                     	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -544,6 +544,33 @@
                     </Grid>
                 </Grid>
             </TabItem>
+
+            <TabItem Name="tabSupplierInvoice" Header="Supplier Invoices" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierInvoice_Selected">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgSupplierInvoices" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" MouseDoubleClick="dgSupplierInvoices_MouseDoubleClick" />
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Name="btnApproveInvoice" Grid.Row="0" Grid.Column="3" Content="Approve Invoice" Margin="10 0 5 0" HorizontalAlignment="left" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
             <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplier_Selected" LostFocus="tabMyAccount_LostFocus">
             <Grid Background="#FFE5E5E5">
                 <Grid.RowDefinitions>

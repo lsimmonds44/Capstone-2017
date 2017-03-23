@@ -30,6 +30,7 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@PRODUCT_ORDER_ID", oLine.ProductOrderID);
             cmd.Parameters.AddWithValue("@PRODUCT_ID", oLine.ProductID);
+            cmd.Parameters.AddWithValue("@PRODUCT_NAME", oLine.ProductName);
             cmd.Parameters.AddWithValue("@QUANTITY", oLine.Quantity);
             cmd.Parameters.AddWithValue("@GRADE_ID", oLine.GradeID);
             cmd.Parameters.AddWithValue("@PRICE", oLine.Price);
@@ -77,10 +78,11 @@ namespace DataAccessLayer
                         {
                             orderLine.ProductID = reader.GetInt32(2);
                         }
-                        orderLine.Quantity = reader.GetInt32(3);
-                        orderLine.GradeID = reader.GetString(4);
-                        orderLine.Price = reader.GetDecimal(5);
-                        orderLine.UnitDiscount = reader.GetDecimal(6);
+                        orderLine.ProductName = reader.GetString(3);
+                        orderLine.Quantity = reader.GetInt32(4);
+                        orderLine.GradeID = reader.GetString(5);
+                        orderLine.Price = reader.GetDecimal(6);
+                        orderLine.UnitDiscount = reader.GetDecimal(7);
                         orderLines.Add(orderLine);
                     }
                     reader.Close();
