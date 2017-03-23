@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class EmployeeAccessor : IDataAccessor
+    public class EmployeeAccessor
     {
         public Employee EmployeeInstance { get; set; }
         public List<Employee> EmployeeList { get; set; }
@@ -189,52 +189,94 @@ namespace DataAccessLayer
             return count;
         }
 
-        public string CreateScript
+        /// <summary>
+        /// Created 2017-03-22 by William Flood
+        /// Creates an employee
+        /// </summary>
+        /// <param name="toCreate"></param>
+        /// <returns></returns>
+        public static int CreateEmployee(Employee toCreate)
         {
-            get
+            var results = 0;
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand("sp_create_employee", conn);
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
+            cmd.Parameters["@SALARY"].Scale = 2;
+            cmd.Parameters["@SALARY"].Precision = 8;
+            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
+            cmd.Parameters["@USER_ID"].Value = toCreate.UserId;
+            cmd.Parameters["@SALARY"].Value = toCreate.Salary;
+            cmd.Parameters["@ACTIVE"].Value = toCreate.Active;
+            cmd.Parameters["@DATE_OF_BIRTH"].Value = toCreate.DateOfBirth;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
             {
-                return "sp_create_employee";
+                conn.Open();
+                results = cmd.ExecuteNonQuery();
             }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close(); // good housekeeping approved!
+            }
+            return results;
         }
 
-        public string DeactivateScript
+        /// <summary>
+        /// Created 2017-03-22 by William Flood
+        /// Retrieves a list of employees based on search criteria
+        /// 
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
+        public static List<Employee> RetrieveBySearch(Employee criteria)
         {
-            get
+            var resultList = new List<Employee>();
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand("sp_retrieve_employee_from_search", conn);
+            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
+            cmd.Parameters["@SALARY"].Scale = 2;
+            cmd.Parameters["@SALARY"].Precision = 8;
+            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
+            cmd.Parameters["@EMPLOYEE_ID"].Value = criteria.EmployeeId;
+            cmd.Parameters["@USER_ID"].Value = criteria.UserId;
+            cmd.Parameters["@SALARY"].Value = criteria.Salary;
+            cmd.Parameters["@ACTIVE"].Value = criteria.Active;
+            cmd.Parameters["@DATE_OF_BIRTH"].Value = criteria.DateOfBirth;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
             {
-                throw new NotImplementedException();
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    resultList.Add(new Employee()
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        Salary = reader.GetDecimal(2),
+                        Active = reader.GetBoolean(3),
+                        DateOfBirth = reader.GetDateTime(4)
+                    });
+                }
             }
-        }
-
-        public string RetrieveListScript
-        {
-            get
+            catch (SqlException ex)
             {
-                throw new NotImplementedException();
+                throw ex;
             }
-        }
-
-        public string RetrieveSearchScript
-        {
-            get
+            finally
             {
-                return "sp_retrieve_employee_from_search";
+                conn.Close(); // good housekeeping approved!
             }
-        }
-
-        public string RetrieveSingleScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string UpdateScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            return resultList;
         }
         
         /// <summary>
@@ -303,11 +345,6 @@ namespace DataAccessLayer
             }
         }
 
-        public void ReadSingle(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetCreateParameters(SqlCommand cmd)
         {
             cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
@@ -320,11 +357,6 @@ namespace DataAccessLayer
             cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
             cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
             cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
-        }
-
-        public void SetKeyParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
         }
 
         public void SetRetrieveSearchParameters(SqlCommand cmd)
@@ -341,11 +373,6 @@ namespace DataAccessLayer
             cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
             cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
             cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
-        }
-
-        public void SetUpdateParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
         }
 
     }

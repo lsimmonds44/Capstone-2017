@@ -13,6 +13,16 @@ namespace DataAccessLayer
     {
         public Charity CharityInstance { get; set; }
         public List<Charity> CharityList { get; private set; }
+        private static CharityAccessor charityAccessorInstance;
+
+        public static CharityAccessor GetCharityAccessorInstance()
+        {
+            if(null == charityAccessorInstance)
+            {
+                charityAccessorInstance = new CharityAccessor();
+            }
+            return charityAccessorInstance;
+        }
 
         public string CreateScript
         {

@@ -112,6 +112,7 @@ namespace WpfPresentationLayer
 
                 }
             }
+            this.Close();
         }
     }
 }

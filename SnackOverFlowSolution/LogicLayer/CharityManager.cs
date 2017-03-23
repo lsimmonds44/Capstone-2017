@@ -12,7 +12,7 @@ namespace LogicLayer
     {
         public List<Charity> RetrieveCharityList()
         {
-            var accessor = new CharityAccessor();
+            var accessor = CharityAccessor.GetCharityAccessorInstance();
             try
             {
                 DatabaseMainAccessor.RetrieveList(accessor);
@@ -25,7 +25,7 @@ namespace LogicLayer
 
         public int AddCharity(Charity charityInstance)
         {
-            var accessor = new CharityAccessor();
+            var accessor = CharityAccessor.GetCharityAccessorInstance();
             accessor.CharityInstance = charityInstance;
             try
             {

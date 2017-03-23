@@ -69,6 +69,8 @@ namespace LogicLayer
         /// William Flood
         /// 2/12/17
         /// Salts the password before hashing
+        /// Updated 2017-03-22 by William Flood
+        /// Refactored database call to a static method to resolve issue #22
         /// 
         /// This returns true or false from the 1 or 0 that is recieved from 
         /// the UserAccessor layer.
@@ -82,17 +84,22 @@ namespace LogicLayer
             UserAccessor accessor = new UserAccessor();
             String foo = accessor.RetrieveUserSalt(userName);
             String bar = HashSha256(password + foo);
-            accessor.UserInstance = null;
-            if (accessor.Login(userName, bar))
+            try
             {
-                userInstance = accessor.UserInstance;
-                userFound = true;
-            }
-            else
+                userInstance = UserAccessor.Login(userName, bar);
+                if (null!=userInstance)
+                {
+                    userFound = true;
+                }
+                else
+                {
+                    userFound = false;
+                }
+                return userFound;
+            } catch
             {
-                userFound = false;
+                throw;
             }
-            return userFound;
 
         }
 
@@ -139,6 +146,9 @@ namespace LogicLayer
         /// Update
         /// added a catch for phone number and if username is
         /// already used
+        /// 
+        /// Updated 2017-03-22 by William Flood
+        /// Refactored database call to a static method to resolve issue #22
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
@@ -205,8 +215,6 @@ namespace LogicLayer
             }
             user.PasswordSalt = RandomString(32);
             user.PasswordHash = HashSha256(password + user.PasswordSalt);
-            UserAccessor accessor = new UserAccessor();
-            accessor.UserInstance = user;
 
             //if (!UserAccessor.UserNameCheck(user.UserName))
             //{
@@ -216,7 +224,7 @@ namespace LogicLayer
             try
             {
 
-                if (1 == DatabaseMainAccessor.Create(accessor))
+                if (1 == UserAccessor.Create(user))
                 {
                     return "Created";
                 }
@@ -230,13 +238,16 @@ namespace LogicLayer
 
         }
 
+        /// <summary>
+        /// Created 2017-03-22 by William Flood
+        /// </summary>
+        /// <returns></returns>
         public List<User> RetrieveFullUserList()
         {
-            var accessor = new UserAccessor();
             try
             {
-                DatabaseMainAccessor.RetrieveList(accessor);
-                return accessor.UserList;
+                var resultList = UserAccessor.RetrieveList();
+                return resultList;
             }
             catch
             {
@@ -385,7 +396,7 @@ namespace LogicLayer
             {
                 Int32.Parse(number);
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

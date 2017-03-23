@@ -81,13 +81,18 @@ namespace LogicLayer
             return employees;
         }
 
+        /// <summary>
+        /// Created 2017-03-22 by William Flood
+        /// 
+        /// </summary>
+        /// <param name="employeeInstance"></param>
+        /// <returns></returns>
         public int CreateEmployee(Employee employeeInstance)
         {
-            var accessor = new EmployeeAccessor();
-            accessor.EmployeeInstance = employeeInstance;
             try
             {
-                return DatabaseMainAccessor.Create(accessor);
+                var rowsAffected = EmployeeAccessor.CreateEmployee(employeeInstance);
+                return rowsAffected;
             }
             catch
             {
@@ -168,14 +173,17 @@ namespace LogicLayer
             return result;
         }
 
+        /// <summary>
+        /// Created 2017-03-22 by William Flood
+        /// </summary>
+        /// <param name="searchParameters"></param>
+        /// <returns></returns>
         public List<Employee> SearchEmployees(Employee searchParameters)
         {
-            var accessor = new EmployeeAccessor();
-            accessor.EmployeeInstance = searchParameters;
             try
             {
-                DatabaseMainAccessor.RetrieveBySearch(accessor);
-                return accessor.EmployeeList;
+                var employeeList = EmployeeAccessor.RetrieveBySearch(searchParameters);
+                return employeeList;
             } catch
             {
                 throw;
