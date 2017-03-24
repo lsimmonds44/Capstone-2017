@@ -49,6 +49,7 @@ namespace WpfPresentationLayer
         private void txtNew_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
+            // Already validated
             Int32.TryParse(txtNew.Text, out value);
             int sum = OldQty + NewQty;
             if (value <= sum && value >= 0)
@@ -72,6 +73,7 @@ namespace WpfPresentationLayer
         private void txtOld_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
+            // Already validated
             Int32.TryParse(txtOld.Text, out value);
             int sum = OldQty + NewQty;
             if (value <= sum && value >= 0)
