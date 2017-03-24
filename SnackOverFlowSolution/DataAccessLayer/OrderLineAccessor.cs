@@ -60,9 +60,7 @@ namespace DataAccessLayer
             var cmdText = @"sp_retrieve_product_orderline_list_by_order_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-
             cmd.Parameters.AddWithValue(@"PRODUCT_ORDER_ID", OrderId);
-
             try
             {
                 conn.Open();

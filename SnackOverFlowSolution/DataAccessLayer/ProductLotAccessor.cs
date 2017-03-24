@@ -326,7 +326,9 @@ namespace DataAccessLayer
         /// <summary>
         /// Christian Lopez
         /// 2017/02/27
-        /// 
+        /// Modified Eric Walton
+        /// 2017/03/24
+        /// Added Grade and Price changed the while loop to handle a null price.
         /// Gets a list of product lots from the database.
         /// </summary>
         /// <returns></returns>
@@ -347,20 +349,26 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        ProductLot lot = new ProductLot
-                        {
-                            ProductLotId = reader.GetInt32(0),
-                            WarehouseId = reader.GetInt32(1),
-                            SupplierId = reader.GetInt32(2),
-                            LocationId = reader.GetInt32(3),
-                            ProductId = reader.GetInt32(4),
-                            SupplyManagerId = reader.GetInt32(5),
-                            Quantity = reader.GetInt32(6),
-                            AvailableQuantity = reader.GetInt32(7),
-                            DateReceived = reader.GetDateTime(8),
-                            ExpirationDate = reader.GetDateTime(9),
-                            Grade = reader.GetString(10)
-                        };
+
+                        ProductLot lot = new ProductLot();
+
+                            lot.ProductLotId = reader.GetInt32(0);
+                            lot.WarehouseId = reader.GetInt32(1);
+                            lot.SupplierId = reader.GetInt32(2);
+                            lot.LocationId = reader.GetInt32(3);
+                            lot.ProductId = reader.GetInt32(4);
+                            lot.SupplyManagerId = reader.GetInt32(5);
+                            lot.Quantity = reader.GetInt32(6);
+                            lot.AvailableQuantity = reader.GetInt32(7);
+                            lot.DateReceived = reader.GetDateTime(8);
+                            lot.ExpirationDate = reader.GetDateTime(9);
+                            lot.Grade = reader.GetString(10);
+                            if (!reader.IsDBNull(11))
+                            {
+                                lot.Price = reader.GetDecimal(11);
+                            }
+
+                        
                         lots.Add(lot);
                     }
                 }

@@ -220,6 +220,7 @@
                             <DataGridTextColumn Header="Date Received" Width="*" Binding="{Binding DateReceived}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Date Expiring" Width="*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grade" Width="*" Binding="{Binding Grade}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"></DataGridTextColumn>
                             </DataGrid.Columns>
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
