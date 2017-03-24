@@ -19,5 +19,6 @@ namespace DataObjects
         public DateTime? LatestRepair { get; set; }
         public int? LastDriver { get; set; }
         public string VehicleTypeID { get; set; }
+        public List<Repair> RepairList { get; set; }
     }
 }

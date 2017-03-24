@@ -62,6 +62,8 @@
     <Compile Include="ProductLotAccessor.cs" />
     <Compile Include="ProductOrderAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepairAccessor.cs" />
+    <Compile Include="RepairLineAccessor.cs" />
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInvoiceAccessor.cs" />
     <Compile Include="UserAccessor.cs" />

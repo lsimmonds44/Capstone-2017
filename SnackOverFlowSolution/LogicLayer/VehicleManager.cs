@@ -16,6 +16,12 @@ namespace LogicLayer
         /// 
         /// Retrieves the details for a specific vehicle through an id
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 2017/03/24
+        /// 
+        /// Added repair list access 
+        /// </remarks>
         public Vehicle RetreiveVehicleById(int vehicleId)
         {
             Vehicle vehicle = null;
@@ -23,6 +29,8 @@ namespace LogicLayer
             try
             {
                 vehicle = VehicleAccessor.RetreiveVehicleByVehicleId(vehicleId);
+                IRepairManager repairManager = new RepairManager();
+                vehicle.RepairList = repairManager.RetreiveAllRepairsForVehicle(vehicleId);
             }
             catch (Exception)
             {
@@ -63,6 +71,12 @@ namespace LogicLayer
         /// 2017/02/03
         /// Retrieves all vehicles
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 2017/03/24
+        /// 
+        /// Added repair list access 
+        /// </remarks>
         /// <returns></returns>
         public List<Vehicle> RetrieveAllVehicles()
         {
@@ -70,6 +84,10 @@ namespace LogicLayer
             try
             {
                 vehicles = VehicleAccessor.RetrieveAllVehicles();
+                foreach(Vehicle vehicle in vehicles){
+                    IRepairManager repairManager = new RepairManager();
+                    vehicle.RepairList = repairManager.RetreiveAllRepairsForVehicle(vehicle.VehicleID);
+                }
             }
             catch (Exception)
             {
