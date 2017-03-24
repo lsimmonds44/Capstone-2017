@@ -21,18 +21,18 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="1" Grid.Column="0" Content="Employee ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
-        <Label Grid.Row="2" Grid.Column="0" Content="User ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Salary:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Active:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Grid.Row="5" Grid.Column="0" Content="Date of Birth:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <TextBox Grid.Row="1" x:Name="txtEmployeeID" Grid.Column="1" Margin="3" IsReadOnly="True" />
-        <TextBox Grid.Row="2" x:Name="txtUserID" Grid.Column="1" Margin="3" />
-        <TextBox Grid.Row="3" x:Name="txtSalary" Grid.Column="1" Margin="3" />
-        <CheckBox Grid.Row="4" x:Name="chkActive" VerticalAlignment="Center" Grid.Column="1" Margin="75 0 0 0" />
-        <TextBox Grid.Row="5" x:Name="txtDateOfBirth" Grid.Column="1" Margin="3" IsReadOnly="True" />
-        <Button x:Name="btnConfirm" Grid.Column="0" Grid.Row="6" Margin="5" Content="Confirm" Click="btnConfirm_Click" />
-        <Button x:Name="btnCancel" Grid.Column="3" Grid.Row="6" Margin="5" Content="Cancel" Click="btnCancel_Click" />
+        <Label Name="lblEmployeeId" Grid.Row="1" Grid.Column="0" Content="Employee ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+        <Label Name="lblUserId" Grid.Row="2" Grid.Column="0" Content="User ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Label Name="lblSalary" Grid.Row="3" Grid.Column="0" Content="Salary:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Label Name="lblActive" Grid.Row="4" Grid.Column="0" Content="Active:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <Label Name="lblDateOfBirth" Grid.Row="5" Grid.Column="0" Content="Date of Birth:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <TextBox Name="txtEmployeeID"  Grid.Row="1" Grid.Column="1" Margin="3" IsReadOnly="True" />
+        <TextBox Name="txtUserID" Grid.Row="2" Grid.Column="1" Margin="3" />
+        <TextBox Name="txtSalary" Grid.Row="3" Grid.Column="1" Margin="3" />
+        <CheckBox Name="chkActive" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Margin="75 0 0 0" />
+        <TextBox Name="txtDateOfBirth" Grid.Row="5" Grid.Column="1" Margin="3" IsReadOnly="True" />
+        <Button Name="btnConfirm" Grid.Column="0" Grid.Row="6" Margin="5" Content="Confirm" Click="btnConfirm_Click" />
+        <Button Name="btnCancel" Grid.Column="3" Grid.Row="6" Margin="5" Content="Cancel" Click="btnCancel_Click" />
 
     </Grid>
 </Window>

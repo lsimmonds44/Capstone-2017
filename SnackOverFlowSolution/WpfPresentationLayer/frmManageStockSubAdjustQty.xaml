@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="4" Grid.RowSpan="4" 
+        <GroupBox Name="gboxProductLotInformation" Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="4" Grid.RowSpan="4" 
                   Header="Product Lot Information">
             <StackPanel Orientation="Vertical">
 
@@ -38,7 +38,7 @@
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Product Lot ID: "/>
+                        <Label Name="lblProductLot" Content="Product Lot ID: "/>
                         <TextBox Name="txtProductLotID" Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
                     </Grid>
                 </StackPanel>
@@ -52,7 +52,7 @@
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Product Name :"/>
+                        <Label Name="lblProductName" Content="Product Name :"/>
                         <TextBox Name="txtProductName"  Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
                     </Grid>
                 </StackPanel>
@@ -66,7 +66,7 @@
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Current Quantity :"/>
+                        <Label Name="lblCurrentQuantity" Content="Current Quantity :"/>
                         <TextBox Name="txtCurrentQuantity"  Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
                     </Grid>
                 </StackPanel>
@@ -80,7 +80,7 @@
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="New Quantity :"/>
+                        <Label Name="lblNewQuantity" Content="New Quantity :"/>
                         <TextBox Name="txtNewQuantity" Grid.Column="1" Margin="0 0 0 0"/>
                     </Grid>
                 </StackPanel>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        Title="BrowseProducts" Height="500" Width="950"
+        Title="Browse Products" Height="500" Width="950"
         Closed="BrowseProducts_OnClosed">
 
     <Grid>
@@ -45,16 +45,16 @@
         <!--Top Border-->
         <Border Background="BurlyWood" Grid.Column="3" Grid.ColumnSpan="11" Grid.Row="0" FlowDirection="RightToLeft">
             <StackPanel Orientation="Horizontal" >
-                <Button Height="25" Width="90" Content="Help" Margin="0 0 5 0"/>
-                <Button Height="25" Width="90" Content="Settings" Margin="0 0 5 0"/>
-                <ComboBox Height="25" Width="150" Text="Login/Account" />
-                <TextBox Height="25" Width="180" Margin="200 0 0 0" />
+                <Button Name="btnHelp" Height="25" Width="90" Content="Help" Margin="0 0 5 0"/>
+                <Button Name="btnSettings" Height="25" Width="90" Content="Settings" Margin="0 0 5 0"/>
+                <ComboBox Name="cboLoginAccount" Height="25" Width="150" Text="Login/Account" />
+                <TextBox Name="txtTextBox" Height="25" Width="180" Margin="200 0 0 0" />
             </StackPanel>
         </Border>
         <!--End of Top Border-->
 
         <!--Cart Button-->
-        <Button Content="Cart(0)" Grid.Column="13" Grid.Row="1" Background="WhiteSmoke"/>
+        <Button Name="btnCart" Content="Cart(0)" Grid.Column="13" Grid.Row="1" Background="WhiteSmoke"/>
         <!--End of Cart Button-->
 
 
@@ -67,16 +67,16 @@
                 <!--End of Software Logo-->
 
                 <!--General Nav-->
-                <TextBlock Height = "50" TextAlignment="Center">
+                <TextBlock Name="txtblkGeneralNav" Height = "50" TextAlignment="Center">
                     General Nav
                 </TextBlock>
                 <!--End of General Nav-->
 
                 <!--Filter By Vendor-->
-                <GroupBox Header="Filter By Vender" Margin="5 0 5 0" Height="125">
+                <GroupBox Name="gboxFilterByVender" Header="Filter By Vender" Margin="5 0 5 0" Height="125">
                     <StackPanel Orientation="Vertical">
                         <!--Vendors Datagrid-->
-                        <DataGrid Name="DtgVendors" Width="170" Height="100"
+                        <DataGrid Name="dgVendors" Width="170" Height="100"
                                   RowBackground="White"
                                     AutoGenerateColumns="False"
                                     HeadersVisibility="None"
@@ -126,7 +126,7 @@
                 <!--Filter By Category-->
                 <GroupBox Header="Filter By Category" Margin="5 5 5 0" Height="125">
                     <!--Vendors Datagrid-->
-                    <DataGrid Name="DtgCategories" Width="170" Height="100"
+                    <DataGrid Name="dgCategories" Width="170" Height="100"
                                   RowBackground="White"
                                     AutoGenerateColumns="False"
                                     HeadersVisibility="None"
@@ -173,7 +173,7 @@
         <!--End of Side Border-->
 
         <!--Product Data Grid-->
-        <DataGrid Name="DgProductList" GridLinesVisibility="Horizontal"
+        <DataGrid Name="dgProductList" GridLinesVisibility="Horizontal"
                   RowBackground="White"
                   AutoGenerateColumns="False"
                   Grid.Column="4" Grid.ColumnSpan="10" Grid.RowSpan="10" Grid.Row="2"
@@ -223,7 +223,7 @@
         <!--End of DataGrid-->
 
         <!--User Prompts-->
-        <TextBlock Name="TxtPrompts" Grid.Column="9" Grid.Row="12" Grid.ColumnSpan="4" FlowDirection="RightToLeft"/>
+        <TextBlock Name="txtPrompts" Grid.Column="9" Grid.Row="12" Grid.ColumnSpan="4" FlowDirection="RightToLeft"/>
         <!--End of User Prompts-->
 
     </Grid>

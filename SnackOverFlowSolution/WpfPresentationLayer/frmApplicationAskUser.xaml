@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="frmApplicationAskUser" Height="200" Width="450">
-    <Grid Name="GridStatus">
+        Title="Application Ask User" Height="200" Width="450">
+    <Grid Name="dgGridStatus">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
 
@@ -21,8 +21,8 @@
                 <ColumnDefinition></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Apply" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Apply_Click"></Button>
-            <Button Grid.Column="1" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Cancel_Click"></Button>
+            <Button Name="btnApply" Grid.Column="0" Content="Apply" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Apply_Click"></Button>
+            <Button Name="btnCancel" Grid.Column="1" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Cancel_Click"></Button>
         </Grid>
         <Label Name="lblWindowTitle" Content="Content is set by code" FontWeight="Bold" FontSize="15"  VerticalAlignment="center" HorizontalAlignment="Center"/>
 

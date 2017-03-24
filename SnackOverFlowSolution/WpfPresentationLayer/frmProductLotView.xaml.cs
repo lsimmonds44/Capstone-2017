@@ -23,11 +23,11 @@ namespace WpfPresentationLayer
     {
         private IProductLotManager _productLotManager;
 
-        List<Location> locationList;
-        List<Product> productList;
-        List<Supplier> supplierList;
-        List<Employee> employeeList;
-        List<Warehouse> warehouseList;
+        List<Location> _locationList;
+        List<Product> _productList;
+        List<Supplier> _supplierList;
+        List<Employee> _employeeList;
+        List<Warehouse> _warehouseList;
         public int supplierId { get; private set; }
         public frmAddProductLot()
         {
@@ -57,21 +57,21 @@ namespace WpfPresentationLayer
 
             try
             {
-                locationList = (new LocationManager()).ListLocations();
-                cbxLocationIDVal.ItemsSource = locationList;
-                cbxLocationIDVal.Visibility = Visibility.Visible;
-                productList = (new ProductManager()).ListProducts();
-                cbxProductIDVal.ItemsSource = productList;
-                cbxProductIDVal.Visibility = Visibility.Visible;
-                supplierList = (new SupplierManager()).ListSuppliers();
-                cbxSupplierIDVal.ItemsSource = supplierList;
-                cbxSupplierIDVal.Visibility = Visibility.Visible;
-                employeeList = (new EmployeeManager()).RetrieveEmployeeList();
-                cbxSupplyManagerIDVal.ItemsSource = employeeList;
-                cbxSupplyManagerIDVal.Visibility = Visibility.Visible;
-                warehouseList = (new WarehouseManager()).ListWarehouses();
-                cbxWarehouseIDVal.ItemsSource = warehouseList;
-                cbxWarehouseIDVal.Visibility = Visibility.Visible;
+                _locationList = (new LocationManager()).ListLocations();
+                cboLocationIDVal.ItemsSource = _locationList;
+                cboLocationIDVal.Visibility = Visibility.Visible;
+                _productList = (new ProductManager()).ListProducts();
+                cboProductIDVal.ItemsSource = _productList;
+                cboProductIDVal.Visibility = Visibility.Visible;
+                _supplierList = (new SupplierManager()).ListSuppliers();
+                cboSupplierIDVal.ItemsSource = _supplierList;
+                cboSupplierIDVal.Visibility = Visibility.Visible;
+                _employeeList = (new EmployeeManager()).RetrieveEmployeeList();
+                cboSupplyManagerIDVal.ItemsSource = _employeeList;
+                cboSupplyManagerIDVal.Visibility = Visibility.Visible;
+                _warehouseList = (new WarehouseManager()).ListWarehouses();
+                cboWarehouseIDVal.ItemsSource = _warehouseList;
+                cboWarehouseIDVal.Visibility = Visibility.Visible;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -82,11 +82,11 @@ namespace WpfPresentationLayer
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             int quantityRead = 0;
-            bool shouldPost = cbxLocationIDVal.SelectedIndex >= 0;
-            shouldPost = shouldPost && cbxProductIDVal.SelectedIndex >= 0;
-            shouldPost = shouldPost && cbxSupplierIDVal.SelectedIndex >= 0;
-            shouldPost = shouldPost && cbxSupplyManagerIDVal.SelectedIndex >= 0;
-            shouldPost = shouldPost && cbxWarehouseIDVal.SelectedIndex >= 0;
+            bool shouldPost = cboLocationIDVal.SelectedIndex >= 0;
+            shouldPost = shouldPost && cboProductIDVal.SelectedIndex >= 0;
+            shouldPost = shouldPost && cboSupplierIDVal.SelectedIndex >= 0;
+            shouldPost = shouldPost && cboSupplyManagerIDVal.SelectedIndex >= 0;
+            shouldPost = shouldPost && cboWarehouseIDVal.SelectedIndex >= 0;
             if(!Int32.TryParse(txtQuantity.Text, out quantityRead) && quantityRead >= 0)
             {
                 shouldPost = false;
@@ -106,11 +106,11 @@ namespace WpfPresentationLayer
             {
                 ProductLot toSave = new ProductLot()
                 {
-                    ProductId = productList[cbxProductIDVal.SelectedIndex].ProductId,
-                    LocationId = locationList[cbxLocationIDVal.SelectedIndex].LocationId,
-                    SupplierId = supplierList[cbxSupplierIDVal.SelectedIndex].SupplierID,
-                    SupplyManagerId = (int)employeeList[cbxSupplyManagerIDVal.SelectedIndex].EmployeeId,
-                    WarehouseId = warehouseList[cbxWarehouseIDVal.SelectedIndex].WarehouseID,
+                    ProductId = _productList[cboProductIDVal.SelectedIndex].ProductId,
+                    LocationId = _locationList[cboLocationIDVal.SelectedIndex].LocationId,
+                    SupplierId = _supplierList[cboSupplierIDVal.SelectedIndex].SupplierID,
+                    SupplyManagerId = (int)_employeeList[cboSupplyManagerIDVal.SelectedIndex].EmployeeId,
+                    WarehouseId = _warehouseList[cboWarehouseIDVal.SelectedIndex].WarehouseID,
                     Quantity = quantityRead,
                     DateReceived = dpDateReceived.SelectedDate,
                     ExpirationDate = dpExpirationDate.SelectedDate
@@ -121,7 +121,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Product Lot Added");
                     try
                     {
-                        supplierId = supplierList[cbxSupplierIDVal.SelectedIndex].SupplierID;
+                        supplierId = _supplierList[cboSupplierIDVal.SelectedIndex].SupplierID;
                     }
                     catch (Exception)
                     {

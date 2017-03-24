@@ -42,9 +42,9 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBox Name="tfUsername" Grid.Column="2" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1"/>
+            <TextBox Name="txtUsername" Grid.Column="2" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1"/>
             <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <PasswordBox Name="tfPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" KeyDown="tfPassword_KeyDown"/>
+            <PasswordBox Name="pwbPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" KeyDown="pwbPassword_KeyDown"/>
             <Label Name="lblPassword" Grid.Column="3" Grid.Row="1" Content="Password" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Padding="10 0" FontSize="10"  IsDefault="True" Click="btnLogin_Click" Margin="0,4,0,0"/>
         </Grid>
@@ -117,7 +117,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Charity" Selector.Selected="tabCharity_Selected">
-                <Grid Name="grdCharity">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="8*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
@@ -128,7 +128,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Name="dgrdCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Name="dgCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
                             <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
@@ -153,7 +153,7 @@
                         <ColumnDefinition Width="296*"></ColumnDefinition>
                         <ColumnDefinition Width="297*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="5" Name="dgrdEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single">
+                    <DataGrid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="5" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" Width="100"/>
                             <DataGridTextColumn Header="UserID" Binding="{Binding UserId}" Width="100"/>
@@ -190,7 +190,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="3" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="viewProductBtn"/>
-                        <Button Name="btnAddProduct" Grid.Row="0" Grid.Column="2" Content="Add Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="BtnAddProduct_OnClick"/>
+                        <Button Name="btnAddProduct" Grid.Row="0" Grid.Column="2" Content="Add Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="btnAddProduct_OnClick"/>
                         <Button Name="btnAddCategory" Grid.Row="0" Grid.Column="1" Content="Add Category" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="btnAddCategory_Click"  />
                     </Grid>
                 </Grid>
@@ -234,7 +234,7 @@
                         <Button Name="btnFilterLots" Grid.Row="0" Grid.Column="2" Content="Filter Product Lots" Margin="10 0 5 0" VerticalAlignment="Top" Click="FilterProductLots_Click"/>
                         <Button Name="btnCreateLot" Grid.Row="0" Grid.Column="3" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
                         <Button Name="btnCreateInspection" Grid.Row="0" Grid.Column="4" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
-                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="5" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="BtnManageStock_OnClick" />
+                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="5" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="btnManageStock_OnClick" />
 
                     </Grid>
                 </Grid>
@@ -324,7 +324,7 @@
                             <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1" Margin="10 5 5 5"
                                 Grid.ColumnSpan="6">
                                 <TextBox Name="txtSearchCriteria" Width="250"/>
-                                <Button Content="Search" Width="100" Margin="5 0 5 0"/>
+                                <Button Name="btnSearch" Content="Search" Width="100" Margin="5 0 5 0"/>
                             </StackPanel>
                             <!--End of Search Controls-->
                         </StackPanel>
@@ -345,15 +345,15 @@
                     <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17" Background="LightBlue"
                             BorderBrush="Black" BorderThickness="0 0 2 0">
                         <StackPanel Orientation="Vertical">
-                            <Button Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
-                            <Button Content="Add Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
-                            <Button Content="Edit Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Name="btnAddSuppliers" Content="Add Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Name="btnEditSuppliers" Content="Edit Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
                         </StackPanel>
                     </Border>
                     <!--End of Side Border-->
 
                     <!--Supplier Catalogue-->
-                    <DataGrid Name="DgSupplierCatalogue" GridLinesVisibility="Horizontal"
+                    <DataGrid Name="dgSupplierCatalogue" GridLinesVisibility="Horizontal"
                       RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
                       AutoGenerateColumns="False"
                       Grid.Column="4" Grid.ColumnSpan="8" Grid.RowSpan="15" Grid.Row="2"
@@ -372,7 +372,7 @@
                     <!--End of Supplier Catalogue-->
 
                     <!--Product DataGrid-->
-                    <DataGrid Name="DgProductList" GridLinesVisibility="Horizontal"
+                    <DataGrid Name="dgProductList" GridLinesVisibility="Horizontal"
                       RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
                       AutoGenerateColumns="False"
                       Grid.Column="13" Grid.ColumnSpan="6" Grid.RowSpan="15" Grid.Row="2"
@@ -411,9 +411,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox x:Name="cboOrderStatus" Margin="5" SelectionChanged="cboOrderStatus_SelectionChanged"/>
+                        <ComboBox Name="cboOrderStatus" Margin="5" SelectionChanged="cboOrderStatus_SelectionChanged"/>
                     </Grid>
-                    <ListView x:Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_MouseDoubleClick">
+                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="75" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
@@ -447,7 +447,7 @@
 
                     <!--Button Panel-->
                     <StackPanel Orientation="Horizontal" Grid.Row="1" FlowDirection="RightToLeft">
-                        <Button Content="Browse Products" Background="LightBlue" Name="btnBrowseProduct" Click="btnBrowseProduct_Click"/>
+                        <Button Name="btnBrowseProducts" Content="Browse Products" Background="LightBlue" Click="btnBrowseProduct_Click"/>
                     </StackPanel>
 
                     <!--End of Button Panel-->
