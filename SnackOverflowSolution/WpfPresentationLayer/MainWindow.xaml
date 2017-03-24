@@ -207,16 +207,17 @@
                     <DataGrid x:Name="dgProductLots" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
                                AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Width="100" Binding="{Binding ProductLotId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Product" Width="100" Binding="{Binding ProductName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Warehouse" Width="100" Binding="{Binding WarehouseId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Supplier" Width="100" Binding="{Binding SupplierId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Location" Width="100" Binding="{Binding LocationId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Supply Manager" Width="100" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Quantity" Width="100" Binding="{Binding Quantity}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Date Received" Width="100" Binding="{Binding DateReceived}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Date Expiring" Width="100" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
-                        </DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ProductLotId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Product" Width="*" Binding="{Binding ProductName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Warehouse" Width="*" Binding="{Binding WarehouseId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier" Width="*" Binding="{Binding SupplierId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Location" Width="*" Binding="{Binding LocationId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supply Manager" Width="*" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Received" Width="*" Binding="{Binding DateReceived}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Expiring" Width="*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Grade" Width="*" Binding="{Binding Grade}"></DataGridTextColumn>
+                            </DataGrid.Columns>
                     </DataGrid>
                     <Grid Background="#FFE5E5E5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
