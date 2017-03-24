@@ -55,5 +55,16 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public bool DeleteProductLot(ProductLot lot)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public List<ProductLot> RetrieveProductLotsWithGradeAndPrice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

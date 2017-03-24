@@ -377,6 +377,58 @@ namespace DataAccessLayer
             return lots;
         }
 
+        public static List<ProductLot> RetrieveProductLotsWithGradeAndPrice()
+        {
+            List<ProductLot> lots = new List<ProductLot>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_lot_list_w_grade_price";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ProductLot lot = new ProductLot
+                        {
+                            ProductLotId = reader.GetInt32(0),
+                            WarehouseId = reader.GetInt32(1),
+                            SupplierId = reader.GetInt32(2),
+                            LocationId = reader.GetInt32(3),
+                            ProductId = reader.GetInt32(4),
+                            SupplyManagerId = reader.GetInt32(5),
+                            Quantity = reader.GetInt32(6),
+                            AvailableQuantity = reader.GetInt32(7),
+                            DateReceived = reader.GetDateTime(8),
+                            ExpirationDate = reader.GetDateTime(9),
+                            Grade = reader.GetString(10),
+                            
+                        };
+                        lots.Add(lot);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return lots;
+        }
+
+
+
+
         public void SetUpdateParameters(SqlCommand cmd)
         {
             cmd.Parameters.Add("@old_PRODUCT_LOT_ID", SqlDbType.Int);
@@ -469,6 +521,34 @@ namespace DataAccessLayer
             cmd.Parameters["@AVAILABLE_QUANTITY"].Value = 0;
             cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
             cmd.Parameters["@EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
+        }
+
+        public static bool DeleteProductLot(ProductLot lot)
+        {
+            var result = false;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_delete_product_lot";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", lot.ProductLotId);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery() == 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
         }
     }
 }
