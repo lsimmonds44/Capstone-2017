@@ -914,7 +914,7 @@ namespace WpfPresentationLayer
             if (_user == null)
             {
                 frmRequestUsername requestUsername = new frmRequestUsername();
-                requestUsername.Show();
+                requestUsername.ShowDialog();
             }
             else { MessageBox.Show("Must not be signed in to use this feature"); }
         }
@@ -1441,6 +1441,14 @@ namespace WpfPresentationLayer
                 }
             }
 
+        }
+
+        private void mnuQuit_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Confirmation:", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
     } // end of class
 } // end of namespace 

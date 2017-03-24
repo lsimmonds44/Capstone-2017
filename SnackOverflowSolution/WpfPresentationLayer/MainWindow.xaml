@@ -16,7 +16,7 @@
 
         <Menu Grid.Row="0">
             <MenuItem  Header="File" >
-                <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120"/>
+                <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
             </MenuItem>
             <MenuItem Header="Edit" >
                 <MenuItem Name="mnuPrefernces" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
