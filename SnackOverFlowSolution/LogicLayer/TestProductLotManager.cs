@@ -60,5 +60,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<ProductLot> RetrieveProductLotsWithGradeAndPrice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

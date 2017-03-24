@@ -22,6 +22,8 @@ namespace DataObjects
         public int? SupplyManagerId { get; set; }
         public int? Quantity { get; set; }
         public int? AvailableQuantity { get; set; }
+        public String Grade { get; set; }
+        public Double Price { get; set; }
         public DateTime? DateReceived { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public String ProductName { get; set; }

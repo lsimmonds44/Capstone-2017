@@ -150,15 +150,15 @@ namespace WpfPresentationLayer
             
             try
             {
-                _productLots = pLM.RetrieveProductLots();
+                _productLots = pLM.RetrieveProductLotsWithGradeAndPrice();
                 foreach (var product in _productLots)
                 {
                     cboProducts.Items.Add(product.ProductName);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error retrieving product lots");
+                MessageBox.Show("Error retrieving product lots" + ex);
             }
             
 
@@ -212,6 +212,7 @@ namespace WpfPresentationLayer
             {
                 ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
                 tfAvailableProduct.Text = selectedProduct.Quantity.ToString();
+                lblProductGradeResult.Content = selectedProduct.Grade.ToString();
             }
         }
 
@@ -228,7 +229,7 @@ namespace WpfPresentationLayer
                     oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
                     oLine.ProductName = cboProducts.SelectedItem.ToString();
                     oLine.Quantity = parseToInt(tfQty.Text);
-                    oLine.GradeID = "Grade A";
+                    oLine.GradeID = lblProductGradeResult.Content.ToString();
                     oLine.Price = 100;
                     oLine.UnitDiscount = (decimal)0.0;
                     try
