@@ -1432,6 +1432,7 @@ namespace WpfPresentationLayer
                             WarehouseId = selectedItem.WarehouseId
                         });
                         _productLotManager.DeleteProductLot(selectedItem);
+                        tabProductLot_Selected(sender, e);
                     }
                 }
                 catch (Exception ex)
