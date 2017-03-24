@@ -11,7 +11,7 @@ namespace DataObjects
         public int OrderLineID { get; set; }
         public int ProductOrderID { get; set; }
         public int? ProductID { get; set; }
-        public string ProductName { get; set; }
+        public String ProductName { get; set; }
         public int Quantity { get; set; }
         public String GradeID { get; set; }
         public decimal Price { get; set; }

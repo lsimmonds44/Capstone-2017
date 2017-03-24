@@ -385,6 +385,7 @@ Create Table [dbo].[ORDER_LINE] (
 [ORDER_LINE_ID][INT] IDENTITY(10000, 1) NOT NULL,
 [PRODUCT_ORDER_ID][int] NOT NULL,
 [PRODUCT_ID][int] NOT NULL,
+[PRODUCT_NAME][NVARCHAR](100) NOT NULL,
 [QUANTITY][int] NOT NULL,
 [GRADE_ID][NVARCHAR](250) NOT NULL,
 [PRICE][DECIMAL](5,2) NOT NULL,
@@ -393,6 +394,7 @@ Create Table [dbo].[ORDER_LINE] (
 CONSTRAINT [PK_ORDER_LINE] PRIMARY KEY ([ORDER_LINE_ID] ASC)
 )
 GO
+
 
 print '' print '*** creating table ORDER_TYPE'
 GO
@@ -2087,6 +2089,7 @@ Create PROCEDURE sp_create_order_line
 (
 @PRODUCT_ORDER_ID[INT],
 @PRODUCT_ID[INT],
+@PRODUCT_NAME[NVARCHAR](100),
 @QUANTITY[INT],
 @GRADE_ID[NVARCHAR](250),
 @PRICE[DECIMAL](5,2),
@@ -2094,9 +2097,9 @@ Create PROCEDURE sp_create_order_line
 )
 AS
 BEGIN
-INSERT INTO ORDER_LINE (PRODUCT_ORDER_ID, PRODUCT_ID, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT)
+INSERT INTO ORDER_LINE (PRODUCT_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT)
 VALUES
-(@PRODUCT_ORDER_ID, @PRODUCT_ID, @QUANTITY, @GRADE_ID, @PRICE, @UNIT_DISCOUNT)
+(@PRODUCT_ORDER_ID, @PRODUCT_ID, @PRODUCT_NAME, @QUANTITY, @GRADE_ID, @PRICE, @UNIT_DISCOUNT)
 SELECT SCOPE_IDENTITY()
 END
 GO
@@ -4203,19 +4206,6 @@ WHERE ORDER_STATUS_ID = @Status
 END
 GO
 
-Print '' print  ' *** creating procedure sp_retrieve_product_orderline_list_by_order_id'
-GO
-Create PROCEDURE sp_retrieve_product_orderline_list_by_order_id
-(
-@PRODUCT_ORDER_ID[INT]
-)
-AS
-BEGIN
-SELECT ORDER_LINE_ID, PRODUCT_ORDER_ID, PRODUCT_ID, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT
-FROM ORDER_LINE
-WHERE PRODUCT_ORDER_ID = @PRODUCT_ORDER_ID
-END
-GO
 
 Print '' print  ' *** creating procedure sp_retrieve_product_order_list'
 GO
@@ -4274,6 +4264,22 @@ AS
 		LEFT JOIN Product_Category pc ON (pc.product_id = pd.product_id)
 		WHERE pd.active = 1
 	END
+GO
+
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_product_orderline_list_by_order_id'
+GO
+Create PROCEDURE sp_retrieve_product_orderline_list_by_order_id
+(
+@PRODUCT_ORDER_ID[INT]
+)
+AS
+BEGIN
+SELECT ORDER_LINE_ID, PRODUCT_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, GRADE_ID, PRICE, UNIT_DISCOUNT
+FROM ORDER_LINE
+WHERE PRODUCT_ORDER_ID = @PRODUCT_ORDER_ID
+END
 GO
 
 Print '' print  ' *** creating procedure sp_retrieve_repair'
