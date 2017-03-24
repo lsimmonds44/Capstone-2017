@@ -150,7 +150,7 @@ namespace WpfPresentationLayer
             
             try
             {
-                _productLots = pLM.RetrieveProductLotsWithGradeAndPrice();
+                _productLots = pLM.RetrieveProductLots();
                 foreach (var product in _productLots)
                 {
                     cboProducts.Items.Add(product.ProductName);
