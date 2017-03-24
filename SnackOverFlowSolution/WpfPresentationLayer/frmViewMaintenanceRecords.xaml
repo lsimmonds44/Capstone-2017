@@ -1,0 +1,22 @@
+﻿<Window x:Name="frmMaintenanceRecords" x:Class="WpfPresentationLayer.frmViewMaintenanceRecords"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Maintenance Records" Height="250" Width="400" Loaded="frmMaintenanceRecords_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lstMaintenanceRecords" Margin="5" ></ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnClose" Margin="5" Padding="20 5" Grid.Column="1" Content="Close" Click="btnClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

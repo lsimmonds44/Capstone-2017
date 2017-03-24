@@ -21,12 +21,12 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for ViewOrdersByStatus.xaml
     /// </summary>
-    public partial class ViewOrdersByStatus : Window
+    public partial class frmViewOrdersByStatus : Window
     {
         private ProductOrderManager _myProductOrderManager = new ProductOrderManager();
         List<ProductOrder> _currentOpenOrders;
 
-        public ViewOrdersByStatus()
+        public frmViewOrdersByStatus()
         {
             InitializeComponent();
 

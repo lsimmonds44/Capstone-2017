@@ -35,7 +35,7 @@ namespace WpfPresentationLayer
             InitializeComponent();
             RetrieveProductLots();
             ParseLotsIntoViewModel();
-            RefreshDtgProductLot();
+            RefreshDgProductLot();
         }
 
         /// <summary>
@@ -84,10 +84,10 @@ namespace WpfPresentationLayer
         /// 
         /// Refreshes Datagrid
         /// </summary>
-        private void RefreshDtgProductLot()
+        private void RefreshDgProductLot()
         {
-            DtgProductList.ItemsSource = null;
-            DtgProductList.ItemsSource = _manageStockViewModels;
+            dgProductList.ItemsSource = null;
+            dgProductList.ItemsSource = _manageStockViewModels;
         }
 
         /// <summary>
@@ -118,12 +118,12 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnUpdateQuantity_OnClick(object sender, RoutedEventArgs e)
+        private void btnUpdateQuantity_OnClick(object sender, RoutedEventArgs e)
         {
             var pm = new ProductLotManager();
 
-            ManageStockViewModel msv = (ManageStockViewModel)DtgProductList.SelectedItem;
-            int selectedIndex = DtgProductList.SelectedIndex;
+            ManageStockViewModel msv = (ManageStockViewModel)dgProductList.SelectedItem;
+            int selectedIndex = dgProductList.SelectedIndex;
 
             ProductLot oldProductLot = _productLotList.Find(x => x.ProductLotId == msv.ProductLotId);
 
@@ -151,8 +151,8 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Quantity Updated Successfully");
                     RetrieveProductLots();
                     ParseLotsIntoViewModel();
-                    RefreshDtgProductLot();
-                    DtgProductList.SelectedIndex = selectedIndex;
+                    RefreshDgProductLot();
+                    dgProductList.SelectedIndex = selectedIndex;
                 }
                 else
                 {
@@ -176,11 +176,11 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChkInactiveLots_OnChecked(object sender, RoutedEventArgs e)
+        private void chkInactiveLots_OnChecked(object sender, RoutedEventArgs e)
         {
             checkBoxOverride = true;
             ParseLotsIntoViewModel();
-            RefreshDtgProductLot();
+            RefreshDgProductLot();
         }
 
         /// <summary>
@@ -191,14 +191,14 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChkInactiveLots_OnUnchecked(object sender, RoutedEventArgs e)
+        private void chkInactiveLots_OnUnchecked(object sender, RoutedEventArgs e)
         {
             checkBoxOverride = false;
             ParseLotsIntoViewModel();
-            RefreshDtgProductLot();
+            RefreshDgProductLot();
         }
 
-        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        private void btnCancel_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -211,13 +211,13 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnRefreshData_OnClick(object sender, RoutedEventArgs e)
+        private void btnRefreshData_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
                 RetrieveProductLots();
                 ParseLotsIntoViewModel();
-                RefreshDtgProductLot();
+                RefreshDgProductLot();
                 MessageBox.Show("Refresh Successful");
             }
             catch (Exception ex)

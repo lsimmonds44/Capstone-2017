@@ -19,31 +19,31 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for EmployeeView.xaml
     /// </summary>
-    public partial class EmployeeView : Window
+    public partial class frmEmployeeViews : Window
     {
         bool inAddMode;
-        private IEmployeeManager employeeManager;
-        private Employee employee;
+        private IEmployeeManager _employeeManager;
+        private Employee _employee;
         private List<User> _userList;
 
 
-        public EmployeeView()
+        public frmEmployeeViews()
         {
             InitializeComponent();
         }
 
-        public EmployeeView(LogicLayer.IEmployeeManager employeeManager)
+        public frmEmployeeViews(LogicLayer.IEmployeeManager employeeManager)
         {
             InitializeComponent();
-            this.employeeManager = employeeManager;
+            this._employeeManager = employeeManager;
             inAddMode = true;
         }
 
-        public EmployeeView(IEmployeeManager employeeManager, Employee employee)
+        public frmEmployeeViews(IEmployeeManager employeeManager, Employee employee)
         {
             InitializeComponent();
-            this.employeeManager = employeeManager;
-            this.employee = employee;
+            this._employeeManager = employeeManager;
+            this._employee = employee;
         }
 
         internal void SetEditable()
@@ -54,13 +54,13 @@ namespace WpfPresentationLayer
             lblUserIdVal.Visibility = Visibility.Collapsed;
 
             chkActive.Visibility = Visibility.Visible;
-            BirthDatePicker.Visibility = Visibility.Visible;
+            dpBirthDatePicker.Visibility = Visibility.Visible;
             txtSalary.Visibility = Visibility.Visible;
-            cbxUserID.Visibility = Visibility.Visible;
+            cboUserID.Visibility = Visibility.Visible;
             try
             {
                 _userList = (new UserManager()).RetrieveFullUserList();
-                cbxUserID.ItemsSource = _userList;
+                cboUserID.ItemsSource = _userList;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -78,7 +78,7 @@ namespace WpfPresentationLayer
                 shouldPost = false;
                 MessageBox.Show("Salary needs a decimal");
             }
-            if(null==BirthDatePicker.SelectedDate)
+            if(null==dpBirthDatePicker.SelectedDate)
             {
                 shouldPost = false;
             }
@@ -88,12 +88,12 @@ namespace WpfPresentationLayer
                 {
                     try
                     {
-                        employeeManager.CreateEmployee(new Employee()
+                        _employeeManager.CreateEmployee(new Employee()
                         {
                             Active = (bool)chkActive.IsChecked,
-                            DateOfBirth = (DateTime)BirthDatePicker.SelectedDate,
+                            DateOfBirth = (DateTime)dpBirthDatePicker.SelectedDate,
                             Salary = parsedSalary,
-                            UserId = _userList[cbxUserID.SelectedIndex].UserId
+                            UserId = _userList[cboUserID.SelectedIndex].UserId
                         });
                         MessageBox.Show("Employee Added");
                         this.Close();

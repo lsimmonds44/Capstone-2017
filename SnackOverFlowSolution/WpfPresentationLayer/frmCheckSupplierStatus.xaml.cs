@@ -38,7 +38,7 @@ namespace WpfPresentationLayer
         /// <param name="user"></param>
         /// <param name="userManager"></param>
         /// <param name="supplierManager"></param>
-        /// <param name="productManager"></param>
+        /// <param name="_productManager"></param>
         /// <param name="agreementManager"></param>
         public frmCheckSupplierStatus(User user, IUserManager userManager, ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager)
         {

@@ -19,43 +19,43 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for CharityView.xaml
     /// </summary>
-    public partial class CharityView : Window
+    public partial class frmCharityView : Window
     {
-        private ICharityManager charityManager;
-        private Charity charity;
+        private ICharityManager _charityManager;
+        private Charity _charity;
         private bool inAddMode;
         private bool _inApplyMode;
         private List<User> _userList;
         private User _charityUser;
 
-        public CharityView(int userID)
+        public frmCharityView(int userID)
         {
             InitializeComponent();
         }
 
-        public CharityView(ICharityManager charityManager)
+        public frmCharityView(ICharityManager charityManager)
         {
             InitializeComponent();
-            this.charityManager = charityManager;
+            this._charityManager = charityManager;
             inAddMode = true;
         }
 
-        public CharityView(ICharityManager charityManager, int employeeID)
+        public frmCharityView(ICharityManager charityManager, int employeeID)
         {
             InitializeComponent();
-            this.charityManager = charityManager;
+            this._charityManager = charityManager;
             inAddMode = true;
             txtEmployeeID.Text = employeeID.ToString();
             txtEmployeeID.IsEnabled = false;
             lblStatus.Visibility = Visibility.Collapsed;
         }
 
-        public CharityView(ICharityManager charityManager, DataObjects.Charity charity)
+        public frmCharityView(ICharityManager charityManager, DataObjects.Charity charity)
         {
             // TODO: Complete member initialization
             InitializeComponent();
-            this.charityManager = charityManager;
-            this.charity = charity;
+            this._charityManager = charityManager;
+            this._charity = charity;
             lblCharityIDVal.Content = charity.CharityID;
             lblCharityNameVal.Content = charity.CharityName;
             lblContactFirstNameVal.Content = charity.ContactFirstName;
@@ -73,16 +73,16 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// Created 2017/03/08
         /// 
-        /// The constructor for a charity user to apply for a charity.
+        /// The constructor for a _charity user to apply for a _charity.
         /// </summary>
         /// <param name="charityUserId"></param>
-        /// <param name="charityManager"></param>
-        public CharityView(User charityUser, ICharityManager charityManager)
+        /// <param name="_charityManager"></param>
+        public frmCharityView(User charityUser, ICharityManager charityManager)
         {
             InitializeComponent();
             _inApplyMode = true;
             _charityUser = charityUser;
-            this.charityManager = charityManager;
+            this._charityManager = charityManager;
             SetEditable();
             
         }
@@ -110,8 +110,8 @@ namespace WpfPresentationLayer
                 try
                 {
                     _userList = (new UserManager()).RetrieveFullUserList();
-                    cbxUserID.ItemsSource = _userList;
-                    cbxUserID.Visibility = Visibility.Visible;
+                    cboUserID.ItemsSource = _userList;
+                    cboUserID.Visibility = Visibility.Visible;
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {
@@ -197,7 +197,7 @@ namespace WpfPresentationLayer
                     Email = txtEmail.Text,
                     EmployeeID = employeeID,
                     PhoneNumber = txtPhoneNumber.Text,
-                    UserID = _userList[cbxUserID.SelectedIndex].UserId,
+                    UserID = _userList[cboUserID.SelectedIndex].UserId,
                     Status = "PENDING"
                 };
 
@@ -205,7 +205,7 @@ namespace WpfPresentationLayer
                 {
                     try
                     {
-                        charityManager.AddCharity(charityAsEntered);
+                        _charityManager.AddCharity(charityAsEntered);
                         MessageBox.Show("Charity Added");
                     }
                     catch (System.Data.SqlClient.SqlException ex)
@@ -237,7 +237,7 @@ namespace WpfPresentationLayer
 
                 try
                 {
-                    if (charityManager.AddCharityApplication(charityAsEntered))
+                    if (_charityManager.AddCharityApplication(charityAsEntered))
                     {
                         this.DialogResult = true;
                     }

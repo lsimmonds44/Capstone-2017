@@ -44,20 +44,20 @@
         <!--End of Grid Definitions-->
 
         <!--Picture Group Controls-->
-        <GroupBox Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="8" Grid.RowSpan="7"
+        <GroupBox Name="gboxImage" Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="8" Grid.RowSpan="7"
                   Header="Image">
             <StackPanel Orientation="Vertical">
 
                 <!--Image Box-->
                 <Border BorderBrush="Gray" BorderThickness="1">
-                    <Image x:Name="ImgProduct" Height="180" Margin="5 5 5 5" />
+                    <Image Name="ImgProduct" Height="180" Margin="5 5 5 5" />
                 </Border>
                 <!--End of Image Box-->
 
 
                 <!--Image Event Controls-->
                 <StackPanel Orientation="Horizontal" Margin="0 5 0 5" HorizontalAlignment="Left">
-                    <Button Click="BtnUpload" Content="Upload" Width="100" Height="30" Margin="0 0 10 0"/>
+                    <Button Name="btnUpload" Click="btnUpload_Click" Content="Upload" Width="100" Height="30" Margin="0 0 10 0"/>
                 </StackPanel>
                 <!--End of Image Event Controls-->
             </StackPanel>
@@ -65,7 +65,7 @@
         <!--End of Picture Group Controls-->
 
         <!--Product Main Information-->
-        <GroupBox Grid.Row="1" Grid.Column="10" Margin="0" Grid.ColumnSpan="5" Grid.RowSpan="10" 
+        <GroupBox Name="gboxProductInformation" Grid.Row="1" Grid.Column="10" Margin="0" Grid.ColumnSpan="5" Grid.RowSpan="10" 
                   Header="Product Information">
             <StackPanel Orientation="Vertical">
 
@@ -78,14 +78,14 @@
                             <ColumnDefinition Width="95"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Name :"/>
+                        <Label Name="lblName" Content="Name :"/>
                         <TextBox Name="txtName" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 0"/>
                     </Grid>
                 </StackPanel>
                 <!--End of Name-->
 
                 <!--Product Description-->
-                <Label Content="Prouct Description:"/>
+                <Label Name="lblProductDescription" Content="Prouct Description:"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -110,7 +110,7 @@
                             <ColumnDefinition Width="65"/>
 
                         </Grid.ColumnDefinitions>
-                        <Label Content="Unit Price:"/>
+                        <Label Name="lblUnitPrice" Content="Unit Price:"/>
                         <TextBox Name="txtUnitPrice" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 0"/>
                     </Grid>
                 </StackPanel>
@@ -125,7 +125,7 @@
                             <ColumnDefinition Width="65"/>
 
                         </Grid.ColumnDefinitions>
-                        <Label Content="Active:"/>
+                        <Label Name="lblActive" Content="Active:"/>
                         <CheckBox Name="chkActive" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
                     </Grid>
                 </StackPanel>
@@ -140,7 +140,7 @@
                             <ColumnDefinition Width="65"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Unit Of Measurement:"/>
+                        <Label Name="lblUnitOfMeasure" Content="Unit Of Measurement:"/>
                         <TextBox Name="txtUnitOfMeasure" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <!--We might probably need this to be a dropdown - MTR-->
                     </Grid>
@@ -156,7 +156,7 @@
                             <ColumnDefinition Width="45"/>
 
                         </Grid.ColumnDefinitions>
-                        <Label Content="Delivery Charge Per Unit:"/>
+                        <Label Name="lblDeliveryChargePerUnit" Content="Delivery Charge Per Unit:"/>
                         <TextBox Name="txtDeliveryChargePerUnit" Grid.Column="1" Grid.ColumnSpan="2"/>
                     </Grid>
                 </StackPanel>
@@ -167,8 +167,8 @@
 
         <!--Function Buttons-->
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="11" Grid.ColumnSpan="4" FlowDirection="RightToLeft">
-            <Button Click="BtnCancel" Content="Cancel" Width="100" Margin="0 0 0 0" />
-            <Button Click="BtnSave" IsDefault="True" Content="Save" Width="100" Margin="10 0 0 0" />
+            <Button Name="btnCancel" Click="btnCancel_Click" Content="Cancel" Width="100" Margin="0 0 0 0" />
+            <Button Name="btnSave" Click="btnSave_Click" IsDefault="True" Content="Save" Width="100" Margin="10 0 0 0" />
         </StackPanel>
         <!--End of Function Buttons-->
 

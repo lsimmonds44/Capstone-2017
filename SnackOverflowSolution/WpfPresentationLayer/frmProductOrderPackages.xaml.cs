@@ -97,7 +97,7 @@ namespace WpfPresentationLayer
         {
             try
             {
-                listPackages.ItemsSource = _packageManager.RetrievePackagesInOrder(_orderId);
+                lvListPackages.ItemsSource = _packageManager.RetrievePackagesInOrder(_orderId);
             }
             catch (Exception)
             {
@@ -113,12 +113,12 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void listPackages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lvListPackages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Package selected = (Package)listPackages.SelectedItem;
+            Package selected = (Package)lvListPackages.SelectedItem;
             if (selected != null)
             {
-                PackageLineManagementWindow lineManagement = new PackageLineManagementWindow(selected);
+                frmPackageLineManagementWindow lineManagement = new frmPackageLineManagementWindow(selected);
                 lineManagement.ShowDialog();
             }
         }

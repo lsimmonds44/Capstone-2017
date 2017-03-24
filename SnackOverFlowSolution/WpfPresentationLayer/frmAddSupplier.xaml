@@ -17,9 +17,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Name="lblUsername" Content="UserName: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Name="txtUsername" Margin="0 0 3 0" MaxLength="50" TextChanged="txtUsername_TextChanged"/>
-            <Button Grid.Column="2" Name="btnLookup" Content="Lookup" Margin="0 0 10 0" Click="btnLookup_Click"/>
+            <Label Name="lblUsername" Grid.Column="0" Content="UserName: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Name="txtUsername" Grid.Column="1" Margin="0 0 3 0" MaxLength="50" TextChanged="txtUsername_TextChanged"/>
+            <Button Name="btnLookup"  Grid.Column="2" Content="Lookup" Margin="0 0 10 0" Click="btnLookup_Click"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -35,10 +35,10 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Name="lblName" Content="Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <Label Grid.Column="0" Grid.Row="1" Name="lblPhone" Content="Phone: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <Label Grid.Column="0" Grid.Row="2" Name="lblFarmName" Content="Farm Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <Label Grid.Column="0" Grid.Row="3" Name="lblFarmAddress" Content="Farm Address: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblName" Grid.Column="0" Grid.Row="0" Content="Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblPhone"  Grid.Column="0" Grid.Row="1" Content="Phone: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblFarmName" Grid.Column="0" Grid.Row="2" Content="Farm Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblFarmAddress" Grid.Column="0" Grid.Row="3" Content="Farm Address: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <Grid Grid.Row="4" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -46,9 +46,9 @@
                     <ColumnDefinition Width="65" />
                     <ColumnDefinition Width="75" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Name="lblFarmCity" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Grid.Column="1" Name="txtFarmCity" Margin="0 5 0 5" MaxLength="50" IsEnabled="False" />
-                <Label Grid.Column="2" Name="lblFarmState" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Label Name="lblFarmCity" Grid.Column="0" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Name="txtFarmCity" Grid.Column="1" Margin="0 5 0 5" MaxLength="50" IsEnabled="False" />
+                <Label Name="lblFarmState" Grid.Column="2" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <ComboBox Name="cboFarmState" Grid.Column="3" Margin="0 5 10 5" SelectedIndex="0" VerticalAlignment="Center" Padding="5" MaxDropDownHeight="200" IsEnabled="False">
                     <ComboBoxItem Content="AK" />
                     <ComboBoxItem Content="AL" />
@@ -102,14 +102,14 @@
                     <ComboBoxItem Content="WY" />
                 </ComboBox>
             </Grid>
-            <Label Grid.Column="0" Grid.Row="5" Name="lblFarmTaxID" Content="Farm Tax ID: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <Label Grid.Column="0" Grid.Row="6" Name="lblActive" Content="Active: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="0" Name="txtName" Margin="0 5 10 5" IsEnabled="False"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Name="txtPhone" Margin="0 5 10 5" IsEnabled="False"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Name="txtFarmName" Margin="0 5 10 5" MaxLength="300" IsEnabled="False"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Name="txtFarmAddress" Margin="0 5 10 5" IsEnabled="False"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Name="txtFarmTaxId" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
-            <CheckBox Grid.Column="1" Grid.Row="6" Name="chkActive" Margin="0" VerticalAlignment="Center" IsChecked="True" IsEnabled="False" />
+            <Label Name="lblFarmTaxID" Grid.Column="0" Grid.Row="5" Content="Farm Tax ID: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblActive" Grid.Column="0" Grid.Row="6" Content="Active: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Name="txtName" Grid.Column="1" Grid.Row="0" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Name="txtPhone" Grid.Column="1" Grid.Row="1" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Name="txtFarmName" Grid.Column="1" Grid.Row="2" Margin="0 5 10 5" MaxLength="300" IsEnabled="False"/>
+            <TextBox Name="txtFarmAddress" Grid.Column="1" Grid.Row="3" Margin="0 5 10 5" IsEnabled="False"/>
+            <TextBox Name="txtFarmTaxId" Grid.Column="1" Grid.Row="5" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
+            <CheckBox Name="chkActive" Grid.Column="1" Grid.Row="6" Margin="0" VerticalAlignment="Center" IsChecked="True" IsEnabled="False" />
         </Grid>
         <Grid Name="productSection" Grid.Row="3" IsEnabled="False">
             <Grid.ColumnDefinitions>
@@ -122,11 +122,11 @@
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Name="lblAvailableProducts" Content="Available Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0 0 0"/>
-                <DataGrid Grid.Row="1" Name="dgAvailableProducts" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
+                <Label Name="lblAvailableProducts" Grid.Row="0" Content="Available Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0 0 0"/>
+                <DataGrid Name="dgAvailableProducts" Grid.Row="1" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
                           SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10 0 0 0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="availableProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
+                        <DataGridTextColumn x:Name="dgtcAvailableProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -136,19 +136,19 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="1" Name="btnAddToApproved" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15" Click="btnAddToApproved_Click"/>
-                <Button Grid.Row="2" Name="btnRemoveFromApproved" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" Click="btnRemoveFromApproved_Click" />
+                <Button Name="btnAddToApproved" Grid.Row="1" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15" Click="btnAddToApproved_Click"/>
+                <Button Name="btnRemoveFromApproved" Grid.Row="2" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" Click="btnRemoveFromApproved_Click" />
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Name="lblApprovedProducts" Content="Approved Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 10 0"/>
-                <DataGrid Grid.Row="1" Name="dgApprovedProducts" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
+                <Label Name="lblApprovedProducts" Grid.Row="0" Content="Approved Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 10 0"/>
+                <DataGrid Name="dgApprovedProducts" Grid.Row="1" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
                           SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0 0 10 0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="approvedProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
+                        <DataGridTextColumn x:Name="dgtcApprovedProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -158,8 +158,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="btnCancel" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
-            <Button Grid.Column="1" Name="btnSubmit" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
+            <Button Name="btnCancel" Grid.Column="0" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
+            <Button Name="btnSubmit" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -26,31 +26,31 @@
             <ColumnDefinition Width="127*" />
         </Grid.ColumnDefinitions>
         
-        <Label Content="Vehicle ID:" Grid.Row="1" Grid.Column="0" Margin="50 25 1 10" />
-        <Label Content="VIN:" Grid.Row="2" Grid.Column="0" Margin="80 25 1 10" />
-        <Label Content="Make:" Grid.Row="3" Grid.Column="0" Margin="70 25 1 10" />
-        <Label Content="Model:" Grid.Row="4" Grid.Column="0" Margin="70 25 1 10" />
-        <Label Content="Year:" Grid.Row="5" Grid.Column="0" Margin="80 25 1 10" />
-        <Label Content="Color:" Grid.Row="6" Grid.Column="0" Margin="75 25 1 10" />
-        <Label Content="Type:" Grid.Row="1" Grid.Column="4" Margin="78 25 1 10" />
-        <Label Content="Mileage:" Grid.Row="2" Grid.Column="4" Margin="60 25 1 10" />
-        <Label Content="Active:" Grid.Row="3" Grid.Column="4" Margin="70 25 1 10" />
-        <Label Content="Repair Date:" Grid.Row="4" Grid.Column="4" Margin="40 25 1 10" />
-        <Label Content="Last Driver:" Grid.Row="5" Grid.Column="4" Margin="45 25 1 10" />
+        <Label Name="lblVehicleId" Content="Vehicle ID:" Grid.Row="1" Grid.Column="0" Margin="50 25 1 10" />
+        <Label Name="lblVIN" Content="VIN:" Grid.Row="2" Grid.Column="0" Margin="80 25 1 10" />
+        <Label Name="lblMake" Content="Make:" Grid.Row="3" Grid.Column="0" Margin="70 25 1 10" />
+        <Label Name="lblModel" Content="Model:" Grid.Row="4" Grid.Column="0" Margin="70 25 1 10" />
+        <Label Name="lblYear" Content="Year:" Grid.Row="5" Grid.Column="0" Margin="80 25 1 10" />
+        <Label Name="lblColor" Content="Color:" Grid.Row="6" Grid.Column="0" Margin="75 25 1 10" />
+        <Label Name="lblType" Content="Type:" Grid.Row="1" Grid.Column="4" Margin="78 25 1 10" />
+        <Label Name="lblMileage" Content="Mileage:" Grid.Row="2" Grid.Column="4" Margin="60 25 1 10" />
+        <Label Name="lblActive" Content="Active:" Grid.Row="3" Grid.Column="4" Margin="70 25 1 10" />
+        <Label Name="lblRepairDate" Content="Repair Date:" Grid.Row="4" Grid.Column="4" Margin="40 25 1 10" />
+        <Label Name="lblLastDriver" Content="Last Driver:" Grid.Row="5" Grid.Column="4" Margin="45 25 1 10" />
 
-        <TextBox x:Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtVIN" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtMake" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtModel" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtYear" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtColor" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtType" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtMileage" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtActive" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtRepairDate" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
-        <TextBox x:Name="txtLastDriver" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtVehicleId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtVIN" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtMake" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtModel" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtYear" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtColor" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtType" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtMileage" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtActive" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtRepairDate" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
+        <TextBox Name="txtLastDriver" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True" />
         
-        <Button x:Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close"  Margin="20" Click="btnClose_Click" IsCancel="True"/>
+        <Button Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close"  Margin="20" Click="btnClose_Click" IsCancel="True"/>
         
     </Grid>
 </Window>

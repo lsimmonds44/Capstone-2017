@@ -141,7 +141,7 @@ namespace WpfPresentationLayer
                     }
 
                 }
-                // Let the employee modify the form
+                // Let the _employee modify the form
                 txtPhone.Text = supplierUser.Phone;
                 txtFarmAddress.IsEnabled = true;
                 txtFarmCity.IsEnabled = true;
