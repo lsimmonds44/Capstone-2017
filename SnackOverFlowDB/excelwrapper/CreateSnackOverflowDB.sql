@@ -1502,6 +1502,8 @@ ALTER TABLE [dbo].[WISHLIST_LINE] with nocheck
   ON UPDATE CASCADE
   ON DELETE CASCADE
 GO
+
+
 Print '' print  ' *** creating procedure sp_retrieve_app_user_from_search'
 GO
 Create PROCEDURE sp_retrieve_user_by_username
@@ -1514,10 +1516,8 @@ SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRE
 FROM app_user
 WHERE USER_NAME = @USER_NAME 
 END
-
 GO
 
-GO
 Print '' print  ' *** creating procedure sp_retrieve_app_username_by_email'
 GO
 Create PROCEDURE sp_retrieve_app_username_by_email
@@ -1552,6 +1552,7 @@ INSERT INTO AGREEMENT (PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED, APP
 VALUES
 (@PRODUCT_ID, @SUPPLIER_ID, @DATE_SUBMITTED, @IS_APPROVED, @APPROVED_BY)
 END
+GO
 
 Print '' print  ' *** creating procedure sp_create_agreement_application'
 GO
@@ -1568,6 +1569,7 @@ INSERT INTO AGREEMENT (PRODUCT_ID, SUPPLIER_ID, DATE_SUBMITTED, IS_APPROVED)
 VALUES
 (@PRODUCT_ID, @SUPPLIER_ID, @DATE_SUBMITTED, @IS_APPROVED)
 END
+GO
 
 Print '' print  ' *** creating procedure sp_create_app_user'
 GO
@@ -1590,6 +1592,7 @@ INSERT INTO APP_USER (FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL
 VALUES
 (@FIRST_NAME, @LAST_NAME, @PHONE, @PREFERRED_ADDRESS_ID, @E_MAIL_ADDRESS, @E_MAIL_PREFERENCES, @PASSWORD_HASH, @PASSWORD_SALT, @USER_NAME, @ACTIVE)
 END
+GO
 
 Print '' print  ' *** creating procedure sp_create_backorder_preorder'
 GO
@@ -1613,6 +1616,7 @@ INSERT INTO BACKORDER_PREORDER (ORDER_ID, CUSTOMER_ID, AMOUNT, DATE_PLACED, DATE
 VALUES
 (@ORDER_ID, @CUSTOMER_ID, @AMOUNT, @DATE_PLACED, @DATE_EXPECTED, @HAS_ARRIVED, @ADDRESS_1, @ADDRESS_2, @CITY, @STATE, @ZIP)
 END
+GO
 
 Print '' print  ' *** creating procedure sp_create_category'
 GO
@@ -2872,6 +2876,7 @@ BEGIN
 DELETE FROM maintenance_schedule_line
 WHERE MAINTENANCE_SCHEDULE_LINE_ID = @MAINTENANCE_SCHEDULE_LINE_ID
 END
+GO
 
 Print '' print  ' *** creating procedure sp_delete_message_line'
 GO
@@ -4294,6 +4299,7 @@ BEGIN
 SELECT REPAIR_ID, VEHICLE_ID
 FROM repair
 END
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_role'
 GO
@@ -4430,7 +4436,7 @@ SELECT FIRST_NAME, LAST_NAME
 FROM APP_USER
 WHERE USER_ID = @USER_ID
 END
-
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_supplier_list'
 GO
@@ -4504,6 +4510,7 @@ FROM user_cart_line
 WHERE PRODUCT_ID = @PRODUCT_ID
 AND USER_ID = @USER_ID
 END
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_user_cart_line_list'
 GO
@@ -4513,6 +4520,7 @@ BEGIN
 SELECT PRODUCT_ID, USER_ID
 FROM user_cart_line
 END
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_user_salt'
 GO
@@ -4552,6 +4560,7 @@ SELECT VEHICLE_TYPE_ID
 FROM vehicle_type
 WHERE VEHICLE_TYPE_ID = @VEHICLE_TYPE_ID
 END
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_vehicle_type_list'
 GO
@@ -4561,6 +4570,7 @@ BEGIN
 SELECT VEHICLE_TYPE_ID
 FROM vehicle_type
 END
+GO
 
 Print '' print  ' *** creating procedure sp_retrieve_vehicle_list'
 GO
@@ -6519,6 +6529,7 @@ WHERE (PRODUCT_LOT_ID = @PRODUCT_LOT_ID)
 AND AVAILABLE_QUANTITY = @old_AVAILABLE_QUANTITY
 RETURN @@ROWCOUNT
 END
+GO
 
 Print '' print  ' *** creating procedure sp_update_product_order'
 GO
@@ -6968,4 +6979,4 @@ SELECT CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTA
 FROM CHARITY
 WHERE USER_ID = @USER_ID
 END
-
+GO
