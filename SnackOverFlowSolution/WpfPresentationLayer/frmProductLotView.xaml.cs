@@ -22,6 +22,7 @@ namespace WpfPresentationLayer
     public partial class frmAddProductLot : Window
     {
         private IProductLotManager _productLotManager;
+        private ProductLot _productLot;
 
         List<Location> locationList;
         List<Product> productList;
@@ -34,6 +35,15 @@ namespace WpfPresentationLayer
             InitializeComponent();
             _productLotManager = new ProductLotManager();
             FillDefaultValues();
+        }
+
+        public frmAddProductLot(ProductLotManager prodMgr, ProductLot prodLot)
+        {
+            InitializeComponent();
+            _productLotManager = prodMgr;
+            _productLot = prodLot;
+            FillProductLotDetails(_productLot);
+
         }
 
         private void FillDefaultValues()
@@ -134,6 +144,38 @@ namespace WpfPresentationLayer
                     ErrorAlert.ShowDatabaseError();
                 }
             }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 3/24/2017
+        /// 
+        /// Populates the fields of product lot window based on clicked product lot
+        /// </summary>
+        /// <param name="_productLot"></param>
+        public void FillProductLotDetails(ProductLot _productLot)
+        {
+            btnClose.Content = "Close";
+            try
+            {
+                lblSupplierVal.Content = _productLot.SupplierId;
+                lblWarehouseIDVal.Content = _productLot.WarehouseId;
+                lblProductVal.Content = _productLot.ProductName;
+                lblLocationIDVal.Content = _productLot.LocationId;
+                lblQuantityVal.Content = _productLot.Quantity;
+                lblSupplyManagerIDVal.Content = _productLot.SupplyManagerId;
+                dpExpirationDate.SelectedDate = _productLot.ExpirationDate;
+                dpDateReceived.SelectedDate = _productLot.DateReceived;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured", ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
