@@ -57,6 +57,66 @@ namespace DataAccessLayer
         } // End of CreteCommercialCustomer
 
         /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Retrieve Commercial Customer by user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static CommercialCustomer RetrieveCommercialCustomerByUserId(int userId)
+        {
+            CommercialCustomer s = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_commercial_customer_by_user_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters["@USER_ID"].Value = userId;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    s = new CommercialCustomer
+                    {
+                        Commercial_Id = reader.GetInt32(0),
+                        User_Id = reader.GetInt32(1),
+                        IsApproved = reader.GetBoolean(2),
+                        //ApprovedBy = reader.GetInt32(3),
+                        FedTaxId = reader.GetInt32(4),
+                        Active = reader.GetBoolean(5)
+                    };
+                    if (!reader.IsDBNull(3))
+                    {
+                        s.ApprovedBy = reader.GetInt32(3);
+                    }
+                    else
+                    {
+                        s.ApprovedBy = 0;
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return s;
+        }
+
+        /// <summary>
         /// Eric Walton
         /// 2017/26/02
         /// Accessor method to Retrieve a list of all Commercial Customers

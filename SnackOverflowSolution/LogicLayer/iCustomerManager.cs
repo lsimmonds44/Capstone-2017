@@ -24,5 +24,15 @@ namespace LogicLayer
         /// </summary>
         /// <returns></returns>
         List<CommercialCustomer> RetrieveCommercialCustomers();
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/23/2017
+        /// 
+        /// RetrieveCommercialCustomerByUserID method
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        CommercialCustomer RetrieveCommercialCustomerByUserId(int userId);
     }
 }

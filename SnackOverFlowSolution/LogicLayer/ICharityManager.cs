@@ -18,5 +18,7 @@ namespace LogicLayer
         bool DenyCharity(Charity charityInstance);
 
         bool AddCharityApplication(Charity charityInstance);
+
+        Charity RetrieveCharityByUserId(int userId);
     }
 }

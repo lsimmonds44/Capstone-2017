@@ -60,6 +60,34 @@ namespace LogicLayer
             return commercialCustomers;
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Retrieves Commercial customer instance by userid
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public CommercialCustomer RetrieveCommercialCustomerByUserId(int userId)
+        {
+            CommercialCustomer s = null;
 
+            try
+            {
+                s = CustomerAccessor.RetrieveCommercialCustomerByUserId(userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            if (null == s)
+            {
+                throw new ApplicationException("Could not find customer for that user ID.");
+            }
+
+            return s;
+        }
     } // end of class
 } // end of namespace

@@ -140,6 +140,70 @@ namespace DataAccessLayer
             cmd.Parameters["@STATUS"].Value = CharityInstance.Status;
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Retrieve Charity By User Id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static Charity RetrieveCharityByUserId(int userId)
+        {
+            Charity s = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_charity_by_user_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
+            cmd.Parameters["@USER_ID"].Value = userId;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    s = new Charity
+                    {
+                        CharityID = reader.GetInt32(0),
+                        UserID = reader.GetInt32(1),
+                        //EmployeeID = reader.GetString(2),
+                        CharityName = reader.GetString(3),
+                        ContactFirstName = reader.GetString(4),
+                        ContactLastName = reader.GetString(5),
+                        PhoneNumber = reader.GetString(6),
+                        Email = reader.GetString(7),
+                        ContactHours = reader.GetString(8),
+                        Status = reader.GetString(9)
+                    };
+                    if (!reader.IsDBNull(2))
+                    {
+                        s.EmployeeID = reader.GetInt32(2);
+                    }
+                    else
+                    {
+                        s.EmployeeID = null;
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return s;
+        }
+
         public void SetKeyParameters(SqlCommand cmd)
         {
             throw new NotImplementedException();

@@ -124,5 +124,35 @@ namespace LogicLayer
             
             return result;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Retrieves Charity instance by user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public Charity RetrieveCharityByUserId(int userId)
+        {
+            Charity s = null;
+
+            try
+            {
+                s = CharityAccessor.RetrieveCharityByUserId(userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            if (null == s)
+            {
+                throw new ApplicationException("Could not find supplier for that user ID.");
+            }
+
+            return s;
+        }
     }
 }

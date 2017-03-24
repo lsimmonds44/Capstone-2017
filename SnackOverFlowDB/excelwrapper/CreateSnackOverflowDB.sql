@@ -6938,3 +6938,34 @@ VALUES
 ('Van'),
 ('Semi-Truck')
 GO
+Print '' print  ' *** dropping procedure sp_retrieve_customer_by_user_id'
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_commercial_customer_by_user_id'
+GO
+Create PROCEDURE sp_retrieve_commercial_customer_by_user_id
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT COMMERCIAL_ID, USER_ID, IS_APPROVED, APPROVED_BY, FEDERAL_TAX_ID, ACTIVE
+FROM COMMERCIAL
+WHERE USER_ID = @USER_ID
+END
+
+GO
+
+Print '' print  ' *** creating procedure sp_retrieve_charity_by_user_id'
+GO
+Create PROCEDURE sp_retrieve_charity_by_user_id
+(
+@USER_ID[INT]
+)
+AS
+BEGIN
+SELECT CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
+FROM CHARITY
+WHERE USER_ID = @USER_ID
+END
+

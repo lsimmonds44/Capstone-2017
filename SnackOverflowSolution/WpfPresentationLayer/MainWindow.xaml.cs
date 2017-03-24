@@ -43,11 +43,14 @@ namespace WpfPresentationLayer
         private List<Delivery> _deliveries;
         private List<Warehouse> _warehouseList;
         private ProductLotSearchCriteria _productLotSearchCriteria;
+        private ICharityManager _charityManager;
+        
 
         Employee _employee = null;
         Supplier _supplier = null;
+        CommercialCustomer _commercialCustomer = null;
+        Charity _charity = null;
         User _user = null;
-        private ICharityManager _charityManager;
 
         private IPackageManager _packageManager = new PackageManager();
         List<Package> _packageList = null;
@@ -219,6 +222,13 @@ namespace WpfPresentationLayer
         /// 
         /// Needs work on returning employee info so tabs can be 
         /// filtered and not just show all
+        /// 
+        /// UPDATE
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Reset buttons and nulled supplier, charity, and customer variables
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -292,7 +302,15 @@ namespace WpfPresentationLayer
                 _user = null;
                 btnLogin.Content = "Login";
                 btnLogin.IsDefault = true;
-
+                _supplier = null;
+                _charity = null;
+                _commercialCustomer = null;
+                btnSupplierApplicationStatusCheck.Content = "Check Supplier Status";
+                btnCharityApplicationStatusCheck.Content = "Check Charity Status";
+                btnCommercialCustomerApplicationStatusCheck.Content = "Check Commerical Status";
+                btnSupplierApplicationStatusCheck.IsEnabled = true;
+                btnCharityApplicationStatusCheck.IsEnabled = true;
+                btnCommercialCustomerApplicationStatusCheck.IsEnabled = true;
                 statusMessage.Content = "Please Log in to continue...";
                 hideTabs();
                 lblPassword.Visibility = Visibility.Visible;
@@ -1087,27 +1105,41 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCheckApplicationStatus_Click(object sender, RoutedEventArgs e)
         {
-            bool isApproved = false;
+            bool isSupplierApproved = false;
+            bool isCommercialCustomerApproved = false;
+            bool isCharityApproved = false;
             if (_user != null)
             {
-                btnCheckStatusDone.Visibility = Visibility.Visible;
-                btnCancelApplication.Visibility = Visibility.Visible;
-                dgMyAccount.Visibility = Visibility.Visible;
+                //btnCheckStatusDone.Visibility = Visibility.Visible;
+                //btnCancelApplication.Visibility = Visibility.Visible;
+                //dgMyAccount.Visibility = Visibility.Visible;
 
                 try
                 {
                     _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
-                    isApproved = _supplier.IsApproved;
-
+                    isSupplierApproved = _supplier.IsApproved;
                 }
                 catch
                 {
+                    //frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user,_userManager,_supplierManager,_productManager,_agreementManager);
+                    //checkSupplierStatus.Show();
+                    //throw;
+                }
+                try
+                {
+                    _commercialCustomer = _customerManager.RetrieveCommercialCustomerByUserId(_user.UserId);
+                    isCommercialCustomerApproved = _commercialCustomer.IsApproved;
+                }
+                catch
+                {
+                    //throw;
+                }
+
+                
+                if (_supplier == null && _commercialCustomer == null)
+                {
                     frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user,_userManager,_supplierManager,_productManager,_agreementManager);
                     checkSupplierStatus.Show();
-                }
-                if (_supplier != null)
-                {
-                    
                 }
             }
         }
@@ -1117,18 +1149,26 @@ namespace WpfPresentationLayer
         /// 3/10/20174
         /// 
         /// Button that reverts back to the original status of the tab
+        ///
+        /// Removed
+        /// Bobby Thorne 
+        /// 3/24/2017
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCheckApplicationStatusDone_Click(object sender, RoutedEventArgs e)
         {
-            btnCheckStatus.Visibility = Visibility.Visible;
-            btnCancelApplication.Visibility = Visibility.Collapsed;
-            btnCheckStatusDone.Visibility = Visibility.Collapsed;
+            //btnCheckStatus.Visibility = Visibility.Visible;
+            //btnCancelApplication.Visibility = Visibility.Collapsed;
+            //btnCheckStatusDone.Visibility = Visibility.Collapsed;
+           
         }
 
         /// <summary>
         /// Bobby Thorne
+        /// 3/10/2017
+        /// Removed
         /// 3/10/2017
         /// 
         /// This will cancel applications that have been submitted
@@ -1137,23 +1177,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCancelApplication_Click(object sender, RoutedEventArgs e)
         {
-            btnCheckStatus.Visibility = Visibility.Visible;
-            btnCancelApplication.Visibility = Visibility.Collapsed;
-            btnCheckStatusDone.Visibility = Visibility.Collapsed;
+            //btnCheckStatus.Visibility = Visibility.Visible;
+            //btnCancelApplication.Visibility = Visibility.Collapsed;
+            //btnCheckStatusDone.Visibility = Visibility.Collapsed;
         }
 
-        /// <summary>
-        /// Bobby Thorne
-        /// 3/10/2017
-        /// 
-        /// This cleans up tab when it no longer has focus such as when logged out
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tabMyAccount_LostFocus(object sender, RoutedEventArgs e)
-        {
-            btnCheckApplicationStatusDone_Click(sender, e);
-        }
+        
 
         private void dgVehicle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -1243,6 +1272,116 @@ namespace WpfPresentationLayer
             }
         }
 
-        
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Checks user's Commercial Customer application status 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCommercialCustomerApplicationStatusCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user != null)
+            {
+
+                try
+                {
+                    _commercialCustomer = _customerManager.RetrieveCommercialCustomerByUserId(_user.UserId);
+                                  
+                    if (_commercialCustomer.IsApproved)
+                    {
+                        btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nAPPROVED";
+                        btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
+                        //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
+                    }
+                    else if(!_commercialCustomer.IsApproved)
+                    {
+                        btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nPENDING";
+                        btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
+                    }
+                }
+                catch
+                {
+                    frmApplicationAskUser askAboutApplication = new frmApplicationAskUser(_user, _userManager, _customerManager);
+                    askAboutApplication.Show();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// Checks user's supplier application status 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupplierApplicationStatusCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user != null)
+            {
+
+                try
+                {
+                    _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+               
+                    if (_supplier.IsApproved)
+                    {
+                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+ "\nAPPROVED";
+                        btnSupplierApplicationStatusCheck.IsEnabled = false;
+                        //btnSupplierApplicationStatusCheck.Background = Brushes.Green;
+                    }
+                    else if(!_supplier.IsApproved) {
+                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+"\nPENDING";
+            
+                        btnSupplierApplicationStatusCheck.IsEnabled = false;
+                    }
+                }
+                catch
+                {
+                    frmApplicationAskUser askAboutApplication = new frmApplicationAskUser(_user,_userManager,_supplierManager,_productManager,_agreementManager);
+                    askAboutApplication.Show();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 3/24/2017
+        /// 
+        /// checks user's charity application status 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCharityApplicationStatusCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user != null)
+            {
+                try
+                {
+                    _charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
+                
+                    if (_charity.Status=="APPROVED")
+                    {
+                        btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nAPPROVED";
+                        btnCharityApplicationStatusCheck.IsEnabled = false;
+                        //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
+                    }
+                    else if(_charity.Status == "PENDING")
+                    {
+                        btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nPENDING";
+                        btnCharityApplicationStatusCheck.IsEnabled = false;
+                    }
+                }
+                catch
+                {
+                    frmApplicationAskUser askAboutApplication = new frmApplicationAskUser(_user, _userManager, _charityManager);
+                    askAboutApplication.Show();
+                }
+            }
+
+        }
     } // end of class
 } // end of namespace 
