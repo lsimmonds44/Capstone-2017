@@ -23,7 +23,7 @@
             <ColumnDefinition Width=".5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Name="lblRequestUsername"  Grid.Column="1" Grid.Row="1" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center">Please enter email that is linked to your account.</Label>
-        <TextBox Name="tfEmail" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" TextAlignment="Center" Height="30" ToolTip="Enter Email" ></TextBox>
+        <TextBox Name="txtEmail" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" TextAlignment="Center" Height="30" ToolTip="Enter Email" ></TextBox>
         <Button Name="btnRequestUsername" Grid.Column="1" Grid.Row="3" FontSize="15" IsDefault="True" Content="Send Request" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Click="btnRequestUsername_Click"></Button>
     </Grid>
 </Window>

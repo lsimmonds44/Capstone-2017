@@ -22,7 +22,7 @@ using System.Windows.Shapes;
 
 namespace WpfPresentationLayer
 {
-    public partial class PackageLineManagementWindow : Window
+    public partial class frmPackageLineManagementWindow : Window
     {
         Package _package;
         IPackageLineManager _packageLineManager;
@@ -34,7 +34,7 @@ namespace WpfPresentationLayer
         /// Constructor for the window
         /// </summary>
         /// <param name="p">The package that the package lines a relevant to</param>
-        public PackageLineManagementWindow(Package p)
+        public frmPackageLineManagementWindow(Package p)
         {
             _package = p;
             _packageLineManager = new PackageLineManager();
@@ -149,7 +149,7 @@ namespace WpfPresentationLayer
             try
             {
                 _package.PackageLineList = _packageLineManager.RetrievePackageLinesInPackage(_package.PackageId);
-                listPackageLines.ItemsSource = _package.PackageLineList;
+                lvListPackageLines.ItemsSource = _package.PackageLineList;
             }
             catch
             {

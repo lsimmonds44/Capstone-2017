@@ -20,20 +20,20 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Name="lblProduct" Content="Product: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Grid.Row="1" Name="lblSupplier" Content="Supplier: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Grid.Row="2" Name="lblFarm" Content="Farm: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="0" Name="txtProduct" Margin="0 2 5 2" IsEnabled="False"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Name="txtSupplier" Margin="0 2 5 2" IsEnabled="False" />
-            <TextBox Grid.Column="1" Grid.Row="2" Name="txtFarm" Margin="0 2 5 2" IsEnabled="False" />
+            <Label Name="lblProduct" Grid.Column="0" Grid.Row="0" Content="Product: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Name="lblSupplier" Grid.Column="0" Grid.Row="1" Content="Supplier: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Name="lblFarm" Grid.Column="0" Grid.Row="2" Content="Farm: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Name="txtProduct" Grid.Column="1" Grid.Row="0" Margin="0 2 5 2" IsEnabled="False"/>
+            <TextBox Name="txtSupplier" Grid.Column="1" Grid.Row="1" Margin="0 2 5 2" IsEnabled="False" />
+            <TextBox Name="txtFarm" Grid.Column="1" Grid.Row="2" Margin="0 2 5 2" IsEnabled="False" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Name="lblGradeSelect" Content="Select Grade: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <ComboBox Grid.Column="1" Name="cboGradeSelect" Margin="0 2 75 2" />
+            <Label Name="lblGradeSelect" Grid.Column="0" Content="Select Grade: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <ComboBox Name="cboGradeSelect" Grid.Column="1" Margin="0 2 75 2" />
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -42,8 +42,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="2" Name="btnCancel" Margin="3 10 3 10" IsCancel="True" Content="Cancel" />
-            <Button Grid.Column="3" Name="btnSave" Margin="3 10 3 10" IsDefault="True" Content="Save" Click="btnSave_Click" />
+            <Button Name="btnCancel" Grid.Column="2" Margin="3 10 3 10" IsCancel="True" Content="Cancel" />
+            <Button Name="btnSave" Grid.Column="3" Margin="3 10 3 10" IsDefault="True" Content="Save" Click="btnSave_Click" />
         </Grid>
     </Grid>
 </Window>

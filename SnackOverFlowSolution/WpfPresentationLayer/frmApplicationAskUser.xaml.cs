@@ -39,7 +39,7 @@ namespace WpfPresentationLayer
         /// <param name="user"></param>
         /// <param name="userManager"></param>
         /// <param name="supplierManager"></param>
-        /// <param name="productManager"></param>
+        /// <param name="_productManager"></param>
         /// <param name="agreementManager"></param>
         public frmApplicationAskUser(User user, IUserManager userManager, ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager)
         {
@@ -61,7 +61,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="userManager"></param>
-        /// <param name="charityManager"></param>
+        /// <param name="_charityManager"></param>
         public frmApplicationAskUser(User user, IUserManager userManager, ICharityManager charityManager)
         {
             InitializeComponent();

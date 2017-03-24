@@ -25,15 +25,15 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Name="lblCustomerID" Grid.Row="1" Grid.Column="2" Content="Customer ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfCustomerID" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtCustomerID" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
             <Label Name="lblOrderNumber" Grid.Row="1" Grid.Column="0" Content="Order #" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfOrderNumber" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtOrderNumber" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
             <Label Name="lblCustomerUserName" Grid.Row="2" Grid.Column="0" Content="Customer User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfCustomerUserName" Grid.Row="2" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtCustomerUserName" Grid.Row="2" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
             <Label Name="lblCustomerAddress" Grid.Row="2" Grid.Column="2" Content="Customer Address" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfUserAddress" Grid.Row="2" Grid.Column="3" TextWrapping="Wrap" MaxLines="5" MinLines="3" AcceptsReturn="True" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtUserAddress" Grid.Row="2" Grid.Column="3" TextWrapping="Wrap" MaxLines="5" MinLines="3" AcceptsReturn="True" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
             <Label Name="lblOrderType" Grid.Row="3" Grid.Column="0" Content="Order Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfOrderType" Grid.Row="3" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtOrderType" Grid.Row="3" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
             <Label Name="lblDeliveryType" Grid.Row="3" Grid.Column="2" Content="Delivery Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <ComboBox Name="cboDeliveryType" Grid.Row="3" Grid.Column="3" Width="250" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Name="lblOrderDate" Grid.Row="4" Grid.Column="0" Content="Order Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
@@ -69,9 +69,9 @@
             <Label Name="lblProduct" Grid.Row="1" Grid.Column="0" Content="Products" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <ComboBox Name="cboProducts" Grid.Row="1" Grid.Column="1"  Margin="8 8 8 8" IsEnabled="False" DropDownClosed="productSelected"  />
             <Label Name="lblAvailableProduct" Grid.Row="1" Grid.Column="2" Content="Available" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfAvailableProduct" Grid.Row="1" Grid.Column="2" Margin="90 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" IsEnabled="False"/>
+            <TextBox Name="txtAvailableProduct" Grid.Row="1" Grid.Column="2" Margin="90 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" IsEnabled="False"/>
             <Label Name="lblProductQty" Grid.Row="1" Grid.Column="2" Content="Qty" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfQty" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"/>
+            <TextBox Name="txtQty" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"/>
             <Button Name="btnAddOrderLine" Grid.Row="1" Grid.Column="3" Content="Add" Width="50" Margin="10 4 10 4" HorizontalAlignment="Right" IsEnabled="False" Click="AddOrderLineClick" />
             <Label Name="lblProductGradeResult" Grid.Row="2" Grid.Column="0" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <Label Name="lblAmount" Grid.Row="3" Grid.Column="2" Content="Order Total" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>

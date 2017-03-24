@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfPresentationLayer.frmProductOrderDetails"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="frmProductOrderDetails" Height="600" Width="900">
+        Title="Product Order Details" Height="600" Width="900">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>
@@ -25,18 +25,18 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label Content="Order ID:" Grid.Row="1" Grid.Column="0" Margin="60 25 1 10" />
-        <Label Content="Customer ID:" Grid.Row="2" Grid.Column="0" Margin="40 25 1 10"/>
-        <Label Content="Order Type:" Grid.Row="3" Grid.Column="0" Margin="50 25 1 10"/>
-        <Label Content="Delivery Type:" Grid.Row="4" Grid.Column="0" Margin="40 25 1 10"/>
-        <Label Content="Amount:" Grid.Row="5" Grid.Column="0" Margin="65 25 1 10"/>
-        <Label Content="Order Date:" Grid.Row="1" Grid.Column="4" Margin="45 25 1 10"/>
-        <Label Content="Expected Delivery:" Grid.Row="2" Grid.Column="4" Margin="10 25 1 10"/>
-        <Label Content="Discount:" Grid.Row="3" Grid.Column="4" Margin="55 25 1 10"/>
-        <Label Content="Order Status:" Grid.Row="4" Grid.Column="4" Margin="35 25 1 10"/>
-        <Label Content="User Address:" Grid.Row="5" Grid.Column="4" Margin="30 25 1 10"/>
-        <Label Content="Address Type:" Grid.Row="6" Grid.Column="0" Margin="40 25 1 10"/>
-        <Label Content="Has Arrived:" Grid.Row="6" Grid.Column="4" Margin="40 25 1 10"/>
+        <Label Name="lblOrderId" Content="Order ID:" Grid.Row="1" Grid.Column="0" Margin="60 25 1 10" />
+        <Label Name="lblCustomerId" Content="Customer ID:" Grid.Row="2" Grid.Column="0" Margin="40 25 1 10"/>
+        <Label Name="lblOrderType" Content="Order Type:" Grid.Row="3" Grid.Column="0" Margin="50 25 1 10"/>
+        <Label Name="lblDeliveryType" Content="Delivery Type:" Grid.Row="4" Grid.Column="0" Margin="40 25 1 10"/>
+        <Label Name="lblAmount" Content="Amount:" Grid.Row="5" Grid.Column="0" Margin="65 25 1 10"/>
+        <Label Name="lblOrderDate" Content="Order Date:" Grid.Row="1" Grid.Column="4" Margin="45 25 1 10"/>
+        <Label Name="lblExpectedDelivery" Content="Expected Delivery:" Grid.Row="2" Grid.Column="4" Margin="10 25 1 10"/>
+        <Label Name="lblDiscount" Content="Discount:" Grid.Row="3" Grid.Column="4" Margin="55 25 1 10"/>
+        <Label Name="lblOrderStatus" Content="Order Status:" Grid.Row="4" Grid.Column="4" Margin="35 25 1 10"/>
+        <Label Name="lblUserAddress" Content="User Address:" Grid.Row="5" Grid.Column="4" Margin="30 25 1 10"/>
+        <Label Name="lblAddressType" Content="Address Type:" Grid.Row="6" Grid.Column="0" Margin="40 25 1 10"/>
+        <Label Name="lblHasArrived" Content="Has Arrived:" Grid.Row="6" Grid.Column="4" Margin="40 25 1 10"/>
 
 
         <TextBox x:Name="txtOrderId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>

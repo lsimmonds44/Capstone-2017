@@ -43,14 +43,14 @@ namespace WpfPresentationLayer
             string username = "";
             try
             {
-                username = _userManager.RetrieveUsernameByEmail(tfEmail.Text);
+                username = _userManager.RetrieveUsernameByEmail(txtEmail.Text);
                 if (username == "")
                 {
                     throw new Exception("Unable to find email");
                 }
                 try
                 {
-                    _emailManager.sendRequestUsernameEmail(tfEmail.Text, username);
+                    _emailManager.sendRequestUsernameEmail(txtEmail.Text, username);
                 }
                 catch
                 {

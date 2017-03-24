@@ -28,8 +28,8 @@ namespace WpfPresentationLayer
         private IProductOrderManager _orderManager = new ProductOrderManager();
         private IVehicleManager _vehicleManager = new VehicleManager();
         List<ProductOrder> _currentOpenOrders;
-        List<Employee> employeeList;
-        List<Charity> charityList;
+        List<Employee> _employeeList;
+        List<Charity> _charityList;
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private List<Vehicle> _vehicleList;
@@ -189,7 +189,7 @@ namespace WpfPresentationLayer
         /// Ariel Sigo
         /// Created 2017/10/02
         /// 
-        /// Button that leads to update employee form
+        /// Button that leads to update _employee form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -197,7 +197,7 @@ namespace WpfPresentationLayer
         {
             try
             {
-                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employeeList[dgEmployee.SelectedIndex]);
                 fUE.ShowDialog();
             }
             catch
@@ -221,14 +221,14 @@ namespace WpfPresentationLayer
         /// If there is not it will use the username and password text field and check if
         /// it matches with any user if so it then recieves the user's info
         /// 
-        /// Needs work on returning employee info so tabs can be 
+        /// Needs work on returning _employee info so tabs can be 
         /// filtered and not just show all
         /// 
         /// UPDATE
         /// Bobby Thorne
         /// 3/24/2017
         /// 
-        /// Reset buttons and nulled supplier, charity, and customer variables
+        /// Reset buttons and nulled supplier, _charity, and customer variables
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -240,18 +240,18 @@ namespace WpfPresentationLayer
 
                 try
                 {
-                    if (_userManager.AuthenticateUser(tfUsername.Text, tfPassword.Password))
+                    if (_userManager.AuthenticateUser(txtUsername.Text, pwbPassword.Password))
                     {
 
                         lblPassword.Visibility = Visibility.Collapsed;
                         lblUsername.Visibility = Visibility.Collapsed;
-                        tfUsername.Visibility = Visibility.Collapsed;
-                        tfPassword.Visibility = Visibility.Collapsed;
+                        txtUsername.Visibility = Visibility.Collapsed;
+                        pwbPassword.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
-                        tfPassword.Password = "";
+                        pwbPassword.Password = "";
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
-                        tfPassword.Background = Brushes.White;
+                        pwbPassword.Background = Brushes.White;
                         try
                         {
                             _user = _userManager.userInstance;
@@ -276,7 +276,7 @@ namespace WpfPresentationLayer
                         }
                         catch (Exception ex)
                         {
-                            // Enters here if user that access this is not an employee.
+                            // Enters here if user that access this is not an _employee.
                             // For now it does nothing. 
                             MessageBox.Show("Employee table is empty or DB connection error.");
                         }
@@ -289,8 +289,8 @@ namespace WpfPresentationLayer
                     else
                     {
                         statusMessage.Content = "Username and Password did not match.";
-                        tfPassword.Password = "";
-                        tfPassword.Background = Brushes.Red;
+                        pwbPassword.Password = "";
+                        pwbPassword.Background = Brushes.Red;
                     }
                 }
                 catch (System.Data.SqlClient.SqlException ex)
@@ -316,8 +316,8 @@ namespace WpfPresentationLayer
                 hideTabs();
                 lblPassword.Visibility = Visibility.Visible;
                 lblUsername.Visibility = Visibility.Visible;
-                tfUsername.Visibility = Visibility.Visible;
-                tfPassword.Visibility = Visibility.Visible;
+                txtUsername.Visibility = Visibility.Visible;
+                pwbPassword.Visibility = Visibility.Visible;
                 mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
                 btnResetPassword.Visibility = Visibility.Collapsed;
@@ -343,7 +343,7 @@ namespace WpfPresentationLayer
 
         private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
-            CreateNewUser fCU = new CreateNewUser();
+            frmCreateNewUser fCU = new frmCreateNewUser();
             fCU.ShowDialog();
         }
 
@@ -351,8 +351,8 @@ namespace WpfPresentationLayer
         {
             try
             {
-                charityList = _charityManager.RetrieveCharityList();
-                dgrdCharity.DataContext = charityList;
+                _charityList = _charityManager.RetrieveCharityList();
+                dgCharity.DataContext = _charityList;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -362,9 +362,9 @@ namespace WpfPresentationLayer
 
         private void btnViewCharity_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdCharity.SelectedIndex >= 0)
+            if (dgCharity.SelectedIndex >= 0)
             {
-                var CharityViewInstance = new CharityView(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                var CharityViewInstance = new frmCharityView(_charityManager, _charityList[dgCharity.SelectedIndex]);
                 CharityViewInstance.ShowDialog();
                 tabCharity_Selected(sender, e);
             }
@@ -380,14 +380,14 @@ namespace WpfPresentationLayer
                 if (employeeSearchList.Count > 0)
                 {
                     employeeId = (int)employeeSearchList[0].EmployeeId;
-                    var CharityViewInstance = new CharityView(_charityManager, employeeId);
+                    var CharityViewInstance = new frmCharityView(_charityManager, employeeId);
                     CharityViewInstance.SetEditable();
                     CharityViewInstance.ShowDialog();
                     tabCharity_Selected(sender, e);
                 }
                 else
                 {
-                    var applyForCharityFrm = new CharityView(_user, _charityManager);
+                    var applyForCharityFrm = new frmCharityView(_user, _charityManager);
                     var result = applyForCharityFrm.ShowDialog();
                     if (result == true)
                     {
@@ -407,8 +407,8 @@ namespace WpfPresentationLayer
         {
             try
             {
-                employeeList = _employeeManager.RetrieveEmployeeList();
-                dgrdEmployee.DataContext = employeeList;
+                _employeeList = _employeeManager.RetrieveEmployeeList();
+                dgEmployee.DataContext = _employeeList;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -418,7 +418,7 @@ namespace WpfPresentationLayer
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var EmployeeViewInstance = new EmployeeView(_employeeManager);
+            var EmployeeViewInstance = new frmEmployeeViews(_employeeManager);
             EmployeeViewInstance.SetEditable();
             EmployeeViewInstance.ShowDialog();
             tabEmployee_Selected(sender, e);
@@ -431,9 +431,9 @@ namespace WpfPresentationLayer
 
         private void btnViewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdEmployee.SelectedIndex >= 0)
+            if (dgEmployee.SelectedIndex >= 0)
             {
-                var EmployeeViewInstance = new EmployeeView(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                var EmployeeViewInstance = new frmEmployeeViews(_employeeManager, _employeeList[dgEmployee.SelectedIndex]);
                 EmployeeViewInstance.ShowDialog();
                 tabEmployee_Selected(sender, e);
             }
@@ -538,9 +538,9 @@ namespace WpfPresentationLayer
             }
         }
 
-        private void tfPassword_KeyDown(object sender, KeyEventArgs e)
+        private void pwbPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            tfPassword.Background = Brushes.White;
+            pwbPassword.Background = Brushes.White;
         }
 
         /// <summary>
@@ -645,7 +645,7 @@ namespace WpfPresentationLayer
         }
 
 
-        private void BtnAddProduct_OnClick(object sender, RoutedEventArgs e)
+        private void btnAddProduct_OnClick(object sender, RoutedEventArgs e)
         {
             var frmAddProduct = new frmAddProduct(_user, _productManager);
             frmAddProduct.ShowDialog();
@@ -734,7 +734,7 @@ namespace WpfPresentationLayer
             addNewVehicleWindow.Show();
         }
 
-        private void BtnManageStock_OnClick(object sender, RoutedEventArgs e)
+        private void btnManageStock_OnClick(object sender, RoutedEventArgs e)
         {
             frmManageStock fms = new frmManageStock();
             fms.ShowDialog();
@@ -790,7 +790,7 @@ namespace WpfPresentationLayer
         {
             if (null != _user)
             {
-                var updateScreen = new PasswordChangeView(_user.UserName);
+                var updateScreen = new frmPasswordChangeView(_user.UserName);
                 updateScreen.Show();
             }
         }
@@ -833,7 +833,7 @@ namespace WpfPresentationLayer
             try
             {
                 List<User> userList = _userManager.RetrieveFullUserList();
-                var passwordResetWindow = new ResetPassword(_userManager, userList);
+                var passwordResetWindow = new frmResetPassword(_userManager, userList);
                 passwordResetWindow.Show();
             }
             catch
@@ -902,9 +902,9 @@ namespace WpfPresentationLayer
 
         private void btnApproveDeny_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdCharity.SelectedIndex >= 0)
+            if (dgCharity.SelectedIndex >= 0)
             {
-                var frmCharityApproval = new frmCharityApproval(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                var frmCharityApproval = new frmCharityApproval(_charityManager, _charityList[dgCharity.SelectedIndex]);
                 frmCharityApproval.ShowDialog();
                 tabCharity_Selected(sender, e);
             }
@@ -947,7 +947,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void FilterProductLots_Click(object sender, RoutedEventArgs e)
         {
-            var filterWindow = new ProductLotSearchView(_productLotSearchCriteria);
+            var filterWindow = new frmProductLotSearchView(_productLotSearchCriteria);
             filterWindow.ShowDialog();
             try
             {
@@ -1009,7 +1009,7 @@ namespace WpfPresentationLayer
             try
             {
                 var suppliersData = _supplierManager.ListSuppliers();
-                DgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
+                dgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
             }
             catch (Exception ex)
             {
@@ -1346,7 +1346,7 @@ namespace WpfPresentationLayer
         /// Bobby Thorne
         /// 3/24/2017
         /// 
-        /// checks user's charity application status 
+        /// checks user's _charity application status 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

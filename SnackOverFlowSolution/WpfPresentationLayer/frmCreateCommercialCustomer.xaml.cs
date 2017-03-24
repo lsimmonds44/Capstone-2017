@@ -33,7 +33,7 @@ namespace WpfPresentationLayer
         public frmCreateCommercialCustomer(int employeeId)
         {
             InitializeComponent();
-            tFApprovedBy.Text = employeeId.ToString();
+            txtApprovedBy.Text = employeeId.ToString();
         }
         
         /// <summary>
@@ -48,14 +48,14 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void findUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (tFUserName.Text.Length > 0)
+            if (txtUserName.Text.Length > 0)
             {// retrieves user from database by username
-                _userToUpdate = _userMngr.RetrieveUserByUserName(tFUserName.Text);
+                _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
                 if (_userToUpdate != null)
-                { // populates data for employee to verify they have the correct user information to the customer on the phone.
-                    tFName.Text = _userToUpdate.FirstName + " " + _userToUpdate.LastName;
-                    tFPhone.Text = _userToUpdate.Phone;
-                    tFUserId.Text = _userToUpdate.UserId.ToString();
+                { // populates data for _employee to verify they have the correct user information to the customer on the phone.
+                    txtName.Text = _userToUpdate.FirstName + " " + _userToUpdate.LastName;
+                    txtPhone.Text = _userToUpdate.Phone;
+                    txtUserId.Text = _userToUpdate.UserId.ToString();
                     btnCreate.IsEnabled = true;
                 }
                 else
@@ -84,7 +84,7 @@ namespace WpfPresentationLayer
         /// 2017/06/02
         /// 
         /// Create button
-        /// If a user that an employee wants to create a commercial account for has been found and all needed info is supplied an attempt to create a commercial account will be made.
+        /// If a user that an _employee wants to create a commercial account for has been found and all needed info is supplied an attempt to create a commercial account will be made.
         /// If the attempt to create an account is successful a confirmation message will appear
         /// If the attempt to create an account is unsuccessful an error message will appear
         /// </summary>
@@ -95,11 +95,11 @@ namespace WpfPresentationLayer
             if (allDataSupplied())
             {
                 _commercialCustomer = new CommercialCustomer();
-                _commercialCustomer.ApprovedBy = parseToInt(tFApprovedBy.Text);
-                _commercialCustomer.IsApproved = (bool)cbIsApproved.IsChecked;
-                _commercialCustomer.Active = (bool)cbActive.IsChecked;
-                _commercialCustomer.User_Id = parseToInt(tFUserId.Text);
-                _commercialCustomer.FedTaxId = parseToInt(tFFedTaxId.Text);
+                _commercialCustomer.ApprovedBy = parseToInt(txtApprovedBy.Text);
+                _commercialCustomer.IsApproved = (bool)cbkIsApproved.IsChecked;
+                _commercialCustomer.Active = (bool)cbkActive.IsChecked;
+                _commercialCustomer.User_Id = parseToInt(txtUserId.Text);
+                _commercialCustomer.FedTaxId = parseToInt(txtFedTaxId.Text);
             }
             if (_commercialCustomer != null)
             {
@@ -127,23 +127,23 @@ namespace WpfPresentationLayer
         private bool allDataSupplied() 
         {
             bool valid = true;
-            if (tFFedTaxId.Text.Length != 9)
+            if (txtFedTaxId.Text.Length != 9)
             {
                 MessageBox.Show("Federal Tax Id must be 9 digits do not include the hyphen");
                 valid = false;
             }
-            else if (parseToInt(tFFedTaxId.Text) == 0)
+            else if (parseToInt(txtFedTaxId.Text) == 0)
             {
                 MessageBox.Show("Federal Tax Id must be 9 digits.");
                 valid = false;
             }
-            if(cbIsApproved.IsChecked == false)
+            if(cbkIsApproved.IsChecked == false)
             {
-                cbIsApproved.IsChecked = true;
+                cbkIsApproved.IsChecked = true;
             }
-            if (cbActive.IsChecked == false)
+            if (cbkActive.IsChecked == false)
             {
-                cbActive.IsChecked = true;
+                cbkActive.IsChecked = true;
             }
             return valid;
         }

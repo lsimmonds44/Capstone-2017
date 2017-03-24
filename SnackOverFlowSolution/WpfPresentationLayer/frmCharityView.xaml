@@ -1,0 +1,61 @@
+﻿<Window x:Class="WpfPresentationLayer.frmCharityView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Charity" Height="300" Width="487.2">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Name="lblCharityID" Grid.Row="0" Grid.Column="0">Charity ID</Label>
+        <Label Name="lblUserID" Grid.Row="0" Grid.Column="2">User ID</Label>
+        <Label Name="lblEmployeeID" Grid.Row="1" Grid.Column="0">Employee ID</Label>
+        <Label Name="lblCharityName" Grid.Row="1" Grid.Column="2">Charity Name</Label>
+        <Label Name="lblContactFirstName" Grid.Row="2" Grid.Column="0">Contact First Name</Label>
+        <Label Name="lblContactLastName" Grid.Row="2" Grid.Column="2">Contact Last Name</Label>
+        <Label Name="lblPhoneNumber" Grid.Row="3" Grid.Column="0">Phone Number</Label>
+        <Label Name="lblEmail" Grid.Row="3" Grid.Column="2">Email</Label>
+        <Label Name="lblContactHours" Grid.Row="4" Grid.Column="0">Contact Hours</Label>
+        <Label Name="lblStatus"  Grid.Row="4" Grid.Column="2" Content="Status"/>
+
+
+        <Label Name="lblCharityIDVal" Grid.Row="0" Grid.Column="1"></Label>
+        <Label Name="lblUserIDVal" Grid.Row="0" Grid.Column="3"></Label>
+        <Label Name="lblEmployeeIDVal" Grid.Row="1" Grid.Column="1"></Label>
+        <Label Name="lblCharityNameVal" Grid.Row="1" Grid.Column="3"></Label>
+        <Label Name="lblContactFirstNameVal" Grid.Row="2" Grid.Column="1"></Label>
+        <Label Name="lblContactLastNameVal" Grid.Row="2" Grid.Column="3"></Label>
+        <Label Name="lblPhoneNumberVal" Grid.Row="3" Grid.Column="1"></Label>
+        <Label Name="lblEmailVal" Grid.Row="3" Grid.Column="3"></Label>
+        <Label Name="lblStatusVal" Grid.Row="4" Grid.Column="3"></Label>
+
+        <TextBox Grid.Row="0" Grid.Column="1" Visibility="Collapsed" Name="txtCharityID"></TextBox>
+        <ComboBox Name="cboUserID"  Grid.Row="0" Grid.Column="3" Visibility="Collapsed">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding UserName}"></Label>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBox Name="txtEmployeeID" Grid.Row="1" Grid.Column="1" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtCharityName" Grid.Row="1" Grid.Column="3" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtContactFirstName" Grid.Row="2" Grid.Column="1" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtContactLastName" Grid.Row="2" Grid.Column="3" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtPhoneNumber" Grid.Row="3" Grid.Column="1" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtEmail" Grid.Row="3" Grid.Column="3" Visibility="Collapsed"></TextBox>
+        <TextBox Name="txtContactHours" Grid.Row="4" Grid.Column="1" Visibility="Collapsed"></TextBox>
+        <Label Name="lblContactHoursVal" Grid.Row="4" Grid.Column="1"></Label>
+        <Button Name="btnPost" Grid.Column="4" Visibility="Collapsed" Click="btnPost_Click" Grid.Row="5">Add</Button>
+    </Grid>
+    
+</Window>
