@@ -24,5 +24,6 @@ namespace LogicLayer
 
         int CreateDeliveryAndRetrieveDeliveryId(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId);
 
+        bool UpdateDelivery(Delivery oldDelivery, Delivery newDelivery);
     }
 }

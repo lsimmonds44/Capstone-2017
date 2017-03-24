@@ -49,9 +49,10 @@ namespace WpfPresentationLayer
         private void txtNew_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
+            // Already validated
             Int32.TryParse(txtNew.Text, out value);
             int sum = OldQty + NewQty;
-            if (value <= sum && value >= 0)
+            if (value <= sum && value >= 1)
             {
                 NewQty = value;
                 OldQty = sum - value;
@@ -61,6 +62,8 @@ namespace WpfPresentationLayer
                 txtOld.Text = OldQty.ToString();
                 txtOld.TextChanged += txtOld_TextChanged;
             }
+            // Make sure that the text box does not show data which did not pass validation
+            txtNew.Text = txtNew.ToString();
         }
 
         private void txtNew_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -72,9 +75,10 @@ namespace WpfPresentationLayer
         private void txtOld_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
+            // Already validated
             Int32.TryParse(txtOld.Text, out value);
             int sum = OldQty + NewQty;
-            if (value <= sum && value >= 0)
+            if (value <= sum && value >= 1)
             {
                 OldQty = value;
                 NewQty = sum - value;
@@ -84,6 +88,8 @@ namespace WpfPresentationLayer
                 txtNew.Text = NewQty.ToString();
                 txtNew.TextChanged += txtNew_TextChanged;
             }
+            // Make sure that the text box does not show data which did not pass validation
+            txtOld.Text = txtNew.ToString();
         }
 
         private void txtOld_PreviewTextInput(object sender, TextCompositionEventArgs e)

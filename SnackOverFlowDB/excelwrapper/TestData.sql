@@ -229,6 +229,41 @@ VALUES
 	(10003, 10000, 1, 500.00, 500.00)
 GO
 
+/*Driver Test Data */
+print '*** Inserting Driver Test Data ***'
+GO
+INSERT INTO [dbo].[Driver]
+	(Driver_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE)
+VALUES
+	(10000, "123AB3123", "2018-04-12", 1)
+GO
 
 
+/*Vehicle Test Data */
+print '*** Inserting Vehicle Test Data ***'
+GO
+INSERT INTO [dbo].[Vehicle]
+	(VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, VEHICLE_TYPE_ID)
+VALUES
+	("123", "Make", "Model", 25, "1850", "Beige", "Truck")
+GO
+
+/*Repair Test Data */
+print '*** Inserting Repair Test Data ***'
+GO
+INSERT INTO [dbo].[Repair]
+	(VEHICLE_ID)
+VALUES
+	(10000)
+GO
+
+/*Repair Line Test Data */
+print '*** Inserting Repair Test Data ***'
+GO
+INSERT INTO [dbo].[Repair_Line]
+	(REPAIR_ID, REPAIR_DESCRIPTION)
+VALUES
+	(10000, "Its fixed"),
+	(10000, "Its more fixed")
+GO
 
