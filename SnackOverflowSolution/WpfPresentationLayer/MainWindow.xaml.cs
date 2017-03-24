@@ -1443,6 +1443,21 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 2017/3/23
+        /// 
+        /// Brings up the Product Lot detail window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgProductLots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var productLot = (ProductLot)dgProductLots.SelectedItem;
+            var productLotMgr = new ProductLotManager();
+            var productLotDetail = new frmAddProductLot(productLotMgr, productLot);
+            productLotDetail.ShowDialog();
+        }
         private void mnuQuit_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Confirmation:", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
