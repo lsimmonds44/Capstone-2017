@@ -16,7 +16,7 @@
 
         <Menu Grid.Row="0">
             <MenuItem  Header="File" >
-                <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120"/>
+                <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
             </MenuItem>
             <MenuItem Header="Edit" >
                 <MenuItem Name="mnuPrefernces" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
@@ -502,19 +502,19 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabDeliveries" Header="Deliveries" GotFocus="tabDeliveries_GotFocus" >
+            <TabItem Name="tabDeliveries" Header="Deliveries" Loaded="tabDeliveries_Loaded"  >
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ListView Name="lvDeliveries" Margin="10 10 10 39">
+                    <ListView Name="lvDeliveries" Margin="10 10 10 39" MouseDoubleClick="lvDeliveries_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Date"/>
-                                    <GridViewColumn Header="VehicleId" Width="60"/>
-                                    <GridViewColumn Header="Status"/>
-                                    <GridViewColumn Header="DeliveryType" Width="75"/>
+                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding DeliveryDate}"/>
+                                    <GridViewColumn Header="VehicleId" Width="60" DisplayMemberBinding="{Binding VehicleId}"/>
+                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding StatusId}"/>
+                                    <GridViewColumn Header="DeliveryType" Width="75" DisplayMemberBinding="{Binding DeliveryTypeId}"/>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
