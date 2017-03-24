@@ -40,22 +40,27 @@ namespace DataAccessLayer
                 {
                     reader.Read();
 
-                    vehicle = new Vehicle()
-                    {
-                        VehicleID = reader.GetInt32(0),
-                        VIN = reader.GetString(1),
-                        Make = reader.GetString(2),
-                        Model = reader.GetString(3),
-                        Mileage = reader.GetInt32(4),
-                        Year = reader.GetString(5),
-                        Color = reader.GetString(6),
-                        Active = reader.GetBoolean(7),
-                        LatestRepair = reader.GetDateTime(8),
-                        LastDriver = reader.GetInt32(9),
-                        VehicleTypeID = reader.GetString(10)
-                    };
-                    reader.Close();
+                    vehicle = new Vehicle();
+                    
+                        vehicle.VehicleID = reader.GetInt32(0);
+                        vehicle.VIN = reader.GetString(1);
+                        vehicle.Make = reader.GetString(2);
+                        vehicle.Model = reader.GetString(3);
+                        vehicle.Mileage = reader.GetInt32(4);
+                        vehicle.Year = reader.GetString(5);
+                        vehicle.Color = reader.GetString(6);
+                        vehicle.Active = reader.GetBoolean(7);
+                         if (!reader.IsDBNull(8))
+                            {
+                                vehicle.LatestRepair = reader.GetDateTime(8);
+                            }
+                            if (!reader.IsDBNull(9))
+                            {
+                                vehicle.LastDriver = reader.GetInt32(9);
+                            }
+                        vehicle.VehicleTypeID = reader.GetString(10);                    
                 }
+                reader.Close();
 
             }
             catch (Exception)
