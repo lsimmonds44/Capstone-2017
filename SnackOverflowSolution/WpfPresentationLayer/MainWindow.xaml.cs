@@ -1289,15 +1289,20 @@ namespace WpfPresentationLayer
                 {
                     _commercialCustomer = _customerManager.RetrieveCommercialCustomerByUserId(_user.UserId);
                                   
-                    if (_commercialCustomer.IsApproved)
+                    if (_commercialCustomer.IsApproved && _commercialCustomer.Active)
                     {
                         btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nAPPROVED";
                         btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(!_commercialCustomer.IsApproved)
+                    else if(!_commercialCustomer.IsApproved && _commercialCustomer.Active)
                     {
                         btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nPENDING";
+                        btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
+                    }
+                    else if (!_commercialCustomer.IsApproved && _commercialCustomer.Active)
+                    {
+                        btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nDENIED";
                         btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
                     }
                 }
@@ -1327,15 +1332,20 @@ namespace WpfPresentationLayer
                 {
                     _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
                
-                    if (_supplier.IsApproved)
+                    if (_supplier.IsApproved && _supplier.Active)
                     {
                         btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+ "\nAPPROVED";
                         btnSupplierApplicationStatusCheck.IsEnabled = false;
                         //btnSupplierApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(!_supplier.IsApproved) {
+                    else if(!_supplier.IsApproved && _supplier.Active) {
                         btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+"\nPENDING";
             
+                        btnSupplierApplicationStatusCheck.IsEnabled = false;
+                    }
+                    else if (!_supplier.IsApproved && !_supplier.Active)
+                    {
+                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content + "\nDENIED";
                         btnSupplierApplicationStatusCheck.IsEnabled = false;
                     }
                 }
@@ -1363,15 +1373,20 @@ namespace WpfPresentationLayer
                 {
                     _charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
                 
-                    if (_charity.Status=="APPROVED")
+                    if (_charity.Status=="Approved")
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nAPPROVED";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(_charity.Status == "PENDING")
+                    else if(_charity.Status == "Pending")
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nPENDING";
+                        btnCharityApplicationStatusCheck.IsEnabled = false;
+                    }
+                    else if (_charity.Status == "Denied")
+                    {
+                        btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nDENIED";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                     }
                 }
