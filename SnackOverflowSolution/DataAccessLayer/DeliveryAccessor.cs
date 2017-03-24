@@ -300,5 +300,52 @@ namespace DataAccessLayer
 
             return result;
         }
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/03/10
+        /// 
+        /// Updates a delivery, while doing a concurrency check.
+        /// </summary>
+        /// <param name="oldDelivery">The old delivery.</param>
+        /// <param name="newDelivery">The new delivery.</param>
+        /// <returns>How many rows were affected.</returns>
+        public static int UpdateDelivery(Delivery oldDelivery, Delivery newDelivery)
+        {
+            int rows = 0;
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_delivery";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.Parameters.AddWithValue("@old_DELIVERY_ID", oldDelivery.DeliveryId);
+            cmd.Parameters.AddWithValue("@old_ROUTE_ID", oldDelivery.RouteId);
+            cmd.Parameters.AddWithValue("@new_ROUTE_ID", newDelivery.RouteId);
+            cmd.Parameters.AddWithValue("@old_DEVLIVERY_DATE", oldDelivery.DeliveryDate);
+            cmd.Parameters.AddWithValue("@new_DEVLIVERY_DATE", newDelivery.DeliveryDate);
+            cmd.Parameters.AddWithValue("@old_VERIFICATION", oldDelivery.Verification);
+            cmd.Parameters.AddWithValue("@new_VERIFICATION", newDelivery.Verification);
+            cmd.Parameters.AddWithValue("@old_STATUS_ID", oldDelivery.StatusId);
+            cmd.Parameters.AddWithValue("@new_STATUS_ID", newDelivery.StatusId);
+            cmd.Parameters.AddWithValue("@old_DELIVERY_TYPE_ID", oldDelivery.DeliveryTypeId);
+            cmd.Parameters.AddWithValue("@new_DELIVERY_TYPE_ID", newDelivery.DeliveryTypeId);
+            cmd.Parameters.AddWithValue("@old_ORDER_ID", oldDelivery.OrderId);
+            cmd.Parameters.AddWithValue("@new_ORDER_ID", newDelivery.OrderId);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
     }
 }
