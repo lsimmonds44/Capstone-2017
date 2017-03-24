@@ -53,10 +53,10 @@ namespace LogicLayer
             {
                 result = VehicleAccessor.RetrieveVehicleByDelivery(deliveryID);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new Exception("Data could not be retrieved", ex);
+                throw;
             }
             return result;
         }
@@ -116,6 +116,32 @@ namespace LogicLayer
             {
                 throw;
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/03/24
+        /// 
+        /// Updates a delivery.
+        /// </summary>
+        /// <param name="oldDelivery"></param>
+        /// <param name="newDelivery"></param>
+        /// <returns></returns>
+        public bool UpdateDelivery(Delivery oldDelivery, Delivery newDelivery)
+        {
+            bool result = false;
+
+            try
+            {
+                result = (1 == DeliveryAccessor.UpdateDelivery(oldDelivery, newDelivery));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             return result;
         }
     }

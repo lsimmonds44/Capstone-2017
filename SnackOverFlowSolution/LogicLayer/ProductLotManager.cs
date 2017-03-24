@@ -152,25 +152,6 @@ namespace LogicLayer
         }
 
 
-        public List<ProductLot> RetrieveProductLotsWithGradeAndPrice()
-        {
-            List<ProductLot> lots = null;
-            try
-            {
-                lots = ProductLotAccessor.RetrieveProductLotsWithGradeAndPrice();
-                IProductManager productManager = new ProductManager();
-                foreach (var lot in lots)
-                {
-                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
-                    lot.ProductName = productInLot.Name;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return lots;
-        }
+        
     }
 }
