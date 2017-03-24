@@ -205,7 +205,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dgProductLots" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                               AutoGenerateColumns="False" IsReadOnly="True">
+                               AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_MouseDoubleClick" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="100" Binding="{Binding ProductLotId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Product" Width="100" Binding="{Binding ProductName}"></DataGridTextColumn>

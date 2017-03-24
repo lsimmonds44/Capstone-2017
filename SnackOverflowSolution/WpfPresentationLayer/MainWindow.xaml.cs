@@ -1441,5 +1441,21 @@ namespace WpfPresentationLayer
             }
 
         }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 2017/3/23
+        /// 
+        /// Brings up the Product Lot detail window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgProductLots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var productLot = (ProductLot)dgProductLots.SelectedItem;
+            var productLotMgr = new ProductLotManager();
+            var productLotDetail = new frmAddProductLot(productLotMgr, productLot);
+            productLotDetail.ShowDialog();
+        }
     } // end of class
 } // end of namespace 
