@@ -493,6 +493,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -500,6 +501,7 @@
                         <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
                         <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="editVehicleClick"/>
                         <Button Name="btnAddMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="3" Content="Add Maintenance Record" Click="btnAddMaintenance_Click"/>
+                        <Button Name="btnViewMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="4" Content="View Maintenance Records" Click="btnViewMaintenance_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>

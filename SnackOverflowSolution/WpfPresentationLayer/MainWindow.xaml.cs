@@ -1444,6 +1444,22 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Robert Forbes
+        /// 2017/03/24
+        /// 
+        /// Opens a window to view maintenance records
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            if((Vehicle)dgVehicle.SelectedItem != null){
+                frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
+                viewMaintenanceRecordsWindow.ShowDialog();
+            }
+        }
+
+        /// <summary>
         /// Ryan Spurgetis
         /// 2017/3/23
         /// 
@@ -1513,6 +1529,5 @@ namespace WpfPresentationLayer
             _deliveries = _deliveryManager.RetrieveDeliveries();
             lvDeliveries.Items.Refresh();
         }
-
     } // end of class
 } // end of namespace 
