@@ -190,27 +190,31 @@ namespace DataAccessLayer
                 var cmd = new SqlCommand(cmdText, conn);
 
                 cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
-
+                cmd.CommandType = CommandType.StoredProcedure;
                 try
                 {
                     conn.Open();
                     var reader = cmd.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        vehicle = new Vehicle()
+                        while (reader.Read())
                         {
-                            VehicleID = reader.GetInt32(0),
-                            VIN = reader.GetString(1),
-                            Make = reader.GetString(2),
-                            Model = reader.GetString(3),
-                            Mileage = reader.GetInt32(4),
-                            Year = reader.GetString(5),
-                            Color = reader.GetString(6),
-                            Active = reader.GetBoolean(7),
-                            LatestRepair = reader.IsDBNull(8) ? (DateTime?)null : reader.GetDateTime(8),
-                            LastDriver = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9),
-                            VehicleTypeID = reader.GetString(10)
-                        };
+                            vehicle = new Vehicle()
+                            {
+                                VehicleID = reader.GetInt32(0),
+                                VIN = reader.GetString(1),
+                                Make = reader.GetString(2),
+                                Model = reader.GetString(3),
+                                Mileage = reader.GetInt32(4),
+                                Year = reader.GetString(5),
+                                Color = reader.GetString(6),
+                                Active = reader.GetBoolean(7),
+                                LatestRepair = reader.IsDBNull(8) ? (DateTime?)null : reader.GetDateTime(8),
+                                LastDriver = reader.IsDBNull(9) ? (int?)null : reader.GetInt32(9),
+                                VehicleTypeID = reader.GetString(10)
+                            };
+                        }
+                        
                     }
                 }
                 catch (Exception)
