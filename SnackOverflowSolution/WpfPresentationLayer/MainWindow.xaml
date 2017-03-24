@@ -29,6 +29,9 @@
                 <MenuItem Name="mnuHelp" Header="Help" HorizontalAlignment="Left" Width="Auto"/>
                 <MenuItem Name="mnuAbout" Header="About" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
+            <MenuItem Header="Inventory Settings" >
+                <MenuItem Name="mnuPreferences" Click="MnuPreferences_OnClick" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
+            </MenuItem>
         </Menu>
         <Grid Grid.Row="1" AllowDrop="True" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Grid.ColumnDefinitions>

@@ -70,6 +70,7 @@
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
+    <Compile Include="IPreferenceManager.cs" />
     <Compile Include="IProductLotManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="OrderStatusManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
+    <Compile Include="PreferenceManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />

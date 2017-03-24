@@ -108,6 +108,9 @@
     <Compile Include="frmManageStockSubAdjustQty.xaml.cs">
       <DependentUpon>frmManageStockSubAdjustQty.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmMnuPreferences.xaml.cs">
+      <DependentUpon>frmMnuPreferences.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmRequestUsername.xaml.cs">
       <DependentUpon>frmRequestUsername.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmManageStockSubAdjustQty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmMnuPreferences.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

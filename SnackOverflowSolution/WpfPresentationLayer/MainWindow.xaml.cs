@@ -44,6 +44,7 @@ namespace WpfPresentationLayer
         private List<Warehouse> _warehouseList;
         private ProductLotSearchCriteria _productLotSearchCriteria;
         private ICharityManager _charityManager;
+        private IPreferenceManager _preferenceManager;
         
 
         Employee _employee = null;
@@ -1456,6 +1457,13 @@ namespace WpfPresentationLayer
                 }
             }
 
+        }
+
+        private void MnuPreferences_OnClick(object sender, RoutedEventArgs e)
+        {
+            _preferenceManager = new PreferenceManager();
+            var frmPreferences = new frmMnuPreferences(_preferenceManager);
+            frmPreferences.ShowDialog();
         }
     } // end of class
 } // end of namespace 

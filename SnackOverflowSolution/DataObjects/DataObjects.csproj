@@ -56,6 +56,7 @@
     <Compile Include="OrderLine.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
+    <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductLot.cs" />
     <Compile Include="ProductOrder.cs" />
