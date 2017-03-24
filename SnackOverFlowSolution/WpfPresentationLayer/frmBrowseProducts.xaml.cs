@@ -39,13 +39,13 @@ namespace WpfPresentationLayer
         List<string> _categories = new List<string>();
 
         User _currentUser;
-        IProductManager productManager;
+        IProductManager _productManager;
 
         public frmBrowseProducts(User user, IProductManager iProductManager)
         {
             InitializeComponent();
             _currentUser = user;
-            productManager = iProductManager;
+            _productManager = iProductManager;
             RetrieveProducts();
             RefreshProductsDataGrid();
             FillFilterGrids();
@@ -60,7 +60,7 @@ namespace WpfPresentationLayer
         public void RetrieveProducts()
         {
 
-            _products = productManager.RetrieveProductsToBrowseProducts();
+            _products = _productManager.RetrieveProductsToBrowseProducts();
 
             //Append Image URIs to _products lists
             try
@@ -112,12 +112,12 @@ namespace WpfPresentationLayer
                 return;
             }
 
-            _products = productManager.FilterProducts(_vendors, _categories, min, max);
+            _products = _productManager.FilterProducts(_vendors, _categories, min, max);
 
             RefreshProductsDataGrid();
 
             //Report Empty Grid
-            if (DgProductList.Items.Count == 0)
+            if (dgProductList.Items.Count == 0)
                 MessageBox.Show("No Products Meet this Criteria");
 
         }
@@ -130,8 +130,8 @@ namespace WpfPresentationLayer
         /// </summary>
         private void FillFilterGrids()
         {
-            DtgVendors.ItemsSource = _products.Select(x => x.Supplier_Name).Distinct().ToList();
-            DtgCategories.ItemsSource = _products.Select(x => x.CategoryID).Distinct().ToList();
+            dgVendors.ItemsSource = _products.Select(x => x.Supplier_Name).Distinct().ToList();
+            dgCategories.ItemsSource = _products.Select(x => x.CategoryID).Distinct().ToList();
         }
 
         /// <summary>
@@ -148,10 +148,10 @@ namespace WpfPresentationLayer
                 a.SourceString = WpfExtensionMethods.FilePath + a.ProductId + ".jpg";
             }
 
-            DgProductList.ItemsSource = _products;
+            dgProductList.ItemsSource = _products;
 
             if (_products.Count == 0)
-                TxtPrompts.Text = "No Items to display";
+                txtPrompts.Text = "No Items to display";
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void chkVendorItem_Checked(object sender, RoutedEventArgs e)
         {
-            _vendors.Add(DtgVendors.SelectedItem.ToString());
+            _vendors.Add(dgVendors.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void chkVendorItem_Unchecked(object sender, RoutedEventArgs e)
         {
-            _vendors.Remove(DtgVendors.SelectedItem.ToString());
+            _vendors.Remove(dgVendors.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void chkCategoryItem_Checked(object sender, RoutedEventArgs e)
         {
-            _categories.Add(DtgCategories.SelectedItem.ToString());
+            _categories.Add(dgCategories.SelectedItem.ToString());
         }
 
         /// <summary>
@@ -229,12 +229,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void chkCategoryItem_Unchecked(object sender, RoutedEventArgs e)
         {
-            _categories.Remove(DtgCategories.SelectedItem.ToString());
+            _categories.Remove(dgCategories.SelectedItem.ToString());
         }
 
         private void BrowseProducts_OnClosed(object sender, EventArgs e) //trigger subscriber-event call
         {
-            DgProductList.ItemsSource = null;
+            dgProductList.ItemsSource = null;
         }
     }
 

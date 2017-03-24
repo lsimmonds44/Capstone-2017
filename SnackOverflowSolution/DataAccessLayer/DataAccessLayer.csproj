@@ -46,6 +46,7 @@
     <Compile Include="CustomerAccessor.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="DeliveryAccessor.cs" />
+    <Compile Include="DeliveryTypeAccessor.cs" />
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="EmployeeOrderResponsibilityAccessor.cs" />
     <Compile Include="IRetriever.cs" />
@@ -63,6 +64,9 @@
     <Compile Include="ProductLotAccessor.cs" />
     <Compile Include="ProductOrderAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepairAccessor.cs" />
+    <Compile Include="RepairLineAccessor.cs" />
+    <Compile Include="StatusAccessor.cs" />
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInvoiceAccessor.cs" />
     <Compile Include="UserAccessor.cs" />

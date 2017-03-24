@@ -43,7 +43,7 @@ namespace WpfPresentationLayer
                 _myMaintenanceScheduleLineManager.createMaintenanceScheduleLine(new MaintenanceScheduleLine
                 {
                     MaintenanceScheduleId = currentMaintenanceSchedule.MaintenanceScheduleId,
-                    Description = txtDescription.Text,
+                    Description = txtMaintenanceDescription.Text,
                     MaintenanceDate = DateTime.Today
                 });
                 MessageBox.Show("Maintenance record saved successfully.");

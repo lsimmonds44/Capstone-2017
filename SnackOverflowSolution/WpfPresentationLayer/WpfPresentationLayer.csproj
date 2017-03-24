@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="frmAddEditDelivery.xaml.cs">
+      <DependentUpon>frmAddEditDelivery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmAddEditVehicle.xaml.cs">
       <DependentUpon>frmAddEditVehicle.xaml</DependentUpon>
     </Compile>
@@ -120,23 +123,30 @@
     <Compile Include="frmSupplierInvoiceDetails.xaml.cs">
       <DependentUpon>frmSupplierInvoiceDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmViewMaintenanceRecords.xaml.cs">
+      <DependentUpon>frmViewMaintenanceRecords.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmViewProduct.xaml.cs">
       <DependentUpon>frmViewProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmViewVehicle.xaml.cs">
       <DependentUpon>frmViewVehicle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PasswordChangeView.xaml.cs">
-      <DependentUpon>PasswordChangeView.xaml</DependentUpon>
+    <Compile Include="frmPasswordChangeView.xaml.cs">
+      <DependentUpon>frmPasswordChangeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductLotSearchCriteria.cs" />
-    <Compile Include="ProductLotSearchView.xaml.cs">
-      <DependentUpon>ProductLotSearchView.xaml</DependentUpon>
+    <Compile Include="frmProductLotSearchView.xaml.cs">
+      <DependentUpon>frmProductLotSearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ResetPassword.xaml.cs">
-      <DependentUpon>ResetPassword.xaml</DependentUpon>
+    <Compile Include="frmResetPassword.xaml.cs">
+      <DependentUpon>frmResetPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfExtensionMethods.cs" />
+    <Page Include="frmAddEditDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmApplicationAskUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,7 +155,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateNewUser.xaml">
+    <Page Include="frmCreateNewUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,6 +231,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmViewMaintenanceRecords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmViewOpenOrders.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,11 +247,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CharityView.xaml">
+    <Page Include="frmCharityView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EmployeeView.xaml">
+    <Page Include="frmEmployeeViews.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -270,8 +284,8 @@
     <Compile Include="frmCreateCommercialCustomer.xaml.cs">
       <DependentUpon>frmCreateCommercialCustomer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateNewUser.xaml.cs">
-      <DependentUpon>CreateNewUser.xaml</DependentUpon>
+    <Compile Include="frmCreateNewUser.xaml.cs">
+      <DependentUpon>frmCreateNewUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmCreateLocation.xaml.cs">
       <DependentUpon>frmCreateLocation.xaml</DependentUpon>
@@ -295,10 +309,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CharityView.xaml.cs" />
-    <Compile Include="EmployeeView.xaml.cs" />
+    <Compile Include="frmCharityView.xaml.cs" />
+    <Compile Include="frmEmployeeViews.xaml.cs" />
     <Compile Include="ErrorAlert.cs" />
-    <Page Include="PasswordChangeView.xaml">
+    <Page Include="frmPasswordChangeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -310,11 +324,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProductLotSearchView.xaml">
+    <Page Include="frmProductLotSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResetPassword.xaml">
+    <Page Include="frmResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -66,10 +66,10 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Commercial Customer user account could not be retrieved.");
             }
-            tfCustomerID.Text = _cCustomer.Commercial_Id.ToString();
-            tfCustomerUserName.Text = _cCUser.UserName;
-            tfUserAddress.Text = "Address will go here.";
-            tfOrderType.Text = "Commercial Customer";
+            txtCustomerID.Text = _cCustomer.Commercial_Id.ToString();
+            txtCustomerUserName.Text = _cCUser.UserName;
+            txtUserAddress.Text = "Address will go here.";
+            txtOrderType.Text = "Commercial Customer";
             dpOrderDate.SelectedDate = DateTime.Now;
             cboDeliveryType.Items.Add("Truck");
             dpExpectedDate.SelectedDate = DateTime.Now.AddDays(5);
@@ -86,7 +86,7 @@ namespace WpfPresentationLayer
         {
             ProductOrder order = new ProductOrder();
             bool valid = true;
-            if (tfCustomerID.Text.Length < 5)
+            if (txtCustomerID.Text.Length < 5)
             {
                 valid = false;
                 MessageBox.Show("The customer Id field is empty go back to customer tab on main menu select a customer and try again.");
@@ -103,8 +103,8 @@ namespace WpfPresentationLayer
             else
             {
                 order.EmployeeId = _employee_Id;
-                order.CustomerId = parseToInt(tfCustomerID.Text);
-                order.OrderTypeId = tfOrderType.Text;
+                order.CustomerId = parseToInt(txtCustomerID.Text);
+                order.OrderTypeId = txtOrderType.Text;
                 order.AddressType = "Commercial";
                 order.DeliveryTypeId = cboDeliveryType.SelectedItem.ToString();
                 order.Amount = (decimal)0.0;
@@ -134,7 +134,7 @@ namespace WpfPresentationLayer
             try
             {
                 _orderNum = _orderManager.createProductOrder(order);
-                tfOrderNumber.Text = _orderNum.ToString();
+                txtOrderNumber.Text = _orderNum.ToString();
                 result = true;
             }
             catch (Exception e)
@@ -150,7 +150,7 @@ namespace WpfPresentationLayer
             
             try
             {
-                _productLots = pLM.RetrieveProductLotsWithGradeAndPrice();
+                _productLots = pLM.RetrieveProductLots();
                 foreach (var product in _productLots)
                 {
                     cboProducts.Items.Add(product.ProductName);
@@ -211,16 +211,16 @@ namespace WpfPresentationLayer
             if (cboProducts.SelectedIndex >= 0)
             {
                 ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
-                tfAvailableProduct.Text = selectedProduct.Quantity.ToString();
+                txtAvailableProduct.Text = selectedProduct.Quantity.ToString();
                 lblProductGradeResult.Content = selectedProduct.Grade.ToString();
             }
         }
 
         private void AddOrderLineClick(object sender, RoutedEventArgs e)
         {
-            if (tfQty.Text.Length > 0)
+            if (txtQty.Text.Length > 0)
             {
-                if (parseToInt(tfQty.Text) <= parseToInt(tfAvailableProduct.Text))
+                if (parseToInt(txtQty.Text) <= parseToInt(txtAvailableProduct.Text))
                 {
 
 
@@ -228,7 +228,7 @@ namespace WpfPresentationLayer
                     oLine.ProductOrderID = _orderNum;
                     oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
                     oLine.ProductName = cboProducts.SelectedItem.ToString();
-                    oLine.Quantity = parseToInt(tfQty.Text);
+                    oLine.Quantity = parseToInt(txtQty.Text);
                     oLine.GradeID = lblProductGradeResult.Content.ToString();
                     oLine.Price = 100;
                     oLine.UnitDiscount = (decimal)0.0;

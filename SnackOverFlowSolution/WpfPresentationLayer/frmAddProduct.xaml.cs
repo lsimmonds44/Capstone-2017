@@ -16,16 +16,16 @@ namespace WpfPresentationLayer
 
         private Product _product = new Product();
         private User _currentUser;
-        private IProductManager productManager;
+        private IProductManager _productManager;
 
         public frmAddProduct(User currentUser, IProductManager iproductManager)
         {
             InitializeComponent();
             _currentUser = currentUser;
-            productManager = iproductManager;
+            _productManager = iproductManager;
         }
 
-        private void BtnUpload(object sender, RoutedEventArgs e)
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg;*jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
@@ -47,7 +47,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -59,7 +59,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnSave(object sender, RoutedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (1 == ValidateInput())
             {
@@ -70,7 +70,7 @@ namespace WpfPresentationLayer
 
             try
             {
-                if (1 == productManager.CreateProduct(_product))
+                if (1 == _productManager.CreateProduct(_product))
                 {
                     MessageBox.Show("Product Created Successfully");
                     ClearFields();

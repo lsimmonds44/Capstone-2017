@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="ProductLotView" Height="300" Width="505.263">
+        Title="Product Lot View" Height="300" Width="505.263">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -40,41 +40,42 @@
         <DatePicker Name="dpExpirationDate" Grid.Column="1" Grid.Row="3" Margin="5 2"></DatePicker>
         <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2" Visibility="Hidden"></TextBox>
 
-        <ComboBox Name="cbxWarehouseIDVal" Grid.Column="3" Grid.Row="0" Visibility="Collapsed">
+        <ComboBox Name="cboWarehouseIDVal" Grid.Column="3" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding WarehouseID}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxSupplierIDVal" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">
+        <ComboBox Name="cboSupplierIDVal" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding SupplierID}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxLocationIDVal" Grid.Column="3" Grid.Row="1" Visibility="Collapsed">
+        <ComboBox Name="cboLocationIDVal" Grid.Column="3" Grid.Row="1" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding LocationId}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxProductIDVal" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
+        <ComboBox Name="cboProductIDVal" Grid.Column="1" Grid.Row="1" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbxSupplyManagerIDVal" Grid.Column="3" Grid.Row="2" Visibility="Collapsed">
+        <ComboBox Name="cboSupplyManagerIDVal" Grid.Column="3" Grid.Row="2" Visibility="Collapsed">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding EmployeeId}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Name="btnPost" Grid.Column="3" Visibility="Collapsed" Grid.Row="5" Click="btnPost_Click">Add</Button>
+        <Button Name="btnPost" Grid.Column="2" Visibility="Collapsed" Grid.Row="5" Click="btnPost_Click">Add</Button>
+        <Button Name="btnClose" Content="Cancel" Grid.Column="3" Visibility="Visible" Grid.Row="5" Click="btnClose_Click" />
     </Grid>
 </Window>

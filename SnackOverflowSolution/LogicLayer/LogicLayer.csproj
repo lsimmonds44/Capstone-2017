@@ -46,6 +46,7 @@
     <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
     <Compile Include="DeliveryManager.cs" />
+    <Compile Include="DeliveryTypeManager.cs" />
     <Compile Include="DummyLocationManager.cs" />
     <Compile Include="DummyProductManager.cs" />
     <Compile Include="DummySupplierManager.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="ICharityManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IDeliveryManager.cs" />
+    <Compile Include="IDeliveryTypeManager.cs" />
     <Compile Include="IEmailManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
@@ -74,6 +76,8 @@
     <Compile Include="IProductLotManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
+    <Compile Include="IRepairManager.cs" />
+    <Compile Include="IStatusManager.cs" />
     <Compile Include="ISupplierInvoiceManager.cs" />
     <Compile Include="ISupplierManager.cs" />
     <Compile Include="IUserManager.cs" />
@@ -92,6 +96,8 @@
     <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepairManager.cs" />
+    <Compile Include="StatusManager.cs" />
     <Compile Include="SupplierInvoiceManager.cs" />
     <Compile Include="TestEmployeeManager.cs" />
     <Compile Include="SupplierManager.cs" />

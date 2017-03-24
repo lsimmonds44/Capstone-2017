@@ -21,10 +21,10 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmCreateLocation : Window
     {
-        ILocationManager locationMgr;
+        ILocationManager _locationMgr;
         public frmCreateLocation(ILocationManager iLocationManager)
         {
-            locationMgr = iLocationManager;
+            _locationMgr = iLocationManager;
             InitializeComponent();
         }
 
@@ -42,7 +42,7 @@ namespace WpfPresentationLayer
                 };
             try
             {
-                if (locationMgr.CreateLocation(location) == 1)
+                if (_locationMgr.CreateLocation(location) == 1)
                 {
                     MessageBox.Show("Location successfully created.");
                 }

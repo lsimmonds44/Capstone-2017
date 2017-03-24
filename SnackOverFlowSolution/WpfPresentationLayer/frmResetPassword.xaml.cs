@@ -19,23 +19,23 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for ResetPassword.xaml
     /// </summary>
-    public partial class ResetPassword : Window
+    public partial class frmResetPassword : Window
     {
         List<User> _users;
         IUserManager _userManager;
-        public ResetPassword(IUserManager _userManager, List<User> _users)
+        public frmResetPassword(IUserManager _userManager, List<User> _users)
         {
             this._userManager = _userManager;
             InitializeComponent();
             this._users = _users;
-            cbxUsers.ItemsSource = this._users;
+            cboUsers.ItemsSource = this._users;
         }
 
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (1 == _userManager.ResetPassword((String)_users[cbxUsers.SelectedIndex].UserName, txtPassword.Text))
+                if (1 == _userManager.ResetPassword((String)_users[cboUsers.SelectedIndex].UserName, pwbPassword.Text))
                 {
                     MessageBox.Show("User Password Changed");
                 }
@@ -52,7 +52,7 @@ namespace WpfPresentationLayer
 
         private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
         {
-            txtPassword.Text = _userManager.NewPassword();
+            pwbPassword.Text = _userManager.NewPassword();
         }
     }
 }

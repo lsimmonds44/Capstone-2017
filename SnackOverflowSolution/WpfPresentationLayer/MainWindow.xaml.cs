@@ -2,6 +2,7 @@
 using LogicLayer;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,8 +28,8 @@ namespace WpfPresentationLayer
         private IProductOrderManager _orderManager = new ProductOrderManager();
         private IVehicleManager _vehicleManager = new VehicleManager();
         List<ProductOrder> _currentOpenOrders;
-        List<Employee> employeeList;
-        List<Charity> charityList;
+        List<Employee> _employeeList;
+        List<Charity> _charityList;
         private List<ProductLot> _productLotList;
         private List<CommercialCustomer> _commercialCustomers;
         private List<Vehicle> _vehicleList;
@@ -46,6 +47,7 @@ namespace WpfPresentationLayer
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
         
+
 
         Employee _employee = null;
         Supplier _supplier = null;
@@ -169,7 +171,7 @@ namespace WpfPresentationLayer
             frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
             if (createOrderWindow.ShowDialog() == true)
             {
-                
+
             }
         }
 
@@ -189,7 +191,7 @@ namespace WpfPresentationLayer
         /// Ariel Sigo
         /// Created 2017/10/02
         /// 
-        /// Button that leads to update employee form
+        /// Button that leads to update _employee form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -197,7 +199,7 @@ namespace WpfPresentationLayer
         {
             try
             {
-                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employeeList[dgEmployee.SelectedIndex]);
                 fUE.ShowDialog();
             }
             catch
@@ -221,14 +223,14 @@ namespace WpfPresentationLayer
         /// If there is not it will use the username and password text field and check if
         /// it matches with any user if so it then recieves the user's info
         /// 
-        /// Needs work on returning employee info so tabs can be 
+        /// Needs work on returning _employee info so tabs can be 
         /// filtered and not just show all
         /// 
         /// UPDATE
         /// Bobby Thorne
         /// 3/24/2017
         /// 
-        /// Reset buttons and nulled supplier, charity, and customer variables
+        /// Reset buttons and nulled supplier, _charity, and customer variables
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -240,18 +242,18 @@ namespace WpfPresentationLayer
 
                 try
                 {
-                    if (_userManager.AuthenticateUser(tfUsername.Text, tfPassword.Password))
+                    if (_userManager.AuthenticateUser(txtUsername.Text, pwbPassword.Password))
                     {
 
                         lblPassword.Visibility = Visibility.Collapsed;
                         lblUsername.Visibility = Visibility.Collapsed;
-                        tfUsername.Visibility = Visibility.Collapsed;
-                        tfPassword.Visibility = Visibility.Collapsed;
+                        txtUsername.Visibility = Visibility.Collapsed;
+                        pwbPassword.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
-                        tfPassword.Password = "";
+                        pwbPassword.Password = "";
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
-                        tfPassword.Background = Brushes.White;
+                        pwbPassword.Background = Brushes.White;
                         try
                         {
                             _user = _userManager.userInstance;
@@ -276,7 +278,7 @@ namespace WpfPresentationLayer
                         }
                         catch (Exception ex)
                         {
-                            // Enters here if user that access this is not an employee.
+                            // Enters here if user that access this is not an _employee.
                             // For now it does nothing. 
                             MessageBox.Show("Employee table is empty or DB connection error.");
                         }
@@ -289,8 +291,8 @@ namespace WpfPresentationLayer
                     else
                     {
                         statusMessage.Content = "Username and Password did not match.";
-                        tfPassword.Password = "";
-                        tfPassword.Background = Brushes.Red;
+                        pwbPassword.Password = "";
+                        pwbPassword.Background = Brushes.Red;
                     }
                 }
                 catch (System.Data.SqlClient.SqlException ex)
@@ -316,8 +318,8 @@ namespace WpfPresentationLayer
                 hideTabs();
                 lblPassword.Visibility = Visibility.Visible;
                 lblUsername.Visibility = Visibility.Visible;
-                tfUsername.Visibility = Visibility.Visible;
-                tfPassword.Visibility = Visibility.Visible;
+                txtUsername.Visibility = Visibility.Visible;
+                pwbPassword.Visibility = Visibility.Visible;
                 mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
                 btnResetPassword.Visibility = Visibility.Collapsed;
@@ -343,16 +345,16 @@ namespace WpfPresentationLayer
 
         private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
-            CreateNewUser fCU = new CreateNewUser();
+            frmCreateNewUser fCU = new frmCreateNewUser();
             fCU.ShowDialog();
         }
-        
+
         private void tabCharity_Selected(object sender, RoutedEventArgs e)
         {
             try
             {
-                charityList = _charityManager.RetrieveCharityList();
-                dgrdCharity.DataContext = charityList;
+                _charityList = _charityManager.RetrieveCharityList();
+                dgCharity.DataContext = _charityList;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -362,9 +364,9 @@ namespace WpfPresentationLayer
 
         private void btnViewCharity_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdCharity.SelectedIndex >= 0)
+            if (dgCharity.SelectedIndex >= 0)
             {
-                var CharityViewInstance = new CharityView(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                var CharityViewInstance = new frmCharityView(_charityManager, _charityList[dgCharity.SelectedIndex]);
                 CharityViewInstance.ShowDialog();
                 tabCharity_Selected(sender, e);
             }
@@ -375,27 +377,29 @@ namespace WpfPresentationLayer
         {
             try
             {
-                List<Employee> employeeSearchList = _employeeManager.SearchEmployees(new Employee() { UserId = _user.UserId});
+                List<Employee> employeeSearchList = _employeeManager.SearchEmployees(new Employee() { UserId = _user.UserId });
                 int employeeId;
-                if(employeeSearchList.Count > 0)
+                if (employeeSearchList.Count > 0)
                 {
                     employeeId = (int)employeeSearchList[0].EmployeeId;
-                    var CharityViewInstance = new CharityView(_charityManager, employeeId);
+                    var CharityViewInstance = new frmCharityView(_charityManager, employeeId);
                     CharityViewInstance.SetEditable();
                     CharityViewInstance.ShowDialog();
                     tabCharity_Selected(sender, e);
-                } else
+                }
+                else
                 {
-                    var applyForCharityFrm = new CharityView(_user, _charityManager);
+                    var applyForCharityFrm = new frmCharityView(_user, _charityManager);
                     var result = applyForCharityFrm.ShowDialog();
                     if (result == true)
                     {
                         MessageBox.Show("Application submitted");
                         tabCharity_Selected(sender, e);
                     }
-                    
+
                 }
-            } catch (System.Data.SqlClient.SqlException ex)
+            }
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 ErrorAlert.ShowDatabaseError();
             }
@@ -405,8 +409,8 @@ namespace WpfPresentationLayer
         {
             try
             {
-                employeeList = _employeeManager.RetrieveEmployeeList();
-                dgrdEmployee.DataContext = employeeList;
+                _employeeList = _employeeManager.RetrieveEmployeeList();
+                dgEmployee.DataContext = _employeeList;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -416,7 +420,7 @@ namespace WpfPresentationLayer
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var EmployeeViewInstance = new EmployeeView(_employeeManager);
+            var EmployeeViewInstance = new frmEmployeeViews(_employeeManager);
             EmployeeViewInstance.SetEditable();
             EmployeeViewInstance.ShowDialog();
             tabEmployee_Selected(sender, e);
@@ -429,9 +433,9 @@ namespace WpfPresentationLayer
 
         private void btnViewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdEmployee.SelectedIndex >= 0)
+            if (dgEmployee.SelectedIndex >= 0)
             {
-                var EmployeeViewInstance = new EmployeeView(_employeeManager, employeeList[dgrdEmployee.SelectedIndex]);
+                var EmployeeViewInstance = new frmEmployeeViews(_employeeManager, _employeeList[dgEmployee.SelectedIndex]);
                 EmployeeViewInstance.ShowDialog();
                 tabEmployee_Selected(sender, e);
             }
@@ -536,11 +540,11 @@ namespace WpfPresentationLayer
             }
         }
 
-        private void tfPassword_KeyDown(object sender, KeyEventArgs e)
+        private void pwbPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            tfPassword.Background = Brushes.White;
+            pwbPassword.Background = Brushes.White;
         }
-        
+
         /// <summary>
         /// Laura Simmonds
         /// 2017/27/02
@@ -643,7 +647,7 @@ namespace WpfPresentationLayer
         }
 
 
-        private void BtnAddProduct_OnClick(object sender, RoutedEventArgs e)
+        private void btnAddProduct_OnClick(object sender, RoutedEventArgs e)
         {
             var frmAddProduct = new frmAddProduct(_user, _productManager);
             frmAddProduct.ShowDialog();
@@ -663,7 +667,7 @@ namespace WpfPresentationLayer
             frmBrowseProducts.Show();
         }
 
-        
+
         /// <summary>
         /// Created by Michael Takrama, Natacha Ilunga
         /// Creatd on 02-28-2017
@@ -686,7 +690,7 @@ namespace WpfPresentationLayer
         }
 
 
-        
+
 
         /// <summary>
         /// Robert Forbes
@@ -715,7 +719,8 @@ namespace WpfPresentationLayer
             {
                 _packageList = _packageManager.RetrieveAllPackages();
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("Unable to retrieve packages from database");
             }
         }
@@ -731,7 +736,7 @@ namespace WpfPresentationLayer
             addNewVehicleWindow.Show();
         }
 
-        private void BtnManageStock_OnClick(object sender, RoutedEventArgs e)
+        private void btnManageStock_OnClick(object sender, RoutedEventArgs e)
         {
             frmManageStock fms = new frmManageStock();
             fms.ShowDialog();
@@ -756,7 +761,7 @@ namespace WpfPresentationLayer
             {
                 ErrorAlert.ShowDatabaseError();
             }
-            
+
         }
 
         /// <summary>
@@ -787,7 +792,7 @@ namespace WpfPresentationLayer
         {
             if (null != _user)
             {
-                var updateScreen = new PasswordChangeView(_user.UserName);
+                var updateScreen = new frmPasswordChangeView(_user.UserName);
                 updateScreen.Show();
             }
         }
@@ -812,7 +817,7 @@ namespace WpfPresentationLayer
             }
         }
 
-		
+
         private void tabUser_Selected(object sender, RoutedEventArgs e)
         {
             if ("ADMIN" == _user.UserName)
@@ -830,39 +835,16 @@ namespace WpfPresentationLayer
             try
             {
                 List<User> userList = _userManager.RetrieveFullUserList();
-                var passwordResetWindow = new ResetPassword(_userManager, userList);
+                var passwordResetWindow = new frmResetPassword(_userManager, userList);
                 passwordResetWindow.Show();
             }
             catch
             {
                 ErrorAlert.ShowDatabaseError();
             }
-	    }
-		
-        private void tabDeliveries_GotFocus(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _deliveries = _deliveryManager.RetrieveDeliveries();
-                lvDeliveries.Items.Clear();
-
-                for (int i = 0; i < _deliveries.Count; i++)
-                {
-                    lvDeliveries.Items.Add(_deliveries[i].DeliveryDate);
-                    lvDeliveries.Items.Add(_deliveryManager.RetrieveVehicleByDelivery(_deliveries[i].DeliveryId.Value).ToString());
-                    lvDeliveries.Items.Add(_deliveries[i].StatusId);
-                    lvDeliveries.Items.Add(_deliveries[i].DeliveryTypeId);
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
-            }
         }
+
+
 
         private void tabSupplier_Selected(object sender, RoutedEventArgs e)
         {
@@ -915,16 +897,16 @@ namespace WpfPresentationLayer
             if (_user == null)
             {
                 frmRequestUsername requestUsername = new frmRequestUsername();
-                requestUsername.Show();
+                requestUsername.ShowDialog();
             }
             else { MessageBox.Show("Must not be signed in to use this feature"); }
         }
 
         private void btnApproveDeny_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrdCharity.SelectedIndex >= 0)
+            if (dgCharity.SelectedIndex >= 0)
             {
-                var frmCharityApproval = new frmCharityApproval(_charityManager, charityList[dgrdCharity.SelectedIndex]);
+                var frmCharityApproval = new frmCharityApproval(_charityManager, _charityList[dgCharity.SelectedIndex]);
                 frmCharityApproval.ShowDialog();
                 tabCharity_Selected(sender, e);
             }
@@ -967,12 +949,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void FilterProductLots_Click(object sender, RoutedEventArgs e)
         {
-            var filterWindow = new ProductLotSearchView(_productLotSearchCriteria);
+            var filterWindow = new frmProductLotSearchView(_productLotSearchCriteria);
             filterWindow.ShowDialog();
             try
             {
                 List<ProductLot> productLotList;
-                if(_productLotSearchCriteria.Expired)
+                if (_productLotSearchCriteria.Expired)
                 {
                     productLotList = _productLotManager.RetrieveExpiredProductLots();
                 }
@@ -980,8 +962,9 @@ namespace WpfPresentationLayer
                 {
                     productLotList = _productLotManager.RetrieveProductLots();
                 }
-                    dgProductLots.ItemsSource = productLotList;
-            } catch
+                dgProductLots.ItemsSource = productLotList;
+            }
+            catch
             {
                 ErrorAlert.ShowDatabaseError();
             }
@@ -998,7 +981,8 @@ namespace WpfPresentationLayer
         {
             if (lvOpenOrders.SelectedItem != null)
             {
-                if(((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment")){
+                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment"))
+                {
                     frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
                     deliveryWindow.ShowDialog();
                 }
@@ -1006,7 +990,7 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show("Please select a delivery that is ready for shipment");
                 }
-                
+
             }
             else
             {
@@ -1027,14 +1011,14 @@ namespace WpfPresentationLayer
             try
             {
                 var suppliersData = _supplierManager.ListSuppliers();
-                DgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
+                dgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show("Problem Loading Supplier Catalogue Data " + ex);
             }
-            
+
         }
 
 
@@ -1046,12 +1030,12 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="suppliersList"></param>
         /// <returns></returns>
-        private List<SupplierCatalogueViewModel> parseIntoSupplierCatalogue( List<Supplier> suppliersList )
+        private List<SupplierCatalogueViewModel> parseIntoSupplierCatalogue(List<Supplier> suppliersList)
         {
             List<SupplierCatalogueViewModel> viewModelList = new List<SupplierCatalogueViewModel>();
             SupplierCatalogueViewModel viewModel;
 
-            foreach ( var k in suppliersList )
+            foreach (var k in suppliersList)
             {
                 viewModel = new SupplierCatalogueViewModel()
                 {
@@ -1069,7 +1053,7 @@ namespace WpfPresentationLayer
             }
 
 
- 
+
 
 
             return viewModelList;
@@ -1084,7 +1068,7 @@ namespace WpfPresentationLayer
                 frmAddMaintenanceRecord addMaint = new frmAddMaintenanceRecord(selectedVehicle.VehicleID);
                 addMaint.Show();
             }
-            
+
         }
 
         //private void btnCheckSupplierStatus_Click(object sender, RoutedEventArgs e)
@@ -1136,10 +1120,10 @@ namespace WpfPresentationLayer
                     //throw;
                 }
 
-                
+
                 if (_supplier == null && _commercialCustomer == null)
                 {
-                    frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user,_userManager,_supplierManager,_productManager,_agreementManager);
+                    frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user, _userManager, _supplierManager, _productManager, _agreementManager);
                     checkSupplierStatus.Show();
                 }
             }
@@ -1163,7 +1147,7 @@ namespace WpfPresentationLayer
             //btnCheckStatus.Visibility = Visibility.Visible;
             //btnCancelApplication.Visibility = Visibility.Collapsed;
             //btnCheckStatusDone.Visibility = Visibility.Collapsed;
-           
+
         }
 
         /// <summary>
@@ -1183,7 +1167,7 @@ namespace WpfPresentationLayer
             //btnCheckStatusDone.Visibility = Visibility.Collapsed;
         }
 
-        
+
 
         private void dgVehicle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -1240,7 +1224,7 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Please select an invoice to view.");
             }
-            
+
         }
 
         /// <summary>
@@ -1253,7 +1237,8 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnApproveInvoice_Click(object sender, RoutedEventArgs e)
         {
-            if (!(dgSupplierInvoices.SelectedIndex < 0)) {
+            if (!(dgSupplierInvoices.SelectedIndex < 0))
+            {
                 try
                 {
                     if (_supplierInvoiceManager.ApproveSupplierInvoice(((SupplierInvoice)dgSupplierInvoices.SelectedItem).SupplierInvoiceId))
@@ -1267,7 +1252,7 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
@@ -1289,14 +1274,14 @@ namespace WpfPresentationLayer
                 try
                 {
                     _commercialCustomer = _customerManager.RetrieveCommercialCustomerByUserId(_user.UserId);
-                                  
+
                     if (_commercialCustomer.IsApproved && _commercialCustomer.Active)
                     {
                         btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nAPPROVED";
                         btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(!_commercialCustomer.IsApproved && _commercialCustomer.Active)
+                    else if (!_commercialCustomer.IsApproved && _commercialCustomer.Active)
                     {
                         btnCommercialCustomerApplicationStatusCheck.Content = btnCommercialCustomerApplicationStatusCheck.Content + "\nPENDING";
                         btnCommercialCustomerApplicationStatusCheck.IsEnabled = false;
@@ -1332,16 +1317,17 @@ namespace WpfPresentationLayer
                 try
                 {
                     _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
-               
+
                     if (_supplier.IsApproved && _supplier.Active)
                     {
-                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+ "\nAPPROVED";
+                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content + "\nAPPROVED";
                         btnSupplierApplicationStatusCheck.IsEnabled = false;
                         //btnSupplierApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(!_supplier.IsApproved && _supplier.Active) {
-                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content+"\nPENDING";
-            
+                    else if (!_supplier.IsApproved && _supplier.Active)
+                    {
+                        btnSupplierApplicationStatusCheck.Content = btnSupplierApplicationStatusCheck.Content + "\nPENDING";
+
                         btnSupplierApplicationStatusCheck.IsEnabled = false;
                     }
                     else if (!_supplier.IsApproved && !_supplier.Active)
@@ -1352,7 +1338,7 @@ namespace WpfPresentationLayer
                 }
                 catch
                 {
-                    frmApplicationAskUser askAboutApplication = new frmApplicationAskUser(_user,_userManager,_supplierManager,_productManager,_agreementManager);
+                    frmApplicationAskUser askAboutApplication = new frmApplicationAskUser(_user, _userManager, _supplierManager, _productManager, _agreementManager);
                     askAboutApplication.Show();
                 }
             }
@@ -1362,7 +1348,7 @@ namespace WpfPresentationLayer
         /// Bobby Thorne
         /// 3/24/2017
         /// 
-        /// checks user's charity application status 
+        /// checks user's _charity application status 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1373,14 +1359,14 @@ namespace WpfPresentationLayer
                 try
                 {
                     _charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
-                
-                    if (_charity.Status=="Approved")
+
+                    if (_charity.Status == "Approved")
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nAPPROVED";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if(_charity.Status == "Pending")
+                    else if (_charity.Status == "Pending")
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nPENDING";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
@@ -1397,7 +1383,7 @@ namespace WpfPresentationLayer
                     askAboutApplication.Show();
                 }
             }
-		}
+        }
 
         /// <summary>
         /// Ethan Jorgensen
@@ -1415,7 +1401,7 @@ namespace WpfPresentationLayer
                 {
                     // Call showDialog so that we know we have a result to use after this
 
-                    var selectedItem = (ProductLot) dgProductLots.SelectedItem;
+                    var selectedItem = (ProductLot)dgProductLots.SelectedItem;
                     var frm = new frmSplitProductLot(selectedItem);
                     var result = frm.ShowDialog();
 
@@ -1459,11 +1445,97 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/24
+        /// 
+        /// Opens a window to view maintenance records
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            if((Vehicle)dgVehicle.SelectedItem != null){
+                frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
+                viewMaintenanceRecordsWindow.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 2017/3/23
+        /// 
+        /// Brings up the Product Lot detail window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgProductLots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var productLot = (ProductLot)dgProductLots.SelectedItem;
+            var productLotMgr = new ProductLotManager();
+            var productLotDetail = new frmAddProductLot(productLotMgr, productLot);
+            productLotDetail.ShowDialog();
+        }
+        private void mnuQuit_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Confirmation:", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
         private void MnuPreferences_OnClick(object sender, RoutedEventArgs e)
         {
             _preferenceManager = new PreferenceManager();
             var frmPreferences = new frmMnuPreferences(_preferenceManager);
             frmPreferences.ShowDialog();
+        }
+
+        private void tabDeliveries_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+                var deliveriesWithVehicleId = new List<ExpandoObject>();
+                foreach (var item in _deliveries)
+                {
+                    dynamic newItem = new ExpandoObject();
+                    newItem.DeliveryDate = item.DeliveryDate;
+                    newItem.StatusId = item.StatusId;
+                    newItem.DeliveryTypeId = item.DeliveryTypeId;
+                    newItem.VehicleId = _deliveryManager.RetrieveVehicleByDelivery(item.DeliveryId.Value).VehicleID;
+                    deliveriesWithVehicleId.Add(newItem);
+                }
+                lvDeliveries.Items.Clear();
+
+                for (int i = 0; i < _deliveries.Count; i++)
+                {
+                    lvDeliveries.Items.Add(deliveriesWithVehicleId[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void lvDeliveries_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Delivery delivery;
+            if (lvDeliveries.SelectedItem != null)
+            {
+                delivery = _deliveries[lvDeliveries.SelectedIndex];
+            }
+            else
+            {
+                MessageBox.Show("Please select a delivery to edit.");
+                return;
+            }
+            var editForm = new frmAddEditDelivery(delivery, _deliveryManager, true);
+            var result = editForm.ShowDialog();
+            _deliveries = _deliveryManager.RetrieveDeliveries();
+            lvDeliveries.Items.Refresh();
         }
     } // end of class
 } // end of namespace 

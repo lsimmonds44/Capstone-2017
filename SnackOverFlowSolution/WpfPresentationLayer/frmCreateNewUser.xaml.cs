@@ -19,9 +19,9 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for CreateNewUser.xaml
     /// </summary>
-    public partial class CreateNewUser : Window
+    public partial class frmCreateNewUser : Window
     {
-        public CreateNewUser()
+        public frmCreateNewUser()
         {
             InitializeComponent();
         }
@@ -47,24 +47,24 @@ namespace WpfPresentationLayer
         {
             User _user = new User() {
                 UserId = 0,
-                FirstName = tFFirstName.Text,
-                LastName = tFLastName.Text,
-                Phone = tFPhone.Text,
-                EmailAddress = tFEmailAddress.Text,
-                EmailPreferences = (bool)cbEmailPreferences.IsChecked,
-                UserName = tFUserName.Text,
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,
+                Phone = txtPhone.Text,
+                EmailAddress = txtEmailAddress.Text,
+                EmailPreferences = (bool)cboEmailPreferences.IsChecked,
+                UserName = txtUserName.Text,
                 Active = true
             };
             UserManager _userManager = new UserManager();
             string result;
 
-            tFPassword.Background = Brushes.White;
-            tfConfirmPassword.Background = Brushes.White;
-            tFUserName.Background = Brushes.White;
-            tFFirstName.Background = Brushes.White;
-            tFLastName.Background = Brushes.White;
-            tFPhone.Background = Brushes.White;
-            tFEmailAddress.Background = Brushes.White;
+            pwbPassword.Background = Brushes.White;
+            pwbConfirmPassword.Background = Brushes.White;
+            txtUserName.Background = Brushes.White;
+            txtFirstName.Background = Brushes.White;
+            txtLastName.Background = Brushes.White;
+            txtPhone.Background = Brushes.White;
+            txtEmailAddress.Background = Brushes.White;
 
             lblConfirmPasswordWarning.Visibility = Visibility.Hidden;
             lblEmailWarning.Visibility = Visibility.Hidden;
@@ -74,7 +74,7 @@ namespace WpfPresentationLayer
             lblFirstNameWarning.Visibility = Visibility.Hidden;
             lblLastNameWarning.Visibility = Visibility.Hidden;
 
-            result = _userManager.CreateNewUser(_user, tFPassword.Password,tfConfirmPassword.Password);
+            result = _userManager.CreateNewUser(_user, pwbPassword.Password,pwbConfirmPassword.Password);
             if (result.Equals("Created"))
             {
                 this.DialogResult = true;
@@ -90,57 +90,57 @@ namespace WpfPresentationLayer
             }
             else if (result.Equals("Invalid Username"))
             {
-                tFUserName.Background = Brushes.Red;
+                txtUserName.Background = Brushes.Red;
                 lblUserWarning.Content = "Invalid Username";
                 lblUserWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Used Username"))
             {
-                tFUserName.Background = Brushes.Red;
+                txtUserName.Background = Brushes.Red;
                 lblUserWarning.Content = "Username already used";
                 lblUserWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Invalid Password"))
             {
-                tFPassword.Background = Brushes.Red;
+                pwbPassword.Background = Brushes.Red;
                 lblPasswordWarning.Content = "Invalid Password";
                 lblPasswordWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Password No Match"))
             {
-                tFPassword.Background = Brushes.Red;
-                tfConfirmPassword.Background = Brushes.Red;
+                pwbPassword.Background = Brushes.Red;
+                pwbConfirmPassword.Background = Brushes.Red;
                 lblConfirmPasswordWarning.Content = "Passwords do not match";
                 lblConfirmPasswordWarning.Visibility = Visibility.Visible;
             }
 
             else if (result.Equals("Invalid FirstName"))
             {
-                tFFirstName.Background = Brushes.Red;
+                txtFirstName.Background = Brushes.Red;
                 lblFirstNameWarning.Content = "Must be at between 2 and 50 letters long";
                 lblFirstNameWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Invalid LastName"))
             {
-                tFLastName.Background = Brushes.Red;
+                txtLastName.Background = Brushes.Red;
                 lblLastNameWarning.Content = "Must be at between 2 and 50 letters long";
                 lblLastNameWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Invalid Phone"))
             {
-                tFPhone.Background = Brushes.Red;
+                txtPhone.Background = Brushes.Red;
                 lblPhoneWarning.Content = "ex. 1234567890";
                 lblPhoneWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Used Email"))
             {
-                tFEmailAddress.Background = Brushes.Red;
+                txtEmailAddress.Background = Brushes.Red;
                 lblEmailWarning.Content = "Email already used";
                 lblEmailWarning.Visibility = Visibility.Visible;
             }
             else if (result.Equals("Invalid Email"))
             {
-                tFEmailAddress.Background = Brushes.Red;
+                txtEmailAddress.Background = Brushes.Red;
                 lblEmailWarning.Content = "Invalid Email";
                 lblEmailWarning.Visibility = Visibility.Visible;
             }
