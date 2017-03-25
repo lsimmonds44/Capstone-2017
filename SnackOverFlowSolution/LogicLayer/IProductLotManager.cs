@@ -15,6 +15,7 @@ namespace LogicLayer
         bool AddProduct(ProductLot p);
 
         List<ProductLot> RetrieveProductLots();
+        List<ProductLot> RetrieveActiveProductLots();
 
         int UpdateProductLotAvailableQuantity(ProductLot oldProductLot, ProductLot newProductLot);
 

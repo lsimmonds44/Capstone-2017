@@ -386,6 +386,59 @@ namespace DataAccessLayer
             return lots;
         }
 
+        public static List<ProductLot> RetrieveActiveProductLots()
+        {
+            List<ProductLot> lots = new List<ProductLot>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_active_product_lot_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        ProductLot lot = new ProductLot();
+
+                        lot.ProductLotId = reader.GetInt32(0);
+                        lot.WarehouseId = reader.GetInt32(1);
+                        lot.SupplierId = reader.GetInt32(2);
+                        lot.LocationId = reader.GetInt32(3);
+                        lot.ProductId = reader.GetInt32(4);
+                        lot.SupplyManagerId = reader.GetInt32(5);
+                        lot.Quantity = reader.GetInt32(6);
+                        lot.AvailableQuantity = reader.GetInt32(7);
+                        lot.DateReceived = reader.GetDateTime(8);
+                        lot.ExpirationDate = reader.GetDateTime(9);
+                        lot.Grade = reader.GetString(10);
+                        if (!reader.IsDBNull(11))
+                        {
+                            lot.Price = reader.GetDecimal(11);
+                        }
+
+
+                        lots.Add(lot);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return lots;
+        }
        
 
 

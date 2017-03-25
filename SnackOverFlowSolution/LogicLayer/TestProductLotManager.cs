@@ -62,7 +62,10 @@ namespace LogicLayer
         }
 
 
-        public List<ProductLot> RetrieveProductLotsWithGradeAndPrice()
+
+
+
+        public List<ProductLot> RetrieveActiveProductLots()
         {
             throw new NotImplementedException();
         }

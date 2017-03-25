@@ -150,10 +150,10 @@ namespace WpfPresentationLayer
             
             try
             {
-                _productLots = pLM.RetrieveProductLots();
+                _productLots = pLM.RetrieveActiveProductLots();
                 foreach (var product in _productLots)
                 {
-                    cboProducts.Items.Add(product.ProductName);
+                        cboProducts.Items.Add(product.ProductName);
                 }
             }
             catch (Exception ex)

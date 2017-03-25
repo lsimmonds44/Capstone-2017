@@ -152,6 +152,34 @@ namespace LogicLayer
         }
 
 
-        
+
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/24
+        /// Gets only the active product lots (Ones that have more than 0 quantity)
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductLot> RetrieveActiveProductLots()
+        {
+            List<ProductLot> lots = null;
+            try
+            {
+                lots = ProductLotAccessor.RetrieveActiveProductLots();
+                IProductManager productManager = new ProductManager();
+                foreach (var lot in lots)
+                {
+                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                    lot.ProductName = productInLot.Name;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return lots;
+        }
     }
 }
