@@ -31,6 +31,7 @@ namespace WpfPresentationLayer
         private int _orderNum;
         private List<ProductLot> _productLots;
         private Decimal _orderTotal = 0;
+        private ProductLot _currentlySelectedProductLot;
        
         public frmCreateOrder()
         {
@@ -214,13 +215,20 @@ namespace WpfPresentationLayer
             return result;
         }
 
+        /// <summary>
+        /// Eric Walton
+        /// 2017/03/24
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void productSelected(object sender, EventArgs e)
         {
             if (cboProducts.SelectedIndex >= 0)
             {
-                ProductLot selectedProduct = _productLots[cboProducts.SelectedIndex];
-                txtAvailableProduct.Text = selectedProduct.Quantity.ToString();
-                lblProductGradeResult.Content = selectedProduct.Grade.ToString();
+                _currentlySelectedProductLot = _productLots[cboProducts.SelectedIndex];
+                txtAvailableProduct.Text = _currentlySelectedProductLot.Quantity.ToString();
+                lblProductGradeResult.Content = _currentlySelectedProductLot.Grade.ToString();
+                lblProductPrice.Content = "$" + _currentlySelectedProductLot.Price.ToString();
             }
         }
 
@@ -244,7 +252,7 @@ namespace WpfPresentationLayer
                     oLine.ProductName = cboProducts.SelectedItem.ToString();
                     oLine.Quantity = parseToInt(txtQty.Text);
                     oLine.GradeID = lblProductGradeResult.Content.ToString();
-                    oLine.Price = 100;
+                    oLine.Price = _currentlySelectedProductLot.Price;
                     oLine.UnitDiscount = (decimal)0.0;
                     try
                     {
