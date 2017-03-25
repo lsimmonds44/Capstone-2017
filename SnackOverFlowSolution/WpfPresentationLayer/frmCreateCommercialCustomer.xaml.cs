@@ -137,14 +137,14 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Federal Tax Id must be 9 digits.");
                 valid = false;
             }
-            if(cbkIsApproved.IsChecked == false)
-            {
-                cbkIsApproved.IsChecked = true;
-            }
-            if (cbkActive.IsChecked == false)
-            {
-                cbkActive.IsChecked = true;
-            }
+            //if(cbkIsApproved.IsChecked == false)
+            //{
+            //    cbkIsApproved.IsChecked = true;
+            //}
+            //if (cbkActive.IsChecked == false)
+            //{
+            //    cbkActive.IsChecked = true;
+            //}
             return valid;
         }
 
