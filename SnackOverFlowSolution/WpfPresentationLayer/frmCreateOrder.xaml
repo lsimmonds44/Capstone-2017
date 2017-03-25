@@ -75,7 +75,7 @@
             <Button Name="btnAddOrderLine" Grid.Row="1" Grid.Column="3" Content="Add" Width="50" Margin="10 4 10 4" HorizontalAlignment="Right" IsEnabled="False" Click="AddOrderLineClick" />
             <Label Name="lblProductGradeResult" Grid.Row="2" Grid.Column="0" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <Label Name="lblAmount" Grid.Row="3" Grid.Column="2" Content="Order Total" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="tfOrderAmount" Grid.Row="3" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+            <TextBox Name="txtOrderAmount" Grid.Row="3" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Row="3" Background="#FFE5E5E5">
             <Grid.RowDefinitions>

@@ -30,6 +30,7 @@ namespace WpfPresentationLayer
         private User _cCUser;
         private int _orderNum;
         private List<ProductLot> _productLots;
+        private Decimal _orderTotal = 0;
        
         public frmCreateOrder()
         {
@@ -174,17 +175,24 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void StartOrderClick(object sender, RoutedEventArgs e)
         {
-            var order = validateOrder();
-            if (order != null)
+            if (btnStartOrder.Content.ToString() == "Start Order")
             {
-                if (createOrder(order))
+                var order = validateOrder();
+                if (order != null)
                 {
-                    btnAddOrderLine.IsEnabled = true;
-                    cboProducts.IsEnabled = true;
-                    displayProductLots();
-                } 
+                    if (createOrder(order))
+                    {
+                        btnAddOrderLine.IsEnabled = true;
+                        cboProducts.IsEnabled = true;
+                        displayProductLots();
+                        btnStartOrder.Content = "Done";
+                    }
+                }
             }
-
+            else
+            {
+                DialogResult = true;
+            }
         }
 
 
@@ -216,6 +224,12 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Eric Walton
+        /// /// 2017/06/02 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddOrderLineClick(object sender, RoutedEventArgs e)
         {
             if (txtQty.Text.Length > 0)
@@ -235,6 +249,8 @@ namespace WpfPresentationLayer
                     try
                     {
                         _orderLineManager.CreateOrderLine(oLine);
+                        _orderTotal += oLine.Price * oLine.Quantity;
+                        txtOrderAmount.Text = "$" + _orderTotal.ToString();
                     }
                     catch (Exception ex)
                     {
@@ -253,10 +269,14 @@ namespace WpfPresentationLayer
             RefreshOrderLines();
         }
 
-        public void RefreshOrderLines()
+        /// <summary>
+        /// Eric Walton
+        /// /// 2017/06/02 
+        /// </summary>
+        private void RefreshOrderLines()
         {
-
-            dgOrderLines.ItemsSource = _orderLineManager.RetrieveOrderLineListByProductOrderId(_orderNum);
+            var oLines = _orderLineManager.RetrieveOrderLineListByProductOrderId(_orderNum, _orderTotal);
+            dgOrderLines.ItemsSource = oLines;
         }
 
         private void CancelClick(object sender, RoutedEventArgs e)

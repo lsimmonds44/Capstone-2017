@@ -37,12 +37,12 @@ namespace LogicLayer
 
 
 
-        public List<OrderLine> RetrieveOrderLineListByProductOrderId(int ProductOrderId)
+        public List<OrderLine> RetrieveOrderLineListByProductOrderId(int ProductOrderId, Decimal OrderAmount)
         {
             List<OrderLine> result = null;
             try
             {
-                result = OrderLineAccessor.RetrieveOrderLinesByOrderId(ProductOrderId);
+                result = OrderLineAccessor.RetrieveOrderLinesByOrderId(ProductOrderId, OrderAmount);
             }
             catch (Exception)
             {

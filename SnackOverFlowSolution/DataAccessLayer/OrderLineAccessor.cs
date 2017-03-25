@@ -52,7 +52,7 @@ namespace DataAccessLayer
             return result;
         }
 
-        public static List<OrderLine> RetrieveOrderLinesByOrderId(int OrderId)
+        public static List<OrderLine> RetrieveOrderLinesByOrderId(int OrderId, Decimal orderAmount)
         {
             List<OrderLine> orderLines = new List<OrderLine>();
 
@@ -61,6 +61,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue(@"PRODUCT_ORDER_ID", OrderId);
+            cmd.Parameters.AddWithValue(@"ORDER_AMOUNT", orderAmount);
             try
             {
                 conn.Open();
