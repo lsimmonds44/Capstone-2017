@@ -168,11 +168,29 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void createOrderClick(object sender, RoutedEventArgs e)
         {
-            frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
-            if (createOrderWindow.ShowDialog() == true)
+            if (dgCustomer.SelectedIndex >= 0)
             {
+                var selectedCustomer = (CommercialCustomer)dgCustomer.SelectedItem;
+                
+                
+                if (selectedCustomer.Active)
+                {
+                    frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
+                    if (createOrderWindow.ShowDialog() == true)
+                    {
 
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(selectedCustomer.Commercial_Id + " Must be active");
+                }   
             }
+            else
+            {
+                MessageBox.Show("Must select a user to create an order!");
+            }
+            
         }
 
         /// <summary>
