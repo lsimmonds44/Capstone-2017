@@ -60,28 +60,39 @@ namespace WpfPresentationLayer
         /// </summary>
         private void displayCustomerInfo()
         {
+            UserAddress userAddress;
             try
             {
                 _cCUser = _userManager.RetrieveUser(_cCustomer.User_Id);
+                
             }
             catch (Exception)
             {
                 MessageBox.Show("Commercial Customer user account could not be retrieved.");
             }
+            try
+            {
+                userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId);
+                MessageBox.Show("preferredaddID" + _cCUser.PreferredAddressId);
+                txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
+            }
+            catch (Exception)
+            {
+                txtUserAddress.Text = "User address not found. Check address info on user tab.";
+            }
+
             txtCustomerID.Text = _cCustomer.Commercial_Id.ToString();
             txtCustomerUserName.Text = _cCUser.UserName;
-            txtUserAddress.Text = "Address will go here.";
             txtOrderType.Text = "Commercial Customer";
             dpOrderDate.SelectedDate = DateTime.Now;
             cboDeliveryType.Items.Add("Truck");
             dpExpectedDate.SelectedDate = DateTime.Now.AddDays(5);
-
         }
 
         /// <summary>
         /// Eric Walton
         /// 2017/10/3
-        /// Checks to make sure all the needed infor is supplied to create and order.
+        /// Checks to make sure all the needed info is supplied to create and order.
         /// </summary>
         /// <returns></returns>
         private ProductOrder validateOrder()
@@ -97,6 +108,11 @@ namespace WpfPresentationLayer
             {
                 valid = false;
                 MessageBox.Show("A delivery type must be selected.");
+            }
+            if (_cCUser.PreferredAddressId == null)
+            {
+                valid = false;
+                MessageBox.Show("Customer does not have an address. Go to user tab and resolve the issue.");
             }
             if (!valid)
             {

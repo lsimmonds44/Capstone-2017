@@ -38,7 +38,7 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@DATE_EXPECTED", order.DateExpected);
             cmd.Parameters.AddWithValue("@DISCOUNT", order.Discount);
             cmd.Parameters.AddWithValue("@ORDER_STATUS_ID", order.OrderStatusId);
-            cmd.Parameters.AddWithValue("@USER_ADDRESS_ID", 100);
+            cmd.Parameters.AddWithValue("@USER_ADDRESS_ID", order.UserAddressId);
             cmd.Parameters.AddWithValue("@HAS_ARRIVED", order.HasArrived);
             try
             {
