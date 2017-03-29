@@ -60,28 +60,39 @@ namespace WpfPresentationLayer
         /// </summary>
         private void displayCustomerInfo()
         {
+            UserAddress userAddress;
             try
             {
                 _cCUser = _userManager.RetrieveUser(_cCustomer.User_Id);
+                
             }
             catch (Exception)
             {
                 MessageBox.Show("Commercial Customer user account could not be retrieved.");
             }
+            try
+            {
+                userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId);
+                MessageBox.Show("preferredaddID" + _cCUser.PreferredAddressId);
+                txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
+            }
+            catch (Exception)
+            {
+                txtUserAddress.Text = "User address not found. Check address info on user tab.";
+            }
+
             txtCustomerID.Text = _cCustomer.Commercial_Id.ToString();
             txtCustomerUserName.Text = _cCUser.UserName;
-            txtUserAddress.Text = "Address will go here.";
             txtOrderType.Text = "Commercial Customer";
             dpOrderDate.SelectedDate = DateTime.Now;
             cboDeliveryType.Items.Add("Truck");
             dpExpectedDate.SelectedDate = DateTime.Now.AddDays(5);
-
         }
 
         /// <summary>
         /// Eric Walton
         /// 2017/10/3
-        /// Checks to make sure all the needed infor is supplied to create and order.
+        /// Checks to make sure all the needed info is supplied to create and order.
         /// </summary>
         /// <returns></returns>
         private ProductOrder validateOrder()
@@ -97,6 +108,11 @@ namespace WpfPresentationLayer
             {
                 valid = false;
                 MessageBox.Show("A delivery type must be selected.");
+            }
+            if (_cCUser.PreferredAddressId == null)
+            {
+                valid = false;
+                MessageBox.Show("Customer does not have an address. Go to user tab and resolve the issue.");
             }
             if (!valid)
             {
@@ -153,9 +169,16 @@ namespace WpfPresentationLayer
             try
             {
                 _productLots = pLM.RetrieveActiveProductLots();
-                foreach (var product in _productLots)
+                if (_productLots.Count < 1)
                 {
+                    MessageBox.Show("No available productlots. Check to see if product lots are ready to be inspected.");
+                }
+                else
+                {
+                    foreach (var product in _productLots)
+                    {
                         cboProducts.Items.Add(product.ProductName);
+                    }
                 }
             }
             catch (Exception ex)
@@ -244,25 +267,30 @@ namespace WpfPresentationLayer
             {
                 if (parseToInt(txtQty.Text) <= parseToInt(txtAvailableProduct.Text))
                 {
-
-
-                    OrderLine oLine = new OrderLine();
-                    oLine.ProductOrderID = _orderNum;
-                    oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
-                    oLine.ProductName = cboProducts.SelectedItem.ToString();
-                    oLine.Quantity = parseToInt(txtQty.Text);
-                    oLine.GradeID = lblProductGradeResult.Content.ToString();
-                    oLine.Price = _currentlySelectedProductLot.Price;
-                    oLine.UnitDiscount = (decimal)0.0;
-                    try
+                    if (_currentlySelectedProductLot.Price <= 0)
                     {
-                        _orderLineManager.CreateOrderLine(oLine);
-                        _orderTotal += oLine.Price * oLine.Quantity;
-                        txtOrderAmount.Text = "$" + _orderTotal.ToString();
+                        MessageBox.Show("Productlot has not been priced. Not available for order yet.");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Failed to add product to order." + ex);
+                        OrderLine oLine = new OrderLine();
+                        oLine.ProductOrderID = _orderNum;
+                        oLine.ProductID = _productLots[cboProducts.SelectedIndex].ProductId;
+                        oLine.ProductName = cboProducts.SelectedItem.ToString();
+                        oLine.Quantity = parseToInt(txtQty.Text);
+                        oLine.GradeID = lblProductGradeResult.Content.ToString();
+                        oLine.Price = _currentlySelectedProductLot.Price;
+                        oLine.UnitDiscount = (decimal)0.0;
+                        try
+                        {
+                            _orderLineManager.CreateOrderLine(oLine);
+                            _orderTotal += oLine.Price * oLine.Quantity;
+                            txtOrderAmount.Text = "$" + _orderTotal.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to add product to order." + ex);
+                        }
                     }
                 }
                 else
@@ -291,6 +319,7 @@ namespace WpfPresentationLayer
         {
             DialogResult = false;
         }
+
         
 
 
