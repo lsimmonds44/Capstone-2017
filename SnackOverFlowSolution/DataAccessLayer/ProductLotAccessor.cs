@@ -271,6 +271,63 @@ namespace DataAccessLayer
         }
 
         /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Returns a list of ProductLots by supplier
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        public static List<ProductLot> RetrieveProductLotsBySupplier(Supplier supplier)
+        {
+            List<ProductLot> productLots = new List<ProductLot>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_lot_by_supplier_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
+            cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ProductLot productLot = new ProductLot
+                        {
+                            ProductLotId = reader.GetInt32(0),
+                            WarehouseId = reader.GetInt32(1),
+                            SupplierId = reader.GetInt32(2),
+                            LocationId = reader.GetInt32(3),
+                            ProductId = reader.GetInt32(4),
+                            SupplyManagerId = reader.GetInt32(5),
+                            Quantity = reader.GetInt32(6),
+                            AvailableQuantity = reader.GetInt32(7),
+                            DateReceived = reader.GetDateTime(8),
+                            ExpirationDate = reader.GetDateTime(9)
+                        };
+                        productLots.Add(productLot);
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("There was an issue connecting to the database: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return productLots;
+        }
+
+        /// <summary>
         /// Created 2017/03/09 by William Flood
         /// 
         /// Returns a list of expired product lots
@@ -564,6 +621,61 @@ namespace DataAccessLayer
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Returns a product lot associated with the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ProductLot RetrieveProductLotById(int id)
+        {
+            ProductLot productLot = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_lot";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", id);
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    productLot = new ProductLot()
+                    {
+                        ProductLotId = reader.GetInt32(0),
+                        WarehouseId = reader.GetInt32(1),
+                        SupplierId = reader.GetInt32(2),
+                        LocationId = reader.GetInt32(3),
+                        ProductId = reader.GetInt32(4),
+                        SupplyManagerId = reader.GetInt32(5),
+                        Quantity = reader.GetInt32(6),
+                        AvailableQuantity = reader.GetInt32(7),
+                        DateReceived = reader.GetDateTime(8),
+                        ExpirationDate = reader.GetDateTime(9),
+                        Grade = reader.GetString(10)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return productLot;
         }
     }
 }

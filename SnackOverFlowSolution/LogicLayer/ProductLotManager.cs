@@ -160,18 +160,14 @@ namespace LogicLayer
         /// Gets only the active product lots (Ones that have more than 0 quantity)
         /// </summary>
         /// <returns></returns>
+        /// <remarks>Last Modified 2017/03/29 by Christian Lopez - Extracted method to reuse it</remarks>
         public List<ProductLot> RetrieveActiveProductLots()
         {
             List<ProductLot> lots = null;
             try
             {
                 lots = ProductLotAccessor.RetrieveActiveProductLots();
-                IProductManager productManager = new ProductManager();
-                foreach (var lot in lots)
-                {
-                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
-                    lot.ProductName = productInLot.Name;
-                }
+                setProductLotNames(lots);
             }
             catch (Exception)
             {
@@ -180,6 +176,71 @@ namespace LogicLayer
             }
 
             return lots;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Sets the names for the product lots
+        /// </summary>
+        /// <param name="lots"></param>
+        private static void setProductLotNames(List<ProductLot> lots)
+        {
+            IProductManager productManager = new ProductManager();
+            foreach (var lot in lots)
+            {
+                var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                lot.ProductName = productInLot.Name;
+            }
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Retrieves a list of product lots from a given supplier
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        public List<ProductLot> RetrieveProductLotsBySupplier(Supplier supplier)
+        {
+            List<ProductLot> lots = null;
+            try
+            {
+                lots = ProductLotAccessor.RetrieveProductLotsBySupplier(supplier);
+                setProductLotNames(lots);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return lots;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Returns a product lot associated with that id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ProductLot RetrieveProductLotById(int id)
+        {
+            try
+            {
+                ProductLot lot = ProductLotAccessor.RetrieveProductLotById(id);
+                ProductManager pm = new ProductManager();
+                lot.ProductName = (pm.RetrieveProductById((int)lot.ProductId)).Name;
+                return lot;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

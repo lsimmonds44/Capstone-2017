@@ -83,5 +83,54 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Creates an invoice and returns the id associated
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public int CreateSupplierInvoice(SupplierInvoice invoice)
+        {
+            int id = 1;
+            try
+            {
+                id = SupplierInvoiceAccessor.CreateSupplierInvoice(invoice);
+                if (id == 0)
+                {
+                    // We were not able to capture the new id
+                    throw new ApplicationException("Unable to retrieve the new id number.");
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Adds a supplier invoice line
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public bool CreateSupplierInvoiceLine(SupplierInvoiceLine line)
+        {
+            try
+            {
+                return (1 == SupplierInvoiceAccessor.CreateSupplierInvoiceLine(line));
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

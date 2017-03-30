@@ -37,5 +37,21 @@ namespace LogicLayer
         /// <param name="invoiceId"></param>
         /// <returns></returns>
         bool ApproveSupplierInvoice(int invoiceId);
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        int CreateSupplierInvoice(SupplierInvoice invoice);
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        bool CreateSupplierInvoiceLine(SupplierInvoiceLine line);
     }
 }

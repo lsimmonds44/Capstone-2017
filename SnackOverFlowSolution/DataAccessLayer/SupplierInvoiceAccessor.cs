@@ -166,6 +166,90 @@ namespace DataAccessLayer
             return rows;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Stores the invoice to the db and returns the id it was stored to
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public static int CreateSupplierInvoice(SupplierInvoice invoice)
+        {
+            int id = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_supplier_invoice";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", invoice.SupplierId);
+            cmd.Parameters.AddWithValue("@INVOICE_DATE", invoice.InvoiceDate);
+            cmd.Parameters.AddWithValue("@SUB_TOTAL", invoice.SubTotal);
+            cmd.Parameters.AddWithValue("@TAX_AMOUNT", invoice.TaxAmount);
+            cmd.Parameters.AddWithValue("@TOTAL", invoice.Total);
+            cmd.Parameters.AddWithValue("@AMOUNT_PAID", invoice.AmountPaid);
+
+            try
+            {
+                conn.Open();
+                int.TryParse(cmd.ExecuteScalar().ToString(), out id);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Creates a line for a supplier invoice
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public static int CreateSupplierInvoiceLine(SupplierInvoiceLine line)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_supplier_invoice_line";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", line.SupplierInvoiceId);
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", line.ProductLotId);
+            cmd.Parameters.AddWithValue("@QUANTITY_SOLD", line.QuantitySold);
+            cmd.Parameters.AddWithValue("@PRICE_EACH", line.PriceEach);
+            cmd.Parameters.AddWithValue("@ITEM_DISCOUNT", line.ItemDiscount);
+            cmd.Parameters.AddWithValue("@ITEM_TOTAL", line.ItemTotal);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
     }
 
 }

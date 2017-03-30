@@ -581,7 +581,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Button Name="btnApproveInvoice" Grid.Row="0" Grid.Column="3" Content="Approve Invoice" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnApproveInvoice_Click" />
-                        <Button Name="btnSubmitSupplierInvoice" Grid.Row="0" Grid.Column="2" Content="Submit Invoice" Margin="10 0 5 0" HorizontalAlignment="left" IsEnabled="False"/>
+                        <Button Name="btnSubmitSupplierInvoice" Grid.Row="0" Grid.Column="2" Content="Submit Invoice" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnSubmitSupplierInvoice_Click" />
                     </Grid>
                 </Grid>
             </TabItem>

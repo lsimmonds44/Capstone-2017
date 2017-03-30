@@ -1623,6 +1623,55 @@ namespace WpfPresentationLayer
             lvDeliveries.Items.Refresh();
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Launches the supplier invoice form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSubmitSupplierInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (_supplierList == null)
+            {
+                try
+                {
+                    _supplierList = _supplierManager.ListSuppliers();
+                }
+                catch (Exception)
+                {
+                    
+                    MessageBox.Show("Unable to verify supplier.");
+                    return;
+                }
+                
+            }
+            // See if the current user is a supplier
+            if (_supplierList.Find(s => s.UserId == _user.UserId) != null)
+            {
+                var supplierInvoiceForm = new frmSubmitSupplierInvoice(_supplierList.Find(s => s.UserId == _user.UserId), _productLotManager, _supplierInvoiceManager);
+                supplierInvoiceForm.ShowDialog();
+            }
+            else
+            {
+                var selectSupplierForm = new frmSelectSupplier(_supplierList);
+                var result = selectSupplierForm.ShowDialog();
+                if (result == true)
+                {
+                    // We have a supplier in the form
+                    var supplierInvoiceForm = new frmSubmitSupplierInvoice(selectSupplierForm.selectedSupplier, _productLotManager, _supplierInvoiceManager);
+                    var innerResult = supplierInvoiceForm.ShowDialog();
+                    if (innerResult == true)
+                    {
+                        tabSupplierInvoice_Selected(sender, e);
+                        MessageBox.Show("Invoice submitted");
+                    }
+                }
+            }
+            
+        }
+
         
     } // end of class
 } // end of namespace 
