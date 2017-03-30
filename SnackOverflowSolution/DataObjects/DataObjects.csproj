@@ -65,6 +65,7 @@
     <Compile Include="RepairLine.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierCatalogueViewModel.cs" />
+    <Compile Include="SupplierInventory.cs" />
     <Compile Include="SupplierInvoice.cs" />
     <Compile Include="SupplierInvoiceLine.cs" />
     <Compile Include="User.cs" />
