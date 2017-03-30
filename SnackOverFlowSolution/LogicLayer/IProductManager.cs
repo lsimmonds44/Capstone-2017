@@ -31,5 +31,7 @@ namespace LogicLayer
             double max);
 
         List<Product> RetrieveProducts();
+
+        List<BrowseProductViewModel> RetrieveProductsBySupplierId(int id);
     }
 }

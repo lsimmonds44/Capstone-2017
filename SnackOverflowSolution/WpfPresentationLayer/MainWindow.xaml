@@ -13,7 +13,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-
         <Menu Grid.Row="0">
             <MenuItem  Header="File" >
                 <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
@@ -360,7 +359,7 @@
                     <!--Supplier Catalogue-->
                     <DataGrid Name="dgSupplierCatalogue" GridLinesVisibility="Horizontal"
                       RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
-                      AutoGenerateColumns="False"
+                      AutoGenerateColumns="False" MouseDoubleClick="btnLoadProductsBySupplierId_Click"
                       Grid.Column="4" Grid.ColumnSpan="8" Grid.RowSpan="15" Grid.Row="2"
                       IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
                       CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
@@ -384,10 +383,16 @@
                       IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
                       CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Image" Binding="{Binding SupplierID}" Width="60*"/>
-                            <DataGridTextColumn Header="Product Name" Binding="{Binding SupplierID}" Width="100*"/>
-                            <DataGridTextColumn Header="Category" Binding="{Binding SupplierID}" Width="100*"/>
-                            <DataGridTextColumn Header="Description" Binding="{Binding SupplierID}" Width="100*"/>
+                            <DataGridTemplateColumn Header="Image" IsReadOnly="True" Width="50*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <Image Source="{Binding SourceString}" Height="40" Width="40"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding Name}" Width="100*"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding CategoryID}" Width="100*"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="100*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product DataGrid-->

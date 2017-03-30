@@ -66,5 +66,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<BrowseProductViewModel> RetrieveProductsBySupplierId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

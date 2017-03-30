@@ -144,7 +144,6 @@ namespace LogicLayer
 
         }
 
-
         /// <summary>
         /// Create by Natacha Ilunga 
         /// Creatd on 2/10/2017
@@ -194,9 +193,6 @@ namespace LogicLayer
             return productsToFilter;
         }
 
-
-
-
         /// <summary>
         /// Christian Lopez
         /// Created 2017/03/08
@@ -215,6 +211,19 @@ namespace LogicLayer
                 
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/29/2017
+        /// 
+        /// Retrieves Products by supplier id to view model
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<BrowseProductViewModel> RetrieveProductsBySupplierId(int id)
+        {
+            return ProductAccessor.RetrieveProductsBySupplierIdToViewModel(id); 
         }
     }
 }

@@ -354,5 +354,18 @@ namespace DataAccessLayer
             return products;
         }
 
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/29/2017
+        /// 
+        /// Retrieves Products by suplier Id to Supplier Catalog View
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        public static List<BrowseProductViewModel> RetrieveProductsBySupplierIdToViewModel(int supplierId)
+        {
+            return RetrieveProductsToBrowseProducts().FindAll(s => s.SupplierID == supplierId);
+        }
+
     }
 }

@@ -1070,12 +1070,80 @@ namespace WpfPresentationLayer
                 viewModelList.Add(viewModel);
             }
 
-
-
-
-
             return viewModelList;
         }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/29/2017
+        /// 
+        /// Click event to load product datagrid with products by supplier id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoadProductsBySupplierId_Click(object sender, MouseButtonEventArgs e)
+        {
+
+            var supplierData =  (SupplierCatalogueViewModel)dgSupplierCatalogue.SelectedItem;
+
+            RefreshSupplierProductDataGrid(supplierData.SupplierID);
+
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/29/2016
+        /// 
+        /// Refreshes Products Datagrid on Supplier Catalog tab
+        /// </summary>
+        /// <param name="supplierId"></param>
+        private void RefreshSupplierProductDataGrid(int supplierId)
+        {
+
+            dgProductList.ItemsSource = null;
+
+            dgProductList.ItemsSource = RetrieveProductsBySupplierId(supplierId);
+
+        }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 03/29/2017
+        /// 
+        /// Retrieves Products by SupplierId to View Model -- Supplier Catalog Tab
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        private List<BrowseProductViewModel> RetrieveProductsBySupplierId(int supplierId)
+        {
+            List<BrowseProductViewModel> productsbySupplierIdData = null;
+            try
+            {
+                productsbySupplierIdData = _productManager.RetrieveProductsBySupplierId(supplierId);
+
+                //Append Image URIs to _products lists
+                try
+                {
+                    foreach (var a in productsbySupplierIdData)
+                    {
+                        a.SaveImageToTempFile();
+                        a.SourceString = WpfExtensionMethods.FilePath + a.ProductId + ".jpg";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return productsbySupplierIdData;
+        }
+
+
 
         private void btnAddMaintenance_Click(object sender, RoutedEventArgs e)
         {
@@ -1242,7 +1310,6 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Please select an invoice to view.");
             }
-
         }
 
         /// <summary>
@@ -1555,5 +1622,7 @@ namespace WpfPresentationLayer
             _deliveries = _deliveryManager.RetrieveDeliveries();
             lvDeliveries.Items.Refresh();
         }
+
+        
     } // end of class
 } // end of namespace 
