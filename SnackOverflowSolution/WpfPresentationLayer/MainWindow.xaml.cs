@@ -533,6 +533,12 @@ namespace WpfPresentationLayer
         /// 
         /// Open a frmAddInspection
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// Modified on 2017/03/30
+        /// 
+        /// Now shows an error message if there is no product lot selected
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
@@ -555,6 +561,10 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a product lot to create a new inspection");
             }
         }
 
