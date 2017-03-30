@@ -73,7 +73,6 @@ namespace WpfPresentationLayer
             try
             {
                 userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId);
-                MessageBox.Show("preferredaddID" + _cCUser.PreferredAddressId);
                 txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
             }
             catch (Exception)
