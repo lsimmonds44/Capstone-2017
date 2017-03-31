@@ -242,15 +242,19 @@ VALUES
 	
 print '*** Inserting Agreement Test Data'
 GO
-
-DECLARE @this_date DATETIME
-SET @this_date = GETDATE()
-EXEC sp_create_agreement 10001, 10002, @this_date, 1, 10001
+INSERT INTO [dbo].[Agreement]
+	(Product_ID, Supplier_ID, Date_Submitted, Is_Approved, Approved_By)
+VALUES
+	(10001, 10002, GETDATE(), 1, 10001)
 GO
 
-print '*** Inserting Supplier Agreement Test Data'
+print '*** Inserting Supplier Inventory Test Data'
 GO
-EXEC sp_create_supplier_inventory 10000,10,'2017-01-01 00:00:000'
+
+INSERT INTO [dbo].[Supplier_Inventory]
+	(Agreement_Id, Quantity, Date_Added)
+VALUES
+	(10000,10,'2017-01-01 00:00:000')
 GO
 
 print '*** Inserting Supplier_Product Test Data ***'
