@@ -46,6 +46,7 @@ namespace WpfPresentationLayer
         private ProductLotSearchCriteria _productLotSearchCriteria;
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
+        private ISupplierInventoryManager _supplierInventoryManager;
         
 
 
@@ -69,6 +70,7 @@ namespace WpfPresentationLayer
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
             _deliveryManager = new DeliveryManager();
+            _supplierInventoryManager = new SupplierInventoryManager();
             DisposeFiles();
             _productLotSearchCriteria = new ProductLotSearchCriteria() { Expired = false };
         }
@@ -533,6 +535,12 @@ namespace WpfPresentationLayer
         /// 
         /// Open a frmAddInspection
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// Modified on 2017/03/30
+        /// 
+        /// Now shows an error message if there is no product lot selected
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
@@ -555,6 +563,10 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a product lot to create a new inspection");
             }
         }
 
@@ -1540,7 +1552,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
         {
-            if((Vehicle)dgVehicle.SelectedItem != null){
+            if(dgVehicle.SelectedIndex > 0){
                 frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
                 viewMaintenanceRecordsWindow.ShowDialog();
             }
@@ -1624,6 +1636,36 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Created on 2017-03-30 by William Flood
+        /// Responds to the click event on btnAddSupplierInventory
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddSupplierInventory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+                if(null!=supplier)
+                {
+                    var agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplier.SupplierID);
+                    if(0==agreementList.Count)
+                    {
+                        MessageBox.Show("Create an agreement first!");
+                        return;
+                    }
+                    var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager,agreementList);
+                    supplierInventoryWindow.ShowDialog();
+                }
+            } catch (System.Data.SqlClient.SqlException ex)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+
+        }
+        
+        /// <summary>
         /// Christian Lopez
         /// 2017/03/29
         /// 
@@ -1676,6 +1718,28 @@ namespace WpfPresentationLayer
         {
             frmAddWarehouse addWarehouseWindow = new frmAddWarehouse();
             addWarehouseWindow.ShowDialog();
+		}
+		
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/30
+        /// 
+        /// Opens the window to edit the selected invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdateInvoice_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(dgSupplierInvoices.SelectedIndex >= 0){
+                frmUpdateSupplierInvoice updateSupplierInvoiceWindow = new frmUpdateSupplierInvoice((SupplierInvoice)dgSupplierInvoices.SelectedItem);
+                updateSupplierInvoiceWindow.ShowDialog();
+                tabSupplierInvoice_Selected(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select an invoice");
+            }
         }
 
         

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="SO" translatesAutoresizingMaskIntoConstraints="NO" id="XjD-0M-GFe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snack Overflow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="I0p-11-qDH">
+                                <rect key="frame" x="0.0" y="301" width="375" height="66"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="55"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XjD-0M-GFe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="INu-pA-Ti4"/>
+                            <constraint firstItem="XjD-0M-GFe" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="JWt-VR-sfg"/>
+                            <constraint firstItem="I0p-11-qDH" firstAttribute="trailing" secondItem="XjD-0M-GFe" secondAttribute="trailing" id="Jre-yo-lYp"/>
+                            <constraint firstItem="I0p-11-qDH" firstAttribute="leading" secondItem="XjD-0M-GFe" secondAttribute="leading" id="Mgr-35-g2l"/>
+                            <constraint firstItem="I0p-11-qDH" firstAttribute="centerY" secondItem="XjD-0M-GFe" secondAttribute="centerY" id="PYr-Pd-tRt"/>
+                            <constraint firstItem="XjD-0M-GFe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RXe-ZE-TKZ"/>
+                            <constraint firstAttribute="trailing" secondItem="XjD-0M-GFe" secondAttribute="trailing" id="VRr-be-m3Y"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SO" width="240" height="180"/>
+    </resources>
+</document>

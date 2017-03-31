@@ -67,8 +67,8 @@ namespace WpfPresentationLayer
                     _repairLineList.Add(rl);
                 }
             }
-            lstMaintenanceRecords.ItemsSource = null;
-            lstMaintenanceRecords.ItemsSource = _repairLineList;
+            lvMaintenanceRecords.ItemsSource = null;
+            lvMaintenanceRecords.ItemsSource = _repairLineList;
         }
     }
 }

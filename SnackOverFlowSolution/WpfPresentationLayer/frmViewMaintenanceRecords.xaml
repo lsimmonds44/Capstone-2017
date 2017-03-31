@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lstMaintenanceRecords" Margin="5" ></ListView>
+        <ListView x:Name="lvMaintenanceRecords" Margin="5" ></ListView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
