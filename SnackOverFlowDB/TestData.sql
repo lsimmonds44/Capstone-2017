@@ -217,12 +217,17 @@ VALUES
 	(10000, "123AB3123", "2018-04-12", 1)
 	GO
 
+/*Vehicle Test Data */
 print '*** Inserting Vehicle Test Data ***'
 GO
 INSERT INTO [dbo].[Vehicle]
-	(VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, VEHICLE_TYPE_ID)
+	(VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, VEHICLE_TYPE_ID, CHECKED_OUT)
 VALUES
-	("123", "Make", "Model", 25, "1850", "Beige", "Truck")
+	("1J4GX48S84C220525", "Nissan", "NV200", 5000, "2017", "White", 1, "Van", 0),
+	("1HTWKAZR2CJ424051", "Isuzu", "NPRHD", 16000, "2016", "White", 1, "Truck", 0),
+	("WVWNL7AN1AE520468", "Ford", "E250", 12000, "2016", "Green", 1, "Van", 0),
+	("JT3FJ60G9E0065688", "Ford", "Transit", 8000, "2017", "White", 1, "Van", 0),
+	("1FMDU64E11UB24590", "Volvo", "VNL", 7000, "2017", "Silver", 1, "Semi-Truck", 0)
 GO
 
 print '*** Inserting Repair Test Data ***'

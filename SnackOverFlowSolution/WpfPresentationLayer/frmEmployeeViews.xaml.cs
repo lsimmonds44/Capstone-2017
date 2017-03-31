@@ -64,7 +64,7 @@ namespace WpfPresentationLayer
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message);
             }
             btnPost.Visibility = Visibility.Visible;
         }
@@ -106,7 +106,7 @@ namespace WpfPresentationLayer
                         }
                         else
                         {
-                            ErrorAlert.ShowDatabaseError();
+                            MessageBox.Show(ex.Message);
                         }
                     }
 

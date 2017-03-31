@@ -20,5 +20,7 @@ namespace DataObjects
         public int? LastDriver { get; set; }
         public string VehicleTypeID { get; set; }
         public List<Repair> RepairList { get; set; }
+        public bool CheckedOut { get; set; }
+        public DateTime? CheckedOutTimeDate { get; set; }
     }
 }

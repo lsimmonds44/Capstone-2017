@@ -85,7 +85,7 @@ namespace WpfPresentationLayer
                 this.Close();
             } catch (SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
             }
         }
     }

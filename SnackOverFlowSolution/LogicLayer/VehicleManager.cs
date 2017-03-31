@@ -97,5 +97,27 @@ namespace LogicLayer
 
             return vehicles;
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/03/30
+        /// 
+        /// Changes vehicle status to checked out or checked in
+        /// </summary>
+        /// <param name="vehicle"></param>
+        public bool CheckVehicleOutIn(Vehicle vehicle)
+        {
+            //Vehicle vehicle = null;
+
+            //try
+            //{
+            return (VehicleAccessor.CheckVehicleOutIn(vehicle) == 1);
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw new ApplicationException("There was a problem updating the vehicle status");
+            //}         
+        }
     }
 }

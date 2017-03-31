@@ -115,7 +115,7 @@ namespace WpfPresentationLayer
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {
-                    ErrorAlert.ShowDatabaseError();
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -216,7 +216,7 @@ namespace WpfPresentationLayer
                         }
                         else
                         {
-                            ErrorAlert.ShowDatabaseError();
+                            MessageBox.Show(ex.Message);
                         }
                     }
                 }

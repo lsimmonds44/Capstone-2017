@@ -63,9 +63,9 @@ namespace WpfPresentationLayer
                     {
                         MessageBox.Show("Update failed");
                     }
-                } catch
+                } catch (Exception ex)
                 {
-                    ErrorAlert.ShowDatabaseError();
+                    MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
                 }
             }
             else

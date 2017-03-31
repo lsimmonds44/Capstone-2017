@@ -44,9 +44,9 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Change failed.  Was the user deleted?");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
             }
         }
 
