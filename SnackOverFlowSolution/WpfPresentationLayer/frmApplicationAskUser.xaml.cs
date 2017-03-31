@@ -107,7 +107,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Apply_Click(object sender, RoutedEventArgs e)
         {
-            if(use == "supplier")
+            if (use == "supplier")
             {
                 var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager, _agreementManager, "Applying");
                 var addSupplierResult = addSupplierFrm.ShowDialog();
@@ -116,14 +116,14 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Application Submitted!");
                     //tabSupplier_Selected(sender, e);
                 }
-         
+
                 this.Close();
             }
-            else if(use == "charity")
+            else if (use == "charity")
             {
                 var applyCharityFrm = new frmCharityView(_user, _charityManager);
                 var applyCharityResult = applyCharityFrm.ShowDialog();
-                if(applyCharityResult == true)
+                if (applyCharityResult == true)
                 {
                     MessageBox.Show("Application Submitted!");
                 }
@@ -131,7 +131,12 @@ namespace WpfPresentationLayer
             }
             else if (use == "Commercial")
             {
-                MessageBox.Show("When users can apply as Commercial Customer add it to this");
+                var applyCommercialCustomerFrm = new frmCreateCommercialCustomer(_user, _userManager, _customerManager);
+                var applyCommercialCustomerResult = applyCommercialCustomerFrm.ShowDialog();
+                if (applyCommercialCustomerResult == true)
+                {
+                    MessageBox.Show("Application Submitted!");
+                }
                 this.Close();
             }
         }
@@ -140,5 +145,6 @@ namespace WpfPresentationLayer
         {
             this.Close();
         }
+
     }
 }

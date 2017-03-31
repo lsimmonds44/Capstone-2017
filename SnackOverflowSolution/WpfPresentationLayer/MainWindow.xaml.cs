@@ -1360,6 +1360,11 @@ namespace WpfPresentationLayer
         /// 3/24/2017
         /// 
         /// Checks user's Commercial Customer application status 
+        /// 
+        /// Bobby Thorne
+        /// UPDATE
+        /// 3/31/2017
+        /// added application form if there is no application in the system
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1403,6 +1408,11 @@ namespace WpfPresentationLayer
         /// 3/24/2017
         /// 
         /// Checks user's supplier application status 
+        /// 
+        /// Bobby Thorne
+        /// UPDATE
+        /// 3/31/2017
+        /// added application form if there is no application in the system
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1446,6 +1456,12 @@ namespace WpfPresentationLayer
         /// 3/24/2017
         /// 
         /// checks user's _charity application status 
+        /// 
+        /// Bobby Thorne
+        /// UPDATE
+        /// 3/31/2017
+        /// 
+        /// Added apply form if there is not an application in the system
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1463,7 +1479,7 @@ namespace WpfPresentationLayer
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if (_charity.Status.Equals("Pending"))
+                    else if (_charity.Status.Equals("PENDING"))
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nPENDING";
                         btnCharityApplicationStatusCheck.IsEnabled = false;

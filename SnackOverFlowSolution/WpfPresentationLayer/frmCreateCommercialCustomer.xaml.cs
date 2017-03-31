@@ -66,6 +66,38 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Bobby Thorne
+        /// 3/31/2017
+        /// 
+        /// Used for applying for Commercial Customer Account
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userManager"></param>
+        /// <param name="customerManager"></param>
+        public frmCreateCommercialCustomer(User user, UserManager userManager, CustomerManager customerManager)
+        {
+            InitializeComponent();
+            _userToUpdate = user;
+            _userMngr = userManager;
+            _customerMngr = customerManager;
+            txtApprovedBy.Text = "0";
+            txtName.IsEnabled = true;
+            cbkIsApproved.IsChecked = false;
+            cbkActive.IsEnabled = false;
+            txtApprovedBy.Visibility = Visibility.Collapsed;
+            lblApprovedBy.Visibility = Visibility.Collapsed;
+            txtPhone.Text = _userToUpdate.Phone;
+            txtUserId.Text = _userToUpdate.UserId.ToString();
+            txtUserId.IsEnabled = false;
+            cbkIsApproved.Visibility = Visibility.Collapsed;
+            lblIsApproved.Visibility = Visibility.Collapsed;
+            txtUserName.Text = _userToUpdate.UserName;
+            txtUserName.IsEnabled = false;
+            btnFindUser.Visibility = Visibility.Hidden;
+            btnCreate.IsEnabled = true;
+        }
+
+        /// <summary>
         /// Eric Walton
         /// 2017/06/02
         /// 
