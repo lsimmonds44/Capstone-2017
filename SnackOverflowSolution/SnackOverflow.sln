@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataObjects", "DataObjects\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCPresentationLayer", "MVCPresentationLayer\MVCPresentationLayer.csproj", "{81EE7F14-00C2-4B59-9ED4-E8B1F22507D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayerTestProject", "LogicLayerTestProject\LogicLayerTestProject.csproj", "{C75D528C-C004-4022-9E74-722C5AD4DE16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{81EE7F14-00C2-4B59-9ED4-E8B1F22507D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81EE7F14-00C2-4B59-9ED4-E8B1F22507D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81EE7F14-00C2-4B59-9ED4-E8B1F22507D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75D528C-C004-4022-9E74-722C5AD4DE16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75D528C-C004-4022-9E74-722C5AD4DE16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75D528C-C004-4022-9E74-722C5AD4DE16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75D528C-C004-4022-9E74-722C5AD4DE16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
