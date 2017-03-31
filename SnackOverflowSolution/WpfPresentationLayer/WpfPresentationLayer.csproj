@@ -120,6 +120,9 @@
     <Compile Include="frmRequestUsername.xaml.cs">
       <DependentUpon>frmRequestUsername.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmSelectSupplier.xaml.cs">
+      <DependentUpon>frmSelectSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmSplitProductLot.xaml.cs">
       <DependentUpon>frmSplitProductLot.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,9 @@
     </Compile>
     <Compile Include="frmSupplierInvoiceDetails.xaml.cs">
       <DependentUpon>frmSupplierInvoiceDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateSupplierInvoice.xaml.cs">
+      <DependentUpon>frmUpdateSupplierInvoice.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmViewMaintenanceRecords.xaml.cs">
       <DependentUpon>frmViewMaintenanceRecords.xaml</DependentUpon>
@@ -233,6 +239,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmSelectSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmSplitProductLot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmSupplierInvoiceDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmUpdateSupplierInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

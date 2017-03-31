@@ -535,6 +535,12 @@ namespace WpfPresentationLayer
         /// 
         /// Open a frmAddInspection
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// Modified on 2017/03/30
+        /// 
+        /// Now shows an error message if there is no product lot selected
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
@@ -557,6 +563,10 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a product lot to create a new inspection");
             }
         }
 
@@ -1542,7 +1552,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
         {
-            if((Vehicle)dgVehicle.SelectedItem != null){
+            if(dgVehicle.SelectedIndex > 0){
                 frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
                 viewMaintenanceRecordsWindow.ShowDialog();
             }
@@ -1625,6 +1635,13 @@ namespace WpfPresentationLayer
             lvDeliveries.Items.Refresh();
         }
 
+        /// <summary>
+        /// Created on 2017-03-30 by William Flood
+        /// Responds to the click event on btnAddSupplierInventory
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddSupplierInventory_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1647,5 +1664,80 @@ namespace WpfPresentationLayer
             }
 
         }
+        
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/29
+        /// 
+        /// Launches the supplier invoice form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSubmitSupplierInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (_supplierList == null)
+            {
+                try
+                {
+                    _supplierList = _supplierManager.ListSuppliers();
+                }
+                catch (Exception)
+                {
+                    
+                    MessageBox.Show("Unable to verify supplier.");
+                    return;
+                }
+                
+            }
+            // See if the current user is a supplier
+            if (_supplierList.Find(s => s.UserId == _user.UserId) != null)
+            {
+                var supplierInvoiceForm = new frmSubmitSupplierInvoice(_supplierList.Find(s => s.UserId == _user.UserId), _productLotManager, _supplierInvoiceManager);
+                supplierInvoiceForm.ShowDialog();
+            }
+            else
+            {
+                var selectSupplierForm = new frmSelectSupplier(_supplierList);
+                var result = selectSupplierForm.ShowDialog();
+                if (result == true)
+                {
+                    // We have a supplier in the form
+                    var supplierInvoiceForm = new frmSubmitSupplierInvoice(selectSupplierForm.selectedSupplier, _productLotManager, _supplierInvoiceManager);
+                    var innerResult = supplierInvoiceForm.ShowDialog();
+                    if (innerResult == true)
+                    {
+                        tabSupplierInvoice_Selected(sender, e);
+                        MessageBox.Show("Invoice submitted");
+                    }
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/30
+        /// 
+        /// Opens the window to edit the selected invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdateInvoice_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(dgSupplierInvoices.SelectedIndex >= 0){
+                frmUpdateSupplierInvoice updateSupplierInvoiceWindow = new frmUpdateSupplierInvoice((SupplierInvoice)dgSupplierInvoices.SelectedItem);
+                updateSupplierInvoiceWindow.ShowDialog();
+                tabSupplierInvoice_Selected(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select an invoice");
+            }
+
+            
+        }
+
+        
     } // end of class
 } // end of namespace 

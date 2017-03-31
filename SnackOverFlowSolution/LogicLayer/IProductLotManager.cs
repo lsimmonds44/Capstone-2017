@@ -22,5 +22,9 @@ namespace LogicLayer
         List<ProductLot> RetrieveExpiredProductLots();
         bool DeleteProductLot(ProductLot lot);
 
+        List<ProductLot> RetrieveProductLotsBySupplier(Supplier supplier);
+
+        ProductLot RetrieveProductLotById(int id);
+
     }
 }

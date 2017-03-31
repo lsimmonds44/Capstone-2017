@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Created 2017-03-29 by William Flood
+    /// </summary>
     public class SupplierInventory
     {
         public int? SupplierInventoryID { get; set; }

@@ -8,8 +8,16 @@ using DataAccessLayer;
 
 namespace LogicLayer
 {
+    /// <summary>
+    /// Created 2017-03-29 by William Flood
+    /// </summary>
     public class SupplierInventoryManager : ISupplierInventoryManager
     {
+        /// <summary>
+        /// Created 2017-03-29 by William Flood
+        /// </summary>
+        /// <param name="toAdd"></param>
+        /// <returns></returns>
         public int CreateSupplierInventory(SupplierInventory toAdd)
         {
             try

@@ -9,8 +9,18 @@ using System.Data;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Created 2017-03-29 by William Flood
+    /// Manages database access for supplier inventory
+    /// </summary>
     public class SupplierInventoryAccessor
     {
+        /// <summary>
+        /// Created 2017-03-29 by William Flood
+        /// Adds a quantity of stock to a supplier's inventory
+        /// </summary>
+        /// <param name="toAdd"></param>
+        /// <returns></returns>
         public static int CreateSupplierInventory (SupplierInventory toAdd)
         {
             var rowsAffected = 0;

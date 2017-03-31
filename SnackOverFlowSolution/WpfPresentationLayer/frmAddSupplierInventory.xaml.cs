@@ -18,6 +18,7 @@ using System.Data.SqlClient;
 namespace WpfPresentationLayer
 {
     /// <summary>
+    /// Created 2017-03-30 by William Flood
     /// Interaction logic for frmAddSupplierInventory.xaml
     /// </summary>
     public partial class frmAddSupplierInventory : Window
@@ -26,6 +27,11 @@ namespace WpfPresentationLayer
         IAgreementManager _agreementManager;
         List<Agreement> _agreementList;
 
+        /// <summary>
+        /// Created 2017-03-30 by William Flood
+        /// </summary>
+        /// <param name="_supplyInventorymanager">Handles business logic related to supplier inventory</param>
+        /// <param name="_agreementList">A list of agreements associated with the user</param>
         public frmAddSupplierInventory(ISupplierInventoryManager _supplyInventorymanager, List<Agreement> _agreementList)
         {
             this._supplyInventorymanager = _supplyInventorymanager;
@@ -35,6 +41,11 @@ namespace WpfPresentationLayer
             this.dateAdded.SelectedDate = DateTime.Now;
         }
 
+        /// <summary>
+        /// Created 2017-03-30 by William Flood
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             int? agreementId = null;

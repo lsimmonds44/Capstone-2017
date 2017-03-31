@@ -69,5 +69,17 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<ProductLot> RetrieveProductLotsBySupplier(Supplier supplier)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public ProductLot RetrieveProductLotById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

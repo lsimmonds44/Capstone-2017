@@ -124,7 +124,8 @@ print '*** Inserting Grade Test Data ***'
 	VALUES
 	('Grade A'),
 	('Grade B'),
-	('Grade C')
+	('Grade C'),
+	('Charity')
 
 /* Supplier Test Data :Seed-10000*/
 print '*** Inserting Supplier Test Data ***'

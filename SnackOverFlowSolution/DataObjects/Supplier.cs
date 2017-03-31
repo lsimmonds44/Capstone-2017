@@ -44,5 +44,10 @@ namespace DataObjects
                 Active = this.Active
             };
         }
+
+        public override string ToString()
+        {
+            return FarmName;
+        }
     }
 }
