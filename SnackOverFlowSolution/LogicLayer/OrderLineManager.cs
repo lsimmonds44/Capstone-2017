@@ -14,7 +14,7 @@ namespace LogicLayer
         /// <summary>
         /// Eric Walton
         /// 2017/10/3
-        /// Calls order line accesor create order line and retrieves
+        /// Calls order line accessor create order line and retrieves
         /// the order line id
         /// </summary>
         /// <param name="orderLine"></param>
@@ -33,10 +33,14 @@ namespace LogicLayer
             return result;
         }
 
-
-
-
-
+        /// <summary>
+        ///  Eric Walton
+        ///  2017/10/3
+        ///  Calls order line accessor to retrieve an orderling by order id
+        /// </summary>
+        /// <param name="ProductOrderId"></param>
+        /// <param name="OrderAmount"></param>
+        /// <returns></returns>
         public List<OrderLine> RetrieveOrderLineListByProductOrderId(int ProductOrderId, Decimal OrderAmount)
         {
             List<OrderLine> result = null;
