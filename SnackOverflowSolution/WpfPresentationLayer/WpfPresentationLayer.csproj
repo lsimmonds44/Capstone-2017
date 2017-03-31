@@ -163,7 +163,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmAddWarehouse.xaml">
-		<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmAddSupplierInventory.xaml">
@@ -346,7 +346,6 @@
     </Compile>
     <Compile Include="frmCharityView.xaml.cs" />
     <Compile Include="frmEmployeeViews.xaml.cs" />
-    <Compile Include="ErrorAlert.cs" />
     <Page Include="frmPasswordChangeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

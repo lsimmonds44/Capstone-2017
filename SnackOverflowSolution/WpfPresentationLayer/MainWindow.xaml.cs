@@ -151,9 +151,9 @@ namespace WpfPresentationLayer
                     _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
                     dgCustomer.ItemsSource = _commercialCustomers;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ErrorAlert.ShowDatabaseError();
+                    MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
                 }
             }
             else if (cboCustomerType.SelectedItem as String == "Residential")
@@ -319,7 +319,7 @@ namespace WpfPresentationLayer
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {
-                    ErrorAlert.ShowDatabaseError();
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -380,7 +380,7 @@ namespace WpfPresentationLayer
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -423,7 +423,7 @@ namespace WpfPresentationLayer
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -436,7 +436,7 @@ namespace WpfPresentationLayer
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -789,9 +789,9 @@ namespace WpfPresentationLayer
                 _vehicleList = _vehicleManager.RetrieveAllVehicles();
                 dgVehicle.ItemsSource = _vehicleList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
             }
 
         }
@@ -841,9 +841,9 @@ namespace WpfPresentationLayer
                         _vehicleList = _vehicleManager.RetrieveAllVehicles();
                         dgVehicle.ItemsSource = _vehicleList;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        ErrorAlert.ShowDatabaseError();
+                        MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
                     }
                 }
             }
@@ -888,9 +888,9 @@ namespace WpfPresentationLayer
                 var passwordResetWindow = new frmResetPassword(_userManager, userList);
                 passwordResetWindow.Show();
             }
-            catch
+            catch (Exception ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
             }
         }
 
@@ -1014,9 +1014,9 @@ namespace WpfPresentationLayer
                 }
                 dgProductLots.ItemsSource = productLotList;
             }
-            catch
+            catch (Exception ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
             }
         }
         /// <summary>
@@ -1696,7 +1696,7 @@ namespace WpfPresentationLayer
                 }
             } catch (System.Data.SqlClient.SqlException ex)
             {
-                ErrorAlert.ShowDatabaseError();
+                MessageBox.Show(ex.Message);
             }
 
         }
