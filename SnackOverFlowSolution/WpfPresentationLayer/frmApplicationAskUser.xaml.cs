@@ -121,7 +121,12 @@ namespace WpfPresentationLayer
             }
             else if(use == "charity")
             {
-                MessageBox.Show("When users can apply as charity add it to this");
+                var applyCharityFrm = new frmCharityView(_user, _charityManager);
+                var applyCharityResult = applyCharityFrm.ShowDialog();
+                if(applyCharityResult == true)
+                {
+                    MessageBox.Show("Application Submitted!");
+                }
                 this.Close();
             }
             else if (use == "Commercial")

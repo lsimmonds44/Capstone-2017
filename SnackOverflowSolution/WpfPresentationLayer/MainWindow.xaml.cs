@@ -1457,18 +1457,18 @@ namespace WpfPresentationLayer
                 {
                     _charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
 
-                    if (_charity.Status == "Approved")
+                    if (_charity.Status.Equals("Approved"))
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nAPPROVED";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                         //btnCommercialCustomerApplicationStatusCheck.Background = Brushes.Green;
                     }
-                    else if (_charity.Status == "Pending")
+                    else if (_charity.Status.Equals("Pending"))
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nPENDING";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
                     }
-                    else if (_charity.Status == "Denied")
+                    else if (_charity.Status.Equals("Denied"))
                     {
                         btnCharityApplicationStatusCheck.Content = btnCharityApplicationStatusCheck.Content + "\nDENIED";
                         btnCharityApplicationStatusCheck.IsEnabled = false;
