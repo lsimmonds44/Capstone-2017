@@ -67,5 +67,46 @@ namespace DataAccessLayer
 
             return warehouses;
         }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 03/30/2017
+        /// 
+        /// Creates a new warehouse
+        /// </summary>
+        /// <param name="newWarehouse">Warehouse Object to be Created</param>
+        /// <returns>Returns an int of 1 if successful, 0 if not</returns>
+        public static int CreateWarehouse(Warehouse newWarehouse)
+        {
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_create_warehouse";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ADDRESS_1", newWarehouse.AddressOne);
+            cmd.Parameters.AddWithValue("@ADDRESS_2", newWarehouse.AddressTwo);
+            cmd.Parameters.AddWithValue("@CITY", newWarehouse.City);
+            cmd.Parameters.AddWithValue("@STATE", newWarehouse.State);
+            cmd.Parameters.AddWithValue("@ZIP", newWarehouse.Zip);
+
+            int rows = 0;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("There was an error saving to the DB: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
     }
 }

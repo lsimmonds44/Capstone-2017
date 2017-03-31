@@ -33,5 +33,19 @@ namespace LogicLayer
 
             return warehouses;
         }
+
+        public int addWarehouse(Warehouse newWarehouse)
+        {
+            int success = 0;
+            try
+            {
+                success = WarehouseAccessor.CreateWarehouse(newWarehouse);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("There was an error saving this vehicle.");
+            }
+            return success;
+        }
     }
 }
