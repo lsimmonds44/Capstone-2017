@@ -132,5 +132,29 @@ namespace LogicLayer
                 throw;
             }
         }
+
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/30
+        /// 
+        /// Updates the old invoice in the database so that it has the values of the new invoice
+        /// </summary>
+        /// <param name="oldInvoice">The original invoice</param>
+        /// <param name="newInvoice">The invoice with updated values</param>
+        /// <returns></returns>
+        public bool UpdateSupplierInvoice(SupplierInvoice oldInvoice, SupplierInvoice newInvoice)
+        {
+            try
+            {
+                return (1 == SupplierInvoiceAccessor.UpdateSupplierInvoice(oldInvoice, newInvoice));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

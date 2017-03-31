@@ -1550,7 +1550,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
         {
-            if((Vehicle)dgVehicle.SelectedItem != null){
+            if(dgVehicle.SelectedIndex > 0){
                 frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
                 viewMaintenanceRecordsWindow.ShowDialog();
             }
@@ -1679,6 +1679,30 @@ namespace WpfPresentationLayer
                     }
                 }
             }
+            
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/30
+        /// 
+        /// Opens the window to edit the selected invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdateInvoice_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(dgSupplierInvoices.SelectedIndex >= 0){
+                frmUpdateSupplierInvoice updateSupplierInvoiceWindow = new frmUpdateSupplierInvoice((SupplierInvoice)dgSupplierInvoices.SelectedItem);
+                updateSupplierInvoiceWindow.ShowDialog();
+                tabSupplierInvoice_Selected(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select an invoice");
+            }
+
             
         }
 

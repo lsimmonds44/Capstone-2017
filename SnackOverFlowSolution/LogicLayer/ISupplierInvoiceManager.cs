@@ -53,5 +53,16 @@ namespace LogicLayer
         /// <param name="line"></param>
         /// <returns></returns>
         bool CreateSupplierInvoiceLine(SupplierInvoiceLine line);
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/30
+        /// 
+        /// </summary>
+        /// <param name="oldInvoice">The original invoice</param>
+        /// <param name="newInvoice">The invoice with updated values</param>
+        /// <returns></returns>
+        bool UpdateSupplierInvoice(SupplierInvoice oldInvoice, SupplierInvoice newInvoice);
     }
 }

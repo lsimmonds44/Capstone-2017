@@ -250,6 +250,59 @@ namespace DataAccessLayer
             return rows;
         }
 
+        /// <summary>
+        /// Robert Forbes
+        /// Updates the passed in "old Invoice" to match the passed in "new Invoice"
+        /// </summary>
+        /// <param name="oldInvoice">The invoice as it was before editing</param>
+        /// <param name="newInvoice">The invoice after it has been edited</param>
+        /// <returns></returns>
+        public static int UpdateSupplierInvoice(SupplierInvoice oldInvoice, SupplierInvoice newInvoice)
+        {
+            int result = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_supplier_invoice";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", oldInvoice.SupplierInvoiceId);
+            cmd.Parameters.AddWithValue("@old_SUPPLIER_ID", oldInvoice.SupplierId);
+            cmd.Parameters.AddWithValue("@old_INVOICE_DATE", oldInvoice.InvoiceDate);
+            cmd.Parameters.AddWithValue("@old_SUB_TOTAL", oldInvoice.SubTotal);
+            cmd.Parameters.AddWithValue("@old_TAX_AMOUNT", oldInvoice.TaxAmount);
+            cmd.Parameters.AddWithValue("@old_TOTAL", oldInvoice.Total);
+            cmd.Parameters.AddWithValue("@old_AMOUNT_PAID", oldInvoice.AmountPaid);
+            cmd.Parameters.AddWithValue("@old_APPROVED", oldInvoice.Approved);
+            cmd.Parameters.AddWithValue("@old_ACTIVE", oldInvoice.Active);
+
+
+            cmd.Parameters.AddWithValue("@new_SUPPLIER_ID", newInvoice.SupplierId);
+            cmd.Parameters.AddWithValue("@new_INVOICE_DATE", newInvoice.InvoiceDate);
+            cmd.Parameters.AddWithValue("@new_SUB_TOTAL", newInvoice.SubTotal);
+            cmd.Parameters.AddWithValue("@new_TAX_AMOUNT", newInvoice.TaxAmount);
+            cmd.Parameters.AddWithValue("@new_TOTAL", newInvoice.Total);
+            cmd.Parameters.AddWithValue("@new_AMOUNT_PAID", newInvoice.AmountPaid);
+            cmd.Parameters.AddWithValue("@new_APPROVED", newInvoice.Approved);
+            cmd.Parameters.AddWithValue("@new_ACTIVE", newInvoice.Active);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
     }
 
 }

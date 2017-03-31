@@ -1,0 +1,42 @@
+﻿<Window x:Name="frmUpdateSuplierInvoice" x:Class="WpfPresentationLayer.frmUpdateSupplierInvoice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Invoice" Height="320" Width="350" MaxHeight="320" MaxWidth="350" MinHeight="320" MinWidth="350" Loaded="frmUpdateSuplierInvoice_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="2*"/>
+            <RowDefinition />
+            <RowDefinition Height="2*"/>
+            <RowDefinition />
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="Supplier" HorizontalAlignment="Center"/>
+        <ComboBox x:Name="cboSupplier" Margin="10" Grid.Row="1"/>
+
+        <Label Content="Invoice Date" HorizontalAlignment="Center" Grid.Column="1"/>
+        <DatePicker x:Name="dpInvoiceDate" Grid.Column="1" Grid.Row="1" Margin="10"/>
+
+        <Label Content="Sub Total" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+        <TextBox x:Name="txtSubTotal" Grid.Column="0" Grid.Row="3" Margin="10"/>
+
+        <Label Content="Tax Amount" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <TextBox x:Name="txtTaxAmount" Grid.Row="3" Grid.Column="1" Margin="10"/>
+
+        <Label Content="Total" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="4"/>
+        <TextBox x:Name="txtTotal" Grid.Row="5" Grid.Column="0" Margin="10"/>
+
+        <Label Content="Amount Paid" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
+        <TextBox x:Name="txtAmountPaid" Grid.Row="5" Grid.Column="1" Margin="10"/>
+        
+        <Button x:Name="btnCancel" Grid.Row="6" Content="Cancel" Margin="10" Click="btnCancel_Click"/>
+        <Button x:Name="btnSubmit" Grid.Row="6" Grid.Column="1" Content="Submit" Margin="10" Click="btnSubmit_Click"/>
+    </Grid>
+</Window>

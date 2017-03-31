@@ -582,6 +582,7 @@
                         </Grid.RowDefinitions>
                         <Button Name="btnApproveInvoice" Grid.Row="0" Grid.Column="3" Content="Approve Invoice" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnApproveInvoice_Click" />
                         <Button Name="btnSubmitSupplierInvoice" Grid.Row="0" Grid.Column="2" Content="Submit Invoice" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnSubmitSupplierInvoice_Click" />
+                        <Button x:Name="btnUpdateInvoice" Grid.Column="1" Content="Update Invoice" Padding="10 5" Click="btnUpdateInvoice_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>
