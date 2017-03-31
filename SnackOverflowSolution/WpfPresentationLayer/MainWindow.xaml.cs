@@ -1672,6 +1672,12 @@ namespace WpfPresentationLayer
             
         }
 
+        private void btnAddNewWarehouse_Click(object sender, RoutedEventArgs e)
+        {
+            frmAddWarehouse addWarehouseWindow = new frmAddWarehouse();
+            addWarehouseWindow.ShowDialog();
+        }
+
         
     } // end of class
 } // end of namespace 
