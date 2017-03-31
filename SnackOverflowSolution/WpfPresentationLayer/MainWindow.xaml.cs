@@ -55,6 +55,7 @@ namespace WpfPresentationLayer
         CommercialCustomer _commercialCustomer = null;
         Charity _charity = null;
         User _user = null;
+        Role _role = null;
 
         private IPackageManager _packageManager = new PackageManager();
         List<Package> _packageList = null;
@@ -62,6 +63,7 @@ namespace WpfPresentationLayer
         List<string> _orderStatusList = null;
         ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
         List<SupplierInvoice> _supplierInvoiceList;
+        List<User> _userList = null;
 
         public MainWindow()
         {
@@ -847,9 +849,27 @@ namespace WpfPresentationLayer
             }
         }
 
-
+        /// <summary>
+        /// Daniel Brown
+        /// 03/31/2017
+        /// 
+        /// Populate the users tab.
+        /// 
+        /// NOTE: Needs to be changed to only show full users list to employees and only the current user to non-employee
+        ///       Cannot be done to roles have been established.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabUser_Selected(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                UserManager usrMgr = new UserManager();
+                _userList = usrMgr.RetrieveFullUserList();
+                dgUsers.ItemsSource = _userList;
+            }catch(Exception){
+                MessageBox.Show("There are currenlty no users");
+            }
             if ("ADMIN" == _user.UserName)
             {
                 btnResetPassword.Visibility = Visibility.Visible;
