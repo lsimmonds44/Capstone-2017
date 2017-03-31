@@ -46,6 +46,7 @@ namespace WpfPresentationLayer
         private ProductLotSearchCriteria _productLotSearchCriteria;
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
+        private ISupplierInventoryManager _supplierInventoryManager;
         
 
 
@@ -69,6 +70,7 @@ namespace WpfPresentationLayer
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
             _deliveryManager = new DeliveryManager();
+            _supplierInventoryManager = new SupplierInventoryManager();
             DisposeFiles();
             _productLotSearchCriteria = new ProductLotSearchCriteria() { Expired = false };
         }
@@ -1623,6 +1625,27 @@ namespace WpfPresentationLayer
             lvDeliveries.Items.Refresh();
         }
 
-        
+        private void btnAddSupplierInventory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+                if(null!=supplier)
+                {
+                    var agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplier.SupplierID);
+                    if(0==agreementList.Count)
+                    {
+                        MessageBox.Show("Create an agreement first!");
+                        return;
+                    }
+                    var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager,agreementList);
+                    supplierInventoryWindow.ShowDialog();
+                }
+            } catch (System.Data.SqlClient.SqlException ex)
+            {
+                ErrorAlert.ShowDatabaseError();
+            }
+
+        }
     } // end of class
 } // end of namespace 

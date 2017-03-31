@@ -352,6 +352,8 @@
                             <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
                             <Button Name="btnAddSuppliers" Content="Add Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
                             <Button Name="btnEditSuppliers" Content="Edit Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Name="btnAddSupplierInventory" Content="Add Inventory" Width="120" Height="30" Background="White" Margin="0 0 0 5"
+                                    Click="btnAddSupplierInventory_Click"/>
                         </StackPanel>
                     </Border>
                     <!--End of Side Border-->

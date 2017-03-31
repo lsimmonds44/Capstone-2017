@@ -84,6 +84,9 @@
     <Compile Include="frmAddProduct.xaml.cs">
       <DependentUpon>frmAddProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmAddSupplierInventory.xaml.cs">
+      <DependentUpon>frmAddSupplierInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmApplicationAskUser.xaml.cs">
       <DependentUpon>frmApplicationAskUser.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
     </Compile>
     <Compile Include="WpfExtensionMethods.cs" />
     <Page Include="frmAddEditDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmAddSupplierInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

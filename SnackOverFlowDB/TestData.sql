@@ -239,7 +239,7 @@ print '*** Inserting Agreement Test Data'
 EXEC sp_create_agreement 10001, 10002, @this_date, 1, 10001
 	
 print '*** Inserting Supplier Agreement Test Data'
-EXEC sp_create_supplier_inventory 10000,10
+EXEC sp_create_supplier_inventory 10000,10,'2017-01-01 00:00:000'
 
 /* Supplier_Product  Test Data */
 print '*** Inserting Supplier_Product Test Data ***'

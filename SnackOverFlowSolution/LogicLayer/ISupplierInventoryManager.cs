@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    interface ISupplierInventoryManager
+    public interface ISupplierInventoryManager
     {
         int CreateSupplierInventory(SupplierInventory toAdd);
     }

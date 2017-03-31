@@ -15,7 +15,7 @@ namespace DataAccessLayer
         {
             var rowsAffected = 0;
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_create_supplier_inventory");
+            var cmd = new SqlCommand("sp_create_supplier_inventory",conn);
             cmd.Parameters.AddWithValue("@AGREEMENT_ID", toAdd.AgreementID);
             cmd.Parameters.AddWithValue("@DATE_ADDED", toAdd.DateAdded);
             cmd.Parameters.AddWithValue("@QUANTITY", toAdd.Quantity);

@@ -8,9 +8,9 @@ namespace DataObjects
 {
     public class SupplierInventory
     {
-        public int SupplierInventoryID { get; set; }
-        public int AgreementID { get; set; }
-        public int Quantity { get; set; }
-        public DateTime DateAdded { get; set; }
+        public int? SupplierInventoryID { get; set; }
+        public int? AgreementID { get; set; }
+        public int? Quantity { get; set; }
+        public DateTime? DateAdded { get; set; }
     }
 }
