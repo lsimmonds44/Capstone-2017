@@ -6019,7 +6019,7 @@ AS
     WHERE USER_NAME = @USERNAME
 	RETURN @@ROWCOUNT
 GO
-------------------------------------------------------------------------------------------------------------
+
 print '' print  '*** Creating procedure sp_update_agreement'
 GO
 CREATE PROCEDURE sp_update_agreement
@@ -6040,34 +6040,19 @@ CREATE PROCEDURE sp_update_agreement
 )
 AS
 	BEGIN
-	IF @old_APPROVED_BY IS NOT NULL
-		BEGIN
-			UPDATE agreement
-			SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
-			WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
-			AND (PRODUCT_ID = @old_PRODUCT_ID)
-			AND (SUPPLIER_ID = @old_SUPPLIER_ID)
-			AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)
-			AND (IS_APPROVED = @old_IS_APPROVED)
-			AND ((APPROVED_BY = @old_APPROVED_BY) OR (APPROVED_BY IS NULL))
-			AND (ACTIVE = @old_ACTIVE)
-		END
-	ELSE IF @old_APPROVED_BY IS NULL
-		BEGIN
-			UPDATE agreement
-			SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
-			WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
-			AND (PRODUCT_ID = @old_PRODUCT_ID)
-			AND (SUPPLIER_ID = @old_SUPPLIER_ID)
-			AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)
-			AND (IS_APPROVED = @old_IS_APPROVED)
-			AND (ACTIVE = @old_ACTIVE)
-			AND (APPROVED_BY IS NULL)
-		END
-	RETURN @@ROWCOUNT
+		UPDATE agreement
+		SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
+		WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
+		AND (PRODUCT_ID = @old_PRODUCT_ID)
+		AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+		AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)
+		AND (IS_APPROVED = @old_IS_APPROVED)
+		AND (ACTIVE = @old_ACTIVE)
+		AND ((APPROVED_BY = @old_APPROVED_BY) OR (APPROVED_BY IS NULL))
+		RETURN @@ROWCOUNT
 	END
 GO
---------------------------------------------------------
+
 print '' print  '*** Creating procedure sp_update_app_user'
 GO
 CREATE PROCEDURE sp_update_app_user
@@ -7302,6 +7287,21 @@ AS
 		SELECT CHARITY_ID, USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME, PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
 		FROM CHARITY
 		WHERE USER_ID = @USER_ID
+	END
+GO
+
+
+print '' print  ' *** Creating procedure sp_retrieve_maintenance_schedule_by_vehicle_id'
+GO
+CREATE PROCEDURE sp_retrieve_maintenance_schedule_by_vehicle_id
+(
+	@VEHICLE_ID[INT]
+)
+AS
+	BEGIN
+		SELECT MAINTENANCE_SCHEDULE_ID, VEHICLE_ID
+		FROM maintenance_schedule
+		WHERE VEHICLE_ID = @VEHICLE_ID
 	END
 GO
 
