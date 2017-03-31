@@ -161,6 +161,11 @@ namespace WpfPresentationLayer
             return result;
         }
 
+        /// <summary>
+        /// Eric Walton
+        /// 2017/10/3
+        /// helper method to display the product lots information
+        /// </summary>
         private void displayProductLots()
         {
             ProductLotManager pLM = new ProductLotManager();
@@ -307,6 +312,7 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Eric Walton
         /// /// 2017/06/02 
+        /// Refreshes the list of orderlines
         /// </summary>
         private void RefreshOrderLines()
         {

@@ -17,6 +17,10 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
+    /// Daniel Brown
+    /// 03/15/2017
+    /// 
+    /// Allows employees to approve or deny charity applications
     /// Interaction logic for frmCharityApproval.xaml
     /// </summary>
     public partial class frmCharityApproval : Window
@@ -36,6 +40,14 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// 03/15/2017
+        /// 
+        /// Denies the current selected charity application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -58,6 +70,14 @@ namespace WpfPresentationLayer
             this.Close();
         }
 
+        /// <summary>
+        /// Daniel Brown
+        /// 03/15/2017
+        /// 
+        /// Approves the current selected charity application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnApprove_Click(object sender, RoutedEventArgs e)
         {
             try

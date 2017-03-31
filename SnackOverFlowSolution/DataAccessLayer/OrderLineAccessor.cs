@@ -52,6 +52,15 @@ namespace DataAccessLayer
             return result;
         }
 
+        /// <summary>
+        /// Eric Walton
+        /// 2017/10/3
+        /// Invokes a stored procedure to retrieve order line by order id and
+        /// update the amount on the order
+        /// </summary>
+        /// <param name="OrderId"></param>
+        /// <param name="orderAmount"></param>
+        /// <returns></returns>
         public static List<OrderLine> RetrieveOrderLinesByOrderId(int OrderId, Decimal orderAmount)
         {
             List<OrderLine> orderLines = new List<OrderLine>();
