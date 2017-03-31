@@ -109,7 +109,14 @@ namespace WpfPresentationLayer
         {
             if(use == "supplier")
             {
-                MessageBox.Show("When users can apply as suppliers add it to this");
+                var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager, _agreementManager, "Applying");
+                var addSupplierResult = addSupplierFrm.ShowDialog();
+                if (addSupplierResult == true)
+                {
+                    MessageBox.Show("Application Submitted!");
+                    //tabSupplier_Selected(sender, e);
+                }
+         
                 this.Close();
             }
             else if(use == "charity")
