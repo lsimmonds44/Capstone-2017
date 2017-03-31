@@ -7291,7 +7291,7 @@ AS
 GO
 
 
-print '' print  ' *** Creating procedure sp_retrieve_maintenance_schedule_by_vehicle_id'
+print '' print  '*** Creating procedure sp_retrieve_maintenance_schedule_by_vehicle_id'
 GO
 CREATE PROCEDURE sp_retrieve_maintenance_schedule_by_vehicle_id
 (
