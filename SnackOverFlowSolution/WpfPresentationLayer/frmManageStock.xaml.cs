@@ -1,37 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using LogicLayer;
 using DataObjects;
+using LogicLayer;
 
 namespace WpfPresentationLayer
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 03/01/2017
-    /// 
-    /// Interaction logic for frmManageStock.xaml
+    ///     Created by Michael Takrama
+    ///     03/01/2017
+    ///     Interaction logic for frmManageStock.xaml
     /// </summary>
     public partial class frmManageStock : Window
     {
-        private List<ProductLot> _productLotList;
-
+        private bool _checkBoxOverride;
+        private ILocationManager _locationManager;
         private List<ManageStockViewModel> _manageStockViewModels = new List<ManageStockViewModel>();
+        private List<ProductLot> _productLotList;
+        private readonly IProductLotManager _productLotManager;
+        private IProductManager _productManager;
+        private ISupplierManager _supplierManager;
 
-        private bool checkBoxOverride;
-
-        public frmManageStock()
+        public frmManageStock(IProductLotManager productLotManager, IProductManager productManager,
+            ISupplierManager supplierManager, ILocationManager locationManager)
         {
+            _productLotManager = productLotManager;
+            _supplierManager = supplierManager;
+            _productManager = productManager;
+            _locationManager = locationManager;
             InitializeComponent();
             RetrieveProductLots();
             ParseLotsIntoViewModel();
@@ -39,16 +35,15 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Parses the lots into a View Model for Datagrid
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Parses the lots into a View Model for Datagrid
         /// </summary>
         private void ParseLotsIntoViewModel()
         {
-            var productManager = new ProductManager();
-            var supplierManager = new SupplierManager();
-            var locationManager = new LocationManager();
+            _productManager = new ProductManager();
+            _supplierManager = new SupplierManager();
+            _locationManager = new LocationManager();
 
             try
             {
@@ -58,16 +53,16 @@ namespace WpfPresentationLayer
                     var manageStockViewModel = new ManageStockViewModel
                     {
                         ProductId = a.ProductId,
-                        ProductName = productManager.RetrieveProductById((int)a.ProductId).Name,
+                        ProductName = _productManager.RetrieveProductById((int) a.ProductId).Name,
                         SupplierId = a.SupplierId,
-                        SupplierName = supplierManager.RetrieveSupplierBySupplierID((int)a.SupplierId).FarmName,
-                        LocationDesc = locationManager.RetrieveLocationByID((int)a.LocationId).Description,
+                        SupplierName = _supplierManager.RetrieveSupplierBySupplierID((int) a.SupplierId).FarmName,
+                        LocationDesc = _locationManager.RetrieveLocationByID((int) a.LocationId).Description,
                         Quantity = a.Quantity,
                         AvailableQuantity = a.AvailableQuantity,
                         ProductLotId = a.ProductLotId
                     };
 
-                    if (manageStockViewModel.AvailableQuantity != 0 || checkBoxOverride)
+                    if (manageStockViewModel.AvailableQuantity != 0 || _checkBoxOverride)
                         _manageStockViewModels.Add(manageStockViewModel);
                 }
             }
@@ -75,14 +70,12 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Catastrophic Error: " + ex.Message);
             }
-
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Refreshes Datagrid
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Refreshes Datagrid
         /// </summary>
         private void RefreshDgProductLot()
         {
@@ -91,18 +84,15 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Retrieves Product Lots from Database
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Retrieves Product Lots from Database
         /// </summary>
         private void RetrieveProductLots()
         {
-            var pm = new ProductLotManager();
-
             try
             {
-                _productLotList = pm.RetrieveProductLots();
+                _productLotList = _productLotManager.RetrieveProductLots();
             }
             catch (Exception ex)
             {
@@ -111,24 +101,28 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Updates Available Quantity of Product Lot
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Updates Available Quantity of Product Lot
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnUpdateQuantity_OnClick(object sender, RoutedEventArgs e)
         {
-            var pm = new ProductLotManager();
+            if (dgProductList.SelectedItem == null)
+            {
+                MessageBox.Show("Kindly select a product lot");
+                return;
+            }
 
-            ManageStockViewModel msv = (ManageStockViewModel)dgProductList.SelectedItem;
-            int selectedIndex = dgProductList.SelectedIndex;
+            var selectedProductLot = (ManageStockViewModel) dgProductList.SelectedItem;
+            var selectedIndex = dgProductList.SelectedIndex;
 
-            ProductLot oldProductLot = _productLotList.Find(x => x.ProductLotId == msv.ProductLotId);
+            var oldProductLot = _productLotList.Find(x => x.ProductLotId == selectedProductLot.ProductLotId);
 
-            frmManageStockSubAdjustQty fmsa = new frmManageStockSubAdjustQty(oldProductLot);
-            fmsa.ShowDialog();
+            //Open sub form for update
+            var valueFromSubUdateView = new frmManageStockSubAdjustQty(oldProductLot);
+            valueFromSubUdateView.ShowDialog();
 
             var newProductLot = new ProductLot
             {
@@ -139,14 +133,18 @@ namespace WpfPresentationLayer
                 ProductId = oldProductLot.ProductId,
                 SupplyManagerId = oldProductLot.SupplyManagerId,
                 Quantity = oldProductLot.Quantity,
-                AvailableQuantity = fmsa.getNewQuantity(),
+                AvailableQuantity = valueFromSubUdateView.getNewQuantity(),
                 DateReceived = oldProductLot.DateReceived,
                 ExpirationDate = oldProductLot.ExpirationDate
             };
 
+            if (ValidateQuantityUpdates(newProductLot, oldProductLot))
+                return;
+
             try
+
             {
-                if (pm.UpdateProductLotAvailableQuantity(oldProductLot, newProductLot) == 1)
+                if (_productLotManager.UpdateProductLotAvailableQuantity(oldProductLot, newProductLot) == 1)
                 {
                     MessageBox.Show("Quantity Updated Successfully");
                     RetrieveProductLots();
@@ -158,42 +156,61 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show("Error Updating quantity. Kindly refresh and try again");
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error occured in update." + ex.Message);
             }
-
-
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Makes Product Lots with 0 Available Products Visible
+        ///     Created by Michael Takram
+        ///     04/01/17
+        ///     Validates quantities from user
+        /// </summary>
+        /// <param name="newProductLot"></param>
+        /// <param name="oldProductLot"></param>
+        /// <returns></returns>
+        private static bool ValidateQuantityUpdates(ProductLot newProductLot, ProductLot oldProductLot)
+        {
+            if (newProductLot.AvailableQuantity == oldProductLot.AvailableQuantity)
+            {
+                MessageBox.Show("No changes mades.");
+                return true;
+            }
+
+            if (newProductLot.AvailableQuantity > oldProductLot.Quantity)
+            {
+                MessageBox.Show("New Available cannot be higher than quantity for product lot. Updates not effected");
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Makes Product Lots with 0 Available Products Visible
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkInactiveLots_OnChecked(object sender, RoutedEventArgs e)
         {
-            checkBoxOverride = true;
+            _checkBoxOverride = true;
             ParseLotsIntoViewModel();
             RefreshDgProductLot();
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Hides Products Lots with 0 Available Products
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Hides Products Lots with 0 Available Products
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkInactiveLots_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            checkBoxOverride = false;
+            _checkBoxOverride = false;
             ParseLotsIntoViewModel();
             RefreshDgProductLot();
         }
@@ -204,10 +221,9 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 3/2/2017
-        /// 
-        /// Refreshes Datagrid
+        ///     Created by Michael Takrama
+        ///     3/2/2017
+        ///     Refreshes Datagrid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -224,7 +240,27 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Catastrophic Error: " + ex.Message);
             }
+        }
 
+        /// <summary>
+        ///     Created by Michael Takrama
+        ///     04/01/2017
+        ///     Search criteria
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_OnClick(object sender, RoutedEventArgs e)
+        {
+            RetrieveProductLots();
+            ParseLotsIntoViewModel();
+
+            _manageStockViewModels = _manageStockViewModels
+                .FindAll(s => string.Equals(
+                    s.ProductName,
+                    txtSearchCriteria.Text,
+                    StringComparison.CurrentCultureIgnoreCase)
+                );
+            RefreshDgProductLot();
         }
     }
 }

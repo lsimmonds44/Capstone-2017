@@ -47,6 +47,7 @@ namespace WpfPresentationLayer
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
         private ISupplierInventoryManager _supplierInventoryManager;
+        private ILocationManager _locationManager;
         
 
 
@@ -770,7 +771,7 @@ namespace WpfPresentationLayer
 
         private void btnManageStock_OnClick(object sender, RoutedEventArgs e)
         {
-            frmManageStock fms = new frmManageStock();
+            frmManageStock fms = new frmManageStock(_productLotManager, _productManager, _supplierManager, _locationManager);
             fms.ShowDialog();
         }
 

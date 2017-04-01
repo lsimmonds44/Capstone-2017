@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Manage Stock" Height="500" Width="950"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <!--Created by Michael Takrama on 3/1/2017-->
     <Grid>
         <!--Grid Definitions-->
@@ -55,7 +55,7 @@
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="0 5 5 5"
                     Grid.ColumnSpan="6">
             <TextBox Name="txtSearchCriteria" Width="250"/>
-            <Button Content="Search" Width="100" Margin="5 0 5 0"/>
+            <Button Click="btnSearch_OnClick" Content="Search" Width="100" Margin="5 0 5 0"/>
         </StackPanel>
         <!--End of Search Controls-->
 

@@ -25,12 +25,13 @@ namespace WpfPresentationLayer
     public partial class frmManageStockSubAdjustQty : Window
     {
         private ProductLot _oldProductLot;
-        private int newQuantity;
+        private int? _newQuantity;
 
         public frmManageStockSubAdjustQty(ProductLot oldProductLot)
         {
             InitializeComponent();
             _oldProductLot = oldProductLot;
+            _newQuantity = oldProductLot.AvailableQuantity;
             SetupWindow();
         }
 
@@ -40,27 +41,44 @@ namespace WpfPresentationLayer
             txtProductLotID.Text = _oldProductLot.ProductLotId.ToString();
             txtProductName.Text = pm.RetrieveProductById((int)_oldProductLot.ProductId).Name;
             txtCurrentQuantity.Text = _oldProductLot.AvailableQuantity.ToString();
+            txtNewQuantity.Text = _newQuantity.ToString();
         }
 
-        public int getNewQuantity()
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 3/2/2017
+        /// Modified on 4/1/17
+        /// 
+        /// Returns newQuantity to parent form
+        /// </summary>
+        /// <returns></returns>
+        public int? getNewQuantity()
         {
-            return newQuantity;
+            return _newQuantity;
         }
 
         private void BtnUpdate_OnClick(object sender, RoutedEventArgs e)
         {
             if (ValidateInput())
             {
-                newQuantity = (int)Double.Parse(txtNewQuantity.Text);
+                _newQuantity = (int)Double.Parse(txtNewQuantity.Text);
                 Close();
             }
             else
             {
                 MessageBox.Show("Illegal Argument");
-                newQuantity = (int)_oldProductLot.AvailableQuantity;
+                _newQuantity = (int)_oldProductLot.AvailableQuantity;
             }
         }
 
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 3/2/2017
+        /// Modified on 4/1/17
+        /// 
+        /// Validates user input
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateInput()
         {
             if (txtNewQuantity.Text == "")
