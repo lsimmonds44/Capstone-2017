@@ -85,7 +85,7 @@
                 <!--End of Name-->
 
                 <!--Product Description-->
-                <Label Name="lblProductDescription" Content="Prouct Description:"/>
+                <Label Name="lblProductDescription" Content="Product Description:"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <Grid>
                         <Grid.ColumnDefinitions>

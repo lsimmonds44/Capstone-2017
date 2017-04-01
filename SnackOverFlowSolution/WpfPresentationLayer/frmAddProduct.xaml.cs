@@ -109,13 +109,12 @@ namespace WpfPresentationLayer
         /// <returns></returns>
         private void GetUserInput()
         {
-
             _product.Name = txtName.Text;
             _product.Description = txtProductDescription.Text;
-            _product.UnitPrice = decimal.Parse(txtUnitPrice.Text);
+            _product.UnitPrice = txtUnitPrice.Text == "" ? 0 : decimal.Parse(txtUnitPrice.Text);
             _product.Active = chkActive.IsChecked;
             _product.UnitOfMeasurement = txtUnitOfMeasure.Text;
-            _product.DeliveryChargePerUnit = decimal.Parse(txtDeliveryChargePerUnit.Text);
+            _product.DeliveryChargePerUnit = txtDeliveryChargePerUnit.Text == "" ? 0 : decimal.Parse(txtDeliveryChargePerUnit.Text);
 
         }
 

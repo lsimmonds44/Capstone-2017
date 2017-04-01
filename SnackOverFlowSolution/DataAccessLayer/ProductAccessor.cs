@@ -206,9 +206,9 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@Name", product.Name);
             cmd.Parameters.AddWithValue("@Description", product.Description);
             cmd.Parameters.AddWithValue("@Unit_Price", product.UnitPrice);
-            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary);
+            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary ?? new Byte[0]);
             cmd.Parameters.AddWithValue("@Active", product.Active);
-            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement);
+            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement );
             cmd.Parameters.AddWithValue("@Delivery_Charge_Per_Unit", product.DeliveryChargePerUnit);
 
             try
