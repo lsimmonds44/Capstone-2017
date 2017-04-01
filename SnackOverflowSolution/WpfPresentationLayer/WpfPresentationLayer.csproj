@@ -138,6 +138,9 @@
     <Compile Include="frmUpdateSupplierInvoice.xaml.cs">
       <DependentUpon>frmUpdateSupplierInvoice.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmVehicleCheckOut.xaml.cs">
+      <DependentUpon>frmVehicleCheckOut.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmViewMaintenanceRecords.xaml.cs">
       <DependentUpon>frmViewMaintenanceRecords.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmUpdateSupplierInvoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmVehicleCheckOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

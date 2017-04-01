@@ -797,6 +797,24 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Laura Simmonds
+        /// 2017/03/24
+        /// 
+        /// Populates Check Out Vehicle form with vehicle data 
+        /// and allows user to update the vehicle satus to checked out or checked in
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCheckOutVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            frmVehicleCheckOut vehicleCheckOut = new frmVehicleCheckOut((Vehicle)dgVehicle.SelectedItem);
+            if (vehicleCheckOut.ShowDialog() == true)
+            {
+                dgVehicle.ItemsSource = _vehicleManager.RetrieveAllVehicles();
+            }
+        }
+
+        /// <summary>
         /// Christian Lopez
         /// Created 2017/03/02
         /// 
