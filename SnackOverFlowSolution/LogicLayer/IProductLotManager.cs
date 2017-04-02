@@ -26,5 +26,7 @@ namespace LogicLayer
 
         ProductLot RetrieveProductLotById(int id);
 
+        int UpdateProductLotPrice(ProductLot prodLot, decimal newPrice);
+
     }
 }

@@ -16,12 +16,12 @@ namespace LogicLayer
     /// </summary>
     public class ProductLotManager : IProductLotManager
     {
-		/// <summary>
-		/// William Flood
-		/// Created on 2017/02/15
-		/// 
-		/// Manages the logic regarding adding a Product Lots
-		/// </summary>
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/02/15
+        /// 
+        /// Manages the logic regarding adding a Product Lots
+        /// </summary>
         public int AddProductLot(ProductLot toAdd)
         {
             var accessor = new ProductLotAccessor();
@@ -29,12 +29,13 @@ namespace LogicLayer
             try
             {
                 return DatabaseMainAccessor.Create(accessor);
-            } catch
+            }
+            catch
             {
                 throw;
             }
-		}
-		
+        }
+
         public ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier)
         {
             ProductLot pl = null;
@@ -73,14 +74,15 @@ namespace LogicLayer
             {
                 lots = ProductLotAccessor.RetrieveProductLots();
                 IProductManager productManager = new ProductManager();
-                foreach (var lot in lots) {
+                foreach (var lot in lots)
+                {
                     var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
                     lot.ProductName = productInLot.Name;
                 }
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
 
@@ -213,7 +215,7 @@ namespace LogicLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
             return lots;
@@ -238,9 +240,35 @@ namespace LogicLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 2017/03/24
+        /// Sends the new price to update product lot price from inspection
+        /// </summary>
+        /// <param name="prodLot"></param>
+        /// <param name="newPrice"></param>
+        /// <returns></returns>
+        public int UpdateProductLotPrice(ProductLot prodLot, decimal newPrice)
+        {
+            int result = 0;
+            int prodLotId = (int)prodLot.ProductLotId;
+
+            try
+            {
+                result = ProductLotAccessor.UpdateProductPrice(prodLotId, newPrice);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
         }
     }
 }

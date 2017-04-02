@@ -81,5 +81,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public int UpdateProductLotPrice(ProductLot prodLot, decimal newPrice)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

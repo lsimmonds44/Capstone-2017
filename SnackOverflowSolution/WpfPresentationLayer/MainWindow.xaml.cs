@@ -496,7 +496,7 @@ namespace WpfPresentationLayer
                 try
                 {
                     var addInspectionFrm = new frmAddInspection(_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierBySupplierID(productLotView.supplierId)),
-                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
+                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager(), new ProductLotManager());
                     var addInspectionResult = addInspectionFrm.ShowDialog();
                     if (addInspectionResult == true)
                     {
@@ -555,7 +555,7 @@ namespace WpfPresentationLayer
                     // Will need to redo method call when linked with either datagrid of ProductLots or immediately aftermaking a productLot
                     //_productLotManager.RetrieveNewestProductLotBySupplier(_supplierManager.RetrieveSupplierByUserId(_user.UserId))
                     var addInspectionFrm = new frmAddInspection((ProductLot)dgProductLots.SelectedItem,
-                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager());
+                        new GradeManager(), _employee, new ProductManager(), _supplierManager, new InspectionManager(), new ProductLotManager());
                     var addInspectionResult = addInspectionFrm.ShowDialog();
                     if (addInspectionResult == true)
                     {
