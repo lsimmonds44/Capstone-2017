@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using DataObjects;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -17,6 +18,11 @@ namespace LogicLayer
     /// </summary>
     public class WarehouseManager : IWarehouseManager
     {
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/03
+        /// </summary>
+        /// <returns></returns>
         public List<Warehouse> ListWarehouses()
         {
             List<Warehouse> warehouses = null;
@@ -25,10 +31,14 @@ namespace LogicLayer
             {
                 warehouses = WarehouseAccessor.RetrieveAllWarehouses();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 
-                throw ex;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unkown error.", ex);
             }
 
             return warehouses;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -36,10 +37,14 @@ namespace LogicLayer
             {
                 added = (1 == InspectionAccessor.CreateInspection(employeeID, productLotId, gradeId, datePerformed, expirationDate));
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return added;

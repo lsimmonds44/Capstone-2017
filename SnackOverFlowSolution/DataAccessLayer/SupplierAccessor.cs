@@ -64,10 +64,10 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was a problem saving to the Database: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -122,10 +122,10 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {
@@ -186,10 +186,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -199,6 +199,12 @@ namespace DataAccessLayer
             return s;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
         public static Supplier RetrieveSupplierBySupplierId(int supplierId)
         {
             Supplier s = null;
@@ -242,10 +248,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -302,10 +308,10 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
@@ -349,10 +355,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was an error reaching the database: " + ex.Message);
+                throw;
             }
             finally
             {

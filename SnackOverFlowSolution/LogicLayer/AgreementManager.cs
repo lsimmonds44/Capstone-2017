@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
 using DataAccessLayer;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -32,10 +33,14 @@ namespace LogicLayer
             {
                 agreements = AgreementAccessor.retrieveAgreementsBySupplierId(supplierId);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 
-                throw ex;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return agreements;
@@ -71,10 +76,14 @@ namespace LogicLayer
                 }
                 
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
 
-                throw ex;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             return success;
         }
@@ -99,10 +108,14 @@ namespace LogicLayer
                     success = true;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 
-                throw ex;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             return success;
         }

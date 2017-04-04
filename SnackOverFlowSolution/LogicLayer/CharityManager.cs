@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
 using DataAccessLayer;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -116,10 +117,14 @@ namespace LogicLayer
                     result = true;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
                 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             
             return result;

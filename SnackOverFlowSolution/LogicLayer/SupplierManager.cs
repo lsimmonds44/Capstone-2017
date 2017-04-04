@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -43,10 +44,14 @@ namespace LogicLayer
                     wasAdded = true;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return wasAdded;
@@ -68,10 +73,14 @@ namespace LogicLayer
             {
                 s = SupplierAccessor.RetrieveSupplierByUserId(userId);
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             if (null == s)
@@ -98,10 +107,14 @@ namespace LogicLayer
             {
                 s = SupplierAccessor.RetrieveSupplierBySupplierId(supplierId);
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             if (null == s)
@@ -112,7 +125,12 @@ namespace LogicLayer
             return s;
         }
 
-
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public string RetrieveSupplierName(int userId)
         {
             string name = null;
@@ -121,10 +139,14 @@ namespace LogicLayer
             {
                 name = SupplierAccessor.RetrieveSupplierName(userId);
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return name;
@@ -144,10 +166,14 @@ namespace LogicLayer
             {
                 suppliers = SupplierAccessor.RetrieveAllSuppliers();
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return suppliers;
@@ -177,10 +203,14 @@ namespace LogicLayer
                     wasAdded = true;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return wasAdded;

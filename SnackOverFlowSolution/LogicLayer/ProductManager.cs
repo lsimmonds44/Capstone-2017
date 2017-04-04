@@ -2,6 +2,7 @@
 using DataObjects;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,9 +97,9 @@ namespace LogicLayer
             {
                 products = ProductAccessor.RetrieveProductbyId(productId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw; // new ApplicationException("There was a problem retrieving the product details. ");
+                throw new ApplicationException("There was a problem retrieving the product details.", ex);
             }
             return products;
         }
@@ -206,10 +207,14 @@ namespace LogicLayer
             {
                 return ProductAccessor.RetrieveProductList();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 
-                throw ex;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
         }
 

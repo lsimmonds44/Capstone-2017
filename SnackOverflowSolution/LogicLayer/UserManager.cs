@@ -110,10 +110,10 @@ namespace LogicLayer
             {
                 user = UserAccessor.RetrieveUserByUsername(username);
             }
-            catch
+            catch (Exception ex)
             {
                 user = null;
-                throw;
+                throw new ApplicationException("There was an error.", ex);
             }
             return user;
         }
@@ -277,10 +277,14 @@ namespace LogicLayer
                 {
                     userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
                 }
-                catch (Exception)
+                catch (SqlException ex)
                 {
 
-                    throw new ApplicationException("Unable to access Data");
+                    throw new ApplicationException("There was a database error.", ex);
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("There was an unknown error.", ex);
                 }
 
             }
@@ -381,10 +385,14 @@ namespace LogicLayer
             {
                 user = UserAccessor.RetrieveUserByUserId(userId);
             }
+            catch (SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
             catch (Exception ex)
             {
-                
-                throw ex;
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             return user;
         }

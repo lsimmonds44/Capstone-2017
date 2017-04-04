@@ -53,7 +53,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                ErrorMessage(ex);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
             try
@@ -63,24 +63,13 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                ErrorMessage(ex);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
             dgSupplierInvoiceLines.ItemsSource = _invoiceLines;
             
         }
 
-        /// <summary>
-        /// Christian Lopez
-        /// 2017/03/22
-        /// 
-        /// Refactored error message
-        /// </summary>
-        /// <param name="ex"></param>
-        private static void ErrorMessage(Exception ex)
-        {
-            MessageBox.Show("Error: " + ex.Message);
-        }
 
         /// <summary>
         /// Christian Lopez
@@ -109,7 +98,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    ErrorMessage(ex);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
             else

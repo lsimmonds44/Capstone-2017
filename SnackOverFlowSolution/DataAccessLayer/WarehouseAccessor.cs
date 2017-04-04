@@ -55,10 +55,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {

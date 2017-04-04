@@ -303,7 +303,7 @@ namespace WpfPresentationLayer
                         {
                             // Enters here if user that access this is not an _employee.
                             // For now it does nothing. 
-                            MessageBox.Show("Employee table is empty or DB connection error.");
+                            MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.InnerException.Message);
                         }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
@@ -482,7 +482,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show("There was an error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -505,7 +505,7 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
             tabProductLot_Selected(sender, e);
@@ -914,7 +914,11 @@ namespace WpfPresentationLayer
         }
 
 
-
+        /// <summary>
+        /// Christian Lopez
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabSupplier_Selected(object sender, RoutedEventArgs e)
         {
             try
@@ -924,7 +928,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -945,7 +949,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -1035,7 +1039,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
         /// <summary>
@@ -1085,7 +1089,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show("Problem Loading Supplier Catalogue Data " + ex);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
         }
@@ -1333,7 +1337,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -1389,7 +1393,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
         }
@@ -1697,6 +1701,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// <remarks>Modified by Christian Lopez on 2017/04/03 to handle all exceptions</remarks>
         private void btnAddSupplierInventory_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1713,9 +1718,16 @@ namespace WpfPresentationLayer
                     var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager,agreementList);
                     supplierInventoryWindow.ShowDialog();
                 }
-            } catch (System.Data.SqlClient.SqlException ex)
+            } catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
         }
@@ -1736,10 +1748,10 @@ namespace WpfPresentationLayer
                 {
                     _supplierList = _supplierManager.ListSuppliers();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     
-                    MessageBox.Show("Unable to verify supplier.");
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     return;
                 }
                 
