@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Christian Lopez
+    /// 2017/02/22
+    /// </summary>
     public class GradeAccessor
     {
         /// <summary>
@@ -44,7 +48,7 @@ namespace DataAccessLayer
             catch (Exception)
             {
 
-                throw new ApplicationException("Could not access the database");
+                throw;
             }
             finally
             {

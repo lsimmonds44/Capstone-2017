@@ -46,6 +46,12 @@ namespace WpfPresentationLayer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Initialized(object sender, EventArgs e)
         {
             try
@@ -55,7 +61,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
             try
@@ -68,7 +74,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
         }
@@ -107,7 +113,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 

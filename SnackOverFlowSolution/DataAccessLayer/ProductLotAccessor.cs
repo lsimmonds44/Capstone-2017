@@ -258,10 +258,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was an issue connecting to the database: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -315,10 +315,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was an issue connecting to the database: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -430,10 +430,10 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {
