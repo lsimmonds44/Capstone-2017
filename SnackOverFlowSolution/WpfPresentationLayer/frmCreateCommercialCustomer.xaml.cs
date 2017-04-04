@@ -130,8 +130,8 @@ namespace WpfPresentationLayer
                 _commercialCustomer.ApprovedBy = parseToInt(txtApprovedBy.Text);
                 _commercialCustomer.IsApproved = (bool)cbkIsApproved.IsChecked;
                 _commercialCustomer.Active = (bool)cbkActive.IsChecked;
-                _commercialCustomer.User_Id = parseToInt(txtUserId.Text);
-                _commercialCustomer.FedTaxId = parseToInt(txtFedTaxId.Text);
+                _commercialCustomer.UserId = parseToInt(txtUserId.Text);
+                _commercialCustomer.FederalTaxId = parseToInt(txtFedTaxId.Text);
             }
             if (_commercialCustomer != null)
             {

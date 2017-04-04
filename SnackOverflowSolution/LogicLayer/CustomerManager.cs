@@ -10,7 +10,7 @@ namespace LogicLayer
 {
     public class CustomerManager : ICustomerManager
     {
-        CustomerAccessor _customerAccessor = new CustomerAccessor();
+       
         /// <summary>
         /// Eric Walton
         /// 2017/06/02
@@ -20,14 +20,14 @@ namespace LogicLayer
         /// If successful it returns true 
         /// If unsuccessful it returns false
         /// </summary>
-        /// <param name="cc"></param>
+        /// <param name="commercialCustomer"></param>
         /// <returns></returns>
-        public bool CreateCommercialAccount(CommercialCustomer cc)
+        public bool CreateCommercialAccount(CommercialCustomer commercialCustomer)
         {
             bool result = false;
             try
             {
-                result = _customerAccessor.CreateCommercialCustomer(cc);
+                result = 1 == CustomerAccessor.CreateCommercialCustomer(commercialCustomer);
             }
             catch (Exception)
             {
@@ -49,7 +49,7 @@ namespace LogicLayer
             List<CommercialCustomer> commercialCustomers = null;
             try
             {
-                commercialCustomers = _customerAccessor.RetrieveAllCommercialCustomers();
+                commercialCustomers = CustomerAccessor.RetrieveAllCommercialCustomers();
             }
             catch (Exception)
             {
@@ -70,11 +70,11 @@ namespace LogicLayer
         /// <returns></returns>
         public CommercialCustomer RetrieveCommercialCustomerByUserId(int userId)
         {
-            CommercialCustomer s = null;
+            CommercialCustomer commercialCustomer = null;
 
             try
             {
-                s = CustomerAccessor.RetrieveCommercialCustomerByUserId(userId);
+                commercialCustomer = CustomerAccessor.RetrieveCommercialCustomerByUserId(userId);
             }
             catch (Exception)
             {
@@ -82,12 +82,12 @@ namespace LogicLayer
                 throw;
             }
 
-            if (null == s)
+            if (null == commercialCustomer)
             {
                 throw new ApplicationException("Could not find customer for that user ID.");
             }
 
-            return s;
+            return commercialCustomer;
         }
     } // end of class
 } // end of namespace

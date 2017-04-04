@@ -188,7 +188,7 @@ namespace WpfPresentationLayer
                 }
                 else
                 {
-                    MessageBox.Show(selectedCustomer.Commercial_Id + " Must be active");
+                    MessageBox.Show(selectedCustomer.CommercialId + " Must be active");
                 }   
             }
             else

@@ -9,135 +9,36 @@ using System.Data;
 
 namespace DataAccessLayer
 {
-    public class CharityAccessor : IDataAccessor
+    public static class CharityAccessor
     {
-        public Charity CharityInstance { get; set; }
-        public List<Charity> CharityList { get; private set; }
-        private static CharityAccessor charityAccessorInstance;
-
-        public static CharityAccessor GetCharityAccessorInstance()
+        public static List<Charity> RetrieveCharities()
         {
-            if(null == charityAccessorInstance)
-            {
-                charityAccessorInstance = new CharityAccessor();
-            }
-            return charityAccessorInstance;
-        }
+            var charities = new List<Charity>();
+            //while (reader.Read()) {
+            //    Charity c = new Charity()
+            //    {
+            //        CharityID = reader.GetInt32(0),
+            //        UserID = reader.GetInt32(1),
+            //        //EmployeeID = reader.GetInt32(2),
+            //        CharityName = reader.GetString(3),
+            //        ContactFirstName = reader.GetString(4),
+            //        ContactLastName = reader.GetString(5),
+            //        PhoneNumber = reader.GetString(6),
+            //        Email = reader.GetString(7),
+            //        ContactHours = reader.GetString(8),
+            //        Status = reader.GetString(9)
+            //    };
+            //    if (!reader.IsDBNull(2))
+            //    {
+            //        c.EmployeeID = reader.GetInt32(2);
+            //    }
+            //    else
+            //    {
+            //        c.EmployeeID = null;
+            //    }
+            //    CharityList.Add(c);
 
-        public string CreateScript
-        {
-            get
-            {
-                return @"sp_create_charity";
-            }
-        }
-
-        public string DeactivateScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string RetrieveListScript
-        {
-            get
-            {
-                return @"sp_retrieve_charity_list";
-            }
-        }
-
-        public string RetrieveSearchScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string RetrieveSingleScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string UpdateScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void ReadList(SqlDataReader reader)
-        {
-            CharityList = new List<Charity>();
-            while (reader.Read()) {
-                Charity c = new Charity()
-                {
-                    CharityID = reader.GetInt32(0),
-                    UserID = reader.GetInt32(1),
-                    //EmployeeID = reader.GetInt32(2),
-                    CharityName = reader.GetString(3),
-                    ContactFirstName = reader.GetString(4),
-                    ContactLastName = reader.GetString(5),
-                    PhoneNumber = reader.GetString(6),
-                    Email = reader.GetString(7),
-                    ContactHours = reader.GetString(8),
-                    Status = reader.GetString(9)
-                };
-                if (!reader.IsDBNull(2))
-                {
-                    c.EmployeeID = reader.GetInt32(2);
-                }
-                else
-                {
-                    c.EmployeeID = null;
-                }
-                CharityList.Add(c);
-
-            }
-        }
-
-        public void ReadSingle(SqlDataReader reader)
-        {
-            CharityInstance = new Charity
-            {
-                CharityID = reader.GetInt32(0),
-                UserID = reader.GetInt32(1),
-                CharityName = reader.GetString(2),
-                ContactFirstName = reader.GetString(3),
-                ContactLastName = reader.GetString(4),
-                PhoneNumber = reader.GetString(5),
-                Email = reader.GetString(6),
-                ContactHours = reader.GetString(7),
-                Status = reader.GetString(8)
-            };
-        }
-
-        public void SetCreateParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@CHARITY_NAME", SqlDbType.NVarChar, 200);
-            cmd.Parameters.Add("@CONTACT_FIRST_NAME", SqlDbType.NVarChar, 150);
-            cmd.Parameters.Add("@CONTACT_LAST_NAME", SqlDbType.NVarChar, 150);
-            cmd.Parameters.Add("@PHONE_NUMBER", SqlDbType.NVarChar, 20);
-            cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar, 100);
-            cmd.Parameters.Add("@CONTACT_HOURS", SqlDbType.NVarChar, 150);
-            cmd.Parameters.Add("@STATUS", SqlDbType.NVarChar, 10);
-            cmd.Parameters["@USER_ID"].Value = CharityInstance.UserID;
-            cmd.Parameters["@EMPLOYEE_ID"].Value = CharityInstance.EmployeeID;
-            cmd.Parameters["@CHARITY_NAME"].Value = CharityInstance.CharityName;
-            cmd.Parameters["@CONTACT_FIRST_NAME"].Value = CharityInstance.ContactFirstName;
-            cmd.Parameters["@CONTACT_LAST_NAME"].Value = CharityInstance.ContactLastName;
-            cmd.Parameters["@PHONE_NUMBER"].Value = CharityInstance.PhoneNumber;
-            cmd.Parameters["@EMAIL"].Value = CharityInstance.Email;
-            cmd.Parameters["@CONTACT_HOURS"].Value = CharityInstance.ContactHours;
-            cmd.Parameters["@STATUS"].Value = CharityInstance.Status;
+            return charities;
         }
 
         /// <summary>
@@ -204,20 +105,6 @@ namespace DataAccessLayer
             return s;
         }
 
-        public void SetKeyParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetRetrieveSearchParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetUpdateParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Daniel Brown
@@ -227,7 +114,7 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="charity"></param>
         /// <returns></returns>
-        public int ApproveCharity(Charity charity)
+        public static int ApproveCharity(Charity charity)
         {
 
             int rowsAffected = 0;
@@ -269,7 +156,7 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="charity"></param>
         /// <returns></returns>
-        public int DenyCharity(Charity charity)
+        public static int DenyCharity(Charity charity)
         {
 
             int rowsAffected = 0;
@@ -341,10 +228,10 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {
@@ -354,5 +241,7 @@ namespace DataAccessLayer
             return rows;
         }
 
+
+        
     }
 }
