@@ -50,7 +50,15 @@ namespace WpfPresentationLayer
         {
             if (txtUserName.Text.Length > 0)
             {// retrieves user from database by username
-                _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
+                try
+                {
+                    _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
+                }
+                catch (Exception )
+                {
+                    MessageBox.Show("Error retrieving user");
+                }
+                
                 if (_userToUpdate != null)
                 { // populates data for _employee to verify they have the correct user information to the customer on the phone.
                     txtName.Text = _userToUpdate.FirstName + " " + _userToUpdate.LastName;

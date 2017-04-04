@@ -88,11 +88,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
-            _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
+            
             if (cboCustomerType.SelectedItem as String == "Commercial")
             {
                 try
                 {
+                    _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
                     frmCreateCommercialCustomer cCCW = new frmCreateCommercialCustomer((int)_employee.EmployeeId);
                     if (cCCW.ShowDialog() == true)
                     {
@@ -180,11 +181,20 @@ namespace WpfPresentationLayer
                 
                 if (selectedCustomer.Active)
                 {
-                    frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
-                    if (createOrderWindow.ShowDialog() == true)
+                    try
                     {
+                        frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
+                        if (createOrderWindow.ShowDialog() == true)
+                        {
 
+                        }
                     }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Only employees can create order from the desktop app.");
+                    }
+                    
+                   
                 }
                 else
                 {
