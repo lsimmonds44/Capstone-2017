@@ -54,10 +54,10 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was an error saving to the DB: " + ex.Message);
+                throw;
             }
             finally
             {

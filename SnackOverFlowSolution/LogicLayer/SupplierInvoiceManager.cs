@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
 using DataAccessLayer;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -28,10 +29,14 @@ namespace LogicLayer
             {
                 return SupplierInvoiceAccessor.RetrieveSupplierInvoices();
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
                 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
         }
 
@@ -49,10 +54,14 @@ namespace LogicLayer
             {
                 return SupplierInvoiceAccessor.RetrieveInvoiceLinesByInvoiceId(invoiceId);
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
         }
 
@@ -75,10 +84,14 @@ namespace LogicLayer
                     result = true;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return result;
@@ -104,10 +117,14 @@ namespace LogicLayer
                     throw new ApplicationException("Unable to retrieve the new id number.");
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             return id;
         }
@@ -126,10 +143,14 @@ namespace LogicLayer
             {
                 return (1 == SupplierInvoiceAccessor.CreateSupplierInvoiceLine(line));
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
         }
 

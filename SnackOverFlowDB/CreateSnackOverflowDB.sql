@@ -4326,7 +4326,7 @@ CREATE PROCEDURE sp_retrieve_product
 )
 AS
 	BEGIN
-		SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT
+		SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT, IMAGE_BINARY
 		FROM product
 		WHERE PRODUCT_ID = @PRODUCT_ID
 	END
@@ -6898,20 +6898,19 @@ AS
 	END
 GO
 
-print '' print  '*** Creating procedure sp_update_product_price'
+Print '' print  ' *** creating procedure sp_update_product_price'
 GO
-CREATE PROCEDURE sp_update_product_price
+Create PROCEDURE sp_update_product_price
 (
-	@PRODUCT_ID[INT],
-	@old_PRICE[DECIMAL](5,2),
+	@PRODUCT_LOT_ID[INT],
 	@new_PRICE[DECIMAL](5,2)
 )
 AS
 	BEGIN
-		UPDATE product_grade_price
+		UPDATE product_lot
 		SET PRICE = @new_PRICE
-		WHERE (PRODUCT_ID = @PRODUCT_ID)
-		AND (PRICE = @old_PRICE)
+		WHERE (PRODUCT_LOT_ID = @PRODUCT_LOT_ID)
+		RETURN @@ROWCOUNT
 	END
 GO
 

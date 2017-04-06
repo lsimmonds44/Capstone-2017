@@ -169,13 +169,15 @@ namespace DataAccessLayer
                                 ImageName = reader.GetString(4),
                                 Active = reader.GetBoolean(5),
                                 UnitOfMeasurement = reader.GetString(6),
-                                DeliveryChargePerUnit = reader.GetDecimal(7)
+                                DeliveryChargePerUnit = reader.GetDecimal(7),
+                                ImageBinary = new byte[reader.GetStream(8).Length]
                             };
+                            reader.GetStream(8).Read(product.ImageBinary, 0, (int)reader.GetStream(8).Length);
                         }
                         reader.Close();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw;
                 }
@@ -341,10 +343,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace LogicLayer
         /// <param name="productCategory">Name of category</param>
         /// <param name="prodCategoryDesc">Description of category</param>
         /// <returns></returns>
-        public bool NewProductCategory(string productCategory, string prodCategoryDesc)
+        public bool CreateCategory(Category category)
         {
             var result = false;
 
             try
             {
-                result = (1 == CategoryAccessor.CreateProductCategory(productCategory, prodCategoryDesc));
+                result = (1 == CategoryAccessor.CreateCategory(category));
             }
             catch (Exception ex)
             {

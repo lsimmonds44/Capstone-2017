@@ -32,8 +32,8 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters["@EMPLOYEE_ID"].Value = employeeID;
+            cmd.Parameters.Add("@EmployeeID", SqlDbType.Int);
+            cmd.Parameters["@EmployeeID"].Value = employeeID;
 
             try
             {
@@ -42,14 +42,13 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                    reader.Read();
                     employee = new Employee()
                     {
                         EmployeeId = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
-                        Salary = reader.GetDecimal(2),
-                        Active = reader.GetBoolean(3),
-                        DateOfBirth = reader.GetDateTime(4)
+                        Salary = reader.GetDecimal(3),
+                        Active = reader.GetBoolean(4),
+                        DateOfBirth = reader.GetDateTime(5)
                     };
                 }
             }

@@ -9,72 +9,89 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class CustomerAccessor
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/03
+    /// 
+    /// Class to handle database interactions involving customers.
+    /// </summary>
+    public static class CustomerAccessor
     {
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02
+        /// Created: 2017/06/02
         /// 
-        /// Create Commercial Customer method that uses a stored procedure to access the database
+        /// Create Commercial Customer method that uses a stored procedure to access the database 
+        /// to add a commercial customer.
         /// </summary>
-        /// <param name="cc"></param>
-        /// <returns></returns>
-        public bool CreateCommercialCustomer(CommercialCustomer cc)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/03
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="commercialCustomer">The commercial customer to add.</param>
+        /// <returns>Rows affectd.</returns>
+        public static int CreateCommercialCustomer(CommercialCustomer commercialCustomer)
         {
-            var result = false;
+            int rows = 0;
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_commercial";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
-            cmd.Parameters.Add("@APPROVED_BY", SqlDbType.Int);
-            cmd.Parameters.Add("@FEDERAL_TAX_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            // values
-            cmd.Parameters["@USER_ID"].Value = cc.User_Id;
-            cmd.Parameters["@IS_APPROVED"].Value = cc.IsApproved;
-            cmd.Parameters["@APPROVED_BY"].Value = cc.ApprovedBy;
-            cmd.Parameters["@FEDERAL_TAX_ID"].Value = cc.FedTaxId;
-            cmd.Parameters["@Active"].Value = cc.Active;
+
+            cmd.Parameters.AddWithValue("@USER_ID", commercialCustomer.UserId);
+            cmd.Parameters.AddWithValue("@IS_APPROVED", commercialCustomer.IsApproved);
+            cmd.Parameters.AddWithValue("@APPROVED_BY", commercialCustomer.ApprovedBy);
+            cmd.Parameters.AddWithValue("@FEDERAL_TAX_ID", commercialCustomer.FederalTaxId);
+            cmd.Parameters.AddWithValue("@ACTIVE", commercialCustomer.Active);
 
             try
             {
                 conn.Open();
-                cmd.ExecuteNonQuery();
-                result = true;
+                rows = cmd.ExecuteNonQuery();
+                
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw new Exception("Error: " + ex);
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return result;
-        } // End of CreteCommercialCustomer
+
+            return rows;
+        }
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created: 2017/03/24
         /// 
         /// Retrieve Commercial Customer by user id
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/03
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="userId">User Id to retrieve the commercial customer on.</param>
+        /// <returns>The commercial customer with the specified User Id.</returns>
         public static CommercialCustomer RetrieveCommercialCustomerByUserId(int userId)
         {
-            CommercialCustomer s = null;
+            CommercialCustomer commercialCustomer = null;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_commercial_customer_by_user_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters["@USER_ID"].Value = userId;
+            cmd.Parameters.AddWithValue("@USER_ID", userId);
 
             try
             {
@@ -83,85 +100,84 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    s = new CommercialCustomer
+                    commercialCustomer = new CommercialCustomer
                     {
-                        Commercial_Id = reader.GetInt32(0),
-                        User_Id = reader.GetInt32(1),
+                        CommercialId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        //ApprovedBy = reader.GetInt32(3),
-                        FedTaxId = reader.GetInt32(4),
+                        ApprovedBy = reader.IsDBNull(3) ? null : (int?)reader.GetInt32(3),
+                        FederalTaxId = reader.GetInt32(4),
                         Active = reader.GetBoolean(5)
                     };
-                    if (!reader.IsDBNull(3))
-                    {
-                        s.ApprovedBy = reader.GetInt32(3);
-                    }
-                    else
-                    {
-                        s.ApprovedBy = 0;
-                    }
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return s;
+            return commercialCustomer;
         }
 
         /// <summary>
         /// Eric Walton
-        /// 2017/26/02
+        /// Created: 2017/26/02
         /// Accessor method to Retrieve a list of all Commercial Customers
-        /// If succesful returns list
-        /// If unsuccessful throws error
         /// </summary>
-        /// <returns></returns>
-        public List<CommercialCustomer> RetrieveAllCommercialCustomers()
+        /// 
+        ///  <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/03
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <returns>A list of all commercial customers in the database.</returns>
+        public static List<CommercialCustomer> RetrieveAllCommercialCustomers()
         {
             var commercialCustomers = new List<CommercialCustomer>();
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_commercial_list";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-    try 
-	{	        
-		   conn.Open();
-           var reader = cmd.ExecuteReader();
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         commercialCustomers.Add(new CommercialCustomer()
                         {
-                            Commercial_Id = reader.GetInt32(0),
-                            User_Id = reader.GetInt32(1),
+                            CommercialId = reader.GetInt32(0),
+                            UserId = reader.GetInt32(1),
                             IsApproved = reader.GetBoolean(2),
                             ApprovedBy = reader.GetInt32(3),
-                            FedTaxId = reader.GetInt32(4),
+                            FederalTaxId = reader.GetInt32(4),
                             Active = reader.GetBoolean(5)
                         });
                     }
                     reader.Close();
                 }
-	}
-	catch (Exception)
-	{
-		throw;
-	}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             finally
             {
                 conn.Close();
             }
+            
             return commercialCustomers;
-        } // End of RetrieveAllCommercialCustomers
-    } // End of class
-} // end of namespace
+        }
+    }
+} 

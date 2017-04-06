@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
 using DataAccessLayer;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -12,24 +13,25 @@ namespace LogicLayer
     {
         public List<Charity> RetrieveCharityList()
         {
-            var accessor = CharityAccessor.GetCharityAccessorInstance();
+            List<Charity> charities = new List<Charity>();
+                           
             try
             {
-                DatabaseMainAccessor.RetrieveList(accessor);
-                return accessor.CharityList;
-            } catch
+                charities = CharityAccessor.RetrieveCharities();
+            } 
+            catch
             {
                 throw;
             }
+
+            return charities;
         }
 
-        public int AddCharity(Charity charityInstance)
+        public int AddCharity(Charity charity)
         {
-            var accessor = CharityAccessor.GetCharityAccessorInstance();
-            accessor.CharityInstance = charityInstance;
             try
             {
-                return DatabaseMainAccessor.Create(accessor);
+                return CharityAccessor.CreateCharityApplication(charity);
             }
             catch
             {
@@ -48,11 +50,10 @@ namespace LogicLayer
         public bool ApproveCharity(Charity charityInstance)
         {
             bool result = false;
-            CharityAccessor accessor = new CharityAccessor();
 
             try
             {
-                if (accessor.ApproveCharity(charityInstance) > 0)
+                if (CharityAccessor.ApproveCharity(charityInstance) > 0)
                 {
                     result = true;
                 }
@@ -78,11 +79,10 @@ namespace LogicLayer
         public bool DenyCharity(Charity charityInstance)
         {
             bool result = false;
-            CharityAccessor accessor = new CharityAccessor();
 
             try
             {
-                if (accessor.DenyCharity(charityInstance) > 0)
+                if (CharityAccessor.DenyCharity(charityInstance) > 0)
                 {
                     result = true;
                 }
@@ -116,10 +116,14 @@ namespace LogicLayer
                     result = true;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
                 
-                throw;
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             
             return result;

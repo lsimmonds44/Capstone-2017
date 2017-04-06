@@ -19,7 +19,7 @@ namespace LogicLayer
                 ProductOrderList = ProductOrderAccessor.RetrieveProductOrdersByStatus(Status);
                 foreach (ProductOrder ProductOrderFound in ProductOrderList)
                 {
-                    ProductOrderFound.BackorderPreorderList = BackorderPreorderAccessor.RetrieveBackorderPreorder(
+                    ProductOrderFound.BackorderPreorderList = BackorderPreorderAccessor.RetrieveBackorderPreorders(
                         new BackorderPreorder
                         {
                             OrderId = ProductOrderFound.OrderId

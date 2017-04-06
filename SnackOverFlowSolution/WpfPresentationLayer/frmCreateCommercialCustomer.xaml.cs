@@ -50,7 +50,15 @@ namespace WpfPresentationLayer
         {
             if (txtUserName.Text.Length > 0)
             {// retrieves user from database by username
-                _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
+                try
+                {
+                    _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
+                }
+                catch (Exception )
+                {
+                    MessageBox.Show("Error retrieving user");
+                }
+                
                 if (_userToUpdate != null)
                 { // populates data for _employee to verify they have the correct user information to the customer on the phone.
                     txtName.Text = _userToUpdate.FirstName + " " + _userToUpdate.LastName;
@@ -130,8 +138,8 @@ namespace WpfPresentationLayer
                 _commercialCustomer.ApprovedBy = parseToInt(txtApprovedBy.Text);
                 _commercialCustomer.IsApproved = (bool)cbkIsApproved.IsChecked;
                 _commercialCustomer.Active = (bool)cbkActive.IsChecked;
-                _commercialCustomer.User_Id = parseToInt(txtUserId.Text);
-                _commercialCustomer.FedTaxId = parseToInt(txtFedTaxId.Text);
+                _commercialCustomer.UserId = parseToInt(txtUserId.Text);
+                _commercialCustomer.FederalTaxId = parseToInt(txtFedTaxId.Text);
             }
             if (_commercialCustomer != null)
             {

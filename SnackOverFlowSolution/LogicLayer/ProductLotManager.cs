@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace LogicLayer
 {
@@ -16,12 +17,12 @@ namespace LogicLayer
     /// </summary>
     public class ProductLotManager : IProductLotManager
     {
-		/// <summary>
-		/// William Flood
-		/// Created on 2017/02/15
-		/// 
-		/// Manages the logic regarding adding a Product Lots
-		/// </summary>
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/02/15
+        /// 
+        /// Manages the logic regarding adding a Product Lots
+        /// </summary>
         public int AddProductLot(ProductLot toAdd)
         {
             var accessor = new ProductLotAccessor();
@@ -29,12 +30,19 @@ namespace LogicLayer
             try
             {
                 return DatabaseMainAccessor.Create(accessor);
-            } catch
+            }
+            catch
             {
                 throw;
             }
-		}
-		
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
         public ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier)
         {
             ProductLot pl = null;
@@ -44,10 +52,14 @@ namespace LogicLayer
                 {
                     pl = ProductLotAccessor.RetrieveNewestProductLot(supplier);
                 }
-                catch (Exception)
+                catch (SqlException ex)
                 {
 
-                    throw;
+                    throw new ApplicationException("There was a database error.", ex);
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("There was an unknown error.", ex);
                 }
             }
             return pl;
@@ -73,15 +85,20 @@ namespace LogicLayer
             {
                 lots = ProductLotAccessor.RetrieveProductLots();
                 IProductManager productManager = new ProductManager();
-                foreach (var lot in lots) {
+                foreach (var lot in lots)
+                {
                     var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
                     lot.ProductName = productInLot.Name;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
 
             return lots;
@@ -107,10 +124,10 @@ namespace LogicLayer
                     lot.ProductName = productInLot.Name;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new ApplicationException("There was an error", ex);
             }
 
             return lots;
@@ -188,11 +205,21 @@ namespace LogicLayer
         private static void setProductLotNames(List<ProductLot> lots)
         {
             IProductManager productManager = new ProductManager();
-            foreach (var lot in lots)
+            try
             {
-                var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
-                lot.ProductName = productInLot.Name;
+                foreach (var lot in lots)
+                {
+                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                    lot.ProductName = productInLot.Name;
+                }
             }
+            catch (Exception ex)
+            {
+                
+                throw new ApplicationException("Could not set product names", ex.InnerException);
+            }
+            
+            
         }
 
         /// <summary>
@@ -211,10 +238,14 @@ namespace LogicLayer
                 lots = ProductLotAccessor.RetrieveProductLotsBySupplier(supplier);
                 setProductLotNames(lots);
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
             }
             return lots;
         }
@@ -236,11 +267,42 @@ namespace LogicLayer
                 lot.ProductName = (pm.RetrieveProductById((int)lot.ProductId)).Name;
                 return lot;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+
+                throw new ApplicationException("There was a database error.", ex);
             }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 2017/03/24
+        /// Sends the new price to update product lot price from inspection
+        /// </summary>
+        /// <param name="prodLot"></param>
+        /// <param name="newPrice"></param>
+        /// <returns></returns>
+        public int UpdateProductLotPrice(ProductLot prodLot, decimal newPrice)
+        {
+            int result = 0;
+            int prodLotId = (int)prodLot.ProductLotId;
+
+            try
+            {
+                result = ProductLotAccessor.UpdateProductPrice(prodLotId, newPrice);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
         }
     }
 }

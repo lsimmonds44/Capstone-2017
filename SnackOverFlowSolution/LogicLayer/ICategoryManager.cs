@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace LogicLayer
 {
     public interface ICategoryManager
     {
-        bool NewProductCategory(string productCategory, string prodCategoryDesc);
+        bool CreateCategory(Category category);
     }
 }

@@ -8,11 +8,11 @@ namespace DataObjects
 {
     public class CommercialCustomer
     {
-        public int Commercial_Id { get; set; }
-        public int User_Id { get; set; }
+        public int CommercialId { get; set; }
+        public int UserId { get; set; }
         public bool IsApproved { get; set; }
-        public int ApprovedBy { get; set; }
-        public int FedTaxId { get; set; }
+        public int? ApprovedBy { get; set; }
+        public int FederalTaxId { get; set; }
         public bool Active { get; set; }
     }
 }

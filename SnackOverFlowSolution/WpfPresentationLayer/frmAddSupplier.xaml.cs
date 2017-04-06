@@ -68,6 +68,12 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLookup_Click(object sender, RoutedEventArgs e)
         {
             // Set up variables to use
@@ -83,7 +89,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Unable to access DB! ERROR: " + ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     return;
                 }
             }
@@ -110,7 +116,7 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to get user address. ERROR: " + ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
 
                 // Fill in tables with the suppliers information that will carry over from user
@@ -256,7 +262,7 @@ namespace WpfPresentationLayer
                             catch (Exception ex)
                             {
 
-                                MessageBox.Show(ex.Message);
+                                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                             }
 
                         }
@@ -270,7 +276,7 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     }
                 }
                 else if (_type.Equals("Applying"))
@@ -293,7 +299,7 @@ namespace WpfPresentationLayer
                             catch (Exception ex)
                             {
 
-                                MessageBox.Show(ex.Message);
+                                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                             }
 
                         }
@@ -307,7 +313,7 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     }
                 }
                 else if (_type.Equals("Editing"))
@@ -369,7 +375,7 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error: " + ex.Message);
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     }
                 }
             }
@@ -395,7 +401,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    throw new ApplicationException("Could not store " + p.Name + " as an agreement. Error: " + ex.Message);
+                    throw new ApplicationException("Could not store " + p.Name + " as an agreement. Error: " + ex.Message, ex.InnerException);
                 }
             }
         }
@@ -448,21 +454,30 @@ namespace WpfPresentationLayer
             }
             else if (_type.Equals("Editing"))
             {
-                btnLookup.IsEnabled = false;
-                txtUsername.IsEnabled = false;
-                btnSubmit.Content = "Update";
-                User supplierUser = _userManager.RetrieveUser(_supplierToEdit.UserId);
-                txtUsername.Text = supplierUser.UserName;
-                txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
-                txtPhone.Text = supplierUser.Phone;
-                txtFarmName.Text = _supplierToEdit.FarmName;
-                txtFarmAddress.Text = _supplierToEdit.FarmAddress;
-                txtFarmCity.Text = _supplierToEdit.FarmCity;
-                txtFarmTaxId.Text = _supplierToEdit.FarmTaxID;
-                cboFarmState.SelectedIndex = getDropdown(_supplierToEdit.FarmState);
-                productSection.IsEnabled = true;
-                chkActive.IsChecked = _supplierToEdit.Active;
-                chkActive.IsEnabled = true;
+                try
+                {
+                    btnLookup.IsEnabled = false;
+                    txtUsername.IsEnabled = false;
+                    btnSubmit.Content = "Update";
+                    User supplierUser = _userManager.RetrieveUser(_supplierToEdit.UserId);
+                    txtUsername.Text = supplierUser.UserName;
+                    txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
+                    txtPhone.Text = supplierUser.Phone;
+                    txtFarmName.Text = _supplierToEdit.FarmName;
+                    txtFarmAddress.Text = _supplierToEdit.FarmAddress;
+                    txtFarmCity.Text = _supplierToEdit.FarmCity;
+                    txtFarmTaxId.Text = _supplierToEdit.FarmTaxID;
+                    cboFarmState.SelectedIndex = getDropdown(_supplierToEdit.FarmState);
+                    productSection.IsEnabled = true;
+                    chkActive.IsChecked = _supplierToEdit.Active;
+                    chkActive.IsEnabled = true;
+                }
+                catch (Exception ex)
+                {
+                    
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                
             }
             try
             {
@@ -486,15 +501,28 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
 
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/09
+        /// </summary>
         private void getAgreements()
         {
-            _agreements = _agreementManager.RetrieveAgreementsBySupplierId(_supplierToEdit.SupplierID);
+            try
+            {
+                _agreements = _agreementManager.RetrieveAgreementsBySupplierId(_supplierToEdit.SupplierID);
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+            
         }
 
         /// <summary>

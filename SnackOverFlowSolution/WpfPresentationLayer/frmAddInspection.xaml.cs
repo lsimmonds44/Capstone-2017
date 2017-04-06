@@ -30,9 +30,11 @@ namespace WpfPresentationLayer
         private IProductManager _productManager;
         private ISupplierManager _supplierManager;
         private IInspectionManager _inspectionManager;
+        private IProductLotManager _productLotManager;
+        private decimal inspProdPrice = 0;
         public frmAddInspection(ProductLot productLot, IGradeManager gradeManager, 
             Employee currentEmp, IProductManager productManager, ISupplierManager supplierManager,
-            IInspectionManager InspectionManager)
+            IInspectionManager InspectionManager, IProductLotManager productLotManager)
         {
             _gradeManager = gradeManager;
             _productLot = productLot;
@@ -40,9 +42,16 @@ namespace WpfPresentationLayer
             _productManager = productManager;
             _supplierManager = supplierManager;
             _inspectionManager = InspectionManager;
+            _productLotManager = productLotManager;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Initialized(object sender, EventArgs e)
         {
             try
@@ -52,7 +61,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
             try
@@ -65,7 +74,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
         }
@@ -87,11 +96,24 @@ namespace WpfPresentationLayer
                 {
                     this.DialogResult = true;
                 }
+                try
+                {
+                    if (_productLotManager.UpdateProductLotPrice(_productLot, inspProdPrice) == 1)
+                    {
+                        MessageBox.Show("Product lot inspection entered.");
+                        Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message + ex.StackTrace);
+                }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -100,6 +122,19 @@ namespace WpfPresentationLayer
             if (cboGradeSelect.Text == "")
             {
                 throw new ApplicationException("A grade must be selected.");
+            }
+            if (txtInspectionProductPrice.Text == "")
+            {
+                throw new ApplicationException("A price must be entered.");
+            }
+            else
+            {
+                bool canConvert = decimal.TryParse(txtInspectionProductPrice.Text, out inspProdPrice);
+                if (canConvert == false)
+                {
+                    txtInspectionProductPrice.Clear();
+                    throw new ApplicationException("A valid price must be entered.");
+                }
             }
         }
     }
