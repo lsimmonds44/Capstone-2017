@@ -69,6 +69,7 @@
     <Compile Include="SupplierInventory.cs" />
     <Compile Include="SupplierInvoice.cs" />
     <Compile Include="SupplierInvoiceLine.cs" />
+    <Compile Include="SupplierWithAgreements.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleType.cs" />
