@@ -1,20 +1,22 @@
 ﻿@model DataObjects.ProductLot
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>SupplierInvoice</h4>
+        <h4>Product Lot</h4>
         <hr />
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ProductLotId)
+
         <div class="form-group">
             @Html.LabelFor(model => model.ProductLotId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -22,6 +24,7 @@
                 @Html.ValidationMessageFor(model => model.ProductLotId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.WarehouseId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -29,6 +32,7 @@
                 @Html.ValidationMessageFor(model => model.WarehouseId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.SupplierId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -36,6 +40,7 @@
                 @Html.ValidationMessageFor(model => model.SupplierId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.LocationId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -43,6 +48,7 @@
                 @Html.ValidationMessageFor(model => model.LocationId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.ProductId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -50,6 +56,7 @@
                 @Html.ValidationMessageFor(model => model.ProductId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.SupplyManagerId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -57,6 +64,7 @@
                 @Html.ValidationMessageFor(model => model.SupplyManagerId)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -64,6 +72,7 @@
                 @Html.ValidationMessageFor(model => model.Quantity)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.AvailableQuantity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -71,6 +80,7 @@
                 @Html.ValidationMessageFor(model => model.AvailableQuantity)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Grade, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,6 +88,7 @@
                 @Html.ValidationMessageFor(model => model.Grade)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -85,6 +96,7 @@
                 @Html.ValidationMessageFor(model => model.Price)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.DateReceived, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -92,6 +104,7 @@
                 @Html.ValidationMessageFor(model => model.DateReceived)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.ExpirationDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -99,11 +112,18 @@
                 @Html.ValidationMessageFor(model => model.ExpirationDate)
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.ProductName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ProductName)
                 @Html.ValidationMessageFor(model => model.ProductName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

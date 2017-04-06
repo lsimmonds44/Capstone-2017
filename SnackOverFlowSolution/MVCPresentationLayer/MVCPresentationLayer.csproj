@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SupplierGoodsController.cs" />
     <Compile Include="Controllers\SupplierInvoiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,6 +287,11 @@
     <Content Include="Views\SupplierInvoice\Details.cshtml" />
     <Content Include="Views\SupplierInvoice\Edit.cshtml" />
     <Content Include="Views\SupplierInvoice\Index.cshtml" />
+    <Content Include="Views\SupplierGoods\Create.cshtml" />
+    <Content Include="Views\SupplierGoods\Delete.cshtml" />
+    <Content Include="Views\SupplierGoods\Details.cshtml" />
+    <Content Include="Views\SupplierGoods\Edit.cshtml" />
+    <Content Include="Views\SupplierGoods\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
