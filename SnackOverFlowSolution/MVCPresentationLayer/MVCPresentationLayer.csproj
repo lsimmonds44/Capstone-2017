@@ -195,6 +195,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SupplierInvoiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +281,11 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\SupplierInvoice\Create.cshtml" />
+    <Content Include="Views\SupplierInvoice\Delete.cshtml" />
+    <Content Include="Views\SupplierInvoice\Details.cshtml" />
+    <Content Include="Views\SupplierInvoice\Edit.cshtml" />
+    <Content Include="Views\SupplierInvoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
