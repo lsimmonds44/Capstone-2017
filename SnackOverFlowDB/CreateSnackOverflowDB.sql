@@ -2981,6 +2981,18 @@ AS
 	END
 GO
 
+
+print '' print  '*** Creating procedure sp_delete_test_employee'
+GO
+CREATE PROCEDURE sp_delete_test_employee
+AS
+	BEGIN
+		DELETE FROM employee
+		WHERE SALARY = 100 AND ACTIVE = 'True' AND DATE_OF_BIRTH = '1000-01-01' 
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_delete_employee_message'
 GO
 CREATE PROCEDURE sp_delete_employee_message
@@ -3377,6 +3389,17 @@ AS
 	BEGIN
 		DELETE FROM supplier
 		WHERE SUPPLIER_ID = @SUPPLIER_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_test_user'
+GO
+Create PROCEDURE sp_delete_test_user
+AS
+	BEGIN
+		DELETE FROM APP_USER 
+		WHERE USER_NAME = "Test"
 		RETURN @@ROWCOUNT
 	END
 GO

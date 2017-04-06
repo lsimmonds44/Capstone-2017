@@ -103,6 +103,7 @@
     <Compile Include="SupplierInvoiceManager.cs" />
     <Compile Include="TestEmployeeManager.cs" />
     <Compile Include="SupplierManager.cs" />
+    <Compile Include="TestManager.cs" />
     <Compile Include="TestProductLotManager.cs" />
     <Compile Include="TestProductManager.cs" />
     <Compile Include="TestUserManager.cs" />
