@@ -9,7 +9,7 @@ namespace LogicLayer
 {
     public interface IProductLotManager
     {
-        int AddProductLot(ProductLot toAdd);
+        bool CreateProductLot(ProductLot toAdd);
         ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier);
 
         bool AddProduct(ProductLot p);

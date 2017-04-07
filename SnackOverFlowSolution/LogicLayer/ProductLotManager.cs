@@ -19,22 +19,31 @@ namespace LogicLayer
     {
         /// <summary>
         /// William Flood
-        /// Created on 2017/02/15
+        /// Created: 2017/02/15
         /// 
-        /// Manages the logic regarding adding a Product Lots
+        /// Manages the logic regarding adding a Product Lot.
         /// </summary>
-        public int AddProductLot(ProductLot toAdd)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated 2017/04/06
+        ///
+        /// Changed to work with static accessor class; standardized.
+        /// </remarks>
+        /// <param name="productLot">The product lot to add.</param>
+        /// <returns>Whether or not the product lot was created successfully.</returns>
+        public bool CreateProductLot(ProductLot productLot)
         {
-            var accessor = new ProductLotAccessor();
-            accessor.ProductLotInstance = toAdd;
+            bool result = false;
             try
             {
-                return DatabaseMainAccessor.Create(accessor);
+                result = (1 == ProductLotAccessor.CreateProductLot(productLot));
             }
             catch
             {
                 throw;
             }
+            return result;
         }
 
         /// <summary>

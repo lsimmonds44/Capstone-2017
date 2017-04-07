@@ -16,101 +16,54 @@ namespace DataAccessLayer
 	///
     /// Contains the access methods for Product Lots
     /// </summary>
-    public class ProductLotAccessor : IDataAccessor
+    public static class ProductLotAccessor
     {
 		
-		
-        public ProductLot ProductLotInstance { get; set; }
-        public ProductLot ProductLotValidatorInstance { get; set; }
-        public List<ProductLot> ProductLotList { get; set; }
-        public string CreateScript
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/04/07
+        /// 
+        /// Adds a new product lot to the database.
+        /// </summary>
+        /// <param name="productLot">THe product lot to add.</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateProductLot(ProductLot productLot)
         {
-            get
-            {
-                return "sp_create_product_lot";
-            }
-        }
+            int rows = 0;
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_product_lot";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-        public string DeactivateScript
-        {
-            get
-            {
-                return "sp_delete_product_lot";
-            }
-        }
+            cmd.Parameters.AddWithValue("@WAREHOUSE_ID", productLot.WarehouseId);
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", productLot.SupplierId);
+            cmd.Parameters.AddWithValue("@LOCATION_ID", productLot.LocationId);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", productLot.ProductId);
+            cmd.Parameters.AddWithValue("@SUPPLY_MANAGER_ID", productLot.SupplyManagerId);
+            cmd.Parameters.AddWithValue("@QUANTITY", productLot.Quantity);
+            cmd.Parameters.AddWithValue("@AVAILABLE_QUANTITY", productLot.AvailableQuantity);
+            cmd.Parameters.AddWithValue("@DATE_RECEIVED", productLot.DateReceived);
+            cmd.Parameters.AddWithValue("@EXPIRATION_DATE", productLot.ExpirationDate);
 
-        public string RetrieveListScript
-        {
-            get
+            try
             {
-                return "sp_retrieve_product_lot_list";
-            }
-        }
+                conn.Open();
 
-        public string RetrieveSearchScript
-        {
-            get
-            {
-                return "sp_retrieve_product_lot_from_search";
+                rows = cmd.ExecuteNonQuery();
             }
-        }
-
-        public string RetrieveSingleScript
-        {
-            get
-            {
-                return "sp_retrieve_product_lot";
-            }
-        }
-
-        public string UpdateScript
-        {
-            get
-            {
-                return "sp_update_product_lot";
-            }
-        }
-
-        public void ReadList(SqlDataReader reader)
-        {
-            ProductLotList = new List<ProductLot>();
-            while(reader.Read())
-            {
-                ProductLotList.Add(new ProductLot()
-                {
-                    ProductLotId = reader.GetInt32(0),
-                    WarehouseId = reader.GetInt32(1),
-                    SupplierId = reader.GetInt32(2),
-                    LocationId = reader.GetInt32(3),
-                    ProductId = reader.GetInt32(4),
-                    SupplyManagerId = reader.GetInt32(5),
-                    Quantity = reader.GetInt32(6),
-                    DateReceived = reader.GetDateTime(8),
-                    ExpirationDate = reader.GetDateTime(9)
-                });
-            }
-        }
-
-        public void ReadSingle(SqlDataReader reader)
-        {
-            ProductLotInstance = null;
-            while(reader.Read())
+            catch (Exception)
             {
 
-                ProductLotInstance = new ProductLot()
-                {
-                    ProductLotId = reader.GetInt32(0),
-                    WarehouseId = reader.GetInt32(1),
-                    SupplierId = reader.GetInt32(2),
-                    LocationId = reader.GetInt32(3),
-                    ProductId = reader.GetInt32(4),
-                    SupplyManagerId = reader.GetInt32(5),
-                    Quantity = reader.GetInt32(6),
-                    DateReceived = reader.GetDateTime(8),
-                    ExpirationDate = reader.GetDateTime(9)
-                };
+                throw;
             }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
+
         /// <summary>
         /// Robert Forbes
         /// 2017/02/16
@@ -497,104 +450,6 @@ namespace DataAccessLayer
             return lots;
         }
        
-
-
-
-
-        public void SetUpdateParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@old_PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_WAREHOUSE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_PRODUCT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_SUPPLY_MANAGER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@old_AVAILABLE_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@old_DATE_RECEIVED", SqlDbType.DateTime);
-            cmd.Parameters.Add("@old_EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters.Add("@new_WAREHOUSE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_PRODUCT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_SUPPLY_MANAGER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@new_AVAILABLE_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@new_DATE_RECEIVED", SqlDbType.DateTime);
-            cmd.Parameters.Add("@new_EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@old_PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
-            cmd.Parameters["@old_WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
-            cmd.Parameters["@old_SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
-            cmd.Parameters["@old_LOCATION_ID"].Value = ProductLotInstance.LocationId;
-            cmd.Parameters["@old_PRODUCT_ID"].Value = ProductLotInstance.ProductId;
-            cmd.Parameters["@old_SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
-            cmd.Parameters["@old_QUANTITY"].Value = ProductLotInstance.Quantity;
-            cmd.Parameters["@old_AVAILABLE_QUANTITY"].Value = 0;
-            cmd.Parameters["@old_DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
-            cmd.Parameters["@old_EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
-            cmd.Parameters["@new_WAREHOUSE_ID"].Value = ProductLotValidatorInstance.WarehouseId;
-            cmd.Parameters["@new_SUPPLIER_ID"].Value = ProductLotValidatorInstance.SupplierId;
-            cmd.Parameters["@new_LOCATION_ID"].Value = ProductLotValidatorInstance.LocationId;
-            cmd.Parameters["@new_PRODUCT_ID"].Value = ProductLotValidatorInstance.ProductId;
-            cmd.Parameters["@new_SUPPLY_MANAGER_ID"].Value = ProductLotValidatorInstance.SupplyManagerId;
-            cmd.Parameters["@new_QUANTITY"].Value = ProductLotValidatorInstance.Quantity;
-            cmd.Parameters["@new_AVAILABLE_QUANTITY"].Value = 0;
-            cmd.Parameters["@new_DATE_RECEIVED"].Value = ProductLotValidatorInstance.DateReceived;
-            cmd.Parameters["@new_EXPIRATION_DATE"].Value = ProductLotValidatorInstance.ExpirationDate;
-		}
-
-        public void SetCreateParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@WAREHOUSE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SUPPLY_MANAGER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@AVAILABLE_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@DATE_RECEIVED", SqlDbType.DateTime);
-            cmd.Parameters.Add("@EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
-            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
-            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationId;
-            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductId;
-            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
-            cmd.Parameters["@QUANTITY"].Value = ProductLotInstance.Quantity;
-            cmd.Parameters["@AVAILABLE_QUANTITY"].Value = 0;
-            cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
-            cmd.Parameters["@EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
-        }
-
-        public void SetKeyParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
-        }
-
-        public void SetRetrieveSearchParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@WAREHOUSE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SUPPLY_MANAGER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@AVAILABLE_QUANTITY", SqlDbType.Int);
-            cmd.Parameters.Add("@DATE_RECEIVED", SqlDbType.DateTime);
-            cmd.Parameters.Add("@EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = ProductLotInstance.ProductLotId;
-            cmd.Parameters["@WAREHOUSE_ID"].Value = ProductLotInstance.WarehouseId;
-            cmd.Parameters["@SUPPLIER_ID"].Value = ProductLotInstance.SupplierId;
-            cmd.Parameters["@LOCATION_ID"].Value = ProductLotInstance.LocationId;
-            cmd.Parameters["@PRODUCT_ID"].Value = ProductLotInstance.ProductId;
-            cmd.Parameters["@SUPPLY_MANAGER_ID"].Value = ProductLotInstance.SupplyManagerId;
-            cmd.Parameters["@QUANTITY"].Value = ProductLotInstance.Quantity;
-            cmd.Parameters["@AVAILABLE_QUANTITY"].Value = 0;
-            cmd.Parameters["@DATE_RECEIVED"].Value = ProductLotInstance.DateReceived;
-            cmd.Parameters["@EXPIRATION_DATE"].Value = ProductLotInstance.ExpirationDate;
-        }
-
         public static bool DeleteProductLot(ProductLot lot)
         {
             var result = false;

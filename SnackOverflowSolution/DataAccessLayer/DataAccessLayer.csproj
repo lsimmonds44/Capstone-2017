@@ -49,7 +49,6 @@
     <Compile Include="DeliveryTypeAccessor.cs" />
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="EmployeeOrderResponsibilityAccessor.cs" />
-    <Compile Include="IRetriever.cs" />
     <Compile Include="LocationAccessor.cs" />
     <Compile Include="GradeAccessor.cs" />
     <Compile Include="InspectionAccessor.cs" />
@@ -71,8 +70,6 @@
     <Compile Include="SupplierInventoryAccessor.cs" />
     <Compile Include="SupplierInvoiceAccessor.cs" />
     <Compile Include="UserAccessor.cs" />
-    <Compile Include="IDataAccessor.cs" />
-    <Compile Include="DataBaseMainAccessor.cs" />
     <Compile Include="VehicleAccessor.cs" />
     <Compile Include="VehicleTypeAccessor.cs" />
     <Compile Include="WarehouseAccessor.cs" />

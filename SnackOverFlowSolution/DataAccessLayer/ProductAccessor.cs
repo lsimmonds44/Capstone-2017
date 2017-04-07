@@ -9,35 +9,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class ProductAccessor : IRetriever
+    public static class ProductAccessor
     {
-
-        public Product ProductInstance { get; set; }
-        public List<Product> ProductList { get; set; }
-
-        public string RetrieveSingleScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string RetrieveListScript
-        {
-            get
-            {
-                return @"sp_retrieve_product_list";
-            }
-        }
-
-        public string RetrieveSearchScript
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         ///<summary> 
         /// Dan Brown
@@ -200,6 +173,8 @@ namespace DataAccessLayer
             var conn = DBConnection.GetConnection();
             const string cmdText = @"sp_create_product";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
             var count = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
@@ -268,40 +243,7 @@ namespace DataAccessLayer
 
             return result;
         }
-
-        public void SetRetrieveSearchParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReadSingle(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Allows DataBaseMainAccessor to read a list of products
-        /// </summary>
-        /// <param name="reader"></param>
-        public void ReadList(SqlDataReader reader)
-        {
-            ProductList = new List<Product>();
-            while(reader.Read())
-            {
-                ProductList.Add(new Product()
-                {
-                    ProductId = reader.GetInt32(0),
-                    Name = reader.GetString(1),
-                    Description = reader.GetString(2),
-                    ImageName = reader.IsDBNull(4)?null:reader.GetString(4),
-                    Active = reader.GetBoolean(5),
-                    UnitOfMeasurement = reader.GetString(6),
-                    DeliveryChargePerUnit = reader.GetDecimal(7),
-                    ImageBinary = reader["IMAGE_BINARY"] as byte[]
-                });
-            }
-        }
-
+       
         /// <summary>
         /// Christian Lopez
         /// Created 2017/03/08
