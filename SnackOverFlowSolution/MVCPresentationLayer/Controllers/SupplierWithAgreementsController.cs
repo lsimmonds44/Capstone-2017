@@ -105,7 +105,7 @@ namespace MVCPresentationLayer.Controllers
                                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
                             }
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index","Home");
                     }
                     else
                     {

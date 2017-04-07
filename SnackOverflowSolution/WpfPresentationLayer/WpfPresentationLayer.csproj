@@ -101,6 +101,9 @@
     <Compile Include="frmApplicationAskUser.xaml.cs">
       <DependentUpon>frmApplicationAskUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmApproval.xaml.cs">
+      <DependentUpon>frmApproval.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmBrowseProducts.xaml.cs">
       <DependentUpon>frmBrowseProducts.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmApplicationAskUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmApproval.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

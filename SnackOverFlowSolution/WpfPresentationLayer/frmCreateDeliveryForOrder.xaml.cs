@@ -110,7 +110,16 @@ namespace WpfPresentationLayer
                 if(dpDeliveryDate.SelectedDate != null){
                     try
                     {
-                        int deliveryId = _deliveryManager.CreateDeliveryAndRetrieveDeliveryId(null, (DateTime)dpDeliveryDate.SelectedDate, null, "Ready For Assignment", "Drop off", _orderId);
+                        Delivery delivery = new Delivery()
+                        {
+                            RouteId = null,
+                            DeliveryDate = dpDeliveryDate.SelectedDate,
+                            Verification = null,
+                            StatusId = "Ready For Assignment",
+                            DeliveryTypeId = "Drop off",
+                            OrderId = _orderId
+                        };
+                        int deliveryId = _deliveryManager.CreateDeliveryAndRetrieveDeliveryId(delivery);
                         List<Package> toBeRemovedFromProposed = new List<Package>();
                         foreach(Package p in _proposedPackages){
                             if(!_packageManager.UpdatePackageDelivery(p.PackageId, deliveryId)){

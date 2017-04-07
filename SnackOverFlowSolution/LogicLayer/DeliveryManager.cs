@@ -64,23 +64,25 @@ namespace LogicLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Creates a new delivery
         /// </summary>
-        /// <param name="routeId"></param>
-        /// <param name="deliveryDate"></param>
-        /// <param name="verification"></param>
-        /// <param name="statusId"></param>
-        /// <param name="deliveryTypeId"></param>
-        /// <param name="orderId"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Method signature changed from taking delivery pieces to a Delivery itself.
+        /// </remarks>
+        /// <param name="delivery">The delivery to add to the database.</param>
         /// <returns>bool representing if the creation was successful</returns>
-        public bool CreateDelivery(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId)
+        public bool CreateDelivery(Delivery delivery)
         {
             bool result = false;
             try
             {
-                if (DeliveryAccessor.CreateDelivery(routeId, deliveryDate, verification, statusId, deliveryTypeId, orderId) == 1)
+                if (DeliveryAccessor.CreateDelivery(delivery) == 1)
                 {
                     result = true;
                 }
@@ -94,23 +96,24 @@ namespace LogicLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Creates a new delivery
         /// </summary>
-        /// <param name="routeId"></param>
-        /// <param name="deliveryDate"></param>
-        /// <param name="verification"></param>
-        /// <param name="statusId"></param>
-        /// <param name="deliveryTypeId"></param>
-        /// <param name="orderId"></param>
-        /// <returns>the delivery id of the newly created delivery</returns>
-        public int CreateDeliveryAndRetrieveDeliveryId(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId)
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method. Changed signature to take delivery object instead of individual parameters.
+        /// </remarks>
+        /// <param name="delivery">The delivery to create.</param>
+        /// <returns>The delivery id of the newly created delivery</returns>
+        public int CreateDeliveryAndRetrieveDeliveryId(Delivery delivery)
         {
             int result = 0;
             try
             {
-                result = DeliveryAccessor.CreateDeliveryAndRetrieveDeliveryId(routeId, deliveryDate, verification, statusId, deliveryTypeId, orderId);
+                result = DeliveryAccessor.CreateDeliveryAndRetrieveDeliveryId(delivery);
             }
             catch (Exception)
             {
