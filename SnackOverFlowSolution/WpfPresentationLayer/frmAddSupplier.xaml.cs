@@ -188,6 +188,14 @@ namespace WpfPresentationLayer
             dgAvailableProducts.ItemsSource = null;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// 
+        /// Create an array of state abbreviations
+        /// </summary>
+        /// <param name="stateAbr"></param>
+        /// <returns></returns>
         private int getDropdown(string stateAbr)
         {
             // The way to get the index for the drop down combo box
@@ -201,6 +209,17 @@ namespace WpfPresentationLayer
             return binarySearchStates(stateAbr, 0, states.Length, states);
         }
 
+        /// <summary>
+        /// Chrsitian Lopez
+        /// 2017/02/22
+        /// 
+        /// Recursion binary search
+        /// </summary>
+        /// <param name="wantedState"></param>
+        /// <param name="first"></param>
+        /// <param name="arrayLength"></param>
+        /// <param name="states"></param>
+        /// <returns></returns>
         private int binarySearchStates(string wantedState, int first, int arrayLength, string[] states)
         {
             int mid = (arrayLength / 2) + first;
@@ -323,7 +342,15 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        if (null != ex.InnerException)
+                        {
+                            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        
                     }
                 }
                 else if (_type.Equals("Editing"))
@@ -391,6 +418,11 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/03/08
+        /// </summary>
+        /// <param name="supplierUser"></param>
         private void addAgreedProducts(User supplierUser)
         {
             foreach (Product p in _agreedProducts)
@@ -415,7 +447,11 @@ namespace WpfPresentationLayer
                 }
             }
         }
-
+        /// <summary>
+        /// Updated 2017/04/07
+        /// Ariel Sigo
+        /// 
+        /// </summary>
         private void validateInputs()
         {
             if (txtFarmName.Text.Length == 0)
@@ -430,9 +466,19 @@ namespace WpfPresentationLayer
             {
                 throw new ApplicationException("Please enter a farm city.");
             }
-            if (txtFarmTaxId.Text.Length == 0)
+            try
             {
-                throw new ApplicationException("Please enter a farm tax ID.");
+                Int32.Parse(txtFarmTaxId.Text);
+            }
+            catch (Exception ex)
+            {
+                
+                throw new ApplicationException("Please enter a valid farm tax ID");
+            }
+            if (txtFarmTaxId.Text.Length != 9)
+            {
+                throw new ApplicationException("Farm Tax ID Must Be 9 Digits");
+
             }
         }
 
