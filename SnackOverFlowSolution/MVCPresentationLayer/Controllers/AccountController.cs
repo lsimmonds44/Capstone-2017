@@ -403,6 +403,16 @@ namespace MVCPresentationLayer.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Created on 2017/04/06 by William Flood
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult ViewCart()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

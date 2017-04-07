@@ -69,7 +69,7 @@ namespace LogicLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId);
+        bool ApplyForSupplierAccount(Supplier supplier);
 
         /// <summary>
         /// Skyler Hiscock
@@ -90,5 +90,13 @@ namespace LogicLayer
         /// </summary>
         /// <returns></returns>
         List<string> SupplierAppStatusList();
+		
+        /// Christian Lopez
+        /// 2017/04/06
+        /// 
+        /// Method signature to retrieve a list of SupplierWithAgreements
+        /// </summary>
+        /// <returns></returns>
+        List<SupplierWithAgreements> RetrieveSuppliersWithAgreements();
     }
 }

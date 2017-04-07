@@ -50,7 +50,12 @@ namespace WpfPresentationLayer
 
             try
             {
-                if (_prodCatMgr.NewProductCategory(categoryName, categoryDesc))
+                var category = new Category()
+                {
+                    CategoryID = categoryName,
+                    Description = categoryDesc
+                };
+                if (_prodCatMgr.CreateCategory(category))
                 {
                     MessageBox.Show("Category added!");
                     Close();

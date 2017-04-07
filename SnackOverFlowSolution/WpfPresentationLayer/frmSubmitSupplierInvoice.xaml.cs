@@ -161,7 +161,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -249,7 +249,7 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to remove the invoice line at this time. Error: " + ex.Message);
+                    MessageBox.Show("Unable to remove the invoice line at this time. Error: " + ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
             
@@ -294,7 +294,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
                     
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
             else

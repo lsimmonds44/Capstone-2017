@@ -127,7 +127,7 @@ namespace WpfPresentationLayer
                 };
                 try
                 {
-                    _productLotManager.AddProductLot(toSave);
+                    _productLotManager.CreateProductLot(toSave);
                     MessageBox.Show("Product Lot Added");
                     try
                     {

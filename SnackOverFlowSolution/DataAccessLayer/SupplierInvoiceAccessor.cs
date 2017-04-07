@@ -303,6 +303,42 @@ namespace DataAccessLayer
             return result;
         }
 
+        /// <summary>
+        /// Victor Algarin
+        /// Created: 2017/04/06
+        /// Deletes the supplier invoice by the selected  supplier invoice ID
+        /// </summary>
+        /// <param name="invoice">The invoice to be deleted</param>
+        /// <returns>Number of rows affected(1 is expected to be returned on a successful query)</returns>
+        public static int DeleteSupplierInvoice(SupplierInvoice invoice)
+        {
+            int count = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = "sp_delete_supplier_invoice";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", invoice.SupplierInvoiceId);
+
+            try
+            {
+                conn.Open();
+                count = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+        }
+
     }
 
 }

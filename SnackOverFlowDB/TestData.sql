@@ -54,7 +54,11 @@ GO
 INSERT INTO [dbo].[Employee]
 	(User_ID, Salary, Active, Date_Of_Birth)
 VALUES
-	(10000, 2000, 1, '2012-05-05')
+	(10000, 27000, 1, '1997-05-05'),
+	(10001, 35700, 1, '1965-08-10'),
+	(10002, 29000, 1, '1988-01-10'),
+	(10003, 55000, 1, '1973-11-30'),
+	(10004, 45500, 1, '1992-04-26')
 GO
 
 print '*** Creating Inventory/Warehouse Test Data ***'
@@ -280,6 +284,7 @@ VALUES
 	(10003, 10000)
 GO
 
+
 print '*** Inserting Supplier Application Status Test Data'
 GO
 INSERT INTO [dbo].[Supplier_Application_Status]
@@ -289,3 +294,69 @@ VALUES
 	("Pending"),
 	("Denied")
 GO
+
+print '*** Inserting Product_Order Test Data ***'
+GO
+INSERT INTO [dbo].[PRODUCT_ORDER]
+	(CUSTOMER_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED,
+		DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+	)
+VALUES
+	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, 0),
+	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, 0),
+	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, 0),
+	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, 0),
+	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, 0),
+	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, 0)
+GO
+
+print '*** Inserting Inspection Test Data ***'
+GO
+INSERT INTO [dbo].[INSPECTION]
+	(EMPLOYEE_ID, PRODUCT_LOT_ID, GRADE_ID, DATE_PERFORMED,
+		EXPIRATION_DATE
+	)
+VALUES
+	(10000, 10000, "Grade A", GETDATE(), GETDATE()),
+	(10001, 10001, "Grade B", GETDATE(), GETDATE()),
+	(10002, 10001, "Grade A", GETDATE(), GETDATE()),
+	(10003, 10000, "Grade C", GETDATE(), GETDATE()),
+	(10000, 10002, "Charity", GETDATE(), GETDATE())
+GO
+
+print '*** Inserting Commercial Test Data ***'
+GO
+INSERT INTO [dbo].[COMMERCIAL]
+	(USER_ID, IS_APPROVED, APPROVED_BY, FEDERAL_TAX_ID, ACTIVE)
+VALUES
+	(10000, 1, 2, 123456789, 1),
+	(10001, 1, 4, 849271875, 1),
+	(10002, 1, 3, 184865487, 1),
+	(10003, 1, 1, 779636458, 1),
+	(10004, 1, 1, 336985432, 1)
+GO
+
+print '*** Inserting Charity Test Data ***'
+GO
+INSERT INTO [dbo].[CHARITY]
+	(USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME,
+		PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
+	)
+VALUES
+	(10000, 10000, "Action Against Hunger", "Sam", "Jones", "5157879235", "sam@gmail.com", "9am to 2pm", "PENDING"),
+	(10001, 10001, "Feed Iowa First", "Greg", "Miller", "6584824412", "gregm@feedia.com", "8am to 5pm", "PENDING"),
+	(10003, 10002, "The Hunger Project", "Pat", "Davis", "3354588886", "pat21@gmail.com", "7am to 3pm", "PENDING"),
+	(10004, 10003, "Meals on Wheels", "Mary", "Smith", "9887772602", "mary@charity4.com", "9am to 7pm", "PENDING")
+GO 
+
+print '*** Inserting Shipping Address Test Data ***'
+GO
+INSERT INTO [dbo].[SHIPPING_ADDRESS]
+	(USER_ID, ADDRESS1, CITY, STATE, ZIP, ADDRESS_NAME)
+VALUES
+	(10000, "444 Main St", "A Town", "IA", "54498", "name 1" ),
+	(10001, "23 Oak Ave", "Farmville", "MO", "68787", "name 2" ),
+	(10002, "787 First Street", "Somewhere", "IL", "21220", "name 3" ),
+	(10003, "3318 North Rd", "Haydale", "IA", "52983", "name 4" )	
+GO 
+>>>>>>> origin/master

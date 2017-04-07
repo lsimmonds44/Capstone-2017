@@ -89,11 +89,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
         {
-            _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
+            
             if (cboCustomerType.SelectedItem as String == "Commercial")
             {
                 try
                 {
+                    _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
                     frmCreateCommercialCustomer cCCW = new frmCreateCommercialCustomer((int)_employee.EmployeeId);
                     if (cCCW.ShowDialog() == true)
                     {
@@ -181,15 +182,24 @@ namespace WpfPresentationLayer
                 
                 if (selectedCustomer.Active)
                 {
-                    frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
-                    if (createOrderWindow.ShowDialog() == true)
+                    try
                     {
+                        frmCreateOrder createOrderWindow = new frmCreateOrder((int)_employee.EmployeeId, (CommercialCustomer)dgCustomer.SelectedItem);
+                        if (createOrderWindow.ShowDialog() == true)
+                        {
 
+                        }
                     }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Only employees can create order from the desktop app.");
+                    }
+                    
+                   
                 }
                 else
                 {
-                    MessageBox.Show(selectedCustomer.Commercial_Id + " Must be active");
+                    MessageBox.Show(selectedCustomer.CommercialId + " Must be active");
                 }   
             }
             else
@@ -304,7 +314,7 @@ namespace WpfPresentationLayer
                         {
                             // Enters here if user that access this is not an _employee.
                             // For now it does nothing. 
-                            MessageBox.Show("Employee table is empty or DB connection error.");
+                            MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.InnerException.Message);
                         }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
@@ -483,7 +493,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show("There was an error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -506,7 +516,7 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
             tabProductLot_Selected(sender, e);
@@ -915,7 +925,11 @@ namespace WpfPresentationLayer
         }
 
 
-
+        /// <summary>
+        /// Christian Lopez
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabSupplier_Selected(object sender, RoutedEventArgs e)
         {
             try
@@ -927,7 +941,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -948,7 +962,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -1038,7 +1052,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
         /// <summary>
@@ -1088,7 +1102,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show("Problem Loading Supplier Catalogue Data " + ex);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
 
         }
@@ -1336,7 +1350,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -1392,7 +1406,7 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
         }
@@ -1562,7 +1576,7 @@ namespace WpfPresentationLayer
 
                     if (result ?? false)
                     {
-                        _productLotManager.AddProductLot(new ProductLot()
+                        _productLotManager.CreateProductLot(new ProductLot()
                         {
                             AvailableQuantity = frm.OldQty - (selectedItem.Quantity - selectedItem.AvailableQuantity),
                             DateReceived = selectedItem.DateReceived,
@@ -1575,7 +1589,7 @@ namespace WpfPresentationLayer
                             SupplyManagerId = selectedItem.SupplyManagerId,
                             WarehouseId = selectedItem.WarehouseId
                         });
-                        _productLotManager.AddProductLot(new ProductLot()
+                        _productLotManager.CreateProductLot(new ProductLot()
                         {
                             AvailableQuantity = frm.NewQty,
                             DateReceived = selectedItem.DateReceived,
@@ -1700,6 +1714,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// <remarks>Modified by Christian Lopez on 2017/04/03 to handle all exceptions</remarks>
         private void btnAddSupplierInventory_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1716,9 +1731,16 @@ namespace WpfPresentationLayer
                     var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager,agreementList);
                     supplierInventoryWindow.ShowDialog();
                 }
-            } catch (System.Data.SqlClient.SqlException ex)
+            } catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
         }
@@ -1739,10 +1761,10 @@ namespace WpfPresentationLayer
                 {
                     _supplierList = _supplierManager.ListSuppliers();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     
-                    MessageBox.Show("Unable to verify supplier.");
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                     return;
                 }
                 

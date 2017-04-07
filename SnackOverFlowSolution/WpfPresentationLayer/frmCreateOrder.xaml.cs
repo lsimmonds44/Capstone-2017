@@ -63,7 +63,7 @@ namespace WpfPresentationLayer
             UserAddress userAddress;
             try
             {
-                _cCUser = _userManager.RetrieveUser(_cCustomer.User_Id);
+                _cCUser = _userManager.RetrieveUser(_cCustomer.UserId);
                 
             }
             catch (Exception)
@@ -80,7 +80,7 @@ namespace WpfPresentationLayer
                 txtUserAddress.Text = "User address not found. Check address info on user tab.";
             }
 
-            txtCustomerID.Text = _cCustomer.Commercial_Id.ToString();
+            txtCustomerID.Text = _cCustomer.CommercialId.ToString();
             txtCustomerUserName.Text = _cCUser.UserName;
             txtOrderType.Text = "Commercial Customer";
             dpOrderDate.SelectedDate = DateTime.Now;

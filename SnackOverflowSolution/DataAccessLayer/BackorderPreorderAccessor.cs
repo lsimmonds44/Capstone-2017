@@ -9,63 +9,88 @@ using System.IO;
 using System.Threading.Tasks;
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/02
+    /// 
+    /// Class to handle database interactions inolving backorderpreorders.
+    /// </summary>
     public static class BackorderPreorderAccessor
     {
-        public static List<BackorderPreorder> RetrieveBackorderPreorder(BackorderPreorder BackorderPreorderInstance)
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/02
+        /// 
+        /// Retrieves BackorderPreorders based on the supplied BackorderPreorder.
+        /// </summary>
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/02
+        /// 
+        /// Standaridized method. Fixed terrible bug where the passed in BackorderPreorder
+        /// would be repeatedly added to the list.
+        /// </remarks>
+        /// <param name="backorderPreorder">BackorderPreorder that the search is based on.</param>
+        /// <returns>List of BackorderPreorders</returns>
+        public static List<BackorderPreorder> RetrieveBackorderPreorders(BackorderPreorder backorderPreorder)
         {
-            List<BackorderPreorder> BackorderPreorderList = new List<BackorderPreorder>();
+            var backorderPreorders = new List<BackorderPreorder>();
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_BACKORDER_PREORDER_from_search";
             var cmd = new SqlCommand(cmdText, conn);
-
-            cmd.Parameters.AddWithValue("@BACKORDER_PREORDER_ID", BackorderPreorderInstance.BackorderPreorderId);
-            cmd.Parameters.AddWithValue("@ORDER_ID", BackorderPreorderInstance.OrderId);
-            cmd.Parameters.AddWithValue("@CUSTOMER_ID", BackorderPreorderInstance.CustomerId);
-            cmd.Parameters.AddWithValue("@AMOUNT", BackorderPreorderInstance.Amount);
-            cmd.Parameters.AddWithValue("@DATE_PLACED", BackorderPreorderInstance.DatePlaced);
-            cmd.Parameters.AddWithValue("@DATE_EXPECTED", BackorderPreorderInstance.DateExpected);
-            cmd.Parameters.AddWithValue("@HAS_ARRIVED", BackorderPreorderInstance.HasArrived);
-            cmd.Parameters.AddWithValue("@ADDRESS_1", BackorderPreorderInstance.Address1);
-            cmd.Parameters.AddWithValue("@ADDRESS_2", BackorderPreorderInstance.Address2);
-            cmd.Parameters.AddWithValue("@CITY", BackorderPreorderInstance.City);
-            cmd.Parameters.AddWithValue("@STATE", BackorderPreorderInstance.State);
-            cmd.Parameters.AddWithValue("@ZIP", BackorderPreorderInstance.Zip);
-
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@BACKORDER_PREORDER_ID", backorderPreorder.BackorderPreorderId);
+            cmd.Parameters.AddWithValue("@ORDER_ID", backorderPreorder.OrderId);
+            cmd.Parameters.AddWithValue("@CUSTOMER_ID", backorderPreorder.CustomerId);
+            cmd.Parameters.AddWithValue("@AMOUNT", backorderPreorder.Amount);
+            cmd.Parameters.AddWithValue("@DATE_PLACED", backorderPreorder.DatePlaced);
+            cmd.Parameters.AddWithValue("@DATE_EXPECTED", backorderPreorder.DateExpected);
+            cmd.Parameters.AddWithValue("@HAS_ARRIVED", backorderPreorder.HasArrived);
+            cmd.Parameters.AddWithValue("@ADDRESS_1", backorderPreorder.Address1);
+            cmd.Parameters.AddWithValue("@ADDRESS_2", backorderPreorder.Address2);
+            cmd.Parameters.AddWithValue("@CITY", backorderPreorder.City);
+            cmd.Parameters.AddWithValue("@STATE", backorderPreorder.State);
+            cmd.Parameters.AddWithValue("@ZIP", backorderPreorder.Zip);
 
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    var foundBackorderPreorderInstance = new BackorderPreorder()
+                    while (reader.Read())
                     {
-                        BackorderPreorderId = reader.IsDBNull(0) ? null : (int?)reader.GetInt32(0),
-                        OrderId = reader.GetInt32(1),
-                        CustomerId = reader.GetInt32(2),
-                        Amount = reader.GetDecimal(3),
-                        DatePlaced = reader.GetDateTime(4),
-                        DateExpected = reader.GetDateTime(5),
-                        HasArrived = reader.GetBoolean(6),
-                        Address1 = reader.GetString(7),
-                        Address2 = reader.GetString(8),
-                        City = reader.GetString(9),
-                        State = reader.GetString(10),
-                        Zip = reader.GetString(11)
-                    };
-                    BackorderPreorderList.Add(BackorderPreorderInstance);
+                        backorderPreorders.Add(new BackorderPreorder()
+                        {
+                            BackorderPreorderId = reader.IsDBNull(0) ? null : (int?)reader.GetInt32(0),
+                            OrderId = reader.GetInt32(1),
+                            CustomerId = reader.GetInt32(2),
+                            Amount = reader.GetDecimal(3),
+                            DatePlaced = reader.GetDateTime(4),
+                            DateExpected = reader.GetDateTime(5),
+                            HasArrived = reader.GetBoolean(6),
+                            Address1 = reader.GetString(7),
+                            Address2 = reader.GetString(8),
+                            City = reader.GetString(9),
+                            State = reader.GetString(10),
+                            Zip = reader.GetString(11)
+                        });
+                    }
                 }
+                
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw new Exception("Error: " + ex);
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return BackorderPreorderList;
+
+            return backorderPreorders;
         }
     }
 }

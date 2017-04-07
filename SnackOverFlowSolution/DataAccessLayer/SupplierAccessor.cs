@@ -64,10 +64,10 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was a problem saving to the Database: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -91,9 +91,11 @@ namespace DataAccessLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        public static int ApplyForSupplierAccount(int userId, bool isApproved, string farmName, string farmAddress,
-            string farmCity, string farmState, string farmTaxId)
+        public static int ApplyForSupplierAccount(Supplier supplier)
         {
+            //int userId, bool isApproved, string farmName, string farmAddress,
+            //string farmCity, string farmState, string farmTaxId
+
             int rows = 0;
 
             var conn = DBConnection.GetConnection();
@@ -109,23 +111,23 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
             cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
 
-            cmd.Parameters["@USER_ID"].Value = userId;
-            cmd.Parameters["@IS_APPROVED"].Value = isApproved;
-            cmd.Parameters["@FARM_NAME"].Value = farmName;
-            cmd.Parameters["@FARM_ADDRESS"].Value = farmAddress;
-            cmd.Parameters["@FARM_CITY"].Value = farmCity;
-            cmd.Parameters["@FARM_STATE"].Value = farmState;
-            cmd.Parameters["@FARM_TAX_ID"].Value = farmTaxId;
+            cmd.Parameters["@USER_ID"].Value = supplier.UserId;
+            cmd.Parameters["@IS_APPROVED"].Value = supplier.IsApproved;
+            cmd.Parameters["@FARM_NAME"].Value = supplier.FarmName;
+            cmd.Parameters["@FARM_ADDRESS"].Value = supplier.FarmAddress;
+            cmd.Parameters["@FARM_CITY"].Value = supplier.FarmCity;
+            cmd.Parameters["@FARM_STATE"].Value = supplier.FarmState;
+            cmd.Parameters["@FARM_TAX_ID"].Value = supplier.FarmTaxID;
 
             try
             {
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
-                throw ex;
+                throw;
             }
             finally
             {
@@ -186,10 +188,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -199,6 +201,12 @@ namespace DataAccessLayer
             return s;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/02/22
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
         public static Supplier RetrieveSupplierBySupplierId(int supplierId)
         {
             Supplier s = null;
@@ -242,10 +250,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("Error connecting to DB: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -302,10 +310,10 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
@@ -349,10 +357,10 @@ namespace DataAccessLayer
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw new ApplicationException("There was an error reaching the database: " + ex.Message);
+                throw;
             }
             finally
             {
@@ -472,6 +480,47 @@ namespace DataAccessLayer
             }
 
             return supplierAppStatus;
+		}
+
+        /// Christian Lopez
+        /// 2017/04/06
+        /// 
+        /// Returns a list of suppliers with their agreements by gettin a list of all suppliers and then finding the 
+        /// agreements associated.
+        /// </summary>
+        /// <returns></returns>
+        public static List<SupplierWithAgreements> RetrieveAllSuppliersWithAgreements()
+        {
+            List<SupplierWithAgreements> suppliersWithAgreements = new List<SupplierWithAgreements>();
+
+            try
+            {
+                List<Supplier> suppliers = RetrieveAllSuppliers();
+                foreach (Supplier supplier in suppliers) {
+                    SupplierWithAgreements s = new SupplierWithAgreements()
+                    {
+                        ID = supplier.SupplierID,
+                        FarmAddress = supplier.FarmAddress,
+                        FarmCity = supplier.FarmCity,
+                        FarmName = supplier.FarmName,
+                        FarmState = supplier.FarmState,
+                        UserId = supplier.UserId,
+                        FarmTaxID = supplier.FarmTaxID,
+                        ApprovedBy = supplier.ApprovedBy,
+                        IsApproved = supplier.IsApproved,
+                        Active = supplier.Active,
+                        Agreements = AgreementAccessor.RetrieveAgreementsWithProductNameBySupplierId(supplier.SupplierID)
+                    };
+                    suppliersWithAgreements.Add(s);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return suppliersWithAgreements;
         }
     }
 }

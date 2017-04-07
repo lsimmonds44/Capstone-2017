@@ -37,7 +37,7 @@ namespace LogicLayer
         }
 
 
-        public bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
+        public bool ApplyForSupplierAccount(Supplier supplier)
         {
             throw new NotImplementedException();
         }
@@ -48,6 +48,11 @@ namespace LogicLayer
         }
 
         public List<string> SupplierAppStatusList()
+		{
+            throw new NotImplementedException();
+        }
+
+        public List<SupplierWithAgreements> RetrieveSuppliersWithAgreements()
         {
             throw new NotImplementedException();
         }
