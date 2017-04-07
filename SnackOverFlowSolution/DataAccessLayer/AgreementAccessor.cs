@@ -99,7 +99,15 @@ namespace DataAccessLayer
             int rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_create_agreement";
+            string cmdText;
+            if (agreement.ApprovedBy == null)
+            {
+                cmdText = @"sp_create_agreement_application";
+            }
+            else
+            {
+                cmdText = @"sp_create_agreement";
+            }
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -107,7 +115,11 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@SUPPLIER_ID", agreement.SupplierId);
             cmd.Parameters.AddWithValue("@DATE_SUBMITTED", agreement.DateSubmitted);
             cmd.Parameters.AddWithValue("@IS_APPROVED", agreement.IsApproved);
-            cmd.Parameters.AddWithValue("@APPROVED_BY", agreement.ApprovedBy);
+            if (agreement.ApprovedBy != null)
+            {
+                cmd.Parameters.AddWithValue("@APPROVED_BY", agreement.ApprovedBy);
+            }
+            
 
             try
             {
