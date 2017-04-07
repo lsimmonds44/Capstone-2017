@@ -62,7 +62,7 @@ namespace MVCPresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                plMgr.AddProductLot(lot);
+                //plMgr.AddProductLot(lot);
                 return RedirectToAction("Index");
             }
 
