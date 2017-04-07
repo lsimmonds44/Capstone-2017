@@ -717,6 +717,15 @@ GO
 CREATE INDEX SUPPLIER_IS_APPROVED ON SUPPLIER([IS_APPROVED])
 GO
 
+print '' print '*** Creating TABLE SUPPLIER_APPLICATION_STATUS'
+GO
+CREATE TABLE [dbo].[SUPPLIER_APPLICATION_STATUS] (
+	[SUPPLIER_STATUS_ID][NVARCHAR](50) NOT NULL,
+
+	CONSTRAINT [PK_SUPPLIER_APPLICATION_STATUS] PRIMARY KEY ([SUPPLIER_STATUS_ID] ASC)
+)
+GO
+
 print '' print '*** Creating TABLE SUPPLIER_INVENTORY'
 GO
 CREATE TABLE [dbo].[SUPPLIER_INVENTORY](
@@ -2573,6 +2582,27 @@ AS
 			(USER_ID, IS_APPROVED, APPROVED_BY, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID)
 		VALUES
 			(@USER_ID, @IS_APPROVED, @APPROVED_BY, @FARM_NAME, @FARM_ADDRESS, @FARM_CITY, @FARM_STATE, @FARM_TAX_ID)
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_create_supplier_application'
+GO
+CREATE PROCEDURE sp_create_supplier_application
+(
+	@USER_ID[INT],
+	@FARM_NAME[NVARCHAR](300),
+	@FARM_ADDRESS[NVARCHAR](300),
+	@FARM_CITY[NVARCHAR](50),
+	@FARM_STATE[NCHAR](2),
+	@FARM_TAX_ID[NVARCHAR](64)
+)
+AS
+	BEGIN
+		INSERT INTO SUPPLIER 
+			(USER_ID, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID)
+		VALUES
+			(@USER_ID, @FARM_NAME, @FARM_ADDRESS, @FARM_CITY, @FARM_STATE, @FARM_TAX_ID)
 		RETURN @@ROWCOUNT
 	END
 GO
@@ -4857,6 +4887,16 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_supplier_application_status_list'
+GO
+CREATE PROCEDURE sp_retrieve_supplier_application_status_list
+AS
+	BEGIN
+		SELECT SUPPLIER_STATUS_ID
+		FROM supplier_application_status
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_user_address'
 GO
 CREATE PROCEDURE sp_retrieve_user_address
@@ -6294,6 +6334,43 @@ AS
 		AND (EMAIL = @old_EMAIL)
 		AND (CONTACT_HOURS = @old_CONTACT_HOURS)
 		AND (STATUS = @old_STATUS)
+		RETURN @@ROWCOUNT
+	END
+GO
+
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_commercial_customer_approval]
+(
+@old_COMMERCIAL_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [commercial]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy
+		WHERE COMMERCIAL_ID = @old_COMMERCIAL_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_supplier_approval]
+(
+@old_SUPPLIER_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [SUPPLIER]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy
+		WHERE SUPPLIER_ID = @old_SUPPLIER_ID
 		RETURN @@ROWCOUNT
 	END
 GO

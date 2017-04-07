@@ -83,6 +83,14 @@ namespace LogicLayer
         bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier);
 
         /// <summary>
+        /// Ryan Spurgetis
+        /// 4/6/2017
+        /// 
+        /// Method signature to display list of supplier application statuses
+        /// </summary>
+        /// <returns></returns>
+        List<string> SupplierAppStatusList();
+		
         /// Christian Lopez
         /// 2017/04/06
         /// 
@@ -90,5 +98,11 @@ namespace LogicLayer
         /// </summary>
         /// <returns></returns>
         List<SupplierWithAgreements> RetrieveSuppliersWithAgreements();
+
+
+
+        bool DenySupplier(Supplier _supplier, int _userid);
+
+        bool ApproveSupplier(Supplier _supplier, int _userid);
     }
 }

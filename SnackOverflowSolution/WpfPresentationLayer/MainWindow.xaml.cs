@@ -64,6 +64,7 @@ namespace WpfPresentationLayer
         List<string> _orderStatusList = null;
         ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
         List<SupplierInvoice> _supplierInvoiceList;
+        List<string> _supplierApplicationStatus = null;
         List<User> _userList = null;
 
         public MainWindow()
@@ -933,6 +934,8 @@ namespace WpfPresentationLayer
         {
             try
             {
+                _supplierApplicationStatus = _supplierManager.SupplierAppStatusList();
+                cboSupplierStatus.ItemsSource = _supplierApplicationStatus;
                 _supplierList = _supplierManager.ListSuppliers();
                 dgSuppliers.ItemsSource = _supplierList;
             }
@@ -1819,6 +1822,86 @@ namespace WpfPresentationLayer
             }
         }
 
-        
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/6/2017
+        /// 
+        /// Populates the datagrid for suppliers based on supplier applications status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboSupplierStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string txt = cboSupplierStatus.SelectedItem.ToString();
+            List<Supplier> pendingApps = new List<Supplier>();
+            try
+            {
+                if (cboSupplierStatus.SelectedItem != null)
+                {
+                    if (txt == "Pending")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.IsApproved == false);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                    else if (txt == "Approved")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.IsApproved == true);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                    else if (txt == "Denied")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.Active == false);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+			}
+		}
+		
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Click to open approval window for supplier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupplierApproval_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSuppliers.SelectedIndex >= 0)
+            {
+                frmApproval ApprovalWindow = new frmApproval(_supplierManager, (Supplier)dgSuppliers.SelectedItem, _user.UserId);
+                ApprovalWindow.ShowDialog();
+                tabSupplier_Selected(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select a supplier account to approve.");
+            }
+        }
+
+        /// <summary>
+        /// Click to open approval window for Commercial Customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCCAccountApproval_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSuppliers.SelectedIndex >= 0)
+            {
+                frmApproval ApprovalWindow = new frmApproval(_customerManager, (CommercialCustomer)dgCustomer.SelectedItem, _user.UserId);
+                ApprovalWindow.ShowDialog();
+                tabSupplier_Selected(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select a Commercial account to approve.");
+            }
+        }
     } // end of class
 } // end of namespace 
