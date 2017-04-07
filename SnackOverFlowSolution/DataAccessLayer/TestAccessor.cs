@@ -80,6 +80,34 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.Parameters.Add("@User_ID", SqlDbType.Int);
             cmd.Parameters["@User_ID"].Value = testCommercialCustomer.UserId;
+			
+			cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+			
+			}
+            catch (Exception)
+            {
+				throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
+
+        public static int DeleteTestProduct()
+        {
+            int rowsAffected = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = "sp_delete_test_product";
+            var cmd = new SqlCommand(cmdText, conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -87,11 +115,9 @@ namespace DataAccessLayer
             {
                 conn.Open();
                 rowsAffected = cmd.ExecuteNonQuery();
-
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally

@@ -1,4 +1,4 @@
-﻿@model DataObjects.SupplierInvoice
+﻿@model Tuple<DataObjects.SupplierInvoiceLine, DataObjects.SupplierInvoice>
 
 @{
     ViewBag.Title = "Details";
@@ -8,75 +8,122 @@
 
 <div>
     <h4>SupplierInvoice</h4>
-	<hr />
+    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.SupplierId)
+            @Html.DisplayNameFor(model => model.Item1.SupplierInvoiceId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SupplierId)
+            @Html.DisplayFor(model => model.Item1.SupplierInvoiceId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.InvoiceDate)
+            @Html.DisplayNameFor(model => model.Item2.SupplierId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InvoiceDate)
+            @Html.DisplayFor(model => model.Item2.SupplierId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SubTotal)
+            @Html.DisplayNameFor(model => model.Item2.InvoiceDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SubTotal)
+            @Html.DisplayFor(model => model.Item2.InvoiceDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TaxAmount)
+            @Html.DisplayNameFor(model => model.Item2.SubTotal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaxAmount)
+            @Html.DisplayFor(model => model.Item2.SubTotal)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Total)
+            @Html.DisplayNameFor(model => model.Item2.TaxAmount)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Total)
+            @Html.DisplayFor(model => model.Item2.TaxAmount)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AmountPaid)
+            @Html.DisplayNameFor(model => model.Item2.Total)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AmountPaid)
+            @Html.DisplayFor(model => model.Item2.Total)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Approved)
+            @Html.DisplayNameFor(model => model.Item2.AmountPaid)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Approved)
+            @Html.DisplayFor(model => model.Item2.AmountPaid)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayNameFor(model => model.Item1.ProductLotId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Active)
+            @Html.DisplayFor(model => model.Item1.ProductLotId)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.QuantitySold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.QuantitySold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PriceEach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PriceEach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.ItemDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.ItemDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.ItemTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.ItemTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.Approved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.Approved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item2.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item2.Active)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SupplierInvoiceId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Item1.SupplierInvoiceId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

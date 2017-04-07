@@ -160,8 +160,15 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -249,7 +256,15 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to remove the invoice line at this time. Error: " + ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show("Unable to remove the invoice line at this time. Error: " + ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to remove the invoice line at this time. Error: " + ex.Message);
+                    }
+                    
                 }
             }
             
@@ -293,8 +308,15 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else

@@ -91,6 +91,7 @@
     <Compile Include="ISupplierInventoryManager.cs" />
     <Compile Include="ISupplierInvoiceManager.cs" />
     <Compile Include="ISupplierManager.cs" />
+    <Compile Include="IUserCartManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="IVehicleManager.cs" />
     <Compile Include="IVehicleTypeManager.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="TestProductLotManager.cs" />
     <Compile Include="TestProductManager.cs" />
     <Compile Include="TestUserManager.cs" />
+    <Compile Include="UserCartManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="VehicleManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />

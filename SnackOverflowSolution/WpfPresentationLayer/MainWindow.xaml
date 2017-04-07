@@ -258,15 +258,23 @@
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplier_Selected">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgSuppliers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Name="cboSupplierStatus" Margin="5" SelectionChanged="cboSupplierStatus_SelectionChanged"  />
+                    </Grid>
+                    <DataGrid Name="dgSuppliers" Grid.Row="1" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
                     	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
-                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                    <Grid Background="#FFE5E5E5" Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>

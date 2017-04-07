@@ -63,7 +63,11 @@ namespace WpfPresentationLayer
                 txtOld.TextChanged += txtOld_TextChanged;
             }
             // Make sure that the text box does not show data which did not pass validation
+
+           // txtNew.Text = txtNew.ToString();
+
             txtNew.Text = NewQty.ToString();
+
         }
 
         private void txtNew_PreviewTextInput(object sender, TextCompositionEventArgs e)

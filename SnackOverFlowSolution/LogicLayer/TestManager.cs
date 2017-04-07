@@ -57,13 +57,30 @@ namespace LogicLayer
             try
             {
                 if (1 == TestAccessor.DeleteTestCommercialCustomer(testCommercialCustomer))
+				{
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {  
+                throw;
+            }
+			return result;
+        }
+
+        public bool DeleteTestProduct()
+        {
+            bool result = false;
+
+            try
+            {
+                if (1 == TestAccessor.DeleteTestProduct())
                 {
                     result = true;
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
