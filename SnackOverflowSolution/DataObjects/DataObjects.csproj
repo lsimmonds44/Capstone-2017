@@ -111,6 +111,7 @@
     <Compile Include="SupplierInvoiceLine.cs" />
     <Compile Include="SupplierWithAgreements.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserCartLine.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleType.cs" />
     <Compile Include="Warehouse.cs" />
