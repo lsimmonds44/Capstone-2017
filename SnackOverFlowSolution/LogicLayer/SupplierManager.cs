@@ -204,5 +204,29 @@ namespace LogicLayer
 
             return success;
         }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/6/2017
+        /// 
+        /// Retrieves a list of supplier application status categories
+        /// </summary>
+        /// <returns></returns>
+        public List<string> SupplierAppStatusList()
+        {
+            List<string> supplierStatus = null;
+
+            try
+            {
+                supplierStatus = SupplierAccessor.RetrieveSupplierStatusList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException ("An error occured." + ex.Message + ex.StackTrace);
+            }
+
+            return supplierStatus;
+        }
     }
 }

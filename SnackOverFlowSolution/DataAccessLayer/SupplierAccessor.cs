@@ -431,5 +431,47 @@ namespace DataAccessLayer
             }
             return results;
         }
+
+        /// <summary>
+        /// Ryan Spurgetis 
+        /// 4/6/2017
+        /// 
+        /// Retrieves the list of supplier application statuses
+        /// </summary>
+        /// <returns>Application status list options</returns>
+        public static List<string> RetrieveSupplierStatusList()
+        {
+            List<string> supplierAppStatus = new List<string>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_supplier_application_status_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var appStatus = reader.GetString(0);
+
+                        supplierAppStatus.Add(appStatus);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return supplierAppStatus;
+        }
     }
 }

@@ -46,5 +46,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public List<string> SupplierAppStatusList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

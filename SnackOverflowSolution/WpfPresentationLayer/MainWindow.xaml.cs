@@ -64,6 +64,7 @@ namespace WpfPresentationLayer
         List<string> _orderStatusList = null;
         ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
         List<SupplierInvoice> _supplierInvoiceList;
+        List<string> _supplierApplicationStatus = null;
         List<User> _userList = null;
 
         public MainWindow()
@@ -919,6 +920,8 @@ namespace WpfPresentationLayer
         {
             try
             {
+                _supplierApplicationStatus = _supplierManager.SupplierAppStatusList();
+                cboSupplierStatus.ItemsSource = _supplierApplicationStatus;
                 _supplierList = _supplierManager.ListSuppliers();
                 dgSuppliers.ItemsSource = _supplierList;
             }
@@ -1797,6 +1800,46 @@ namespace WpfPresentationLayer
             }
         }
 
-        
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/6/2017
+        /// 
+        /// Populates the datagrid for suppliers based on supplier applications status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboSupplierStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string txt = cboSupplierStatus.SelectedItem.ToString();
+            List<Supplier> pendingApps = new List<Supplier>();
+            try
+            {
+                if (cboSupplierStatus.SelectedItem != null)
+                {
+                    if (txt == "Pending")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.IsApproved == false);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                    else if (txt == "Approved")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.IsApproved == true);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                    else if (txt == "Denied")
+                    {
+                        _supplierList = _supplierManager.ListSuppliers();
+                        pendingApps = _supplierList.FindAll(s => s.Active == false);
+                        dgSuppliers.ItemsSource = pendingApps;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
     } // end of class
 } // end of namespace 
