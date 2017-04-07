@@ -90,5 +90,11 @@ namespace LogicLayer
         /// </summary>
         /// <returns></returns>
         List<SupplierWithAgreements> RetrieveSuppliersWithAgreements();
+
+
+
+        bool DenySupplier(Supplier _supplier, int _userid);
+
+        bool ApproveSupplier(Supplier _supplier, int _userid);
     }
 }

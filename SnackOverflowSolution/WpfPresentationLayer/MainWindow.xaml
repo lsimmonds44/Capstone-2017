@@ -79,6 +79,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -87,6 +88,7 @@
                         <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick" IsEnabled="False"/>
                         <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
                         <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
+                        <Button Name="btnCCAccountApproval" Grid.Row="0" Grid.Column="6" Content="Account Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCCAccountApproval_Click" />
                     </Grid>
                 </Grid>
             </TabItem>
@@ -270,13 +272,15 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="2" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
-                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="3" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
-                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="1" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
+                        <Button Name="btnSupplierApproval" Grid.Row="0" Grid.Column="1" Content="Supplier Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnSupplierApproval_Click"/>
+                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="3" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
+                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="4" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
+                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="2" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
                     </Grid>
                 </Grid>
             </TabItem>
