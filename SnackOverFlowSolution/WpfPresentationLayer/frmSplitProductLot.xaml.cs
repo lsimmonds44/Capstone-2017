@@ -29,8 +29,11 @@ namespace WpfPresentationLayer
         {
             InitializeComponent();
             OldQty = selectedItem.Quantity ?? 0;
+            MessageBox.Show(OldQty.ToString());
             NewQty = 0;
             txtOld.Text = OldQty.ToString();
+            MessageBox.Show(OldQty.ToString());
+            MessageBox.Show(txtOld.Text);
             txtNew.Text = NewQty.ToString();
         }
 
@@ -63,7 +66,7 @@ namespace WpfPresentationLayer
                 txtOld.TextChanged += txtOld_TextChanged;
             }
             // Make sure that the text box does not show data which did not pass validation
-            txtNew.Text = txtNew.ToString();
+            txtNew.Text = NewQty.ToString();
         }
 
         private void txtNew_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -89,7 +92,7 @@ namespace WpfPresentationLayer
                 txtNew.TextChanged += txtNew_TextChanged;
             }
             // Make sure that the text box does not show data which did not pass validation
-            txtOld.Text = txtNew.ToString();
+            txtOld.Text = OldQty.ToString();
         }
 
         private void txtOld_PreviewTextInput(object sender, TextCompositionEventArgs e)
