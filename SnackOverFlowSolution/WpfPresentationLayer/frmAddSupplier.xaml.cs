@@ -89,7 +89,14 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     return;
                 }
             }
@@ -116,7 +123,14 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
 
                 // Fill in tables with the suppliers information that will carry over from user
@@ -262,7 +276,14 @@ namespace WpfPresentationLayer
                             catch (Exception ex)
                             {
 
-                                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                                if (null != ex.InnerException)
+                                {
+                                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
                             }
 
                         }
@@ -276,7 +297,14 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        if (null != ex.InnerException)
+                        {
+                            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
                 else if (_type.Equals("Applying"))
@@ -309,7 +337,14 @@ namespace WpfPresentationLayer
                             catch (Exception ex)
                             {
 
-                                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                                if (null != ex.InnerException)
+                                {
+                                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
                             }
 
                         }
@@ -323,7 +358,14 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        if (null != ex.InnerException)
+                        {
+                            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
                 else if (_type.Equals("Editing"))
@@ -385,7 +427,14 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        if (null != ex.InnerException)
+                        {
+                            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
             }
@@ -484,8 +533,15 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 
             }
@@ -511,7 +567,14 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
 
@@ -529,8 +592,15 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             
         }
