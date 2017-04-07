@@ -114,7 +114,7 @@ namespace DataAccessLayer
             {
                 cmdText = @"sp_create_agreement";
             }
-            
+
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

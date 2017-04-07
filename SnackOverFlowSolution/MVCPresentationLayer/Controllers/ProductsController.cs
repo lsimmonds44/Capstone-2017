@@ -24,7 +24,9 @@ namespace MVCPresentationLayer.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(_productManager.RetrieveProducts());
+            var products = new ProductsListViewModel {Products = _productManager.RetrieveProducts()};
+
+            return View(products);
         }
 
         // GET: Products/Details/5

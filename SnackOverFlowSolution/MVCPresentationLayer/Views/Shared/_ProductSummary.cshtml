@@ -1,0 +1,40 @@
+﻿@model DataObjects.Product
+
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Description)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.UnitPrice)
+</td>
+@*<td>
+        @Html.DisplayFor(modelItem => item.ImageName)
+    </td>*@
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Active)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.UnitOfMeasurement)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.DeliveryChargePerUnit)
+</td>
+@*<td>
+        @Html.DisplayFor(modelItem => item.ImageBinary)
+    </td>*@
+<td>
+    @Html.ActionLink("Details", "Details", "Products", new { id = Model.ProductId }, null)
+</td>
+<td>
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        </div>
+    }
+</td>
+

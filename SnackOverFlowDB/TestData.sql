@@ -135,7 +135,9 @@ VALUES
 	(10002,1,10001,'Glasgow Foods', 'Glasgow Drive', 'Cedar Rapids', 'IA', '2322',1),
 	(10003,1,10001,'Trapp Foods', '6301 Trapp Drive', 'Cedar Rapids', 'IA', '2322',1),
 	(10004,1,10001,'Browmich Foods', '212 Browmich Drive', 'Cedar Rapids', 'IA', '2322',1),
-	(10005,1,10001,'Hench Foods', '222 Hench AV', 'Cedar Rapids', 'IA', '2322',1)
+	(10005,1,10001,'Hench Foods', '222 Hench AV', 'Cedar Rapids', 'IA', '2322',1),
+	(10006,0,null,'Parker Produce', '4985 Vegetable Ln', 'Cedar Rapids', 'IA', '2452',1),
+	(10007,0,null,'Marion Farms', '5643 170th St', 'Marion', 'IA', '2782',1)
 GO
 
 print '*** Inserting Product Test Data ***'
@@ -282,6 +284,17 @@ VALUES
 	(10003, 10000)
 GO
 
+
+print '*** Inserting Supplier Application Status Test Data'
+GO
+INSERT INTO [dbo].[Supplier_Application_Status]
+	(SUPPLIER_STATUS_ID)
+VALUES
+	("Approved"),
+	("Pending"),
+	("Denied")
+GO
+
 print '*** Inserting Product_Order Test Data ***'
 GO
 INSERT INTO [dbo].[PRODUCT_ORDER]
@@ -346,3 +359,4 @@ VALUES
 	(10002, "787 First Street", "Somewhere", "IL", "21220", "name 3" ),
 	(10003, "3318 North Rd", "Haydale", "IA", "52983", "name 4" )	
 GO 
+>>>>>>> origin/master

@@ -37,7 +37,7 @@ namespace MVCPresentationLayer.Controllers
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
             var product = _productManager.RetrieveProducts()
-                .FirstOrDefault(p => p.ProductId == 10000);
+                .FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
                 cart.AddItem(product, 1);
             return RedirectToAction("Index", new { returnUrl });

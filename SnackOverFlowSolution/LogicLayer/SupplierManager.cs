@@ -235,6 +235,29 @@ namespace LogicLayer
         }
 
         /// <summary>
+        /// Ryan Spurgetis
+        /// 4/6/2017
+        /// 
+        /// Retrieves a list of supplier application status categories
+        /// </summary>
+        /// <returns></returns>
+        public List<string> SupplierAppStatusList()
+        {
+            List<string> supplierStatus = null;
+
+            try
+            {
+                supplierStatus = SupplierAccessor.RetrieveSupplierStatusList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("An error occured." + ex.Message + ex.StackTrace);
+            }
+
+            return supplierStatus;
+        }
+
         /// Christian Lopez
         /// 2017/04/06
         /// 
@@ -256,6 +279,61 @@ namespace LogicLayer
             {
                 throw new ApplicationException("There was an unknown error", ex);
             }
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls accessor method to approve supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool ApproveSupplier(Supplier supplier, int approvedBy)
+        {
+            try
+            {
+                if (SupplierAccessor.ApproveSupplier(supplier, approvedBy) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
+        public bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier, int approvedby)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls accessor method to deny supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool DenySupplier(Supplier supplier, int approvedBy)
+        {
+            try
+            {
+                if (SupplierAccessor.DenySupplier(supplier, approvedBy) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
         }
     }
 }
