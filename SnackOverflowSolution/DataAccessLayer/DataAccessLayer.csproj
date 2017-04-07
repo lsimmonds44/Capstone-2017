@@ -70,6 +70,7 @@
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInventoryAccessor.cs" />
     <Compile Include="SupplierInvoiceAccessor.cs" />
+    <Compile Include="TestAccessor.cs" />
     <Compile Include="UserAccessor.cs" />
     <Compile Include="IDataAccessor.cs" />
     <Compile Include="DataBaseMainAccessor.cs" />
