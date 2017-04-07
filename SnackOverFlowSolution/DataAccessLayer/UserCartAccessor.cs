@@ -31,7 +31,11 @@ namespace DataAccessLayer
                         Quantity = reader.GetInt32(2),
                         GradeID = reader.GetString(3),
                         Name = reader.GetString(4),
-                        Total = reader.GetDecimal(5)
+                        Total = reader.GetDecimal(5),
+                        FlatProductDiscount = reader.GetDecimal(6),
+                        ScaledProductDiscount = reader.GetDecimal(7),
+                        FlatCategoryDiscount = reader.GetDecimal(8),
+                        ScaledCategoryDiscount = reader.GetDecimal(9)
                     });
                 }
             }

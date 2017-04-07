@@ -79,6 +79,7 @@
     <Compile Include="SupplierInvoiceAccessor.cs" />
     <Compile Include="TestAccessor.cs" />
     <Compile Include="UserAccessor.cs" />
+    <Compile Include="UserCartAccessor.cs" />
     <Compile Include="VehicleAccessor.cs" />
     <Compile Include="VehicleTypeAccessor.cs" />
     <Compile Include="WarehouseAccessor.cs" />
