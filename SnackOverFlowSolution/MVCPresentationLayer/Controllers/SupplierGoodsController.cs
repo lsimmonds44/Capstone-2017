@@ -58,7 +58,7 @@ namespace MVCPresentationLayer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ProductLotId,WarehouseId,SupplierId,LocationId,ProductId,SupplyManagerId,Quantity,AvailableQuantity,Grade,Price,DateReceived,ExpirationDate,ProductName")] ProductLot lot)
+        public ActionResult Create([Bind(Include = "ProductLotId,WarehouseId,SupplierId,LocationId,ProductId,SupplyManagerId,Quantity,AvailableQuantity,Grade,Price,DateReceived,ExpirationDate,ProductName")] ProductLot lot)
         {
             if (ModelState.IsValid)
             {
