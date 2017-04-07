@@ -3381,6 +3381,20 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_delete_supplier_invoice'
+GO
+CREATE PROCEDURE sp_delete_supplier_invoice
+(
+	@SUPPLIER_INVOICE_ID[INT]
+)
+AS
+	BEGIN
+		DELETE FROM supplier_invoice
+		WHERE SUPPLIER_INVOICE_ID = @SUPPLIER_INVOICE_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_delete_user_address'
 GO
 CREATE PROCEDURE sp_delete_user_address

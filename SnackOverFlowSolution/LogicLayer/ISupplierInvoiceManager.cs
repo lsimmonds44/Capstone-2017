@@ -64,5 +64,14 @@ namespace LogicLayer
         /// <param name="newInvoice">The invoice with updated values</param>
         /// <returns></returns>
         bool UpdateSupplierInvoice(SupplierInvoice oldInvoice, SupplierInvoice newInvoice);
+
+        /// <summary>
+        /// Victor Algarin
+        /// 2017/04/06
+        /// 
+        /// </summary>
+        /// <param name="invoice">The selected invoice to be deleted</param>
+        /// <returns>true (if query from accessor is successful)</returns>
+        bool DeleteSupplierInvoice(SupplierInvoice invoice);
     }
 }

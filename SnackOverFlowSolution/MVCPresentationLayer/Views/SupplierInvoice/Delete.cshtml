@@ -12,96 +12,69 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ProductLotId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductLotId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.WarehouseId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WarehouseId)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.SupplierId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SupplierId)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.LocationId)
+            @Html.DisplayNameFor(model => model.InvoiceDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LocationId)
+            @Html.DisplayFor(model => model.InvoiceDate)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.ProductId)
+            @Html.DisplayNameFor(model => model.SubTotal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductId)
+            @Html.DisplayFor(model => model.SubTotal)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.SupplyManagerId)
+            @Html.DisplayNameFor(model => model.TaxAmount)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SupplyManagerId)
+            @Html.DisplayFor(model => model.TaxAmount)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayNameFor(model => model.Total)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Quantity)
+            @Html.DisplayFor(model => model.Total)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.AvailableQuantity)
+            @Html.DisplayNameFor(model => model.AmountPaid)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AvailableQuantity)
+            @Html.DisplayFor(model => model.AmountPaid)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.Grade)
+            @Html.DisplayNameFor(model => model.Approved)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Grade)
+            @Html.DisplayFor(model => model.Approved)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Active)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Active)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateReceived)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateReceived)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpirationDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ExpirationDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
