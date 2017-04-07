@@ -210,6 +210,9 @@ namespace LogicLayerTestProject
         [TestMethod]
         public void TestRetrieveEmployeeWithCorrectEmployeeID()
         {
+            RemoveTestEmployeeData();
+            RemoveTestUserData();
+
             //Arrange
             User testUser;
             Employee testEmployee;
