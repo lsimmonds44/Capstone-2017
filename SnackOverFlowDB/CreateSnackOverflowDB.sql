@@ -6298,6 +6298,43 @@ AS
 	END
 GO
 
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_commercial_customer_approval]
+(
+@old_COMMERCIAL_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [commercial]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy
+		WHERE COMMERCIAL_ID = @old_COMMERCIAL_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_supplier_approval]
+(
+@old_SUPPLIER_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [SUPPLIER]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy
+		WHERE SUPPLIER_ID = @old_SUPPLIER_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_update_charity_approve'
 GO
 CREATE PROCEDURE [dbo].[sp_update_charity_approve]
