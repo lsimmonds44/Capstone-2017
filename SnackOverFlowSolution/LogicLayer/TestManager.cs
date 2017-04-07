@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,24 @@ namespace LogicLayer
                 throw;
             }
 
+            return result;
+        }
+
+        public bool DeleteTestCommercialCustomer(CommercialCustomer testCommercialCustomer)
+        {
+            bool result = false;
+            try
+            {
+                if (1 == TestAccessor.DeleteTestCommercialCustomer(testCommercialCustomer))
+                {
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
             return result;
         }
 

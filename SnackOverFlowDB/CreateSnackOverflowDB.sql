@@ -3034,6 +3034,20 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_delete_test_commercial_customer'
+GO
+CREATE PROCEDURE sp_delete_test_commercial_customer
+(
+	@User_ID	[INT]
+)
+AS
+	BEGIN
+		DELETE FROM commercial
+		WHERE User_ID = @User_ID AND FEDERAL_TAX_ID = 123456789
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_delete_employee_message'
 GO
 CREATE PROCEDURE sp_delete_employee_message
