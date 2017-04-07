@@ -53,7 +53,14 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
             try
@@ -63,7 +70,14 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
             dgSupplierInvoiceLines.ItemsSource = _invoiceLines;
@@ -98,7 +112,14 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else

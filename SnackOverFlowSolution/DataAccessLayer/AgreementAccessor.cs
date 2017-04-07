@@ -19,24 +19,29 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created: 2017/03/08
         /// 
         /// Retrieves a list of Agreements for a supplier from the DB
         /// </summary>
-        /// <param name="supplierId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="supplierId">The supplier id to search on.</param>
+        /// <returns>A list of agreements associated with the given supplier Id.</returns>
         public static List<Agreement> retrieveAgreementsBySupplierId(int supplierId)
         {
             List<Agreement> agreements = new List<Agreement>();
-
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_agreement_list_by_supplier_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_ID"].Value = supplierId;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierId);
 
             try
             {
@@ -46,28 +51,18 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        Agreement a = new Agreement()
+                        agreements.Add(new Agreement()
                         {
                             AgreementId = reader.GetInt32(0),
                             ProductId = reader.GetInt32(1),
                             SupplierId = reader.GetInt32(2),
                             DateSubmitted = reader.GetDateTime(3),
                             IsApproved = reader.GetBoolean(4),
+                            ApprovedBy = reader.IsDBNull(5) ? (int?)null : reader.GetInt32(5),
                             Active = reader.GetBoolean(6)
-                        };
-                        if (!reader.IsDBNull(5))
-                        {
-                            a.ApprovedBy = reader.GetInt32(5);
-                        }
-                        else
-                        {
-                            a.ApprovedBy = null;
-                        }
-
-                        agreements.Add(a);
+                        });
                     }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
@@ -97,6 +92,12 @@ namespace DataAccessLayer
         /// Standardized method.
         /// </remarks>
         /// 
+        /// Ariel Sigo
+        /// Christian Lopez
+        /// Updated 2017/04/07
+        /// 
+        /// Fixed crashing errors
+        /// 
         /// <param name="agreement">The agreement to store.</param>
         /// <returns>Rows affected.</returns>
         public static int CreateAgreement(Agreement agreement)
@@ -104,7 +105,16 @@ namespace DataAccessLayer
             int rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_create_agreement";
+            string cmdText;
+            if (agreement.ApprovedBy == null)
+            {
+                cmdText = @"sp_create_agreement_application";
+            }
+            else
+            {
+                cmdText = @"sp_create_agreement";
+            }
+
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -112,7 +122,11 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@SUPPLIER_ID", agreement.SupplierId);
             cmd.Parameters.AddWithValue("@DATE_SUBMITTED", agreement.DateSubmitted);
             cmd.Parameters.AddWithValue("@IS_APPROVED", agreement.IsApproved);
-            cmd.Parameters.AddWithValue("@APPROVED_BY", agreement.ApprovedBy);
+            if (agreement.ApprovedBy != null)
+            {
+                cmd.Parameters.AddWithValue("@APPROVED_BY", agreement.ApprovedBy);
+            }
+            
 
             try
             {
