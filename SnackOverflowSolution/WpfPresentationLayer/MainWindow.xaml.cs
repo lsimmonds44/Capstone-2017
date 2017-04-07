@@ -1573,7 +1573,7 @@ namespace WpfPresentationLayer
 
                     if (result ?? false)
                     {
-                        _productLotManager.AddProductLot(new ProductLot()
+                        _productLotManager.CreateProductLot(new ProductLot()
                         {
                             AvailableQuantity = frm.OldQty - (selectedItem.Quantity - selectedItem.AvailableQuantity),
                             DateReceived = selectedItem.DateReceived,
@@ -1586,7 +1586,7 @@ namespace WpfPresentationLayer
                             SupplyManagerId = selectedItem.SupplyManagerId,
                             WarehouseId = selectedItem.WarehouseId
                         });
-                        _productLotManager.AddProductLot(new ProductLot()
+                        _productLotManager.CreateProductLot(new ProductLot()
                         {
                             AvailableQuantity = frm.NewQty,
                             DateReceived = selectedItem.DateReceived,

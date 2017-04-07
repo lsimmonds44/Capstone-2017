@@ -27,11 +27,11 @@ namespace DataAccessLayer
         /// Aaron Usher
         /// Updated: 2017/04/02
         /// 
-        /// Standaridized naming conventions and form. Fixed terrible bug where the passed in BackorderPreorder
+        /// Standaridized method. Fixed terrible bug where the passed in BackorderPreorder
         /// would be repeatedly added to the list.
         /// </remarks>
         /// <param name="backorderPreorder">BackorderPreorder that the search is based on.</param>
-        /// <returns>List of backorderPreorders</returns>
+        /// <returns>List of BackorderPreorders</returns>
         public static List<BackorderPreorder> RetrieveBackorderPreorders(BackorderPreorder backorderPreorder)
         {
             var backorderPreorders = new List<BackorderPreorder>();

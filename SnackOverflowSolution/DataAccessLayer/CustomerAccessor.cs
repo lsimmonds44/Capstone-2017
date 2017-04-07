@@ -33,7 +33,7 @@ namespace DataAccessLayer
         /// Standardized method.
         /// </remarks>
         /// <param name="commercialCustomer">The commercial customer to add.</param>
-        /// <returns>Rows affectd.</returns>
+        /// <returns>Rows affected.</returns>
         public static int CreateCommercialCustomer(CommercialCustomer commercialCustomer)
         {
             int rows = 0;

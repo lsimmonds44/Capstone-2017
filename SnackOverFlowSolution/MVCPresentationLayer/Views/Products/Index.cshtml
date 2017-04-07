@@ -35,36 +35,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        @*<td>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            @*<td>
             @Html.DisplayFor(modelItem => item.ImageName)
         </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitOfMeasurement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryChargePerUnit)
-        </td>
-        @*<td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitOfMeasurement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryChargePerUnit)
+            </td>
+            @*<td>
             @Html.DisplayFor(modelItem => item.ImageBinary)
         </td>*@
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.ProductId })
+            </td>
+            <td>
+                @*@Html.ActionLink("Add to Cart", "AddToCArt" ,"Cart", new { id = item.ProductId }, null)*@
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    <div class="pull-right">
+                        @Html.HiddenFor(x => item.ProductId)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn btn-success" value="Add to cart" />
+                    </div>
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+
+

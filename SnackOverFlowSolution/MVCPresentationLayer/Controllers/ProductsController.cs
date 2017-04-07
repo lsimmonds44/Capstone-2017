@@ -42,6 +42,29 @@ namespace MVCPresentationLayer.Controllers
             return View(product);
         }
 
+        /// <summary>
+        /// Created on 2017/04/06 by William Flood
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public FileContentResult PictureOf(int? id)
+        {
+            try
+            {
+                Product requested = _productManager.RetrieveProductById((int)id);
+                if(null!=requested)
+                {
+                    var pictureArray = requested.ImageBinary;
+                    return new FileContentResult(pictureArray, "image/jpeg");
+                }
+            } catch
+            {
+
+            }
+            Response.StatusCode = 404;
+            return null;
+        }
+
         //// GET: Products/Create
         //public ActionResult Create()
         //{

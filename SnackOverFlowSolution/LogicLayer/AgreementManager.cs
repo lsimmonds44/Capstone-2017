@@ -35,7 +35,7 @@ namespace LogicLayer
             }
             catch (SqlException ex)
             {
-                
+
                 throw new ApplicationException("There was a database error.", ex);
             }
             catch (Exception ex)
@@ -48,33 +48,43 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created: 2017/03/08
         /// 
         /// Creates an agreement for the supplier for the given product
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/06
+        /// 
+        /// Modified method to be less redundant and to change default approverId from 0 to null.
+        /// approverId was changed to be nullable as well.
+        /// </remarks>
         /// <param name="supplier"></param>
         /// <param name="product"></param>
         /// <returns></returns>
-        public bool CreateAgreementsForSupplier(Supplier supplier, Product product, int approverId = 0, bool isApproved = true)
+        public bool CreateAgreementsForSupplier(Supplier supplier, Product product, int? approverId = null, bool isApproved = true)
         {
             bool success = false;
+            var agreement = new Agreement()
+            {
+                ProductId = product.ProductId,
+                SupplierId = supplier.SupplierID,
+                DateSubmitted = DateTime.Now,
+                IsApproved = isApproved,
+                ApprovedBy = approverId
+            };
+            if (approverId == null)
+            {
+                agreement.IsApproved = false;
+            }
             try
             {
-                if (0 != approverId) //We have an approver
+                if (1 == AgreementAccessor.CreateAgreement(agreement))
                 {
-                    if (1 == AgreementAccessor.CreateAgreement(product.ProductId, supplier.SupplierID, DateTime.Now, isApproved, approverId))
-                    {
-                        success = true;
-                    }
+                    success = true;
                 }
-                else // Making an application, not approving
-                {
-                    if (1 == AgreementAccessor.CreateAgreementApplication(product.ProductId, supplier.SupplierID, DateTime.Now))
-                    {
-                        success = true;
-                    }
-                }
-                
+
             }
             catch (SqlException ex)
             {
@@ -110,7 +120,7 @@ namespace LogicLayer
             }
             catch (SqlException ex)
             {
-                
+
                 throw new ApplicationException("There was a database error.", ex);
             }
             catch (Exception ex)

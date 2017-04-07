@@ -11,7 +11,7 @@ namespace LogicLayer
     {
         List<Agreement> RetrieveAgreementsBySupplierId(int supplierId);
 
-        bool CreateAgreementsForSupplier(Supplier supplier, Product product, int approverID = 0, bool isApproved = true);
+        bool CreateAgreementsForSupplier(Supplier supplier, Product product, int? approverID = null, bool isApproved = true);
 
         bool UpdateAgreement(Agreement oldAgreement, Agreement newAgreement);
 

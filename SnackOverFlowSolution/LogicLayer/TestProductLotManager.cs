@@ -86,5 +86,10 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        public bool CreateProductLot(ProductLot toAdd)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

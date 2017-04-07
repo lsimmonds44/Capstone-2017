@@ -781,9 +781,11 @@ print '' print '*** Creating TABLE USER_CART_LINE'
 GO
 CREATE TABLE [dbo].[USER_CART_LINE] (
 	[PRODUCT_ID][INT] NOT NULL,
+    [GRADE_ID] [NVARCHAR](250) NOT NULL,
+    [QUANTITY][INT] NOT NULL,
 	[USER_ID]	[INT] NOT NULL,
 
-	CONSTRAINT [PK_USER_CART_LINE] PRIMARY KEY ([PRODUCT_ID] ASC, [USER_ID] ASC)
+	CONSTRAINT [PK_USER_CART_LINE] PRIMARY KEY ([PRODUCT_ID] ASC, [GRADE_ID] ASC, [USER_ID] ASC)
 )
 GO
 
@@ -1508,6 +1510,15 @@ GO
 ALTER TABLE [dbo].[USER_CART_LINE] WITH NOCHECK
   ADD CONSTRAINT[fk_USER_CART_LINE_PRODUCT_ID] FOREIGN KEY ([PRODUCT_ID])
   REFERENCES [dbo].[PRODUCT](PRODUCT_ID)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+GO
+
+print '' print '*** Creating Foreign Key USER_CART_LINE_PRODUCT_ID'
+GO
+ALTER TABLE [dbo].[USER_CART_LINE] WITH NOCHECK
+  ADD CONSTRAINT[fk_USER_CART_LINE_GRADE_ID] FOREIGN KEY ([GRADE_ID])
+  REFERENCES [dbo].[GRADE](GRADE_ID)
   ON UPDATE CASCADE
   ON DELETE CASCADE
 GO
@@ -2657,14 +2668,44 @@ GO
 CREATE PROCEDURE sp_create_user_cart_line
 (
 	@PRODUCT_ID[INT],
+    @GRADE_ID[NVARCHAR](250),
+    @QUANTITY[INT],
 	@USER_ID[INT]
 )
 AS
 	BEGIN
 		INSERT INTO USER_CART_LINE 
-			(PRODUCT_ID, USER_ID)
+			(PRODUCT_ID, GRADE_ID, QUANTITY, USER_ID)
 		VALUES
-			(@PRODUCT_ID, @USER_ID)
+			(@PRODUCT_ID, @GRADE_ID, @QUANTITY, @USER_ID)
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_add_to_cart'
+GO
+CREATE PROCEDURE sp_add_to_cart
+(
+	@PRODUCT_ID[INT],
+    @GRADE_ID[NVARCHAR](250),
+    @QUANTITY[INT],
+	@USER_ID[INT]
+)
+AS
+	BEGIN
+        IF 0<(SELECT COUNT(*) FROM USER_CART_LINE WHERE PRODUCT_ID = @PRODUCT_ID AND @GRADE_ID=GRADE_ID AND USER_ID=@USER_ID)
+        BEGIN
+            UPDATE USER_CART_LINE
+            SET QUANTITY = QUANTITY + @QUANTITY
+            WHERE PRODUCT_ID = @PRODUCT_ID AND @GRADE_ID=GRADE_ID AND USER_ID=@USER_ID
+        END
+        ELSE
+        BEGIN
+            INSERT INTO USER_CART_LINE 
+                (PRODUCT_ID, GRADE_ID, QUANTITY, USER_ID)
+            VALUES
+                (@PRODUCT_ID, @GRADE_ID, @QUANTITY, @USER_ID)
+        END
 		RETURN @@ROWCOUNT
 	END
 GO
@@ -2977,6 +3018,18 @@ AS
 	BEGIN
 		DELETE FROM employee
 		WHERE EMPLOYEE_ID = @EMPLOYEE_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+
+print '' print  '*** Creating procedure sp_delete_test_employee'
+GO
+CREATE PROCEDURE sp_delete_test_employee
+AS
+	BEGIN
+		DELETE FROM employee
+		WHERE SALARY = 100 AND ACTIVE = 'True' AND DATE_OF_BIRTH = '1000-01-01' 
 		RETURN @@ROWCOUNT
 	END
 GO
@@ -3381,6 +3434,30 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_delete_supplier_invoice'
+GO
+CREATE PROCEDURE sp_delete_supplier_invoice
+(
+	@SUPPLIER_INVOICE_ID[INT]
+)
+AS
+	BEGIN
+		DELETE FROM supplier_invoice
+		WHERE SUPPLIER_INVOICE_ID = @SUPPLIER_INVOICE_ID
+	END
+GO
+
+Print '' print  ' *** creating procedure sp_delete_test_user'
+GO
+Create PROCEDURE sp_delete_test_user
+AS
+	BEGIN
+		DELETE FROM APP_USER 
+		WHERE USER_NAME = "Test"
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_delete_user_address'
 GO
 CREATE PROCEDURE sp_delete_user_address
@@ -3400,6 +3477,7 @@ GO
 CREATE PROCEDURE sp_delete_user_cart_line
 (
 	@PRODUCT_ID[INT],
+    @GRADE_ID[NVARCHAR](250),
 	@USER_ID[INT]
 )
 AS
@@ -3408,6 +3486,48 @@ AS
 		WHERE PRODUCT_ID = @PRODUCT_ID
 		AND USER_ID = @USER_ID
 		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_remove_from_cart'
+GO
+CREATE PROCEDURE sp_remove_from_cart
+(
+	@PRODUCT_ID[INT],
+    @GRADE_ID[NVARCHAR](250),
+    @QUANTITY[INT],
+	@USER_ID[INT]
+)
+AS
+	BEGIN
+        IF 0=(SELECT COUNT(*) FROM USER_CART_LINE 
+                WHERE PRODUCT_ID = @PRODUCT_ID 
+                AND USER_ID = @USER_ID
+                AND GRADE_ID = @GRADE_ID) OR
+            @QUANTITY > (SELECT QUANTITY FROM USER_CART_LINE 
+                WHERE PRODUCT_ID = @PRODUCT_ID 
+                AND USER_ID = @USER_ID
+                AND GRADE_ID = @GRADE_ID)
+        BEGIN
+            RETURN -1
+        END
+        IF @QUANTITY = (SELECT QUANTITY FROM USER_CART_LINE 
+                WHERE PRODUCT_ID = @PRODUCT_ID 
+                AND USER_ID = @USER_ID
+                AND GRADE_ID = @GRADE_ID)
+        BEGIN
+            DELETE FROM user_cart_line
+            WHERE PRODUCT_ID = @PRODUCT_ID
+            AND GRADE_ID = @GRADE_ID
+            AND USER_ID = @USER_ID
+            RETURN @@ROWCOUNT
+        END
+        
+        UPDATE USER_CART_LINE
+        SET QUANTITY = QUANTITY - @QUANTITY
+        WHERE PRODUCT_ID = @PRODUCT_ID AND @GRADE_ID=GRADE_ID AND USER_ID=@USER_ID
+        RETURN @@ROWCOUNT
+        
 	END
 GO
 
@@ -4303,7 +4423,7 @@ CREATE PROCEDURE sp_retrieve_product
 )
 AS
 	BEGIN
-		SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT
+		SELECT PRODUCT_ID, NAME, DESCRIPTION, UNIT_PRICE, IMAGE_NAME, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT, IMAGE_BINARY
 		FROM product
 		WHERE PRODUCT_ID = @PRODUCT_ID
 	END
@@ -4766,6 +4886,7 @@ GO
 CREATE PROCEDURE sp_retrieve_user_cart_line
 (
 	@PRODUCT_ID[INT],
+    @GRADE_ID[NVARCHAR](250),
 	@USER_ID[INT]
 )
 AS
@@ -4774,6 +4895,7 @@ AS
 		FROM user_cart_line
 		WHERE PRODUCT_ID = @PRODUCT_ID
 		AND USER_ID = @USER_ID
+        AND GRADE_ID = @GRADE_ID
 	END
 GO
 
@@ -4782,8 +4904,28 @@ GO
 CREATE PROCEDURE sp_retrieve_user_cart_line_list
 AS
 	BEGIN
-		SELECT PRODUCT_ID, USER_ID
+		SELECT PRODUCT_ID, GRADE_ID, USER_ID, QUANTITY
 		FROM user_cart_line
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_cart_for_user'
+GO
+CREATE PROCEDURE sp_retrieve_cart_for_user
+(
+	@USER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT user_cart_line.PRODUCT_ID, user_cart_line.USER_ID, user_cart_line.QUANTITY, user_cart_line.GRADE_ID,
+                PRODUCT.NAME, PRODUCT_GRADE_PRICE.PRICE * user_cart_line.QUANTITY AS total
+        FROM user_cart_line
+        INNER JOIN PRODUCT
+        ON user_cart_line.PRODUCT_ID = PRODUCT.PRODUCT_ID
+        INNER JOIN PRODUCT_GRADE_PRICE
+        ON user_cart_line.PRODUCT_ID = PRODUCT_GRADE_PRICE.PRODUCT_ID
+        AND user_cart_line.GRADE_ID = PRODUCT_GRADE_PRICE.GRADE_ID
+        WHERE user_cart_line.USER_ID = @USER_ID
 	END
 GO
 
@@ -5866,6 +6008,8 @@ GO
 CREATE PROCEDURE sp_retrieve_user_cart_line_from_search
 (
 	@PRODUCT_ID[INT]=NULL,
+    @GRADE_ID[NVARCHAR](250)=NULL,
+    @QUANTITY[INT]=NULL,
 	@USER_ID[INT]=NULL
 )
 AS
@@ -5874,6 +6018,8 @@ AS
 		FROM USER_CART_LINE
 		WHERE (USER_CART_LINE.PRODUCT_ID=@PRODUCT_ID OR @PRODUCT_ID IS NULL)
 		AND (USER_CART_LINE.USER_ID=@USER_ID OR @USER_ID IS NULL)
+		AND (USER_CART_LINE.GRADE_ID=@GRADE_ID OR @GRADE_ID IS NULL)
+		AND (USER_CART_LINE.QUANTITY=@QUANTITY OR @QUANTITY IS NULL)
 	END
 GO
 
@@ -5987,7 +6133,7 @@ print '' print  '*** Creating procedure sp_update_agreement'
 GO
 CREATE PROCEDURE sp_update_agreement
 (
-	@old_AGREEMENT_ID[INT],
+	@AGREEMENT_ID[INT],
 	@old_PRODUCT_ID[INT],
 	@new_PRODUCT_ID[INT],
 	@old_SUPPLIER_ID[INT],
@@ -6005,7 +6151,7 @@ AS
 	BEGIN
 		UPDATE agreement
 		SET PRODUCT_ID = @new_PRODUCT_ID, SUPPLIER_ID = @new_SUPPLIER_ID, DATE_SUBMITTED = @new_DATE_SUBMITTED, IS_APPROVED = @new_IS_APPROVED, APPROVED_BY = @new_APPROVED_BY, ACTIVE = @new_ACTIVE
-		WHERE (AGREEMENT_ID = @old_AGREEMENT_ID)
+		WHERE (AGREEMENT_ID = @AGREEMENT_ID)
 		AND (PRODUCT_ID = @old_PRODUCT_ID)
 		AND (SUPPLIER_ID = @old_SUPPLIER_ID)
 		AND (DATE_SUBMITTED = @old_DATE_SUBMITTED)

@@ -32,17 +32,17 @@ namespace LogicLayer
         }
 
 
-        
-         ///<summary> 
-         ///Dan Brown
-         ///Created on 2017/03/10
-         ///
-         /// Delete an individual product from the product table (following documentation guidlines)
-         ///</summary>
-         ///<param name="productID"> The ID field of the product to be deleted </param>
-         ///<returns> Returns rows affected (int) </returns>
-         ///<exception cref="System.ApplicationException"> Thrown if 'ProductAccessor.DeleteProduct' returns 0 rows affected </exception>
-         ///<exception cref="System.Exception"> Thrown if there is an error connecting to the 'ProductAccessor' class </exception>
+
+        ///<summary> 
+        ///Dan Brown
+        ///Created on 2017/03/10
+        ///
+        /// Delete an individual product from the product table (following documentation guidlines)
+        ///</summary>
+        ///<param name="productID"> The ID field of the product to be deleted </param>
+        ///<returns> Returns rows affected (int) </returns>
+        ///<exception cref="System.ApplicationException"> Thrown if 'ProductAccessor.DeleteProduct' returns 0 rows affected </exception>
+        ///<exception cref="System.Exception"> Thrown if there is an error connecting to the 'ProductAccessor' class </exception>
         public int DeleteProduct(int productID)
         {
             int result = 0;
@@ -60,7 +60,7 @@ namespace LogicLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
 
@@ -68,17 +68,26 @@ namespace LogicLayer
             return result;
         }
 
-        public List<DataObjects.Product> ListProducts()
+        /// <summary>
+        /// Redudant with RetrieveProducts; should be removed entirely.
+        /// </summary>
+        /// <returns></returns>
+        public List<Product> ListProducts()
         {
-            var accessor = new ProductAccessor();
+
+            List<Product> products = null;
             try
             {
-                DatabaseMainAccessor.RetrieveList(accessor);
-                return accessor.ProductList;
-            } catch (System.Data.SqlClient.SqlException ex)
-            {
-                throw ex;
+
+                products = ProductAccessor.RetrieveProductList();
+
             }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return products;
         }
 
         /// <summary>
@@ -209,7 +218,7 @@ namespace LogicLayer
             }
             catch (SqlException ex)
             {
-                
+
                 throw new ApplicationException("There was a database error.", ex);
             }
             catch (Exception ex)
@@ -219,16 +228,32 @@ namespace LogicLayer
         }
 
         /// <summary>
-        /// Created by Natacha Ilunga
-        /// 03/29/2017
+        /// Natacha Ilunga
+        /// Created: 03/29/2017
         /// 
         /// Retrieves Products by supplier id to view model
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 04/06/2017
+        /// 
+        /// Added very basic exception handling logic.
+        /// </remarks>
+        /// 
         /// <param name="id"></param>
         /// <returns></returns>
         public List<BrowseProductViewModel> RetrieveProductsBySupplierId(int id)
         {
-            return ProductAccessor.RetrieveProductsBySupplierIdToViewModel(id); 
+            try
+            {
+                return ProductAccessor.RetrieveProductsBySupplierIdToViewModel(id);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            
         }
     }
 }

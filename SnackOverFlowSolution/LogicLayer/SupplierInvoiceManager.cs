@@ -177,5 +177,25 @@ namespace LogicLayer
                 throw;
             }
         }
+
+        /// <summary>
+        /// Victor Algarin
+        /// 2017/04/06 
+        /// </summary>
+        /// 
+        /// <param name="invoice">The selected invoice to be deleted</param>
+        /// <returns>true (if query from accessor is successful)</returns>
+        public bool DeleteSupplierInvoice(SupplierInvoice invoice)
+        {
+            try
+            {
+                return (SupplierInvoiceAccessor.DeleteSupplierInvoice(invoice) == 1);
+            }
+            catch (Exception)
+            {
+                return false;
+                throw new ApplicationException("There was a problem deleting the specified supplier invoice");
+            }
+        }
     }
 }
