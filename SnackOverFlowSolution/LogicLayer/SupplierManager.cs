@@ -280,5 +280,60 @@ namespace LogicLayer
                 throw new ApplicationException("There was an unknown error", ex);
             }
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls accessor method to approve supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool ApproveSupplier(Supplier supplier, int approvedBy)
+        {
+            try
+            {
+                if (SupplierAccessor.ApproveSupplier(supplier, approvedBy) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
+        public bool UpdateSupplierAccount(Supplier oldSupplier, Supplier newSupplier, int approvedby)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls accessor method to deny supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool DenySupplier(Supplier supplier, int approvedBy)
+        {
+            try
+            {
+                if (SupplierAccessor.DenySupplier(supplier, approvedBy) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
     }
 }

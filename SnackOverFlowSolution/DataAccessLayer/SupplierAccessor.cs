@@ -522,5 +522,87 @@ namespace DataAccessLayer
 
             return suppliersWithAgreements;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Accessor method to approve supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int ApproveSupplier(Supplier supplier, int approvedBy)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_supplier_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_SUPPLIER_ID", supplier.SupplierID);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", true);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Accessor method to deny supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int DenySupplier(Supplier supplier, int approvedBy)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_supplier_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_SUPPLIER_ID", supplier.SupplierID);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", false);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+
     }
 }

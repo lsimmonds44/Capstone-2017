@@ -32,8 +32,8 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@EmployeeID", SqlDbType.Int);
-            cmd.Parameters["@EmployeeID"].Value = employeeID;
+            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
+            cmd.Parameters["@EMPLOYEE_ID"].Value = employeeID;
 
             try
             {

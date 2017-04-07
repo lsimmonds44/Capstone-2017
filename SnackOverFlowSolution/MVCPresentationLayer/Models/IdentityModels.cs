@@ -29,7 +29,5 @@ namespace MVCPresentationLayer.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<DataObjects.SupplierInvoice> SupplierInvoices { get; set; }
     }
 }
