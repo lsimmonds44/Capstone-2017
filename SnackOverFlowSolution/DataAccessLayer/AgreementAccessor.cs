@@ -92,6 +92,12 @@ namespace DataAccessLayer
         /// Standardized method.
         /// </remarks>
         /// 
+        /// Ariel Sigo
+        /// Christian Lopez
+        /// Updated 2017/04/07
+        /// 
+        /// Fixed crashing errors
+        /// 
         /// <param name="agreement">The agreement to store.</param>
         /// <returns>Rows affected.</returns>
         public static int CreateAgreement(Agreement agreement)
@@ -108,6 +114,7 @@ namespace DataAccessLayer
             {
                 cmdText = @"sp_create_agreement";
             }
+
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
