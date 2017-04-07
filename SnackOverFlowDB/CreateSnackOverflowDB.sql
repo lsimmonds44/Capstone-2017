@@ -6373,7 +6373,8 @@ AS
 	BEGIN
 		UPDATE [commercial]
 		SET IS_APPROVED = @isApproved,
-			APPROVED_BY = @approvedBy
+			APPROVED_BY = @approvedBy,
+			ACTIVE = @isApproved
 		WHERE COMMERCIAL_ID = @old_COMMERCIAL_ID
 		RETURN @@ROWCOUNT
 	END
@@ -6391,7 +6392,8 @@ AS
 	BEGIN
 		UPDATE [SUPPLIER]
 		SET IS_APPROVED = @isApproved,
-			APPROVED_BY = @approvedBy
+			APPROVED_BY = @approvedBy,
+			ACTIVE = @isApproved
 		WHERE SUPPLIER_ID = @old_SUPPLIER_ID
 		RETURN @@ROWCOUNT
 	END
