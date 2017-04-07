@@ -3064,6 +3064,17 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_delete_test_product'
+GO
+CREATE PROCEDURE sp_delete_test_product
+AS
+	BEGIN
+		DELETE FROM product
+		WHERE NAME = "Test Product" AND DESCRIPTION = "A test product"
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_delete_employee_message'
 GO
 CREATE PROCEDURE sp_delete_employee_message
