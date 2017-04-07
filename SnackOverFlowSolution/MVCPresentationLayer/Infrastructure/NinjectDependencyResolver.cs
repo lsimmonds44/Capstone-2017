@@ -28,6 +28,8 @@ namespace MVCPresentationLayer.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IProductManager>().To<ProductManager>();
+            kernel.Bind<ISupplierManager>().To<SupplierManager>();
+            kernel.Bind<IAgreementManager>().To<AgreementManager>();
         }
     }
 }

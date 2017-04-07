@@ -14,6 +14,20 @@ namespace DataObjects
     /// </summary>
     public class SupplierWithAgreements : Supplier
     {
-        public List<Agreement> Agreements { get; set; }
+        public int ID
+        {
+            get
+            {
+                return SupplierID;
+            }
+            set
+            {
+                SupplierID = value;
+            }
+        }
+
+        public List<AgreementWithProductName> Agreements { get; set; }
+
+        public int[] ProductIDs { get; set; }
     }
 }

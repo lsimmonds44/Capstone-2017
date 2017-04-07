@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SupplierGoodsController.cs" />
     <Compile Include="Controllers\SupplierInvoiceController.cs" />
+    <Compile Include="Controllers\SupplierWithAgreementsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +238,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\listgroup.js" />
+    <Content Include="Scripts\listgroup.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
@@ -292,6 +295,11 @@
     <Content Include="Views\SupplierGoods\Details.cshtml" />
     <Content Include="Views\SupplierGoods\Edit.cshtml" />
     <Content Include="Views\SupplierGoods\Index.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\Create.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\Delete.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\Details.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\Edit.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
