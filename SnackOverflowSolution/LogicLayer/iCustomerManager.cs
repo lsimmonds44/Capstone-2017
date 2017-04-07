@@ -34,5 +34,9 @@ namespace LogicLayer
         /// <param name="userId"></param>
         /// <returns></returns>
         CommercialCustomer RetrieveCommercialCustomerByUserId(int userId);
+
+        bool ApproveCommercialCustomer(CommercialCustomer _commercialCustomer, int _userid);
+
+        bool DenyCommercialCustomer(CommercialCustomer _commercialCustomer, int _userid);
     }
 }

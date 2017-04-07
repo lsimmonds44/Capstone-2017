@@ -89,5 +89,56 @@ namespace LogicLayer
 
             return commercialCustomer;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls the accessor method to approve Commercial Customers and updates who made the change
+        /// </summary>
+        /// <param name="commercialCustomer"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool ApproveCommercialCustomer(CommercialCustomer commercialCustomer, int approvedby)
+        {
+
+            try
+            {
+                if (CustomerAccessor.ApproveCommercialCustomer(commercialCustomer, approvedby) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Calls the accessor method to denie Commercial Customers and updates who made the change
+        /// </summary>
+        /// <param name="commercialCustomer"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public bool DenyCommercialCustomer(CommercialCustomer commercialCustomer, int approvedby)
+        {
+            try
+            {
+                if (CustomerAccessor.DenyCommercialCustomer(commercialCustomer, approvedby) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
     } // end of class
 } // end of namespace

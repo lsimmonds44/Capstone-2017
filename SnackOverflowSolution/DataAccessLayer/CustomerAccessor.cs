@@ -179,5 +179,87 @@ namespace DataAccessLayer
             
             return commercialCustomers;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Denies Commercial Customers and updates who made the change
+        /// </summary>
+        /// <param name="commercialCustomer"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int DenyCommercialCustomer(CommercialCustomer commercialCustomer, int approvedBy)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_commercial_customer_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_COMMERCIAL_ID", commercialCustomer.CommercialId);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", false);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Approves Commercial Customers and updates who made the change
+        /// </summary>
+        /// <param name="commercialCustomer"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int ApproveCommercialCustomer(CommercialCustomer commercialCustomer, int approvedBy)
+        {
+
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_commercial_customer_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_COMMERCIAL_ID", commercialCustomer.CommercialId);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", true);
+
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
     }
 } 

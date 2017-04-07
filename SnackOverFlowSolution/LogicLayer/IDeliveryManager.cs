@@ -20,9 +20,11 @@ namespace LogicLayer
 
         Vehicle RetrieveVehicleByDelivery(int vehicleID);
 
-        bool CreateDelivery(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId);
+        
 
-        int CreateDeliveryAndRetrieveDeliveryId(int? routeId, DateTime deliveryDate, Stream verification, string statusId, string deliveryTypeId, int orderId);
+        bool CreateDelivery(Delivery delivery);
+
+        int CreateDeliveryAndRetrieveDeliveryId(Delivery delivery);
 
         bool UpdateDelivery(Delivery oldDelivery, Delivery newDelivery);
     }
