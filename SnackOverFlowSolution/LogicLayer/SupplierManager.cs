@@ -191,14 +191,13 @@ namespace LogicLayer
         /// <param name="farmState"></param>
         /// <param name="farmTaxId"></param>
         /// <returns></returns>
-        public bool ApplyForSupplierAccount(int userId, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
+        public bool ApplyForSupplierAccount(Supplier supplier)
         {
             bool wasAdded = false;
 
             try
             {
-                if (1 == SupplierAccessor.ApplyForSupplierAccount(userId, false, farmName, farmAddress,
-                    farmCity, farmState, farmTaxId))
+                if (1 == SupplierAccessor.ApplyForSupplierAccount(supplier))
                 {
                     wasAdded = true;
                 }
@@ -233,6 +232,30 @@ namespace LogicLayer
             }
 
             return success;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/06
+        /// 
+        /// Attempts to retrieve a list of SupplierWithAgreements
+        /// </summary>
+        /// <returns></returns>
+        public List<SupplierWithAgreements> RetrieveSuppliersWithAgreements()
+        {
+            try
+            {
+                return SupplierAccessor.RetrieveAllSuppliersWithAgreements();
+            }
+            catch (SqlException ex)
+            {
+                
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error", ex);
+            }
         }
     }
 }

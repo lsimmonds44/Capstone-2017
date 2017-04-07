@@ -287,8 +287,18 @@ namespace WpfPresentationLayer
                         User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
 
                         // Actually try to create the supplier
-                        if (_supplierManager.ApplyForSupplierAccount(supplierUser.UserId, txtFarmName.Text, txtFarmAddress.Text, txtFarmCity.Text,
-                            cboFarmState.Text, txtFarmTaxId.Text))
+                        if (_supplierManager.ApplyForSupplierAccount(new Supplier()
+                        {
+                            UserId = supplierUser.UserId,
+                            FarmName = txtFarmName.Text,
+                            FarmAddress = txtFarmAddress.Text,
+                            FarmCity = txtFarmCity.Text,
+                            FarmState = cboFarmState.Text,
+                            FarmTaxID = txtFarmTaxId.Text
+                        }))
+
+                        //supplierUser.UserId, txtFarmName.Text, txtFarmAddress.Text, txtFarmCity.Text,
+                        //cboFarmState.Text, txtFarmTaxId.Text
                         {
                             //this.DialogResult = true;
                             try

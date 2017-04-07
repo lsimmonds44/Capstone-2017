@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgreementManager.cs" />
+    <Compile Include="Cart.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="CharityManager.cs" />
     <Compile Include="CustomerManager.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="IMaintenanceScheduleLineManager.cs" />
     <Compile Include="InspectionManager.cs" />
     <Compile Include="IOrderLineManager.cs" />
+    <Compile Include="IOrderManager.cs" />
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />

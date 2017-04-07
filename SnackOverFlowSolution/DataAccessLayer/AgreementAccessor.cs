@@ -186,5 +186,46 @@ namespace DataAccessLayer
 
             return rows;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/06
+        /// 
+        /// Returns a list of agreements with the product names
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        public static List<AgreementWithProductName> RetrieveAgreementsWithProductNameBySupplierId(int supplierId)
+        {
+            List<AgreementWithProductName> agreementsWithNames = new List<AgreementWithProductName>();
+
+            try
+            {
+                List<Agreement> agreementsBySupplier = retrieveAgreementsBySupplierId(supplierId);
+                foreach (Agreement a in agreementsBySupplier)
+                {
+                    AgreementWithProductName newAgreement = new AgreementWithProductName()
+                    {
+                        ProductId = a.ProductId,
+                        AgreementId = a.AgreementId,
+                        Active = a.Active,
+                        ApprovedBy = a.ApprovedBy,
+                        IsApproved = a.IsApproved,
+                        DateSubmitted = a.DateSubmitted,
+                        SupplierId = a.SupplierId,
+                        ProductName = ProductAccessor.RetrieveProductbyId(a.ProductId).Name
+                    };
+                    agreementsWithNames.Add(newAgreement);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return agreementsWithNames;
+        }
+
     }
 }
