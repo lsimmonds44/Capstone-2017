@@ -50,5 +50,24 @@ namespace LogicLayer
             return result;
         }
 
+        public bool DeleteTestProduct()
+        {
+            bool result = false;
+
+            try
+            {
+                if (1 == TestAccessor.DeleteTestProduct())
+                {
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
     }
 }
