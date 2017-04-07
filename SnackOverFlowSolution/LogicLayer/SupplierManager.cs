@@ -252,10 +252,11 @@ namespace LogicLayer
             catch (Exception ex)
             {
 
-                throw new ApplicationException ("An error occured." + ex.Message + ex.StackTrace);
+                throw new ApplicationException("An error occured." + ex.Message + ex.StackTrace);
             }
 
             return supplierStatus;
+        }
 
         /// Christian Lopez
         /// 2017/04/06
