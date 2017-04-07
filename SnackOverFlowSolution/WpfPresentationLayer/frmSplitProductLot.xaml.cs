@@ -29,11 +29,8 @@ namespace WpfPresentationLayer
         {
             InitializeComponent();
             OldQty = selectedItem.Quantity ?? 0;
-            MessageBox.Show(OldQty.ToString());
             NewQty = 0;
             txtOld.Text = OldQty.ToString();
-            MessageBox.Show(OldQty.ToString());
-            MessageBox.Show(txtOld.Text);
             txtNew.Text = NewQty.ToString();
         }
 
