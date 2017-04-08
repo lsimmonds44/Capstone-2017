@@ -1833,7 +1833,7 @@ namespace WpfPresentationLayer
         private void cboSupplierStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string txt = cboSupplierStatus.SelectedItem.ToString();
-            List<Supplier> pendingApps = new List<Supplier>();
+            List<Supplier> supplierApps = new List<Supplier>();
             try
             {
                 if (cboSupplierStatus.SelectedItem != null)
@@ -1841,20 +1841,14 @@ namespace WpfPresentationLayer
                     if (txt == "Pending")
                     {
                         _supplierList = _supplierManager.ListSuppliers();
-                        pendingApps = _supplierList.FindAll(s => s.IsApproved == false);
-                        dgSuppliers.ItemsSource = pendingApps;
+                        supplierApps = _supplierList.FindAll(s => s.IsApproved == false);
+                        dgSuppliers.ItemsSource = supplierApps;
                     }
                     else if (txt == "Approved")
                     {
                         _supplierList = _supplierManager.ListSuppliers();
-                        pendingApps = _supplierList.FindAll(s => s.IsApproved == true);
-                        dgSuppliers.ItemsSource = pendingApps;
-                    }
-                    else if (txt == "Denied")
-                    {
-                        _supplierList = _supplierManager.ListSuppliers();
-                        pendingApps = _supplierList.FindAll(s => s.Active == false);
-                        dgSuppliers.ItemsSource = pendingApps;
+                        supplierApps = _supplierList.FindAll(s => s.IsApproved == true);
+                        dgSuppliers.ItemsSource = supplierApps;
                     }
                 }
             }

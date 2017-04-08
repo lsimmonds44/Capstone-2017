@@ -291,8 +291,7 @@ INSERT INTO [dbo].[Supplier_Application_Status]
 	(SUPPLIER_STATUS_ID)
 VALUES
 	("Approved"),
-	("Pending"),
-	("Denied")
+	("Pending")
 GO
 
 print '*** Inserting Product_Order Test Data ***'
