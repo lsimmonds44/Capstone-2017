@@ -17,6 +17,7 @@
 		614B2EE51E8DFAAB006EF1FA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EE41E8DFAAB006EF1FA /* HomeVC.swift */; };
 		614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EE71E8E08C8006EF1FA /* UserManager.swift */; };
 		614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */; };
+		61F7C4521E97FE900048D945 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C4511E97FE900048D945 /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		614B2EE41E8DFAAB006EF1FA /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		614B2EE71E8E08C8006EF1FA /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testUserManager.swift; sourceTree = "<group>"; };
+		61F7C4511E97FE900048D945 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				614B2EE71E8E08C8006EF1FA /* UserManager.swift */,
+				61F7C4511E97FE900048D945 /* ApiManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				614B2EB91E8DF36C006EF1FA /* LoginVC.swift in Sources */,
 				614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */,
 				614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */,
+				61F7C4521E97FE900048D945 /* ApiManager.swift in Sources */,
 				614B2EB71E8DF36C006EF1FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +542,7 @@
 				614B2EDD1E8DF36C006EF1FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		614B2EDE1E8DF36C006EF1FA /* Build configuration list for PBXNativeTarget "Snack OverflowTests" */ = {
 			isa = XCConfigurationList;
@@ -546,6 +551,7 @@
 				614B2EE01E8DF36C006EF1FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		614B2EE11E8DF36C006EF1FA /* Build configuration list for PBXNativeTarget "Snack OverflowUITests" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +560,7 @@
 				614B2EE31E8DF36C006EF1FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

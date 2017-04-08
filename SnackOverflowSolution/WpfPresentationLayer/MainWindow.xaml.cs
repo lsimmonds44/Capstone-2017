@@ -156,7 +156,14 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else if (cboCustomerType.SelectedItem as String == "Residential")
@@ -314,7 +321,15 @@ namespace WpfPresentationLayer
                         {
                             // Enters here if user that access this is not an _employee.
                             // For now it does nothing. 
-                            MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.InnerException.Message);
+                            if (null != ex.InnerException)
+                            {
+                                MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.InnerException.Message);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.Message);
+                            }
+                            
                         }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
@@ -493,7 +508,14 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -516,7 +538,14 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             tabProductLot_Selected(sender, e);
@@ -803,7 +832,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
         }
@@ -873,7 +909,14 @@ namespace WpfPresentationLayer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                        if (null != ex.InnerException)
+                        {
+                            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
             }
@@ -920,7 +963,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -941,7 +991,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -962,7 +1019,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -1052,7 +1116,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
         /// <summary>
@@ -1102,7 +1173,14 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
         }
@@ -1350,7 +1428,14 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -1406,7 +1491,14 @@ namespace WpfPresentationLayer
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }
@@ -1763,8 +1855,15 @@ namespace WpfPresentationLayer
                 }
                 catch (Exception ex)
                 {
-                    
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     return;
                 }
                 
