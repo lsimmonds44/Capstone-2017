@@ -1,4 +1,4 @@
-﻿@model DataObjects.Product
+﻿@model DataObjects.BrowseProductViewModel
 
 <td>
     @Html.DisplayFor(modelItem => modelItem.Name)
@@ -7,23 +7,17 @@
     @Html.DisplayFor(modelItem => modelItem.Description)
 </td>
 <td>
-    @Html.DisplayFor(modelItem => modelItem.UnitPrice)
-</td>
-@*<td>
-        @Html.DisplayFor(modelItem => item.ImageName)
-    </td>*@
-<td>
-    @Html.DisplayFor(modelItem => modelItem.Active)
+    @Html.DisplayFor(modelItem => modelItem.PriceString)
 </td>
 <td>
-    @Html.DisplayFor(modelItem => modelItem.UnitOfMeasurement)
+    @Html.DisplayFor(modelItem => modelItem.Supplier_Name)
 </td>
 <td>
-    @Html.DisplayFor(modelItem => modelItem.DeliveryChargePerUnit)
+    @Html.DisplayFor(modelItem => modelItem.CategoryID)
 </td>
-@*<td>
-        @Html.DisplayFor(modelItem => item.ImageBinary)
-    </td>*@
+<td>
+        <img src="@Url.Action("PictureOf", "Products", new { id = Model.ProductId})" width="100" height="100" />
+</td>
 <td>
     @Html.ActionLink("Details", "Details", "Products", new { id = Model.ProductId }, null)
 </td>

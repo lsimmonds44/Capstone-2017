@@ -9,12 +9,10 @@ namespace MVCPresentationLayer.Models
     /// 
     /// Composite Data Object View Model for Product/Index
     /// </summary>
+
     public class ProductsListViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
+        public List<BrowseProductViewModel> Products { get; set; }
 
-        public Product Product { get; set; }
-
-        public string CurrentCategory { get; set; }
     }
 }

@@ -9,25 +9,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Name)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Description)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.UnitPrice)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ImageName)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Product.Active)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().PriceString)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.UnitOfMeasurement)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Supplier_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.DeliveryChargePerUnit)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CategoryID)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.ImageBinary)

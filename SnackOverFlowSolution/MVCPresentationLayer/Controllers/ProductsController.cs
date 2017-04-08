@@ -24,8 +24,7 @@ namespace MVCPresentationLayer.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = new ProductsListViewModel {Products = _productManager.RetrieveProducts()};
-
+            var products = new ProductsListViewModel {Products = _productManager.RetrieveProductsToBrowseProducts()};
             return View(products);
         }
 
@@ -36,7 +35,7 @@ namespace MVCPresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = _productManager.RetrieveProductById((int)id);
+            var product = _productManager.RetrieveProductsToBrowseProducts().Find(i => i.ProductId == id);
             if (product == null)
             {
                 return HttpNotFound();
