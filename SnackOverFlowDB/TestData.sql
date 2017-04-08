@@ -357,5 +357,4 @@ VALUES
 	(10001, "23 Oak Ave", "Farmville", "MO", "68787", "name 2" ),
 	(10002, "787 First Street", "Somewhere", "IL", "21220", "name 3" ),
 	(10003, "3318 North Rd", "Haydale", "IA", "52983", "name 4" )	
-GO 
->>>>>>> origin/master
+GO
