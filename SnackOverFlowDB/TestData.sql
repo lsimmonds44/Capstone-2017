@@ -358,3 +358,36 @@ VALUES
 	(10002, "787 First Street", "Somewhere", "IL", "21220", "name 3" ),
 	(10003, "3318 North Rd", "Haydale", "IA", "52983", "name 4" )	
 GO
+
+print '*** Inserting Company Order Test Data ***'
+GO
+INSERT INTO [dbo].[COMPANY_ORDER]
+	(EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE)
+VALUES
+	(10000, 10001, 500.00, '2017-03-20'),
+	(10001, 10002, 625.00, '2017-03-21'),
+	(10002, 10001, 725.00, '2017-03-20'),
+	(10000, 10002, 225.00, '2017-03-22'),
+	(10003, 10000, 575.00, '2017-03-25'),
+	(10001, 10000, 250.00, '2017-03-21')
+GO
+
+print '*** Inserting Company Order Line Test Data ***'
+GO
+INSERT INTO [dbo].[COMPANY_ORDER_LINE]
+	(COMPANY_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, UNIT_PRICE, TOTAL_PRICE)
+VALUES
+	(10000, 10000, 'Apple', 500, .5, 250.00),
+	(10000, 10001, 'Orange', 100, .75, 75.00),
+	(10000, 10003, 'Cassava', 175, 1.00, 175.00),
+	(10001, 10000, 'Apple', 1000, .35, 350.00),
+	(10001, 10004, 'Tomatoes', 1375, .2, 275.00),
+	(10002, 10002, 'Onion', 580, 1.25, 725.00),
+	(10003, 10000, 'Apple', 100, .5, 50.00),
+	(10003, 10003, 'Cassava', 50, .75, 37.50),
+	(10003, 10002, 'Onion', 275, .5, 137.50),
+	(10004, 10001, 'Orange', 1000, .30, 300.00),
+	(10004, 10004, 'Tomatoes', 1375, .2, 275.00),
+	(10005, 10002, 'Onion', 250, .5, 125.00),
+	(10005, 10001, 'Orange', 250, .5, 125.00)
+GO
