@@ -1,31 +1,288 @@
 ﻿@{
+    Layout = null;
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html class="no-js no-flash">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snack Overflow</title>
+    <meta name="description" content="Snackoverflow connects local growers to consumers seamlessly">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <!-- Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+
+    <!-- Icon Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="~/Content/fontello.css" rel="stylesheet" />
+
+    <!-- Plugins CSS -->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/rev-slider-settings.css" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+
+    <!-- Head JS Libraries -->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body class="frame-on">
+
+    <!-- Start page-frame -->
+    <div class="page-frame">
+        <div class="frame-top"></div>
+        <div class="frame-right"></div>
+        <div class="frame-bottom"></div>
+        <div class="frame-left"></div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <!-- End page-frame -->
+    <!-- Start mobile-nav -->
+    <div class="mobile-nav-container clearfix">
+        <div class="main-nav-trigger mobile-nav-trigger">
+            <a href="#"></a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- End mobile-nav -->
+    <!-- Start main-nav-trigger -->
+    <div class="main-nav-trigger style2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="handle" href="#">
+                        <span class="bars">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </span>
+                    </a>
+                </div><!-- /col-md-12 -->
+            </div><!-- /row -->
+        </div><!-- /container -->
     </div>
-</div>
+    <!-- End main-nav-trigger -->
+    <!-- Start main-nav -->
+    <div class="main-nav-container style3">
+        <div class="main-nav-inner">
+            <div class="logo-container">
+                <a href="#">
+                    <img src="~/Images/slider-images/Flogo2.png" alt="snack overflow logo">
+                </a>
+            </div><!-- /logo-container -->
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li>@Html.ActionLink("Store", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Apply for a Supplier Account", "Create", "SupplierWithAgreements")</li>  @*Shall be changes to a central supplier page*@
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </nav>
+        </div><!-- /main-nav-inner -->
+    </div><!-- /main-nav-container -->
+    <!-- End main-nav -->
+    <!-- Start wrapper -->
+    <div class="wrapper">
+
+        <!-- Start main-header -->
+        <header class="main-header slider-on" id="top">
+            <div class="main-slider-container">
+                <div class="main-slider">
+                    <ul class="scrollme">
+                        <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" data-title="Chana Experience">
+                            <img class="rs-parallaxlevel-1" src="~/Images/Background/bg-1.jpg" alt="Marine Slider BG" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                            <div class="tp-caption customin customout" id="topOne">
+                                <img src="~/Images/slider-images/FLogo.png" alt="Organic" class="animateme" id="sOne">
+                            </div>
+                        </li>
+                        <li data-transition="fadetorightfadetoleft" data-slotamount="7" data-masterspeed="1500" data-title="Coffee Experience">
+                            <img class="rs-parallaxlevel-1" src="~/Images/background/bg-2.jpg" alt="Marine Slider BG" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                            <div class="tp-caption customin customout" id="topTwo">
+                                <img src="~/Images/slider-images/Flogo2.png" alt="Organic" class="animateme" id="sTwo">
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- /main-slider -->
+            </div><!-- /main-slider-container -->
+        </header>
+        <!-- End main-header -->
+
+        <section class="no-padding">
+            <div class="double-view">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="image-container wow fadeInLeft">
+                            <figure>
+                                <img src="~/Images/Background/custom-bg30.jpg" alt="About Gourmet">
+                            </figure>
+                        </div><!-- /image-container -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contents-container wow fadeInRight">
+                            <header class="section-title style3 color-white">
+                                <h1><span>About</span> Us</h1>
+                                <img src="~/Images/slider-images/Flogo2.png" alt="About Snack Overflow">
+                                <p>
+                                    Snack Overflow is a startup company with the desire to connect produce consumers with the
+                                    local suppliers. The company believes this is an important step to facilitate a more economical and self-
+                                    sustaining organic produce market. Snack Overflow also believes its mission will boost the local
+                                    economy, keeping products sold and purchased as locally connected as possible.
+                                </p>
+                            </header>
+                        </div><!-- /contents-container -->
+                    </div><!-- /col-md-6 -->
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery style3 white-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 wow fadeInDown">
+                        <header class="section-title style3">
+                            <h1><span>Our</span> Gallery</h1>
+                            <p>View... </p>
+                        </header>
+                    </div><!-- /col-md-8 -->
+                </div><!-- /row -->
+            </div><!-- /container -->
+            <div class="gallery-items-container wow fadeInDown">
+                <ul class="clearfix">
+                    <li class="overlay-container mix vegetarian">
+                        <img src="~/Images/Gallery/gallery-1.jpg" height="214" width="546" alt="avocado">
+                        <div class="overlay">
+                            <div class="overlay-details">
+                                <h3>Freshly grown avocado</h3>
+                            </div><!-- /overlay-details -->
+                        </div><!-- /overlay -->
+                    </li>
+                    <li class="overlay-container mix  desert">
+                        <img src="~/Images/Gallery/gallery-2.jpg" height="214" width="546" alt="eggs">
+                        <div class="overlay">
+                            <div class="overlay-details">
+                                <h3>Organic Chicken Eggs</h3>
+                            </div><!-- /overlay-details -->
+                        </div><!-- /overlay -->
+                    </li>
+                    <li class="overlay-container mix  vegetarian">
+                        <img src="~/Images/Gallery/gallery-3.jpg" height="214" width="546" alt="pepper">
+                        <div class="overlay">
+                            <div class="overlay-details">
+                                <h3>Habanero Peppers</h3>
+                            </div><!-- /overlay-details -->
+                        </div><!-- /overlay -->
+                    </li>
+                    <li class="overlay-container mix meat">
+                        <img src="~/Images/Gallery/gallery-4.jpg" height="214" width="546" alt="fish">
+                        <div class="overlay">
+                            <div class="overlay-details">
+                                <h3>Fish</h3>
+                            </div><!-- /overlay-details -->
+                        </div><!-- /overlay -->
+                    </li>
+                    <li class="overlay-container mix desert">
+                        <img src="~/Images/Gallery/gallery-5.jpg" height="214" width="546" alt="cuisinepowders">
+                        <div class="overlay">
+                            <div class="overlay-details">
+                                <h3>Cuisine Powders</h3>
+                            </div><!-- /overlay-details -->
+                        </div><!-- /overlay -->
+                    </li>
+                </ul>
+            </div><!-- /gallery-items-container -->
+        </section><!-- /gallery -->
+
+
+
+        <footer class="main-footer style3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 wow fadeInDown">
+                        <div class="contact-form-contaienr">
+                            <div class="section-title style3">
+                                <h1><span>Get</span> In Touch</h1>
+                            </div>
+                            <form id="contact-form" method="post" action="#">
+                                <div class="input-container col-md-6">
+                                    <input type="text" id="name" name="name" placeholder="Name*" required>
+                                </div>
+                                <div class="input-container col-md-6">
+                                    <input type="email" id="email" name="email" placeholder="Email*" required>
+                                </div>
+                                <div class="input-container col-md-12">
+                                    <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
+                                </div>
+                                <div class="input-container col-md-12">
+                                    <button type="submit">Send Message</button>
+                                </div>
+                            </form>
+                            <div id="form-messages"></div>
+                        </div><!-- /contact-form-container -->
+                    </div><!-- /col-md-10 -->
+                </div><!-- /row -->
+            </div><!-- /container -->
+            <div class="bottom-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 align-left">
+                            <p class="copyright">© 2017 KCC Snack Overflow. <br>All Rights Reserved</p>
+                        </div><!-- /col-md-4 -->
+                        <div class="col-md-4 align-center">
+                            <figure class="logo-container">
+                                <a href="#"><img src="~/Images/Footer/footerlogo.png" alt="Snack Overflow"></a>
+                            </figure>
+                        </div>
+                        <div class="col-md-4 align-center">
+                            <div class="socials-container">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                            </div><!-- /socials-container -->
+                        </div><!-- /col-md-4 -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /bottom-bar -->
+        </footer>
+
+    </div><!-- /wrapper -->
+    <!-- End wrapper -->
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
+    <script src="~/Scripts/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Scripts/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/Scripts/jquery.scrollme.min.js"></script>
+    <script src="~/Scripts/jquery.mixitup.min.js"></script>
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/snackoverflow.js"></script>
+    <script type="text/javascript">
+            jQuery(document).ready(function() {
+               jQuery('.main-slider').revolution(
+                {
+                    delay:9000,
+                    startwidth:1170,
+                    startheight: 960,
+                    hideThumbs:10,
+                    fullScreen: 'on',
+                    hideTimerBar: 'on',
+                    navigationStyle: 'preview1'
+                });
+            });
+    </script>
+
+</body>
+</html>
+
+
