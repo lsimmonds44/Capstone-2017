@@ -84,6 +84,9 @@
     <Compile Include="Category.cs" />
     <Compile Include="Charity.cs" />
     <Compile Include="CommercialCustomer.cs" />
+    <Compile Include="CompanyOrder.cs" />
+    <Compile Include="CompanyOrderLine.cs" />
+    <Compile Include="CompanyOrderWithLines.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeOrderResponsibility.cs" />
