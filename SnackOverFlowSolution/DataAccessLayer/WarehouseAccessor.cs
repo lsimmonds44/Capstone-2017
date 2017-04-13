@@ -73,6 +73,10 @@ namespace DataAccessLayer
         /// Created on 03/30/2017
         /// 
         /// Creates a new warehouse
+        /// 
+        /// Mason Allen
+        /// Updated on 4/13/17
+        /// Updated return int to sql generated warehouseId instead of numrows
         /// </summary>
         /// <param name="newWarehouse">Warehouse Object to be Created</param>
         /// <returns>Returns an int of 1 if successful, 0 if not</returns>

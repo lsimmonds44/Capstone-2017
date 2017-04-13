@@ -34,5 +34,27 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 4/13/17
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns>1 for success, 0 for fail</returns>
+        public int DeleteCategory(string categoryId)
+        {
+            int success = 0;
+
+            try
+            {
+                success = CategoryAccessor.DeleteCategory(categoryId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return success;
+        }
     }
 }
