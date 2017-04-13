@@ -5159,13 +5159,13 @@ GO
 print '' print  '*** Creating procedure sp_retrieve_user_salt'
 GO
 CREATE PROCEDURE sp_retrieve_user_salt (
-    @EmailAddress[NVARCHAR](50)
+    @Username[NVARCHAR](50)
 )
 AS
 	BEGIN
 		SELECT PASSWORD_SALT
 		FROM APP_USER
-		WHERE E_MAIL_ADDRESS = @EmailAddress
+		WHERE USER_NAME = @Username
 	END
 GO
 
