@@ -66,6 +66,7 @@
     <Compile Include="EmployeeManagerTests.cs" />
     <Compile Include="CustomerManagerTests.cs" />
     <Compile Include="StatusManagerTests.cs" />
+    <Compile Include="GradeManagerTests.cs" />
     <Compile Include="VehicleManagerTests.cs" />
     <Compile Include="WarehouseManagerTests.cs" />
     <Compile Include="UserManagerTests.cs" />
