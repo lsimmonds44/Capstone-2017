@@ -161,20 +161,6 @@ namespace DataAccessLayer
             return results;
         }
 
-        public void SetKeyParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetRetrieveSearchParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetUpdateParameters(SqlCommand cmd)
-        {
-            throw new NotImplementedException();
-        }
 
         public String RetrieveUserSalt (String userName)
         {
@@ -200,6 +186,37 @@ namespace DataAccessLayer
             return results;
         }
 
+        /// <summary>
+        /// William Flood 
+        /// Created on 2017-04-12
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static String RetrieveUserSaltByEmail(String email)
+        {
+
+            var results = "";
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand("sp_retrieve_user_salt_by_email", conn);
+            cmd.Parameters.Add("@EmailAddress", SqlDbType.NVarChar, 50);
+            cmd.Parameters["@EmailAddress"].Value = email;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    results = reader.GetString(0);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return results;
+        }
+
         public static User Login(String userName, String hash)
         {
             User userFound = null;
@@ -208,6 +225,54 @@ namespace DataAccessLayer
             cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50);
             cmd.Parameters.Add("@Password_Hash", SqlDbType.NVarChar, 64);
             cmd.Parameters["@Username"].Value = userName;
+            cmd.Parameters["@Password_Hash"].Value = hash;
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        userFound = new User()
+                        {
+                            UserId = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            Phone = reader.GetString(3),
+                            //PreferredAddressId = reader.GetInt32(4),
+                            EmailAddress = reader.GetString(5),
+                            EmailPreferences = reader.GetBoolean(6),
+                            UserName = reader.GetString(9),
+                            Active = reader.GetBoolean(10)
+                        };
+                    }
+                }
+                return userFound;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/04/12
+        /// Uses a user's email address and hashed password to log in
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public static User WebLogin(String email, String hash)
+        {
+            User userFound = null;
+            var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand("sp_web_login", conn);
+            cmd.Parameters.Add("@EmailAddress", SqlDbType.NVarChar, 50);
+            cmd.Parameters.Add("@Password_Hash", SqlDbType.NVarChar, 64);
+            cmd.Parameters["@EmailAddress"].Value = email;
             cmd.Parameters["@Password_Hash"].Value = hash;
             cmd.CommandType = CommandType.StoredProcedure;
             try

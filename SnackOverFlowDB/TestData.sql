@@ -26,7 +26,7 @@ INSERT INTO [dbo].[App_User]
 VALUES
 	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1),
 	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1),
-	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jmyers', 1),
+	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1), --Password: m0R3$e(ur3
 	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1),
 	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1),
 	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1),

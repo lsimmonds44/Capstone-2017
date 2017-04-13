@@ -3735,6 +3735,22 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_web_login'
+GO
+CREATE PROCEDURE sp_web_login 
+(
+    @EmailAddress[NVARCHAR](50),
+    @Password_Hash[NVARCHAR](64)
+)
+AS
+	BEGIN
+		SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+		FROM app_user
+		WHERE E_MAIL_ADDRESS = @EmailAddress
+		AND PASSWORD_HASH = @Password_Hash
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_agreement'
 GO
 CREATE PROCEDURE sp_retrieve_agreement
@@ -5091,13 +5107,26 @@ GO
 print '' print  '*** Creating procedure sp_retrieve_user_salt'
 GO
 CREATE PROCEDURE sp_retrieve_user_salt (
-    @Username[NVARCHAR](64)
+    @EmailAddress[NVARCHAR](50)
 )
 AS
 	BEGIN
 		SELECT PASSWORD_SALT
 		FROM APP_USER
-		WHERE USER_NAME = @Username
+		WHERE E_MAIL_ADDRESS = @EmailAddress
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_salt_by_email'
+GO
+CREATE PROCEDURE sp_retrieve_user_salt_by_email (
+    @EmailAddress[NVARCHAR](50)
+)
+AS
+	BEGIN
+		SELECT PASSWORD_SALT
+		FROM APP_USER
+		WHERE E_MAIL_ADDRESS = @EmailAddress
 	END
 GO
 

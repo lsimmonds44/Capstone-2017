@@ -19,16 +19,19 @@ namespace MVCPresentationLayer.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserManager _appUserManager;
         private IUserCartManager _userCartManager;
 
-        public AccountController()
+        public AccountController(IUserManager appUserManager)
         {
+            this._appUserManager = appUserManager;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this._appUserManager = appUserManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -152,26 +155,45 @@ namespace MVCPresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                return View(model);
+            }
+            DataObjects.User userFound = null;
+            try
+            {
+                userFound = _appUserManager.AuthenticateWebUser(model.Email, model.Password);
+            }
+            catch
+            {
+
+            }
+            if (null != userFound)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var user = new ApplicationUser {UserName=userFound.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+
+
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, userFound.FirstName));
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, userFound.LastName));
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Email, userFound.EmailAddress));
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
