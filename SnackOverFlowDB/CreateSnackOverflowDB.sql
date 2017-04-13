@@ -3940,6 +3940,44 @@ AS
 	END
 GO
 
+print '' print '*** Creating procedure sp_retrieve_company_order_list'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_list
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_list_by_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_list_by_supplier_id
+(
+	@SUPPLIER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+		WHERE SUPPLIER_ID = @SUPPLIER_ID
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_lines_by_order_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_lines_by_order_id
+(
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, UNIT_PRICE, TOTAL_PRICE
+		FROM company_order_line
+		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_customer'
 GO
 CREATE PROCEDURE sp_retrieve_customer
