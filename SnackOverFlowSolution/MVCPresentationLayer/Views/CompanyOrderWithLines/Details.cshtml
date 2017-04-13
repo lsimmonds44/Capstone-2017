@@ -1,0 +1,124 @@
+﻿@model DataObjects.CompanyOrderWithLines
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SnackOverflow Order @Model.CompanyOrderID</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyOrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasArrived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasArrived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+    </dl>
+</div>
+@if (Model.OrderLines.Count > 0) { 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderLines[0].ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderLines[0].ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderLines[0].Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderLines[0].UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderLines[0].TotalPrice)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.OrderLines)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>*@
+        </tr>
+    }
+
+</table>
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

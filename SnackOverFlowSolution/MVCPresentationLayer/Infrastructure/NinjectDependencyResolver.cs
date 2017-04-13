@@ -31,6 +31,7 @@ namespace MVCPresentationLayer.Infrastructure
             kernel.Bind<ISupplierManager>().To<SupplierManager>();
             kernel.Bind<IAgreementManager>().To<AgreementManager>();
             kernel.Bind<IUserManager>().To<UserManager>();
+            kernel.Bind<ICompanyOrderManager>().To<CompanyOrderManager>();
             //kernel.Bind<IUserCartManager>().To<UserCartManager>();
         }
     }

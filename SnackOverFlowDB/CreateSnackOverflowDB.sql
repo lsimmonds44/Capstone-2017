@@ -3940,6 +3940,20 @@ AS
 	END
 GO
 
+print '' print '*** Creating procedure sp_retrieve_company_order_by_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_by_id
+(
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
+	END
+GO
+
 print '' print '*** Creating procedure sp_retrieve_company_order_list'
 GO
 CREATE PROCEDURE sp_retrieve_company_order_list

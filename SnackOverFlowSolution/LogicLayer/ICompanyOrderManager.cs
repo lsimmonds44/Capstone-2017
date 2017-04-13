@@ -22,5 +22,7 @@ namespace LogicLayer
         List<CompanyOrderWithLines> RetrieveCompanyOrdersWithLines();
 
         List<CompanyOrderWithLines> RetrieveCompanyOrdersWithLinesBySupplierId(int supplierId);
+
+        CompanyOrderWithLines RetrieveCompanyOrderWithLinesById(int orderId);
     }
 }

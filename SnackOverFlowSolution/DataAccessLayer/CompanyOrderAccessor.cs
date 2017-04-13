@@ -142,7 +142,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@ORDER_ID", orderId);
+            cmd.Parameters.AddWithValue("@COMPANY_ORDER_ID", orderId);
 
             try
             {
@@ -257,6 +257,90 @@ namespace DataAccessLayer
 
 
             return orders;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/13
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public static CompanyOrder RetrieveOrderByOrderId(int orderId)
+        {
+            CompanyOrder order = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_company_order_by_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@COMPANY_ORDER_ID", orderId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    order = new CompanyOrder()
+                    {
+                        CompanyOrderID = reader.GetInt32(0),
+                        EmployeeId = reader.GetInt32(1),
+                        SupplierId = reader.GetInt32(2),
+                        Amount = reader.GetDecimal(3),
+                        OrderDate = reader.GetDateTime(4),
+                        HasArrived = reader.GetBoolean(5),
+                        Active = reader.GetBoolean(6)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return order;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/13
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public static CompanyOrderWithLines RetrieveOrderWithLinesByOrderId(int orderId)
+        {
+            CompanyOrderWithLines order = null;
+
+            try
+            {
+                CompanyOrder data = RetrieveOrderByOrderId(orderId);
+                order = new CompanyOrderWithLines()
+                {
+                    CompanyOrderID = data.CompanyOrderID,
+                    EmployeeId = data.EmployeeId,
+                    SupplierId = data.SupplierId,
+                    Amount = data.Amount,
+                    HasArrived = data.HasArrived,
+                    OrderDate = data.OrderDate,
+                    Active = data.Active,
+                    OrderLines = RetrieveCompanyOrderLinesByOrderId(orderId)
+                };
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return order;
         }
     }
 }
