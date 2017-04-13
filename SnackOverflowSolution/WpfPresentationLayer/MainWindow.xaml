@@ -343,7 +343,7 @@
                     <!--End of Grid Definitions-->
 
                     <!--Top Border-->
-                    <Border Background="LightBlue" Grid.Column="3" Grid.ColumnSpan="17" Grid.Row="0" FlowDirection="LeftToRight"
+                    <Border Grid.Column="3" Grid.ColumnSpan="17" Grid.Row="0" FlowDirection="LeftToRight"
                             BorderBrush="Black" BorderThickness="0 0 0 2">
                         <StackPanel Orientation="Horizontal" >
                             <!--Search Controls-->
@@ -358,7 +358,7 @@
                     <!--End of Top Border-->
 
                     <!--Top Border Left Edge-->
-                    <Border Background="LightBlue" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" FlowDirection="LeftToRight">
+                    <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" FlowDirection="LeftToRight">
                         <StackPanel Orientation="Horizontal" >
                             <!--Software Logo-->
                             <Image Height="36"/>
@@ -368,7 +368,7 @@
                     <!--End of Top Border Left Edge-->
 
                     <!--Side Border-->
-                    <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17" Background="LightBlue"
+                    <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17"
                             BorderBrush="Black" BorderThickness="0 0 2 0">
                         <StackPanel Orientation="Vertical">
                             <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
