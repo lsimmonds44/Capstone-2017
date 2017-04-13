@@ -44,6 +44,11 @@ namespace LogicLayer
             return warehouses;
         }
 
+        /// <summary>
+        /// Mason Allen
+        /// </summary>
+        /// <param name="newWarehouse"></param>
+        /// <returns></returns>
         public int addWarehouse(Warehouse newWarehouse)
         {
             int success = 0;
@@ -53,7 +58,27 @@ namespace LogicLayer
             }
             catch (Exception)
             {
-                throw new ApplicationException("There was an error saving this vehicle.");
+                throw new ApplicationException("There was an error saving this warehouse.");
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 4/13/17
+        /// </summary>
+        /// <param name="warehouseId"></param>
+        /// <returns></returns>
+        public int deleteWarehouse(int warehouseId)
+        {
+            int success = 0;
+            try
+            {
+                success = WarehouseAccessor.DeleteWarehouse(warehouseId);
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return success;
         }

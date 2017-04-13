@@ -89,6 +89,35 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@STATE", newWarehouse.State);
             cmd.Parameters.AddWithValue("@ZIP", newWarehouse.Zip);
 
+            int warehouseId = 0;
+
+            try
+            {
+                conn.Open();
+                warehouseId = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("There was an error saving to the DB: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return warehouseId;
+        }
+
+        public static int DeleteWarehouse(int warehouseId)
+        {
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_delete_warehouse";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@WAREHOUSE_ID", warehouseId);
+
             int rows = 0;
 
             try
@@ -96,10 +125,9 @@ namespace DataAccessLayer
                 conn.Open();
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw new ApplicationException("There was an error saving to the DB: " + ex.Message);
+                throw;
             }
             finally
             {
