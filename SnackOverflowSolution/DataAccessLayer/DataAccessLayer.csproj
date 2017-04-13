@@ -66,6 +66,8 @@
     <Compile Include="OrderStatusAccessor.cs" />
     <Compile Include="PackageAccessor.cs" />
     <Compile Include="PackageLineAccessor.cs" />
+    <Compile Include="PickupAccessor.cs" />
+    <Compile Include="PickupLineAccessor.cs" />
     <Compile Include="PreferenceAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />
     <Compile Include="ProductLotAccessor.cs" />

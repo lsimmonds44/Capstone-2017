@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,28 +11,27 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/03/01
+    /// 2017/04/13
     /// </summary>
-    public static class OrderStatusAccessor
+    public static class PickupLineAccessor
     {
-
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// 2017/04/13
         /// </summary>
+        /// <param name="pickupId"></param>
         /// <returns></returns>
-        public static List<string> RetrieveAllOrderStatus()
+        public static List<PickupLine> RetrievePickupLinesForPickup(int? pickupId)
         {
-            List<string> status = new List<string>();
+            List<PickupLine> lines = new List<PickupLine>();
 
-            // Creating an sql command object
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_order_status_list";
+            var cmdText = @"sp_retrieve_pickup_line_from_search";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.Parameters.AddWithValue("@PICKUP_ID", pickupId);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
@@ -39,12 +39,17 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                    // Looping through all returned results until there aren't any left
                     while (reader.Read())
                     {
-                        var newStatus = reader.GetString(0);
-
-                        status.Add(newStatus);
+                        var line = new PickupLine()
+                        {
+                            PickupLineId = reader.GetInt32(0),
+                            PickupId = reader.GetInt32(1),
+                            ProductLotId = reader.GetInt32(2),
+                            Quantity = reader.GetInt32(3),
+                            PickupStatus = reader.GetBoolean(4)
+                        };
+                        lines.Add(line);
                     }
                 }
             }
@@ -56,7 +61,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return status;
+            return lines;
         }
+
     }
 }

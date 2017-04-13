@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,28 +11,28 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/03/01
+    /// 2017/04/13
     /// </summary>
-    public static class OrderStatusAccessor
+    public static class PickupAccessor
     {
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// 2017/04/13
         /// </summary>
+        /// <param name="driverId"></param>
         /// <returns></returns>
-        public static List<string> RetrieveAllOrderStatus()
+        public static List<Pickup> RetrievePickupsForDriver(int? driverId)
         {
-            List<string> status = new List<string>();
+            List<Pickup> pickups = new List<Pickup>();
 
-            // Creating an sql command object
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_order_status_list";
+            var cmdText = @"sp_retrieve_pickup_from_search";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.Parameters.AddWithValue("@DRIVER_ID", driverId);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
@@ -39,12 +40,17 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                    // Looping through all returned results until there aren't any left
                     while (reader.Read())
                     {
-                        var newStatus = reader.GetString(0);
-
-                        status.Add(newStatus);
+                        var pickup = new Pickup()
+                        {
+                            PickupId = reader.GetInt32(0),
+                            SupplierId = reader.GetInt32(1),
+                            WarehouseId = reader.GetInt32(2),
+                            DriverId = reader.GetInt32(3),
+                            EmployeeId = reader.GetInt32(4)
+                        };
+                        pickups.Add(pickup);
                     }
                 }
             }
@@ -56,7 +62,7 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return status;
+            return pickups;
         }
     }
 }

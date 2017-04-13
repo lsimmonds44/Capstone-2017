@@ -22,15 +22,15 @@ GO
 print '*** Inserting App_User Test Data ***'
 GO
 INSERT INTO [dbo].[App_User]
-	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active)
+	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active, PREFERRED_ADDRESS_ID)
 VALUES
-	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1),
-	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1),
-	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1), --Password: m0R3$e(ur3
-	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1),
-	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1),
-	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1),
-	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1)
+	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1, 10000),
+	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1, 10000),
+	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1, 10000), --Password: m0R3$e(ur3
+	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, 10000),
+	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, 10000),
+	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, 10000),
+	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, 10000)
 GO
 
 print '' print '*** Inserting Customer Test Data ***'
@@ -390,4 +390,34 @@ VALUES
 	(10004, 10004, 'Tomatoes', 1375, .2, 275.00),
 	(10005, 10002, 'Onion', 250, .5, 125.00),
 	(10005, 10001, 'Orange', 250, .5, 125.00)
+GO
+
+print '*** Inserting Pickup Test Data ***'
+GO
+INSERT INTO [dbo].[PICKUP]
+	(SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID)
+VALUES
+	(10000, 10000, 10000, 10000),
+	(10001, 10000, 10000, 10000),
+	(10000, 10000, 10000, 10000)
+GO
+
+print '*** Inserting Pickup Line Test Data ***'
+GO
+INSERT INTO [dbo].[PICKUP_LINE]
+	(PICKUP_ID, PRODUCT_LOT_ID, QUANTITY, PICK_UP_STATUS)
+VALUES
+	(10000, 10000, 20, 0),
+	(10000, 10001, 23, 1),
+	(10000, 10002, 21, 0),
+	(10001, 10000, 20, 0),
+	(10002, 10000, 20, 1)
+GO
+
+print '' print '*** Inserting User_Address Test Data ***'
+GO
+INSERT INTO [dbo].[USER_ADDRESS]
+	(USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP)
+VALUES
+	(10000, 10002, '123 Street Name', 'Second Street Name', 'City', 'AA', '12345')
 GO
