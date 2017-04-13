@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCPresentationLayer.Models;
+using LogicLayer;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -18,6 +19,7 @@ namespace MVCPresentationLayer.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserCartManager _userCartManager;
 
         public AccountController()
         {
@@ -411,7 +413,7 @@ namespace MVCPresentationLayer.Controllers
         /// <returns></returns>
         public ViewResult ViewCart()
         {
-            
+            //var cartList = _userCartManager.RetrieveUserCart();
             return View();
         }
 
