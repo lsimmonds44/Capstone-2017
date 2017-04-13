@@ -284,7 +284,7 @@ CREATE TABLE [dbo].[DRIVER] (
 	[DRIVER_ID]			   [INT] 		 NOT NULL,
 	[DRIVER_LICENSE_NUMBER][NVARCHAR](9) NOT NULL,
 	[LICENSE_EXPIRATION]   [DATETIME] 	 NOT NULL,
-	[ACTIVE]			   [BIT] 		 NOT NULL,
+	[ACTIVE]			   [BIT] 		 NOT NULL DEFAULT 1,
 
 	CONSTRAINT [PK_DRIVER] PRIMARY KEY ([DRIVER_ID] ASC)
 )
@@ -7764,3 +7764,35 @@ SET CHECKED_OUT = @new_Checked_Out_Status, OUT_IN_TIME_STAMP = GETDATE()
 WHERE (VEHICLE_ID = @vehicleId)
 END
 GO
+
+
+print '' print  '*** Creating procedure sp_retrieve_product_name_from_product_lot_id'
+GO
+CREATE PROCEDURE sp_retrieve_product_name_from_product_lot_id
+(
+	@PRODUCT_LOT_ID[int]
+)
+AS
+	BEGIN
+		SELECT NAME
+		FROM PRODUCT, PRODUCT_LOT
+		WHERE PRODUCT_LOT.PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+		AND PRODUCT.PRODUCT_ID = PRODUCT_LOT.PRODUCT_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_from_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_from_supplier_id
+(
+	@SUPPLIER_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, APP_USER, SUPPLIER
+		WHERE SUPPLIER.USER_ID = APP_USER.USER_ID
+		AND APP_USER.PREFERRED_ADDRESS_ID = USER_ADDRESS.USER_ADDRESS_ID
+	END
+GO
+

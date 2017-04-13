@@ -311,5 +311,45 @@ namespace DataAccessLayer
             return RetrieveProductsToBrowseProducts().FindAll(s => s.SupplierID == supplierId);
         }
 
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Retrieves the name of a product based on the passed in product lot id
+        /// </summary>
+        /// <param name="productLotId"></param>
+        /// <returns></returns>
+        public static string RetrieveProductNameFromProductLotId(int? productLotId)
+        {
+            string productName = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_product_name_from_product_lot_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    productName = reader.GetString(0);
+                    reader.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return productName;
+        }
+
     }
 }

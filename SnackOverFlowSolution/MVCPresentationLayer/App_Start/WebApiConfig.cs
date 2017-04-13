@@ -13,8 +13,14 @@ namespace MVCPresentationLayer
 
             config.Routes.MapHttpRoute(
                 name: "userApi",
-                routeTemplate: "api/user/{userName}/{hash}",
-                defaults: new { controller = "user", userName = RouteParameter.Optional, hash = RouteParameter.Optional }
+                routeTemplate: "api/user/{userName}/{password}",
+                defaults: new { controller = "user", userName = RouteParameter.Optional, password = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "pickupApi",
+                routeTemplate: "api/pickup/{driverId}",
+                defaults: new { controller = "pickup", driverId = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(

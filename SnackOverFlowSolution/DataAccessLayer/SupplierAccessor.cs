@@ -604,5 +604,59 @@ namespace DataAccessLayer
         }
 
 
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Method to retrieve the address of a supplier
+        /// </summary>
+        /// <param name="preferredAddressId"></param>
+        /// <returns>The UserAddress Object for the given supplier</returns>
+        public static UserAddress RetrieveSuppliersUserAddress(int? supplierId)
+        {
+
+            UserAddress userAddress = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_address_from_supplier_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userAddress = new UserAddress()
+                    {
+                        UserAddressId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        AddressLineOne = reader.GetString(2),
+                        AddressLineTwo = reader.GetString(3),
+                        City = reader.GetString(4),
+                        State = reader.GetString(5),
+                        Zip = reader.GetString(6)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return userAddress;
+        }
+
+
     }
 }
