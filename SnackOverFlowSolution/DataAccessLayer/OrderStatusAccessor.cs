@@ -11,40 +11,45 @@ namespace DataAccessLayer
     /// <summary>
     /// Robert Forbes
     /// 2017/03/01
+    /// 
+    /// Class to handle database interactions involving product order statuses.
     /// </summary>
     public static class OrderStatusAccessor
     {
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// Created: 2017/03/01
+        /// 
+        /// Retrieves all order statuses from the database.
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>List of all order statuses.</returns>
         public static List<string> RetrieveAllOrderStatus()
         {
-            List<string> status = new List<string>();
+            var orderStatuses = new List<string>();
 
-            // Creating an sql command object
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_order_status_list";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-
                 if (reader.HasRows)
                 {
-                    // Looping through all returned results until there aren't any left
                     while (reader.Read())
                     {
-                        var newStatus = reader.GetString(0);
-
-                        status.Add(newStatus);
+                        orderStatuses.Add(reader.GetString(0));
                     }
                 }
             }
@@ -56,7 +61,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return status;
+
+            return orderStatuses;
         }
     }
 }

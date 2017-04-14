@@ -46,7 +46,7 @@ namespace LogicLayer
             List<OrderLine> result = null;
             try
             {
-                result = OrderLineAccessor.RetrieveOrderLinesByOrderId(ProductOrderId, OrderAmount);
+                result = OrderLineAccessor.RetrieveOrderLinesByProductOrderId(ProductOrderId, OrderAmount);
             }
             catch (Exception)
             {
