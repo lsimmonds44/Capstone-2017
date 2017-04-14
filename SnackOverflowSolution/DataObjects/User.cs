@@ -12,7 +12,11 @@ namespace DataObjects
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String Phone { get; set; }
-        public int? PreferredAddressId { get; set; }
+        public string AddressLineOne { get; set; }
+        public string AddressLineTwo { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
         public String EmailAddress { get; set; }
         public bool EmailPreferences { get; set; }
         public String UserName { get; set; }

@@ -60,7 +60,7 @@ namespace WpfPresentationLayer
         /// </summary>
         private void displayCustomerInfo()
         {
-            UserAddress userAddress;
+            //UserAddress userAddress;
             try
             {
                 _cCUser = _userManager.RetrieveUser(_cCustomer.UserId);
@@ -72,8 +72,9 @@ namespace WpfPresentationLayer
             }
             try
             {
-                userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId);
-                txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
+                //userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId.Value);
+                txtUserAddress.Text = (_cCUser.AddressLineOne ?? "") + "\n" + (_cCUser.AddressLineTwo ?? "") + "\n" + (_cCUser.City ?? "") + " " + (_cCUser.State ?? "") + " " + (_cCUser.Zip ?? "");
+                //txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
             }
             catch (Exception)
             {
@@ -108,7 +109,7 @@ namespace WpfPresentationLayer
                 valid = false;
                 MessageBox.Show("A delivery type must be selected.");
             }
-            if (_cCUser.PreferredAddressId == null)
+            if (_cCUser.AddressLineOne == null || _cCUser.City == null)
             {
                 valid = false;
                 MessageBox.Show("Customer does not have an address. Go to user tab and resolve the issue.");
@@ -129,7 +130,6 @@ namespace WpfPresentationLayer
                 order.DateExpected = dpExpectedDate.SelectedDate;
                 order.Discount = (decimal)0.0;
                 order.OrderStatusId = "Open";
-                order.UserAddressId = _cCUser.PreferredAddressId;
                 order.HasArrived = false;
             }
 

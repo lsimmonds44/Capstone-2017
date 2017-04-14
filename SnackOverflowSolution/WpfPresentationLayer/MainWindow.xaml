@@ -109,9 +109,11 @@
                             <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*"/>
                             <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
                             <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
-                            <DataGridTextColumn Header="Preferred Address ID" Binding="{Binding PreferredAddressId}" Width="*"/>
+                            <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                            <DataGridTextColumn Header="State" Binding="{Binding State}" Width="*"/>
+                            <DataGridTextColumn Header="Zip" Binding="{Binding Zip}" Width="*"/>
                             <DataGridTextColumn Header="Email Address" Binding="{Binding EmailAddress}" Width="*"/>
-                            <DataGridTextColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="*"/>
                         </DataGrid.Columns>
