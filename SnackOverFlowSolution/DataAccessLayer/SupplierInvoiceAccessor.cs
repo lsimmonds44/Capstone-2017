@@ -339,6 +339,64 @@ namespace DataAccessLayer
             return count;
         }
 
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/04/14
+        /// 
+        /// Retrieve the invoices by the supplier Id
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns>List of the supplier invoices</returns>
+        public static List<SupplierInvoice> RetrieveSupplierInvoicesBySupplierID(int supplierID)
+        {
+            List<SupplierInvoice> invoices = new List<SupplierInvoice>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_supplier_invoice_list_by_supplier_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierID);
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SupplierInvoice supplierInvoice = new SupplierInvoice
+                        {
+                            SupplierInvoiceId = reader.GetInt32(0),
+                            SupplierId = reader.GetInt32(1),
+                            InvoiceDate = reader.GetDateTime(2),
+                            SubTotal = reader.GetDecimal(3),
+                            TaxAmount = reader.GetDecimal(4),
+                            Total = reader.GetDecimal(5),
+                            AmountPaid = reader.GetDecimal(6),
+                            Approved = reader.GetBoolean(7),
+                            Active = reader.GetBoolean(8)
+                        };
+                        invoices.Add(supplierInvoice);
+                    }
+                }
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+            return invoices;
+        }
+        
     }
 
 }

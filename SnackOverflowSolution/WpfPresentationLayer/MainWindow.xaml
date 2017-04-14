@@ -48,7 +48,7 @@
             <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <PasswordBox Name="pwbPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" KeyDown="pwbPassword_KeyDown"/>
             <Label Name="lblPassword" Grid.Column="3" Grid.Row="1" Content="Password" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Padding="10 0" FontSize="10"  IsDefault="True" Click="btnLogin_Click" Margin="0,4,0,0"/>
+            <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Padding="10 0" FontSize="10"  IsDefault="True" Click="btnLogin_Click" Margin="0.2,4,-0.4,24.6" Grid.RowSpan="2"/>
         </Grid>
         <TabControl Name="tabSetMain" Grid.Row="2" >
 
@@ -616,7 +616,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabSupplier_Selected">
+            <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabMyAccount_Selected" >
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -627,23 +627,28 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height=".5*"/>
                             <RowDefinition/>
+                            <RowDefinition Height=".5*"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".2*"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width=".2*"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width="98*"/>
+                            <ColumnDefinition Width="494*" />
+                            <ColumnDefinition Width="98*"/>
+                            <ColumnDefinition Width="494*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="91*"/>
                         </Grid.ColumnDefinitions>
+                        <Label Name="lblMyInvoices" Grid.Row="2" FontSize="20" VerticalAlignment="Bottom" Content="My Invoices" Grid.ColumnSpan="2" Margin="98,0,0,0.4"/>
 
-                        <Label Name="lblApplicationStatus" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" Content="Application Status"/>
-                        <Grid Grid.Column="1" Grid.Row="1">
+                        <DataGrid Name="dgMyInvoices" Grid.Row="2" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" MouseDoubleClick="dgUserInvoices_MouseDoubleClick" Grid.ColumnSpan="4" Margin="98,64.4,2,129.4" Grid.RowSpan="3" />
+
+                        <Label Name="lblApplicationStatus" FontSize="20" VerticalAlignment="Bottom" Content="Application Status" Grid.ColumnSpan="2" Margin="98,0,0,0"/>
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="98,0,0,64.4" Grid.RowSpan="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>

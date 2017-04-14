@@ -5038,6 +5038,20 @@ AS
 	END
 GO
 
+print '' print '*** Creating procedure sp_retrieve_supplier_invoice_list_by_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_supplier_invoice_list_by_supplier_id
+(
+	@Supplier_Id [INT]
+)
+AS
+	BEGIN
+		SELECT SUPPLIER_INVOICE_ID, SUPPLIER_ID, INVOICE_DATE, SUB_TOTAL, TAX_AMOUNT, TOTAL, AMOUNT_PAID, APPROVED, ACTIVE
+		FROM supplier_invoice
+		WHERE SUPPLIER_ID = @Supplier_Id
+	END
+GO
+
 print '' print '*** Creating procedure sp_retrieve_supplier_invoice_lines_by_supplier_invoice_id'
 GO
 CREATE PROCEDURE sp_retrieve_supplier_invoice_lines_by_supplier_invoice_id

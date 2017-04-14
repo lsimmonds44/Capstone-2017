@@ -293,6 +293,7 @@ namespace WpfPresentationLayer
                         txtUsername.Visibility = Visibility.Collapsed;
                         pwbPassword.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
+                        tabCommercialCustomer.Focus();
                         pwbPassword.Password = "";
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
@@ -300,6 +301,10 @@ namespace WpfPresentationLayer
                         try
                         {
                             _user = _userManager.userInstance;
+                            if (tabMyAccount.IsFocused)
+                            {
+                                tabMyAccount_Selected(sender, e);
+                            }
 
                             if ("ADMIN" == _user.UserName)
                             {
@@ -359,6 +364,8 @@ namespace WpfPresentationLayer
                 _supplier = null;
                 _charity = null;
                 _commercialCustomer = null;
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
                 btnSupplierApplicationStatusCheck.Content = "Check Supplier Status";
                 btnCharityApplicationStatusCheck.Content = "Check Charity Status";
                 btnCommercialCustomerApplicationStatusCheck.Content = "Check Commerical Status";
@@ -1480,6 +1487,41 @@ namespace WpfPresentationLayer
             }
         }
 
+        private void tabMyAccount_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+                dgMyInvoices.Visibility = Visibility.Visible;
+                lblMyInvoices.Visibility = Visibility.Visible;
+            }
+            catch 
+            {
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
+            }
+
+            if (_supplier != null)
+            {
+                try
+                {
+                    _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoicesBySupplierId(_supplier.SupplierID);
+                    dgMyInvoices.ItemsSource = _supplierInvoiceList;
+                }
+                catch (Exception ex)
+                {
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Christian Lopez
         /// 2017/03/22
@@ -1505,6 +1547,35 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select an invoice to view.");
             }
         }
+
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/03/22
+        /// 
+        /// Handles what happens if the datagrid in my account is double clicked. Launches the detail window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>Last modified by Christian Lopez 2017/03/23</remarks>
+        private void dgUserInvoices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!(dgMyInvoices.SelectedIndex < 0))
+            {
+                var MyInvoicesDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgMyInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager, "ReadOnly");
+                var result = MyInvoicesDetail.ShowDialog();
+                if (result == true)
+                {
+                    tabSupplierInvoice_Selected(sender, e);
+                }
+            }
+            else
+            {
+
+                MessageBox.Show("Please select an invoice to view. " + dgMyInvoices.SelectedIndex);
+            }
+        }
+
 
         /// <summary>
         /// Christian Lopez
@@ -2037,5 +2108,46 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select a Commercial account to approve.");
             }
         }
+
+        private void refreshUserInvoices()
+        {
+
+            try
+            {
+                _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+            }
+            catch
+            {
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
+            }
+
+            if (_supplier != null)
+            {
+                try
+                {
+                    _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoicesBySupplierId(_supplier.SupplierID);
+                    dgMyInvoices.ItemsSource = _supplierInvoiceList;
+                }
+                catch (Exception ex)
+                {
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void tabMyAccount_GotFocus(object sender, RoutedEventArgs e)
+        {
+            refreshUserInvoices();
+        }
+        
+
     } // end of class
 } // end of namespace 
