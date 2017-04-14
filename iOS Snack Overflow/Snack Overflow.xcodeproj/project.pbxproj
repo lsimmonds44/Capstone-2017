@@ -17,6 +17,7 @@
 		614B2EE51E8DFAAB006EF1FA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EE41E8DFAAB006EF1FA /* HomeVC.swift */; };
 		614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EE71E8E08C8006EF1FA /* UserManager.swift */; };
 		614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */; };
+		614D2F131EA111EE00E6D8A3 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614D2F121EA111EE00E6D8A3 /* AppUser.swift */; };
 		61F7C4521E97FE900048D945 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C4511E97FE900048D945 /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		614B2EE41E8DFAAB006EF1FA /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		614B2EE71E8E08C8006EF1FA /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testUserManager.swift; sourceTree = "<group>"; };
+		614D2F121EA111EE00E6D8A3 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		61F7C4511E97FE900048D945 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				614B2EE61E8E088C006EF1FA /* Models */,
 				614B2EE91E8E0EA0006EF1FA /* TestModels */,
 				614B2EBA1E8DF36C006EF1FA /* Main.storyboard */,
+				614D2F111EA111C200E6D8A3 /* DTOs */,
 				614B2EBD1E8DF36C006EF1FA /* Assets.xcassets */,
 				614B2EBF1E8DF36C006EF1FA /* LaunchScreen.storyboard */,
 				614B2EC21E8DF36C006EF1FA /* Info.plist */,
@@ -151,6 +154,14 @@
 				614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */,
 			);
 			name = TestModels;
+			sourceTree = "<group>";
+		};
+		614D2F111EA111C200E6D8A3 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				614D2F121EA111EE00E6D8A3 /* AppUser.swift */,
+			);
+			name = DTOs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				614D2F131EA111EE00E6D8A3 /* AppUser.swift in Sources */,
 				614B2EE51E8DFAAB006EF1FA /* HomeVC.swift in Sources */,
 				614B2EB91E8DF36C006EF1FA /* LoginVC.swift in Sources */,
 				614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */,

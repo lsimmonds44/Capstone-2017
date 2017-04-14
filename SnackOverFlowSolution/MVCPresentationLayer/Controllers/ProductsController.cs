@@ -36,6 +36,8 @@ namespace MVCPresentationLayer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var product = _productManager.RetrieveProductsToBrowseProducts().Find(i => i.ProductId == id && i.SupplierID == supplierId);
+            var gradeOptionList = _productManager.RetrieveGradeForProduct((int)id);
+            product.GradeOptions = gradeOptionList;
             if (product == null)
             {
                 return HttpNotFound();

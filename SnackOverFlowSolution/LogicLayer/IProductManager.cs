@@ -33,5 +33,6 @@ namespace LogicLayer
         List<Product> RetrieveProducts();
 
         List<BrowseProductViewModel> RetrieveProductsBySupplierId(int id);
+        List<ProductGradePrice> RetrieveGradeForProduct(int productId);
     }
 }

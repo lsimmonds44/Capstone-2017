@@ -6,7 +6,7 @@
 
 <h2>Check out now</h2>
 <p>Please enter your details, and we'll ship your goods right away!</p>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Checkout", "Cart"))
 {
     @Html.ValidationSummary()
     <h3>Ship to</h3>
@@ -29,15 +29,6 @@
             </div>
         }
     }
-
-
-    <h3>Options</h3>
-    <div class="checkbox">
-        <label>
-            @Html.EditorFor(x => x.GiftWrap)
-            Gift wrap these items
-        </label>
-    </div>
     <div class="text-center">
         <input class="btn btn-primary" type="submit" value="Complete order"/>
     </div>

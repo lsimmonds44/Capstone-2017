@@ -21,5 +21,12 @@ namespace DataObjects
         public decimal? ScaledProductDiscount { get; set; }
         public decimal? FlatCategoryDiscount { get; set; }
         public decimal? ScaledCategoryDiscount { get; set; }
+        public decimal Total
+        {
+            get
+            {
+                return (decimal)BasePrice * (ScaledCategoryDiscount??1) * (ScaledProductDiscount??1) - (FlatProductDiscount??0) - (FlatCategoryDiscount??0);
+            }
+        }
     }
 }
