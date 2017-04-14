@@ -82,10 +82,12 @@ namespace DataAccessLayer
                         OrderLine orderLine = new OrderLine();
                         orderLine.OrderLineID = reader.GetInt32(0);
                         orderLine.ProductOrderID = reader.GetInt32(1);
+
                         if (!reader.IsDBNull(2))
                         {
                             orderLine.ProductID = reader.GetInt32(2);
                         }
+
                         orderLine.ProductName = reader.GetString(3);
                         orderLine.Quantity = reader.GetInt32(4);
                         orderLine.GradeID = reader.GetString(5);
