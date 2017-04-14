@@ -4211,6 +4211,20 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_employee_by_user_id'
+GO
+CREATE PROCEDURE sp_retrieve_employee_by_user_id
+(
+	@USER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT EMPLOYEE_ID, USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH
+		FROM employee
+		WHERE USER_ID = @USER_ID
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_employee_by_username'
 GO
 CREATE PROCEDURE sp_retrieve_employee_by_username

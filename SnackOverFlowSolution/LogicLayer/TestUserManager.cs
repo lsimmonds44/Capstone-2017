@@ -149,5 +149,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public bool[] GetUserRoles(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

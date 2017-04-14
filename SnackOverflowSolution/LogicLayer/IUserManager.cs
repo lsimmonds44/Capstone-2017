@@ -26,5 +26,7 @@ namespace LogicLayer
 
         User RetrieveUser(int userId);
         User AuthenticateWebUser(String email, String password);
+
+        bool[] GetUserRoles(int userId);
     }
 }

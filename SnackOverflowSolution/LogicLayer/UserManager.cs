@@ -406,5 +406,39 @@ namespace LogicLayer
             if (number.Length == 10) { return true; }
             else { return false; }
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/14
+        /// 
+        /// sees what tables the userId shows up in, and sets
+        /// a bool[] in the order of customer, employee, supplier
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool[] GetUserRoles(int userId)
+        {
+            bool[] roles = new bool[3];
+            CommercialCustomer cust = null;
+            Employee emp = null;
+            Supplier supp = null;
+            try
+            {
+                cust = CustomerAccessor.RetrieveCommercialCustomerByUserId(userId);
+                emp = EmployeeAccessor.RetrieveEmployeeByUserId(userId);
+                supp = SupplierAccessor.RetrieveSupplierByUserId(userId);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            roles[0] = (cust != null);
+            roles[1] = (emp != null);
+            roles[2] = (supp != null);
+
+            return roles;
+        }
     }
 }

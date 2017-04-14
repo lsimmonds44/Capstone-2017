@@ -340,5 +340,52 @@ namespace DataAccessLayer
 
             return employee;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/14
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static Employee RetrieveEmployeeByUserId(int userId)
+        {
+            Employee employee = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_employee_by_user_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@USER_ID", userId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    employee = new Employee
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        Salary = reader.IsDBNull(2) ? (decimal?)null : reader.GetDecimal(2),
+                        Active = reader.GetBoolean(3),
+                        DateOfBirth = reader.GetDateTime(4)
+                    };
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return employee;
+        }
     }
 }

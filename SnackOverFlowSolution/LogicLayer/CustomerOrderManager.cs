@@ -11,10 +11,11 @@ namespace LogicLayer
         /// <summary>
         ///     Created by Michael Takrama
         ///     04/13/17
+        /// 
         ///     Processes Orders from the MVC Layer
         /// </summary>
         /// <param name="cart">Cart object containing OrderLine Items</param>
-        /// <param name="shippingDetails">Constains shipping Details</param>
+        /// <param name="shippingDetails">Contains shipping Details</param>
         public bool ProcessOrder(Cart cart, ShippingDetails shippingDetails)
         {
             var orderId = 0;
@@ -53,9 +54,9 @@ namespace LogicLayer
                         ProductID = o.Product.ProductId,
                         Quantity = o.Quantity,
                         GradeID = o.Product.GradeId,
-                        Price = o.Product.Price,
+                        Price = (decimal)o.Product.Price,
                         UnitDiscount = 0 //temporaire
-                    }).All(lineToWrite => 1 == OrderLineAccessor.CreateOrderLine(lineToWrite))
+                    }).All( lineToWrite => 1 == OrderLineAccessor.CreateOrderLine(lineToWrite) )
                 )
                 {
                     Debug.WriteLine("CustomerOrderManager: Error during order line writing");
@@ -73,8 +74,7 @@ namespace LogicLayer
             try
             {
                 // lookup user id of customer
-                // create address using userid
-                // update order to include address
+                // update user address in user table
             }
             catch (Exception e)
             {

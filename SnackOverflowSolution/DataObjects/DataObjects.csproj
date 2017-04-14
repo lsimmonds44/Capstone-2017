@@ -102,6 +102,8 @@
     <Compile Include="PickupLine.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductGradePrice.cs" />
+    <Compile Include="SupplierProductLot.cs" />
     <Compile Include="ProductLot.cs" />
     <Compile Include="ProductOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
