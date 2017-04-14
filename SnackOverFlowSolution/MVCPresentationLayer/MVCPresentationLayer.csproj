@@ -378,6 +378,7 @@
     <Content Include="Views\CompanyOrderWithLines\Details.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Edit.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Index.cshtml" />
+    <Content Include="Views\Account\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

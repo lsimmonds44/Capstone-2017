@@ -9,6 +9,7 @@ namespace LogicLayer
 {
     public interface IUserCartManager
     {
-        List<UserCartLine> RetrieveUserCart(int userID);
+        List<UserCartLine> RetrieveUserCart(String userID);
+        int RemoveFromCart(int productId, string gradeId, int quantity, int userId);
     }
 }
