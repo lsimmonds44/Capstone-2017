@@ -7,38 +7,38 @@ using System.Collections.Generic;
 namespace LogicLayerTestProject
 {
     /// <summary>
-    /// Status Manager Unit Test Class
+    /// Order Status Manager Unit Test Class
     /// Created by Mason Allen
     /// Created on 4/13/17
     /// </summary>
     [TestClass]
-    public class StatusManagerTests
+    public class OrderStatusManagerTests
     {
         //declare private variables
-        private StatusManager _statusManager;
+        private OrderStatusManager _orderStatusManager;
 
         [TestInitialize]
         public void TestInitialize()
         {
             //instantiate private variables
-            _statusManager = new StatusManager();
+            _orderStatusManager = new OrderStatusManager();
         }
 
         [TestMethod]
-        public void TestRetrieveStatusList()
+        public void TestRetrieveOrderStatusList()
         {
             //arrange
             //create new object
-            List<string> statusList;
             //set expected result variable
+            List<string> orderStatusList;
 
             //act
             //execute method test, set to variable to test
-            statusList = _statusManager.RetrieveStatusList();
+            orderStatusList = _orderStatusManager.RetrieveAllOrderStatus();
 
             //assert
             //compare result to expected result
-            Assert.IsTrue(statusList != null);
+            Assert.IsTrue(orderStatusList != null);
         }
 
         [TestCleanup]

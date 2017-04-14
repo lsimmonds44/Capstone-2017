@@ -7,38 +7,38 @@ using System.Collections.Generic;
 namespace LogicLayerTestProject
 {
     /// <summary>
-    /// Status Manager Unit Test Class
+    /// Delivery Type Manager Unit Test Class
     /// Created by Mason Allen
     /// Created on 4/13/17
     /// </summary>
     [TestClass]
-    public class StatusManagerTests
+    public class DeliveryTypeManagerTests
     {
         //declare private variables
-        private StatusManager _statusManager;
+        private DeliveryTypeManager _deliveryTypeManager;
 
         [TestInitialize]
         public void TestInitialize()
         {
             //instantiate private variables
-            _statusManager = new StatusManager();
+            _deliveryTypeManager = new DeliveryTypeManager();
         }
 
         [TestMethod]
-        public void TestRetrieveStatusList()
+        public void TestRetrieveDeliveryTypeList()
         {
             //arrange
             //create new object
-            List<string> statusList;
             //set expected result variable
+            List<string> deliveryTypeList;
 
             //act
             //execute method test, set to variable to test
-            statusList = _statusManager.RetrieveStatusList();
+            deliveryTypeList = _deliveryTypeManager.RetrieveDeliveryTypeList();
 
             //assert
             //compare result to expected result
-            Assert.IsTrue(statusList != null);
+            Assert.IsTrue(deliveryTypeList != null);
         }
 
         [TestCleanup]

@@ -15,7 +15,7 @@ namespace LogicLayerTestProject
     public class GradeManagerTests
     {
         //declare private variables
-        GradeManager _gradeManager;
+        private GradeManager _gradeManager;
         string[] gradeList;
 
         [TestInitialize]
@@ -34,7 +34,7 @@ namespace LogicLayerTestProject
 
             //act
             //execute method test, set to variable to test
-            gradeList = _gradeManager.RetrieveGradeList();
+            gradeList = _gradeManager.RetrieveGradeList().ToArray();
 
             //assert
             //compare result to expected result

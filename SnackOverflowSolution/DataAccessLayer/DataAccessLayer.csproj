@@ -71,11 +71,13 @@
     <Compile Include="PickupLineAccessor.cs" />
     <Compile Include="PreferenceAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />
+    <Compile Include="SupplierProductLotAccessor.cs" />
     <Compile Include="ProductLotAccessor.cs" />
     <Compile Include="ProductOrderAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairAccessor.cs" />
     <Compile Include="RepairLineAccessor.cs" />
+    <Compile Include="RouteAccessor.cs" />
     <Compile Include="StatusAccessor.cs" />
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInventoryAccessor.cs" />

@@ -171,7 +171,9 @@ INSERT INTO [dbo].[Status]
 VALUES
 	("Open"),
 	("Ready For Shipment"),
-	("Ready For Assignment")
+	("Ready For Assignment"),
+	("Ready For Delivery"),
+	("Delivered")
 GO
 
 print '*** Inserting Order_Status Test Data ***'
@@ -420,4 +422,81 @@ INSERT INTO [dbo].[USER_ADDRESS]
 	(USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP)
 VALUES
 	(10000, 10002, '123 Street Name', 'Second Street Name', 'City', 'AA', '12345')
+GO
+
+
+print '' print '*** Inserting User Cart Line Test Data ***'
+INSERT INTO [dbo].[USER_CART_LINE]
+    (PRODUCT_ID, GRADE_ID, QUANTITY, USER_ID)
+VALUES
+    (10000,'GRADE A',5,10003)
+GO
+
+print '*** Inserting Route Test Data ***'
+GO
+INSERT INTO [dbo].[ROUTE]
+	(DRIVER_ID, VEHICLE_ID, ASSIGNED_DATE)
+VALUES
+	(10000, 10000, '2017-04-20'),
+	(10000, 10000, '2017-04-13'),
+	(10000, 10000, '2017-04-10')
+GO
+
+print '*** Inserting Delivery Test Data ***'
+GO
+INSERT INTO [dbo].[DELIVERY]
+	(ROUTE_ID, DELIVERY_DATE, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID)
+VALUES
+	(10000, '2017-04-20', "Ready For Delivery", "Drop off", 10000),
+	(10000, '2017-04-20', "Ready For Delivery", "Drop off", 10001),
+	(10001, '2017-04-13', "Ready For Delivery", "Drop off", 10002),
+	(10001, '2017-04-13', "Ready For Delivery", "Drop off", 10003),
+	(10002, '2017-04-10', "Ready For Delivery", "Drop off", 10003),
+	(10002, '2017-04-10', "Ready For Delivery", "Drop off", 10004)
+GO
+
+print '*** Inserting Package Test Data ***'
+GO
+INSERT INTO [dbo].[PACKAGE]
+	(DELIVERY_ID, ORDER_ID)
+VALUES
+	(10000, 10000),
+	(10000, 10000),
+	(10001, 10001),
+	(10002, 10002),
+	(10002, 10002),
+	(10002, 10002),
+	(10003, 10003),
+	(10003, 10003),
+	(10004, 10003),
+	(10005, 10004),
+	(10005, 10004),
+	(10005, 10004)
+GO
+
+
+print '*** Inserting Package Line Test Data ***'
+GO
+INSERT INTO [dbo].[PACKAGE_LINE]
+	(PACKAGE_ID, PRODUCT_LOT_ID, QUANTITY, PRICE_PAID)
+VALUES
+	(10000, 10000, 5, 10.50),
+	(10001, 10001, 5, 10.50),
+	(10002, 10000, 5, 10.50),
+	(10003, 10002, 5, 10.50),
+	(10004, 10000, 5, 10.50),
+	(10005, 10000, 5, 10.50),
+	(10006, 10003, 5, 10.50),
+	(10007, 10000, 5, 10.50),
+	(10008, 10000, 5, 10.50),
+	(10009, 10000, 5, 10.50),
+	(10010, 10002, 5, 10.50),
+	(10011, 10000, 5, 10.50),
+	(10010, 10000, 5, 10.50),
+	(10001, 10001, 5, 10.50),
+	(10002, 10000, 5, 10.50),
+	(10003, 10000, 5, 10.50),
+	(10004, 10002, 5, 10.50),
+	(10005, 10000, 5, 10.50)
+	
 GO

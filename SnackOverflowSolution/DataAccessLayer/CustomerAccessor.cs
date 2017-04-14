@@ -105,7 +105,7 @@ namespace DataAccessLayer
                         CommercialId = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        ApprovedBy = reader.IsDBNull(3) ? null : (int?)reader.GetInt32(3),
+                        ApprovedBy = reader.IsDBNull(3) ? (int?)null : reader.GetInt32(3),
                         FederalTaxId = reader.GetInt32(4),
                         Active = reader.GetBoolean(5)
                     };

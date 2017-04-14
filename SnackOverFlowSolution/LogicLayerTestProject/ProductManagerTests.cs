@@ -39,14 +39,6 @@ namespace LogicLayerTestProject
             removeTestProductData();
         }
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-            //
-            // TODO: Add test logic here
-            //
-        }
-
         [TestCleanup]
         public void TestCleanup()
         {

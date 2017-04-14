@@ -71,7 +71,7 @@ namespace MVCPresentationLayer.Controllers
             if (!ModelState.IsValid) 
                 return View(shippingDetails);
 
-            _customerOrderManager.ProcessOrder(cart, shippingDetails);
+            _customerOrderManager.ProcessOrder(cart, shippingDetails); //returns bool
 
 
 

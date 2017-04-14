@@ -17,9 +17,9 @@ namespace LogicLayer
         /// Returns a list of grades for a combo box
         /// </summary>
         /// <returns></returns>
-        public string[] RetrieveGradeList()
+        public List<string> RetrieveGradeList()
         {
-            string[] grades = null;
+            List<string> grades = null;
             try
             {
                 grades = GradeAccessor.RetrieveGradeList();

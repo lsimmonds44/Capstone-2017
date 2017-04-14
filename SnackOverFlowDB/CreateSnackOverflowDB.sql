@@ -5118,12 +5118,12 @@ print '' print  '*** Creating procedure sp_retrieve_cart_for_user'
 GO
 CREATE PROCEDURE sp_retrieve_cart_for_user
 (
-	@USER_ID[INT]
+	@USER_NAME[NVARCHAR](50)
 )
 AS
 	BEGIN
 		SELECT user_cart_line.PRODUCT_ID, user_cart_line.USER_ID, user_cart_line.QUANTITY, user_cart_line.GRADE_ID, PRODUCT.NAME,
-		PRODUCT_GRADE_PRICE.PRICE * user_cart_line.QUANTITY AS total,
+		PRODUCT_GRADE_PRICE.PRICE,
 		DEALS_FOR_PRODUCT.TOTAL_AMOUNT AS FLAT_PRODUCT_DISCOUNT,
 		DEALS_FOR_PRODUCT.TOTAL_PERCENT AS SCALED_PRODUCT_DISCOUNT,
 		DEALS_FOR_CATEGORY.TOTAL_AMOUNT AS FLAT_CATEGORY_DISCOUNT,
@@ -5152,7 +5152,9 @@ AS
 			GROUP BY PRODUCT_CATEGORY.PRODUCT_ID
 		) AS DEALS_FOR_CATEGORY
 		ON DEALS_FOR_PRODUCT.PRODUCT_ID = PRODUCT.PRODUCT_ID
-        WHERE user_cart_line.USER_ID = @USER_ID
+        INNER JOIN APP_USER
+        ON user_cart_line.USER_ID = APP_USER.USER_ID
+        WHERE APP_USER.USER_NAME = @USER_NAME
 	END
 GO
 
@@ -6815,7 +6817,7 @@ print '' print  '*** Creating procedure sp_update_employee'
 GO
 CREATE PROCEDURE sp_update_employee
 (
-	@old_EMPLOYEE_ID[INT],
+	@EMPLOYEE_ID[INT],
 	@old_USER_ID[INT],
 	@new_USER_ID[INT],
 	@old_SALARY[DECIMAL](8,2)=null,
@@ -6829,7 +6831,7 @@ AS
 	BEGIN
 		UPDATE employee
 		SET USER_ID = @new_USER_ID, SALARY = @new_SALARY, ACTIVE = @new_ACTIVE, DATE_OF_BIRTH = @new_DATE_OF_BIRTH
-		WHERE (EMPLOYEE_ID = @old_EMPLOYEE_ID)
+		WHERE (EMPLOYEE_ID = @EMPLOYEE_ID)
 		AND (USER_ID = @old_USER_ID)
 		AND (SALARY = @old_SALARY OR ISNULL(SALARY, @old_SALARY) IS NULL)
 		AND (ACTIVE = @old_ACTIVE)
@@ -6922,7 +6924,7 @@ print '' print  '*** Creating procedure sp_update_location'
 GO
 CREATE PROCEDURE sp_update_location
 (
-	@old_LOCATION_ID[INT],
+	@LOCATION_ID[INT],
 	@old_DESCRIPTION[NVARCHAR](250),
 	@new_DESCRIPTION[NVARCHAR](250),
 	@old_IS_ACTIVE[BIT],
@@ -6932,7 +6934,7 @@ AS
 	BEGIN
 		UPDATE location
 		SET DESCRIPTION = @new_DESCRIPTION, IS_ACTIVE = @new_IS_ACTIVE
-		WHERE (LOCATION_ID = @old_LOCATION_ID)
+		WHERE (LOCATION_ID = @LOCATION_ID)
 		AND (DESCRIPTION = @old_DESCRIPTION)
 		AND (IS_ACTIVE = @old_IS_ACTIVE)
 		RETURN @@ROWCOUNT
@@ -7796,3 +7798,50 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_routes_for_driver_after_date'
+GO
+CREATE PROCEDURE sp_retrieve_routes_for_driver_after_date
+(
+	@DRIVER_ID[INT],
+	@TODAYS_DATE[DATETIME]
+)
+AS
+	BEGIN
+		SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+		FROM ROUTE
+		WHERE DRIVER_ID = @DRIVER_ID
+		AND cast(ASSIGNED_DATE as date) >= cast(@TODAYS_DATE as date)
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_for_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_for_delivery
+(
+	@DELIVERY_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS.USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, DELIVERY, PRODUCT_ORDER
+		WHERE USER_ADDRESS.USER_ADDRESS_ID = PRODUCT_ORDER.USER_ADDRESS_ID
+		AND DELIVERY.ORDER_ID = PRODUCT_ORDER.ORDER_ID
+		AND DELIVERY.DELIVERY_ID = @DELIVERY_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_vehicle_from_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_vehicle_from_delivery
+(
+@DELIVERY_ID[INT]
+)
+AS
+	BEGIN
+		SELECT VEHICLE.VEHICLE_ID, VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID
+		FROM vehicle, delivery, route
+		WHERE DELIVERY.DELIVERY_ID = @DELIVERY_ID
+		AND DELIVERY.ROUTE_ID = ROUTE.ROUTE_ID
+		AND ROUTE.VEHICLE_ID = VEHICLE.VEHICLE_ID
+	END
+GO

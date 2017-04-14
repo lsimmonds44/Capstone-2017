@@ -4,41 +4,42 @@ using DataObjects;
 using LogicLayer;
 using System.Collections.Generic;
 
+
 namespace LogicLayerTestProject
 {
     /// <summary>
-    /// Status Manager Unit Test Class
+    /// Vehicle Type Manager Unit Test Class
     /// Created by Mason Allen
     /// Created on 4/13/17
     /// </summary>
     [TestClass]
-    public class StatusManagerTests
+    public class VehicleTypeManagerTests
     {
         //declare private variables
-        private StatusManager _statusManager;
+        private VehicleTypeManager _vehicleTypeManager;
 
         [TestInitialize]
         public void TestInitialize()
         {
             //instantiate private variables
-            _statusManager = new StatusManager();
+            _vehicleTypeManager = new VehicleTypeManager();
         }
 
         [TestMethod]
-        public void TestRetrieveStatusList()
+        public void TestRetrieveVehicleTypeList()
         {
             //arrange
             //create new object
-            List<string> statusList;
             //set expected result variable
+            List<VehicleType> vehicleTypeList;
 
             //act
             //execute method test, set to variable to test
-            statusList = _statusManager.RetrieveStatusList();
+            vehicleTypeList = _vehicleTypeManager.retreiveVehicleTypeList();
 
             //assert
             //compare result to expected result
-            Assert.IsTrue(statusList != null);
+            Assert.IsTrue(vehicleTypeList != null);
         }
 
         [TestCleanup]

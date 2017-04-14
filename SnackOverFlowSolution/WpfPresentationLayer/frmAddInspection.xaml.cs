@@ -50,13 +50,20 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// 2017/02/22
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Changed string array of grades to list of string of grades.
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Window_Initialized(object sender, EventArgs e)
         {
             try
             {
-                string[] grades = _gradeManager.RetrieveGradeList();
+                var grades = _gradeManager.RetrieveGradeList();
                 cboGradeSelect.ItemsSource = grades;
             }
             catch (Exception ex)
@@ -96,10 +103,17 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/16
+        /// Created: 2017/02/16
         /// 
-        /// Passes the information to the InpsectionManager
+        /// Passes the information to the InspectionManager
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Created: 2017/04/07
+        /// 
+        /// Wrapped information being passed in an Inspection.
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -107,7 +121,15 @@ namespace WpfPresentationLayer
             try
             {
                 validateInputs();
-                if (_inspectionManager.CreateInspection((int)_currentEmp.EmployeeId, (int)_productLot.ProductLotId, cboGradeSelect.Text, DateTime.Now, DateTime.Now.AddDays(7.0)))
+                var inspection = new Inspection()
+                {
+                    EmployeeId = _currentEmp.EmployeeId.Value,
+                    ProductLotId = _productLot.ProductLotId.Value,
+                    GradeId = cboGradeSelect.Text,
+                    DatePerformed = DateTime.Now,
+                    ExpirationDate = DateTime.Now.AddDays(7.0)
+                };
+                if (_inspectionManager.CreateInspection(inspection))
                 {
                     this.DialogResult = true;
                 }
@@ -138,7 +160,7 @@ namespace WpfPresentationLayer
                 }
             }
         }
-
+        
         private void validateInputs()
         {
             if (cboGradeSelect.Text == "")

@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\PickupController.cs" />
+    <Compile Include="Controllers\Api\RouteController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
@@ -380,6 +381,7 @@
     <Content Include="Views\CompanyOrderWithLines\Details.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Edit.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Index.cshtml" />
+    <Content Include="Views\Account\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
