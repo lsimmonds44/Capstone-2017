@@ -129,5 +129,28 @@ namespace LogicLayer
                 throw new ApplicationException("There was an unknown error.", ex);
             }
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/13
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public CompanyOrderWithLines RetrieveCompanyOrderWithLinesById(int orderId)
+        {
+            try
+            {
+                return CompanyOrderAccessor.RetrieveOrderWithLinesByOrderId(orderId);
+            }
+            catch (SqlException sqlEx)
+            {
+
+                throw new ApplicationException("There was a database error.", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+        }
     }
 }

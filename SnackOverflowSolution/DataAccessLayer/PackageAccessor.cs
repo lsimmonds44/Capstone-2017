@@ -312,5 +312,62 @@ namespace DataAccessLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <returns></returns>
+        public static List<Package> RetrieveAllPackagesInDelivery(int? deliveryId)
+        {
+
+            List<Package> packages = new List<Package>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_package_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var package = new Package()
+                        {
+                            PackageId = reader.GetInt32(0),
+                            OrderId = reader.GetInt32(2)
+                        };
+
+                        try
+                        {
+                            package.DeliveryId = reader.GetInt32(1);
+                        }
+                        catch
+                        {
+                            package.DeliveryId = null;
+                        }
+
+                        packages.Add(package);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return packages;
+
+        }
     }
 }

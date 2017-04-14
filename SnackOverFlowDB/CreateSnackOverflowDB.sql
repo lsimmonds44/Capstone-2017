@@ -284,7 +284,7 @@ CREATE TABLE [dbo].[DRIVER] (
 	[DRIVER_ID]			   [INT] 		 NOT NULL,
 	[DRIVER_LICENSE_NUMBER][NVARCHAR](9) NOT NULL,
 	[LICENSE_EXPIRATION]   [DATETIME] 	 NOT NULL,
-	[ACTIVE]			   [BIT] 		 NOT NULL,
+	[ACTIVE]			   [BIT] 		 NOT NULL DEFAULT 1,
 
 	CONSTRAINT [PK_DRIVER] PRIMARY KEY ([DRIVER_ID] ASC)
 )
@@ -3940,6 +3940,20 @@ AS
 	END
 GO
 
+print '' print '*** Creating procedure sp_retrieve_company_order_by_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_by_id
+(
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
+	END
+GO
+
 print '' print '*** Creating procedure sp_retrieve_company_order_list'
 GO
 CREATE PROCEDURE sp_retrieve_company_order_list
@@ -5145,13 +5159,13 @@ GO
 print '' print  '*** Creating procedure sp_retrieve_user_salt'
 GO
 CREATE PROCEDURE sp_retrieve_user_salt (
-    @EmailAddress[NVARCHAR](50)
+    @Username[NVARCHAR](50)
 )
 AS
 	BEGIN
 		SELECT PASSWORD_SALT
 		FROM APP_USER
-		WHERE E_MAIL_ADDRESS = @EmailAddress
+		WHERE USER_NAME = @Username
 	END
 GO
 
@@ -7750,3 +7764,67 @@ SET CHECKED_OUT = @new_Checked_Out_Status, OUT_IN_TIME_STAMP = GETDATE()
 WHERE (VEHICLE_ID = @vehicleId)
 END
 GO
+
+
+print '' print  '*** Creating procedure sp_retrieve_product_name_from_product_lot_id'
+GO
+CREATE PROCEDURE sp_retrieve_product_name_from_product_lot_id
+(
+	@PRODUCT_LOT_ID[int]
+)
+AS
+	BEGIN
+		SELECT NAME
+		FROM PRODUCT, PRODUCT_LOT
+		WHERE PRODUCT_LOT.PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+		AND PRODUCT.PRODUCT_ID = PRODUCT_LOT.PRODUCT_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_from_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_from_supplier_id
+(
+	@SUPPLIER_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, APP_USER, SUPPLIER
+		WHERE SUPPLIER.USER_ID = APP_USER.USER_ID
+		AND APP_USER.PREFERRED_ADDRESS_ID = USER_ADDRESS.USER_ADDRESS_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_routes_for_driver_after_date'
+GO
+CREATE PROCEDURE sp_retrieve_routes_for_driver_after_date
+(
+	@DRIVER_ID[INT],
+	@TODAYS_DATE[DATETIME]
+)
+AS
+	BEGIN
+		SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+		FROM ROUTE
+		WHERE DRIVER_ID = @DRIVER_ID
+		AND cast(ASSIGNED_DATE as date) >= cast(@TODAYS_DATE as date)
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_for_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_for_delivery
+(
+	@DELIVERY_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS.USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, DELIVERY, PRODUCT_ORDER
+		WHERE USER_ADDRESS.USER_ADDRESS_ID = PRODUCT_ORDER.USER_ADDRESS_ID
+		AND DELIVERY.ORDER_ID = PRODUCT_ORDER.ORDER_ID
+		AND DELIVERY.DELIVERY_ID = @DELIVERY_ID
+	END
+GO
+

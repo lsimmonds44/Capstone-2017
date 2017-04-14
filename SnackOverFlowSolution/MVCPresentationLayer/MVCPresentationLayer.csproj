@@ -199,8 +199,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\PickupController.cs" />
+    <Compile Include="Controllers\Api\RouteController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -237,6 +240,7 @@
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\rev-slider-settings.css" />
+    <Content Include="Content\snackoverflow.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\bebasneue_bold-webfont.svg" />
     <Content Include="fonts\bebasneue_regular-webfont.svg" />
@@ -255,6 +259,7 @@
     <Content Include="Images\Gallery\gallery-3.jpg" />
     <Content Include="Images\Gallery\gallery-4.jpg" />
     <Content Include="Images\Gallery\gallery-5.jpg" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\slider-images\FLogo.png" />
     <Content Include="Images\slider-images\Flogo2.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -371,6 +376,11 @@
     <Content Include="Views\Cart\Completed.cshtml" />
     <Content Include="Views\Cart\Summary.cshtml" />
     <Content Include="Views\Shared\_ProductSummary.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Create.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Delete.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Details.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Edit.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

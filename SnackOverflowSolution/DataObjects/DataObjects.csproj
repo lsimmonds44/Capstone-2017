@@ -98,6 +98,8 @@
     <Compile Include="OrderLine.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
+    <Compile Include="Pickup.cs" />
+    <Compile Include="PickupLine.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductLot.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Repair.cs" />
     <Compile Include="RepairLine.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Route.cs" />
     <Compile Include="ShippingDetails.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierCatalogueViewModel.cs" />
