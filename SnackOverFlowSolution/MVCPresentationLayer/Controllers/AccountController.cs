@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using MVCPresentationLayer.Models;
 using LogicLayer;
 using DataObjects;
+using System.Net;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -194,6 +195,35 @@ namespace MVCPresentationLayer.Controllers
                     UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, userFound.FirstName));
                     UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, userFound.LastName));
                     UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Email, userFound.EmailAddress));
+
+                    bool[] roles = null;
+                    try
+                    {
+                        roles = _appUserManager.GetUserRoles(userFound.UserId);
+                    }
+                    catch (Exception)
+                    {
+
+                        return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                    }
+
+                    if (roles != null) // it should not be null if we are here
+                    {
+                        if (roles[0])
+                        {
+                            UserManager.AddToRole(user.Id, "Customer");
+                        }
+                        if (roles[1])
+                        {
+                            UserManager.AddToRole(user.Id, "Employee");
+                        }
+                        if (roles[2])
+                        {
+                            UserManager.AddToRole(user.Id, "Supplier");
+                        }
+                    }
+                    
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

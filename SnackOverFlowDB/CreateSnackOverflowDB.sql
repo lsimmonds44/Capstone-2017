@@ -4202,6 +4202,20 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_employee_by_user_id'
+GO
+CREATE PROCEDURE sp_retrieve_employee_by_user_id
+(
+	@USER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT EMPLOYEE_ID, USER_ID, SALARY, ACTIVE, DATE_OF_BIRTH
+		FROM employee
+		WHERE USER_ID = @USER_ID
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_employee_by_username'
 GO
 CREATE PROCEDURE sp_retrieve_employee_by_username
@@ -7844,3 +7858,18 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_vehicle_from_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_vehicle_from_delivery
+(
+@DELIVERY_ID[INT]
+)
+AS
+	BEGIN
+		SELECT VEHICLE.VEHICLE_ID, VIN, MAKE, MODEL, MILEAGE, YEAR, COLOR, ACTIVE, LATEST_REPAIR_DATE, LAST_DRIVER_ID, VEHICLE_TYPE_ID
+		FROM vehicle, delivery, route
+		WHERE DELIVERY.DELIVERY_ID = @DELIVERY_ID
+		AND DELIVERY.ROUTE_ID = ROUTE.ROUTE_ID
+		AND ROUTE.VEHICLE_ID = VEHICLE.VEHICLE_ID
+	END
+GO

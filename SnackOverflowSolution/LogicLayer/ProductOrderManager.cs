@@ -40,7 +40,7 @@ namespace LogicLayer
                         }
                     );
 
-                    ProductOrderFound.PackageList = PackageAccessor.RetrievePackage(
+                    ProductOrderFound.PackageList = PackageAccessor.RetrievePackageFromSearch(
                         new Package
                         {
                             OrderId = ProductOrderFound.OrderId

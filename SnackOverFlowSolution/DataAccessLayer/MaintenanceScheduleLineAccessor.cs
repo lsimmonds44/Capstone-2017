@@ -8,31 +8,47 @@ using System.Data.SqlClient;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/14
+    /// 
+    /// Class to handle database interactions involving maintenance schedule lines.
+    /// </summary>
     public class MaintenanceScheduleLineAccessor
     {
         /// <summary>
+        /// Mason Allen
+        /// Created: 2017/03/09
+        ///  
         /// Creates a new maintenance schedule line
-        /// Created by Mason Allen
-        /// Created on 03/09/17
         /// </summary>
-        /// <param name="newMaintenanceScheduleLine">New maintenance schedule line to be added</param>
-        /// <returns>1 for success, 0 for fail</returns>
-        public static int CreateMaintenanceScheduleLine(MaintenanceScheduleLine newMaintenanceScheduleLine)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="maintenanceScheduleLine">New maintenance schedule line to be added</param>
+        /// <returns>Rows affected</returns>
+        public static int CreateMaintenanceScheduleLine(MaintenanceScheduleLine maintenanceScheduleLine)
         {
-            var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_create_maintenance_schedule_line";
-            var cmd = new SqlCommand(cmdText, conn);
-            var count = 0;
+            var rows = 0;
 
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_maintenance_schedule_line";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@MAINTENANCE_SCHEDULE_ID", newMaintenanceScheduleLine.MaintenanceScheduleId);
-            cmd.Parameters.AddWithValue("@DESCRIPTION", newMaintenanceScheduleLine.Description);
-            cmd.Parameters.AddWithValue("@MAINTENANCE_DATE", newMaintenanceScheduleLine.MaintenanceDate);
+
+            cmd.Parameters.AddWithValue("@MAINTENANCE_SCHEDULE_ID", maintenanceScheduleLine.MaintenanceScheduleId);
+            cmd.Parameters.AddWithValue("@DESCRIPTION", maintenanceScheduleLine.Description);
+            cmd.Parameters.AddWithValue("@MAINTENANCE_DATE", maintenanceScheduleLine.MaintenanceDate);
 
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -43,7 +59,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return count;
+            return rows;
         }
     }
 }

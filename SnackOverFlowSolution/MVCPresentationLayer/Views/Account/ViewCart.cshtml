@@ -8,13 +8,16 @@
 <table>
         <tr>
             <th>Product Name</th>
+            <th>Grade</th>
             <th>Quantity</th>
+            <th>Total</th>
             <th>Remove</th>
         </tr>
     @foreach (var cartItem in Model)
     {
         <tr>
             <td>@cartItem.Name</td>
+            <td>@cartItem.GradeID</td>
             <td>@cartItem.Quantity</td>
             <th><form action="RemoveFromCart" method="post">
                     <input type="hidden" name="userId" value="@cartItem.UserID" />

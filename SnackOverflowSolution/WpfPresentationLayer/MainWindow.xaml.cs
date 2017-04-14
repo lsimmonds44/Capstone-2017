@@ -1572,7 +1572,7 @@ namespace WpfPresentationLayer
             else
             {
 
-                MessageBox.Show("Please select an invoice to view. " + dgMyInvoices.SelectedIndex);
+                MessageBox.Show("Please select an invoice to view. " );
             }
         }
 
