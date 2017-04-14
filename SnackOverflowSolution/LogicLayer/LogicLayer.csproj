@@ -87,6 +87,7 @@
     <Compile Include="IPackageManager.cs" />
     <Compile Include="IPickupManager.cs" />
     <Compile Include="IPreferenceManager.cs" />
+    <Compile Include="ISupplierProductLotManager.cs" />
     <Compile Include="IProductLotManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="PackageManager.cs" />
     <Compile Include="PickupManager.cs" />
     <Compile Include="PreferenceManager.cs" />
+    <Compile Include="SupplierProductLotManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
