@@ -68,9 +68,10 @@
 {
     <input type="number" name="Quantity" value="1" />
     <select name="Grade">
-        <option value="Grade A">Grade A</option>
-        <option value="Grade B">Grade B</option>
-        <option value="Grade C">Grade C</option>
+        @foreach (var gradeOption in Model.GradeOptions)
+        {
+            <option value="@gradeOption.GradeID">@gradeOption.GradeID: @gradeOption.Price</option>
+        }
     </select>
     <div class="pull-right">
         @Html.HiddenFor(x => x.ProductId)

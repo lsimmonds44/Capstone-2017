@@ -8,7 +8,7 @@ namespace MVCPresentationLayer.Models
 {
     public class ProductWithGradeOptions
     {
-        public Product product { get; set; }
-        public IEnumerable<ProductGradePrice> gradeOptions { get; set; }
+        public Product Product { get; set; }
+        public IEnumerable<ProductGradePrice> GradeOptions { get; set; }
     }
 }

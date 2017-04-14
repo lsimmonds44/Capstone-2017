@@ -351,6 +351,12 @@ namespace DataAccessLayer
             return productName;
         }
 
+        /// <summary>
+        /// William Flood
+        /// Created 2017/04/14
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public static List<ProductGradePrice> GetPriceOptionsForProduct(int productID)
         {
             var optionList = new List<ProductGradePrice>();

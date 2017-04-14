@@ -57,5 +57,7 @@ namespace DataObjects
             set { SupplierNameToView = value; }
         }
 
+        public IEnumerable<ProductGradePrice> GradeOptions { get; set; }
+
     }
 }
