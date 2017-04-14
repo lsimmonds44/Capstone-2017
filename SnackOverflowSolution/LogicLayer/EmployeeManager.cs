@@ -124,51 +124,27 @@ namespace LogicLayer
         }
         
         /// <summary>
-        /// Ariel Sigo
-        /// Created 2017/07/02
-        /// 
-        /// Updates Employee Information
-        /// </summary>
-        /// <param name="Employee_ID"></param>
-        /// <param name="oldUser_ID"></param>
-        /// <param name="newUser_ID"></param>
-        /// <param name="oldSalary"></param>
-        /// <param name="newSalary"></param>
-        /// <param name="oldActive"></param>
-        /// <param name="newActive"></param>
-        /// <param name="oldDate_Of_Birth"></param>
-        /// <param name="newDate_Of_Birth"></param>
-        /// <returns>true if update was successful for Employee info</returns>
-        public bool UpdateEmployee(int Employee_ID, int oldUser_ID, int newUser_ID, decimal oldSalary, decimal newSalary, bool oldActive, bool newActive, DateTime oldDate_Of_Birth, DateTime newDate_Of_Birth)
-        {
-            var result = false; // we want to let the presentation layer
-            // know whether the operation succeeded
-            try
-            {
-                result = (1 == EmployeeAccessor.UpdateEmployee(Employee_ID, oldUser_ID, newUser_ID, oldSalary, newSalary, oldActive, newActive, oldDate_Of_Birth, newDate_Of_Birth));
-                RefreshEmployeeList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return result;
-        }
-        /// <summary>
         /// Ariel Sigo  
-        /// Created 2017/10/02
+        /// Created: 2017/02/10
         /// 
+        /// Updates an employee in the database, with a concurrency check.
         /// </summary>
-        /// <param name="oldEmp"></param>
-        /// <param name="newEmp"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// </remarks>
+        /// 
+        /// <param name="oldEmployee">The employee as it was in the database.</param>
+        /// <param name="newEmployee">The employee as it should be.</param>
         /// <returns>True if employee update was successful</returns>
-        public bool UpdateEmployee(Employee oldEmp, Employee newEmp)
+        public bool UpdateEmployee(Employee oldEmployee, Employee newEmployee)
         {
             var result = false; // we want to let the presentation layer
             // know whether the operation succeeded
             try
             {
-                result = (1 == EmployeeAccessor.UpdateEmployee((int)newEmp.EmployeeId, (int)oldEmp.UserId, (int)newEmp.UserId, (decimal)oldEmp.Salary, (decimal)newEmp.Salary, (bool)oldEmp.Active, (bool)newEmp.Active, (DateTime)oldEmp.DateOfBirth, (DateTime)newEmp.DateOfBirth));
+                result = (1 == EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee));
                 RefreshEmployeeList();
             }
             catch (Exception)

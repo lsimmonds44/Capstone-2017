@@ -9,47 +9,44 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/07
+    /// 
+    /// Class to handle database interactions involving locations.
+    /// </summary>
     public static class LocationAccessor
     {
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Created: 2016/02/03
+        /// Skyler Hiscock
+        /// Created: 2017/02/03
         /// Creates a warehouse location
         /// </summary>
-        /// <param name="location"></param>
-        /// <returns>1 if successful, 0 if it fails</returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="location">The location to add to the database.</param>
+        /// <returns>Rows affected.</returns>
         public static int CreateLocation(Location location)
         {
-            var result = 0;
+            var rows = 0;
 
-            // get a connection
             var conn = DBConnection.GetConnection();
-
             var cmdText = @"sp_create_location";
-
-            // create a command object
             var cmd = new SqlCommand(cmdText, conn);
-
-            // set command type to stored procedure
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // add parameters
-            cmd.Parameters.Add("@DESCRIPTION", SqlDbType.VarChar, 250);
-            cmd.Parameters.Add("@IS_ACTIVE", SqlDbType.Bit);
-
-            // set parameter values
-            cmd.Parameters["@DESCRIPTION"].Value = location.Description;
-            cmd.Parameters["@IS_ACTIVE"].Value = location.IsActive;
-
-            // try-catch-finally
+            cmd.Parameters.AddWithValue("@DESCRIPTION", location.Description);
+            cmd.Parameters.AddWithValue("@IS_ACTIVE", location.IsActive);
 
             try
             {
-                // open a connection
                 conn.Open();
-
-                // execute and capture the result
-                result = (int)cmd.ExecuteNonQuery();
+                rows = (int)cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -59,46 +56,40 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return result;
+
+            return rows;
         }
 
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Class to update a location in the database.
+        /// </summary>
+        /// <param name="oldLocation">The location as it was.</param>
+        /// <param name="newLocation">The location as it should be.</param>
+        /// <returns>Rows affected.</returns>
         public static int UpdateLocation(Location oldLocation, Location newLocation)
         {
             var result = 0;
 
-            // get a connection
             var conn = DBConnection.GetConnection();
-
             var cmdText = @"sp_update_location";
-
-            // create a command object
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // add parameters
-            cmd.Parameters.Add("@old_LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_DESCRIPTION", SqlDbType.VarChar, 250);
-            cmd.Parameters.Add("@new_DESCRIPTION", SqlDbType.VarChar, 250);
-            cmd.Parameters.Add("@old_IS_ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@new_IS_ACTIVE", SqlDbType.Bit);
+            cmd.Parameters.AddWithValue("@LOCATION_ID", oldLocation.LocationId);
 
-            // set parameter values
-            cmd.Parameters["@old_LOCATION_ID"].Value = oldLocation.LocationId;
-            cmd.Parameters["@old_DESCRIPTION"].Value = oldLocation.Description;
-            cmd.Parameters["@new_DESCRIPTION"].Value = newLocation.Description;
-            cmd.Parameters["@old_IS_ACTIVE"].Value = oldLocation.IsActive;
-            cmd.Parameters["@new_IS_ACTIVE"].Value = newLocation.IsActive;
+            cmd.Parameters.AddWithValue("@old_DESCRIPTION", oldLocation.Description);
+            cmd.Parameters.AddWithValue("@old_IS_ACTIVE", oldLocation.IsActive);
 
-            // try-catch-finally
+            cmd.Parameters.AddWithValue("@new_DESCRIPTION", newLocation.Description);
+            cmd.Parameters.AddWithValue("@new_IS_ACTIVE", newLocation.IsActive);
 
             try
             {
-                // open a connection
                 conn.Open();
-
-                // execute and capture the result
-                result = (int)cmd.ExecuteNonQuery();
+                result = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -108,9 +99,18 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return result;
         }
 
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Retrieves a location from the database based on its Id.
+        /// </summary>
+        /// <param name="locationId">The id of the desired location</param>
+        /// <returns>The location with the given id.</returns>
         public static Location RetrieveLocationById(int locationId)
         {
             Location location = null;
@@ -119,8 +119,8 @@ namespace DataAccessLayer
             var cmdText = @"sp_retrieve_location";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@LOCATION_ID", SqlDbType.Int);
-            cmd.Parameters["@LOCATION_ID"].Value = locationId;
+
+            cmd.Parameters.AddWithValue("@LOCATION_ID", locationId);
 
             try
             {
@@ -147,19 +147,26 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return location;
         }
 
         /// <summary>
         /// Bill Flood
+        /// Created: 2017/03/28
         /// 
-        /// 
+        /// Retrieves all locations from the database.
         /// </summary>
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
         /// <returns></returns>
-        /// <remarks>Last Modified by Christian Lopez 2017/03/03</remarks>
         public static List<Location> RetrieveAllLocations()
         {
-            List<Location> locations = new List<Location>();
+            var locations = new List<Location>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_location_list";
@@ -183,7 +190,6 @@ namespace DataAccessLayer
                         });
                     }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
@@ -193,6 +199,7 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return locations;
         }
     }

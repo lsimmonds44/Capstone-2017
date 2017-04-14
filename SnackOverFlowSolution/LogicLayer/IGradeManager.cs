@@ -14,6 +14,6 @@ namespace LogicLayer
     /// </summary>
     public interface IGradeManager
     {
-        string[] RetrieveGradeList();
+        List<string> RetrieveGradeList();
     }
 }

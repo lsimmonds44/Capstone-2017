@@ -6536,7 +6536,7 @@ print '' print  '*** Creating procedure sp_update_employee'
 GO
 CREATE PROCEDURE sp_update_employee
 (
-	@old_EMPLOYEE_ID[INT],
+	@EMPLOYEE_ID[INT],
 	@old_USER_ID[INT],
 	@new_USER_ID[INT],
 	@old_SALARY[DECIMAL](8,2)=null,
@@ -6643,7 +6643,7 @@ print '' print  '*** Creating procedure sp_update_location'
 GO
 CREATE PROCEDURE sp_update_location
 (
-	@old_LOCATION_ID[INT],
+	@LOCATION_ID[INT],
 	@old_DESCRIPTION[NVARCHAR](250),
 	@new_DESCRIPTION[NVARCHAR](250),
 	@old_IS_ACTIVE[BIT],

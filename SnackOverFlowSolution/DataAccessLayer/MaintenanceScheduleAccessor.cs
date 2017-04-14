@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using DataObjects;
+using System.Data;
 
 namespace DataAccessLayer
 {
     public class MaintenanceScheduleAccessor
     {
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 03/09/17
+        /// Mason Allen
+        /// Created: 2017/03/09
         /// 
         /// Creates a new vehicle maintenance schedule
         /// </summary>
@@ -21,11 +22,11 @@ namespace DataAccessLayer
         public static int CreateMaintenanceSchedule(int vehicleId)
         {
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_create_maintenance_schedule";
+            var cmdText = @"sp_create_maintenance_schedule";
             var cmd = new SqlCommand(cmdText, conn);
             var count = 0;
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@VEHICLE_ID", vehicleId);
 
             try
