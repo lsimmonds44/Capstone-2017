@@ -12,12 +12,13 @@ namespace DataObjects
     /// Christian Lopez
     /// Created on 2017/02/15
     /// Edited By Michael Takrama on 2017/04/07
-    /// Detail - Add Data Annotation for Model Fields
+    /// Detail - Added Data Annotation for Model Fields
     /// 
     /// The DTO for Product
     /// </summary>
     public class Product
     {
+
         [HiddenInput(DisplayValue = false)]
         public int ProductId { get; set; }
 
@@ -44,5 +45,6 @@ namespace DataObjects
         public string UnitOfMeasurement { get; set; }
         public decimal DeliveryChargePerUnit { get; set; }
         public byte[] ImageBinary { get; set; }
+        public string GradeId { get; set; }
     }
 }
