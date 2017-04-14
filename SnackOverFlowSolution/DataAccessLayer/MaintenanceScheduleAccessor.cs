@@ -9,6 +9,12 @@ using System.Data;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/14
+    /// 
+    /// Class to handle database interactions involving maintenance schedules.
+    /// </summary>
     public class MaintenanceScheduleAccessor
     {
         /// <summary>
@@ -17,22 +23,30 @@ namespace DataAccessLayer
         /// 
         /// Creates a new vehicle maintenance schedule
         /// </summary>
-        /// <param name="vehicleId">Vehcile Id of the new maintenance schedule</param>
-        /// <returns>Int of 1 if successful, 0 if fail</returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="vehicleId">Vehicle Id of the new maintenance schedule</param>
+        /// <returns>Rows affected.</returns>
         public static int CreateMaintenanceSchedule(int vehicleId)
         {
+            var rows = 0;
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_maintenance_schedule";
             var cmd = new SqlCommand(cmdText, conn);
-            var count = 0;
-
             cmd.CommandType = CommandType.StoredProcedure;
+
             cmd.Parameters.AddWithValue("@VEHICLE_ID", vehicleId);
 
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -43,28 +57,36 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return count;
+            return rows;
         }
 
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 03/09/17
+        /// Mason Allen
+        /// Created: 03/09/17
         /// 
-        /// Retrives a maintenance schedule by vehicle id
+        /// Retrieves a maintenance schedule by vehicle id
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="vehicleId">ID of the vehicle you are searching by</param>
         /// <returns>Maintenance schedule</returns>
         public static MaintenanceSchedule RetrieveMaintenanceScheduleByVehicleId(int vehicleId)
         {
+            MaintenanceSchedule maintenanceSchedule = null;
+
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_retrieve_maintenance_schedule_by_vehicle_id";
+            var cmdText = @"sp_retrieve_maintenance_schedule_by_vehicle_id";
             var cmd = new SqlCommand(cmdText, conn);
-            var count = 0;
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@VEHICLE_ID", vehicleId);
-
-            MaintenanceSchedule retrievedMaintenanceSchedule = new MaintenanceSchedule();
+            
 
             try
             {
@@ -73,11 +95,12 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    
-                    retrievedMaintenanceSchedule.MaintenanceScheduleId = reader.GetInt32(0);
-                    retrievedMaintenanceSchedule.VehicleId = reader.GetInt32(1);
-                    
-                    reader.Close();
+
+                    maintenanceSchedule = new MaintenanceSchedule()
+                    {
+                        MaintenanceScheduleId = reader.GetInt32(0),
+                        VehicleId = reader.GetInt32(1)
+                    };
                 }
 
             }
@@ -90,7 +113,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return retrievedMaintenanceSchedule;
+
+            return maintenanceSchedule;
         }
     }
 }
