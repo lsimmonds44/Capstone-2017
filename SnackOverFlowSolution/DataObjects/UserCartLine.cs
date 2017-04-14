@@ -16,7 +16,7 @@ namespace DataObjects
         public int Quantity { get; set; }
         public String GradeID { get; set; }
         public String Name { get; set; }
-        public decimal Total { get; set; }
+        public decimal BasePrice { get; set; }
         public decimal? FlatProductDiscount { get; set; }
         public decimal? ScaledProductDiscount { get; set; }
         public decimal? FlatCategoryDiscount { get; set; }

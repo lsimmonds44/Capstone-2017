@@ -424,6 +424,14 @@ VALUES
 	(10000, 10002, '123 Street Name', 'Second Street Name', 'City', 'AA', '12345')
 GO
 
+
+print '' print '*** Inserting User Cart Line Test Data ***'
+INSERT INTO [dbo].[USER_CART_LINE]
+    (PRODUCT_ID, GRADE_ID, QUANTITY, USER_ID)
+VALUES
+    (10000,'GRADE A',5,10003)
+GO
+
 print '*** Inserting Route Test Data ***'
 GO
 INSERT INTO [dbo].[ROUTE]

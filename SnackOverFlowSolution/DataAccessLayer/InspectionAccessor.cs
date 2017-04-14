@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,36 +19,34 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/16
+        /// Created: 2017/02/16
         /// 
         /// Creates an inspection from the given data
         /// </summary>
-        /// <param name="employeeID"></param>
-        /// <param name="productLotId"></param>
-        /// <param name="gradeId"></param>
-        /// <param name="datePerformed"></param>
-        /// <param name="expirationDate"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method and changed signature from inspection fields to an inspection object.
+        /// </remarks>
+        /// 
+        /// <param name="inspection">The inspection to add to the database.</param>
         /// <returns>The number of rows affected</returns>
-        public static int CreateInspection(int employeeID, int productLotId, string gradeId,
-            DateTime datePerformed, DateTime expirationDate)
+        public static int CreateInspection(Inspection inspection)
         {
-            int rows = 0;
+            var rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_inspection";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@GRADE_ID", SqlDbType.NVarChar, 250);
-            cmd.Parameters.Add("@DATE_PERFORMED", SqlDbType.DateTime);
-            cmd.Parameters.Add("@EXPIRATION_DATE", SqlDbType.DateTime);
-            cmd.Parameters["@EMPLOYEE_ID"].Value = employeeID;
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = productLotId;
-            cmd.Parameters["@GRADE_ID"].Value = gradeId;
-            cmd.Parameters["@DATE_PERFORMED"].Value = datePerformed;
-            cmd.Parameters["@EXPIRATION_DATE"].Value = expirationDate;
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", inspection.EmployeeId);
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", inspection.ProductLotId);
+            cmd.Parameters.AddWithValue("@GRADE_ID", inspection.GradeId);
+            cmd.Parameters.AddWithValue("@DATE_PERFORMED", inspection.DatePerformed);
+            cmd.Parameters.AddWithValue("@EXPIRATION_DATE", inspection.ExpirationDate);
 
             try
             {
@@ -63,7 +62,6 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-
 
             return rows;
         }

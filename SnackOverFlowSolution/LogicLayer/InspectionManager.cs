@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using System.Data.SqlClient;
+using DataObjects;
 
 namespace LogicLayer
 {
@@ -18,24 +19,26 @@ namespace LogicLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/16
+        /// Created: 2017/02/16
         /// 
         /// Attempts to create an Inspection record to the DB.
         /// </summary>
-        /// <param name="employeeID"></param>
-        /// <param name="productLotId"></param>
-        /// <param name="gradeId"></param>
-        /// <param name="datePerformed"></param>
-        /// <param name="expirationDate"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Changed signature from list of inspection fields to inspection itself.
+        /// </remarks>
+        /// <param name="inspection">The inspection to create in the database.</param>
         /// <returns>True if successful</returns>
-        public bool CreateInspection(int employeeID, int productLotId, string gradeId,
-            DateTime datePerformed, DateTime expirationDate)
+        public bool CreateInspection(Inspection inspection)
         {
             bool added = false;
 
             try
             {
-                added = (1 == InspectionAccessor.CreateInspection(employeeID, productLotId, gradeId, datePerformed, expirationDate));
+                added = (1 == InspectionAccessor.CreateInspection(inspection));
             }
             catch (SqlException ex)
             {

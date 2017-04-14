@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCPresentationLayer.Models;
 using LogicLayer;
+using DataObjects;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -22,16 +23,19 @@ namespace MVCPresentationLayer.Controllers
         private IUserManager _appUserManager;
         private IUserCartManager _userCartManager;
 
-        public AccountController(IUserManager appUserManager)
+        public AccountController(IUserManager appUserManager, IUserCartManager _userCartManager)
         {
             this._appUserManager = appUserManager;
+            this._userCartManager = _userCartManager;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager,
+            IUserCartManager _userCartManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             this._appUserManager = appUserManager;
+            this._userCartManager = _userCartManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -81,7 +85,7 @@ namespace MVCPresentationLayer.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -433,10 +437,50 @@ namespace MVCPresentationLayer.Controllers
         /// Created on 2017/04/06 by William Flood
         /// </summary>
         /// <returns></returns>
-        public ViewResult ViewCart()
+        public ActionResult ViewCart()
         {
-            //var cartList = _userCartManager.RetrieveUserCart();
-            return View();
+            var userName = User.Identity.Name;
+            var cartList = new List<UserCartLine>();
+
+            // Access IClaimsIdentity which contains claims
+            //IClaimsIdentity claimsIdentity = (IClaimsIdentity)icp.Identity;
+            try
+            {
+                cartList = _userCartManager.RetrieveUserCart(userName);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(500);
+            }
+            return View(cartList);
+        }
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/13
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RemoveFromCart()
+        {
+            try
+            {
+                var userId = Int32.Parse(Request.Params["userId"]);
+                var productId = Int32.Parse(Request.Params["productId"]);
+                var quantity = Int32.Parse(Request.Params["quantity"]);
+                var gradeId = Request.Params["gradeId"];
+                if (0 < _userCartManager.RemoveFromCart(productId, gradeId, quantity, userId))
+                {
+                    return RedirectToAction("ViewCart");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(500);
+                }
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         protected override void Dispose(bool disposing)

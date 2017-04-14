@@ -15,7 +15,7 @@ namespace LogicLayerTestProject
     public class StatusManagerTests
     {
         //declare private variables
-        StatusManager _statusManager;
+        private StatusManager _statusManager;
 
         [TestInitialize]
         public void TestInitialize()

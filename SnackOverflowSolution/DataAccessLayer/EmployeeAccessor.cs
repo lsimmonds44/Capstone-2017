@@ -9,16 +9,26 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class EmployeeAccessor
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/07
+    /// 
+    /// Class to handle database interactions involing employees.
+    /// </summary>
+    public static class EmployeeAccessor
     {
-        public Employee EmployeeInstance { get; set; }
-        public List<Employee> EmployeeList { get; set; }
         /// <summary>
         /// Daniel Brown 
-        /// Created 02/08/2017
+        /// Created: 2017/02/08
         /// 
         /// Retrieve a single employee from the database
         /// </summary>
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
         /// <param name="employeeID">The employee ID of the employee to be retrieved</param>
         /// <returns>An employee object</returns>
         public static Employee RetrieveEmployee(int employeeID)
@@ -28,12 +38,10 @@ namespace DataAccessLayer
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_employee";
-
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters["@EMPLOYEE_ID"].Value = employeeID;
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", employeeID);
 
             try
             {
@@ -54,7 +62,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -68,18 +75,23 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Daniel Brown
-        /// Created 02/08/2017
+        /// Created: 2017/02/08
         /// 
         /// Retrieve a list of all employees
         /// </summary>
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
         /// <returns>List of Employee Objects</returns>
         public static List<Employee> RetrieveEmployeeList()
         {
-            List<Employee> employees = new List<Employee>();
+            var employees = new List<Employee>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_employee_list";
-
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -106,7 +118,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -121,62 +132,42 @@ namespace DataAccessLayer
         
         /// <summary>
         /// Ariel Sigo
-        /// Created 2017/02/07
+        /// Created: 2017/02/07
+        /// 
+        /// Updates an employee in the database.
         /// </summary>
-        /// <param name="Employee_ID"></param>
-        /// <param name="oldUser_ID"></param>
-        /// <param name="newUser_ID"></param>
-        /// <param name="oldSalary"></param>
-        /// <param name="newSalary"></param>
-        /// <param name="oldActive"></param>
-        /// <param name="newActive"></param>
-        /// <param name="oldDate_Of_Birth"></param>
-        /// <param name="newDate_Of_Birth"></param>
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method, and changed signature to take two employees instead of individual parameters.
+        /// </remarks>
+        /// <param name="oldEmployee">The employee as it was.</param>
+        /// <param name="newEmployee">The employee as it should be.</param>
         /// <returns>returns count of rows affected of updated employees</returns>
-        public static int UpdateEmployee(int Employee_ID, int oldUser_ID, int newUser_ID, decimal oldSalary, decimal newSalary, bool oldActive, bool newActive, DateTime oldDate_Of_Birth, DateTime newDate_Of_Birth)
+        public static int UpdateEmployee(Employee oldEmployee, Employee newEmployee)
         {
-            var count = 0;
-
-            // sql connection object
+            var rows = 0;
+            
             var conn = DBConnection.GetConnection();
-
-            // command text
             var cmdText = @"sp_update_employee";
-
-            // create a command object
             var cmd = new SqlCommand(cmdText, conn);
-
-            //set command type if needed
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // add parameters
-            cmd.Parameters.Add("@Employee_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@OldUser_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@NewUser_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@OldSalary", SqlDbType.Money);
-            cmd.Parameters.Add("@NewSalary", SqlDbType.Money);
-            cmd.Parameters.Add("@OldActive", SqlDbType.Bit);
-            cmd.Parameters.Add("@NewActive", SqlDbType.Bit);
-            cmd.Parameters.Add("@OldDate_Of_Birth", SqlDbType.Date);
-            cmd.Parameters.Add("@NewDate_Of_Birth", SqlDbType.Date);
-
-            // set parameter values
-            cmd.Parameters["@OldUser_ID"].Value = oldUser_ID;
-            cmd.Parameters["@NewUser_ID"].Value = newUser_ID;
-            cmd.Parameters["@OldSalary"].Value = oldSalary;
-            cmd.Parameters["@NewSalary"].Value = newSalary;
-            cmd.Parameters["@OldActive"].Value = oldActive;
-            cmd.Parameters["@NewActive"].Value = newActive;
-            cmd.Parameters["@OldDate_Of_Birth"].Value = oldDate_Of_Birth;
-            cmd.Parameters["@NewDate_Of_Birth"].Value = newDate_Of_Birth;
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", oldEmployee.EmployeeId);
+            cmd.Parameters.AddWithValue("@old_USER_ID", oldEmployee.UserId);
+            cmd.Parameters.AddWithValue("@new_USER_ID", newEmployee.UserId);
+            cmd.Parameters.AddWithValue("@old_SALARY", oldEmployee.Salary);
+            cmd.Parameters.AddWithValue("@new_SALARY", newEmployee.Salary);
+            cmd.Parameters.AddWithValue("@old_ACTIVE", oldEmployee.Active);
+            cmd.Parameters.AddWithValue("@new_ACTIVE", newEmployee.Active);
+            cmd.Parameters.AddWithValue("@old_DATE_OF_BIRTH", oldEmployee.DateOfBirth);
+            cmd.Parameters.AddWithValue("@new_DATE_OF_BIRTH", newEmployee.DateOfBirth);
 
             try
             {
-                // open the connection
                 conn.Open();
-
-                // let the execution begin!
-                count = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -184,119 +175,141 @@ namespace DataAccessLayer
             }
             finally
             {
-                conn.Close(); // good housekeeping approved!
+                conn.Close();
             }
-            return count;
+            return rows;
         }
 
         /// <summary>
-        /// Created 2017-03-22 by William Flood
+        /// William Flood
+        /// Created: 2017/03/22
+        /// 
         /// Creates an employee
         /// </summary>
-        /// <param name="toCreate"></param>
-        /// <returns></returns>
-        public static int CreateEmployee(Employee toCreate)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Created: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="employee">The employee to add to the database.</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateEmployee(Employee employee)
         {
-            var results = 0;
+            var rows = 0;
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_create_employee", conn);
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
-            cmd.Parameters["@SALARY"].Scale = 2;
-            cmd.Parameters["@SALARY"].Precision = 8;
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
-            cmd.Parameters["@USER_ID"].Value = toCreate.UserId;
-            cmd.Parameters["@SALARY"].Value = toCreate.Salary;
-            cmd.Parameters["@ACTIVE"].Value = toCreate.Active;
-            cmd.Parameters["@DATE_OF_BIRTH"].Value = toCreate.DateOfBirth;
+            var cmdText = @"sp_create_employee";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@USER_ID", employee.UserId);
+            cmd.Parameters.AddWithValue("@SALARY", employee.Salary);
+            cmd.Parameters.AddWithValue("@ACTIVE", employee.Active);
+            cmd.Parameters.AddWithValue("@DATE_OF_BIRTH", employee.DateOfBirth);
+            
             try
             {
                 conn.Open();
-                results = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
-                conn.Close(); // good housekeeping approved!
+                conn.Close();
             }
-            return results;
+
+            return rows;
         }
 
         /// <summary>
-        /// Created 2017-03-22 by William Flood
-        /// Retrieves a list of employees based on search criteria
+        /// William Flood
+        /// Created: 2017/03/22
         /// 
+        /// Retrieves a list of employees based on search criteria
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        public static List<Employee> RetrieveBySearch(Employee criteria)
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="employee">The employee to search on.</param>
+        /// <returns>A list of employees who match the search criteria.</returns>
+        public static List<Employee> RetrieveBySearch(Employee employee)
         {
-            var resultList = new List<Employee>();
+            var employees = new List<Employee>();
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_retrieve_employee_from_search", conn);
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
-            cmd.Parameters["@SALARY"].Scale = 2;
-            cmd.Parameters["@SALARY"].Precision = 8;
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
-            cmd.Parameters["@EMPLOYEE_ID"].Value = criteria.EmployeeId;
-            cmd.Parameters["@USER_ID"].Value = criteria.UserId;
-            cmd.Parameters["@SALARY"].Value = criteria.Salary;
-            cmd.Parameters["@ACTIVE"].Value = criteria.Active;
-            cmd.Parameters["@DATE_OF_BIRTH"].Value = criteria.DateOfBirth;
+            var cmdText = @"sp_retrieve_employee_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", employee.EmployeeId);
+            cmd.Parameters.AddWithValue("@USER_ID", employee.UserId);
+            cmd.Parameters.AddWithValue("@SALARY", employee.Salary);
+            cmd.Parameters.AddWithValue("@DATE_OF_BIRTH", employee.DateOfBirth);
+
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    resultList.Add(new Employee()
+                    while (reader.Read())
                     {
-                        EmployeeId = reader.GetInt32(0),
-                        UserId = reader.GetInt32(1),
-                        Salary = reader.GetDecimal(2),
-                        Active = reader.GetBoolean(3),
-                        DateOfBirth = reader.GetDateTime(4)
-                    });
+                        employees.Add(new Employee()
+                        {
+                            EmployeeId = reader.GetInt32(0),
+                            UserId = reader.GetInt32(1),
+                            Salary = reader.GetDecimal(2),
+                            Active = reader.GetBoolean(3),
+                            DateOfBirth = reader.GetDateTime(4)
+                        });
+                    } 
                 }
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
-                conn.Close(); // good housekeeping approved!
+                conn.Close();
             }
-            return resultList;
+
+            return employees;
         }
         
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/02/24
+        /// Created: 2017/02/24
         /// 
         /// Accesses DB to get Employee by username
         /// </summary>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        public static Employee RetrieveEmployeeByUsername(string userName)
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="username">The username of the employee.</param>
+        /// <returns>The employee with the given username.</returns>
+        public static Employee RetrieveEmployeeByUsername(string username)
         {
-            Employee emp = null;
+            Employee employee = null;
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_employee_by_username";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_NAME", SqlDbType.NVarChar, 50);
-            cmd.Parameters["@USER_NAME"].Value = userName;
+            cmd.Parameters.AddWithValue("@USER_NAME", username);
 
             try
             {
@@ -305,11 +318,11 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    emp = new Employee
+                    employee = new Employee
                     {
                         EmployeeId = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
-                        Salary = reader.GetDecimal(2),
+                        Salary = reader.IsDBNull(2) ? (decimal?)null : reader.GetDecimal(2),
                         Active = reader.GetBoolean(3),
                         DateOfBirth = reader.GetDateTime(4)
                     };
@@ -325,55 +338,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return emp;
+            return employee;
         }
-
-
-        public void ReadList(SqlDataReader reader)
-        {
-            EmployeeList = new List<Employee>();
-            while(reader.Read())
-            {
-                EmployeeList.Add(new Employee()
-                {
-                    EmployeeId = reader.GetInt32(0),
-                    UserId = reader.GetInt32(1),
-                    Salary = reader.GetDecimal(2),
-                    Active = reader.GetBoolean(3),
-                    DateOfBirth = reader.GetDateTime(4)
-                });
-            }
-        }
-
-        public void SetCreateParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
-            cmd.Parameters["@SALARY"].Scale = 2;
-            cmd.Parameters["@SALARY"].Precision = 8;
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
-            cmd.Parameters["@USER_ID"].Value = this.EmployeeInstance.UserId;
-            cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
-            cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
-            cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
-        }
-
-        public void SetRetrieveSearchParameters(SqlCommand cmd)
-        {
-            cmd.Parameters.Add("@EMPLOYEE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@SALARY", SqlDbType.Decimal);
-            cmd.Parameters["@SALARY"].Scale = 2;
-            cmd.Parameters["@SALARY"].Precision = 8;
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@DATE_OF_BIRTH", SqlDbType.Date);
-            cmd.Parameters["@EMPLOYEE_ID"].Value = this.EmployeeInstance.EmployeeId;
-            cmd.Parameters["@USER_ID"].Value = this.EmployeeInstance.UserId;
-            cmd.Parameters["@SALARY"].Value = this.EmployeeInstance.Salary;
-            cmd.Parameters["@ACTIVE"].Value = this.EmployeeInstance.Active;
-            cmd.Parameters["@DATE_OF_BIRTH"].Value = this.EmployeeInstance.DateOfBirth;
-        }
-
     }
 }

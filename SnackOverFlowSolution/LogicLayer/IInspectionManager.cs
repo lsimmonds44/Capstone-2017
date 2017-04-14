@@ -1,4 +1,5 @@
 ﻿using System;
+using DataObjects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,6 @@ namespace LogicLayer
     /// </summary>
     public interface IInspectionManager
     {
-        bool CreateInspection(int employeeID, int productLotId, string gradeId,
-            DateTime datePerformed, DateTime expirationDate);
+        bool CreateInspection(Inspection inspection);
     }
 }
