@@ -19,7 +19,7 @@ namespace DataObjects
 
         private string Category_ID;
 
-        public int? ProductId { get; set; }
+        public int ProductId { get; set; }
 
         public byte[] Image_Binary { get; set; }
 
