@@ -1335,6 +1335,33 @@ namespace WpfPresentationLayer
                 }
             }
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/04/07
+        /// 
+        /// Launch form to view supplier application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewOpenApps_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgSuppliers.SelectedIndex)
+            {
+                MessageBox.Show("Select a supplier to view application");
+            }
+            else
+            {
+                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                    _agreementManager, "Viewing", (Supplier)dgSuppliers.SelectedItem);
+                var result = frmEditSupplier.ShowDialog();
+                if (result == true)
+                {
+                    tabSupplier_Selected(sender, e);
+                }
+
+            }
+        }
         /// <summary>
         /// William Flood
         /// 2017/03/09
