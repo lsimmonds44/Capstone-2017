@@ -34,7 +34,7 @@ namespace LogicLayerTestProject
 
             //act
             //execute method test, set to variable to test
-            gradeList = _gradeManager.RetrieveGradeList();
+           // gradeList = _gradeManager.RetrieveGradeList();
 
             //assert
             //compare result to expected result
