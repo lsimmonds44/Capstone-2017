@@ -15,7 +15,7 @@ namespace LogicLayerTestProject
     public class OrderStatusManagerTests
     {
         //declare private variables
-        OrderStatusManager _orderStatusManager;
+        private OrderStatusManager _orderStatusManager;
 
         [TestInitialize]
         public void TestInitialize()
@@ -25,7 +25,7 @@ namespace LogicLayerTestProject
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestRetrieveOrderStatusList()
         {
             //arrange
             //create new object

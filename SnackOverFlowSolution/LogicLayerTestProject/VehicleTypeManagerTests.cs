@@ -16,7 +16,7 @@ namespace LogicLayerTestProject
     public class VehicleTypeManagerTests
     {
         //declare private variables
-        VehicleTypeManager _vehicleTypeManager;
+        private VehicleTypeManager _vehicleTypeManager;
 
         [TestInitialize]
         public void TestInitialize()
