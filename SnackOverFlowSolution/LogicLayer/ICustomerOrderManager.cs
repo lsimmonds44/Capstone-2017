@@ -10,6 +10,6 @@ namespace LogicLayer
     /// </summary>
     public interface ICustomerOrderManager
     {
-        void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
+        bool ProcessOrder(Cart cart, ShippingDetails shippingDetails);
     }
 }
