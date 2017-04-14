@@ -21,17 +21,11 @@ class UserManager {
         // not implemented. Need connection to server.
         // let url:URL = SnackOverflowAPI.authUser() as URL // not currently used will probably remove Api manager
         let url2:URL = URL(string: "http://10.108.2.56:8333/api/user/\(username)/\(password)")!
-        print("url: \(url2)")
         let request = URLRequest(url: url2)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             do{
                 if let jsonData = data,
-                    //                if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue){
-                    //                    print(jsonString)
-                    //
-                    //                }
-                    
                     let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any]{
                     
                     user.UserId = jsonObject["UserId"] as? Int
@@ -41,20 +35,21 @@ class UserManager {
                     user.UserName = jsonObject["UserName"] as? String
                     user.EmailAddress = jsonObject["EmailAddress"] as? String
                     user.Active = jsonObject["Active"] as? Bool
-                    
-                }
-                completion(user)
-                
+                    completion(user)
+                }else if let requestError = error{
+                print("Error authinticating user. Error: \(requestError)")
+                    completion(user)
+            }else{
+                print("Unexpected error with the request")
+                    completion(user)
+            }
+
+            
             }catch let error{
                 print("json error: \(error)")
-                completion(nil)
+                completion(user)
                 
             }
-            //            }else if let requestError = error{
-            //                print("Error authinticating user. Error: \(requestError)")
-            //            }else{
-            //                print("Unexpected error with the request")
-            //            }
         }
         task.resume()
     }

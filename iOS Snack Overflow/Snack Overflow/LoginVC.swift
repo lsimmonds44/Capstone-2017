@@ -34,7 +34,7 @@ class LoginVC: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         _testUserManager.validateLogin(username: tfUsername.text ?? "", password: tfPassword.text ?? "") { (user) in
             
-            if user != nil{
+            if user?.UserId != nil{
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "HomeSeg", sender: nil)
                 }
