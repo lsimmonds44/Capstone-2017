@@ -24,17 +24,18 @@ namespace MVCPresentationLayer.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(_productManager.RetrieveProducts());
+            var products = new ProductsListViewModel {Products = _productManager.RetrieveProductsToBrowseProducts()};
+            return View(products);
         }
 
         // GET: Products/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? supplierId)
         {
-            if (id == null)
+            if (id == null || supplierId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = _productManager.RetrieveProductById((int)id);
+            var product = _productManager.RetrieveProductsToBrowseProducts().Find(i => i.ProductId == id && i.SupplierID == supplierId);
             if (product == null)
             {
                 return HttpNotFound();

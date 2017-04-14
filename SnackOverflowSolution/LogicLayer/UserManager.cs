@@ -103,6 +103,33 @@ namespace LogicLayer
 
         }
 
+
+        /// <summary>
+        /// William Flood
+        /// 4/12/17
+        /// Refactored database call to a static method to resolve issue #22
+        /// 
+        /// This returns true or false from the 1 or 0 that is recieved from 
+        /// the UserAccessor layer.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public User AuthenticateWebUser(string email, string password)
+        {
+            String foo = UserAccessor.RetrieveUserSaltByEmail(email);
+            String bar = HashSha256(password + foo);
+            try
+            {
+                return UserAccessor.WebLogin(email, bar);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
         public User RetrieveUserByUserName(string username)
         {
             User user = null;

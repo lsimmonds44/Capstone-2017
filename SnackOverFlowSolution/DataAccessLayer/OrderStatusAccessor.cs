@@ -14,6 +14,12 @@ namespace DataAccessLayer
     /// </summary>
     public static class OrderStatusAccessor
     {
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/03/01
+        /// </summary>
+        /// <returns></returns>
         public static List<string> RetrieveAllOrderStatus()
         {
             List<string> status = new List<string>();

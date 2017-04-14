@@ -12,17 +12,17 @@ namespace MVCPresentationLayer.Controllers
     public class CartController : Controller
     {
         private readonly IProductManager _productManager;
-        private readonly IOrderManager _orderManager;
+        private readonly ICustomerOrderManager _customerOrderManager;
 
         public CartController(IProductManager repo)
         {
             _productManager = repo;
         }
 
-        public CartController(IProductManager repo, IOrderManager proc)
+        public CartController(IProductManager repo, ICustomerOrderManager proc)
         {
             _productManager = repo;
-            _orderManager = proc;
+            _customerOrderManager = proc;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -37,7 +37,7 @@ namespace MVCPresentationLayer.Controllers
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
             var product = _productManager.RetrieveProducts()
-                .FirstOrDefault(p => p.ProductId == 10000);
+                .FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
                 cart.AddItem(product, 1);
             return RedirectToAction("Index", new { returnUrl });
@@ -71,7 +71,11 @@ namespace MVCPresentationLayer.Controllers
             if (!ModelState.IsValid) 
                 return View(shippingDetails);
 
-            _orderManager.ProcessOrder(cart, shippingDetails);
+            _customerOrderManager.ProcessOrder(cart, shippingDetails);
+
+
+
+
             cart.Clear();
             return View("Completed");
         }

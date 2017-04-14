@@ -1,8 +1,12 @@
-﻿@model DataObjects.Product
+﻿@model DataObjects.BrowseProductViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Name;
 }
+
+@*
+    Updated by Skyler Hiscock 04/08/17    
+*@
 
 <h2>Details</h2>
 
@@ -27,56 +31,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            @Html.DisplayNameFor(model => model.PriceString)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
+            @Html.DisplayFor(model => model.PriceString)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ImageName)
+            @Html.DisplayNameFor(model => model.Supplier_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageName)
+            @Html.DisplayFor(model => model.Supplier_Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayNameFor(model => model.CategoryID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Active)
+            @Html.DisplayFor(model => model.CategoryID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UnitOfMeasurement)
+            @Html.DisplayNameFor(model => model.Image_Binary)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitOfMeasurement)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryChargePerUnit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryChargePerUnit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageBinary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageBinary)
+            <img src="@Url.Action("PictureOf", "Products", new { id = Model.ProductId})" width="100" height="100" />
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

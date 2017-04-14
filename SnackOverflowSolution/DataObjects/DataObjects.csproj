@@ -34,6 +34,14 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.14.0.832, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -76,6 +84,9 @@
     <Compile Include="Category.cs" />
     <Compile Include="Charity.cs" />
     <Compile Include="CommercialCustomer.cs" />
+    <Compile Include="CompanyOrder.cs" />
+    <Compile Include="CompanyOrderLine.cs" />
+    <Compile Include="CompanyOrderWithLines.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeOrderResponsibility.cs" />
@@ -87,6 +98,8 @@
     <Compile Include="OrderLine.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageLine.cs" />
+    <Compile Include="Pickup.cs" />
+    <Compile Include="PickupLine.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductLot.cs" />
@@ -95,6 +108,7 @@
     <Compile Include="Repair.cs" />
     <Compile Include="RepairLine.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Route.cs" />
     <Compile Include="ShippingDetails.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierCatalogueViewModel.cs" />
@@ -103,6 +117,7 @@
     <Compile Include="SupplierInvoiceLine.cs" />
     <Compile Include="SupplierWithAgreements.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserCartLine.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleType.cs" />
     <Compile Include="Warehouse.cs" />

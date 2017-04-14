@@ -441,6 +441,47 @@ namespace DataAccessLayer
         }
 
         /// <summary>
+        /// Ryan Spurgetis 
+        /// 4/6/2017
+        /// 
+        /// Retrieves the list of supplier application statuses
+        /// </summary>
+        /// <returns>Application status list options</returns>
+        public static List<string> RetrieveSupplierStatusList()
+        {
+            List<string> supplierAppStatus = new List<string>();
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_supplier_application_status_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var appStatus = reader.GetString(0);
+
+                        supplierAppStatus.Add(appStatus);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return supplierAppStatus;
+		}
+
         /// Christian Lopez
         /// 2017/04/06
         /// 
@@ -481,5 +522,141 @@ namespace DataAccessLayer
 
             return suppliersWithAgreements;
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Accessor method to approve supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int ApproveSupplier(Supplier supplier, int approvedBy)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_supplier_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_SUPPLIER_ID", supplier.SupplierID);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", true);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 4/7/2017
+        /// 
+        /// Accessor method to deny supplier and updates who made the change
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="approvedBy"></param>
+        /// <returns></returns>
+        public static int DenySupplier(Supplier supplier, int approvedBy)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_supplier_approval";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("old_SUPPLIER_ID", supplier.SupplierID);
+            cmd.Parameters.AddWithValue("approvedBy", approvedBy);
+            cmd.Parameters.AddWithValue("isApproved", false);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Method to retrieve the address of a supplier
+        /// </summary>
+        /// <param name="preferredAddressId"></param>
+        /// <returns>The UserAddress Object for the given supplier</returns>
+        public static UserAddress RetrieveSuppliersUserAddress(int? supplierId)
+        {
+
+            UserAddress userAddress = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_address_from_supplier_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userAddress = new UserAddress()
+                    {
+                        UserAddressId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        AddressLineOne = reader.GetString(2),
+                        AddressLineTwo = reader.GetString(3),
+                        City = reader.GetString(4),
+                        State = reader.GetString(5),
+                        Zip = reader.GetString(6)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return userAddress;
+        }
+
+
     }
 }

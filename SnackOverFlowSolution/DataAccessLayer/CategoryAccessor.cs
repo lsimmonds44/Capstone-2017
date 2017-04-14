@@ -61,5 +61,39 @@ namespace DataAccessLayer
 
             return rows;
         }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 4/13/17
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns>1 for success, 0 for fail</returns>
+        public static int DeleteCategory(string categoryId)
+        {
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_delete_category";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@CATEGORY_ID", categoryId);
+
+            int rows = 0;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
     }
 }

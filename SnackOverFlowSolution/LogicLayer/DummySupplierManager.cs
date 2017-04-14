@@ -47,8 +47,23 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        public List<string> SupplierAppStatusList()
+		{
+            throw new NotImplementedException();
+        }
 
         public List<SupplierWithAgreements> RetrieveSuppliersWithAgreements()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool DenySupplier(Supplier _supplier, int approvedby)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ApproveSupplier(Supplier supplier, int approvedby)
         {
             throw new NotImplementedException();
         }

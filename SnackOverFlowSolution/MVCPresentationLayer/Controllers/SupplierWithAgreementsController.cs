@@ -26,6 +26,7 @@ namespace MVCPresentationLayer.Controllers
             _agreementManager = agreementManager;
         }
 
+        [Authorize]
         // GET: SupplierWithAgreements
         public ActionResult Index()
         {
@@ -48,6 +49,7 @@ namespace MVCPresentationLayer.Controllers
         //}
 
         // GET: SupplierWithAgreements/Create
+        [Authorize]
         public ActionResult Create()
         {
             List<Product> products = _productManager.ListProducts();
@@ -105,7 +107,7 @@ namespace MVCPresentationLayer.Controllers
                                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
                             }
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index","Home");
                     }
                     else
                     {

@@ -167,5 +167,11 @@ namespace LogicLayer
 
             return newUser;
         }
+
+
+        public User AuthenticateWebUser(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

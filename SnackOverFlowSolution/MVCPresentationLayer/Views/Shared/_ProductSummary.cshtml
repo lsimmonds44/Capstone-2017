@@ -1,0 +1,34 @@
+﻿@model DataObjects.BrowseProductViewModel
+
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Description)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.PriceString)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.Supplier_Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => modelItem.CategoryID)
+</td>
+<td>
+        <img src="@Url.Action("PictureOf", "Products", new { id = Model.ProductId})" width="100" height="100" />
+</td>
+<td>
+    @Html.ActionLink("Details", "Details", "Products", new { id = Model.ProductId, supplierId = Model.SupplierID }, null)
+</td>
+<td>
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        </div>
+    }
+</td>
+

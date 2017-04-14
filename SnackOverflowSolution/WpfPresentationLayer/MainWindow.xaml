@@ -79,6 +79,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -87,6 +88,7 @@
                         <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick" IsEnabled="False"/>
                         <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
                         <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
+                        <Button Name="btnCCAccountApproval" Grid.Row="0" Grid.Column="6" Content="Account Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCCAccountApproval_Click" />
                     </Grid>
                 </Grid>
             </TabItem>
@@ -256,17 +258,26 @@
             <TabItem Name="tabSupplier" Header="Supplier" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplier_Selected">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgSuppliers" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
-                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Name="cboSupplierStatus" Margin="5" SelectionChanged="cboSupplierStatus_SelectionChanged"  />
+                    </Grid>
+                    <DataGrid Name="dgSuppliers" Grid.Row="1" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
+                    <Grid Background="#FFE5E5E5" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -274,9 +285,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="2" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
-                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="3" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
-                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="1" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
+                        <Button Name="btnSupplierApproval" Grid.Row="0" Grid.Column="1" Content="Supplier Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnSupplierApproval_Click"/>
+                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="3" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
+                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="4" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
+                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="2" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
                     </Grid>
                 </Grid>
             </TabItem>
@@ -331,7 +343,7 @@
                     <!--End of Grid Definitions-->
 
                     <!--Top Border-->
-                    <Border Background="LightBlue" Grid.Column="3" Grid.ColumnSpan="17" Grid.Row="0" FlowDirection="LeftToRight"
+                    <Border Grid.Column="3" Grid.ColumnSpan="17" Grid.Row="0" FlowDirection="LeftToRight"
                             BorderBrush="Black" BorderThickness="0 0 0 2">
                         <StackPanel Orientation="Horizontal" >
                             <!--Search Controls-->
@@ -346,7 +358,7 @@
                     <!--End of Top Border-->
 
                     <!--Top Border Left Edge-->
-                    <Border Background="LightBlue" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" FlowDirection="LeftToRight">
+                    <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" FlowDirection="LeftToRight">
                         <StackPanel Orientation="Horizontal" >
                             <!--Software Logo-->
                             <Image Height="36"/>
@@ -356,7 +368,7 @@
                     <!--End of Top Border Left Edge-->
 
                     <!--Side Border-->
-                    <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17" Background="LightBlue"
+                    <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="17"
                             BorderBrush="Black" BorderThickness="0 0 2 0">
                         <StackPanel Orientation="Vertical">
                             <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>

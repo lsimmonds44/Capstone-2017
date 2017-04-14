@@ -33,5 +33,6 @@ namespace LogicLayer
         int ResetPassword(String userName, String password);
 
         User RetrieveUser(int userId);
+        User AuthenticateWebUser(String email, String password);
     }
 }

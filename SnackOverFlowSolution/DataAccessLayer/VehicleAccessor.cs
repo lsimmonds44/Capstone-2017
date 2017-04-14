@@ -276,7 +276,42 @@ namespace DataAccessLayer
             return vehicle;
         }
 
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 4/13/17
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public static int DeleteVehicle(int vehicleId)
+        {
+            var conn = DBConnection.GetConnection();
+            const string cmdText = @"sp_delete_vehicle";
+            var cmd = new SqlCommand(cmdText, conn);
 
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@VEHICLE_ID", vehicleId);
+
+            int rows = 0;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
 
     } // End of class
 } // End of namespace

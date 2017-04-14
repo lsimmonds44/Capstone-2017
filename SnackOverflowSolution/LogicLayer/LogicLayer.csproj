@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.14.0.832, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,7 +53,9 @@
     <Compile Include="Cart.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="CharityManager.cs" />
+    <Compile Include="CompanyOrderManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="CustomerOrderManager.cs" />
     <Compile Include="DeliveryManager.cs" />
     <Compile Include="DeliveryTypeManager.cs" />
     <Compile Include="DummyLocationManager.cs" />
@@ -57,6 +67,7 @@
     <Compile Include="IAgreementManager.cs" />
     <Compile Include="ICategoryManager.cs" />
     <Compile Include="ICharityManager.cs" />
+    <Compile Include="ICompanyOrderManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IDeliveryManager.cs" />
     <Compile Include="IDeliveryTypeManager.cs" />
@@ -70,19 +81,22 @@
     <Compile Include="IMaintenanceScheduleLineManager.cs" />
     <Compile Include="InspectionManager.cs" />
     <Compile Include="IOrderLineManager.cs" />
-    <Compile Include="IOrderManager.cs" />
+    <Compile Include="ICustomerOrderManager.cs" />
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
+    <Compile Include="IPickupManager.cs" />
     <Compile Include="IPreferenceManager.cs" />
     <Compile Include="IProductLotManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="IRepairManager.cs" />
+    <Compile Include="IRouteManager.cs" />
     <Compile Include="IStatusManager.cs" />
     <Compile Include="ISupplierInventoryManager.cs" />
     <Compile Include="ISupplierInvoiceManager.cs" />
     <Compile Include="ISupplierManager.cs" />
+    <Compile Include="IUserCartManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="IVehicleManager.cs" />
     <Compile Include="IVehicleTypeManager.cs" />
@@ -94,12 +108,14 @@
     <Compile Include="OrderStatusManager.cs" />
     <Compile Include="PackageLineManager.cs" />
     <Compile Include="PackageManager.cs" />
+    <Compile Include="PickupManager.cs" />
     <Compile Include="PreferenceManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ProductLotManager.cs" />
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairManager.cs" />
+    <Compile Include="RouteManager.cs" />
     <Compile Include="StatusManager.cs" />
     <Compile Include="SupplierInventoryManager.cs" />
     <Compile Include="SupplierInvoiceManager.cs" />
@@ -109,6 +125,7 @@
     <Compile Include="TestProductLotManager.cs" />
     <Compile Include="TestProductManager.cs" />
     <Compile Include="TestUserManager.cs" />
+    <Compile Include="UserCartManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="VehicleManager.cs" />
     <Compile Include="VehicleTypeManager.cs" />
@@ -123,6 +140,9 @@
       <Project>{3ca06c03-ca44-46ab-9ba0-933de97b908b}</Project>
       <Name>DataObjects</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

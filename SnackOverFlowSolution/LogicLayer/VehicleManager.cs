@@ -63,6 +63,26 @@ namespace LogicLayer
                 throw;
                 //throw new ApplicationException("There was a problem saving the requested vehicle");
             }
+            return newVehicleId;
+        }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 4/13/17
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public int DeleteVehicle(int vehicleId)
+        {
+            int success;
+            try
+            {
+                success = VehicleAccessor.DeleteVehicle(vehicleId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return success;
         }
 

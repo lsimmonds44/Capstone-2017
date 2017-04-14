@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.14.0.832, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +51,7 @@
     <Compile Include="BackorderPreorderAccessor.cs" />
     <Compile Include="CategoryAccessor.cs" />
     <Compile Include="CharityAccessor.cs" />
+    <Compile Include="CompanyOrderAccessor.cs" />
     <Compile Include="CustomerAccessor.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="DeliveryAccessor.cs" />
@@ -58,6 +67,8 @@
     <Compile Include="OrderStatusAccessor.cs" />
     <Compile Include="PackageAccessor.cs" />
     <Compile Include="PackageLineAccessor.cs" />
+    <Compile Include="PickupAccessor.cs" />
+    <Compile Include="PickupLineAccessor.cs" />
     <Compile Include="PreferenceAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />
     <Compile Include="ProductLotAccessor.cs" />
@@ -65,12 +76,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairAccessor.cs" />
     <Compile Include="RepairLineAccessor.cs" />
+    <Compile Include="RouteAccessor.cs" />
     <Compile Include="StatusAccessor.cs" />
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInventoryAccessor.cs" />
     <Compile Include="SupplierInvoiceAccessor.cs" />
     <Compile Include="TestAccessor.cs" />
     <Compile Include="UserAccessor.cs" />
+    <Compile Include="UserCartAccessor.cs" />
     <Compile Include="VehicleAccessor.cs" />
     <Compile Include="VehicleTypeAccessor.cs" />
     <Compile Include="WarehouseAccessor.cs" />
@@ -80,6 +93,9 @@
       <Project>{3ca06c03-ca44-46ab-9ba0-933de97b908b}</Project>
       <Name>DataObjects</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

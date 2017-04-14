@@ -146,6 +146,41 @@ CREATE TABLE [dbo].[COMMERCIAL] (
 )
 GO
 
+print '' print '*** Creating TABLE COMPANY_ORDER'
+GO
+CREATE TABLE [dbo].[COMPANY_ORDER] (
+	[COMPANY_ORDER_ID]		[INT]IDENTITY(10000, 1) NOT NULL,
+	[EMPLOYEE_ID]			[INT]					NOT NULL,
+	[SUPPLIER_ID]			[INT]					NOT NULL,
+	[AMOUNT]				[DECIMAL](6,2)			NOT NULL,
+	[ORDER_DATE]			[DATETIME]				NOT NULL,
+	[HAS_ARRIVED]			[BIT]					NOT NULL DEFAULT 0,
+	[ACTIVE]				[BIT]					NOT NULL DEFAULT 1,
+	
+	CONSTRAINT [PK_COMPANY_ORDER] PRIMARY KEY ([COMPANY_ORDER_ID] ASC)
+)
+GO
+CREATE INDEX COMPANY_ORDER_EMPLOYEE_ID ON COMPANY_ORDER([EMPLOYEE_ID])
+GO
+CREATE INDEX COMPANY_ORDER_SUPPLIER_ID ON COMPANY_ORDER([SUPPLIER_ID])
+GO
+CREATE INDEX COMPANY_ORDER_HAS_ARRIVED ON COMPANY_ORDER([HAS_ARRIVED])
+GO
+
+print '' print '*** Creating TABLE COMPANY_ORDER_LINE'
+GO
+CREATE TABLE [dbo].[COMPANY_ORDER_LINE] (
+	[COMPANY_ORDER_ID]		[INT]			NOT NULL,
+	[PRODUCT_ID]			[INT]			NOT NULL,
+	[PRODUCT_NAME]			[NVARCHAR](100)	NOT NULL,
+	[QUANTITY]				[INT]			NOT NULL,
+	[UNIT_PRICE]			[DECIMAL](6,2)	NOT NULL,
+	[TOTAL_PRICE]			[DECIMAL](6,2)	NOT NULL,
+	
+	CONSTRAINT [PK_COMPANY_ORDER_LINE] PRIMARY KEY ([COMPANY_ORDER_ID] ASC, [PRODUCT_ID] ASC)
+)
+GO
+
 print '' print '*** Creating TABLE CUSTOMER'
 GO
 CREATE TABLE [dbo].[CUSTOMER] (
@@ -249,7 +284,7 @@ CREATE TABLE [dbo].[DRIVER] (
 	[DRIVER_ID]			   [INT] 		 NOT NULL,
 	[DRIVER_LICENSE_NUMBER][NVARCHAR](9) NOT NULL,
 	[LICENSE_EXPIRATION]   [DATETIME] 	 NOT NULL,
-	[ACTIVE]			   [BIT] 		 NOT NULL,
+	[ACTIVE]			   [BIT] 		 NOT NULL DEFAULT 1,
 
 	CONSTRAINT [PK_DRIVER] PRIMARY KEY ([DRIVER_ID] ASC)
 )
@@ -494,7 +529,7 @@ CREATE TABLE [dbo].[PRODUCT] (
 	[NAME]					  [NVARCHAR](50) 		  NOT NULL,
 	[DESCRIPTION]			  [NVARCHAR](200) 		  NOT NULL,
 	[UNIT_PRICE]			  [DECIMAL](16,2) 		  NOT NULL,
-	[IMAGE_NAME]			  [VARCHAR](50),
+	[IMAGE_NAME]			  [VARCHAR](50) DEFAULT '',
 	[ACTIVE]				  [BIT] 				  NOT NULL,
 	[UNIT_OF_MEASUREMENT]	  [NVARCHAR](20) 		  NOT NULL,
 	[DELIVERY_CHARGE_PER_UNIT][DECIMAL](16,2) 		  NOT NULL,
@@ -717,6 +752,15 @@ GO
 CREATE INDEX SUPPLIER_IS_APPROVED ON SUPPLIER([IS_APPROVED])
 GO
 
+print '' print '*** Creating TABLE SUPPLIER_APPLICATION_STATUS'
+GO
+CREATE TABLE [dbo].[SUPPLIER_APPLICATION_STATUS] (
+	[SUPPLIER_STATUS_ID][NVARCHAR](50) NOT NULL,
+
+	CONSTRAINT [PK_SUPPLIER_APPLICATION_STATUS] PRIMARY KEY ([SUPPLIER_STATUS_ID] ASC)
+)
+GO
+
 print '' print '*** Creating TABLE SUPPLIER_INVENTORY'
 GO
 CREATE TABLE [dbo].[SUPPLIER_INVENTORY](
@@ -803,7 +847,7 @@ CREATE TABLE [dbo].[VEHICLE] (
 	[LATEST_REPAIR_DATE][DATE]									  ,
 	[LAST_DRIVER_ID]    [INT]									  ,
 	[VEHICLE_TYPE_ID]	[NVARCHAR](50) 			NOT NULL		  ,
-	[CHECKED_OUT]		[BIT] 					NOT NULL, 
+	[CHECKED_OUT]		[BIT] 					NOT NULL DEFAULT 0, 
 	[OUT_IN_TIME_STAMP]	[DATETIME],
 
 	CONSTRAINT [AK_VIN] UNIQUE([VIN] ASC),
@@ -952,6 +996,42 @@ ALTER TABLE [dbo].[COMMERCIAL] WITH NOCHECK
   REFERENCES [dbo].[APP_USER](USER_ID)
   ON UPDATE CASCADE
   ON DELETE CASCADE
+GO
+
+print '' print '*** Creating Foreign Key COMPANY_ORDER_EMPLOYEE_ID'
+GO
+ALTER TABLE [dbo].[COMPANY_ORDER] WITH NOCHECK
+	ADD CONSTRAINT [fk_COMPANY_ORDER_EMPLOYEE_ID] FOREIGN KEY ([EMPLOYEE_ID])
+	REFERENCES [dbo].[EMPLOYEE](EMPLOYEE_ID)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+GO
+
+print '' print '*** Creating Foreign Key COMPANY_ORDER_SUPPLIER_ID'
+GO
+ALTER TABLE [dbo].[COMPANY_ORDER] WITH NOCHECK
+	ADD CONSTRAINT [fk_COMPANY_ORDER_SUPPLIER_ID] FOREIGN KEY ([SUPPLIER_ID])
+	REFERENCES [dbo].[SUPPLIER](SUPPLIER_ID)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+GO
+
+print '' print '*** Creating Foreign Key COMPANY_ORDER_LINE_COMPANY_ORDER_ID'
+GO
+ALTER TABLE [dbo].[COMPANY_ORDER_LINE] WITH NOCHECK
+	ADD CONSTRAINT [fk_COMPANY_ORDER_LINE_COMPANY_ORDER_ID] FOREIGN KEY ([COMPANY_ORDER_ID])
+	REFERENCES [dbo].[COMPANY_ORDER](COMPANY_ORDER_ID)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+GO
+
+print '' print '*** Creating Foreign Key COMPANY_ORDER_LINE_PRODUCT_ID'
+GO
+ALTER TABLE [dbo].[COMPANY_ORDER_LINE] WITH NOCHECK
+	ADD CONSTRAINT [fk_COMPANY_ORDER_LINE_PRODUCT_ID] FOREIGN KEY ([PRODUCT_ID])
+	REFERENCES [dbo].[PRODUCT](PRODUCT_ID)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 GO
 
 print '' print '*** Creating Foreign Key CUSTOMER_CUSTOMER_ID'
@@ -1719,7 +1799,7 @@ AS
 			(CATEGORY_ID, DESCRIPTION)
 		VALUES
 			(@CATEGORY_ID, @DESCRIPTION)
-		RETURN @@ROWCOUNT
+		SELECT SCOPE_IDENTITY()
 	END
 GO
 
@@ -2577,6 +2657,27 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_create_supplier_application'
+GO
+CREATE PROCEDURE sp_create_supplier_application
+(
+	@USER_ID[INT],
+	@FARM_NAME[NVARCHAR](300),
+	@FARM_ADDRESS[NVARCHAR](300),
+	@FARM_CITY[NVARCHAR](50),
+	@FARM_STATE[NCHAR](2),
+	@FARM_TAX_ID[NVARCHAR](64)
+)
+AS
+	BEGIN
+		INSERT INTO SUPPLIER 
+			(USER_ID, FARM_NAME, FARM_ADDRESS, FARM_CITY, FARM_STATE, FARM_TAX_ID)
+		VALUES
+			(@USER_ID, @FARM_NAME, @FARM_ADDRESS, @FARM_CITY, @FARM_STATE, @FARM_TAX_ID)
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print '*** Creating procedure sp_create_supplier_invoice'
 GO
 CREATE PROCEDURE sp_create_supplier_invoice
@@ -2768,7 +2869,7 @@ AS
 			(ADDRESS_1, ADDRESS_2, CITY, STATE, ZIP)
 		VALUES
 			(@ADDRESS_1, @ADDRESS_2, @CITY, @STATE, @ZIP)
-		RETURN @@ROWCOUNT
+		SELECT SCOPE_IDENTITY()
 	END
 GO
 
@@ -3030,6 +3131,32 @@ AS
 	BEGIN
 		DELETE FROM employee
 		WHERE SALARY = 100 AND ACTIVE = 'True' AND DATE_OF_BIRTH = '1000-01-01' 
+		RETURN @@ROWCOUNT
+	END
+GO
+
+
+print '' print  '*** Creating procedure sp_delete_test_commercial_customer'
+GO
+CREATE PROCEDURE sp_delete_test_commercial_customer
+(
+	@User_ID	[INT]
+)
+AS
+	BEGIN
+		DELETE FROM commercial
+		WHERE User_ID = @User_ID AND FEDERAL_TAX_ID = 123456789
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_delete_test_product'
+GO
+CREATE PROCEDURE sp_delete_test_product
+AS
+	BEGIN
+		DELETE FROM product
+		WHERE NAME = "Test Product" AND DESCRIPTION = "A test product"
 		RETURN @@ROWCOUNT
 	END
 GO
@@ -3608,6 +3735,22 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_web_login'
+GO
+CREATE PROCEDURE sp_web_login 
+(
+    @EmailAddress[NVARCHAR](50),
+    @Password_Hash[NVARCHAR](64)
+)
+AS
+	BEGIN
+		SELECT USER_ID, FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE
+		FROM app_user
+		WHERE E_MAIL_ADDRESS = @EmailAddress
+		AND PASSWORD_HASH = @Password_Hash
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_agreement'
 GO
 CREATE PROCEDURE sp_retrieve_agreement
@@ -3794,6 +3937,58 @@ AS
 	BEGIN
 		SELECT COMMERCIAL_ID, USER_ID, IS_APPROVED, APPROVED_BY, FEDERAL_TAX_ID, ACTIVE
 		FROM commercial
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_by_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_by_id
+(
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_list'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_list
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_list_by_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_list_by_supplier_id
+(
+	@SUPPLIER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		FROM company_order
+		WHERE SUPPLIER_ID = @SUPPLIER_ID
+	END
+GO
+
+print '' print '*** Creating procedure sp_retrieve_company_order_lines_by_order_id'
+GO
+CREATE PROCEDURE sp_retrieve_company_order_lines_by_order_id
+(
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		SELECT COMPANY_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, UNIT_PRICE, TOTAL_PRICE
+		FROM company_order_line
+		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
 	END
 GO
 
@@ -4857,6 +5052,16 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_supplier_application_status_list'
+GO
+CREATE PROCEDURE sp_retrieve_supplier_application_status_list
+AS
+	BEGIN
+		SELECT SUPPLIER_STATUS_ID
+		FROM supplier_application_status
+	END
+GO
+
 print '' print  '*** Creating procedure sp_retrieve_user_address'
 GO
 CREATE PROCEDURE sp_retrieve_user_address
@@ -4913,32 +5118,69 @@ print '' print  '*** Creating procedure sp_retrieve_cart_for_user'
 GO
 CREATE PROCEDURE sp_retrieve_cart_for_user
 (
-	@USER_ID[INT]
+	@USER_NAME[NVARCHAR](50)
 )
 AS
 	BEGIN
-		SELECT user_cart_line.PRODUCT_ID, user_cart_line.USER_ID, user_cart_line.QUANTITY, user_cart_line.GRADE_ID,
-                PRODUCT.NAME, PRODUCT_GRADE_PRICE.PRICE * user_cart_line.QUANTITY AS total
+		SELECT user_cart_line.PRODUCT_ID, user_cart_line.USER_ID, user_cart_line.QUANTITY, user_cart_line.GRADE_ID, PRODUCT.NAME,
+		PRODUCT_GRADE_PRICE.PRICE,
+		DEALS_FOR_PRODUCT.TOTAL_AMOUNT AS FLAT_PRODUCT_DISCOUNT,
+		DEALS_FOR_PRODUCT.TOTAL_PERCENT AS SCALED_PRODUCT_DISCOUNT,
+		DEALS_FOR_CATEGORY.TOTAL_AMOUNT AS FLAT_CATEGORY_DISCOUNT,
+		DEALS_FOR_CATEGORY.TOTAL_PERCENT AS SCALED_CATEGORY_DISCOUNT
         FROM user_cart_line
         INNER JOIN PRODUCT
         ON user_cart_line.PRODUCT_ID = PRODUCT.PRODUCT_ID
         INNER JOIN PRODUCT_GRADE_PRICE
         ON user_cart_line.PRODUCT_ID = PRODUCT_GRADE_PRICE.PRODUCT_ID
         AND user_cart_line.GRADE_ID = PRODUCT_GRADE_PRICE.GRADE_ID
-        WHERE user_cart_line.USER_ID = @USER_ID
+		LEFT OUTER JOIN (
+			SELECT SUM(AMOUNT) AS TOTAL_AMOUNT, EXP(SUM(LOG(1-PERCENT_OFF))) AS TOTAL_PERCENT, DEAL_PRODUCT.PRODUCT_ID
+			FROM DEAL
+			INNER JOIN DEAL_PRODUCT
+			ON DEAL.DEAL_ID = DEAL_PRODUCT.DEAL_ID
+			GROUP BY DEAL_PRODUCT.PRODUCT_ID
+		) AS DEALS_FOR_PRODUCT
+		ON DEALS_FOR_PRODUCT.PRODUCT_ID = PRODUCT.PRODUCT_ID
+		LEFT OUTER JOIN (
+			SELECT SUM(AMOUNT) AS TOTAL_AMOUNT, EXP(SUM(LOG(1-PERCENT_OFF))) AS TOTAL_PERCENT, PRODUCT_CATEGORY.PRODUCT_ID
+			FROM DEAL
+			INNER JOIN DEAL_CATEGORY
+			ON DEAL.DEAL_ID = DEAL_CATEGORY.DEAL_ID
+			INNER JOIN PRODUCT_CATEGORY
+			ON DEAL_CATEGORY.CATEGORY_ID = PRODUCT_CATEGORY.CATEGORY_ID
+			GROUP BY PRODUCT_CATEGORY.PRODUCT_ID
+		) AS DEALS_FOR_CATEGORY
+		ON DEALS_FOR_PRODUCT.PRODUCT_ID = PRODUCT.PRODUCT_ID
+        INNER JOIN APP_USER
+        ON user_cart_line.USER_ID = APP_USER.USER_ID
+        WHERE APP_USER.USER_NAME = @USER_NAME
 	END
 GO
 
 print '' print  '*** Creating procedure sp_retrieve_user_salt'
 GO
 CREATE PROCEDURE sp_retrieve_user_salt (
-    @Username[NVARCHAR](64)
+    @Username[NVARCHAR](50)
 )
 AS
 	BEGIN
 		SELECT PASSWORD_SALT
 		FROM APP_USER
 		WHERE USER_NAME = @Username
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_salt_by_email'
+GO
+CREATE PROCEDURE sp_retrieve_user_salt_by_email (
+    @EmailAddress[NVARCHAR](50)
+)
+AS
+	BEGIN
+		SELECT PASSWORD_SALT
+		FROM APP_USER
+		WHERE E_MAIL_ADDRESS = @EmailAddress
 	END
 GO
 
@@ -6298,6 +6540,45 @@ AS
 	END
 GO
 
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_commercial_customer_approval]
+(
+@old_COMMERCIAL_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [commercial]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy,
+			ACTIVE = @isApproved
+		WHERE COMMERCIAL_ID = @old_COMMERCIAL_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_update_commercial_customer_approval'
+GO
+CREATE PROCEDURE [dbo].[sp_update_supplier_approval]
+(
+@old_SUPPLIER_ID		[INT],
+@approvedBy				[INT],
+@isApproved				[bit]
+)
+AS
+	BEGIN
+		UPDATE [SUPPLIER]
+		SET IS_APPROVED = @isApproved,
+			APPROVED_BY = @approvedBy,
+			ACTIVE = @isApproved
+		WHERE SUPPLIER_ID = @old_SUPPLIER_ID
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_update_charity_approve'
 GO
 CREATE PROCEDURE [dbo].[sp_update_charity_approve]
@@ -6455,7 +6736,7 @@ AS
 	BEGIN
 		UPDATE delivery
 		SET ROUTE_ID = @new_ROUTE_ID, DELIVERY_DATE = @new_DELIVERY_DATE, VERIFICATION = @new_VERIFICATION, STATUS_ID = @new_STATUS_ID, DELIVERY_TYPE_ID = @new_DELIVERY_TYPE_ID, ORDER_ID = @new_ORDER_ID
-		WHERE (DELIVERY_ID = @old_DELIVERY_ID)
+		WHERE (DELIVERY_ID = @DELIVERY_ID)
 		AND (ROUTE_ID = @old_ROUTE_ID)
 		AND (DELIVERY_DATE = @old_DELIVERY_DATE)
 		AND (VERIFICATION = @old_VERIFICATION OR ISNULL(VERIFICATION, @old_VERIFICATION) IS NULL)
@@ -7485,3 +7766,67 @@ SET CHECKED_OUT = @new_Checked_Out_Status, OUT_IN_TIME_STAMP = GETDATE()
 WHERE (VEHICLE_ID = @vehicleId)
 END
 GO
+
+
+print '' print  '*** Creating procedure sp_retrieve_product_name_from_product_lot_id'
+GO
+CREATE PROCEDURE sp_retrieve_product_name_from_product_lot_id
+(
+	@PRODUCT_LOT_ID[int]
+)
+AS
+	BEGIN
+		SELECT NAME
+		FROM PRODUCT, PRODUCT_LOT
+		WHERE PRODUCT_LOT.PRODUCT_LOT_ID = @PRODUCT_LOT_ID
+		AND PRODUCT.PRODUCT_ID = PRODUCT_LOT.PRODUCT_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_from_supplier_id'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_from_supplier_id
+(
+	@SUPPLIER_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, APP_USER, SUPPLIER
+		WHERE SUPPLIER.USER_ID = APP_USER.USER_ID
+		AND APP_USER.PREFERRED_ADDRESS_ID = USER_ADDRESS.USER_ADDRESS_ID
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_routes_for_driver_after_date'
+GO
+CREATE PROCEDURE sp_retrieve_routes_for_driver_after_date
+(
+	@DRIVER_ID[INT],
+	@TODAYS_DATE[DATETIME]
+)
+AS
+	BEGIN
+		SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+		FROM ROUTE
+		WHERE DRIVER_ID = @DRIVER_ID
+		AND cast(ASSIGNED_DATE as date) >= cast(@TODAYS_DATE as date)
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_for_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_for_delivery
+(
+	@DELIVERY_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS.USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, DELIVERY, PRODUCT_ORDER
+		WHERE USER_ADDRESS.USER_ADDRESS_ID = PRODUCT_ORDER.USER_ADDRESS_ID
+		AND DELIVERY.ORDER_ID = PRODUCT_ORDER.ORDER_ID
+		AND DELIVERY.DELIVERY_ID = @DELIVERY_ID
+	END
+GO
+

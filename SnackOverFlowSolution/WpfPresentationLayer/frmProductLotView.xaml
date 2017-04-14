@@ -38,7 +38,7 @@
         <Label Name="lblQuantityVal" Grid.Column="1" Grid.Row="2" Margin="5 2"></Label>
         <DatePicker Name="dpDateReceived" Grid.Column="3" Grid.Row="3" Margin="5 2"></DatePicker>
         <DatePicker Name="dpExpirationDate" Grid.Column="1" Grid.Row="3" Margin="5 2"></DatePicker>
-        <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2" Visibility="Hidden"></TextBox>
+        <TextBox Name="txtQuantity" Grid.Column="1" Grid.Row="2"></TextBox>
 
         <ComboBox Name="cboWarehouseIDVal" Grid.Column="3" Grid.Row="0" Visibility="Collapsed">
             <ComboBox.ItemTemplate>

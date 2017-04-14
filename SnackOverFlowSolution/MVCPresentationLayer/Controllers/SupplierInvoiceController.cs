@@ -37,11 +37,14 @@ namespace MVCPresentationLayer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var supplierInvoice = invMgr.RetrieveAllSupplierInvoices().Find(i => i.SupplierInvoiceId == (int)id);
+            var invoiceDetails = invMgr.RetrieveSupplierInvoiceLinesByInvoiceId(supplierInvoice.SupplierInvoiceId).Find(i => i.SupplierInvoiceId == (int)id);
+            var tuple = Tuple.Create(invoiceDetails, supplierInvoice);
+
             if (supplierInvoice == null)
             {
                 return HttpNotFound();
             }
-            return View(supplierInvoice);
+            return View(tuple);
         }
 
         // GET: /SupplierInvoice/Create

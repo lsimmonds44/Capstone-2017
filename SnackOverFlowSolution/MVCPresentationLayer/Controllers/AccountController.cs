@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCPresentationLayer.Models;
+using LogicLayer;
+using DataObjects;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -17,15 +20,22 @@ namespace MVCPresentationLayer.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserManager _appUserManager;
+        private IUserCartManager _userCartManager;
 
-        public AccountController()
+        public AccountController(IUserManager appUserManager, IUserCartManager _userCartManager)
         {
+            this._appUserManager = appUserManager;
+            this._userCartManager = _userCartManager;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager,
+            IUserCartManager _userCartManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this._appUserManager = appUserManager;
+            this._userCartManager = _userCartManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -75,7 +85,7 @@ namespace MVCPresentationLayer.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -149,26 +159,45 @@ namespace MVCPresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                return View(model);
+            }
+            DataObjects.User userFound = null;
+            try
+            {
+                userFound = _appUserManager.AuthenticateWebUser(model.Email, model.Password);
+            }
+            catch
+            {
+
+            }
+            if (null != userFound)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var user = new ApplicationUser {UserName=userFound.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+
+
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, userFound.FirstName));
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, userFound.LastName));
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Email, userFound.EmailAddress));
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -408,9 +437,50 @@ namespace MVCPresentationLayer.Controllers
         /// Created on 2017/04/06 by William Flood
         /// </summary>
         /// <returns></returns>
-        public ViewResult ViewCart()
+        public ActionResult ViewCart()
         {
-            return View();
+            var userName = User.Identity.Name;
+            var cartList = new List<UserCartLine>();
+
+            // Access IClaimsIdentity which contains claims
+            //IClaimsIdentity claimsIdentity = (IClaimsIdentity)icp.Identity;
+            try
+            {
+                cartList = _userCartManager.RetrieveUserCart(userName);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(500);
+            }
+            return View(cartList);
+        }
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/13
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RemoveFromCart()
+        {
+            try
+            {
+                var userId = Int32.Parse(Request.Params["userId"]);
+                var productId = Int32.Parse(Request.Params["productId"]);
+                var quantity = Int32.Parse(Request.Params["quantity"]);
+                var gradeId = Request.Params["gradeId"];
+                if (0 < _userCartManager.RemoveFromCart(productId, gradeId, quantity, userId))
+                {
+                    return RedirectToAction("ViewCart");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(500);
+                }
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         protected override void Dispose(bool disposing)
