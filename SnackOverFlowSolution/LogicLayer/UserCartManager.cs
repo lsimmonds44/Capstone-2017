@@ -41,5 +41,18 @@ namespace LogicLayer
                 throw;
             }
         }
+
+
+        public int AddToCart(UserCartLine toAdd)
+        {
+            try
+            {
+                return UserCartAccessor.AddToCart(toAdd);
+            }
+            catch(System.Data.SqlClient.SqlException ex)
+            {
+                throw new ApplicationException("An error occured: ", ex);
+            }
+        }
     }
 }

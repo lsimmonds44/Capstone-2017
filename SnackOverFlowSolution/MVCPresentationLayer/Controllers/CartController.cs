@@ -53,7 +53,11 @@ namespace MVCPresentationLayer.Controllers
             };
             
             if (product.ProductId != 0)
+            {
                 cart.AddItem(product, 1);
+            }
+            var gradeId = Request.Params["Grade"];
+            var quantity = Request.Params["Quantity"];
 
             return RedirectToAction("Index", new { returnUrl });
         }
