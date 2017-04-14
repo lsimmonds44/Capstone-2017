@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\PickupController.cs" />
+    <Compile Include="Controllers\Api\RouteController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\rev-slider-settings.css" />
+    <Content Include="Content\snackoverflow.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\bebasneue_bold-webfont.svg" />
     <Content Include="fonts\bebasneue_regular-webfont.svg" />
@@ -257,6 +259,7 @@
     <Content Include="Images\Gallery\gallery-3.jpg" />
     <Content Include="Images\Gallery\gallery-4.jpg" />
     <Content Include="Images\Gallery\gallery-5.jpg" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\slider-images\FLogo.png" />
     <Content Include="Images\slider-images\Flogo2.png" />
     <Content Include="Scripts\bootstrap.js" />

@@ -23,7 +23,15 @@ namespace LogicLayer
             return userCart;
         }
 
-
+        /// <summary>
+        /// William Flood
+        /// Created: 20178/04/13
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="gradeId"></param>
+        /// <param name="quantity"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public int RemoveFromCart(int productId, string gradeId, int quantity, int userId)
         {
             try

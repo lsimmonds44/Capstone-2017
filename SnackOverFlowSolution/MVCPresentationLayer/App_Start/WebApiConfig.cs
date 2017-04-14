@@ -24,6 +24,12 @@ namespace MVCPresentationLayer
             );
 
             config.Routes.MapHttpRoute(
+                name: "routeApi",
+                routeTemplate: "api/route/{driverId}",
+                defaults: new { controller = "route", driverId = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

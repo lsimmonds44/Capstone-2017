@@ -108,6 +108,7 @@
     <Compile Include="Repair.cs" />
     <Compile Include="RepairLine.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Route.cs" />
     <Compile Include="ShippingDetails.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierCatalogueViewModel.cs" />

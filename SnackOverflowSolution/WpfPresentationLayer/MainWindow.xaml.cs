@@ -2,6 +2,7 @@
 using LogicLayer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -66,6 +67,7 @@ namespace WpfPresentationLayer
         List<SupplierInvoice> _supplierInvoiceList;
         List<string> _supplierApplicationStatus = null;
         List<User> _userList = null;
+        private List<SupplierCatalogueViewModel> _parsedSupplierCatalogueData = null;
 
         public MainWindow()
         {
@@ -1167,8 +1169,7 @@ namespace WpfPresentationLayer
             //Load Supplier Data
             try
             {
-                var suppliersData = _supplierManager.ListSuppliers();
-                dgSupplierCatalogue.ItemsSource = parseIntoSupplierCatalogue(suppliersData);
+                RefreshSupplierCatalogue();
             }
             catch (Exception ex)
             {
@@ -1184,6 +1185,7 @@ namespace WpfPresentationLayer
             }
 
         }
+
 
 
         /// <summary>
@@ -1235,6 +1237,45 @@ namespace WpfPresentationLayer
             RefreshSupplierProductDataGrid(supplierData.SupplierID);
 
         }
+
+        /// <summary>
+        /// Created by Natacha Ilunga
+        /// 04/13/17
+        /// 
+        /// Utility Method to refresh Supplier Catalogue Data Grid
+        /// </summary>
+        private void RefreshSupplierCatalogue()
+        {
+            dgSupplierCatalogue.ItemsSource = null;
+
+            dgProductList.ItemsSource = null;
+
+            try
+            {
+                var suppliersData = _supplierManager.ListSuppliers();
+
+                _parsedSupplierCatalogueData = parseIntoSupplierCatalogue(suppliersData);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("RefreshSupplierCatalogue(): " + ex.Message);
+
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+
+            
+
+            dgSupplierCatalogue.ItemsSource = _parsedSupplierCatalogueData;
+        }
+
 
         /// <summary>
         /// Created by Natacha Ilunga

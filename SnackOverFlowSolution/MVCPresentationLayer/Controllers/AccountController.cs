@@ -455,6 +455,11 @@ namespace MVCPresentationLayer.Controllers
             return View(cartList);
         }
 
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/13
+        /// </summary>
+        /// <returns></returns>
         public ActionResult RemoveFromCart()
         {
             try

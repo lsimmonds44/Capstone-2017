@@ -296,5 +296,111 @@ namespace DataAccessLayer
 
             return rows;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Gets all deliveries for the specified route
+        /// </summary>
+        /// <param name="routeId"></param>
+        /// <returns></returns>
+        public static List<Delivery> RetrieveDeliveriesForRoute(int? routeId)
+        {
+            var deliveries = new List<Delivery>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_delivery_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@ROUTE_ID", routeId);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        deliveries.Add(new Delivery()
+                        {
+                            DeliveryId = reader.GetInt32(0),
+                            RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                            DeliveryDate = reader.GetDateTime(2),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            StatusId = reader.GetString(4),
+                            DeliveryTypeId = reader.GetString(5),
+                            OrderId = reader.GetInt32(6)
+                        });
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return deliveries;
+        }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Gets the address assigned to the passed in delivery
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <returns></returns>
+        public static UserAddress RetrieveUserAddressForDelivery(int? deliveryId)
+        {
+
+            UserAddress userAddress = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_address_for_delivery";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userAddress = new UserAddress()
+                    {
+                        UserAddressId = reader.GetInt32(0),
+                        UserId = reader.GetInt32(1),
+                        AddressLineOne = reader.GetString(2),
+                        AddressLineTwo = reader.GetString(3),
+                        City = reader.GetString(4),
+                        State = reader.GetString(5),
+                        Zip = reader.GetString(6)
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return userAddress;
+        }
     }
 }

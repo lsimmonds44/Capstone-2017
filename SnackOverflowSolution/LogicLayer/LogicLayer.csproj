@@ -55,6 +55,7 @@
     <Compile Include="CharityManager.cs" />
     <Compile Include="CompanyOrderManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="CustomerOrderManager.cs" />
     <Compile Include="DeliveryManager.cs" />
     <Compile Include="DeliveryTypeManager.cs" />
     <Compile Include="DummyLocationManager.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="IMaintenanceScheduleLineManager.cs" />
     <Compile Include="InspectionManager.cs" />
     <Compile Include="IOrderLineManager.cs" />
-    <Compile Include="IOrderManager.cs" />
+    <Compile Include="ICustomerOrderManager.cs" />
     <Compile Include="IOrderStatusManager.cs" />
     <Compile Include="IPackageLineManager.cs" />
     <Compile Include="IPackageManager.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="IRepairManager.cs" />
+    <Compile Include="IRouteManager.cs" />
     <Compile Include="IStatusManager.cs" />
     <Compile Include="ISupplierInventoryManager.cs" />
     <Compile Include="ISupplierInvoiceManager.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairManager.cs" />
+    <Compile Include="RouteManager.cs" />
     <Compile Include="StatusManager.cs" />
     <Compile Include="SupplierInventoryManager.cs" />
     <Compile Include="SupplierInvoiceManager.cs" />
