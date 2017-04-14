@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6115EC0D1EA17BAA00717997 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6115EC0C1EA17BAA00717997 /* MapVC.swift */; };
+		6115EC101EA186F300717997 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6115EC0F1EA186F300717997 /* MapKit.framework */; };
 		614B2EB71E8DF36C006EF1FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EB61E8DF36C006EF1FA /* AppDelegate.swift */; };
 		614B2EB91E8DF36C006EF1FA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EB81E8DF36C006EF1FA /* LoginVC.swift */; };
 		614B2EBC1E8DF36C006EF1FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 614B2EBA1E8DF36C006EF1FA /* Main.storyboard */; };
@@ -18,7 +20,6 @@
 		614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EE71E8E08C8006EF1FA /* UserManager.swift */; };
 		614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */; };
 		614D2F131EA111EE00E6D8A3 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614D2F121EA111EE00E6D8A3 /* AppUser.swift */; };
-		61F7C4521E97FE900048D945 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F7C4511E97FE900048D945 /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6115EC0C1EA17BAA00717997 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		6115EC0F1EA186F300717997 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		614B2EB31E8DF36C006EF1FA /* Snack Overflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Snack Overflow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		614B2EB61E8DF36C006EF1FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		614B2EB81E8DF36C006EF1FA /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -56,7 +59,6 @@
 		614B2EE71E8E08C8006EF1FA /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		614B2EEA1E8E0F43006EF1FA /* testUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testUserManager.swift; sourceTree = "<group>"; };
 		614D2F121EA111EE00E6D8A3 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
-		61F7C4511E97FE900048D945 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6115EC101EA186F300717997 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6115EC0E1EA186F300717997 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6115EC0F1EA186F300717997 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		614B2EAA1E8DF36C006EF1FA = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +102,7 @@
 				614B2ECA1E8DF36C006EF1FA /* Snack OverflowTests */,
 				614B2ED51E8DF36C006EF1FA /* Snack OverflowUITests */,
 				614B2EB41E8DF36C006EF1FA /* Products */,
+				6115EC0E1EA186F300717997 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +122,7 @@
 				614B2EB61E8DF36C006EF1FA /* AppDelegate.swift */,
 				614B2EB81E8DF36C006EF1FA /* LoginVC.swift */,
 				614B2EE41E8DFAAB006EF1FA /* HomeVC.swift */,
+				6115EC0C1EA17BAA00717997 /* MapVC.swift */,
 				614B2EE61E8E088C006EF1FA /* Models */,
 				614B2EE91E8E0EA0006EF1FA /* TestModels */,
 				614B2EBA1E8DF36C006EF1FA /* Main.storyboard */,
@@ -143,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				614B2EE71E8E08C8006EF1FA /* UserManager.swift */,
-				61F7C4511E97FE900048D945 /* ApiManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -234,6 +246,11 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 4QBXAKWQL8;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					614B2EC61E8DF36C006EF1FA = {
 						CreatedOnToolsVersion = 8.3;
@@ -303,8 +320,8 @@
 				614B2EE51E8DFAAB006EF1FA /* HomeVC.swift in Sources */,
 				614B2EB91E8DF36C006EF1FA /* LoginVC.swift in Sources */,
 				614B2EEB1E8E0F43006EF1FA /* testUserManager.swift in Sources */,
+				6115EC0D1EA17BAA00717997 /* MapVC.swift in Sources */,
 				614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */,
-				61F7C4521E97FE900048D945 /* ApiManager.swift in Sources */,
 				614B2EB71E8DF36C006EF1FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

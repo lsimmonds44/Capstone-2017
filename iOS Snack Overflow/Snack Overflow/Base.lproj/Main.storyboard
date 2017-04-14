@@ -26,22 +26,28 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dz-FS-iA1">
-                                <rect key="frame" x="16" y="275" width="343" height="116"/>
+                                <rect key="frame" x="16" y="259" width="343" height="150"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Please Log In" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Giy-af-7aw">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="24"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lof-9V-YV8">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="34" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vAy-Wk-26o">
-                                        <rect key="frame" x="0.0" y="40" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="74" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2VS-bq-shT">
-                                        <rect key="frame" x="0.0" y="80" width="343" height="36"/>
+                                        <rect key="frame" x="0.0" y="114" width="343" height="36"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzn-J0-Hnz">
                                                 <rect key="frame" x="0.0" y="0.0" width="171.5" height="36"/>
@@ -78,6 +84,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login/Logout" id="UNv-UM-dGK"/>
                     <connections>
+                        <outlet property="lblUserMessage" destination="Giy-af-7aw" id="Ya0-bP-ViJ"/>
                         <outlet property="tfPassword" destination="vAy-Wk-26o" id="2co-gr-KeX"/>
                         <outlet property="tfUsername" destination="lof-9V-YV8" id="wBR-qu-3fB"/>
                         <segue destination="T1Q-ye-7yP" kind="show" identifier="HomeSeg" id="eq7-bB-flo"/>
@@ -98,13 +105,81 @@
                     <view key="view" contentMode="scaleToFill" id="rNW-LA-My6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SO" translatesAutoresizingMaskIntoConstraints="NO" id="fTl-Sh-QII">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dzy-59-eSo">
+                                <rect key="frame" x="112.5" y="255" width="150" height="157"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEr-gb-O11">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="73"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                        <state key="normal" backgroundImage="DLTruck">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="1w2-0R-K2K" kind="show" identifier="DeliverySeg" id="3zh-F2-cVq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGV-3V-Lk7">
+                                        <rect key="frame" x="0.0" y="83" width="150" height="74"/>
+                                        <state key="normal" backgroundImage="PUTruck"/>
+                                        <connections>
+                                            <segue destination="1w2-0R-K2K" kind="show" identifier="PickupSeg" id="K87-Uj-ejx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fTl-Sh-QII" firstAttribute="top" secondItem="zek-JE-yeo" secondAttribute="bottom" id="2cp-bc-8rO"/>
+                            <constraint firstItem="Dzy-59-eSo" firstAttribute="centerX" secondItem="rNW-LA-My6" secondAttribute="centerX" id="Qsv-CD-GFc"/>
+                            <constraint firstAttribute="trailing" secondItem="fTl-Sh-QII" secondAttribute="trailing" id="UEb-sU-uGS"/>
+                            <constraint firstItem="fTl-Sh-QII" firstAttribute="leading" secondItem="rNW-LA-My6" secondAttribute="leading" id="Wpf-gC-Bgb"/>
+                            <constraint firstItem="fTl-Sh-QII" firstAttribute="bottom" secondItem="wyb-h6-1tO" secondAttribute="top" id="mFm-pP-bpv"/>
+                            <constraint firstItem="Dzy-59-eSo" firstAttribute="centerY" secondItem="rNW-LA-My6" secondAttribute="centerY" id="mav-wv-cLZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="gfU-kG-jgi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r35-Xn-8V5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1713" y="778"/>
+            <point key="canvasLocation" x="1712.8" y="777.66116941529242"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="TZ3-eu-wkP">
+            <objects>
+                <viewController id="1w2-0R-K2K" customClass="MapVC" customModule="Snack_Overflow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b9A-O5-YUB"/>
+                        <viewControllerLayoutGuide type="bottom" id="QOE-YG-pXa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KDI-Fm-Fe1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZMz-7h-mlK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZMz-7h-mlK" secondAttribute="trailing" id="N4P-GP-7BS"/>
+                            <constraint firstItem="ZMz-7h-mlK" firstAttribute="top" secondItem="b9A-O5-YUB" secondAttribute="bottom" id="ZN1-OB-QFP"/>
+                            <constraint firstItem="ZMz-7h-mlK" firstAttribute="bottom" secondItem="QOE-YG-pXa" secondAttribute="top" id="fhL-ks-lpq"/>
+                            <constraint firstItem="ZMz-7h-mlK" firstAttribute="leading" secondItem="KDI-Fm-Fe1" secondAttribute="leading" id="yVH-j4-yl0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="Xug-UA-6hr"/>
+                    <connections>
+                        <outlet property="map" destination="ZMz-7h-mlK" id="L4B-J6-bv6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6f7-3D-bIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2576.8000000000002" y="777.66116941529242"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="apM-9l-Hwm">
@@ -126,6 +201,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="DLTruck" width="150" height="73"/>
+        <image name="PUTruck" width="150" height="74"/>
         <image name="SO" width="240" height="180"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="K87-Uj-ejx"/>
+    </inferredMetricsTieBreakers>
 </document>

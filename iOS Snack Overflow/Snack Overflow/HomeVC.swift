@@ -22,14 +22,37 @@ class HomeVC: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        if segue.identifier == "DeliverySeg"{
+            if let mapVC:MapVC = segue.destination as? MapVC{
+                mapVC.navigationItem.title = "Deliveries"
+            }
+        }else if segue.identifier == "PickupSeg"{
+            if let mapVC:MapVC = segue.destination as? MapVC{
+                mapVC.navigationItem.title = "Pick-Ups"
+            }
+        }
+    } // end of prepare
+ 
 
-}
+} // end of class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
