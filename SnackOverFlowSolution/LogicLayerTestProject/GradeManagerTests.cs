@@ -15,7 +15,7 @@ namespace LogicLayerTestProject
     public class GradeManagerTests
     {
         //declare private variables
-        GradeManager _gradeManager;
+        private GradeManager _gradeManager;
         string[] gradeList;
 
         [TestInitialize]

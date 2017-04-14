@@ -15,7 +15,7 @@ namespace LogicLayerTestProject
     public class DeliveryTypeManagerTests
     {
         //declare private variables
-        DeliveryTypeManager _deliveryTypeManager;
+        private DeliveryTypeManager _deliveryTypeManager;
 
         [TestInitialize]
         public void TestInitialize()
