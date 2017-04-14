@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
-    public class SupplierCatalogueViewModel
+    public class SupplierCatalogViewModel
     {
         private bool _IsApproved;
 

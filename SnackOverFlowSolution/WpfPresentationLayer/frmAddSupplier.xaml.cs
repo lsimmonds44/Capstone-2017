@@ -115,52 +115,25 @@ namespace WpfPresentationLayer
             else
             {
                 supplierFound = true;
-                UserAddress userAddress = null;
-                // Try to get the user's preferred address
-                try
-                {
-                    userAddress = _userManager.RetrieveUserAddress(supplierUser.PreferredAddressId);
-                }
-                catch (Exception ex)
-                {
-                    if (null != ex.InnerException)
-                    {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
 
                 // Fill in tables with the suppliers information that will carry over from user
                 // (name, phone for double checking) and assume the user's address
                 // will be the same as the farm address, but that can be changed
-                txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
-                if (userAddress == null)
+                txtName.Text = supplierUser.FirstName + " " + (supplierUser.LastName ?? "");
+                txtFarmCity.Text = supplierUser.City ?? "";
+                // Need to get index to populate the correct drop down with
+                // the user's state
+                if (getDropdown(supplierUser.State) != -1)
                 {
-                    txtFarmAddress.Text = "";
-                    txtFarmCity.Text = "";
-                    cboFarmState.SelectedIndex = 0;
+                    cboFarmState.SelectedIndex = getDropdown(supplierUser.State);
                 }
                 else
                 {
-                    txtFarmAddress.Text = userAddress.AddressLineOne + " " + userAddress.AddressLineTwo;
-                    txtFarmCity.Text = userAddress.City;
-
-                    // Need to get index to populate the correct drop down with
-                    // the user's state
-                    if (getDropdown(userAddress.State) != -1)
-                    {
-                        cboFarmState.SelectedIndex = getDropdown(userAddress.State);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cannot find user's state!");
-                        cboFarmState.SelectedIndex = 0;
-                    }
-
+                    MessageBox.Show("Cannot find user's state!");
+                    cboFarmState.SelectedIndex = 0;
                 }
+                txtFarmAddress.Text = supplierUser.AddressLineOne + " " + (supplierUser.AddressLineTwo ?? "");
+                
                 // Let the _employee modify the form
                 txtPhone.Text = supplierUser.Phone;
                 txtFarmAddress.IsEnabled = true;

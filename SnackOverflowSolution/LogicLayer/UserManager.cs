@@ -87,7 +87,7 @@ namespace LogicLayer
             try
             {
                 userInstance = UserAccessor.Login(userName, bar);
-                if (null!=userInstance)
+                if (null != userInstance)
                 {
                     userFound = true;
                 }
@@ -96,7 +96,8 @@ namespace LogicLayer
                     userFound = false;
                 }
                 return userFound;
-            } catch
+            }
+            catch
             {
                 throw;
             }
@@ -231,7 +232,7 @@ namespace LogicLayer
                 MailAddress m = new MailAddress(user.EmailAddress);
                 string username = "";
                 username = userAccessor.RetrieveUsernameByEmail(user.EmailAddress);
-                if (username != "")
+                if (username != null)
                 {
                     return "Used Email";
                 }
@@ -251,7 +252,7 @@ namespace LogicLayer
             try
             {
 
-                if (1 == UserAccessor.Create(user))
+                if (1 == UserAccessor.CreateUser(user))
                 {
                     return "Created";
                 }
@@ -285,39 +286,6 @@ namespace LogicLayer
 
 
 
-        /// <summary>
-        /// Christian Lopez
-        /// Created on 2017/02/01
-        /// 
-        /// Retrieve the corresponding User Address
-        /// </summary>
-        /// <param name="prefferedAddressId"></param>
-        /// <returns></returns>
-        /// <remarks>Last modified by Christian Lopez 2017/02/25</remarks>
-        public UserAddress RetrieveUserAddress(int? prefferedAddressId)
-        {
-
-            UserAddress userAddress = null;
-            if (prefferedAddressId != null)
-            {
-                try
-                {
-                    userAddress = UserAccessor.RetrieveUserAddress(prefferedAddressId);
-                }
-                catch (SqlException ex)
-                {
-
-                    throw new ApplicationException("There was a database error.", ex);
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException("There was an unknown error.", ex);
-                }
-
-            }
-            return userAddress;
-        }
-
 
         public string LogIn(string p1, string p2)
         {
@@ -341,11 +309,11 @@ namespace LogicLayer
                 var accessor = new UserAccessor();
                 String oldSalt = accessor.RetrieveUserSalt(userName);
                 String oldHash = HashSha256(oldPassword + oldSalt);
-                String foo = RandomString(32);
-                String bar = HashSha256(newPassword + foo);
+                String newSalt = RandomString(32);
+                String newHash = HashSha256(newPassword + newSalt);
                 try
                 {
-                    returnValue = accessor.UpdatePassword(userName, oldSalt, oldHash, foo, bar);
+                    returnValue = accessor.UpdatePassword(userName, oldSalt, oldHash, newSalt, newHash);
                 }
                 catch
                 {
@@ -371,10 +339,10 @@ namespace LogicLayer
         {
             int results = 0;
             String foo = RandomString(32);
-            String bar = HashSha256(password+foo);
+            String bar = HashSha256(password + foo);
             try
             {
-                results = (new UserAccessor()).ResetPassword(userName,foo,bar);
+                results = (new UserAccessor()).ResetPassword(userName, foo, bar);
             }
             catch
             {

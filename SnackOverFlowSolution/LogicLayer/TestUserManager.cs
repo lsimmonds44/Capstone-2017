@@ -29,11 +29,15 @@ namespace LogicLayer
                     FirstName = "Test",
                     LastName = "User",
                     Phone = "1234567890",
-                    PreferredAddressId = 1,
                     EmailAddress = "test@test.com",
                     EmailPreferences = true,
                     UserName = userName,
-                    Active = true
+                    Active = true,
+                    AddressLineOne = "818 45th St NE",
+                    AddressLineTwo = "test address line two",
+                    City = "Test New York",
+                    State = "TT",
+                    Zip = "66666"
                 };
             }
             else
@@ -44,38 +48,6 @@ namespace LogicLayer
             return newUser;
         }
 
-        /// <summary>
-        /// Christian Lopez
-        /// Created on 2017/02/01
-        /// 
-        /// Return known values as UserAddress
-        /// </summary>
-        /// <param name="prefferedAddressId">The preferred addressID from the User</param>
-        /// <returns>Known User Address</returns>
-        public DataObjects.UserAddress RetrieveUserAddress(int? prefferedAddressId)
-        {
-            UserAddress ua = null;
-
-            if (prefferedAddressId == 1)
-            {
-                ua = new UserAddress()
-                {
-                    UserAddressId = (int)prefferedAddressId,
-                    UserId = 10000,
-                    AddressLineOne = "102 Somewhere Rd",
-                    AddressLineTwo = "",
-                    City = "Anywhere",
-                    State = "IA",
-                    Zip = "52525"
-                };
-            }
-            else
-            {
-                throw new ApplicationException("Unable to find address");
-            }
-
-            return ua;
-        }
 
         public string LogIn(string uName, string pass)
         {
@@ -154,11 +126,15 @@ namespace LogicLayer
                     FirstName = "Test",
                     LastName = "User",
                     Phone = "1234567890",
-                    PreferredAddressId = 1,
                     EmailAddress = "test@test.com",
                     EmailPreferences = true,
                     UserName = "test",
-                    Active = true
+                    Active = true,
+                    AddressLineOne = "818 45th St NE",
+                    AddressLineTwo = "test address line two",
+                    City = "Test New York",
+                    State = "TT",
+                    Zip = "66666"
                 };
             
             

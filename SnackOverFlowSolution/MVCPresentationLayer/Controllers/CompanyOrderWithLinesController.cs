@@ -15,20 +15,28 @@ namespace MVCPresentationLayer.Controllers
     public class CompanyOrderWithLinesController : Controller
     {
         private ICompanyOrderManager _companyOrderManager;
+        private ISupplierManager _supplierManager;
+        private IUserManager _userManager;
 
-        public CompanyOrderWithLinesController(ICompanyOrderManager companyOrderManager)
+        public CompanyOrderWithLinesController(ICompanyOrderManager companyOrderManager, ISupplierManager supplierManager,
+            IUserManager userManager)
         {
             _companyOrderManager = companyOrderManager;
+            _supplierManager = supplierManager;
+            _userManager = userManager;
         }
 
         // GET: CompanyOrderWithLines
-        [Authorize]
+        [Authorize(Roles="Supplier")]
         public ActionResult Index()
         {
             List<CompanyOrderWithLines> orders;
             try
             {
-                orders = _companyOrderManager.RetrieveCompanyOrdersWithLines();
+                DataObjects.User usr = _userManager.RetrieveUserByUserName(User.Identity.Name);
+                Supplier supplier = _supplierManager.RetrieveSupplierByUserId(usr.UserId);
+                //orders = _companyOrderManager.RetrieveCompanyOrdersWithLines();
+                orders = _companyOrderManager.RetrieveCompanyOrdersWithLinesBySupplierId(supplier.SupplierID);
                 return View(orders);
             }
             catch (Exception)
