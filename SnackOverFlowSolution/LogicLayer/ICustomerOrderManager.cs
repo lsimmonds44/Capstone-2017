@@ -8,7 +8,7 @@ namespace LogicLayer
     /// 
     /// Interface for Customer Orders on MVC Layer
     /// </summary>
-    public interface IOrderManager
+    public interface ICustomerOrderManager
     {
         void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
     }

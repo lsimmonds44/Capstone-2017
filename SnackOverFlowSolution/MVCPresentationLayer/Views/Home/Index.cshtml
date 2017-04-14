@@ -31,6 +31,7 @@
 
     <link href="~/Content/reset.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/snackoverflow.css" rel="stylesheet" />
 
     <!-- Head JS Libraries -->
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
@@ -86,7 +87,6 @@
                     <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                     <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </nav>
         </div><!-- /main-nav-inner -->
     </div><!-- /main-nav-container -->
@@ -102,13 +102,13 @@
                         <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" data-title="Chana Experience">
                             <img class="rs-parallaxlevel-1" src="~/Images/Background/bg-1.jpg" alt="Marine Slider BG" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                             <div class="tp-caption customin customout" id="topOne">
-                                <img src="~/Images/slider-images/FLogo.png" alt="Organic" class="animateme" id="sOne">
+                                <img src="~/Images/logo.png" alt="Organic" class="animateme" id="sOne">
                             </div>
                         </li>
                         <li data-transition="fadetorightfadetoleft" data-slotamount="7" data-masterspeed="1500" data-title="Coffee Experience">
                             <img class="rs-parallaxlevel-1" src="~/Images/background/bg-2.jpg" alt="Marine Slider BG" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                             <div class="tp-caption customin customout" id="topTwo">
-                                <img src="~/Images/slider-images/Flogo2.png" alt="Organic" class="animateme" id="sTwo">
+                                <img src="~/Images/logo.png" alt="Organic" class="animateme" id="sTwo">
                             </div>
                         </li>
                     </ul>
