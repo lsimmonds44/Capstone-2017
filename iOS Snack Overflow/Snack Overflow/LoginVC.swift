@@ -12,8 +12,9 @@ class LoginVC: UIViewController {
     
     // variables
     private let _userManager = UserManager()
-    private let _testUserManager = TestUserManager()
-    private var loggedIn = Bool(){didSet{if loggedIn{performSegue(withIdentifier: "HomeSeg", sender: nil)}}}
+    private let _testUserManager = UserManager()
+    private var user = User()
+//    {didSet{if user != nil {performSegue(withIdentifier: "HomeSeg", sender: nil)}}
     
     // outlets
     @IBOutlet weak var tfUsername: UITextField!
@@ -31,8 +32,13 @@ class LoginVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func login(_ sender: UIButton) {
-        _testUserManager.validateLogin(username: tfUsername.text ?? "", password: tfPassword.text ?? "") { (loginSuccessful) in
-            self.loggedIn = loginSuccessful
+        _testUserManager.validateLogin(username: tfUsername.text ?? "", password: tfPassword.text ?? "") { (user) in
+            
+            if user != nil{
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "HomeSeg", sender: nil)
+                }
+            }
         }
         tfUsername.text = nil
         tfPassword.text = nil
