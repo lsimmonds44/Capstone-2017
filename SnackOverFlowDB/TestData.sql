@@ -3,9 +3,9 @@ USE [SnackOverflowDB];
 print '' print '*** Inserting App_User Admin data'
 GO
 INSERT INTO App_User 
-	(FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE)
+	(FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE, ADDRESS1, ADDRESS2, CITY, STATE, ZIP)
 VALUES
-	('Mason', 'Masonson', '3192222222', NULL, 'masn@yahoo', 0, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'ADMIN', 1)
+	('Mason', 'Masonson', '3192222222', NULL, 'masn@yahoo', 0, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'ADMIN', 1, "Top of the world", NULL, "North Poland", "UU", 55555)
 GO
 
 print '' print '*** Inserting Vehicle_Type sample data'
@@ -22,15 +22,15 @@ GO
 print '*** Inserting App_User Test Data ***'
 GO
 INSERT INTO [dbo].[App_User]
-	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active, PREFERRED_ADDRESS_ID)
+	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active, Address1, Address2, City, State, Zip)
 VALUES
-	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1, 10000),
-	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1, 10000),
-	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1, 10000), --Password: m0R3$e(ur3
-	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, 10000),
-	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, 10000),
-	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, 10000),
-	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, 10000)
+	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
+	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
+	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1, "Home", NULL, "Cedar Rapids", "IA", 52404), --Password: m0R3$e(ur3
+	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
+	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
+	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
+	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, "Home", NULL, "Cedar Rapids", "IA", 52404)
 GO
 
 print '' print '*** Inserting Customer Test Data ***'
@@ -46,7 +46,7 @@ GO
 INSERT INTO [dbo].[USER_ADDRESS]
 	(USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP)
 VALUES
-	(1, 10006, '6301 Kirkwood Blvd', 'Nielson Hall','Cedar Rapids', 'IA', '52404')
+	(1, 10006, '6301 Kirkwood Blvd', 'Nielson Hall','"Cedar Rapids"', 'IA', '52404')
 GO
 
 print '*** Inserting Employee Test Data ***'
@@ -79,7 +79,7 @@ GO
 INSERT INTO [dbo].[Warehouse]
 	(Address_1, Address_2, City, State, Zip)
 VALUES
-	('Ware A St', 'Block B', 'Cedar Rapids', 'IA', '52304')
+	('Ware A St', 'Block B', '"Cedar Rapids"', 'IA', '52304')
 GO
 
 print '*** Inserting Product Test Data ***'
@@ -132,11 +132,11 @@ GO
 INSERT INTO [dbo].[Supplier]
 	(User_ID, IS_Approved, Approved_BY, Farm_Name, Farm_Address, Farm_City, Farm_State, Farm_Tax_ID,Active)
 VALUES
-	(10002,1,10001,'Glasgow Foods', 'Glasgow Drive', 'Cedar Rapids', 'IA', '2322',1),
-	(10003,1,10001,'Trapp Foods', '6301 Trapp Drive', 'Cedar Rapids', 'IA', '2322',1),
-	(10004,1,10001,'Browmich Foods', '212 Browmich Drive', 'Cedar Rapids', 'IA', '2322',1),
-	(10005,1,10001,'Hench Foods', '222 Hench AV', 'Cedar Rapids', 'IA', '2322',1),
-	(10006,0,null,'Parker Produce', '4985 Vegetable Ln', 'Cedar Rapids', 'IA', '2452',1),
+	(10002,1,10001,'Glasgow Foods', 'Glasgow Drive', '"Cedar Rapids"', 'IA', '2322',1),
+	(10003,1,10001,'Trapp Foods', '6301 Trapp Drive', '"Cedar Rapids"', 'IA', '2322',1),
+	(10004,1,10001,'Browmich Foods', '212 Browmich Drive', '"Cedar Rapids"', 'IA', '2322',1),
+	(10005,1,10001,'Hench Foods', '222 Hench AV', '"Cedar Rapids"', 'IA', '2322',1),
+	(10006,0,null,'Parker Produce', '4985 Vegetable Ln', '"Cedar Rapids"', 'IA', '2452',1),
 	(10007,0,null,'Marion Farms', '5643 170th St', 'Marion', 'IA', '2782',1)
 GO
 

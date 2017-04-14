@@ -29,8 +29,8 @@
                 <MenuItem Name="mnuPrefernces" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="User Settings">
-                <MenuItem Name="mnuRequestUsername" Header="Request Username" Click="RequestUsername_Click" HorizontalAlignment="Left" Width="Auto"/>
-                <MenuItem Name="mnuChangePassword" Header="Change Password" Visibility="Collapsed" Click="ChangePassword" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuRequestUsername" Header="Request Username" Click="mnuRequestUsername_OnClick" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuChangePassword" Header="Change Password" Visibility="Collapsed" Click="mnuChangePassword_OnClick" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Help" >
                 <MenuItem Name="mnuHelp" Header="Help" HorizontalAlignment="Left" Width="Auto"/>
@@ -82,7 +82,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Customer Date Grid-->
-                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="CustomerSelected" Grid.ColumnSpan="3">
+                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="Customer_Selected" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" Width="*"/>
                             <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="*"/>
@@ -110,9 +110,9 @@
                         </Grid.RowDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Customer Controls -->
-                        <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerTypeSelected" Initialized="cboCustomerTypeInitialized" />
-                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="createOrderClick" IsEnabled="False"/>
-                        <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Button_Click_Create_CommercialCustomer"/>
+                        <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerType_Selected" Initialized="cboCustomerType_Initialized" />
+                        <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="btnCreateOrder_Click" IsEnabled="False"/>
+                        <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Create_CommercialCustomer_Button_Click"/>
                         <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
                         <Button Name="btnCCAccountApproval" Grid.Row="0" Grid.Column="6" Content="Account Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCCAccountApproval_Click" />
                         <!--End of Customer Controls -->
@@ -142,9 +142,11 @@
                             <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*"/>
                             <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
                             <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
-                            <DataGridTextColumn Header="Preferred Address ID" Binding="{Binding PreferredAddressId}" Width="*"/>
+                            <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                            <DataGridTextColumn Header="State" Binding="{Binding State}" Width="*"/>
+                            <DataGridTextColumn Header="Zip" Binding="{Binding Zip}" Width="*"/>
                             <DataGridTextColumn Header="Email Address" Binding="{Binding EmailAddress}" Width="*"/>
-                            <DataGridTextColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="*"/>
                         </DataGrid.Columns>
@@ -235,7 +237,7 @@
                     <!--End of Employee Data Grid-->
                     <!--Employee Controls-->
                     <Button Name="btnAddEmployee" Grid.Row="1" Grid.Column="3" Width="180" Margin="58,0" VerticalAlignment="Bottom" Click="btnAddEmployee_Click">Add</Button>
-                    <Button Grid.Row="1" Grid.Column="4" Content="Update Employee Information" Width="180" Margin="59,0,58,0" VerticalAlignment="Bottom" Click="Button_Click_Update_Employee"  />
+                    <Button Grid.Row="1" Grid.Column="4" Content="Update Employee Information" Width="180" Margin="59,0,58,0" VerticalAlignment="Bottom" Click="Update_Employee_Button_Click"  />
                 </Grid>
                 <!--End of Employee Grid-->
             </TabItem>
@@ -273,7 +275,7 @@
                         </Grid.RowDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Product Controls-->
-                        <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="3" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="viewProductBtn"/>
+                        <Button Name="btnViewProduct" Grid.Row="0" Grid.Column="3" Content="View Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="btnViewProduct_Click"/>
                         <Button Name="btnAddProduct" Grid.Row="0" Grid.Column="2" Content="Add Product" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="btnAddProduct_OnClick"/>
                         <Button Name="btnAddCategory" Grid.Row="0" Grid.Column="1" Content="Add Category" Margin="10.4,0,0,-0.4" HorizontalAlignment="left" Height="22" VerticalAlignment="Bottom" Click="btnAddCategory_Click"  />
                     </Grid>
@@ -297,7 +299,7 @@
                     <!--End of Grid Definitions-->
                     <!--Product Lot Data Grid -->
                     <DataGrid x:Name="dgProductLots" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                               AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_MouseDoubleClick" >
+                               AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_Mouse_Double_Click" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ProductLotId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Product" Width="*" Binding="{Binding ProductName}"></DataGridTextColumn>
@@ -330,10 +332,10 @@
                         <!--End of Grid Definitions-->
                         <!--Product Lot Controls-->
                         <Button Name="btnSplitLot" Grid.Row="0" Grid.Column="1" Content="Split Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnSplitLot_Click"/>
-                        <Button Name="btnFilterLots" Grid.Row="0" Grid.Column="2" Content="Filter Product Lots" Margin="10 0 5 0" VerticalAlignment="Top" Click="FilterProductLots_Click"/>
-                        <Button Name="btnCreateLot" Grid.Row="0" Grid.Column="3" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="AddProductLot_Click"/>
+                        <Button Name="btnFilterLots" Grid.Row="0" Grid.Column="2" Content="Filter Product Lots" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnFilterProductLots_Click"/>
+                        <Button Name="btnCreateLot" Grid.Row="0" Grid.Column="3" Content="Add Product Lot" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnAddProductLot_Click"/>
                         <Button Name="btnCreateInspection" Grid.Row="0" Grid.Column="4" Margin="10 0 5 0" Content="Create Inspection" HorizontalAlignment="left" Click="btnCreateInspection_Click" />
-                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="5" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="btnManageStock_OnClick" />
+                        <Button Name="btnManageStock" Grid.Row="0" Grid.Column="5" Margin="10 0 5 0" Content="Manage Stock" HorizontalAlignment="left" Click="btnManageStock_Click" />
 
                     </Grid>
                     <!--End of Product Lot Controls Grid-->
@@ -379,6 +381,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -386,8 +389,9 @@
                         <!--End of Grid Definitions-->
                         <!--Suppliers Controls-->
                         <Button Name="btnSupplierApproval" Grid.Row="0" Grid.Column="1" Content="Supplier Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnSupplierApproval_Click"/>
-                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="3" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
-                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="4" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
+                        <Button Name="btnViewOpenApps" Grid.Row="0" Grid.Column="3" Content="View Application Details" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnViewOpenApps_Click" Height="22" VerticalAlignment="Bottom"/>
+                        <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="4" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
+                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="5" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
                         <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="2" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
                         <!--End of Suppliers Controls-->
                     </Grid>
@@ -397,7 +401,7 @@
             </TabItem>
             <!--End of Suppliers tab -->
             <!--Supplier Catalog Tab-->
-            <TabItem Name="tabSupplierCatalog" Header="Supplier Catalog" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierCatlog_Selected">
+            <TabItem Name="tabSupplierCatalog" Header="Supplier Catalog" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierCatalog_Selected">
                 <Grid Background="#FFE5E5E5">
                     <!--Grid Definitions-->
                     <Grid.ColumnDefinitions>
@@ -548,11 +552,11 @@
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Open Orders Top Controls-->
-                        <ComboBox Name="cboOrderStatus" Margin="5" SelectionChanged="cboOrderStatus_SelectionChanged"/>
+                        <ComboBox Name="cboOrderStatus" Margin="5" SelectionChanged="cboOrderStatus_Selection_Changed"/>
                     </Grid>
                     <!--End of Open Orders Grid-->
                     <!--List View Open Orders-->
-                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_MouseDoubleClick">
+                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_Mouse_Double_Click">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="75" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
@@ -647,7 +651,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Vehicle Data Grid-->
-                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_MouseDoubleClick">
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_Mouse_Double_Click">
                     </DataGrid>
                     <!--End of Vehicle Data Grid-->
                     <!--Vehicle Management Control Grid-->
@@ -666,7 +670,7 @@
                         <!--End of Grid Definitions-->
                         <!--Vehicle Management Controls-->
                         <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
-                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="editVehicleClick"/>
+                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditVehicle_Click"/>
                         <Button Name="btnAddMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="3" Content="Add Maintenance Record" Click="btnAddMaintenance_Click"/>
                         <Button Name="btnViewMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="4" Content="View Maintenance Records" Click="btnViewMaintenance_Click"/>
                         <Button Name="btnCheckOutVehicle" Grid.Row="0" Margin="10 0 0 0" Grid.Column="5" Content="Check Vehicle Out / In" Click="btnCheckOutVehicle_Click"/>
@@ -686,7 +690,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Deliveries List View-->
-                    <ListView Name="lvDeliveries" Margin="10 10 10 39" MouseDoubleClick="lvDeliveries_MouseDoubleClick">
+                    <ListView Name="lvDeliveries" Margin="10 10 10 39" MouseDoubleClick="lvDeliveries_Mouse_Double_Click">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -756,7 +760,7 @@
                     <!--End of Grid Definitions-->
                     <!--Supplier Invoices Data Grid -->
                     <DataGrid x:Name="dgSupplierInvoices" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" MouseDoubleClick="dgSupplierInvoices_MouseDoubleClick" />
+                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" MouseDoubleClick="dgSupplierInvoices_Mouse_Double_Click" />
                     <!--End of Supplier Invoices Data Grid-->
                     <!--Supplier Invoices Controls Grid-->
                     <Grid Background="#FFE5E5E5" Grid.Row="1">

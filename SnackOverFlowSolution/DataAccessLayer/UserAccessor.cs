@@ -11,59 +11,88 @@ namespace DataAccessLayer
 {
     public class UserAccessor
     {
-        
-        
-        
 
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Retrieves a list of all users from the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method and added address fields.
+        /// </remarks>
+        /// 
+        /// <returns>List of all users.</returns>
         public static List<User> RetrieveList()
         {
+            var users = new List<User>();
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_retrieve_app_user_list", conn);
+            var cmdText = @"sp_retrieve_app_user_list";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-                var resultList = new List<User>();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    resultList.Add(new User()
+                    while (reader.Read())
                     {
-                        UserId = reader.GetInt32(0),
-                        FirstName = reader.GetString(1),
-                        //Test if the query returned a null value.
-                        LastName = (reader.IsDBNull(2) ? null : reader.GetString(2)),
-                        Phone = reader.GetString(3),
-                        //Test if the query returned a null value.
-                        PreferredAddressId = (reader.IsDBNull(4) ? null : (int?)reader.GetInt32(4)),
-                        EmailAddress = reader.GetString(5),
-                        EmailPreferences = reader.GetBoolean(6),
-                        UserName = reader.GetString(9),
-                        Active = reader.GetBoolean(10)
-                    });
+                        users.Add(new User()
+                        {
+                            UserId = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
+                            Phone = reader.GetString(3),
+                            EmailAddress = reader.GetString(4),
+                            EmailPreferences = reader.GetBoolean(5),
+                            UserName = reader.GetString(6),
+                            Active = reader.GetBoolean(7),
+                            AddressLineOne = reader.IsDBNull(8) ? null : reader.GetString(8),
+                            AddressLineTwo = reader.IsDBNull(9) ? null : reader.GetString(9),
+                            City = reader.IsDBNull(10) ? null : reader.GetString(10),
+                            State = reader.IsDBNull(11) ? null : reader.GetString(11),
+                            Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
+                        });
+                    }
                 }
-                return resultList;
+
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
-                conn.Close(); // good housekeeping approved!
+                conn.Close();
             }
+
+            return users;
         }
 
-        
+
 
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/01
+        /// Created: 2017/02/01
         /// 
         /// Access DB to get User by given username
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method and added address fields.
+        /// </remarks>
+        /// <param name="username">The username to search on.</param>
+        /// <returns>The user with the username.</returns>
         public static User RetrieveUserByUsername(string username)
         {
             User user = null;
@@ -73,8 +102,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar, 50);
-            cmd.Parameters["@USERNAME"].Value = username;
+            cmd.Parameters.AddWithValue("@USERNAME", username);
 
             try
             {
@@ -87,28 +115,22 @@ namespace DataAccessLayer
                     {
                         UserId = reader.GetInt32(0),
                         FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
+                        LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Phone = reader.GetString(3),
-                        //PreferredAddressId = reader.GetInt32(4),
-                        EmailAddress = reader.GetString(5),
-                        EmailPreferences = reader.GetBoolean(6),
-                        UserName = reader.GetString(7),
-                        Active = reader.GetBoolean(8)
+                        EmailAddress = reader.GetString(4),
+                        EmailPreferences = reader.GetBoolean(5),
+                        UserName = reader.GetString(6),
+                        Active = reader.GetBoolean(7),
+                        AddressLineOne = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        AddressLineTwo = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        City = reader.IsDBNull(10) ? null : reader.GetString(10),
+                        State = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
                     };
-                    if (!reader.IsDBNull(4))
-                    {
-                        user.PreferredAddressId = reader.GetInt32(4);
-                    }
-                    else
-                    {
-                        user.PreferredAddressId = null;
-                    }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -119,241 +141,53 @@ namespace DataAccessLayer
             return user;
         }
 
-        public static int Create(User toCreate)
-        {
-            var results = 0;
-            var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_create_app_user", conn);
-            cmd.Parameters.Add("@FIRST_NAME", SqlDbType.NVarChar, 150);
-            cmd.Parameters.Add("@LAST_NAME", SqlDbType.NVarChar, 100);
-            cmd.Parameters.Add("@PHONE", SqlDbType.NVarChar, 15);
-            cmd.Parameters.Add("@PREFERRED_ADDRESS_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@E_MAIL_ADDRESS", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@E_MAIL_PREFERENCES", SqlDbType.Bit);
-            cmd.Parameters.Add("@PASSWORD_HASH", SqlDbType.NVarChar, 64);
-            cmd.Parameters.Add("@PASSWORD_SALT", SqlDbType.NVarChar, 64);
-            cmd.Parameters.Add("@USER_NAME", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@ACTIVE", SqlDbType.Bit);
-            cmd.Parameters["@FIRST_NAME"].Value = toCreate.FirstName;
-            cmd.Parameters["@LAST_NAME"].Value = toCreate.LastName;
-            cmd.Parameters["@PHONE"].Value = toCreate.Phone;
-            cmd.Parameters["@PREFERRED_ADDRESS_ID"].Value = toCreate.PreferredAddressId;
-            cmd.Parameters["@E_MAIL_ADDRESS"].Value = toCreate.EmailAddress;
-            cmd.Parameters["@E_MAIL_PREFERENCES"].Value = toCreate.EmailPreferences;
-            cmd.Parameters["@PASSWORD_HASH"].Value = toCreate.PasswordHash;
-            cmd.Parameters["@PASSWORD_SALT"].Value = toCreate.PasswordSalt;
-            cmd.Parameters["@USER_NAME"].Value = toCreate.UserName;
-            cmd.Parameters["@ACTIVE"].Value = toCreate.Active;
-            cmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                conn.Open();
-                results = cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                conn.Close(); // good housekeeping approved!
-            }
-            return results;
-        }
-
-
-        public String RetrieveUserSalt (String userName)
-        {
-
-            var results = "";
-            var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_retrieve_user_salt", conn);
-            cmd.Parameters.Add("@Username", SqlDbType.NVarChar,50);
-            cmd.Parameters["@Username"].Value = userName;
-            cmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                if(reader.Read())
-                {
-                    results = reader.GetString(0);
-                }
-            } catch 
-            {
-                throw;
-            }
-            return results;
-        }
-
         /// <summary>
-        /// William Flood 
-        /// Created on 2017-04-12
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public static String RetrieveUserSaltByEmail(String email)
-        {
-
-            var results = "";
-            var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_retrieve_user_salt_by_email", conn);
-            cmd.Parameters.Add("@EmailAddress", SqlDbType.NVarChar, 50);
-            cmd.Parameters["@EmailAddress"].Value = email;
-            cmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    results = reader.GetString(0);
-                }
-            }
-            catch
-            {
-                throw;
-            }
-            return results;
-        }
-
-        public static User Login(String userName, String hash)
-        {
-            User userFound = null;
-            var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_login", conn);
-            cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@Password_Hash", SqlDbType.NVarChar, 64);
-            cmd.Parameters["@Username"].Value = userName;
-            cmd.Parameters["@Password_Hash"].Value = hash;
-            cmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        userFound = new User()
-                        {
-                            UserId = reader.GetInt32(0),
-                            FirstName = reader.GetString(1),
-                            LastName = reader.GetString(2),
-                            Phone = reader.GetString(3),
-                            //PreferredAddressId = reader.GetInt32(4),
-                            EmailAddress = reader.GetString(5),
-                            EmailPreferences = reader.GetBoolean(6),
-                            UserName = reader.GetString(9),
-                            Active = reader.GetBoolean(10)
-                        };
-                    }
-                }
-                return userFound;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// William Flood
-        /// Created on 2017/04/12
-        /// Uses a user's email address and hashed password to log in
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="hash"></param>
-        /// <returns></returns>
-        public static User WebLogin(String email, String hash)
-        {
-            User userFound = null;
-            var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_web_login", conn);
-            cmd.Parameters.Add("@EmailAddress", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@Password_Hash", SqlDbType.NVarChar, 64);
-            cmd.Parameters["@EmailAddress"].Value = email;
-            cmd.Parameters["@Password_Hash"].Value = hash;
-            cmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        userFound = new User()
-                        {
-                            UserId = reader.GetInt32(0),
-                            FirstName = reader.GetString(1),
-                            LastName = reader.GetString(2),
-                            Phone = reader.GetString(3),
-                            //PreferredAddressId = reader.GetInt32(4),
-                            EmailAddress = reader.GetString(5),
-                            EmailPreferences = reader.GetBoolean(6),
-                            UserName = reader.GetString(9),
-                            Active = reader.GetBoolean(10)
-                        };
-                    }
-                }
-                return userFound;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Christian Lopez
-        /// Created on 2017/02/01
+        /// Aaron Usher
+        /// Updated: 2017/04/14
         /// 
-        /// Access DB to get UserAddress by given address ID
+        /// Adds a user to the database.
         /// </summary>
-        /// <param name="preferredAddressId">The ID for the address</param>
-        /// <returns>The associated UserAddress</returns>
-        public static UserAddress RetrieveUserAddress(int? preferredAddressId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method and added address fields.
+        /// </remarks>
+        /// 
+        /// <param name="user">The user to add.</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateUser(User user)
         {
-
-            UserAddress userAddress = null;
-
-            if (null == preferredAddressId)
-            {
-                return userAddress;
-            }
+            var rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_user_address";
+            var cmdText = @"sp_create_app_user";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ADDRESS_ID", SqlDbType.Int);
-            cmd.Parameters["@USER_ADDRESS_ID"].Value = preferredAddressId;
+            cmd.Parameters.AddWithValue("@FIRST_NAME", user.FirstName);
+            cmd.Parameters.AddWithValue("@LAST_NAME", user.LastName);
+            cmd.Parameters.AddWithValue("@PHONE", user.Phone);
+            cmd.Parameters.AddWithValue("@E_MAIL_ADDRESS", user.EmailAddress);
+            cmd.Parameters.AddWithValue("@E_MAIL_PREFERENCES", user.EmailPreferences);
+            cmd.Parameters.AddWithValue("@PASSWORD_HASH", user.PasswordHash);
+            cmd.Parameters.AddWithValue("@PASSWORD_SALT", user.PasswordSalt);
+            cmd.Parameters.AddWithValue("@USER_NAME", user.UserName);
+            cmd.Parameters.AddWithValue("@ACTIVE", user.Active);
+            cmd.Parameters.AddWithValue("@ADDRESS1", user.AddressLineOne);
+            cmd.Parameters.AddWithValue("@ADDRESS2", user.AddressLineTwo);
+            cmd.Parameters.AddWithValue("@CITY", user.City);
+            cmd.Parameters.AddWithValue("@STATE", user.State);
+            cmd.Parameters.AddWithValue("@ZIP", user.Zip);
 
             try
             {
                 conn.Open();
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    userAddress = new UserAddress()
-                    {
-                        UserAddressId = reader.GetInt32(0),
-                        UserId = reader.GetInt32(1),
-                        AddressLineOne = reader.GetString(2),
-                        AddressLineTwo = reader.GetString(3),
-                        City = reader.GetString(4),
-                        State = reader.GetString(5),
-                        Zip = reader.GetString(6)
-                    };
-                }
-                reader.Close();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -361,27 +195,124 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return userAddress;
+            return rows;
         }
 
         /// <summary>
-        /// Bobby Thorne
-        /// 3/4/2017
+        /// Aaron Usher
+        /// Updated: 2017/04/14
         /// 
-        /// returns username of the email that is provided
+        /// Retrieves the salt of a user based on their username.
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public string RetrieveUsernameByEmail(string email)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="username">The username to search on.</param>
+        /// <returns>Salt of the user.</returns>
+        public string RetrieveUserSalt(string username)
         {
-            string username="";
+
+            var salt = "";
+
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_app_username_by_email";
+            var cmdText = @"sp_retrieve_user_salt";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@E_MAIL_ADDRESS", SqlDbType.NVarChar,50);
-            cmd.Parameters["@E_MAIL_ADDRESS"].Value = email;
+            cmd.Parameters.AddWithValue("@USERNAME", username);
+
+            try
+            {
+                conn.Open();
+                salt = cmd.ExecuteScalar().ToString();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return salt;
+        }
+
+        /// <summary>
+        /// William Flood 
+        /// Created: 2017/04/12
+        /// 
+        /// Retrieves the salt of a user based on their email.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="email">The email to search on.</param>
+        /// <returns>The salt of the user with the given email.</returns>
+        public static string RetrieveUserSaltByEmail(string email)
+        {
+
+            var salt = "";
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_user_salt_by_email";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EmailAddress", email);
+            try
+            {
+                conn.Open();
+                salt = cmd.ExecuteScalar().ToString();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return salt;
+        }
+
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Authenticates a user and retrieves their information if it is correct.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method and added address fields.
+        /// </remarks>
+        /// <param name="username">The username to search on.</param>
+        /// <param name="passwordHash">The password of the user.</param>
+        /// <returns>A full User.</returns>
+        public static User Login(string username, string passwordHash)
+        {
+            User user = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_login";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password_Hash", passwordHash);
+
             try
             {
                 conn.Open();
@@ -389,10 +320,132 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    username = reader.GetString(0);
+                    user = new User()
+                    {
+                        UserId = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Phone = reader.GetString(3),
+                        EmailAddress = reader.GetString(4),
+                        EmailPreferences = reader.GetBoolean(5),
+                        UserName = reader.GetString(6),
+                        Active = reader.GetBoolean(7),
+                        AddressLineOne = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        AddressLineTwo = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        City = reader.IsDBNull(10) ? null : reader.GetString(10),
+                        State = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
+                    };
 
                 }
-                reader.Close();
+
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/12
+        /// 
+        /// Uses a user's email address and hashed password to log in.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method and added address fields.
+        /// </remarks>
+        /// <param name="emailAddress">The email address to log in with.</param>
+        /// <param name="passwordHash">The hash of the password to log in with.</param>
+        /// <returns>The user.</returns>
+        public static User WebLogin(string emailAddress, string passwordHash)
+        {
+            User user = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_web_login";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EmailAddress", emailAddress);
+            cmd.Parameters.AddWithValue("@Password_Hash", passwordHash);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    user = new User()
+                    {
+                        UserId = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Phone = reader.GetString(3),
+                        EmailAddress = reader.GetString(4),
+                        EmailPreferences = reader.GetBoolean(5),
+                        UserName = reader.GetString(6),
+                        Active = reader.GetBoolean(7),
+                        AddressLineOne = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        AddressLineTwo = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        City = reader.IsDBNull(10) ? null : reader.GetString(10),
+                        State = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
+                    };
+                }    
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// Created: 2017/03/04
+        /// 
+        /// Retrieves the username of the of the user with the given email.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="emailAddress">The email to search on.</param>
+        /// <returns>The username.</returns>
+        public string RetrieveUsernameByEmail(string emailAddress)
+        {
+            var username = "";
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_app_username_by_email";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@E_MAIL_ADDRESS", emailAddress);
+            try
+            {
+                conn.Open();
+                username = (string)cmd.ExecuteScalar();
             }
             catch (Exception)
             {
@@ -409,75 +462,99 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created on 2017/02/28
+        /// Created: 2017/02/28
         /// 
-        /// Allows a user to update one's password
+        /// Updates a user's password in the database.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="oldSalt"></param>
-        /// <param name="oldHash"></param>
-        /// <param name="newSalt"></param>
-        /// <param name="newHash"></param>
-        /// <returns></returns>
-        public int UpdatePassword(String username, String oldSalt, String oldHash, String newSalt, String newHash)
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="username">Username of the user to update.</param>
+        /// <param name="oldSalt">The old salt (for a concurrency check).</param>
+        /// <param name="oldPasswordHash">The old password hash (for a concurrency check).</param>
+        /// <param name="newSalt">The new salt.</param>
+        /// <param name="newPasswordHash">The new password hash.</param>
+        /// <returns>Rows affected.</returns>
+        public int UpdatePassword(string username, string oldSalt, string oldPasswordHash, string newSalt, string newPasswordHash)
         {
+            var rows = 0;
 
-            var results = 0;
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand(@"sp_update_user_password", conn);
-            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@OLD_SALT", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@OLD_HASH", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@NEW_SALT", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@NEW_HASH", SqlDbType.NVarChar);
-            cmd.Parameters["@USERNAME"].Value = username;
-            cmd.Parameters["@OLD_SALT"].Value = oldSalt;
-            cmd.Parameters["@OLD_HASH"].Value = oldHash;
-            cmd.Parameters["@NEW_SALT"].Value = newSalt;
-            cmd.Parameters["@NEW_HASH"].Value = newHash;
+            var cmdText = @"sp_update_user_password";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@USERNAME", username);
+            cmd.Parameters.AddWithValue("@OLD_SALT", oldSalt);
+            cmd.Parameters.AddWithValue("@OLD_HASH", oldPasswordHash);
+            cmd.Parameters.AddWithValue("@NEW_SALT", newSalt);
+            cmd.Parameters.AddWithValue("@NEW_HASH", newPasswordHash);
+
             try
             {
                 conn.Open();
-                results = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return results;
+
+            return rows;
         }
 
-        public int ResetPassword(String username, String salt, String passwordHash)
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Resets a user's password in the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/14
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="salt">The new salt for the user.</param>
+        /// <param name="passwordHash">The new password for the user.</param>
+        /// <returns>Rows affected.</returns>
+        public int ResetPassword(string username, string salt, string passwordHash)
         {
-            var results = 0;
+            var rows = 0;
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand(@"sp_reset_user_password", conn);
-            cmd.Parameters.Add("@USERNAME", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@PASSWORD_SALT", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@PASSWORD_HASH", SqlDbType.NVarChar);
-            cmd.Parameters["@USERNAME"].Value = username;
-            cmd.Parameters["@PASSWORD_SALT"].Value = salt;
-            cmd.Parameters["@PASSWORD_HASH"].Value = passwordHash;
+            var cmdText = @"sp_reset_user_password";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@USERNAME", username);
+            cmd.Parameters.AddWithValue("@PASSWORD_SALT", salt);
+            cmd.Parameters.AddWithValue("@PASSWORD_HASH", passwordHash);
+            
             try
             {
                 conn.Open();
-                results = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return results;
+
+            return rows;
         }
 
         /// <summary>
@@ -497,10 +574,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            
-            cmd.Parameters["@USER_ID"].Value = userId;
-
+            cmd.Parameters.AddWithValue("@USER_ID", userId);
             try
             {
                 conn.Open();
@@ -512,22 +586,22 @@ namespace DataAccessLayer
                     {
                         UserId = reader.GetInt32(0),
                         FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
+                        LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Phone = reader.GetString(3),
-                        EmailAddress = reader.GetString(5),
-                        EmailPreferences = reader.GetBoolean(6),
-                        UserName = reader.GetString(9),
-                        Active = reader.GetBoolean(10)
+                        EmailAddress = reader.GetString(4),
+                        EmailPreferences = reader.GetBoolean(5),
+                        UserName = reader.GetString(6),
+                        Active = reader.GetBoolean(7),
+                        AddressLineOne = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        AddressLineTwo = reader.IsDBNull(9) ? null : reader.GetString(9),
+                        City = reader.IsDBNull(10) ? null : reader.GetString(10),
+                        State = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
                     };
-                    if (!reader.IsDBNull(4))
-                    {
-                        user.PreferredAddressId = reader.GetInt32(4);
-                    }
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
