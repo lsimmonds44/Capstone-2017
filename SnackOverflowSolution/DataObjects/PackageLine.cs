@@ -19,6 +19,7 @@ namespace DataObjects
         public int? productLotId { get; set; }
         public int? packageId { get; set; }
         public int? packageLineId { get; set; }
+        public string ProductName { get; set; }
 
 
         /// <summary>

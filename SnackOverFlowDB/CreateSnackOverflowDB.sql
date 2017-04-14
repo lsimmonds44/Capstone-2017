@@ -7796,3 +7796,35 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_routes_for_driver_after_date'
+GO
+CREATE PROCEDURE sp_retrieve_routes_for_driver_after_date
+(
+	@DRIVER_ID[INT],
+	@TODAYS_DATE[DATETIME]
+)
+AS
+	BEGIN
+		SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+		FROM ROUTE
+		WHERE DRIVER_ID = @DRIVER_ID
+		AND cast(ASSIGNED_DATE as date) >= cast(@TODAYS_DATE as date)
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_user_address_for_delivery'
+GO
+CREATE PROCEDURE sp_retrieve_user_address_for_delivery
+(
+	@DELIVERY_ID[int]
+)
+AS
+	BEGIN
+		SELECT USER_ADDRESS.USER_ADDRESS_ID, USER_ADDRESS.USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP
+		FROM USER_ADDRESS, DELIVERY, PRODUCT_ORDER
+		WHERE USER_ADDRESS.USER_ADDRESS_ID = PRODUCT_ORDER.USER_ADDRESS_ID
+		AND DELIVERY.ORDER_ID = PRODUCT_ORDER.ORDER_ID
+		AND DELIVERY.DELIVERY_ID = @DELIVERY_ID
+	END
+GO
+

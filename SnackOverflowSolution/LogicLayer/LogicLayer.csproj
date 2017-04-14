@@ -90,6 +90,7 @@
     <Compile Include="IProductManager.cs" />
     <Compile Include="IProductOrderManager.cs" />
     <Compile Include="IRepairManager.cs" />
+    <Compile Include="IRouteManager.cs" />
     <Compile Include="IStatusManager.cs" />
     <Compile Include="ISupplierInventoryManager.cs" />
     <Compile Include="ISupplierInvoiceManager.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="ProductOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairManager.cs" />
+    <Compile Include="RouteManager.cs" />
     <Compile Include="StatusManager.cs" />
     <Compile Include="SupplierInventoryManager.cs" />
     <Compile Include="SupplierInvoiceManager.cs" />

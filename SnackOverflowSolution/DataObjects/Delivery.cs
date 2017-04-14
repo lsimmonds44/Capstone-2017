@@ -18,5 +18,7 @@ namespace DataObjects
         public String DeliveryTypeId { get; set; }
         public int? OrderId { get; set; }
         public List<Package> PackageList { get; set; }
+
+        public UserAddress Address { get; set; }
     }
 }

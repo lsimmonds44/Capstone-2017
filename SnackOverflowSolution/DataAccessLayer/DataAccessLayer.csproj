@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairAccessor.cs" />
     <Compile Include="RepairLineAccessor.cs" />
+    <Compile Include="RouteAccessor.cs" />
     <Compile Include="StatusAccessor.cs" />
     <Compile Include="SupplierAccessor.cs" />
     <Compile Include="SupplierInventoryAccessor.cs" />

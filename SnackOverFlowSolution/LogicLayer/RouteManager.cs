@@ -1,0 +1,62 @@
+﻿using DataAccessLayer;
+using DataObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicLayer
+{
+    /// <summary>
+    /// Robert Forbes
+    /// 2017/04/13
+    /// </summary>
+    public class RouteManager : IRouteManager
+    {
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/13
+        /// 
+        /// Retrieves all routes with assigned dates for today or after
+        /// </summary>
+        /// <param name="driverId"></param>
+        /// <returns></returns>
+        public List<Route> RetrieveFutureRoutesForDriver(int? driverId)
+        {
+            List<Route> routes = new List<Route>();
+
+            try
+            {
+
+                //Getting all the routes
+                routes = RouteAccessor.RetrieveFutureRoutesForDriver(driverId);
+                foreach(Route r in routes){
+                    //Getting all the deliveries for each route
+                    r.Deliveries = DeliveryAccessor.RetrieveDeliveriesForRoute(r.RouteId);
+                    foreach(Delivery d in r.Deliveries){
+                        //Getting the address for each delivery
+                        d.Address = DeliveryAccessor.RetrieveUserAddressForDelivery(d.DeliveryId);
+                        //Getting the packages for each delivery
+                        d.PackageList = PackageAccessor.RetrieveAllPackagesInDelivery(d.DeliveryId);
+                        foreach(Package p in d.PackageList){
+                            //Getting all the lines for each package
+                            p.PackageLineList = PackageLineAccessor.RetrievePackageLinesInPackage(p.PackageId);
+                            foreach(PackageLine line in p.PackageLineList){
+                                //Getting the name of each product for each package line
+                                line.ProductName = ProductAccessor.RetrieveProductNameFromProductLotId(line.productLotId);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+
+            return routes;
+        }
+    }
+}
