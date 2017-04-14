@@ -37,8 +37,7 @@ namespace DataObjects
         /// </summary>
         [Required]
         [Range(0.02, double.MaxValue, ErrorMessage = "Please enter a positive price")]
-        public decimal Price { get; set; }
-
+        public double Price { get; set; }
         public decimal UnitPrice { get; set; }
         public string ImageName { get; set; }
         public bool? Active { get; set; }

@@ -255,5 +255,23 @@ namespace LogicLayer
             }
             
         }
+
+        /// <summary>
+        /// William Flood
+        /// Created 2017/04/14
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public List<ProductGradePrice> RetrieveGradeForProduct(int productId)
+        {
+            try
+            {
+                return ProductAccessor.GetPriceOptionsForProduct(productId);
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("An error occured: ", ex);
+            }
+        }
     }
 }

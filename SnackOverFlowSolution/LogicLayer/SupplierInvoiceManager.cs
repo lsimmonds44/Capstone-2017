@@ -197,5 +197,30 @@ namespace LogicLayer
                 throw new ApplicationException("There was a problem deleting the specified supplier invoice");
             }
         }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/04/14
+        /// 
+        /// Retrieve the invoices by the supplier Id
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns>List of the supplier invoices</returns>
+        public List<SupplierInvoice> RetrieveAllSupplierInvoicesBySupplierId(int supplierID)
+        {
+            try
+            {
+                return SupplierInvoiceAccessor.RetrieveSupplierInvoicesBySupplierID(supplierID);
+            }
+            catch (SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+        }
     }
 }

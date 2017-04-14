@@ -11,5 +11,7 @@ namespace LogicLayer
     {
         List<UserCartLine> RetrieveUserCart(String userID);
         int RemoveFromCart(int productId, string gradeId, int quantity, int userId);
+
+        int AddToCart(UserCartLine toAdd);
     }
 }

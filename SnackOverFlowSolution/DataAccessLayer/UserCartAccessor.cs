@@ -82,5 +82,30 @@ namespace DataAccessLayer
             return results;
 
         }
+
+        public static int AddToCart(UserCartLine toAdd)
+        {
+            var results = 0;
+            var userCart = new List<UserCartLine>();
+            var conn = DBConnection.GetConnection();
+            var procedureName = @"sp_remove_from_cart";
+            var com = new SqlCommand(procedureName, conn);
+            com.Parameters.AddWithValue("@PRODUCT_ID", toAdd.ProductID);
+            com.Parameters.AddWithValue("@GRADE_ID", toAdd.GradeID);
+            com.Parameters.AddWithValue("@QUANTITY", toAdd.Quantity);
+            com.Parameters.AddWithValue("@USER_ID", toAdd.UserID);
+            com.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                results = com.ExecuteNonQuery();
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return results;
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace WpfPresentationLayer
         SupplierInvoice _supplierInvoice;
         List<SupplierInvoiceLine> _invoiceLines;
 
+       
         public frmSupplierInvoiceDetails(SupplierInvoice supplierInvoice, ISupplierInvoiceManager supplierInvoiceManager, ISupplierManager supplierManager)
         {
             _supplierInvoice = supplierInvoice;
@@ -33,6 +34,30 @@ namespace WpfPresentationLayer
             _supplierManager = supplierManager;
             _invoiceLines = new List<SupplierInvoiceLine>();
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/04/14
+        /// 
+        /// OverLoad method to view user's own invoices
+        /// </summary>
+        /// <param name="supplierInvoice"></param>
+        /// <param name="supplierInvoiceManager"></param>
+        /// <param name="supplierManager"></param>
+        /// <param name="purpose"></param>
+        public frmSupplierInvoiceDetails(SupplierInvoice supplierInvoice, ISupplierInvoiceManager supplierInvoiceManager, ISupplierManager supplierManager, string purpose)
+        {
+            // TODO: Complete member initialization
+            _supplierInvoice = supplierInvoice;
+            _supplierInvoiceManager = supplierInvoiceManager;
+            _supplierManager = supplierManager;
+            _invoiceLines = new List<SupplierInvoiceLine>();
+            InitializeComponent();
+            if (purpose == "ReadOnly")
+            {
+                btnApprove.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

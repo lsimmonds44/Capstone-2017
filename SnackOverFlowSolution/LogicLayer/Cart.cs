@@ -37,7 +37,7 @@ namespace LogicLayer
             lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
 
-        public decimal ComputeTotalValue()
+        public double ComputeTotalValue()
         {
             return lineCollection.Sum(e => e.Product.Price * e.Quantity);
         }

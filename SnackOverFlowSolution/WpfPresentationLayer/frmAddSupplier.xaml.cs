@@ -61,9 +61,15 @@ namespace WpfPresentationLayer
             {
                 _type = type;
             }
-            else
+            else if (type == "Editing")
             {
-                _type = "Editing";
+                _type = type;
+                supplierFound = true;
+            }
+            else if (type == "Viewing")
+            {
+
+                _type = type;
                 supplierFound = true;
             }
         }
@@ -115,52 +121,25 @@ namespace WpfPresentationLayer
             else
             {
                 supplierFound = true;
-                UserAddress userAddress = null;
-                // Try to get the user's preferred address
-                try
-                {
-                    userAddress = _userManager.RetrieveUserAddress(supplierUser.PreferredAddressId);
-                }
-                catch (Exception ex)
-                {
-                    if (null != ex.InnerException)
-                    {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
 
                 // Fill in tables with the suppliers information that will carry over from user
                 // (name, phone for double checking) and assume the user's address
                 // will be the same as the farm address, but that can be changed
-                txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
-                if (userAddress == null)
+                txtName.Text = supplierUser.FirstName + " " + (supplierUser.LastName ?? "");
+                txtFarmCity.Text = supplierUser.City ?? "";
+                // Need to get index to populate the correct drop down with
+                // the user's state
+                if (getDropdown(supplierUser.State) != -1)
                 {
-                    txtFarmAddress.Text = "";
-                    txtFarmCity.Text = "";
-                    cboFarmState.SelectedIndex = 0;
+                    cboFarmState.SelectedIndex = getDropdown(supplierUser.State);
                 }
                 else
                 {
-                    txtFarmAddress.Text = userAddress.AddressLineOne + " " + userAddress.AddressLineTwo;
-                    txtFarmCity.Text = userAddress.City;
-
-                    // Need to get index to populate the correct drop down with
-                    // the user's state
-                    if (getDropdown(userAddress.State) != -1)
-                    {
-                        cboFarmState.SelectedIndex = getDropdown(userAddress.State);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cannot find user's state!");
-                        cboFarmState.SelectedIndex = 0;
-                    }
-
+                    MessageBox.Show("Cannot find user's state!");
+                    cboFarmState.SelectedIndex = 0;
                 }
+                txtFarmAddress.Text = supplierUser.AddressLineOne + " " + (supplierUser.AddressLineTwo ?? "");
+                
                 // Let the _employee modify the form
                 txtPhone.Text = supplierUser.Phone;
                 txtFarmAddress.IsEnabled = true;
@@ -534,6 +513,9 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Christian Lopez
         /// 
+        /// Laura Simmonds
+        /// Edited 2017/04/14
+        /// 
         /// Sets the screen depending on the type
         /// </summary>
         /// <param name="sender"></param>
@@ -549,6 +531,32 @@ namespace WpfPresentationLayer
             {
                 btnSubmit.Content = "Apply";
                 this.Title = "Apply for Account";
+            }
+            else if (_type.Equals("Viewing"))
+            {
+                try
+                {
+                    this.Title = "View Application Details";
+                    btnLookup.IsEnabled = false;
+                    txtUsername.IsEnabled = false;
+                    btnSubmit.IsEnabled = false;
+                    User supplierUser = _userManager.RetrieveUser(_supplierToEdit.UserId);
+                    txtUsername.Text = supplierUser.UserName;
+                    txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
+                    txtPhone.Text = supplierUser.Phone;
+                    txtFarmName.Text = _supplierToEdit.FarmName;
+                    txtFarmAddress.Text = _supplierToEdit.FarmAddress;
+                    txtFarmCity.Text = _supplierToEdit.FarmCity;
+                    txtFarmTaxId.Text = _supplierToEdit.FarmTaxID;
+                    cboFarmState.SelectedIndex = getDropdown(_supplierToEdit.FarmState);
+                    productSection.IsEnabled = false;
+                    chkActive.IsChecked = _supplierToEdit.Active;
+                    chkActive.IsEnabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
             }
             else if (_type.Equals("Editing"))
             {

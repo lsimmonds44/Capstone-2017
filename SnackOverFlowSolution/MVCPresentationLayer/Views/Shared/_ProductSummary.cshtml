@@ -21,14 +21,4 @@
 <td>
     @Html.ActionLink("Details", "Details", "Products", new { id = Model.ProductId, supplierId = Model.SupplierID }, null)
 </td>
-<td>
-    @using (Html.BeginForm("AddToCart", "Cart"))
-    {
-        <div class="pull-right">
-            @Html.HiddenFor(x => x.ProductId)
-            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-            <input type="submit" class="btn btn-success" value="Add to cart" />
-        </div>
-    }
-</td>
 

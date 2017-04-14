@@ -52,6 +52,11 @@ namespace MVCPresentationLayer.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            if (User.IsInRole("Supplier"))
+            {
+                ViewBag.Account = "supplier";
+                return View("AlreadyAccepted");
+            }
             List<Product> products = _productManager.ListProducts();
             SupplierWithAgreements dummy = new SupplierWithAgreements()
             {

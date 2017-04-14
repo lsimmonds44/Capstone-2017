@@ -102,6 +102,7 @@
     <Compile Include="PickupLine.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductGradePrice.cs" />
     <Compile Include="SupplierProductLot.cs" />
     <Compile Include="ProductLot.cs" />
     <Compile Include="ProductOrder.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Route.cs" />
     <Compile Include="ShippingDetails.cs" />
     <Compile Include="Supplier.cs" />
-    <Compile Include="SupplierCatalogueViewModel.cs" />
+    <Compile Include="SupplierCatalogViewModel.cs" />
     <Compile Include="SupplierInventory.cs" />
     <Compile Include="SupplierInvoice.cs" />
     <Compile Include="SupplierInvoiceLine.cs" />

@@ -53,6 +53,11 @@ namespace WpfPresentationLayer
                 EmailAddress = txtEmailAddress.Text,
                 EmailPreferences = (bool)cboEmailPreferences.IsChecked,
                 UserName = txtUserName.Text,
+                AddressLineOne = txtAddressLineOne.Text,
+                AddressLineTwo = txtAddressLineTwo.Text,
+                City = txtCity.Text,
+                State = txtState.Text,
+                Zip = txtZip.Text,
                 Active = true
             };
             UserManager _userManager = new UserManager();

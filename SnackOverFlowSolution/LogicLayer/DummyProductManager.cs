@@ -54,5 +54,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public List<ProductGradePrice> RetrieveGradeForProduct(int productId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

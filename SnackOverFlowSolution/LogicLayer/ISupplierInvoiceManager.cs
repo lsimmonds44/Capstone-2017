@@ -73,5 +73,14 @@ namespace LogicLayer
         /// <param name="invoice">The selected invoice to be deleted</param>
         /// <returns>true (if query from accessor is successful)</returns>
         bool DeleteSupplierInvoice(SupplierInvoice invoice);
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/04/14
+        /// 
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns>List of Invoices for a supplier</returns>
+        List<SupplierInvoice> RetrieveAllSupplierInvoicesBySupplierId(int supplierID);
     }
 }

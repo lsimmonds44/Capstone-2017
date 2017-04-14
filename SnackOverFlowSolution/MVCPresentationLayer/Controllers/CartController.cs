@@ -9,6 +9,12 @@ using MVCPresentationLayer.Models;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Created by Michael Takrama
+    /// 4/7/2017
+    /// 
+    /// Cart Controller
+    /// </summary>
     public class CartController : Controller
     {
         private readonly IProductManager _productManager;
@@ -36,10 +42,23 @@ namespace MVCPresentationLayer.Controllers
 
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
-            var product = _productManager.RetrieveProducts()
-                .FirstOrDefault(p => p.ProductId == productId);
-            if (product != null)
+            var productViewModel = _productManager.RetrieveProductsToBrowseProducts().FirstOrDefault(p => p.ProductId == productId);
+
+            var product = new Product
+            {
+                ProductId = productViewModel.ProductId,
+                GradeId = productViewModel.GradeID,
+                Price = productViewModel.Price,
+                Name = productViewModel.Name
+            };
+            
+            if (product.ProductId != 0)
+            {
                 cart.AddItem(product, 1);
+            }
+            var gradeId = Request.Params["Grade"];
+            var quantity = Request.Params["Quantity"];
+
             return RedirectToAction("Index", new { returnUrl });
         }
 
@@ -71,13 +90,16 @@ namespace MVCPresentationLayer.Controllers
             if (!ModelState.IsValid) 
                 return View(shippingDetails);
 
-            _customerOrderManager.ProcessOrder(cart, shippingDetails); //returns bool
-
-
-
-
-            cart.Clear();
-            return View("Completed");
+            if (_customerOrderManager.ProcessOrder(cart, shippingDetails)) //returns bool
+            {
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View("Error");
+            }
+  
         }
     }
 }

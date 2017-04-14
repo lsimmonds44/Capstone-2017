@@ -5,11 +5,10 @@
 }
 
 @*
-    Updated by Skyler Hiscock 04/08/17    
+    Updated by Skyler Hiscock 04/08/17
 *@
 
 <h2>Details</h2>
-
 <div>
     <h4>Product</h4>
     <hr />
@@ -17,7 +16,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
@@ -25,7 +23,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
@@ -64,6 +61,21 @@
 
     </dl>
 </div>
+@using (Html.BeginForm("AddToCart", "Cart"))
+{
+    <input type="number" name="Quantity" value="1" />
+    <select name="Grade">
+        @foreach (var gradeOption in Model.GradeOptions)
+        {
+            <option value="@gradeOption.GradeID">@gradeOption.GradeID: @gradeOption.Price</option>
+        }
+    </select>
+    <div class="pull-right">
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" class="btn btn-success" value="Add to cart" />
+    </div>
+}
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

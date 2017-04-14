@@ -67,7 +67,7 @@ namespace WpfPresentationLayer
         List<SupplierInvoice> _supplierInvoiceList;
         List<string> _supplierApplicationStatus = null;
         List<User> _userList = null;
-        private List<SupplierCatalogueViewModel> _parsedSupplierCatalogueData = null;
+        private List<SupplierCatalogViewModel> _parsedSupplierCatalogueData = null;
 
         public MainWindow()
         {
@@ -83,13 +83,19 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02
+        /// 2017/02/06
         /// 
         /// Button to load Create Commercial Customer Window
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_Create_CommercialCustomer(object sender, RoutedEventArgs e)
+        private void Create_CommercialCustomer_Button_Click(object sender, RoutedEventArgs e)
         {
             
             if (cboCustomerType.SelectedItem as String == "Commercial")
@@ -120,9 +126,15 @@ namespace WpfPresentationLayer
         /// 2017/03/03
         /// Invoked when the customer type combo box is initialized
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboCustomerTypeInitialized(object sender, EventArgs e)
+        private void cboCustomerType_Initialized(object sender, EventArgs e)
         {
             cboCustomerType.Items.Add("Commercial");
             cboCustomerType.Items.Add("Residential");
@@ -135,9 +147,15 @@ namespace WpfPresentationLayer
         /// 2017/03/03
         /// Invoked when the customer type combo box is changed
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/4/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboCustomerTypeSelected(object sender, EventArgs e)
+        private void cboCustomerType_Selected(object sender, EventArgs e)
         {
             refreshCustomerList();
         }
@@ -176,19 +194,24 @@ namespace WpfPresentationLayer
         }
         /// <summary>
         /// Eric Walton
-        /// 2017/05/03
+        /// 2017/03/05
         /// Invoked when the create order button is clicked on the customers tab.
         /// Loads the create order window
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/4/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void createOrderClick(object sender, RoutedEventArgs e)
+        private void btnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
             if (dgCustomer.SelectedIndex >= 0)
             {
                 var selectedCustomer = (CommercialCustomer)dgCustomer.SelectedItem;
-                
-                
+         
                 if (selectedCustomer.Active)
                 {
                     try
@@ -203,8 +226,6 @@ namespace WpfPresentationLayer
                     {
                         MessageBox.Show("Only employees can create order from the desktop app.");
                     }
-                    
-                   
                 }
                 else
                 {
@@ -220,25 +241,37 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// 2017/3/10
         /// Enables the create order button when a customer is selected.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/4/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CustomerSelected(object sender, SelectionChangedEventArgs e)
+        private void Customer_Selected(object sender, SelectionChangedEventArgs e)
         {
             btnCreateOrder.IsEnabled = true;
         }
 
         /// <summary>
         /// Ariel Sigo
-        /// Created 2017/10/02
+        /// Created 2017/2/10
         /// 
-        /// Button that leads to update _employee form
+        /// Invokes the Update Employee form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/4/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_Update_Employee(object sender, RoutedEventArgs e)
+        private void Update_Employee_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -260,7 +293,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 2/11/17
+        /// 2017/2/11
         /// 
         /// When this button is pushed it first checks to see if there is a user logged in
         /// If there is not it will use the username and password text field and check if
@@ -269,12 +302,16 @@ namespace WpfPresentationLayer
         /// Needs work on returning _employee info so tabs can be 
         /// filtered and not just show all
         /// 
-        /// UPDATE
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Updated: 2017-3-24
         /// 
         /// Reset buttons and nulled supplier, _charity, and customer variables
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/4/17
         /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -282,17 +319,16 @@ namespace WpfPresentationLayer
         {
             if (_user == null)
             {
-
                 try
                 {
                     if (_userManager.AuthenticateUser(txtUsername.Text, pwbPassword.Password))
                     {
-
                         lblPassword.Visibility = Visibility.Collapsed;
                         lblUsername.Visibility = Visibility.Collapsed;
                         txtUsername.Visibility = Visibility.Collapsed;
                         pwbPassword.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
+                        tabCommercialCustomer.Focus();
                         pwbPassword.Password = "";
                         btnLogin.Content = "Logout";
                         btnLogin.IsDefault = false;
@@ -300,6 +336,10 @@ namespace WpfPresentationLayer
                         try
                         {
                             _user = _userManager.userInstance;
+                            if (tabMyAccount.IsFocused)
+                            {
+                                tabMyAccount_Selected(sender, e);
+                            }
 
                             if ("ADMIN" == _user.UserName)
                             {
@@ -330,14 +370,12 @@ namespace WpfPresentationLayer
                             else
                             {
                                 MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.Message);
-                            }
-                            
+                            }                           
                         }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
-                        // assigned to the employe
+                        // assigned to the employee
                         mnuChangePassword.Visibility = Visibility.Visible;
-
                     }
                     else
                     {
@@ -359,6 +397,8 @@ namespace WpfPresentationLayer
                 _supplier = null;
                 _charity = null;
                 _commercialCustomer = null;
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
                 btnSupplierApplicationStatusCheck.Content = "Check Supplier Status";
                 btnCharityApplicationStatusCheck.Content = "Check Charity Status";
                 btnCommercialCustomerApplicationStatusCheck.Content = "Check Commerical Status";
@@ -393,13 +433,29 @@ namespace WpfPresentationLayer
             tabEmployee.Visibility = Visibility.Collapsed;
             tabUser.Visibility = Visibility.Collapsed;
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Create New User form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
             frmCreateNewUser fCU = new frmCreateNewUser();
             fCU.ShowDialog();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Charity Tab and returns a List of Charities 
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabCharity_Selected(object sender, RoutedEventArgs e)
         {
             try
@@ -412,7 +468,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Charity View form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnViewCharity_Click(object sender, RoutedEventArgs e)
         {
             if (dgCharity.SelectedIndex >= 0)
@@ -423,7 +487,15 @@ namespace WpfPresentationLayer
             }
 
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the ability to Add Charity
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCharity_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -455,7 +527,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Employee Tab with a list of Employees.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabEmployee_Selected(object sender, RoutedEventArgs e)
         {
             try
@@ -468,7 +548,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the ability to Add an Employee.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             var EmployeeViewInstance = new frmEmployeeViews(_employeeManager);
@@ -476,12 +564,28 @@ namespace WpfPresentationLayer
             EmployeeViewInstance.ShowDialog();
             tabEmployee_Selected(sender, e);
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Order tab.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabOrder_Selected(object sender, RoutedEventArgs e)
         {
 
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Employee View form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnViewEmployee_Click(object sender, RoutedEventArgs e)
         {
             if (dgEmployee.SelectedIndex >= 0)
@@ -491,7 +595,15 @@ namespace WpfPresentationLayer
                 tabEmployee_Selected(sender, e);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Product Lot tab and a lists of Product Lot.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabProductLot_Selected(object sender, RoutedEventArgs e)
         {
             try
@@ -520,8 +632,17 @@ namespace WpfPresentationLayer
                 }
             }
         }
-
-        private void AddProductLot_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the ability to add a new Product Lot. 
+        /// Invokes the Add Inspection form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddProductLot_Click(object sender, RoutedEventArgs e)
         {
             var productLotView = new frmAddProductLot();
             productLotView.SetEditable();
@@ -552,16 +673,21 @@ namespace WpfPresentationLayer
             }
             tabProductLot_Selected(sender, e);
         }
-
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/01/31
+        /// 2017/01/31
         /// 
-        /// Open a frmAddSupplier
+        /// Invokes Add Supplier Form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
+        /// <remarks>Christian Lopez Updated: 2017/02/02</remarks>
         private void btnCreateSupplier_Click(object sender, RoutedEventArgs e)
         {
             var addSupplierFrm = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager, _agreementManager);
@@ -572,20 +698,18 @@ namespace WpfPresentationLayer
                 tabSupplier_Selected(sender, e);
             }
         }
-
-
         /// <summary>
         /// Christian Lopez
         /// Created on 2017/02/15
         /// 
         /// Open a frmAddInspection
         /// </summary>
-        /// <remarks>
+        /// <summary>
         /// Robert Forbes
-        /// Modified on 2017/03/30
+        /// Updated: 2017/03/30
         /// 
         /// Now shows an error message if there is no product lot selected
-        /// </remarks>
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCreateInspection_Click(object sender, RoutedEventArgs e)
@@ -614,7 +738,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select a product lot to create a new inspection");
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Password KeyDown.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pwbPassword_KeyDown(object sender, KeyEventArgs e)
         {
             pwbPassword.Background = Brushes.White;
@@ -623,24 +755,33 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Laura Simmonds
         /// 2017/27/02
-        /// Button links tab to View Product window.
+        /// 
+        /// Invokes View Product form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void viewProductBtn(object sender, RoutedEventArgs e)
+        private void btnViewProduct_Click(object sender, RoutedEventArgs e)
         {
-            frmViewProduct viewProduct = new frmViewProduct();
-            viewProduct.ShowDialog();
+            frmViewProduct btnViewProduct = new frmViewProduct();
+            btnViewProduct.ShowDialog();
 
         }
 
         /// <summary>
-        ///     Mason Allen
-        ///     ListView that displays current open orders.  Double clicking an item will display the order details.
+        /// Mason Allen
+        /// 2017/3/01
+        /// 
+        /// Invokes ListView that displays current open orders.  Double clicking an item will display the order details.
         /// </summary>
         /// <remarks>
         /// Robert Forbes
-        /// 2017/03/01
+        /// Updated: 2017/03/01
         /// 
         /// Modified to work with drop down to select status
         /// </remarks>
@@ -655,7 +796,6 @@ namespace WpfPresentationLayer
                 cboOrderStatus.SelectedIndex = 0;
                 if (cboOrderStatus.SelectedItem != null)
                 {
-
                     _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus((string)cboOrderStatus.SelectedItem);
                     lvOpenOrders.Items.Clear();
 
@@ -671,10 +811,16 @@ namespace WpfPresentationLayer
                 lblStatus.Content += ex.ToString();
             }
         }
-
-
-
-        private void lvOpenOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the List View of Open Orders from Product Order.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvOpenOrders_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -695,11 +841,17 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/01
         /// 
-        /// Updates the list of orders to match the new combo box selection
+        /// Invokes the update of the list of orders to match the new combo box selection
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboOrderStatus_Selection_Changed(object sender, SelectionChangedEventArgs e)
         {
             try
             {
@@ -720,8 +872,15 @@ namespace WpfPresentationLayer
                 lblStatus.Content += ex.ToString();
             }
         }
-
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Add Product form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddProduct_OnClick(object sender, RoutedEventArgs e)
         {
             var frmAddProduct = new frmAddProduct(_user, _productManager);
@@ -732,7 +891,8 @@ namespace WpfPresentationLayer
         /// Created by Natacha Ilunga
         /// Created on 02-28-2017
         /// 
-        /// Navigate to Browse Products Page
+        /// Invokes the ability to navigate to Browse Products Page
+        /// Invokes the Browse Products form.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -747,7 +907,13 @@ namespace WpfPresentationLayer
         /// Created by Michael Takrama, Natacha Ilunga
         /// Creatd on 02-28-2017
         /// 
-        /// Method to cleanup cached files
+        /// Invokes method to cleanup cached files
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -763,15 +929,17 @@ namespace WpfPresentationLayer
             }
 
         }
-
-
-
-
         /// <summary>
         /// Robert Forbes
         /// 2017/03/09
         /// 
-        /// Tab that shows all packages in the database
+        /// Invokes Package Tab that shows all packages in the database
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -786,7 +954,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/01
         /// 
-        /// Updates the locally stored list of packages
+        /// Invokes updates the locally stored list of packages
         /// </summary>
         private void RefreshPackageList()
         {
@@ -802,16 +970,24 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Mason Allen
-        /// 03/01/2017
-        /// Opens new window to create a new vehicle record
+        /// 2017/3/01
+        /// Invokes Add New Vehicle form to create a new vehicle record
         /// </summary>
         private void btnAddNewVehicle_Click(object sender, RoutedEventArgs e)
         {
             var addNewVehicleWindow = new frmAddEditVehicle();
             addNewVehicleWindow.Show();
         }
-
-        private void btnManageStock_OnClick(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Manage Stock form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnManageStock_Click(object sender, RoutedEventArgs e)
         {
             frmManageStock fms = new frmManageStock(_productLotManager, _productManager, _supplierManager, _locationManager);
             fms.ShowDialog();
@@ -819,9 +995,15 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton 
-        /// 2017/02/03
-        /// Triggers when vehicle management tab is selected
-        /// Will populate a list of vehicles once complete
+        /// 2017/03/02
+        /// 
+        /// Invokes Vehicle Tab and a list of all vehicles.
+        /// </summary>
+        /// /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -850,8 +1032,14 @@ namespace WpfPresentationLayer
         /// Laura Simmonds
         /// 2017/03/24
         /// 
-        /// Populates Check Out Vehicle form with vehicle data 
-        /// and allows user to update the vehicle satus to checked out or checked in
+        /// Invokes Check Out Vehicle form with vehicle data
+        /// and allows user to update the vehicle status to checked out or checked in.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -868,7 +1056,14 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// Created 2017/03/02
         /// 
-        /// Uses frmAddSupplier, but this calling does not automatically set the approved status that the other one does.
+        /// Invokes Add Supplier form, but this calling does not 
+        /// automatically set the approved status that the other one does.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -884,11 +1079,15 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Opens a window to allow a user to change one's password
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Change Password form.
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChangePassword(object sender, RoutedEventArgs e)
+        private void mnuChangePassword_OnClick(object sender, RoutedEventArgs e)
         {
             if (null != _user)
             {
@@ -896,8 +1095,17 @@ namespace WpfPresentationLayer
                 updateScreen.Show();
             }
         }
-
-        private void editVehicleClick(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Add Edit Vehicle form
+        /// Invokes the ability to edit a vehicle from a list of vehicles.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditVehicle_Click(object sender, RoutedEventArgs e)
         {
             if (dgVehicle.SelectedItem != null)
             {
@@ -926,9 +1134,9 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Daniel Brown
-        /// 03/31/2017
+        /// 2017/3/31
         /// 
-        /// Populate the users tab.
+        /// Invokes the Users Tab and Populates a List of Users.
         /// 
         /// NOTE: Needs to be changed to only show full users list to employees and only the current user to non-employee
         ///       Cannot be done to roles have been established.
@@ -954,7 +1162,15 @@ namespace WpfPresentationLayer
                 btnResetPassword.Visibility = Visibility.Collapsed;
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Reset Password form and populates a User list.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnResetPassword_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -976,9 +1192,15 @@ namespace WpfPresentationLayer
             }
         }
 
-
         /// <summary>
         /// Christian Lopez
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Supplier Tab and populates a Supplier Application Status List.
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1006,9 +1228,9 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/03
+        /// 2017/03/03
         /// 
-        /// Handles logic of what happens when the warehouse tab is selected
+        /// Invokes the logic of what happens when the warehouse tab is selected
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1034,17 +1256,33 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// 03/02/2017
+        /// 2017/3/02
         /// 
-        /// Loads the create a new product category window
+        /// Invokes the Product Category form to create a new Category.
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
             frmProductCategory prodCategoryWindow = new frmProductCategory();
             prodCategoryWindow.Show();
         }
-
-        private void RequestUsername_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Request Username form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuRequestUsername_OnClick(object sender, RoutedEventArgs e)
         {
             if (_user == null)
             {
@@ -1053,7 +1291,15 @@ namespace WpfPresentationLayer
             }
             else { MessageBox.Show("Must not be signed in to use this feature"); }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Charity Approval form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnApproveDeny_Click(object sender, RoutedEventArgs e)
         {
             if (dgCharity.SelectedIndex >= 0)
@@ -1066,9 +1312,15 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/09
+        /// 2017/03/09
         /// 
-        /// Launch form to edit existing supplier
+        /// Invokes Edit Supplier form from the Add Supplier form to edit existing supplier
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1092,14 +1344,40 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/04/07
+        /// 
+        /// Launch form to view supplier application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewOpenApps_Click(object sender, RoutedEventArgs e)
+        {
+            if (0 > dgSuppliers.SelectedIndex)
+            {
+                MessageBox.Show("Select a supplier to view application");
+            }
+            else
+            {
+                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                    _agreementManager, "Viewing", (Supplier)dgSuppliers.SelectedItem);
+                var result = frmEditSupplier.ShowDialog();
+                if (result == true)
+                {
+                    tabSupplier_Selected(sender, e);
+                }
+
+            }
+        }
+        /// <summary>
         /// William Flood
-        /// Created 2017/03/09
+        /// 2017/03/09
         /// 
         /// Retrieve criteria to filter product lots
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FilterProductLots_Click(object sender, RoutedEventArgs e)
+        private void btnFilterProductLots_Click(object sender, RoutedEventArgs e)
         {
             var filterWindow = new frmProductLotSearchView(_productLotSearchCriteria);
             filterWindow.ShowDialog();
@@ -1132,7 +1410,13 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/09
         /// 
-        /// Button click event to open a delivery management window for the selected order
+        /// Invokes delivery management window for the selected order.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1156,20 +1440,26 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select a delivery that is ready for shipment");
             }
         }
-
+        /// <summary>
         /// Created by Natacha Ilunga
-        /// 03/09/2017
+        /// 2017/3/09
         /// 
-        /// Supplier Tab Select Event
+        /// Invokes Supplier Catalog Tab 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabSupplierCatlog_Selected(object sender, RoutedEventArgs e)
+        private void tabSupplierCatalog_Selected(object sender, RoutedEventArgs e)
         {
             //Load Supplier Data
             try
             {
-                RefreshSupplierCatalogue();
+                RefreshSupplierCatalog();
             }
             catch (Exception ex)
             {
@@ -1185,9 +1475,6 @@ namespace WpfPresentationLayer
             }
 
         }
-
-
-
         /// <summary>
         /// Created by Natacha Ilunga
         /// 03/09/2017
@@ -1196,14 +1483,14 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="suppliersList"></param>
         /// <returns></returns>
-        private List<SupplierCatalogueViewModel> parseIntoSupplierCatalogue(List<Supplier> suppliersList)
+        private List<SupplierCatalogViewModel> parseIntoSupplierCatalog(List<Supplier> suppliersList)
         {
-            List<SupplierCatalogueViewModel> viewModelList = new List<SupplierCatalogueViewModel>();
-            SupplierCatalogueViewModel viewModel;
+            List<SupplierCatalogViewModel> viewModelList = new List<SupplierCatalogViewModel>();
+            SupplierCatalogViewModel viewModel;
 
             foreach (var k in suppliersList)
             {
-                viewModel = new SupplierCatalogueViewModel()
+                viewModel = new SupplierCatalogViewModel()
                 {
                     SupplierID = k.SupplierID,
                     FarmName = k.FarmName,
@@ -1222,17 +1509,23 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Natacha Ilunga
-        /// 03/29/2017
+        /// Natacha Ilunga
+        /// 2017/03/29
         /// 
-        /// Click event to load product datagrid with products by supplier id
+        /// Invokeds  product data grid with products by supplier id.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnLoadProductsBySupplierId_Click(object sender, MouseButtonEventArgs e)
         {
 
-            var supplierData =  (SupplierCatalogueViewModel)dgSupplierCatalogue.SelectedItem;
+            var supplierData =  (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
 
             RefreshSupplierProductDataGrid(supplierData.SupplierID);
 
@@ -1242,19 +1535,23 @@ namespace WpfPresentationLayer
         /// Created by Natacha Ilunga
         /// 04/13/17
         /// 
-        /// Utility Method to refresh Supplier Catalogue Data Grid
+        /// Invokes Utility Method to refresh Supplier Catalogue Data Grid.
         /// </summary>
-        private void RefreshSupplierCatalogue()
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
+        private void RefreshSupplierCatalog()
         {
             dgSupplierCatalogue.ItemsSource = null;
-
             dgProductList.ItemsSource = null;
-
             try
             {
                 var suppliersData = _supplierManager.ListSuppliers();
 
-                _parsedSupplierCatalogueData = parseIntoSupplierCatalogue(suppliersData);
+                _parsedSupplierCatalogueData = parseIntoSupplierCatalog(suppliersData);
             }
             catch (Exception ex)
             {
@@ -1270,9 +1567,6 @@ namespace WpfPresentationLayer
                 }
 
             }
-
-            
-
             dgSupplierCatalogue.ItemsSource = _parsedSupplierCatalogueData;
         }
 
@@ -1286,11 +1580,8 @@ namespace WpfPresentationLayer
         /// <param name="supplierId"></param>
         private void RefreshSupplierProductDataGrid(int supplierId)
         {
-
             dgProductList.ItemsSource = null;
-
             dgProductList.ItemsSource = RetrieveProductsBySupplierId(supplierId);
-
         }
 
         /// <summary>
@@ -1329,9 +1620,15 @@ namespace WpfPresentationLayer
 
             return productsbySupplierIdData;
         }
-
-
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Add Maintenance Record form to create a new maintenance record.
+        /// Standaridized method.
+        /// </summary>>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddMaintenance_Click(object sender, RoutedEventArgs e)
         {
             Vehicle selectedVehicle;
@@ -1354,10 +1651,16 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/10/2017
+        /// 2017/03/24
         /// 
-        /// When clicked it will bring up Applications that they have submitted
-        /// that have been approved and also pending
+        /// Populates Applications that have been submitted 
+        /// both approved and also pending applications.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1371,7 +1674,6 @@ namespace WpfPresentationLayer
                 //btnCheckStatusDone.Visibility = Visibility.Visible;
                 //btnCancelApplication.Visibility = Visibility.Visible;
                 //dgMyAccount.Visibility = Visibility.Visible;
-
                 try
                 {
                     _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
@@ -1393,7 +1695,6 @@ namespace WpfPresentationLayer
                     //throw;
                 }
 
-
                 if (_supplier == null && _commercialCustomer == null)
                 {
                     frmCheckSupplierStatus checkSupplierStatus = new frmCheckSupplierStatus(_user, _userManager, _supplierManager, _productManager, _agreementManager);
@@ -1404,13 +1705,13 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/10/20174
+        /// 2017/03/10
         /// 
-        /// Button that reverts back to the original status of the tab
+        /// Invokes the reverts back to the original status of the tab.
         ///
         /// Removed
         /// Bobby Thorne 
-        /// 3/24/2017
+        /// Updates 2017/03/10
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -1429,7 +1730,7 @@ namespace WpfPresentationLayer
         /// Removed
         /// 3/10/2017
         /// 
-        /// This will cancel applications that have been submitted
+        /// Invokes the cancel applications that have been submitted
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1441,8 +1742,16 @@ namespace WpfPresentationLayer
         }
 
 
-
-        private void dgVehicle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the View Vehicle form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgVehicle_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
         {
             if (dgVehicle.SelectedItem != null)
             {
@@ -1456,7 +1765,13 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// 2017/03/22
         /// 
-        /// Handles what happens when the supplier invoice tab is selected
+        /// Invokes the Supplier Invoice Tab.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1480,16 +1795,57 @@ namespace WpfPresentationLayer
             }
         }
 
+        private void tabMyAccount_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+                dgMyInvoices.Visibility = Visibility.Visible;
+                lblMyInvoices.Visibility = Visibility.Visible;
+            }
+            catch 
+            {
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
+            }
+
+            if (_supplier != null)
+            {
+                try
+                {
+                    _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoicesBySupplierId(_supplier.SupplierID);
+                    dgMyInvoices.ItemsSource = _supplierInvoiceList;
+                }
+                catch (Exception ex)
+                {
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Christian Lopez
         /// 2017/03/22
         /// 
-        /// Handles what happens if the datagrid is double clicked. Launches the detail window.
+        /// Invokes double click of the Supplier Invoice Data Grid. Invokes the Supplier Invoice Details form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <remarks>Last modified by Christian Lopez 2017/03/23</remarks>
-        private void dgSupplierInvoices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void dgSupplierInvoices_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
         {
             if (!(dgSupplierInvoices.SelectedIndex < 0))
             {
@@ -1506,11 +1862,46 @@ namespace WpfPresentationLayer
             }
         }
 
+
+        /// <summary>
+        /// Bobby Thorne
+        /// 2017/03/22
+        /// 
+        /// Handles what happens if the datagrid in my account is double clicked. Launches the detail window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>Last modified by Christian Lopez 2017/03/23</remarks>
+        private void dgUserInvoices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!(dgMyInvoices.SelectedIndex < 0))
+            {
+                var MyInvoicesDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgMyInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager, "ReadOnly");
+                var result = MyInvoicesDetail.ShowDialog();
+                if (result == true)
+                {
+                    tabSupplierInvoice_Selected(sender, e);
+                }
+            }
+            else
+            {
+
+                MessageBox.Show("Please select an invoice to view. " );
+            }
+        }
+
+
         /// <summary>
         /// Christian Lopez
         /// 2017/03/23
         /// 
-        /// Logic to approve the selected invoice
+        /// Invokes the logic to approve the selected invoice.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1546,14 +1937,19 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// 2017/24/03
         /// 
-        /// Checks user's Commercial Customer application status 
+        /// Checks user's Commercial Customer application status. 
         /// 
         /// Bobby Thorne
-        /// UPDATE
-        /// 3/31/2017
-        /// added application form if there is no application in the system
+        /// Updated: 2017/03/31
+        /// Added application form if there is no application in the system.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1594,14 +1990,20 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// 2017/03/24
         /// 
         /// Checks user's supplier application status 
         /// 
         /// Bobby Thorne
         /// UPDATE
-        /// 3/31/2017
-        /// added application form if there is no application in the system
+        /// Updated: 2017/03/31
+        /// Added application form if there is no application in the system.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1642,15 +2044,21 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// 2017/03/24
         /// 
-        /// checks user's _charity application status 
+        /// Checks user's _charity application status.
         /// 
         /// Bobby Thorne
         /// UPDATE
-        /// 3/31/2017
+        /// Updated: 2017/03/31
         /// 
-        /// Added apply form if there is not an application in the system
+        /// Added apply form if there is not an application in the system.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1691,7 +2099,7 @@ namespace WpfPresentationLayer
         /// Ethan Jorgensen
         /// 2017/03/20
         /// 
-        /// Allows splitting a product lot into two smaller lots
+        /// Allows splitting a product lot into two smaller lots.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1751,7 +2159,13 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/24
         /// 
-        /// Opens a window to view maintenance records
+        /// Invokes the View Maintenance Records form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1769,15 +2183,30 @@ namespace WpfPresentationLayer
         /// 
         /// Brings up the Product Lot detail window
         /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgProductLots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void dgProductLots_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
         {
             var productLot = (ProductLot)dgProductLots.SelectedItem;
             var productLotMgr = new ProductLotManager();
             var productLotDetail = new frmAddProductLot(productLotMgr, productLot);
             productLotDetail.ShowDialog();
         }
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Menu Quit.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuQuit_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Confirmation:", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -1785,14 +2214,30 @@ namespace WpfPresentationLayer
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Menu Preferences.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MnuPreferences_OnClick(object sender, RoutedEventArgs e)
         {
             _preferenceManager = new PreferenceManager();
             var frmPreferences = new frmMnuPreferences(_preferenceManager);
             frmPreferences.ShowDialog();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the Deliveries Tab.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabDeliveries_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -1821,8 +2266,16 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
-
-        private void lvDeliveries_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes the list View of Deliveries and ability to Add Edit a Delivery.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvDeliveries_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
         {
             Delivery delivery;
             if (lvDeliveries.SelectedItem != null)
@@ -1842,8 +2295,14 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Created on 2017-03-30 by William Flood
-        /// Responds to the click event on btnAddSupplierInventory
+        /// Invokes the click event on btnAddSupplierInventory
         /// 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1882,7 +2341,13 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// 2017/03/29
         /// 
-        /// Launches the supplier invoice form
+        /// Invokes Supplier Invoice form.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1933,7 +2398,15 @@ namespace WpfPresentationLayer
             }
             
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Invokes Add Warehouse form to create a new warehouse.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddNewWarehouse_Click(object sender, RoutedEventArgs e)
         {
             frmAddWarehouse addWarehouseWindow = new frmAddWarehouse();
@@ -1944,7 +2417,14 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/30
         /// 
-        /// Opens the window to edit the selected invoice
+        /// Invokes the Update Supplier Invoice form and the ability to add/edit a
+        /// supplier invoice.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1966,7 +2446,7 @@ namespace WpfPresentationLayer
         /// Ryan Spurgetis
         /// 4/6/2017
         /// 
-        /// Populates the datagrid for suppliers based on supplier applications status
+        /// Populates the datagrid for suppliers based on supplier applications status.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1999,9 +2479,15 @@ namespace WpfPresentationLayer
 		}
 		
         /// Bobby Thorne
-        /// 4/7/2017
+        /// 2017/04/12
         /// 
-        /// Click to open approval window for supplier
+        /// Invokes Approval form for supplier.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2020,7 +2506,13 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Click to open approval window for Commercial Customer
+        /// Invokes Approval form for Commercial Customer
+        /// </summary>
+        ////// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/17
+        /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2037,5 +2529,46 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select a Commercial account to approve.");
             }
         }
+
+        private void refreshUserInvoices()
+        {
+
+            try
+            {
+                _supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
+            }
+            catch
+            {
+                dgMyInvoices.Visibility = Visibility.Hidden;
+                lblMyInvoices.Visibility = Visibility.Hidden;
+            }
+
+            if (_supplier != null)
+            {
+                try
+                {
+                    _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoicesBySupplierId(_supplier.SupplierID);
+                    dgMyInvoices.ItemsSource = _supplierInvoiceList;
+                }
+                catch (Exception ex)
+                {
+                    if (null != ex.InnerException)
+                    {
+                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void tabMyAccount_GotFocus(object sender, RoutedEventArgs e)
+        {
+            refreshUserInvoices();
+        }
+        
+
     } // end of class
 } // end of namespace 
