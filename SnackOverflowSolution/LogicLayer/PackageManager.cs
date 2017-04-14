@@ -87,7 +87,7 @@ namespace LogicLayer
 
             try
             {
-                packages = PackageAccessor.RetrieveAllPackagesInOrder(orderID);
+                packages = PackageAccessor.RetrieveAllPackagesByOrder(orderID);
 
                 foreach(Package p in packages){
                     try{
