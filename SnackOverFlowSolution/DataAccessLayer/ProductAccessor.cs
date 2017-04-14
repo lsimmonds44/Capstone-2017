@@ -351,5 +351,33 @@ namespace DataAccessLayer
             return productName;
         }
 
+        public static List<ProductGradePrice> GetPriceOptionsForProduct(int productID)
+        {
+            var optionList = new List<ProductGradePrice>();
+            var conn = DBConnection.GetConnection();
+            var procedureName = "sp_retrieve_product_grade_price_from_search";
+            var cmd = new SqlCommand(procedureName, conn);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", productID);
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    optionList.Add(new ProductGradePrice
+                    {
+                        ProductID = reader.GetInt32(0),
+                        GradeID = reader.GetString(1),
+                        Price = reader.GetDecimal(2)
+                    });
+                }
+                return optionList;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

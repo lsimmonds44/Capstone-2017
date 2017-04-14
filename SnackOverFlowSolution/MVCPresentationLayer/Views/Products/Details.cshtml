@@ -64,6 +64,20 @@
 
     </dl>
 </div>
+@using (Html.BeginForm("AddToCart", "Cart"))
+{
+    <input type="number" name="Quantity" value="1" />
+    <select name="Grade">
+        <option value="Grade A">Grade A</option>
+        <option value="Grade B">Grade B</option>
+        <option value="Grade C">Grade C</option>
+    </select>
+    <div class="pull-right">
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" class="btn btn-success" value="Add to cart" />
+    </div>
+}
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
