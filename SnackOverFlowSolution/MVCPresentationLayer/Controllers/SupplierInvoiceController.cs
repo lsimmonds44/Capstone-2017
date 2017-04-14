@@ -21,7 +21,12 @@ namespace MVCPresentationLayer.Controllers
     public class SupplierInvoiceController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
-        ISupplierInvoiceManager invMgr = new SupplierInvoiceManager();
+        ISupplierInvoiceManager invMgr;
+
+        public SupplierInvoiceController(ISupplierInvoiceManager _invMgr)
+        {
+            invMgr = _invMgr;
+        }
 
         // GET: /SupplierInvoice/
         public ActionResult Index()
