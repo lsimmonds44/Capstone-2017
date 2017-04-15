@@ -19,16 +19,22 @@ namespace MVCPresentationLayer.Controllers
     {
         private readonly IProductManager _productManager;
         private readonly ICustomerOrderManager _customerOrderManager;
+        private readonly IUserManager _userManager;
+        private readonly IUserCartManager _userCartManager;
 
-        public CartController(IProductManager repo)
+        public CartController(IProductManager repo, IUserManager _userManager, IUserCartManager _userCartManager)
         {
             _productManager = repo;
+            this._userCartManager = _userCartManager;
+            this._userManager = _userManager;
         }
 
-        public CartController(IProductManager repo, ICustomerOrderManager proc)
+        public CartController(IProductManager repo, ICustomerOrderManager proc, IUserManager _userManager, IUserCartManager _userCartManager)
         {
             _productManager = repo;
             _customerOrderManager = proc;
+            this._userCartManager = _userCartManager;
+            this._userManager = _userManager;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -40,26 +46,51 @@ namespace MVCPresentationLayer.Controllers
             });
         }
 
+        /// <summary>
+        /// William Flood
+        /// 2017/04/14
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="productId"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
-            var productViewModel = _productManager.RetrieveProductsToBrowseProducts().FirstOrDefault(p => p.ProductId == productId);
+            try
+            {
+                var productViewModel = _productManager.RetrieveProductsToBrowseProducts().FirstOrDefault(p => p.ProductId == productId);
 
-            var product = new Product
-            {
-                ProductId = productViewModel.ProductId,
-                GradeId = productViewModel.GradeID,
-                Price = productViewModel.Price,
-                Name = productViewModel.Name
-            };
-            
-            if (product.ProductId != 0)
-            {
-                cart.AddItem(product, 1);
+                var product = new Product
+                {
+                    ProductId = productViewModel.ProductId,
+                    GradeId = productViewModel.GradeID,
+                    Price = productViewModel.Price,
+                    Name = productViewModel.Name
+                };
+                
+                if (product.ProductId != 0)
+                {
+                    cart.AddItem(product, 1);
+                    var currentUser = _userManager.RetrieveUserByUserName(User.Identity.Name);
+                    var gradeId = Request.Params["Grade"];
+                    
+                    var quantity = Int32.Parse(Request.Params["Quantity"]);
+                    var cartLine = new UserCartLine {
+                        UserID = currentUser.UserId,
+                        ProductID = (int)productId,
+                        GradeID = gradeId,
+                        Quantity = quantity
+                    };
+                    _userCartManager.AddToCart(cartLine);
+                    return RedirectToAction("Index","Products");
             }
-            var gradeId = Request.Params["Grade"];
-            var quantity = Request.Params["Quantity"];
 
-            return RedirectToAction("Index", new { returnUrl });
+            }
+            catch
+            {
+
+            }
+            return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int? productId, string returnUrl)
