@@ -155,5 +155,11 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+
+        public string CreateNewUser(User user, string password, string confirmPassword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

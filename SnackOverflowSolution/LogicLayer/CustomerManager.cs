@@ -2,6 +2,7 @@
 using DataObjects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,6 +139,51 @@ namespace LogicLayer
             {
                 throw ex;
             }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 04/15/17
+        /// 
+        /// Logic to Apply for Commercial Account - MVC
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool ApplyForCommercialAccount(RegisterCommercialViewModel user)
+        {
+            try
+            {
+                var um = new UserManager();
+
+                var createdUserResult = um.CreateNewUser(user, user.Password, user.ConfirmPassword);
+
+                if ("Created" != createdUserResult)
+                    throw new ApplicationException("ApplyForCommercialAccount" + createdUserResult);
+                
+                var userData = um.RetrieveUserByUserName(user.UserName);
+
+                var cm = new CommercialCustomer
+                {
+                    UserId = userData.UserId,
+                    FederalTaxId = int.Parse( user.FederalTaxID),  // lossy conversion probable
+                    ApprovedBy =  10000, //lower level accessor fix required
+                    Active = false
+                };
+
+                if (CreateCommercialAccount(cm))
+                    return true;
+
+                //creation failed - delete created user.    
+    
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("CustomerManager-ApplyForCommercialAccount: " + ex.Message);
+                throw;
+            }
+
             return false;
         }
     } // end of class
