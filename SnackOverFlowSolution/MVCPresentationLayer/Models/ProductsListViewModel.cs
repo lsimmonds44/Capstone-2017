@@ -13,7 +13,8 @@ namespace MVCPresentationLayer.Models
 
     public class ProductsListViewModel
     {
-        public List<BrowseProductViewModel> Products { get; set; }
+        public IEnumerable<BrowseProductViewModel> Products { get; set; }
+        public PagingInfo PagingInfo { get; set; }
 
     }
 }

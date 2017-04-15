@@ -15,19 +15,48 @@ namespace MVCPresentationLayer.Controllers
     public class ProductsController : Controller
     {
         IProductManager _productManager;
+        public int PageSize = 10; // change in v2?
 
         public ProductsController(IProductManager productManager)
         {
             _productManager = productManager;
         }
 
+        /// <summary>
+        /// Author: Skyler Hiscock
+        /// Updated: 4/14/17
+        /// </summary>
+        /// <param name="page">Page Number</param>
+        /// <returns></returns>
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var products = new ProductsListViewModel {Products = _productManager.RetrieveProductsToBrowseProducts()};
+            var productsList = _productManager.RetrieveProductsToBrowseProducts();
+
+            // for testing pagination. copy this line a couple of times to give you extra data
+            // productsList.AddRange(productsList);
+
+            var products = new ProductsListViewModel {
+                    Products = productsList.OrderBy(p => p.ProductId)
+                                                                         .Skip((page - 1) * PageSize)
+                                                                         .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = productsList.Count()
+                    }
+                };
             return View(products);
         }
 
+        /// <summary>
+        /// Author: Skyler Hiscock
+        /// Updated 4/14/17
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="supplierId"></param>
+        /// <returns>Detail view for specific product.</returns>
         // GET: Products/Details/5
         public ActionResult Details(int? id, int? supplierId)
         {
