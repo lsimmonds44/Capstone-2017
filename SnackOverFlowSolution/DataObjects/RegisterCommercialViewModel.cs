@@ -18,7 +18,7 @@ namespace DataObjects
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [RegularExpression(@"[0-9]{10}", ErrorMessage = "Not a valid Tax ID")]
+        [RegularExpression(@"[0-9]{9}", ErrorMessage = "Not a valid Tax ID")]
         public string FederalTaxID { get; set; }
     }
 }

@@ -63,6 +63,11 @@ namespace MVCPresentationLayer.Controllers
             {
                 return View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
             }
+            catch (ApplicationException ex)
+            {
+                ViewBag.Error = "Error: "+  ex.Message;
+                return View();
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
