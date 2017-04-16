@@ -26,8 +26,8 @@
             @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CategoryID)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.ImageBinary)
-        </th>*@
+                @Html.DisplayNameFor(model => model.ImageBinary)
+            </th>*@
         <th></th>
         <th></th>
     </tr>
@@ -38,5 +38,10 @@
             @Html.Partial("_ProductSummary", item)
         </tr>
     }
-
+    <div class="btn-group pull-right">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+    </div>
 </table>
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+</div>

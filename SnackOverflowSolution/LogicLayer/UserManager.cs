@@ -397,7 +397,7 @@ namespace LogicLayer
 
             try
             {
-                Int32.Parse(number);
+                Int64.Parse(number);
             }
             catch (Exception ex)
             {

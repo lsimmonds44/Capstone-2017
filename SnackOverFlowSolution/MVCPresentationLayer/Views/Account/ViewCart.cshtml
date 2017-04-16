@@ -7,11 +7,11 @@
 <h2>Cart:</h2>
 <table>
         <tr>
-            <th>Product Name</th>
-            <th>Grade</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th>Remove</th>
+            <th>Product Name:</th>
+            <th>Grade:</th>
+            <th>Quantity:</th>
+            <th>Total:</th>
+            <th>Remove:</th>
         </tr>
     @foreach (var cartItem in Model)
     {
@@ -19,15 +19,20 @@
             <td>@cartItem.Name</td>
             <td>@cartItem.GradeID</td>
             <td>@cartItem.Quantity</td>
+            <td>@cartItem.Total</td>
             <th><form action="RemoveFromCart" method="post">
                     <input type="hidden" name="userId" value="@cartItem.UserID" />
                     <input type="hidden" name="productId" value="@cartItem.ProductID" />
                     <input type="hidden" name="quantity" value="@cartItem.Quantity" />
                     <input type="hidden" name="gradeId" value="@cartItem.GradeID" />
-                    <input type="submit" value="Remove" name="submit" />
+                    <input type="submit" class="btn btn-sm btn-warning" value="Remove" name="submit" />
                 </form>
             </th>
         </tr>
     }
 </table>
+<div class="text-center">
+    @Html.ActionLink("Continue Shpping", "Index", "Products", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Checkout now", "Checkout", "Cart", null, new { @class = "btn btn-primary" })
+</div>
 

@@ -45,7 +45,7 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@USER_ID", commercialCustomer.UserId);
             cmd.Parameters.AddWithValue("@IS_APPROVED", commercialCustomer.IsApproved);
-            cmd.Parameters.AddWithValue("@APPROVED_BY", commercialCustomer.ApprovedBy);
+            cmd.Parameters.AddWithValue("@APPROVED_BY", (object)commercialCustomer.ApprovedBy ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@FEDERAL_TAX_ID", commercialCustomer.FederalTaxId);
             cmd.Parameters.AddWithValue("@ACTIVE", commercialCustomer.Active);
 

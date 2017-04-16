@@ -28,5 +28,8 @@ namespace LogicLayer
         User AuthenticateWebUser(String email, String password);
 
         bool[] GetUserRoles(int userId);
+
+        string CreateNewUser(User user, string password, string confirmPassword);
+
     }
 }

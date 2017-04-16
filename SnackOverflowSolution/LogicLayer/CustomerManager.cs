@@ -2,6 +2,8 @@
 using DataObjects;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,6 +140,74 @@ namespace LogicLayer
             {
                 throw ex;
             }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 04/15/17
+        /// 
+        /// Logic to Apply for Commercial Account - MVC
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool ApplyForCommercialAccount(RegisterCommercialViewModel user)
+        {
+            // App User Creation
+            var userManager = new UserManager();
+            try
+            {
+
+                var createdUserResult = userManager.CreateNewUser(user, user.Password, user.ConfirmPassword);
+
+                if ("Created" != createdUserResult)
+                    throw new ApplicationException(createdUserResult);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("CustomerManager-ApplyForCommercialAccount: " + ex.Message);
+                throw;
+            }
+
+            // Commercial Customer Creation
+            User userData = null;
+            try
+            {
+                userData = userManager.RetrieveUserByUserName(user.UserName);
+
+                var cm = new CommercialCustomer
+                {
+                    UserId = userData.UserId,
+                    FederalTaxId = int.Parse(user.FederalTaxID),
+                    ApprovedBy = null,
+                    Active = false
+                };
+
+                if (CreateCommercialAccount(cm))
+                    return true;
+
+                //Commercial Customer Creation failed - delete created user
+                if (1 == UserAccessor.DeleteUser(userData.UserId))
+                    throw new ApplicationException("Fatal Error Occured");
+
+            }
+            catch (SqlException ex)
+            {
+                if (userData != null)
+                    UserAccessor.DeleteUser(userData.UserId);
+
+                Debug.WriteLine(ex.Message);
+
+                throw new ApplicationException("Fatal Error Occured");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw;
+            }
+
             return false;
         }
     } // end of class

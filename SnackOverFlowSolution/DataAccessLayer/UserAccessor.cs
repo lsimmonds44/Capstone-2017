@@ -611,5 +611,30 @@ namespace DataAccessLayer
 
             return user;
         }
+
+        public static int DeleteUser(int id)
+        {
+            int rowsAffected = 0;
+
+            const string cmdText = @"sp_delete_app_user";
+            var conn = DBConnection.GetConnection();
+
+            using (var cmd = new SqlCommand(cmdText, conn) {CommandType = CommandType.StoredProcedure})
+            {
+                cmd.Parameters.AddWithValue("@USER_ID", id);
+
+                try
+                {
+                    conn.Open();
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            return rowsAffected;
+        }
     }
 }

@@ -213,6 +213,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HTMLHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\CartModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Migrations\201704130339412_Initial Setup.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Models\CartIndexViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
     <Compile Include="Models\ProductWithGradeOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -388,9 +390,12 @@
     <Content Include="Views\CompanyOrderWithLines\Index.cshtml" />
     <Content Include="Views\Account\ViewCart.cshtml" />
     <Content Include="Views\Shared\AlreadyAccepted.cshtml" />
+    <Content Include="Views\Home\RegisterCommercial.cshtml" />
+    <Content Include="Views\Home\Application-Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

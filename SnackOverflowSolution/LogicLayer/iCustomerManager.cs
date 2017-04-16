@@ -38,5 +38,16 @@ namespace LogicLayer
         bool ApproveCommercialCustomer(CommercialCustomer _commercialCustomer, int _userid);
 
         bool DenyCommercialCustomer(CommercialCustomer _commercialCustomer, int _userid);
+
+
+        /// <summary>
+        /// Created by Michael TAkrama
+        /// 4/15/2017
+        /// 
+        /// Logic for Commercial Account Application - MVC Layer
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        bool ApplyForCommercialAccount(RegisterCommercialViewModel user);
     }
 }

@@ -88,7 +88,7 @@ namespace DataAccessLayer
             var results = 0;
             var userCart = new List<UserCartLine>();
             var conn = DBConnection.GetConnection();
-            var procedureName = @"sp_remove_from_cart";
+            var procedureName = @"sp_add_to_cart";
             var com = new SqlCommand(procedureName, conn);
             com.Parameters.AddWithValue("@PRODUCT_ID", toAdd.ProductID);
             com.Parameters.AddWithValue("@GRADE_ID", toAdd.GradeID);
