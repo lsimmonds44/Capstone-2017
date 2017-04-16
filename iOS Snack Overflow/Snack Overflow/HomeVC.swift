@@ -8,11 +8,22 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
 
+class HomeVC: UIViewController {
+    
+    
+   
+    @IBOutlet var btns: [UIButton]!{didSet{
+        for btn in btns {
+            btn.layer.cornerRadius = 8
+        }
+        }}
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 

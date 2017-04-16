@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Description: User manager class that handles user validation to the database.
-class UserManager {
+class UserManager: NSObject,NSURLConnectionDelegate {
     
     
     
@@ -30,13 +30,14 @@ class UserManager {
     ///   - username: username: passed from username textfield
     ///   - password: password: passed from password textfield
     ///   - completion: completion description: When database call is done completion returns user object
-    func validateLogin(username:String,password:String, completion: @escaping (_ result:User?)->())
+    func validateLogin(username:String,password:String, completion: @escaping (_ result:User?, _ userMessage:String)->())
     {
         let user = User()
+        var timer = Timer()
         // not implemented. Need connection to server.
-        let url:URL = URL(string: "http://192.168.3.129:8333/api/user/\(username)/\(password)")! // uses ip from computer Robbie usually sits.
-        let url2:URL = URL(string: "http://10.108.2.56:8333/api/user/\(username)/\(password)")! // ip changes depending on where I'm working.
-        let request = URLRequest(url: url)
+        let url:URL = URL(string: "http://10.108.2.56:8333/api/user/\(username)/\(password)")! // uses ip from computer Robbie usually sits.
+        let url2:URL = URL(string: "http://10.0.1.27:8333/api/user/\(username)/\(password)")! // ip changes depending on where I'm working.
+        let request = URLRequest(url: url2, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
         
         let task = session.dataTask(with: request) { (data, response, error) in
             do{
@@ -50,16 +51,25 @@ class UserManager {
                     user.UserName = jsonObject["UserName"] as? String
                     user.EmailAddress = jsonObject["EmailAddress"] as? String
                     user.Active = jsonObject["Active"] as? Bool
-                    completion(user)
+                    completion(user,"")
+                    timer.invalidate()
                 }
             }catch{
-                completion(nil)
+                completion(nil,"Username or Password incorrect!")
+                timer.invalidate()
             }
         }
-        completion(user)
+        
+         timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { (theTimer) in
+            completion(nil,"Error connecting to database. Check for data connection. If data is present and still can't connect. Try again later.")
+            
+        }
+        
         task.resume()
     }
-}
+    
+    
+} // end of class
 
 
 

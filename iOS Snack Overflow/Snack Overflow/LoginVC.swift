@@ -12,8 +12,8 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     
     // variables
     private let _userManager = UserManager()
-    private let _testUserManager = UserManager()
-    private var user = User()
+    private let _testUserManager = TestUserManager()
+    private var user = User(){didSet{}}
     //    {didSet{if user != nil {performSegue(withIdentifier: "HomeSeg", sender: nil)}}
     
     // outlets
@@ -23,9 +23,13 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
+        dismissKeyboard()
         return true
+    }
+    
+    func dismissKeyboard(){
+        tfUsername.resignFirstResponder()
+        tfPassword.resignFirstResponder()
     }
     
     override func viewDidLoad() {
@@ -38,24 +42,26 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func login(_ sender: UIButton) {
+        dismissKeyboard()
         if tfUsername.text!.isEmpty || tfPassword.text!.isEmpty {
             lblUserMessage.text = "You must enter a username and a password"
         }else{
-            _testUserManager.validateLogin(username: tfUsername.text ?? "", password: tfPassword.text ?? "") { (user) in
+            _userManager.validateLogin(username: tfUsername.text ?? "", password: tfPassword.text ?? "") { (user,userMessage) in
                 if user != nil{
                     if user?.UserId != nil{
                         DispatchQueue.main.async {
-                            self.lblUserMessage.text = ""
+                            self.lblUserMessage.text = userMessage
+                            self.user = user!
                             self.performSegue(withIdentifier: "HomeSeg", sender: nil)
                         }
                     }else{
                         DispatchQueue.main.async {
-                            self.lblUserMessage.text = "Error connecting to database. Check for data connection. If data is present and still can't connect. Try again later."
+                            self.lblUserMessage.text = userMessage
                         }
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.lblUserMessage.text = "Username or Password incorrect"
+                        self.lblUserMessage.text = userMessage
                     }
                 }
             }

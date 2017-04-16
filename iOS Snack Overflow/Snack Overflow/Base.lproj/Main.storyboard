@@ -110,21 +110,27 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dzy-59-eSo">
-                                <rect key="frame" x="112.5" y="255" width="150" height="157"/>
+                                <rect key="frame" x="140" y="292.5" width="95" height="82"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEr-gb-O11">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="73"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEr-gb-O11">
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="36"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
-                                        <state key="normal" backgroundImage="DLTruck">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="  Delivery  ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="1w2-0R-K2K" kind="show" identifier="DeliverySeg" id="3zh-F2-cVq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGV-3V-Lk7">
-                                        <rect key="frame" x="0.0" y="83" width="150" height="74"/>
-                                        <state key="normal" backgroundImage="PUTruck"/>
+                                        <rect key="frame" x="0.0" y="46" width="95" height="36"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                        <state key="normal" title="  Pickup  ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <segue destination="1w2-0R-K2K" kind="show" identifier="PickupSeg" id="K87-Uj-ejx"/>
                                         </connections>
@@ -143,6 +149,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="gfU-kG-jgi"/>
+                    <connections>
+                        <outletCollection property="btns" destination="JEr-gb-O11" collectionClass="NSMutableArray" id="0P7-az-wud"/>
+                        <outletCollection property="btns" destination="XGV-3V-Lk7" collectionClass="NSMutableArray" id="3Cj-fC-bqd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r35-Xn-8V5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -201,8 +211,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DLTruck" width="150" height="73"/>
-        <image name="PUTruck" width="150" height="74"/>
         <image name="SO" width="240" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
