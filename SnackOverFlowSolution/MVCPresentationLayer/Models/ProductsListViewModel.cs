@@ -16,5 +16,7 @@ namespace MVCPresentationLayer.Models
         public IEnumerable<BrowseProductViewModel> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
 
+        public string searchPhrase { get; set; }
+
     }
 }

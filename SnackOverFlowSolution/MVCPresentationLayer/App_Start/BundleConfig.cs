@@ -14,6 +14,9 @@ namespace MVCPresentationLayer
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            // Added by Skyler Hiscock (4/16/17)
+            bundles.Add(new ScriptBundle("~/bundles/searchproducts").Include("~/Scripts/searchproducts.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
