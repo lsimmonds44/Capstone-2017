@@ -34,9 +34,13 @@ class UserManager: NSObject,NSURLConnectionDelegate {
     {
         let user = User()
         var timer = Timer()
+        var vegTimer = Timer()
+        var vegArray = ["🍎","🌽","🍅","🥕"]
+        var i = 0
+        var output = ""
         // not implemented. Need connection to server.
         let url:URL = URL(string: "http://10.108.2.56:8333/api/user/\(username)/\(password)")! // uses ip from computer Robbie usually sits.
-        let url2:URL = URL(string: "http://10.0.1.27:8333/api/user/\(username)/\(password)")! // ip changes depending on where I'm working.
+        let url2:URL = URL(string: "http://10.132.18.15:8333/api/user/\(username)/\(password)")! // ip changes depending on where I'm working.
         let request = URLRequest(url: url2, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
         
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -52,18 +56,33 @@ class UserManager: NSObject,NSURLConnectionDelegate {
                     user.EmailAddress = jsonObject["EmailAddress"] as? String
                     user.Active = jsonObject["Active"] as? Bool
                     completion(user,"")
+                    vegTimer.invalidate()
                     timer.invalidate()
                 }
             }catch{
                 completion(nil,"Username or Password incorrect!")
+                vegTimer.invalidate()
                 timer.invalidate()
             }
         }
         
          timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { (theTimer) in
+            vegTimer.invalidate()
             completion(nil,"Error connecting to database. Check for data connection. If data is present and still can't connect. Try again later.")
-            
         }
+        vegTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (theVegTimer) in
+            
+            
+            if i < vegArray.count{
+                output += vegArray[i]
+                i = i + 1
+                completion(nil,output)
+            }else{
+                i = 0
+                output = ""
+                completion(nil,output)
+            }
+        })
         
         task.resume()
     }
