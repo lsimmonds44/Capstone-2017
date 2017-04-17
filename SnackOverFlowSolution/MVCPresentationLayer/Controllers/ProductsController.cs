@@ -37,10 +37,14 @@ namespace MVCPresentationLayer.Controllers
             if (!search.Equals(""))
             {
                 var tempSearch = search.ToLower();
-                productsList = productsList.FindAll(p => p.CategoryID.ToLower().Contains(tempSearch) || 
-                                                         p.Description.ToLower().Contains(tempSearch) || 
-                                                         p.Name.ToLower().Contains(tempSearch) ||
-                                                         p.Supplier_Name.ToLower().Contains(tempSearch));
+                foreach(var str in tempSearch.Split())
+                {
+                    productsList = productsList.FindAll(p => p.CategoryID.ToLower().Contains(str) ||
+                                                         p.Description.ToLower().Contains(str) ||
+                                                         p.Name.ToLower().Contains(str) ||
+                                                         p.Supplier_Name.ToLower().Contains(str));
+                }
+                
             }
 
             // for testing pagination. copy this line a couple of times to give you extra data
