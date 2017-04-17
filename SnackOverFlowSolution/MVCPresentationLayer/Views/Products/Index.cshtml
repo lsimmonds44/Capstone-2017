@@ -1,13 +1,22 @@
 ﻿@model MVCPresentationLayer.Models.ProductsListViewModel
-
+@Scripts.Render("~/bundles/searchproducts")
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Available Products";
 }
 @*
-    Last updated 04/08/17 by Skyler Hiscock
+    Last updated 04/16/17 by Skyler Hiscock
 *@
+
 <h2>Available Products</h2>
 
+@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <p>
+        @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search products" })
+        <input type="submit" value="Search" class="btn btn-primary" />
+        <input type="button" value="Clear" class="btn" id="search-clear" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -39,9 +48,9 @@
         </tr>
     }
     <div class="btn-group pull-right">
-        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search= Model.searchPhrase, page = x }))
     </div>
 </table>
 <div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search = Model.searchPhrase, page = x }))
 </div>

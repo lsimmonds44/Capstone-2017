@@ -29,23 +29,35 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="page">Page Number</param>
         /// <returns></returns>
         // GET: Products
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string search = "", int page = 1)
         {
+            
             var productsList = _productManager.RetrieveProductsToBrowseProducts();
+            
+            if (!search.Equals(""))
+            {
+                var tempSearch = search.ToLower();
+                productsList = productsList.FindAll(p => p.CategoryID.ToLower().Contains(tempSearch) || 
+                                                         p.Description.ToLower().Contains(tempSearch) || 
+                                                         p.Name.ToLower().Contains(tempSearch) ||
+                                                         p.Supplier_Name.ToLower().Contains(tempSearch));
+            }
 
             // for testing pagination. copy this line a couple of times to give you extra data
             // productsList.AddRange(productsList);
 
+
             var products = new ProductsListViewModel {
                     Products = productsList.OrderBy(p => p.ProductId)
-                                                                         .Skip((page - 1) * PageSize)
-                                                                         .Take(PageSize),
+                                           .Skip((page - 1) * PageSize)
+                                           .Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
                         TotalItems = productsList.Count()
-                    }
+                    },
+                    searchPhrase = search
                 };
             return View(products);
         }
