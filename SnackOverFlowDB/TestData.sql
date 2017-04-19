@@ -38,7 +38,8 @@ GO
 INSERT [dbo].[Customer]
 	(Customer_ID)
 VALUES 
-	(10006)
+	(10006),
+	(10000)
 GO
 
 print '' print '*** Inserting User_Address Test Data ***'
