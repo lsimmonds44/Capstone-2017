@@ -12,7 +12,8 @@ import UIKit
 class HomeVC: UIViewController {
     
     
-   
+    var _driver:User!
+    
     @IBOutlet var btns: [UIButton]!{didSet{
         for btn in btns {
             btn.layer.cornerRadius = 8
@@ -41,10 +42,12 @@ class HomeVC: UIViewController {
         if segue.identifier == "DeliverySeg"{
             if let mapVC:MapVC = segue.destination as? MapVC{
                 mapVC.navigationItem.title = "Deliveries"
+                mapVC._driver = _driver
             }
         }else if segue.identifier == "PickupSeg"{
             if let mapVC:MapVC = segue.destination as? MapVC{
                 mapVC.navigationItem.title = "Pick-Ups"
+                mapVC._driver = _driver
             }
         }
     } // end of prepare

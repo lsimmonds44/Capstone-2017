@@ -20,7 +20,7 @@ namespace LogicLayer
 
         Vehicle RetrieveVehicleByDelivery(int vehicleID);
 
-        
+        Delivery RetrieveDeliveryById(int deliveryId);
 
         bool CreateDelivery(Delivery delivery);
 
