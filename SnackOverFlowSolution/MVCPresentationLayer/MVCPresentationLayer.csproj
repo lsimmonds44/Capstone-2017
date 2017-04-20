@@ -204,6 +204,7 @@
     <Compile Include="Controllers\Api\RouteController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CommercialInvoiceController.cs" />
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -394,6 +395,7 @@
     <Content Include="Views\Shared\AlreadyAccepted.cshtml" />
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
     <Content Include="Views\Home\Application-Success.cshtml" />
+    <Content Include="Views\CommercialInvoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
