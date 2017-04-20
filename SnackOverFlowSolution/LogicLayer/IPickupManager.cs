@@ -11,5 +11,9 @@ namespace LogicLayer
     {
         List<Pickup> RetrievePickupsForDriver(int? driverId);
         List<Pickup> RetrieveUnpickedupPickupsForDriver(int? driverId);
+
+        bool UpdatePickupLine(PickupLine oldLine, PickupLine newLine);
+
+        PickupLine RetrievePickupLineById(int? pickupLineId);
     }
 }
