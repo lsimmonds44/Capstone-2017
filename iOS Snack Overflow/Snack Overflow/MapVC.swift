@@ -11,6 +11,8 @@ import MapKit
 
 class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
+    let _driverMgr = DriverManager()
+    
     // outlets
     let mapModel = MapVCModel()
     private var _locationManager = CLLocationManager()
@@ -31,11 +33,10 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapModel.convertAddressToCoord(address: "6301 Kirkwood Blvd SW Cedar Rapids, IA 52404") { (returnedCoord) in
-            DispatchQueue.main.async {
-                self.displayPin(coord: returnedCoord)
-            }
+        _driverMgr.getRouteByDriverID(driverID: 10000) { (route, userMessage) in
+            self.displayPin(routes: route)
         }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -46,13 +47,28 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     
     
-    func displayPin(coord:CLLocationCoordinate2D){ // will probably be changed to display all pins and iterate through the list of deliveries
-        let pinToAdd = Pin()
-            pinToAdd.title = "Kirkwood"
-            pinToAdd.subtitle = "Test"
-            pinToAdd.coordinate = coord
-            pinToAdd.pinColor = "blue"
-            self.map.addAnnotation(pinToAdd)
+    func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
+        
+        for package in routes?.Deliveries ?? []{
+            if package.Address?.AddressLine1 != nil {
+                mapModel.convertAddressToCoord(address: package.Address!.AddressLine1! + package.Address!.AddressLine2! + package.Address!.City! + package.Address!.State! + package.Address!.Zip!) { (returnedCoord) in
+                    DispatchQueue.main.async {
+                        let pinToAdd = Pin()
+                        pinToAdd.title = "\(package.DeliveryId ?? 0)"
+                        pinToAdd.subtitle = "\(package.OrderID ?? 0)"
+                        pinToAdd.coordinate = returnedCoord
+                        pinToAdd.pinColor = "blue"
+                        self.map.addAnnotation(pinToAdd)
+                    }
+                }
+            }
+            
+        }
+        
+        
+        
+        
+        
     }
     
     /// Description
@@ -75,6 +91,12 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         
         return outPin
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        let pin = view.annotation as! Pin
+        // Robbie use this to call the view you want to make for detail view.
+    }
+    
     
     /*
      // MARK: - Navigation

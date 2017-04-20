@@ -10,17 +10,7 @@ import Foundation
 
 
 /// Description: User manager class that handles user validation to the database.
-class UserManager: NSObject,NSURLConnectionDelegate {
-    
-    
-    
-    /// Makes a session
-    /// Eric Walton
-    /// 2017/14/04
-    let session: URLSession = {
-        let config = URLSessionConfiguration.default
-        return URLSession(configuration: config)
-    }()
+class UserManager: NSObject {
     
     
     /// Description
@@ -38,12 +28,10 @@ class UserManager: NSObject,NSURLConnectionDelegate {
         var vegArray = ["🍎","🌽","🍅","🥕"]
         var i = 0
         var output = ""
-        // not implemented. Need connection to server.
-        let url:URL = URL(string: "http://10.108.2.56:8333/api/user/\(username)/\(password)")! // uses ip from computer Robbie usually sits.
-        let url2:URL = URL(string: "http://10.132.18.15:8333/api/user/\(username)/\(password)")! // ip changes depending on where I'm working.
-        let request = URLRequest(url: url2, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
         
-        let task = session.dataTask(with: request) { (data, response, error) in
+        let url:URL = URL(string:getIPAsString() + "user/\(username)/\(password)")!
+        
+        let task = session.dataTask(with: getRequest(url: url)) { (data, response, error) in
             do{
                 if let jsonData = data,
                     let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any]{
