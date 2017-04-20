@@ -12,6 +12,7 @@ import MapKit
 class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     let _driverMgr = DriverManager()
+    var _driver:User!
     
     // outlets
     let mapModel = MapVCModel()
@@ -33,7 +34,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _driverMgr.getRouteByDriverID(driverID: 10000) { (route, userMessage) in
+        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (route, userMessage) in
             self.displayPin(routes: route)
         }
         
@@ -50,7 +51,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
         
         for delivery in routes?.Deliveries ?? []{
-            if delivery.Address?.AddressLine1 != nil{
+            
                 let addLine1 = (delivery.Address!.AddressLine1 ?? "")
                 let addLine2 = (delivery.Address!.AddressLine2 ?? "")
                 let addCity = (delivery.Address!.City ?? "")
@@ -67,8 +68,6 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
                         self.map.addAnnotation(pinToAdd)
                     }
                 }
-            }
-            
         }
         
         
