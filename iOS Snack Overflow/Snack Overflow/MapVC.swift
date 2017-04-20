@@ -49,13 +49,19 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
         
-        for package in routes?.Deliveries ?? []{
-            if package.Address?.AddressLine1 != nil {
-                mapModel.convertAddressToCoord(address: package.Address!.AddressLine1! + package.Address!.AddressLine2! + package.Address!.City! + package.Address!.State! + package.Address!.Zip!) { (returnedCoord) in
+        for delivery in routes?.Deliveries ?? []{
+            if delivery.Address?.AddressLine1 != nil{
+                let addLine1 = (delivery.Address!.AddressLine1 ?? "")
+                let addLine2 = (delivery.Address!.AddressLine2 ?? "")
+                let addCity = (delivery.Address!.City ?? "")
+                let addState = (delivery.Address!.State ?? "")
+                let addZip = (delivery.Address!.Zip ?? "")
+                
+                mapModel.convertAddressToCoord(address: addLine1 + addLine2 + addCity + addState + addZip) { (returnedCoord) in
                     DispatchQueue.main.async {
                         let pinToAdd = Pin()
-                        pinToAdd.title = "\(package.DeliveryId ?? 0)"
-                        pinToAdd.subtitle = "\(package.OrderID ?? 0)"
+                        pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
+                        pinToAdd.subtitle = "\(delivery.OrderID ?? 0)"
                         pinToAdd.coordinate = returnedCoord
                         pinToAdd.pinColor = "blue"
                         self.map.addAnnotation(pinToAdd)

@@ -15,5 +15,7 @@ class Delivery: NSObject {
     var DeliveryId:Int?
     var DeliveryTypeID:String?
     var OrderID:Int?
+    var Packages = [Package]()
+    var StatusId:String?
     
 }
