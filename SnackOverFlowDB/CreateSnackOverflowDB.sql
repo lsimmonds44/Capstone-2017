@@ -4048,8 +4048,22 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_retrieve_commercial_invoice_list_by_commercial_invoice_id'
+GO
+CREATE PROCEDURE sp_retrieve_commercial_invoice_list_by_commercial_invoice_id
+(
+	@Commercial_Invoice_Id [INT]
+)
+AS
+	BEGIN 
+		SELECT COMMERCIAL_INVOICE_ID, COMMERCIAL_ID, INVOICE_DATE, SUB_TOTAL, TAX_AMOUNT, TOTAL, AMOUNT_PAID, APPROVED, ACTIVE
+		FROM COMMERCIAL_INVOICE
+		WHERE COMMERCIAL_INVOICE_ID = @Commercial_Invoice_Id
+	END
+GO
 
-print '' print '*** Creating procedure sp_retrieve_commercial_invoice_list_by_supplier_id'
+
+print '' print '*** Creating procedure sp_retrieve_commercial_invoice_list_by_commercial_id'
 GO
 CREATE PROCEDURE sp_retrieve_commercial_invoice_list_by_commercial_id
 (

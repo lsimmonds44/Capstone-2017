@@ -26,5 +26,41 @@ namespace LogicLayer
                 throw new ApplicationException("There was an unknown error.", ex);
             }
         }
+
+
+        public List<CommercialInvoiceLine> RetrieveCommercialInvoiceLinesByInvoiceId(int invoiceId)
+        {
+            try
+            {
+                return CommercialInvoiceAccessor.RetrieveInvoiceLinesByInvoiceId(invoiceId);
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+        }
+
+
+        public CommercialInvoice RetrieveCommercialInvoiceByInvoiceID(int invoiceId)
+        {
+            try
+            {
+                return CommercialInvoiceAccessor.RetrieveCommercialInvoicesByInvoiceID(invoiceId);
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+        }
     }
 }

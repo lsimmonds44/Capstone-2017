@@ -11,12 +11,28 @@ namespace LogicLayer
     {
 
         /// <summary>
-        /// Christian Lopez
-        /// 2017/03/22
+        /// William Flood
+        /// 2017/04/19
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        List<CommercialInvoice> RetrieveCommercialInvoiceByUserName(string userName);
+
+        /// <summary>
+        /// William Flood
+        /// 2017/04/19
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        CommercialInvoice RetrieveCommercialInvoiceByInvoiceID(int invoiceId);
+
+        /// <summary>
+        /// William Flood
+        /// 2017/04/20
         /// </summary>
         /// <param name="invoiceId"></param>
         /// <returns></returns>
-        List<CommercialInvoice> RetrieveCommercialInvoiceByUserName(string userName);
+        List<CommercialInvoiceLine> RetrieveCommercialInvoiceLinesByInvoiceId(int invoiceId);
 
     }
 }

@@ -229,6 +229,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
+    <Compile Include="Models\CommercialInvoiceDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PagingInfo.cs" />
@@ -396,6 +397,8 @@
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
     <Content Include="Views\Home\Application-Success.cshtml" />
     <Content Include="Views\CommercialInvoice\Index.cshtml" />
+    <Content Include="Views\CommercialInvoice\Details.cshtml" />
+    <Content Include="Views\CommercialInvoice\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

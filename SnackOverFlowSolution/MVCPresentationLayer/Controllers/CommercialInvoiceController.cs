@@ -1,5 +1,6 @@
 ﻿using DataObjects;
 using LogicLayer;
+using MVCPresentationLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,22 @@ namespace MVCPresentationLayer.Controllers
                 ViewBag["ErrorMessage"] = "Internal error: " + ex.Message;
             }
             return View(invoiceList);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            var invoiceDetails = new CommercialInvoiceDetails();
+            try
+            {
+                invoiceDetails.CommercialInvoice = _commercialInvoiceManager.RetrieveCommercialInvoiceByInvoiceID((int)id);
+                invoiceDetails.CommercialInvoiceLines = _commercialInvoiceManager.RetrieveCommercialInvoiceLinesByInvoiceId((int)id);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Internal error: " + ex.Message;
+            }
+            return View(invoiceDetails);
+            
         }
     }
 }

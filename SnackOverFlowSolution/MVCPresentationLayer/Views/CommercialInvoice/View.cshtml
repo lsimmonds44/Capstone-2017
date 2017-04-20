@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DataObjects.CommercialInvoiceLine>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CommercialInvoiceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductLotId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantitySold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceEach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDiscount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommercialInvoiceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductLotId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantitySold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceEach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemDiscount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemTotal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
