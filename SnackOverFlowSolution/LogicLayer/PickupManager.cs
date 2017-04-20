@@ -89,5 +89,48 @@ namespace LogicLayer
 
             return pickups;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/04/19
+        /// </summary>
+        /// <param name="oldLine"></param>
+        /// <param name="newLine"></param>
+        /// <returns></returns>
+        public bool UpdatePickupLine(PickupLine oldLine, PickupLine newLine)
+        {
+            bool result = false;
+
+            try
+            {
+                result = (PickupLineAccessor.UpdatePickupLine(oldLine, newLine) >= 1);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/04/19
+        /// </summary>
+        /// <param name="pickupLineId"></param>
+        /// <returns></returns>
+        public PickupLine RetrievePickupLineById(int? pickupLineId)
+        {
+            PickupLine result = null;
+            try
+            {
+                result = PickupLineAccessor.RetrievePickupLineById(pickupLineId);
+            }
+            catch
+            {
+                throw;
+            }
+            return result;
+        }
     }
 }

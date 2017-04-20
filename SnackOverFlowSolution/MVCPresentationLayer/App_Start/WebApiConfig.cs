@@ -24,9 +24,21 @@ namespace MVCPresentationLayer
             );
 
             config.Routes.MapHttpRoute(
+                name: "pickupLineUpdate",
+                routeTemplate: "api/pickup/markpickedup/{pickupLineId}",
+                defaults: new { controller = "pickup", pickupLineId = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "routeApi",
                 routeTemplate: "api/route/{driverId}",
                 defaults: new { controller = "route", driverId = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "updateDelivery",
+                routeTemplate: "api/delivery/{deliveryId}/{newDeliveryStatus}",
+                defaults: new { controller = "delivery", deliveryId = RouteParameter.Optional, newDeliveryStatus = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
