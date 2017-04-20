@@ -53,6 +53,7 @@
     <Compile Include="Cart.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="CharityManager.cs" />
+    <Compile Include="CommercialInvoiceManager.cs" />
     <Compile Include="CompanyOrderManager.cs" />
     <Compile Include="CustomerManager.cs" />
     <Compile Include="CustomerOrderManager.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="IAgreementManager.cs" />
     <Compile Include="ICategoryManager.cs" />
     <Compile Include="ICharityManager.cs" />
+    <Compile Include="ICommercialInvoiceManager.cs" />
     <Compile Include="ICompanyOrderManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IDeliveryManager.cs" />
