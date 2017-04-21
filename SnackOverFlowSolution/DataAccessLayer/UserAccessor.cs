@@ -176,7 +176,7 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@USER_NAME", user.UserName);
             cmd.Parameters.AddWithValue("@ACTIVE", user.Active);
             cmd.Parameters.AddWithValue("@ADDRESS1", user.AddressLineOne);
-            cmd.Parameters.AddWithValue("@ADDRESS2", user.AddressLineTwo);
+            cmd.Parameters.AddWithValue("@ADDRESS2", (user.AddressLineTwo ?? ""));
             cmd.Parameters.AddWithValue("@CITY", user.City);
             cmd.Parameters.AddWithValue("@STATE", user.State);
             cmd.Parameters.AddWithValue("@ZIP", user.Zip);

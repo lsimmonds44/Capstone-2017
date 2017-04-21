@@ -209,7 +209,9 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SupplierGoodsController.cs" />
     <Compile Include="Controllers\SupplierInvoiceController.cs" />
-    <Compile Include="Controllers\SupplierWithAgreementsController.cs" />
+    <Compile Include="Controllers\SupplierWithAgreementsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +234,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
     <Compile Include="Models\ProductWithGradeOptions.cs" />
+    <Compile Include="Models\SupplierApplicantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -393,6 +396,7 @@
     <Content Include="Views\Shared\AlreadyAccepted.cshtml" />
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
     <Content Include="Views\Home\Application-Success.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
