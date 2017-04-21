@@ -160,8 +160,8 @@ namespace DataAccessLayer
                             QuantitySold = reader.GetInt32(2),
                             PriceEach = reader.GetDecimal(3),
                             ItemDiscount = reader.GetDecimal(4),
-                            ItemTotal = reader.GetDecimal(5),
-                            ProductName = reader.GetString(6)
+                            ItemTotal = reader.GetInt32(2) * (reader.GetDecimal(3) - reader.GetDecimal(4)),
+                            ProductName = reader.GetString(5)
                         };
                         lines.Add(line);
                     }
