@@ -35,8 +35,7 @@ class DriverManager: NSObject {
                     {
                         
                         
-                        let packageOb = Package()
-                        let packageLineOb = PackageLine()
+                        
                         
                         
                         driverRoute.DriverID =  route["DriverId"] as? Int
@@ -70,7 +69,8 @@ class DriverManager: NSObject {
                             let packageList = json["PackageList"] as? [Any]
                             for package in packageList ?? []
                             {
-                                
+                                let packageOb = Package()
+                                let packageLineOb = PackageLine()
                                 guard let packageJson = package as? [String:Any] else
                                 {
                                     continue
@@ -93,9 +93,9 @@ class DriverManager: NSObject {
                                     packageLineOb.ProductName = packageLineJson["ProductName"] as? String
                                     packageLineOb.Quantity = packageLineJson["quantity"] as? Int
                                     packageOb.PackageLineList.append(packageLineOb)
-                                    delivery.Packages.append(packageOb)
                                 }
                                 
+                                delivery.Packages.append(packageOb)
                                 
                             }
                             
