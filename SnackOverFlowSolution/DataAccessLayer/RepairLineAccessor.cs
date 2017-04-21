@@ -23,6 +23,14 @@ namespace DataAccessLayer
         /// 
         /// Retrieves all of the repair lines related to the given repair.
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="repairID">The id of the related repair.</param>
         /// <returns>All repair lines related to the given repair.</returns>
         public static List<RepairLine> RetreiveAllRepairLinesForRepair(int repairID)

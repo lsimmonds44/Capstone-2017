@@ -50,14 +50,14 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                    employee = new Employee()
-                    {
-                        EmployeeId = reader.GetInt32(0),
-                        UserId = reader.GetInt32(1),
-                        Salary = reader.GetDecimal(3),
-                        Active = reader.GetBoolean(4),
-                        DateOfBirth = reader.GetDateTime(5)
-                    };
+                    employee = new Employee();
+                    reader.Read();
+                        employee.EmployeeId = reader.GetInt32(0);
+                        employee.UserId = reader.GetInt32(1);
+                        employee.Salary = reader.IsDBNull(2) ? (decimal?)null : reader.GetDecimal(2);
+                        employee.Active = reader.GetBoolean(3);
+                        employee.DateOfBirth = reader.GetDateTime(4);
+                    
                 }
             }
             catch (Exception)
