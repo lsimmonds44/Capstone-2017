@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+
 namespace DataAccessLayer
 {
     /// <summary>
@@ -53,7 +54,7 @@ namespace DataAccessLayer
                             Description = reader.GetString(2)
                         };
                         EmployeeOrderResponsibilityList.Add(employeeOrderResponsibility);
-                    } 
+                    }
                 }
             }
             catch (Exception)

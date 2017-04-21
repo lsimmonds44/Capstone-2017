@@ -232,7 +232,7 @@ namespace DataAccessLayer
                         IsApproved = a.IsApproved,
                         DateSubmitted = a.DateSubmitted,
                         SupplierId = a.SupplierId,
-                        ProductName = ProductAccessor.RetrieveProductbyId(a.ProductId).Name
+                        ProductName = ProductAccessor.RetrieveProduct(a.ProductId).Name
                     };
                     agreementsWithNames.Add(newAgreement);
                 }

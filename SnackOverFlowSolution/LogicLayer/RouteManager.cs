@@ -45,7 +45,7 @@ namespace LogicLayer
                             p.PackageLineList = PackageLineAccessor.RetrievePackageLinesInPackage(p.PackageId);
                             foreach(PackageLine line in p.PackageLineList){
                                 //Getting the name of each product for each package line
-                                line.ProductName = ProductAccessor.RetrieveProductNameFromProductLotId(line.productLotId);
+                                line.ProductName = ProductAccessor.RetrieveProductNameFromProductLotId(line.ProductLotId);
                             }
                         }
                     }

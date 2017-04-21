@@ -14,11 +14,11 @@ namespace DataObjects
 {
     public class PackageLine
     {
-        public decimal? pricePaid { get; set; }
-        public int? quantity { get; set; }
-        public int? productLotId { get; set; }
-        public int? packageId { get; set; }
-        public int? packageLineId { get; set; }
+        public decimal? PricePaid { get; set; }
+        public int? Quantity { get; set; }
+        public int? ProductLotId { get; set; }
+        public int? PackageId { get; set; }
+        public int? PackageLineId { get; set; }
         public string ProductName { get; set; }
 
 
@@ -31,7 +31,7 @@ namespace DataObjects
         /// <returns>a string representation of the package line</returns>
         public override string ToString()
         {
-            return "Lot ID: " + productLotId + " - Quantity: " + quantity;
+            return "Lot ID: " + ProductLotId + " - Quantity: " + Quantity;
         }
     }
 }

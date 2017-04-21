@@ -14,7 +14,7 @@ namespace DataAccessLayer
     /// 
     /// Class to handle database interactions involving maintenance schedule lines.
     /// </summary>
-    public class MaintenanceScheduleLineAccessor
+    public static class MaintenanceScheduleLineAccessor
     {
         /// <summary>
         /// Mason Allen
