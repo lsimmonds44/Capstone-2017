@@ -9,27 +9,33 @@ using System.Web.Mvc;
 using DataObjects;
 using MVCPresentationLayer.Models;
 using LogicLayer;
-using DataAccessLayer;
+using Microsoft.AspNet.Identity;
 
 namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
-    /// Controller logic for supplier invoices
+    /// Controller logic for supplier product lots
     /// 
     /// Ethan Jorgensen
     /// Created: 04/06/2017
     /// </summary>
     public class SupplierGoodsController : Controller
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
-        ISupplierProductLotManager plMgr = new SupplierProductLotManager();
-
-        // dummy supplier
-        Supplier sup = new Supplier() { SupplierID = 10000 };
+        private ISupplierProductLotManager plMgr;
+        private ISupplierManager supMgr;
+        private IUserManager usrMgr;
+        public SupplierGoodsController(ISupplierProductLotManager plMgr, ISupplierManager supMgr, IUserManager usrMgr)
+        {
+            this.plMgr = plMgr;
+            this.supMgr = supMgr;
+            this.usrMgr = usrMgr;
+        }
 
         // GET: /SupplierGoods/
         public ActionResult Index()
         {
+            var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
+            Supplier sup = supMgr.RetrieveSupplierByUserId(userId);
             return View(plMgr.RetrieveSupplierProductLotsBySupplier(sup));
         }
 
@@ -40,6 +46,8 @@ namespace MVCPresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
+            Supplier sup = supMgr.RetrieveSupplierByUserId(userId);
             var lot = plMgr.RetrieveSupplierProductLotsBySupplier(sup).Find(i => i.SupplierProductLotId == (int)id);
             if (lot == null)
             {

@@ -86,32 +86,6 @@ namespace LogicLayer
         }
 
 
-
-
-        /// <summary>
-        /// Ethan Jorgensen
-        /// Created on 2017/04/13
-        /// Gets only the active product lots (Ones that have more than 0 quantity)
-        /// </summary>
-        /// <returns></returns>
-        /// <remarks>Last Modified 2017/03/29 by Christian Lopez - Extracted method to reuse it</remarks>
-        public List<SupplierProductLot> RetrieveActiveSupplierProductLots()
-        {
-            List<SupplierProductLot> lots = null;
-            try
-            {
-                lots = SupplierProductLotAccessor.RetrieveActiveSupplierProductLots();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            return lots;
-        }
-
-
         /// <summary>
         /// Ethan Jorgensen
         /// Created on 2017/04/13

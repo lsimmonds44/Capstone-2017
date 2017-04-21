@@ -11,7 +11,9 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/04/13
+    /// Created: 2017/04/13
+    /// 
+    /// Class to handle database interactions involving routes.
     /// </summary>
     public static class RouteAccessor
     {
@@ -27,7 +29,7 @@ namespace DataAccessLayer
         /// <returns></returns>
         public static List<Route> RetrieveFutureRoutesForDriver(int? driverId)
         {
-            List<Route> routes = new List<Route>();
+            var routes = new List<Route>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_routes_for_driver_after_date";

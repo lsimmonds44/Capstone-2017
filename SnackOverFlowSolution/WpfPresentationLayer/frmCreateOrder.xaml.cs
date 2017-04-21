@@ -283,7 +283,7 @@ namespace WpfPresentationLayer
                         oLine.ProductName = cboProducts.SelectedItem.ToString();
                         oLine.Quantity = parseToInt(txtQty.Text);
                         oLine.GradeID = lblProductGradeResult.Content.ToString();
-                        oLine.Price = _currentlySelectedProductLot.Price;
+                        oLine.Price = _currentlySelectedProductLot.Price.Value;
                         oLine.UnitDiscount = (decimal)0.0;
                         try
                         {

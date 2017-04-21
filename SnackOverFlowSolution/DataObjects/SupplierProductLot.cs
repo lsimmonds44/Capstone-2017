@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAccessLayer
+namespace DataObjects
 {
     public class SupplierProductLot
     {

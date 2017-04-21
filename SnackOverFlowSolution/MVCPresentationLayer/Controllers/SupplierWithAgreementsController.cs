@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataObjects;
 using MVCPresentationLayer.Models;
 using LogicLayer;
+using System.Threading.Tasks;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -18,12 +19,14 @@ namespace MVCPresentationLayer.Controllers
         private ISupplierManager _supplierManager;
         private IProductManager _productManager;
         private IAgreementManager _agreementManager;
+        private IUserManager _userManager;
 
-        public SupplierWithAgreementsController(ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager)
+        public SupplierWithAgreementsController(ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager, IUserManager userManager)
         {
             _supplierManager = supplierManager;
             _productManager = productManager;
             _agreementManager = agreementManager;
+            _userManager = userManager;
         }
 
         [Authorize]
@@ -49,16 +52,16 @@ namespace MVCPresentationLayer.Controllers
         //}
 
         // GET: SupplierWithAgreements/Create
-        [Authorize]
         public ActionResult Create()
         {
-            if (User.IsInRole("Supplier"))
-            {
-                ViewBag.Account = "supplier";
-                return View("AlreadyAccepted");
-            }
+            //if (User.IsInRole("Supplier"))
+            //{
+            //    ViewBag.Account = "supplier";
+            //    return View("AlreadyAccepted");
+            //}
             List<Product> products = _productManager.ListProducts();
-            SupplierWithAgreements dummy = new SupplierWithAgreements()
+            //SupplierWithAgreements dummy = new SupplierWithAgreements()
+            SupplierApplicantViewModel dummy = new SupplierApplicantViewModel()
             {
                 Agreements = new List<AgreementWithProductName>()
             };
@@ -70,6 +73,7 @@ namespace MVCPresentationLayer.Controllers
                     ProductName = p.Name
                 });
             }
+            ViewBag.Message = "";
             return View(dummy);
         }
 
@@ -79,25 +83,90 @@ namespace MVCPresentationLayer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create([Bind(Include = "FarmTaxID,UserId,FarmName,FarmAddress,FarmCity,FarmState,Agreements")] SupplierWithAgreements supplierWithAgreements)
-        public ActionResult Create([Bind(Include = "FarmTaxID,FarmName,FarmAddress,FarmCity,FarmState,ProductIDs")] SupplierWithAgreements supplierWithAgreements)
+        public async Task<ActionResult> Create([Bind(Include = 
+            "FirstName,LastName,Phone,AddressLineOne,AddressLineTwo,City,State,Zip,EmailAddress,UserName,Password,ConfirmPassword,FarmTaxID,FarmName,FarmAddress,FarmCity,FarmState,ProductIDs")] 
+            SupplierApplicantViewModel supplierApplicant)
         {
-            supplierWithAgreements.Agreements = new List<AgreementWithProductName>();
-            if (supplierWithAgreements.ProductIDs != null)
+
+
+
+            supplierApplicant.Agreements = new List<AgreementWithProductName>();
+            if (supplierApplicant.ProductIDs != null)
             {
-                for (int i = 0; i < supplierWithAgreements.ProductIDs.Length; i++)
+                for (int i = 0; i < supplierApplicant.ProductIDs.Length; i++)
                 {
-                    supplierWithAgreements.Agreements.Add(new AgreementWithProductName()
+                    supplierApplicant.Agreements.Add(new AgreementWithProductName()
                     {
-                        ProductId = supplierWithAgreements.ProductIDs[i],
-                        ProductName = _productManager.RetrieveProductById(supplierWithAgreements.ProductIDs[i]).Name
+                        ProductId = supplierApplicant.ProductIDs[i],
+                        ProductName = _productManager.RetrieveProductById(supplierApplicant.ProductIDs[i]).Name
                     });
                 }
             }
             if (ModelState.IsValid)
             {
+                //Need to first make a user with the information, then the supplier
+                User newUser = new User()
+                {
+                    FirstName = supplierApplicant.FirstName,
+                    LastName = supplierApplicant.LastName,
+                    City = supplierApplicant.City,
+                    State = supplierApplicant.State,
+                    AddressLineOne = supplierApplicant.AddressLineOne,
+                    AddressLineTwo = supplierApplicant.AddressLineTwo,
+                    Zip = supplierApplicant.Zip,
+                    EmailAddress = supplierApplicant.EmailAddress,
+                    EmailPreferences = true,
+                    Active = true,
+                    Phone = supplierApplicant.Phone,
+                    UserName = supplierApplicant.UserName
+                };
 
-                //Christian Lopez - Will want to change when we have a current user implemented.
-                supplierWithAgreements.UserId = 10000;
+                try
+                {
+                    string result = _userManager.CreateNewUser(newUser, supplierApplicant.Password, supplierApplicant.ConfirmPassword);
+                    if (!("Created".Equals(result)))
+                    {
+                        ViewBag.Message = result;
+                        return View(supplierApplicant);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }
+
+                // If we are here, it means we created the user
+                User newlyCreated = null;
+                try
+                {
+                    newlyCreated = _userManager.RetrieveUserByUserName(newUser.UserName);
+                }
+                catch (Exception)
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }
+
+                if (null == newlyCreated) // this shouldn't ever be true
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                }
+
+                // Make a supplier and store the associated data to the db
+                SupplierWithAgreements supplierWithAgreements = new SupplierWithAgreements()
+                {
+                    FarmName = supplierApplicant.FarmName,
+                    FarmAddress = supplierApplicant.FarmAddress,
+                    FarmCity = supplierApplicant.FarmCity,
+                    FarmState = supplierApplicant.FarmState,
+                    FarmTaxID = supplierApplicant.FarmTaxID,
+                    UserId = newlyCreated.UserId,
+                    ProductIDs = supplierApplicant.ProductIDs,
+                    Agreements = supplierApplicant.Agreements,
+                    Active = true,
+                    IsApproved = false
+                };
                 try
                 {
 
@@ -112,7 +181,22 @@ namespace MVCPresentationLayer.Controllers
                                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
                             }
                         }
+
+                        RegisterViewModel registerModel = new RegisterViewModel()
+                        {
+                            Email = newUser.EmailAddress,
+                            Password = supplierApplicant.Password,
+                            ConfirmPassword = supplierApplicant.ConfirmPassword
+                        };
+                        
+
+                        var controller = DependencyResolver.Current.GetService<AccountController>();
+                        controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+
+                        var result = await controller.Register(registerModel);
+
                         return RedirectToAction("Index","Home");
+                        //return RedirectToAction("Register", "Account", registerModel);
                     }
                     else
                     {
@@ -128,17 +212,17 @@ namespace MVCPresentationLayer.Controllers
             }
 
             List<Product> products = _productManager.ListProducts();
-            supplierWithAgreements.Agreements = new List<AgreementWithProductName>();
+            supplierApplicant.Agreements = new List<AgreementWithProductName>();
             foreach (Product p in products)
             {
-                supplierWithAgreements.Agreements.Add(new AgreementWithProductName()
+                supplierApplicant.Agreements.Add(new AgreementWithProductName()
                 {
                     ProductId = p.ProductId,
                     ProductName = p.Name
                 });
             }
 
-            return View(supplierWithAgreements);
+            return View(supplierApplicant);
         }
 
         //// GET: SupplierWithAgreements/Edit/5
