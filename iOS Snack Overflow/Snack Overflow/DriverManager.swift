@@ -16,28 +16,19 @@ class DriverManager: NSObject {
     /// - Parameters:
     ///   - userID: userID description
     ///   - completion: completion description
-    func getRouteByDriverID(driverID:Int, completion: @escaping (_ result:Route?, _ userMessage:String)->())
+    func getRouteByDriverID(driverID:Int, completion: @escaping (_ result:[Route]?, _ userMessage:String)->())
     {
         let url:URL = URL(string:getIPAsString() + "route/\(driverID)")!
         
         let task = session.dataTask(with: getRequest(url: url)) { (data, response, error) in
             do{
-                
                 if let jsonData = data,
                     let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String:Any]]{
                     // print("jsonOb \(jsonObject)")
+                    var driverRoutes = [Route]()
                     let driverRoute = Route()
-                    
-                    
-                    
-                    
                     for route in jsonObject
                     {
-                        
-                        
-                        
-                        
-                        
                         driverRoute.DriverID =  route["DriverId"] as? Int
                         driverRoute.RouteID = route["RouteId"] as? Int
                         driverRoute.VehicleID = route["VehicleId"] as? Int
@@ -50,7 +41,6 @@ class DriverManager: NSObject {
                             {
                                 continue
                             }
-                            
                             delivery.DeliveryId = json["DeliveryId"] as? Int
                             delivery.DeliveryTypeID = json["DeliveryTypeId"] as? String
                             delivery.OrderID = json["OrderId"] as? Int
@@ -64,8 +54,6 @@ class DriverManager: NSObject {
                             address.State = addressJson?["State"] as? String
                             address.Zip = addressJson?["Zip"] as? String
                             delivery.Address = address
-                            
-                            
                             let packageList = json["PackageList"] as? [Any]
                             for package in packageList ?? []
                             {
@@ -81,7 +69,6 @@ class DriverManager: NSObject {
                                 let packageLineList = packageJson["PackageLineList"] as? [Any]
                                 for packageLine in packageLineList ?? []
                                 {
-                                    
                                     guard let packageLineJson = packageLine as? [String:Any]else
                                     {
                                         continue
@@ -94,30 +81,16 @@ class DriverManager: NSObject {
                                     packageLineOb.Quantity = packageLineJson["quantity"] as? Int
                                     packageOb.PackageLineList.append(packageLineOb)
                                 }
-                                
                                 delivery.Packages.append(packageOb)
-                                
                             }
-                            
-                            
                             driverRoute.Deliveries.append(delivery)
-                            
                         }
+                        driverRoutes.append(driverRoute)
                     }
-                    
-                    completion(driverRoute,"")
-                    
-                    //                    for package in route.Deliveries{
-                    //                        print(package.Address?.AddressLine1 ?? "No address")
-                    //                    }
-                    
-                    
-                    //                    user.UserId = jsonObject["UserId"] as? Int
+                    completion(driverRoutes,"")
                 }
             }catch{
                 completion(nil,"Username or Password incorrect!")
-                //                vegTimer.invalidate()
-                //                timer.invalidate()
             }
         }
         task.resume()
