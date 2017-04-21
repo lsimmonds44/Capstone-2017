@@ -252,6 +252,12 @@ namespace DataAccessLayer
         /// 
         /// Standardized method.
         /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// Updates: 2017/04/19
+        /// 
+        /// Updated to check if the verification is null before assigning it
+        /// </remarks>
         /// <param name="oldDelivery">The old delivery.</param>
         /// <param name="newDelivery">The new delivery.</param>
         /// <returns>How many rows were affected.</returns>
@@ -268,14 +274,34 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@old_ROUTE_ID", oldDelivery.RouteId);
             cmd.Parameters.AddWithValue("@old_DELIVERY_DATE", oldDelivery.DeliveryDate);
-            cmd.Parameters.AddWithValue("@old_VERIFICATION", oldDelivery.Verification);
+
+            //Checking if the verification is null before assigning it as it used to break before doing this
+            cmd.Parameters.Add("@old_VERIFICATION", SqlDbType.VarBinary);
+            if (oldDelivery.Verification != null)
+            {
+                cmd.Parameters["@old_VERIFICATION"].Value = oldDelivery.Verification;
+            }
+            else
+            {
+                cmd.Parameters["@old_VERIFICATION"].Value = DBNull.Value;
+            }
+
             cmd.Parameters.AddWithValue("@old_STATUS_ID", oldDelivery.StatusId);
             cmd.Parameters.AddWithValue("@old_DELIVERY_TYPE_ID", oldDelivery.DeliveryTypeId);
             cmd.Parameters.AddWithValue("@old_ORDER_ID", oldDelivery.OrderId);
 
             cmd.Parameters.AddWithValue("@new_ROUTE_ID", newDelivery.RouteId);
-            cmd.Parameters.AddWithValue("@new_DELIVERY_DATE", newDelivery.DeliveryDate);           
-            cmd.Parameters.AddWithValue("@new_VERIFICATION", newDelivery.Verification);           
+            cmd.Parameters.AddWithValue("@new_DELIVERY_DATE", newDelivery.DeliveryDate);
+            cmd.Parameters.Add("@new_VERIFICATION", SqlDbType.VarBinary);
+            if (newDelivery.Verification != null)
+            {
+                cmd.Parameters["@new_VERIFICATION"].Value = newDelivery.Verification;
+            }
+            else
+            {
+                cmd.Parameters["@new_VERIFICATION"].Value = DBNull.Value;
+            }          
+
             cmd.Parameters.AddWithValue("@new_STATUS_ID", newDelivery.StatusId);       
             cmd.Parameters.AddWithValue("@new_DELIVERY_TYPE_ID", newDelivery.DeliveryTypeId);       
             cmd.Parameters.AddWithValue("@new_ORDER_ID", newDelivery.OrderId);
@@ -379,13 +405,12 @@ namespace DataAccessLayer
                     reader.Read();
                     userAddress = new UserAddress()
                     {
-                        UserAddressId = reader.GetInt32(0),
-                        UserId = reader.GetInt32(1),
-                        AddressLineOne = reader.GetString(2),
-                        AddressLineTwo = reader.GetString(3),
-                        City = reader.GetString(4),
-                        State = reader.GetString(5),
-                        Zip = reader.GetString(6)
+                        UserId = reader.GetInt32(0),
+                        AddressLineOne = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        AddressLineTwo = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        City = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        State = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Zip = reader.IsDBNull(5) ? null : reader.GetString(5)
                     };
                 }
                 reader.Close();
@@ -401,6 +426,59 @@ namespace DataAccessLayer
             }
 
             return userAddress;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created:2017/04/19
+        /// 
+        /// Retrieves a delivery with the passed in id
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <returns></returns>
+        public static Delivery RetrieveDeliveryById(int deliveryId)
+        {
+
+            Delivery delivery = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_delivery";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    delivery = new Delivery()
+                    {
+                        DeliveryId = reader.GetInt32(0),
+                        RouteId = reader.GetInt32(1),
+                        DeliveryDate = reader.GetDateTime(2),
+                        Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                        StatusId = reader.GetString(4),
+                        DeliveryTypeId = reader.GetString(5),
+                        OrderId = reader.GetInt32(6)
+
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return delivery;
         }
     }
 }

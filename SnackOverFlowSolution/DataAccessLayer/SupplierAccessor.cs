@@ -633,13 +633,12 @@ namespace DataAccessLayer
                     reader.Read();
                     userAddress = new UserAddress()
                     {
-                        UserAddressId = reader.GetInt32(0),
-                        UserId = reader.GetInt32(1),
-                        AddressLineOne = reader.GetString(2),
-                        AddressLineTwo = reader.GetString(3),
-                        City = reader.GetString(4),
-                        State = reader.GetString(5),
-                        Zip = reader.GetString(6)
+                        UserId = reader.GetInt32(0),
+                        AddressLineOne = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        AddressLineTwo = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        City = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        State = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Zip = reader.IsDBNull(5) ? null : reader.GetString(5)
                     };
                 }
                 reader.Close();

@@ -16,7 +16,18 @@ namespace MVCPresentationLayer.Models
         public IEnumerable<BrowseProductViewModel> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
 
-        public string searchPhrase { get; set; }
+        public string SearchPhrase { get; set; }
 
+        public string CurrentCategory { get; set; }
+
+        public IEnumerable<string> Categories { get; set; }
+
+    }
+
+    public class NavMenuViewModel
+    {
+        public IEnumerable<string> Categories { get; set; }
+        public string SearchPhrase { get; set; }
+        public string SelectedCategory { get; set; }
     }
 }

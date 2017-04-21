@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,37 +9,56 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class PreferenceAccessor
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/21
+    /// 
+    /// Class to handle database interactions involving preferences.
+    /// </summary>
+    public static class PreferenceAccessor
     {
         /// <summary>
-        /// Created by Michael Takrama
-        /// 24/03/2017
+        /// Michael Takrama
+        /// Created: 2017/03/24
         /// 
-        /// Data Access Logic for Preference Settings
+        /// Data Access Logic for Preference Settings.
         /// </summary>
-        /// <param name="preferenceSetting"></param>
-        /// <returns>Returns a signal for success</returns>
-        public static bool SavePreferenceSettings(DataObjects.Preferences preferenceSetting)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Update: 2017/04/24
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="preferenceSetting">The setting to update.</param>
+        /// <returns>Rows affected.</returns>
+        public static int UpdatePreferenceSettings(Preferences preferenceSetting)
         {
-            int count = 0;
+            var rows = 0;
 
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_update_preferenceSettings";
-            var cmd = new SqlCommand(cmdText, conn) {CommandType = CommandType.StoredProcedure};
+            var cmdText = @"sp_update_preferenceSettings";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@expiringsoonduration", preferenceSetting.expiringSoonDuration);
+            cmd.Parameters.AddWithValue("@expiringsoonduration", preferenceSetting.ExpiringSoonDuration);
 
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return count > 0;
+            return rows;
         }
     }
 }

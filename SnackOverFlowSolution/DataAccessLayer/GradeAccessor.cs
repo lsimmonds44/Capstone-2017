@@ -14,7 +14,7 @@ namespace DataAccessLayer
     /// 
     /// Class to handle database interactions involving grades.
     /// </summary>
-    public class GradeAccessor
+    public static class GradeAccessor
     {
         /// <summary>
         /// Christian Lopez

@@ -199,10 +199,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DeliveryController.cs" />
     <Compile Include="Controllers\Api\PickupController.cs" />
     <Compile Include="Controllers\Api\RouteController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CommercialInvoiceController.cs" />
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
+    <Compile Include="Models\CommercialInvoiceDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PagingInfo.cs" />
@@ -244,6 +247,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom-bg.css" />
     <Content Include="Content\fontello.css" />
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\main.css" />
@@ -263,6 +267,9 @@
     <Content Include="Images\Background\bg-1.jpg" />
     <Content Include="Images\Background\bg-2.jpg" />
     <Content Include="Images\Background\custom-bg30.jpg" />
+    <Content Include="Images\Background\custom-bg32.jpg" />
+    <Content Include="Images\Background\custom-bg41.jpg" />
+    <Content Include="Images\cart.png" />
     <Content Include="Images\Footer\footerlogo.png" />
     <Content Include="Images\Gallery\gallery-1.jpg" />
     <Content Include="Images\Gallery\gallery-2.jpg" />
@@ -397,6 +404,17 @@
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
     <Content Include="Views\Home\Application-Success.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Invoice.cshtml" />
+    <Content Include="Views\CommercialInvoice\Index.cshtml" />
+    <Content Include="Views\CommercialInvoice\Details.cshtml" />
+    <Content Include="Views\CommercialInvoice\View.cshtml" />
+    <Content Include="Views\Products\NavMenu.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Shared\_HomeMainNavPartial.cshtml" />
+    <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Products\IndexTemp.cshtml" />
+    <Content Include="Views\Shared\_ShopLayout.cshtml" />
+    <Content Include="Views\Shared\_CartPartial.cshtml" />
+    <Content Include="Views\Shared\_TopSectionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

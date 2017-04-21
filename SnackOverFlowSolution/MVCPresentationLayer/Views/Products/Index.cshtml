@@ -8,49 +8,50 @@
 *@
 
 <h2>Available Products</h2>
-
-@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
-{
-    <p>
-        @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search products" })
-        <input type="submit" value="Search" class="btn btn-primary" />
-        <input type="button" value="Clear" class="btn" id="search-clear" />
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().PriceString)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Supplier_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CategoryID)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.ImageBinary)
-            </th>*@
-        <th></th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Products)
-    {
-        <tr>
-            @Html.Partial("_ProductSummary", item)
-        </tr>
-    }
-    <div class="btn-group pull-right">
-        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search= Model.searchPhrase, page = x }))
+<div class="row panel">
+    <div id="categories" class="col-xs-2">
+        @Html.Action("NavMenu", "Products", new { categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory })
     </div>
-</table>
-<div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search = Model.searchPhrase, page = x }))
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
+    {
+        <p>
+            @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search products" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <input type="button" value="Clear" class="btn" id="search-clear" />
+        </p>
+    }
+    <table class="col-xs-8">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().PriceString)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Supplier_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CategoryID)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ImageBinary)
+                </th>*@
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                @Html.Partial("_ProductSummary", item)
+            </tr>
+        }
+        <div class="btn-group pull-right">
+            @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search = Model.SearchPhrase, category = Model.CurrentCategory, page = x }))
+        </div>
+    </table>
 </div>

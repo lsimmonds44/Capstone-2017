@@ -1,0 +1,51 @@
+﻿@model MVCPresentationLayer.Models.CommercialInvoiceDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Invoice #@(null==Model.CommercialInvoice?"":Model.CommercialInvoice.CommercialInvoiceId.ToString())</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+
+<div>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Product:
+            </th>
+            <th>
+                Quantity:
+            </th>
+            <th>
+                Individual Price:
+            </th>
+            <th>
+                Discount:
+            </th>
+            <th>
+                Subtotal:
+            </th>
+        </tr>
+
+        @foreach (var item in Model.CommercialInvoiceLines??new List<DataObjects.CommercialInvoiceLine>())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantitySold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceEach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemDiscount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemTotal)
+                </td>
+            </tr>
+        }
+</div>

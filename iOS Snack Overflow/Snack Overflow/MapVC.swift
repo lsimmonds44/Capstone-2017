@@ -11,6 +11,9 @@ import MapKit
 
 class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
+    let _driverMgr = DriverManager()
+    var _driver:User!
+    
     // outlets
     let mapModel = MapVCModel()
     private var _locationManager = CLLocationManager()
@@ -31,11 +34,10 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapModel.convertAddressToCoord(address: "6301 Kirkwood Blvd SW Cedar Rapids, IA 52404") { (returnedCoord) in
-            DispatchQueue.main.async {
-                self.displayPin(coord: returnedCoord)
-            }
+        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (routes, userMessage) in
+            self.displayPin(routes: routes?[0])
         }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -46,13 +48,33 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     
     
-    func displayPin(coord:CLLocationCoordinate2D){ // will probably be changed to display all pins and iterate through the list of deliveries
-        let pinToAdd = Pin()
-            pinToAdd.title = "Kirkwood"
-            pinToAdd.subtitle = "Test"
-            pinToAdd.coordinate = coord
-            pinToAdd.pinColor = "blue"
-            self.map.addAnnotation(pinToAdd)
+    func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
+        
+        for delivery in routes?.Deliveries ?? []{
+            
+                let addLine1 = (delivery.Address!.AddressLine1 ?? "")
+                let addLine2 = (delivery.Address!.AddressLine2 ?? "")
+                let addCity = (delivery.Address!.City ?? "")
+                let addState = (delivery.Address!.State ?? "")
+                let addZip = (delivery.Address!.Zip ?? "")
+                
+                mapModel.convertAddressToCoord(address: addLine1 + addLine2 + addCity + addState + addZip) { (returnedCoord) in
+                    DispatchQueue.main.async {
+                        let pinToAdd = Pin()
+                        pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
+                        pinToAdd.subtitle = "\(delivery.DeliverDate ?? Date())"
+                        pinToAdd.coordinate = returnedCoord
+                        pinToAdd.pinColor = "blue"
+                        pinToAdd.delivery = delivery
+                        self.map.addAnnotation(pinToAdd)
+                    }
+                }
+        }
+        
+        
+        
+        
+        
     }
     
     /// Description
@@ -76,6 +98,17 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         return outPin
     }
     
+    //Holds the delivery for the pin that has been selected
+    var _selectedDelivery = Delivery()
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let pin = view.annotation as! Pin
+        
+        _selectedDelivery = pin.delivery
+        self.performSegue(withIdentifier: "DeliveryDetailSeg", sender: nil)
+    }
+    
+    
     /*
      // MARK: - Navigation
      
@@ -85,5 +118,14 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DeliveryDetailSeg"{
+            if let deliveryVC:DeliveryVC = segue.destination as? DeliveryVC{
+                deliveryVC.navigationItem.title = "Delivery Details"
+                deliveryVC._delivery = _selectedDelivery
+            }
+        }else if segue.identifier == "PickupSeg"{
+            
+        }
+    }
 }

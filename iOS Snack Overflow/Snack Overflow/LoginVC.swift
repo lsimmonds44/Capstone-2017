@@ -13,13 +13,14 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     // variables
     private let _userManager = UserManager()
     private let _testUserManager = TestUserManager()
-    private var user = User(){didSet{}}
+    private var _user = User(){didSet{}}
     //    {didSet{if user != nil {performSegue(withIdentifier: "HomeSeg", sender: nil)}}
     
     // outlets
     @IBOutlet weak var tfUsername: UITextField!{didSet{tfUsername.delegate = self}}
     @IBOutlet weak var tfPassword: UITextField!{didSet{tfPassword.delegate = self}}
     @IBOutlet weak var lblUserMessage: UILabel!
+    @IBOutlet weak var btnLogin: UIButton!{didSet{btnLogin.layer.cornerRadius = 8}}
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -51,7 +52,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
                     if user?.UserId != nil{
                         DispatchQueue.main.async {
                             self.lblUserMessage.text = userMessage
-                            self.user = user!
+                            self._user = user!
                             self.performSegue(withIdentifier: "HomeSeg", sender: nil)
                         }
                     }else{
@@ -71,6 +72,24 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         }
     } // end of login button
     
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeSeg"{
+            if let homeVC:HomeVC = segue.destination as? HomeVC{
+                homeVC._driver = _user
+            }
+        }
+    } // end of prepare
+    
+    
     
 } // end of class
+
+
+
+
+
+
+
+
 

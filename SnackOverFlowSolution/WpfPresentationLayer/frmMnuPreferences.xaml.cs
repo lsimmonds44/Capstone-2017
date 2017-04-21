@@ -49,7 +49,7 @@ namespace WpfPresentationLayer
                 try
                 {
 
-                    expiringSoonDuration.expiringSoonDuration = int.Parse(TxtPreference.Text);
+                    expiringSoonDuration.ExpiringSoonDuration = int.Parse(TxtPreference.Text);
                     _preferenceManager.UpdatePreferenceSettings(expiringSoonDuration); 
                     MessageBox.Show("Preferences Saved");
                 }

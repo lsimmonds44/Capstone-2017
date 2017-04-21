@@ -51,6 +51,7 @@
     <Compile Include="BackorderPreorderAccessor.cs" />
     <Compile Include="CategoryAccessor.cs" />
     <Compile Include="CharityAccessor.cs" />
+    <Compile Include="CommercialInvoiceAccessor.cs" />
     <Compile Include="CompanyOrderAccessor.cs" />
     <Compile Include="CustomerAccessor.cs" />
     <Compile Include="DBConnection.cs" />

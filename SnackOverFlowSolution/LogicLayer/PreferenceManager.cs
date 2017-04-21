@@ -26,7 +26,7 @@ namespace LogicLayer
         /// <returns></returns>
         public bool UpdatePreferenceSettings(Preferences preferenceSetting)
         {
-            return PreferenceAccessor.SavePreferenceSettings(preferenceSetting);
+            return 0 > PreferenceAccessor.UpdatePreferenceSettings(preferenceSetting);
         }
     }
 }
