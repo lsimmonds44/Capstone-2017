@@ -14,6 +14,6 @@ namespace DataObjects
     /// </summary>
     public class Preferences
     {
-        public int expiringSoonDuration { get; set; }
+        public int ExpiringSoonDuration { get; set; }
     }
 }

@@ -124,7 +124,7 @@ namespace LogicLayer
             PickupLine result = null;
             try
             {
-                result = PickupLineAccessor.RetrievePickupLineById(pickupLineId);
+                result = PickupLineAccessor.RetrievePickupLine(pickupLineId);
             }
             catch
             {

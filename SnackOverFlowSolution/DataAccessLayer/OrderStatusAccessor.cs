@@ -10,7 +10,7 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/03/01
+    /// Created: 2017/03/01
     /// 
     /// Class to handle database interactions involving product order statuses.
     /// </summary>
