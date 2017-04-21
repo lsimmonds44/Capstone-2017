@@ -53,7 +53,7 @@ namespace MVCPresentationLayer.Controllers
             IEnumerable<string> categories = productsList.Select(x => x.CategoryID)
                                                          .Distinct()
                                                          .OrderBy(x => x);
-            ViewBag.SelectedCategory = category;
+
             var products = new ProductsListViewModel
             {
                 Products = productsList.Where(p => category == null || p.CategoryID == category)
@@ -121,7 +121,7 @@ namespace MVCPresentationLayer.Controllers
             return null;
         }
 
-        public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase, string selectedCategory = "")
+        public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase = "", string selectedCategory = "")
         {
             var navViewModel = new NavMenuViewModel {
                 Categories = categories,
