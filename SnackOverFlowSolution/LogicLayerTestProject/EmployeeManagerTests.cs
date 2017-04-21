@@ -180,7 +180,7 @@ namespace LogicLayerTestProject
             _userManager.CreateNewUser(testUser, password, password2);
 
             testUser = _userManager.RetrieveUserByUserName("Test");
-            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(1000,01,01), Salary = 100, UserId = testUser.UserId };
+            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(2000,01,01), Salary = 100, UserId = testUser.UserId };
 
             _employeeMgr.CreateEmployee(testEmployee);
             result = _employeeMgr.RetrieveEmployeeByUserName("Test");
@@ -188,7 +188,7 @@ namespace LogicLayerTestProject
             //Assert
             RemoveTestEmployeeData();
             RemoveTestUserData();
-            Assert.IsTrue(result.UserId == testUser.UserId && result.Active == true && result.DateOfBirth == new DateTime(1000,01,01) && result.Salary == 100 && result.EmployeeId != null);
+            Assert.IsTrue(result.UserId == testUser.UserId && result.Active == true && result.DateOfBirth == new DateTime(2000,01,01) && result.Salary == 100 && result.EmployeeId != null);
 
         }
 
