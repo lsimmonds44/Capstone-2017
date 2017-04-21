@@ -38,7 +38,6 @@ class DeliveryManager : NSObject{
                 }
                 
             }catch{
-                print("Error info: \(error)")
                 completion(false,"There was a problem communicating with the database")
             }
         }

@@ -160,6 +160,7 @@
             </Grid.ColumnDefinitions>
             <Button Name="btnCancel" Grid.Column="0" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
             <Button Name="btnSubmit" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
+            <Button Name="btnSubmitAgreement" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="False"  Visibility="Hidden" Click="btnSubmitAgreement_Click"  />
         </Grid>
     </Grid>
 </Window>
