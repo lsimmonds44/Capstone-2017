@@ -70,7 +70,7 @@ namespace LogicLayer
 		ProductOrder order = null;
             try
             {
-                order = ProductOrderAccessor.RetrieveOrderByID(orderID);
+                order = ProductOrderAccessor.RetrieveProductOrder(orderID);
             }
             catch (Exception)
             {
@@ -122,7 +122,7 @@ namespace LogicLayer
             int result = 0;
             try
             {
-               result = ProductOrderAccessor.CreateOrder(productOrder);
+               result = ProductOrderAccessor.CreateProductOrder(productOrder);
             }
             catch (Exception)
             {

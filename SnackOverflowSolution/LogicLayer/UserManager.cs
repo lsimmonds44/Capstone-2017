@@ -434,9 +434,9 @@ namespace LogicLayer
                 throw;
             }
 
-            roles[0] = (cust != null);
-            roles[1] = (emp != null);
-            roles[2] = (supp != null);
+            roles[0] = (cust != null && cust.IsApproved && cust.Active);
+            roles[1] = (emp != null && (bool)emp.Active);
+            roles[2] = (supp != null && supp.Active && supp.IsApproved);
 
             return roles;
         }

@@ -71,6 +71,37 @@ namespace MVCPresentationLayer.Controllers
             
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// </summary>
+        /// <param name="companyOrder"></param>
+        /// <returns></returns>
+        [Authorize(Roles="Supplier")]
+        public ActionResult InvoiceDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CompanyOrderWithLines companyOrder = null;
+            try
+            {
+                companyOrder = _companyOrderManager.RetrieveCompanyOrderWithLinesById((int)id);
+            }
+            catch (Exception)
+            {
+                
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+            }
+
+            if (null == companyOrder)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
+            return View("Invoice", companyOrder);
+        }
+
         //// GET: CompanyOrderWithLines/Create
         //public ActionResult Create()
         //{
