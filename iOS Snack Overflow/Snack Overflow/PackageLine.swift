@@ -10,7 +10,7 @@ import Foundation
 
 class PackageLine: NSObject {
     
-    var PricePaid:Decimal?
+    var PricePaid:Double?
     var Quantity:Int?
     var ProductLotId:Int?
     var PackageId:Int?

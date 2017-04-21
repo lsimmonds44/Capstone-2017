@@ -62,9 +62,10 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
                     DispatchQueue.main.async {
                         let pinToAdd = Pin()
                         pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
-                        pinToAdd.subtitle = "\(delivery.OrderID ?? 0)"
+                        pinToAdd.subtitle = "\(delivery.DeliverDate ?? Date())"
                         pinToAdd.coordinate = returnedCoord
                         pinToAdd.pinColor = "blue"
+                        pinToAdd.delivery = delivery
                         self.map.addAnnotation(pinToAdd)
                     }
                 }
@@ -97,9 +98,14 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         return outPin
     }
     
+    //Holds the delivery for the pin that has been selected
+    var _selectedDelivery = Delivery()
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        let pin = view.annotation as! Pin
-        // Robbie use this to call the view you want to make for detail view.
+        let pin = view.annotation as! Pin
+        
+        _selectedDelivery = pin.delivery
+        self.performSegue(withIdentifier: "DeliveryDetailSeg", sender: nil)
     }
     
     
@@ -112,5 +118,14 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DeliveryDetailSeg"{
+            if let deliveryVC:DeliveryVC = segue.destination as? DeliveryVC{
+                deliveryVC.navigationItem.title = "Delivery Details"
+                deliveryVC._delivery = _selectedDelivery
+            }
+        }else if segue.identifier == "PickupSeg"{
+            
+        }
+    }
 }
