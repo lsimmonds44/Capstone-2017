@@ -1017,5 +1017,3 @@ Changed database context to 'SnackOverflowDB'.
 *** Creating procedure sp_retrieve_vehicle_from_delivery
  
 *** Creating procedure sp_save_order
-Msg 207, Level 16, State 1, Server NH229C26, Procedure sp_save_order, Line 19
-Invalid column name 'ORDER_ID'.
