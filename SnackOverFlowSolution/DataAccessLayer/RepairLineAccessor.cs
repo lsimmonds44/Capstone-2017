@@ -9,20 +9,32 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/21
+    /// 
+    /// Class to handle database interactions involving repair lines.
+    /// </summary>
     public class RepairLineAccessor
     {
-
-        public static List<RepairLine> RetreiveAllRepairLinesForRepair(int repairId)
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Retrieves all of the repair lines related to the given repair.
+        /// </summary>
+        /// <param name="repairID">The id of the related repair.</param>
+        /// <returns>All repair lines related to the given repair.</returns>
+        public static List<RepairLine> RetreiveAllRepairLinesForRepair(int repairID)
         {
-            List<RepairLine> lines = new List<RepairLine>();
+            var repairLines = new List<RepairLine>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_repair_line_from_search";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@REPAIR_ID", SqlDbType.Int);
-            cmd.Parameters["@REPAIR_ID"].Value = repairId;
+            cmd.Parameters.AddWithValue("@REPAIR_ID", repairID);
 
             try
             {
@@ -32,30 +44,26 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        RepairLine line = new RepairLine()
+                        repairLines.Add(new RepairLine()
                         {
                             RepairLineId = reader.GetInt32(0),
                             RepairId = reader.GetInt32(1),
                             RepairDescription = reader.GetString(2)
-                        };
-
-                        lines.Add(line);
+                        });
                     }
 
                 }
-                reader.Close();
-
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 conn.Close();
             }
-            return lines;
+
+            return repairLines;
         }
 
     }

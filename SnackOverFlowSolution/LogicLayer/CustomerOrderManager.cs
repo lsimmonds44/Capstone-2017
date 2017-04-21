@@ -31,7 +31,7 @@ namespace LogicLayer
                     UserAddressId = 1
                 };
 
-                orderId = ProductOrderAccessor.CreateOrder(p);
+                orderId = ProductOrderAccessor.CreateProductOrder(p);
 
                 if (orderId == 0)
                 {

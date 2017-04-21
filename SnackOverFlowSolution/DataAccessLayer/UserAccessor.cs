@@ -228,7 +228,11 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                salt = cmd.ExecuteScalar().ToString();
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    salt = result.ToString();                  
+                }
             }
             catch
             {
