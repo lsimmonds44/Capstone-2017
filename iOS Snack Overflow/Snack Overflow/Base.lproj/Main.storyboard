@@ -234,11 +234,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dQ-Gp-csI">
-                                <rect key="frame" x="16" y="617" width="343" height="30"/>
-                                <state key="normal" title="Mark Delivered"/>
+                                <rect key="frame" x="98.5" y="611" width="178" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                <state key="normal" title="    Mark Delivered    ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XGi-FF-Nkj">
-                                <rect key="frame" x="16" y="282" width="343" height="327"/>
+                                <rect key="frame" x="16" y="282" width="343" height="321"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <sections/>
                             </tableView>
@@ -264,7 +268,7 @@
                             <constraint firstItem="I6L-uX-xch" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="OQR-hl-Mup"/>
                             <constraint firstItem="9ft-bX-2VG" firstAttribute="top" secondItem="hiy-DL-4Hr" secondAttribute="bottom" constant="8" id="OvJ-7q-eb9"/>
                             <constraint firstItem="78A-3Q-e73" firstAttribute="top" secondItem="ZGu-84-fua" secondAttribute="bottom" constant="8" id="QB4-sU-fje"/>
-                            <constraint firstItem="5dQ-Gp-csI" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="SSX-Q3-QXn"/>
+                            <constraint firstItem="5dQ-Gp-csI" firstAttribute="centerX" secondItem="kzp-5S-p7K" secondAttribute="centerX" id="VwV-ck-qg6"/>
                             <constraint firstItem="ZGu-84-fua" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="XrA-IE-Bwd"/>
                             <constraint firstItem="hiy-DL-4Hr" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="Yi1-Nb-qRp"/>
                             <constraint firstItem="5dQ-Gp-csI" firstAttribute="top" secondItem="XGi-FF-Nkj" secondAttribute="bottom" constant="8" id="ae9-Mi-5XB"/>
@@ -276,7 +280,6 @@
                             <constraint firstItem="hiy-DL-4Hr" firstAttribute="top" secondItem="78A-3Q-e73" secondAttribute="bottom" constant="8" id="idm-L9-Jmp"/>
                             <constraint firstItem="ZGu-84-fua" firstAttribute="top" secondItem="M7P-sO-V7K" secondAttribute="bottom" constant="8" id="j02-kX-KhW"/>
                             <constraint firstItem="M7P-sO-V7K" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="nl5-jS-MyQ"/>
-                            <constraint firstItem="5dQ-Gp-csI" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="o63-BE-z06"/>
                             <constraint firstItem="H5E-zs-HtZ" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="plF-YE-Oey"/>
                             <constraint firstItem="XGi-FF-Nkj" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="tTo-rM-Jno"/>
                         </constraints>

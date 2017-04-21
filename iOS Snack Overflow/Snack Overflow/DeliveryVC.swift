@@ -19,7 +19,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var _addressState: UILabel!
     @IBOutlet weak var _addressZip: UILabel!
     
-    @IBOutlet weak var _btnMarkDelivered: UIButton!
+    @IBOutlet weak var _btnMarkDelivered: UIButton!{didSet{_btnMarkDelivered.layer.cornerRadius = 8}}
     @IBOutlet weak var _packagesTable: UITableView!
     
     /**
