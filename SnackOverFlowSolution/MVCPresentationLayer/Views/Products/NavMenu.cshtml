@@ -1,4 +1,6 @@
-﻿@model MVCPresentationLayer.Models.NavMenuViewModel
+﻿
+
+@model MVCPresentationLayer.Models.NavMenuViewModel
     @Html.ActionLink("Home", "Index", "Products", null,
 new { @class = "btn btn-block btn-default btn-lg" + ("" == Model.SelectedCategory ? " btn-primary" : "") })
     @foreach (var link in Model.Categories)

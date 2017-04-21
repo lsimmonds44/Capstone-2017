@@ -131,6 +131,11 @@ namespace MVCPresentationLayer.Controllers
             return PartialView(navViewModel);
         }
 
+        public ActionResult IndexTemp()
+        {
+            return View();
+        }
+
         //// GET: Products/Create
         //public ActionResult Create()
         //{

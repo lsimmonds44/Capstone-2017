@@ -3939,17 +3939,19 @@ p.big{
     -moz-perspective: 1200;
     perspective: 1200;
 }
-.shopping-cart .cart-link{
-    display: inline-block;
-    width: 60px;
-    height: 55px;
-    float: right;
-    clear: both;
-    background-color: #23292c;
-    background-image: url(../img/template-assets/cart.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-}
+
+    .shopping-cart .cart-link {
+        display: inline-block;
+        width: 60px;
+        height: 55px;
+        float: right;
+        clear: both;
+        background-color: #23292c;
+        background-image: url('../Images/cart.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
 .shopping-cart .cart-link span{
     display: inline-block;
     width: 20px;
