@@ -476,7 +476,7 @@
                         <!--Supplier Controls Stack Panel-->
                         <StackPanel Orientation="Vertical">
                             <!--Supplier Catalog Controls-->
-                            <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
+                            <Button Name="btnAgreement" Content="Agreements" Width="120" Height="30" Background="White" Margin="0 0 0 5" Click="btnAgreement_Click" />
                             <Button Name="btnAddSuppliers" Content="Add Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
                             <Button Name="btnEditSuppliers" Content="Edit Supplier" Width="120" Height="30" Background="White" Margin="0 0 0 5"/>
                             <Button Name="btnAddSupplierInventory" Content="Add Inventory" Width="120" Height="30" Background="White" Margin="0 0 0 5"
@@ -510,7 +510,7 @@
                       AutoGenerateColumns="False"
                       Grid.Column="13" Grid.ColumnSpan="6" Grid.RowSpan="15" Grid.Row="2"
                       IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
-                      CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
+                      CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" Visibility="Visible" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Image" IsReadOnly="True" Width="50*">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -525,6 +525,27 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product List Data Grid-->
+                    <!--Product List Data Grid based on Agreement -->
+                    <DataGrid Name="dgProductListAgreements" GridLinesVisibility="Horizontal"
+                      RowBackground="White" BorderBrush="LightBlue" BorderThickness="1"
+                      AutoGenerateColumns="False"
+                      Grid.Column="13" Grid.ColumnSpan="6" Grid.RowSpan="15" Grid.Row="2"
+                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                      CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" Visibility="Hidden" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Image" IsReadOnly="True" Width="50*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding SourceString}" Height="40" Width="40"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="100*"/>
+                            <DataGridTextColumn Header="Supplier" Binding="{Binding SupplierId}" Width="100*"/>
+                            <DataGridTextColumn Header="Date Approved" Binding="{Binding DateSubmitted}" Width="100*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--End of Product Data Grid List based on Agreement -->
                 </Grid>
                 <!--End of Supplier Catalog Grid-->
             </TabItem>

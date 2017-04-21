@@ -10,40 +10,57 @@ using System.Data;
 namespace DataAccessLayer
 {
     /// <summary>
-    /// Created 2017-03-29 by William Flood
-    /// Manages database access for supplier inventory
+    /// William Flood
+    /// Created: 2017/03/29
+    /// 
+    /// Class to handle database interactions involving supplier inventories.
     /// </summary>
     public class SupplierInventoryAccessor
     {
         /// <summary>
-        /// Created 2017-03-29 by William Flood
-        /// Adds a quantity of stock to a supplier's inventory
+        /// William Flood
+        /// Created: 2017/03/29
+        /// 
+        /// Adds a new supplier inventory to the database.
         /// </summary>
-        /// <param name="toAdd"></param>
-        /// <returns></returns>
-        public static int CreateSupplierInventory (SupplierInventory toAdd)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierInventory">The supplier inventory to add</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateSupplierInventory (SupplierInventory supplierInventory)
         {
-            var rowsAffected = 0;
+            var rows = 0;
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand("sp_create_supplier_inventory",conn);
-            cmd.Parameters.AddWithValue("@AGREEMENT_ID", toAdd.AgreementID);
-            cmd.Parameters.AddWithValue("@DATE_ADDED", toAdd.DateAdded);
-            cmd.Parameters.AddWithValue("@QUANTITY", toAdd.Quantity);
+            var cmdText = @"sp_create_supplier_inventory";
+            var cmd = new SqlCommand(cmdText,conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@AGREEMENT_ID", supplierInventory.AgreementID);
+            cmd.Parameters.AddWithValue("@DATE_ADDED", supplierInventory.DateAdded);
+            cmd.Parameters.AddWithValue("@QUANTITY", supplierInventory.Quantity);
+            
             try
             {
                 conn.Open();
-                rowsAffected = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
-                conn.Close(); // good housekeeping approved!
+                conn.Close();
             }
-            return rowsAffected;
+
+            return rows;
         }
     }
 }

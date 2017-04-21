@@ -513,7 +513,7 @@ namespace LogicLayerTestProject
             
             // arrange
             string email = "email1352";
-            string username = "";
+            string username = null;
 
             //act
             string result = _userManager.RetrieveUsernameByEmail(email);
