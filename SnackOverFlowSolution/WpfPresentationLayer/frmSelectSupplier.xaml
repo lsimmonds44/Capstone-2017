@@ -2,21 +2,39 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Select Supplier" Height="200" Width="300" Loaded="Window_Loaded" >
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Select Supplier Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Select Supplier Control-->
         <Label Name="lblHeader" Grid.Row="0" Content="Select Supplier" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
         <ComboBox Name="cboSuppliers" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="40 5"/>
+        <!--Select Supplier Control-->
+        <!--Select Supplier Bottom Grid-->
         <Grid Grid.Row="2">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Select Supplier Bottom Control-->
             <Button Name="btnBack" Grid.Column="0" Content="Back" Margin="10" IsCancel="True"/>
             <Button Name="btnNext" Grid.Column="1" Content="Next" Margin="10" IsDefault="True" Click="btnNext_Click"/>
+            <!--End Select Supplier Bottom Control-->
         </Grid>
+        <!--End of Select Supplier Bottom Grid-->
     </Grid>
+    <!--End of Select Supplier Grid-->
 </Window>
+<!--End of Select Supplier Window-->

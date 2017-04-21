@@ -61,7 +61,7 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Mason Allen
         /// Created 03/01/2017
-        /// Retrieves a list of current vehicle types
+        /// Retrieves a list of current _vehicle types
         /// </summary>
         /// <returns></returns>
         public List<VehicleType> getCurrentVehicleTypes()
@@ -85,7 +85,7 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Mason Allen
         /// Created 03/01/2017
-        /// Saves a new vehicle record to the db based on information entered into text fields
+        /// Saves a new _vehicle record to the db based on information entered into text fields
         /// </summary>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {

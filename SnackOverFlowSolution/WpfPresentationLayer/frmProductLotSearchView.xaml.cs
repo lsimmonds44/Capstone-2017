@@ -19,17 +19,35 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmProductLotSearchView : Window
     {
-        ProductLotSearchCriteria criteria;
+        ProductLotSearchCriteria _criteria;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Product Lot Search View Window.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="criteria"></param>
         public frmProductLotSearchView(ProductLotSearchCriteria criteria)
         {
-            this.criteria = criteria;
+            this._criteria = criteria;
             InitializeComponent();
             chkBoxExpiring.IsChecked = criteria.Expired;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Invokes search of Criteria and Closes Window.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            criteria.Expired = chkBoxExpiring.IsChecked??false;
+            _criteria.Expired = chkBoxExpiring.IsChecked??false;
             this.Close();
         }
     }

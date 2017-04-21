@@ -27,6 +27,14 @@ namespace WpfPresentationLayer
         private List<Supplier> _suppliers;
         public Supplier selectedSupplier { get; private set; }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Select Supplier Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="suppliers"></param>
         public frmSelectSupplier(List<Supplier> suppliers)
         {
             _suppliers = suppliers;

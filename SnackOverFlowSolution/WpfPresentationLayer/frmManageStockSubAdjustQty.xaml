@@ -3,7 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Adjust Quantity" Height="250" Width="300"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Adjust Quantity Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="65"/>
@@ -11,9 +18,7 @@
             <ColumnDefinition Width="65"/>
             <ColumnDefinition Width="65"/>
             <ColumnDefinition Width="10*"/>
-
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="36"/>
@@ -21,68 +26,85 @@
             <RowDefinition Height="36"/>
             <RowDefinition Height="36"/>
             <RowDefinition Height="36"/>
-
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-
-
+        <!--End of Grid Definitions-->
+        <!--Product Lot Information Controls-->
         <GroupBox Name="gboxProductLotInformation" Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="4" Grid.RowSpan="4" 
                   Header="Product Lot Information">
             <StackPanel Orientation="Vertical">
-
                 <!--Product Lot ID-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Product Lot ID Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--Product Lot Id Controls-->
                         <Label Name="lblProductLot" Content="Product Lot ID: "/>
                         <TextBox Name="txtProductLotID" Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
+                        <!--End of Product Lot Id Controls-->
                     </Grid>
+                    <!--End of Product Lot Id Grid-->
                 </StackPanel>
                 <!--End of Product Lot ID-->
-
                 <!--Product Name-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Product Name Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--Product Name Controls-->
                         <Label Name="lblProductName" Content="Product Name :"/>
                         <TextBox Name="txtProductName"  Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
+                        <!--Product Name Controls-->
                     </Grid>
+                    <!--End of Product Name Grid-->
                 </StackPanel>
                 <!--End of Product Name-->
 
                 <!--Current Quantity-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Current Quantity Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--Current Quantity Contols-->
                         <Label Name="lblCurrentQuantity" Content="Current Quantity :"/>
                         <TextBox Name="txtCurrentQuantity"  Grid.Column="1" Margin="0 0 0 0" IsReadOnly="True"/>
+                        <!--Current Quantity Contols-->
                     </Grid>
+                    <!--End of Current Quantity Grid-->
                 </StackPanel>
                 <!--End of Current Quantity-->
 
                 <!--New Quantity-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--New Quantity Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="148"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--New Quantity Controls-->
                         <Label Name="lblNewQuantity" Content="New Quantity :"/>
                         <TextBox Name="txtNewQuantity" Grid.Column="1" Margin="0 0 0 0"/>
+                        <!--End of New Quantity Controls-->
                     </Grid>
+                    <!--End of New Quantity Grid-->
                 </StackPanel>
                 <!--End of  New Quantity-->
             </StackPanel>
@@ -90,6 +112,7 @@
         <!--End of Product Lot Information-->
 
         <Button Name="btnUpdate" Click="BtnUpdate_OnClick" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Content="Update" Margin="0 5 0 0"/>
-
+        <!--End of Product Lot Information Controls-->
     </Grid>
+    <!--End of Product Lot Information Grid-->
 </Window>

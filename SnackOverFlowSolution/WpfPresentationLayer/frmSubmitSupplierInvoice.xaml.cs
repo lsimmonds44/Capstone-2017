@@ -32,6 +32,16 @@ namespace WpfPresentationLayer
         private decimal invoiceTax = 0.0m;
         private decimal invoiceTotalCost = 0.0m;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize the Submit Supplier Invoice Window.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="productLotManager"></param>
+        /// <param name="supplierInvoiceManager"></param>
         public frmSubmitSupplierInvoice(Supplier supplier, IProductLotManager productLotManager, ISupplierInvoiceManager supplierInvoiceManager)
         {
             _supplier = supplier;

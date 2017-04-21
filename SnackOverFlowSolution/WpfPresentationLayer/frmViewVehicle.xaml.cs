@@ -27,43 +27,64 @@ namespace WpfPresentationLayer
     {
 
 
-        private int vehicleId;
-
+        private int _vehicleId;
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Standaridized method.
+        /// Initialize the View Vehicle Window.
+        /// </summary>
+        /// <param name="_vehicleId"></param>
         public frmViewVehicle(int vehicleId)
         {
             InitializeComponent();
-            this.vehicleId = vehicleId;
+            this._vehicleId = vehicleId;
             displayVehicle();
         }
 
-        Vehicle vehicle = new Vehicle();
-        IVehicleManager vehMgr = new VehicleManager();
-
-        // This method sends the vehicleId to the vehicle manager class
-        // then sets the retreived data as text in the corresponding textboxes on the form  
+        Vehicle _vehicle = new Vehicle();
+        IVehicleManager _vehMgr = new VehicleManager();
+        
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Standaridized method.
+        /// This method sends the _vehicleId to the _vehicle manager class
+        /// then sets the retreived data as text in the corresponding textboxes on the form  
+        /// </summary>
         private void displayVehicle()
         {
             try
             {
-                vehicle = vehMgr.RetreiveVehicleById(vehicleId);
-                txtVehicleId.Text = vehicle.VehicleID.ToString();
-                txtVIN.Text = vehicle.VIN.ToString();
-                txtMake.Text = vehicle.Make.ToString();
-                txtModel.Text = vehicle.Model.ToString();
-                txtYear.Text = vehicle.Year.ToString();
-                txtActive.Text = vehicle.Active.ToString();
-                txtColor.Text = vehicle.Color.ToString();
-                txtRepairDate.Text = vehicle.LatestRepair.ToString();
-                txtType.Text = vehicle.VehicleTypeID.ToString();
-                txtLastDriver.Text = vehicle.LastDriver.ToString();
-                txtMileage.Text = vehicle.Mileage.ToString();
+                _vehicle = _vehMgr.RetreiveVehicleById(_vehicleId);
+                txtVehicleId.Text = _vehicle.VehicleID.ToString();
+                txtVIN.Text = _vehicle.VIN.ToString();
+                txtMake.Text = _vehicle.Make.ToString();
+                txtModel.Text = _vehicle.Model.ToString();
+                txtYear.Text = _vehicle.Year.ToString();
+                txtActive.Text = _vehicle.Active.ToString();
+                txtColor.Text = _vehicle.Color.ToString();
+                txtRepairDate.Text = _vehicle.LatestRepair.ToString();
+                txtType.Text = _vehicle.VehicleTypeID.ToString();
+                txtLastDriver.Text = _vehicle.LastDriver.ToString();
+                txtMileage.Text = _vehicle.Mileage.ToString();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Close Method that closes the View Vehicle Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -5,7 +5,14 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Product Order Details Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -25,6 +32,8 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Product Order Details Controls-->
         <Label Name="lblOrderId" Content="Order ID:" Grid.Row="1" Grid.Column="0" Margin="60 25 1 10" />
         <Label Name="lblCustomerId" Content="Customer ID:" Grid.Row="2" Grid.Column="0" Margin="40 25 1 10"/>
         <Label Name="lblOrderType" Content="Order Type:" Grid.Row="3" Grid.Column="0" Margin="50 25 1 10"/>
@@ -39,22 +48,23 @@
         <Label Name="lblHasArrived" Content="Has Arrived:" Grid.Row="6" Grid.Column="4" Margin="40 25 1 10"/>
 
 
-        <TextBox x:Name="txtOrderId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtCustomerId" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtOrderType" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtDeliveryType" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtAmount" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtOrderDate" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtExpectedDate" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtDiscount" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtOrderStatus" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtUserAddress" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtAddressType" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
-        <TextBox x:Name="txtHasArrived" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtOrderId" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtCustomerId" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtOrderType" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtDeliveryType" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtAmount" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtOrderDate" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtExpectedDate" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtDiscount" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtOrderStatus" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtUserAddress" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtAddressType" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
+        <TextBox Name="txtHasArrived" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="25 15" Background="{x:Null}" VerticalAlignment="Center" IsHitTestVisible="False" IsReadOnly="True"/>
 
-        <Button x:Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close" Margin="20" Click="btnClose_Click"/>
-        <Button x:Name="btnPackaging" Grid.Row="7" Grid.Column="5" Content="Packaging" Margin="20" Click="btnPackaging_Click" />
-
-
+        <Button Name="btnClose" Grid.Row="7" Grid.Column="6" Content="Close" Margin="20" Click="btnClose_Click"/>
+        <Button Name="btnPackaging" Grid.Row="7" Grid.Column="5" Content="Packaging" Margin="20" Click="btnPackaging_Click" />
+        <!--End of Product Order Details Controls-->
     </Grid>
+    <!--End of Product Order Details Grid-->
 </Window>
+<!--End of Product Order Details Window-->

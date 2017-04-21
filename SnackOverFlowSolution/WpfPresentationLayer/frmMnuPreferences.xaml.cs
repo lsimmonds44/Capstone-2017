@@ -26,6 +26,14 @@ namespace WpfPresentationLayer
     {
         private readonly IPreferenceManager _preferenceManager;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Preferences Menu Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="preferenceManager"></param>
         public frmMnuPreferences(IPreferenceManager preferenceManager)
         {
             _preferenceManager = preferenceManager;
@@ -49,7 +57,7 @@ namespace WpfPresentationLayer
                 try
                 {
 
-                    expiringSoonDuration.ExpiringSoonDuration = int.Parse(TxtPreference.Text);
+                    expiringSoonDuration.ExpiringSoonDuration = int.Parse(txtPreference.Text);
                     _preferenceManager.UpdatePreferenceSettings(expiringSoonDuration); 
                     MessageBox.Show("Preferences Saved");
                 }
@@ -90,21 +98,21 @@ namespace WpfPresentationLayer
         {
             int signal = 1;
 
-            if ("" == TxtPreference.Text)
+            if ("" == txtPreference.Text)
             {
-                TxtPreference.BorderBrush = System.Windows.Media.Brushes.Red;
+                txtPreference.BorderBrush = System.Windows.Media.Brushes.Red;
                 signal = 0;
             }
 
-            if ("" != TxtPreference.Text)
+            if ("" != txtPreference.Text)
             {
                 try
                 {
-                    Int32.Parse(TxtPreference.Text);
+                    Int32.Parse(txtPreference.Text);
                 }
                 catch (FormatException fe)
                 {
-                    TxtPreference.BorderBrush = System.Windows.Media.Brushes.Red;
+                    txtPreference.BorderBrush = System.Windows.Media.Brushes.Red;
                     signal = 0;
                 }
             }
