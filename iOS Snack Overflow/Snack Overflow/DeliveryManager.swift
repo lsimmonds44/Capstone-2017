@@ -29,15 +29,16 @@ class DeliveryManager : NSObject{
      */
     func UpdateDeliveryStatus(DeliveryId:Int, newDeliveryStatus:String, completion: @escaping (_ result:Bool, _ userMessage:String)->()){
         let url:URL = URL(string:getIPAsString() + "delivery/\(DeliveryId)/\(newDeliveryStatus)")!
-        
+
         let task = session.dataTask(with: getRequest(url: url)) { (data, response, error) in
             do{
-                if let jsonData = data, let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String:Any]{
-                    let result = jsonObject["boolean"] as? Bool
-                    completion(result!,"")
+                if let jsonData = data, let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? Bool{
+                    let result = jsonObject
+                    completion(result,"Test")
                 }
                 
             }catch{
+                print("Error: \(error)")
                 completion(false,"There was a problem communicating with the database")
             }
         }
