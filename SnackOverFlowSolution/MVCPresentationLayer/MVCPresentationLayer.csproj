@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductOrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SupplierGoodsController.cs" />
     <Compile Include="Controllers\SupplierInvoiceController.cs" />
@@ -415,6 +416,11 @@
     <Content Include="Views\Shared\_ShopLayout.cshtml" />
     <Content Include="Views\Shared\_CartPartial.cshtml" />
     <Content Include="Views\Shared\_TopSectionPartial.cshtml" />
+    <Content Include="Views\ProductOrders\Create.cshtml" />
+    <Content Include="Views\ProductOrders\Delete.cshtml" />
+    <Content Include="Views\ProductOrders\Details.cshtml" />
+    <Content Include="Views\ProductOrders\Edit.cshtml" />
+    <Content Include="Views\ProductOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -456,7 +462,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8333</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
