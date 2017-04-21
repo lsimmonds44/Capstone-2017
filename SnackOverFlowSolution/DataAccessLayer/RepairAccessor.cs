@@ -11,30 +11,39 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/03/24
+    /// Created: 2017/03/24
+    /// 
+    /// Class to handle database interactions involving repairs.
     /// </summary>
     public class RepairAccessor
     {
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/24
+        /// Created: 2017/03/24
         /// 
         /// Retrieves all repairs for a given vehicle
         /// </summary>
-        /// <param name="vehicleId">The vehicle id of the vehicle to select repairs for</param>
-        /// <returns>A list of repairs</returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="vehicleId">The id of the relevant vehicle.</param>
+        /// <returns>A list of repairs related to the given vehicle.</returns>
         public static List<Repair> RetreiveAllRepairsForVehicle(int vehicleId)
         {
-            List<Repair> repairs = new List<Repair>();
+            var repairs = new List<Repair>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_repair_from_search";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@Vehicle_ID", SqlDbType.Int);
-            cmd.Parameters["@Vehicle_ID"].Value = vehicleId;
+            cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleId);
 
             try
             {
@@ -44,18 +53,14 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        Repair repair = new Repair()
+                        repairs.Add(new Repair()
                         {
                             RepairId = reader.GetInt32(0),
                             VehicleId = reader.GetInt32(1)
-                        };
-
-                        repairs.Add(repair);
+                        });
                     }
                     
                 }
-                reader.Close();
-
             }
             catch (Exception)
             {
@@ -66,6 +71,7 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return repairs;
         }
 

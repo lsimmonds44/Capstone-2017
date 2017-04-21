@@ -5,7 +5,7 @@ GO
 INSERT INTO App_User 
 	(FIRST_NAME, LAST_NAME, PHONE, PREFERRED_ADDRESS_ID, E_MAIL_ADDRESS, E_MAIL_PREFERENCES, PASSWORD_HASH, PASSWORD_SALT, USER_NAME, ACTIVE, ADDRESS1, ADDRESS2, CITY, STATE, ZIP)
 VALUES
-	('Mason', 'Masonson', '3192222222', NULL, 'masn@yahoo', 0, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'ADMIN', 1, "Top of the world", NULL, "North Poland", "UU", 55555)
+	('Mason', 'Masonson', '3192222222', NULL, 'masn@yahoo', 0, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'ADMIN', 1, "6301 Kirkwood Blvd", "Nielson Hall", "Cedar Rapids", "IA", "52404")
 GO
 
 print '' print '*** Inserting Vehicle_Type sample data'
@@ -24,13 +24,13 @@ GO
 INSERT INTO [dbo].[App_User]
 	(First_Name, Last_Name, Phone, E_Mail_Address, E_Mail_Preferences, Password_Hash, Password_Salt, User_Name, Active, Address1, Address2, City, State, Zip)
 VALUES
-	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
-	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
-	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1, "Home", NULL, "Cedar Rapids", "IA", 52404), --Password: m0R3$e(ur3
-	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
-	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
-	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, "Home", NULL, "Cedar Rapids", "IA", 52404),
-	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, "Home", NULL, "Cedar Rapids", "IA", 52404)
+	('Jim', 'Glasgow', '3197422222', 'hardees@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jglasgow', 1, "6305 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Elga', 'Ilunga', '970742222', 'elga@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'elunga', 1, "6310 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('John', 'Myers', '9707422225', 'jmyers@gmail.com', 1, '352139c421eb72134551b2e80c2b79c55d30b5af08ec682e996ab11631f4e21d', 'ADMIN', 'jmyers', 1, "6305 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404), --Password: m0R3$e(ur3
+	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, "6309 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, "6303 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, "6315 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, "6308 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404)
 GO
 
 print '' print '*** Inserting Customer Test Data ***'
@@ -38,8 +38,15 @@ GO
 INSERT [dbo].[Customer]
 	(Customer_ID)
 VALUES 
+	(10000),
+	(10001),
+	(10002),
+	(10003),
+	(10004),
+	(10005),
 	(10006),
-	(10000)
+	(10007)
+	
 GO
 
 print '' print '*** Inserting User_Address Test Data ***'
@@ -47,7 +54,7 @@ GO
 INSERT INTO [dbo].[USER_ADDRESS]
 	(USER_ADDRESS_ID, USER_ID, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP)
 VALUES
-	(1, 10006, '6301 Kirkwood Blvd', 'Nielson Hall','"Cedar Rapids"', 'IA', '52404')
+	(1, 10006, '6301 Kirkwood Blvd', 'Nielson Hall','Cedar Rapids', 'IA', '52404')
 GO
 
 print '*** Inserting Employee Test Data ***'
@@ -125,7 +132,8 @@ VALUES
 	('Grade A'),
 	('Grade B'),
 	('Grade C'),
-	('Charity')
+	('Charity'),
+	('Reject')
 GO
 
 print '*** Inserting Supplier Test Data ***'
@@ -174,7 +182,8 @@ VALUES
 	("Ready For Shipment"),
 	("Ready For Assignment"),
 	("Ready For Delivery"),
-	("Delivered")
+	("Delivered"),
+	("Saved")
 GO
 
 print '*** Inserting Order_Status Test Data ***'
@@ -183,7 +192,8 @@ INSERT INTO [dbo].[Order_Status]
 	(ORDER_STATUS_ID)
 VALUES
 	("Open"),
-	("Ready For Shipment")
+	("Ready For Shipment"),
+	("Saved")
 GO
 
 print '*** Inserting Delivery_Type Test Data ***'
@@ -223,7 +233,10 @@ GO
 INSERT INTO [dbo].[Driver]
 	(Driver_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE)
 VALUES
-	(10000, "123AB3123", "2018-04-12", 1)
+	(10000, "123AB3123", "2018-04-12", 1),
+	(10001, "123AB3123", "2018-04-12", 1),
+	(10002, "123AB3123", "2018-04-12", 1),
+	(10003, "123AB3123", "2018-04-12", 1)
 	GO
 
 /*Vehicle Test Data */
@@ -311,6 +324,14 @@ VALUES
 	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, 0),
 	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, 0)
 GO
+
+print '*** Inserting Order Line Test Data ***'
+GO
+INSERT INTO [dbo].[ORDER_LINE] (PRODUCT_ORDER_ID,PRODUCT_ID,PRODUCT_NAME,QUANTITY,GRADE_ID,PRICE,UNIT_DISCOUNT)
+VALUES
+(10003,10000,'Should not matter',5,'GRADE A', 5, 0),
+(10003,10001,'Who cares', 7, 'GRADE B', 16, 1)
+	
 
 print '*** Inserting Inspection Test Data ***'
 GO
@@ -438,9 +459,9 @@ GO
 INSERT INTO [dbo].[ROUTE]
 	(DRIVER_ID, VEHICLE_ID, ASSIGNED_DATE)
 VALUES
-	(10000, 10000, '2017-04-20'),
-	(10000, 10000, '2017-04-13'),
-	(10000, 10000, '2017-04-10')
+	(10000, 10000, '2028-04-20'),
+	(10000, 10001, '2018-04-13'),
+	(10001, 10002, '2018-04-10')
 GO
 
 print '*** Inserting Delivery Test Data ***'
@@ -506,20 +527,8 @@ GO
 print '*** Inserting commercial invoice Test Data ***'
 GO
 INSERT INTO [dbo].[COMMERCIAL_INVOICE]
-    (COMMERCIAL_ID,INVOICE_DATE,SUB_TOTAL,TAX_AMOUNT,TOTAL)
+    (COMMERCIAL_ID,INVOICE_DATE,SUB_TOTAL,TAX_AMOUNT,TOTAL, ORDER_ID)
 VALUES
-    (10003, '2017-03-20', 4600.00, 20.00, 4620.00),
-    (10003, '2017-03-20', 2300.00, 10.00, 2310.00),
-    (10002, '2017-03-20', 2300.00, 10.00, 2310.00)
-
-print '*** Inserting commercial invoice line Test Data ***'
-GO
-
-INSERT INTO [dbo].[COMMERCIAL_INVOICE_LINE]
-	(COMMERCIAL_INVOICE_ID, PRODUCT_ID, QUANTITY_SOLD, PRICE_EACH, ITEM_TOTAL)
-VALUES
-	(10000, 10003, 2, 800.00, 1600.00),
-	(10000, 10001, 5, 600.00, 3000.00),
-	(10001, 10004, 23, 100.00, 1000.00),
-	(10002, 10004, 23, 100.00, 1000.00)
-GO
+    (10003, '2017-03-20', 4600.00, 20.00, 4620.00, 10003),
+    (10001, '2017-03-20', 2300.00, 10.00, 2310.00, 10001),
+    (10002, '2017-03-20', 2300.00, 10.00, 2310.00, 10002)

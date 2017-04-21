@@ -119,6 +119,7 @@
 }
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID })*@
+    @Html.ActionLink("Print as invoice", "InvoiceDetails", "CompanyOrderWithLines", new { id = Model.ID }, new {target = "_blank"}) |
     @Html.ActionLink("Back to List", "Index")
 </p>
