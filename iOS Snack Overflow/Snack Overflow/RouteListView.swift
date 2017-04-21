@@ -10,6 +10,7 @@ import UIKit
 
 protocol RouteListViewDelegate {
     func RouteSelected(route:Route)
+    func PickupSelected()
     func RouteSelectionCanceled()
 }
 
@@ -24,6 +25,8 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     var delegate:RouteListViewDelegate? = nil
     let _driverMgr = DriverManager()
     var _routes = [Route]()
+    var _pickups = ["Test"]
+    var _driveType:Int!
     
     func addView(apiToCall:String, driverId:Int)
     {
@@ -31,19 +34,28 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
         self.addSubview(RouteListView)
         self.RouteTV.register(RouteCell.classForCoder, forCellReuseIdentifier: RouteCell.reuseIdentifier!)
         callDriverAPI(apiToCall: apiToCall, driverId: driverId)
-        
     }
     
     func callDriverAPI(apiToCall:String,driverId:Int){
-        _driverMgr.getRouteByDriverID(driverID: driverId) { (routes, userMessage) in
-            DispatchQueue.main.async {
-                self._routes = routes!
-                self.RouteTV.reloadData()
+        if apiToCall == "Delivery" {
+            _driveType = 0
+            _driverMgr.getRouteByDriverID(driverID: driverId) { (routes, userMessage) in
+                DispatchQueue.main.async {
+                    self._routes = routes!
+                    self.RouteTV.reloadData()
+                }
             }
+        }else{
+            _driveType = 1
+            _driverMgr.getPickupByDriverID(driverID: driverId, completion: { (Pickups, userMessage) in
+                
+            })
         }
+        
     }
     
     @IBAction func cancelBtn(_ sender: UIButton) {
+        _routes.removeAll()
         delegate?.RouteSelectionCanceled()
     }
     
@@ -52,17 +64,34 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _routes.count
+        var count = 0
+        if self._driveType == 0 {
+            count = _routes.count
+        }else if _driveType == 1{
+            count = _pickups.count
+        }
+        return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
-        cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
-        cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!)"
+        if self._driveType == 0 {
+            cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
+            cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!)"
+        }else if self._driveType == 1{
+            cell.textLabel?.text = _pickups[indexPath.row]
+//            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
+//            cell.detailTextLabel?.text = "Vehicle #: \(_pickups[indexPath.row].VehicleID!)"
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
+        if _driveType == 0 {
+             delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
+        }else if _driveType == 1{
+            delegate?.PickupSelected()
+        }
     }
     
     //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

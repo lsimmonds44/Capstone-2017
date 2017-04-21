@@ -100,6 +100,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SO" translatesAutoresizingMaskIntoConstraints="NO" id="fTl-Sh-QII">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="EBV-gY-MSh">
+                                <rect key="frame" x="149" y="72" width="77.5" height="24"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dzy-59-eSo">
                                 <rect key="frame" x="140" y="292.5" width="95" height="82"/>
                                 <subviews>
@@ -134,13 +140,16 @@
                             <constraint firstItem="fTl-Sh-QII" firstAttribute="top" secondItem="zek-JE-yeo" secondAttribute="bottom" id="2cp-bc-8rO"/>
                             <constraint firstItem="Dzy-59-eSo" firstAttribute="centerX" secondItem="rNW-LA-My6" secondAttribute="centerX" id="Qsv-CD-GFc"/>
                             <constraint firstAttribute="trailing" secondItem="fTl-Sh-QII" secondAttribute="trailing" id="UEb-sU-uGS"/>
+                            <constraint firstItem="EBV-gY-MSh" firstAttribute="centerX" secondItem="rNW-LA-My6" secondAttribute="centerX" id="W2q-jw-u9z"/>
                             <constraint firstItem="fTl-Sh-QII" firstAttribute="leading" secondItem="rNW-LA-My6" secondAttribute="leading" id="Wpf-gC-Bgb"/>
                             <constraint firstItem="fTl-Sh-QII" firstAttribute="bottom" secondItem="wyb-h6-1tO" secondAttribute="top" id="mFm-pP-bpv"/>
                             <constraint firstItem="Dzy-59-eSo" firstAttribute="centerY" secondItem="rNW-LA-My6" secondAttribute="centerY" id="mav-wv-cLZ"/>
+                            <constraint firstItem="EBV-gY-MSh" firstAttribute="top" secondItem="zek-JE-yeo" secondAttribute="bottom" constant="8" symbolic="YES" id="y7l-AY-PWf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="gfU-kG-jgi"/>
                     <connections>
+                        <outlet property="userMessageLbl" destination="EBV-gY-MSh" id="Hsa-dN-pGD"/>
                         <outletCollection property="btns" destination="JEr-gb-O11" collectionClass="NSMutableArray" id="0P7-az-wud"/>
                         <outletCollection property="btns" destination="XGV-3V-Lk7" collectionClass="NSMutableArray" id="3Cj-fC-bqd"/>
                         <segue destination="1w2-0R-K2K" kind="show" identifier="DeliverySeg" id="w8r-1a-MiW"/>

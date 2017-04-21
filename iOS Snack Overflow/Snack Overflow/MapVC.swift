@@ -14,10 +14,11 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     let _driverMgr = DriverManager()
     var _driver:User!
     var _route:Route!{didSet{self.displayPin(routes: _route)}}
-    
-    // outlets
     let mapModel = MapVCModel()
-    private var _locationManager = CLLocationManager()
+
+    // outlets
+        private var _locationManager = CLLocationManager()
+        private let delVC = DeliveryVC()
     @IBOutlet weak var map: MKMapView!{didSet{
         map.delegate = self
         map.mapType = .hybrid
@@ -30,14 +31,11 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         _locationManager.startUpdatingLocation()
         }}
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (routes, userMessage) in
-//            self.displayPin(routes: routes?[0])
-//        }
+        //        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (routes, userMessage) in
+        //            self.displayPin(routes: routes?[0])
+        //        }
         
         // Do any additional setup after loading the view.
     }
@@ -47,42 +45,34 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
         
         for delivery in routes?.Deliveries ?? []{
-                let pinToAdd = Pin()
-                let addLine1 = (delivery.Address!.AddressLine1 ?? "")
-                let addCity = (delivery.Address!.City ?? "")
-                let addState = (delivery.Address!.State ?? "")
-                let addZip = (delivery.Address!.Zip ?? "")
-                
-                mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
-                    DispatchQueue.main.async {
-                        pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
-                        pinToAdd.subtitle = "\(delivery.DeliverDate ?? Date())"
-                        pinToAdd.coordinate = returnedCoord
-                        if delivery.StatusId == "Delivered"
-                        {
-                            pinToAdd.pinColor = "green"
-                        }else{
-                            pinToAdd.pinColor = "blue"
-                        }
-                        pinToAdd.delivery = delivery
-                        self.map.addAnnotation(pinToAdd)
-                        
-                    }
-                    
-                }
+            let pinToAdd = Pin()
+            let addLine1 = (delivery.Address!.AddressLine1 ?? "")
+            let addCity = (delivery.Address!.City ?? "")
+            let addState = (delivery.Address!.State ?? "")
+            let addZip = (delivery.Address!.Zip ?? "")
             
+            mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
+                DispatchQueue.main.async {
+                    pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
+                    pinToAdd.subtitle = "\(delivery.DeliverDate ?? Date())"
+                    pinToAdd.coordinate = returnedCoord
+                    if delivery.StatusId == "Delivered"
+                    {
+                        pinToAdd.pinColor = "green"
+                    }else{
+                        pinToAdd.pinColor = "blue"
+                    }
+                    pinToAdd.delivery = delivery
+                    self.map.addAnnotation(pinToAdd)
+                }
+            }
         }
-        
-        
-        
-        
-        
     }
+    
+    
     
     /// Description
     /// Get's called when an annotation is dropped
@@ -106,7 +96,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     }
     
     //Holds the delivery for the pin that has been selected
-    var _selectedDelivery = Delivery(){didSet{}}
+    var _selectedDelivery = Delivery()
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let pin = view.annotation as! Pin

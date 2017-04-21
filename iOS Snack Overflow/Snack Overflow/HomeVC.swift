@@ -15,6 +15,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     var _driver:User!
     var _routeListView = RouteListView()
     var _route:Route!
+    @IBOutlet weak var userMessageLbl: UILabel!{didSet{userMessageLbl?.text = "Welcome\n \(_driver.FirstName ?? "Anonymous") \(_driver.LastName ?? "???")"}}
     
     @IBOutlet var btns: [UIButton]!{didSet{
         for btn in btns {
@@ -26,6 +27,10 @@ class HomeVC: UIViewController,RouteListViewDelegate {
         _routeListView.RouteListView.removeFromSuperview()
         _route = route
         self.performSegue(withIdentifier: "DeliverySeg", sender: nil)
+    }
+    
+    func PickupSelected() {
+        self.performSegue(withIdentifier: "PickupSeg", sender: nil)
     }
     
     func RouteSelectionCanceled() {
@@ -46,15 +51,18 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     @IBAction func ViewListButtons(_ sender: UIButton) {
         if sender.title(for: UIControlState.normal)!.contains("Delivery"){
             _routeListView.addView(apiToCall: "Delivery", driverId: _driver.UserId!)
-            _routeListView.RouteListView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: _routeListView.RouteListView.bounds.height)
-            _routeListView.delegate = self
-            self.view.addSubview(_routeListView.RouteListView)
+            displayRouteListView()
         }else{
-            
+            _routeListView.addView(apiToCall: "Pickup", driverId: _driver.UserId!)
+            displayRouteListView()
         }
     }
     
-    
+    func displayRouteListView(){
+        _routeListView.RouteListView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: _routeListView.RouteListView.bounds.height)
+        _routeListView.delegate = self
+        self.view.addSubview(_routeListView.RouteListView)
+    }
     
     
     // MARK: - Navigation

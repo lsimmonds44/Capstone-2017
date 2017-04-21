@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     let _deliveryMgr = DeliveryManager()
     var _delivery:Delivery!
@@ -51,6 +52,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return _delivery.Packages.count
+        
     }
     
     /**
@@ -109,7 +111,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func btnMarkDeliveredClicked() {
         _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered"){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
-            
+            self._delivery.StatusId = "Delivered"
         }
     }
     

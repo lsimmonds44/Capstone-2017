@@ -104,7 +104,7 @@ class DriverManager: NSObject {
     /// - Parameters:
     ///   - userID: userID description
     ///   - completion: completion description
-    func getPickupByDriverID(userID:Int, completion: @escaping (_ result:Pickup, _ userMessage:String)->())
+    func getPickupByDriverID(driverID:Int, completion: @escaping (_ result:Pickup, _ userMessage:String)->())
     {
         
         
