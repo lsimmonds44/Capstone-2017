@@ -14,6 +14,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     
     var _driver:User!
     var _routeListView = RouteListView()
+    var _route:Route!
     
     @IBOutlet var btns: [UIButton]!{didSet{
         for btn in btns {
@@ -23,6 +24,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     
     func RouteSelected(route: Route) {
         _routeListView.RouteListView.removeFromSuperview()
+        _route = route
         self.performSegue(withIdentifier: "DeliverySeg", sender: nil)
     }
     
@@ -63,6 +65,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
             if let mapVC:MapVC = segue.destination as? MapVC{
                 mapVC.navigationItem.title = "Deliveries"
                 mapVC._driver = _driver
+                mapVC._route = _route
             }
         }else if segue.identifier == "PickupSeg"{
             if let mapVC:MapVC = segue.destination as? MapVC{

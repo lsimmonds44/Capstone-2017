@@ -109,6 +109,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func btnMarkDeliveredClicked() {
         _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered"){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
+            
         }
     }
     

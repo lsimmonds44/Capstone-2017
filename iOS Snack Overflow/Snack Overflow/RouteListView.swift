@@ -56,14 +56,8 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
-        cell.textLabel?.text = "RouteId: \(_routes[indexPath.row].RouteID!)"
-        cell.detailTextLabel?.text = "Delivery Date: \(_routes[indexPath.row].Deliveries[0].DeliverDate!)"
-        //        let pin = Pin()
-        //        pin.title =  _pinList[indexPath.row].value(forKey: Cloud.Attribute.PinTitle) as? String
-        //        pin.subtitle = _pinList[indexPath.row].value(forKey: Cloud.Attribute.PinSubtitle) as? String
-        //        cell.textLabel?.text = pin.title
-        //        cell.detailTextLabel?.text = pin.subtitle
-        
+        cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
+        cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!)"
         return cell
     }
     
