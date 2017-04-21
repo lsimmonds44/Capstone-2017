@@ -700,5 +700,30 @@ namespace WpfPresentationLayer
             dgApprovedProducts.ItemsSource = _agreedProducts;
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/13/2017
+        /// 
+        /// The submit agreement button is only visible when approving suppliers, it sends new agreement request to AgreementManager
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSubmitAgreement_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (Product p in _agreedProducts)
+                {
+                    _agreementManager.CreateAgreementsForSupplier(_supplierToEdit, p, _currentUser.UserId, true);
+                    MessageBox.Show("Agreement created.");
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Unable to create agreement: " + ex.Message + ex.StackTrace); ;
+            }
+        }
     }
 }

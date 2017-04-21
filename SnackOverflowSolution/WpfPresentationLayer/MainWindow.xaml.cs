@@ -2497,6 +2497,7 @@ namespace WpfPresentationLayer
             {
                 frmApproval ApprovalWindow = new frmApproval(_supplierManager, (Supplier)dgSuppliers.SelectedItem, _user.UserId);
                 ApprovalWindow.ShowDialog();
+                createAgreementForApprovedSupplier((Supplier)dgSuppliers.SelectedItem);
                 tabSupplier_Selected(sender, e);
             }
             else
@@ -2568,7 +2569,32 @@ namespace WpfPresentationLayer
         {
             refreshUserInvoices();
         }
-        
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/13/2017
+        /// 
+        /// Prompts the user to create an agreement for supplier after clicking approve supplier.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="supplier"></param>
+        private void createAgreementForApprovedSupplier(Supplier supplier)
+        {
+            MessageBox.Show("Select products for the approved supplier to create an agreement.");
+
+            try
+            {
+                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                            _agreementManager, "Editing", supplier);
+                frmEditSupplier.btnSubmit.Visibility = Visibility.Hidden;
+                frmEditSupplier.btnSubmitAgreement.Visibility = Visibility.Visible;
+                var result = frmEditSupplier.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred" + ex.Message + ex.StackTrace);
+            }
+        }
 
     } // end of class
 } // end of namespace 

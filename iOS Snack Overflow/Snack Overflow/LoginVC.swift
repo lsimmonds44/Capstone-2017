@@ -20,6 +20,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var tfUsername: UITextField!{didSet{tfUsername.delegate = self}}
     @IBOutlet weak var tfPassword: UITextField!{didSet{tfPassword.delegate = self}}
     @IBOutlet weak var lblUserMessage: UILabel!
+    @IBOutlet weak var btnLogin: UIButton!{didSet{btnLogin.layer.cornerRadius = 8}}
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -1,0 +1,17 @@
+﻿@model MVCPresentationLayer.Models.NavMenuViewModel
+    @Html.ActionLink("Home", "Index", "Products", null,
+new { @class = "btn btn-block btn-default btn-lg" + ("" == Model.SelectedCategory ? " btn-primary" : "") })
+    @foreach (var link in Model.Categories)
+    {
+        @Html.RouteLink(link, new
+{
+    controller = "Products",
+    action = "Index",
+    category = link,
+    search = Model.SearchPhrase,
+    page = 1
+}, new
+{
+    @class = "btn btn-block btn-default btn-lg" + (link == Model.SelectedCategory ? " btn-primary" : "")
+})
+    }
