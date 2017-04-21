@@ -14,5 +14,6 @@ namespace DataObjects
         public decimal PriceEach {get;set;}
         public decimal ItemDiscount {get;set;}
         public decimal ItemTotal { get; set; }
+        public string ProductName { get; set; }
     }
 }
