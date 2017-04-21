@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataObjects;
 using MVCPresentationLayer.Models;
 using LogicLayer;
+using DataAccessLayer;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -21,7 +22,7 @@ namespace MVCPresentationLayer.Controllers
     public class SupplierGoodsController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
-        IProductLotManager plMgr = new ProductLotManager();
+        ISupplierProductLotManager plMgr = new SupplierProductLotManager();
 
         // dummy supplier
         Supplier sup = new Supplier() { SupplierID = 10000 };
@@ -29,7 +30,7 @@ namespace MVCPresentationLayer.Controllers
         // GET: /SupplierGoods/
         public ActionResult Index()
         {
-            return View(plMgr.RetrieveProductLotsBySupplier(sup));
+            return View(plMgr.RetrieveSupplierProductLotsBySupplier(sup));
         }
 
         // GET: /SupplierGoods/Details/5
@@ -39,7 +40,7 @@ namespace MVCPresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var lot = plMgr.RetrieveProductLotsBySupplier(sup).Find(i => i.ProductLotId == (int)id);
+            var lot = plMgr.RetrieveSupplierProductLotsBySupplier(sup).Find(i => i.SupplierProductLotId == (int)id);
             if (lot == null)
             {
                 return HttpNotFound();
@@ -58,11 +59,11 @@ namespace MVCPresentationLayer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductLotId,WarehouseId,SupplierId,LocationId,ProductId,SupplyManagerId,Quantity,AvailableQuantity,Grade,Price,DateReceived,ExpirationDate,ProductName")] ProductLot lot)
+        public ActionResult Create([Bind(Include = "SupplierProductLotId,ExpirationDate,ProductId,Quantity,SupplierId,Price")] SupplierProductLot lot)
         {
             if (ModelState.IsValid)
             {
-                plMgr.CreateProductLot(lot);
+                plMgr.CreateSupplierProductLot(lot);
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +77,7 @@ namespace MVCPresentationLayer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             // Cast int? to int since we know id is not null
-            var lot = plMgr.RetrieveProductLotById((int)id);
+            var lot = plMgr.RetrieveSupplierProductLotById((int)id);
             if (lot == null)
             {
                 return HttpNotFound();
@@ -89,7 +90,7 @@ namespace MVCPresentationLayer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductLotId,WarehouseId,SupplierId,LocationId,ProductId,SupplyManagerId,Quantity,AvailableQuantity,Grade,Price,DateReceived,ExpirationDate,ProductName")] ProductLot lot)
+        public ActionResult Edit([Bind(Include= "SupplierProductLotId,ExpirationDate,ProductId,Quantity,SupplierId,Price")] SupplierProductLot lot)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +109,7 @@ namespace MVCPresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var lot = plMgr.RetrieveProductLotById((int)id);
+            var lot = plMgr.RetrieveSupplierProductLotById((int)id);
             if (lot == null)
             {
                 return HttpNotFound();
@@ -121,8 +122,8 @@ namespace MVCPresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var lot = plMgr.RetrieveProductLotById((int)id);
-            plMgr.DeleteProductLot(lot);
+            var lot = plMgr.RetrieveSupplierProductLotById((int)id);
+            plMgr.DeleteSupplierProductLot(lot);
             return RedirectToAction("Index");
         }
 
