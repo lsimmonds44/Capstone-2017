@@ -9,19 +9,32 @@ using DataObjects;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Created: 2017/04/21
+    /// 
+    /// Class to handle database interactions involving vehicle types.
+    /// </summary>
     public class VehicleTypeAccessor
     {
         /// <summary>
         /// Mason Allen
-        /// Created 03/01/2017
+        /// Created: 2017/03/01
         /// 
-        /// Retrieves a list of the current vehicle types
+        /// Retrieves a list of all vehicle types from the database.
         /// </summary>
-        /// <returns>List<VehicleType></returns>
-
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>List of all vehicle types from the database.</returns>
         public static List<VehicleType> RetreiveVehicleTypeList()
         {
-            var vehicleTypeList = new List<VehicleType>();
+            var vehicleTypes = new List<VehicleType>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_vehicle_type_list";
@@ -32,16 +45,13 @@ namespace DataAccessLayer
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-
                 while(reader.Read())
                 {
-                    VehicleType currentVehicleType = new VehicleType()
+                    vehicleTypes.Add(new VehicleType()
                     {
                         VehicleTypeID = reader.GetString(0)
-                    };
-                    vehicleTypeList.Add(currentVehicleType);
+                    });
                 }
-
             }
             catch (Exception)
             {
@@ -52,7 +62,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return vehicleTypeList;
+
+            return vehicleTypes;
         }
     }
 }

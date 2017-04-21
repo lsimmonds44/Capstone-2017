@@ -1,12 +1,4 @@
-﻿/// <summary>
-/// Robert Forbes
-/// 2017/02/07
-/// 
-/// Handles database calls for packages
-///</summary>
-///
-
-using DataObjects;
+﻿using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-
-    public class PackageAccessor
+    /// <summary>
+    /// Robert Forbes
+    /// Created: 2017/02/07
+    /// 
+    /// Class to handle database interactions involving packages.
+    /// </summary>
+    public static class PackageAccessor
     {
 
         /// <summary>
@@ -124,65 +121,90 @@ namespace DataAccessLayer
             return packages;
         }
 
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/20
+        /// 
+        /// Retrieves a list of packages based on the given package.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/20
+        /// 
+        /// Standardized method; fixed search bug where given package was passed back instead of found packages.
+        /// </remarks>
+        /// <param name="package">The package to search on.</param>
+        /// <returns>List of packages that are similar to the given package.</returns>
         public static List<Package> RetrievePackageFromSearch(Package package)
         {
-            List<Package> PackageList = new List<Package>();
+            var packages = new List<Package>();
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_PACKAGE_from_search";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@PACKAGE_ID", package.PackageId);
             cmd.Parameters.AddWithValue("@DELIVERY_ID", package.DeliveryId);
             cmd.Parameters.AddWithValue("@ORDER_ID", package.OrderId);
 
-            cmd.CommandType = CommandType.StoredProcedure;
+            
 
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    var foundPackageInstance = new Package()
+                    while (reader.Read())
                     {
-                        PackageId = reader.GetInt32(0),
-                        DeliveryId = reader.GetInt32(1),
-                        OrderId = reader.GetInt32(2)
-                    };
-                    PackageList.Add(package);
+                        packages.Add(new Package()
+                        {
+                            PackageId = reader.GetInt32(0),
+                            DeliveryId = reader.GetInt32(1),
+                            OrderId = reader.GetInt32(2)
+                        });
+                    }
                 }
+                
             }
-            catch (SqlException ex)
+            catch (Exception )
             {
-                throw new Exception("Error: " + ex);
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return PackageList;
+
+            return packages;
         }
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/01
+        /// Created: 2017/03/01
         /// 
         /// Get all packages stored in the database
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <returns>A list of packages</returns>
         public static List<Package> RetrieveAllPackages()
         {
-            // an empty list to add the found packages to
-            List<Package> packages = new List<Package>();
-
-            // Creating an sql command object
+            var packages = new List<Package>();
+            
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_package_list";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
@@ -190,28 +212,14 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                    // Looping through all returned results until there aren't any left
                     while (reader.Read())
                     {
-                        // Creating a package from the current record
-                        var package = new Package()
+                        packages.Add(new Package()
                         {
                             PackageId = reader.GetInt32(0),
+                            DeliveryId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             OrderId = reader.GetInt32(2)
-                        };
-
-                        // Attempting to set the delivery id since it can be null
-                        try
-                        {
-                            package.DeliveryId = reader.GetInt32(1);
-                        }
-                        catch
-                        {
-                            package.DeliveryId = null;
-                        }
-
-                        // Adding the package to the list
-                        packages.Add(package);
+                        });
                     }
                 }
             }
@@ -223,52 +231,42 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return packages;
         }
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Updates the delivery Id of the passed in package
         /// </summary>
-        /// <returns>int rows affected</returns>
-        public static int UpdatePackageDelivery(int packageId, int deliveryId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method; changed delivery id to be nullable and have a default value of null,
+        /// based on preexisting comments.
+        /// </remarks>
+        /// 
+        /// <returns>Rows affected</returns>
+        public static int UpdatePackageDelivery(int packageId, int? deliveryId = null)
         {
-            // Result represents the number of rows affected
-            int result = 0;
+            var rows = 0;
 
-
-            // Getting a SqlCommand object
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_update_package_delivery";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@PACKAGE_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_DELIVERY_ID", SqlDbType.Int);
-            cmd.Parameters["@PACKAGE_ID"].Value = packageId;
+            cmd.Parameters.AddWithValue("@PACKAGE_ID", packageId);
+            cmd.Parameters.AddWithValue("@new_DELIVERY_ID", deliveryId);
 
-            /* 
-             * Since deliveryId can be null I'm checking if the package has a null deliveryid
-             * and then storing it appropriately
-             */
-            if (deliveryId != null)
-            {
-                cmd.Parameters["@new_DELIVERY_ID"].Value = deliveryId;
-            }
-            else
-            {
-                cmd.Parameters["@new_DELIVERY_ID"].Value = DBNull.Value;
-            }
-
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
-                // Storing the amount of rows that were affected by the stored procedure
-                result = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -279,20 +277,29 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-
-            return result;
+            return rows;
         }
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/04/13
+        /// Created: 2017/04/13
+        /// 
+        /// Retrieves all packages with a given delivery id.
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="deliveryId"></param>
         /// <returns></returns>
         public static List<Package> RetrieveAllPackagesInDelivery(int? deliveryId)
         {
+            var packages = new List<Package>();
 
-            List<Package> packages = new List<Package>();
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_package_from_search";
             var cmd = new SqlCommand(cmdText, conn);
@@ -309,22 +316,12 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        var package = new Package()
+                        packages.Add(new Package()
                         {
                             PackageId = reader.GetInt32(0),
+                            DeliveryId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             OrderId = reader.GetInt32(2)
-                        };
-
-                        try
-                        {
-                            package.DeliveryId = reader.GetInt32(1);
-                        }
-                        catch
-                        {
-                            package.DeliveryId = null;
-                        }
-
-                        packages.Add(package);
+                        });
                     }
                 }
             }
@@ -336,8 +333,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return packages;
 
+            return packages;
         }
     }
 }

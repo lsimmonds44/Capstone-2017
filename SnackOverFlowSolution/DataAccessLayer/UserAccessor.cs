@@ -175,11 +175,48 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@PASSWORD_SALT", user.PasswordSalt);
             cmd.Parameters.AddWithValue("@USER_NAME", user.UserName);
             cmd.Parameters.AddWithValue("@ACTIVE", user.Active);
-            cmd.Parameters.AddWithValue("@ADDRESS1", user.AddressLineOne);
-            cmd.Parameters.AddWithValue("@ADDRESS2", user.AddressLineTwo);
-            cmd.Parameters.AddWithValue("@CITY", user.City);
-            cmd.Parameters.AddWithValue("@STATE", user.State);
-            cmd.Parameters.AddWithValue("@ZIP", user.Zip);
+            cmd.Parameters.Add("@ADDRESS1", SqlDbType.VarChar);
+            cmd.Parameters.Add("@ADDRESS2", SqlDbType.VarChar);
+            if (user.AddressLineOne != null)
+            {
+                cmd.Parameters["@ADDRESS1"].Value = user.AddressLineOne;
+            }
+            else
+            {
+                cmd.Parameters["@ADDRESS1"].Value = DBNull.Value;
+            }
+            if (user.AddressLineTwo != null)
+            {
+                cmd.Parameters["@ADDRESS2"].Value = user.AddressLineTwo;
+            }
+            else
+            {
+                cmd.Parameters["@ADDRESS2"].Value = DBNull.Value;
+            }
+
+            if (user.City != null)
+            {
+                cmd.Parameters.AddWithValue("@CITY", user.City);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@CITY", DBNull.Value);
+            }
+            if (user.State != null)
+            {
+                cmd.Parameters.AddWithValue("@STATE", user.State);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@STATE", DBNull.Value);
+            }
+            if (user.Zip != null)
+            {
+                cmd.Parameters.AddWithValue("@ZIP", user.Zip);
+            }else{
+                cmd.Parameters.AddWithValue("@ZIP", DBNull.Value);
+            }
+
 
             try
             {
@@ -228,7 +265,11 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                salt = cmd.ExecuteScalar().ToString();
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    salt = result.ToString();                  
+                }
             }
             catch
             {
@@ -271,7 +312,11 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                salt = cmd.ExecuteScalar().ToString();
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    salt = result.ToString();
+                }
             }
             catch
             {

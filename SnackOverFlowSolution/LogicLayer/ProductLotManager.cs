@@ -59,7 +59,7 @@ namespace LogicLayer
             {
                 try
                 {
-                    pl = ProductLotAccessor.RetrieveNewestProductLot(supplier);
+                    pl = ProductLotAccessor.RetrieveNewestProductLotBySupplier(supplier);
                 }
                 catch (SqlException ex)
                 {
@@ -172,7 +172,15 @@ namespace LogicLayer
         {
             bool result = false;
 
-            result = ProductLotAccessor.DeleteProductLot(lot);
+
+            try
+            {
+                result = 1 == ProductLotAccessor.DeleteProductLot(lot);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
 
             return result;
         }
@@ -182,11 +190,25 @@ namespace LogicLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/24
+        /// Created: 2017/03/24
         /// Gets only the active product lots (Ones that have more than 0 quantity)
         /// </summary>
-        /// <returns></returns>
-        /// <remarks>Last Modified 2017/03/29 by Christian Lopez - Extracted method to reuse it</remarks>
+        /// 
+        /// <remarks>
+        /// Christian Lopez
+        /// Updated: 2017/03/29
+        /// 
+        ///  Extracted method to reuse it
+        /// </remarks>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Added basic try-catch logic.
+        /// </remarks>
+        /// 
+        /// <returns>A list of active product lots.</returns>
         public List<ProductLot> RetrieveActiveProductLots()
         {
             List<ProductLot> lots = null;
@@ -195,10 +217,10 @@ namespace LogicLayer
                 lots = ProductLotAccessor.RetrieveActiveProductLots();
                 setProductLotNames(lots);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw new ApplicationException("Could not retrieve active products", ex.InnerException);
             }
 
             return lots;

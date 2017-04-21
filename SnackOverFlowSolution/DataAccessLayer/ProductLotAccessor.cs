@@ -10,26 +10,34 @@ using System.Data;
 namespace DataAccessLayer
 {
     /// <summary>
-	/// Christian Lopez
-    /// Created on 2017/02/15
-    /// Edited on 2017/02/24 by William Flood
-	///
-    /// Contains the access methods for Product Lots
+    /// Christian Lopez
+    /// Created: 2017/02/15
+    ///
+    /// Class to handle database interactions involving product lots.
     /// </summary>
     public static class ProductLotAccessor
     {
-		
+
         /// <summary>
         /// Aaron Usher
         /// Created: 2017/04/07
         /// 
         /// Adds a new product lot to the database.
         /// </summary>
-        /// <param name="productLot">THe product lot to add.</param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productLot">The product lot to add.</param>
         /// <returns>Rows affected.</returns>
         public static int CreateProductLot(ProductLot productLot)
         {
             int rows = 0;
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
@@ -53,7 +61,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -66,36 +73,40 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/02/16
+        /// Created: 2017/02/16
         /// 
-        /// Gets a product lot object using the productlotid 
+        /// Gets a product lot object using the given id 
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="productLotID">the id to search on</param>
         /// <returns>A product lot</returns>
         public static ProductLot RetrieveProductLot(int? productLotID)
         {
-            ProductLot lot = new ProductLot();
+            ProductLot productLot = null;
 
-            // Getting a SqlCommand object
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
-
 
             cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotID);
 
-            // Attempting to run the stored procedure
-			try
+            try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-				reader.Read();
+                    reader.Read();
 
-                    lot = new ProductLot()
+                    productLot = new ProductLot()
                     {
                         ProductLotId = reader.GetInt32(0),
                         WarehouseId = reader.GetInt32(1),
@@ -109,52 +120,55 @@ namespace DataAccessLayer
                         ExpirationDate = reader.GetDateTime(9)
 
                     };
-                    reader.Close();
                 }
             }
             catch (Exception)
             {
                 throw;
-			}
+            }
             finally
             {
                 conn.Close();
             }
-			    return lot;
+
+            return productLot;
         }
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/02/16
+        /// Created: 2017/02/16
         /// 
         /// Updates the available quantity in the product lot table
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="productLotID">The product lot to be updated</param>
         /// <param name="oldAvailableQuantity">The quantity that already exists in the database</param>
         /// <param name="newAvailableQuantity">The new quantity to insert into the database</param>
-        /// <returns>int rows affected</returns>
+        /// <returns>Rows affected</returns>
         public static int UpdateProductLotAvailableQuantity(int? productLotID, int? oldAvailableQuantity, int? newAvailableQuantity)
         {
-            int result = 0;
+            var rows = 0;
 
-            // Getting a SqlCommand object
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_update_product_lot_available_quantity";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
-
 
             cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotID);
             cmd.Parameters.AddWithValue("@old_AVAILABLE_QUANTITY", oldAvailableQuantity);
             cmd.Parameters.AddWithValue("@new_AVAILABLE_QUANTITY", newAvailableQuantity);
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
-                // Storing the amount of rows that were affected by the stored procedure
-                result = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -163,20 +177,28 @@ namespace DataAccessLayer
             finally
             {
                 conn.Close();
-			}
+            }
 
-            return result;
+            return rows;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/15
+        /// Created: 2017/02/15
         /// 
         /// Retrieve the newest product lot based on the supplier
         /// </summary>
-        /// <param name="supplier">The Supplier we are interested in</param>
-        /// <returns></returns>
-        public static ProductLot RetrieveNewestProductLot(Supplier supplier)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        ///
+        /// <param name="supplier">The relevant supplier we are interested in.</param>
+        /// <returns>The newest product lot related to the given supplier.</returns>
+        public static ProductLot RetrieveNewestProductLotBySupplier(Supplier supplier)
         {
             ProductLot productLot = null;
 
@@ -185,15 +207,13 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplier.SupplierID);
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    // Although sp returns a list, we only want the newest one (largest ID returned first)
                     reader.Read();
                     productLot = new ProductLot
                     {
@@ -220,27 +240,36 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return productLot;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/29
+        /// Created: 2017/03/29
         /// 
-        /// Returns a list of ProductLots by supplier
+        /// Returns all of the product lots related to the given supplier.
         /// </summary>
-        /// <param name="supplier"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The relevant supplier.</param>
+        /// <returns>A list of all product lots related to the given supplier.</returns>
         public static List<ProductLot> RetrieveProductLotsBySupplier(Supplier supplier)
         {
-            List<ProductLot> productLots = new List<ProductLot>();
+            var productLots = new List<ProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_product_lot_by_supplier_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplier.SupplierID);
             cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
             try
             {
@@ -250,7 +279,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        ProductLot productLot = new ProductLot
+                        productLots.Add(new ProductLot
                         {
                             ProductLotId = reader.GetInt32(0),
                             WarehouseId = reader.GetInt32(1),
@@ -262,33 +291,40 @@ namespace DataAccessLayer
                             AvailableQuantity = reader.GetInt32(7),
                             DateReceived = reader.GetDateTime(8),
                             ExpirationDate = reader.GetDateTime(9)
-                        };
-                        productLots.Add(productLot);
+                        });
                     }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 conn.Close();
             }
+
             return productLots;
         }
 
         /// <summary>
-        /// Created 2017/03/09 by William Flood
+        /// William Flood
+        /// Created: 2017/03/09
         /// 
-        /// Returns a list of expired product lots
+        /// Returns a list of all expired product lots.
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>A list of all expired product lots. </returns>
         public static List<ProductLot> RetrieveExpiredProductLots()
         {
-            List<ProductLot> lots = new List<ProductLot>();
+            var productLots = new List<ProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_expired_product_lot_list";
@@ -303,7 +339,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        ProductLot lot = new ProductLot
+                        productLots.Add(new ProductLot
                         {
                             ProductLotId = reader.GetInt32(0),
                             WarehouseId = reader.GetInt32(1),
@@ -315,36 +351,48 @@ namespace DataAccessLayer
                             AvailableQuantity = reader.GetInt32(7),
                             DateReceived = reader.GetDateTime(8),
                             ExpirationDate = reader.GetDateTime(9)
-                        };
-                        lots.Add(lot);
+                        });
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return lots;
+            return productLots;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/02/27
-        /// Modified Eric Walton
-        /// 2017/03/24
-        /// Added Grade and Price changed the while loop to handle a null price.
+        /// Created: 2017/02/27
+        /// 
         /// Gets a list of product lots from the database.
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Eric Walton
+        /// Updated: 2017/03/24
+        /// 
+        /// Added Grade and Price changed the while loop to handle a null price.
+        /// </remarks>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>A list of all product lots in the database.</returns>
         public static List<ProductLot> RetrieveProductLots()
         {
-            List<ProductLot> lots = new List<ProductLot>();
+            var productLots = new List<ProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_product_lot_list";
@@ -360,32 +408,26 @@ namespace DataAccessLayer
                     while (reader.Read())
                     {
 
-                        ProductLot lot = new ProductLot();
-
-                            lot.ProductLotId = reader.GetInt32(0);
-                            lot.WarehouseId = reader.GetInt32(1);
-                            lot.SupplierId = reader.GetInt32(2);
-                            lot.LocationId = reader.GetInt32(3);
-                            lot.ProductId = reader.GetInt32(4);
-                            lot.SupplyManagerId = reader.GetInt32(5);
-                            lot.Quantity = reader.GetInt32(6);
-                            lot.AvailableQuantity = reader.GetInt32(7);
-                            lot.DateReceived = reader.GetDateTime(8);
-                            lot.ExpirationDate = reader.GetDateTime(9);
-                            lot.Grade = reader.GetString(10);
-                            if (!reader.IsDBNull(11))
-                            {
-                                lot.Price = reader.GetDecimal(11);
-                            }
-
-                        
-                        lots.Add(lot);
+                        productLots.Add(new ProductLot()
+                        {
+                            ProductLotId = reader.GetInt32(0),
+                            WarehouseId = reader.GetInt32(1),
+                            SupplierId = reader.GetInt32(2),
+                            LocationId = reader.GetInt32(3),
+                            ProductId = reader.GetInt32(4),
+                            SupplyManagerId = reader.GetInt32(5),
+                            Quantity = reader.GetInt32(6),
+                            AvailableQuantity = reader.GetInt32(7),
+                            DateReceived = reader.GetDateTime(8),
+                            ExpirationDate = reader.GetDateTime(9),
+                            Grade = reader.GetString(10),
+                            Price = reader.IsDBNull(11) ? (decimal?)null : reader.GetDecimal(11)
+                        });
                     }
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -393,12 +435,27 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return lots;
+            return productLots;
         }
 
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Retrieves a list of all active product lots in the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>A list of all active product lots in the database.</returns>
         public static List<ProductLot> RetrieveActiveProductLots()
         {
-            List<ProductLot> lots = new List<ProductLot>();
+            var productLots = new List<ProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_active_product_lot_list";
@@ -414,78 +471,97 @@ namespace DataAccessLayer
                     while (reader.Read())
                     {
 
-                        ProductLot lot = new ProductLot();
-
-                        lot.ProductLotId = reader.GetInt32(0);
-                        lot.WarehouseId = reader.GetInt32(1);
-                        lot.SupplierId = reader.GetInt32(2);
-                        lot.LocationId = reader.GetInt32(3);
-                        lot.ProductId = reader.GetInt32(4);
-                        lot.SupplyManagerId = reader.GetInt32(5);
-                        lot.Quantity = reader.GetInt32(6);
-                        lot.AvailableQuantity = reader.GetInt32(7);
-                        lot.DateReceived = reader.GetDateTime(8);
-                        lot.ExpirationDate = reader.GetDateTime(9);
-                        lot.Grade = reader.GetString(10);
-                        if (!reader.IsDBNull(11))
+                        productLots.Add(new ProductLot()
                         {
-                            lot.Price = reader.GetDecimal(11);
-                        }
-
-
-                        lots.Add(lot);
+                            ProductLotId = reader.GetInt32(0),
+                            WarehouseId = reader.GetInt32(1),
+                            SupplierId = reader.GetInt32(2),
+                            LocationId = reader.GetInt32(3),
+                            ProductId = reader.GetInt32(4),
+                            SupplyManagerId = reader.GetInt32(5),
+                            Quantity = reader.GetInt32(6),
+                            AvailableQuantity = reader.GetInt32(7),
+                            DateReceived = reader.GetDateTime(8),
+                            ExpirationDate = reader.GetDateTime(9),
+                            Grade = reader.GetString(10),
+                            Price = reader.IsDBNull(11) ? (decimal?)null : reader.GetDecimal(11)
+                        });
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return lots;
+            return productLots;
         }
-       
-        public static bool DeleteProductLot(ProductLot lot)
+
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Deletes a product lot from the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productLot">The product lot to delete.</param>
+        /// <returns>Rows affected.</returns>
+        public static int DeleteProductLot(ProductLot productLot)
         {
-            var result = false;
+            var rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_delete_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", lot.ProductLotId);
+
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLot.ProductLotId);
 
             try
             {
                 conn.Open();
-                result = cmd.ExecuteNonQuery() == 1;
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return result;
+            return rows;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/29
+        /// Created: 2017/03/29
         /// 
         /// Returns a product lot associated with the id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="id">The id of the needed product lot.</param>
+        /// <returns>The relevant product lot.</returns>
         public static ProductLot RetrieveProductLotById(int id)
         {
             ProductLot productLot = null;
@@ -496,6 +572,7 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", id);
+
             try
             {
                 conn.Open();
@@ -518,11 +595,10 @@ namespace DataAccessLayer
                         Grade = reader.GetString(10)
                     };
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
             finally
@@ -535,45 +611,49 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// 02/17/2017
+        /// Created: 2017/02/17
         /// 
         /// Writes an updated product unit price to the database
         /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="oldPrice"></param>
-        /// <param name="newPrice"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productID">The id of the product to change.</param>
+        /// <param name="newPrice">The price as it should be in the database.</param>
+        /// <returns>Rows affected.</returns>
         public static int UpdateProductPrice(int productID, decimal newPrice)
         {
-            int result = 0;
+            int rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_update_product_price";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@PRODUCT_LOT_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_PRICE", SqlDbType.Decimal);
-
-            cmd.Parameters["@PRODUCT_LOT_ID"].Value = productID;
-            cmd.Parameters["@new_PRICE"].Value = newPrice;
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productID);
+            cmd.Parameters.AddWithValue("@new_PRICE", newPrice);
 
             try
             {
                 conn.Open();
-                result = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
 
-                throw new ApplicationException("A problem occurred updating the product price.");
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return result;
+            return rows;
         }
     }
 }

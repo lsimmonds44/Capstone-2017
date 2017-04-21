@@ -7,7 +7,7 @@ namespace MVCPresentationLayer.Models
     /// Created by Michael Takrama
     /// 04/07/2017
     /// Update by Skyler Hiscock
-    /// 04/08/2017
+    /// 04/20/2017
     /// Composite Data Object View Model for Product/Index
     /// </summary>
 
@@ -23,6 +23,11 @@ namespace MVCPresentationLayer.Models
         public IEnumerable<string> Categories { get; set; }
 
     }
+
+    /// <summary>
+    /// Author: Skyler Hiscock
+    /// Added: 4/20/17
+    /// </summary>
 
     public class NavMenuViewModel
     {
