@@ -1526,7 +1526,8 @@ namespace WpfPresentationLayer
         {
 
             var supplierData =  (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
-
+            dgProductListAgreements.Visibility = Visibility.Hidden;
+            dgProductList.Visibility = Visibility.Visible;
             RefreshSupplierProductDataGrid(supplierData.SupplierID);
 
         }
@@ -2592,9 +2593,61 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred" + ex.Message + ex.StackTrace);
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/20/2017
+        /// 
+        /// View agreements of supplier selected in supplier catalogue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAgreement_Click(object sender, RoutedEventArgs e)
+        {
+            List<Agreement> agreementList = null;
+            SupplierCatalogViewModel supplier = null;
+            try
+            {
+                supplier = (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
+                int supplierId = supplier.SupplierID;
+                agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplierId);
+                
+                List < AgreementWithProductName > newList = new List<AgreementWithProductName>();
+                foreach(var agreement in agreementList)
+                {
+                    AgreementWithProductName temp = new AgreementWithProductName()
+                    {
+                        ProductName = _productLotManager.RetrieveProductLotById(agreement.ProductId).ProductName,
+                        Active = agreement.Active,
+                        AgreementId = agreement.AgreementId,
+                        ProductId = agreement.ProductId,
+                        SupplierId = agreement.SupplierId,
+                        DateSubmitted = agreement.DateSubmitted,
+                        IsApproved = agreement.IsApproved,
+                        ApprovedBy = agreement.ApprovedBy
+                    };
+                    newList.Add(temp);
+                }
+                
+
+                if(agreementList == null)
+                {
+                    MessageBox.Show("No agreement product list found for this supplier.");
+                }
+                else
+                {
+                    dgProductList.Visibility = Visibility.Hidden;
+                    dgProductListAgreements.Visibility = Visibility.Visible;
+                    dgProductListAgreements.ItemsSource = newList;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
     } // end of class
 } // end of namespace 

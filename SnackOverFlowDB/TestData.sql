@@ -125,7 +125,8 @@ VALUES
 	('Grade A'),
 	('Grade B'),
 	('Grade C'),
-	('Charity')
+	('Charity'),
+	('Reject')
 GO
 
 print '*** Inserting Supplier Test Data ***'

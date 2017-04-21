@@ -135,7 +135,13 @@ namespace WpfPresentationLayer
                 }
                 try
                 {
-                    if (_productLotManager.UpdateProductLotPrice(_productLot, inspProdPrice) == 1)
+                    if (cboGradeSelect.Text == "Reject")
+                    {
+                        frmConfirm confirmReject = new frmConfirm(_productLotManager, _productLot);
+                        confirmReject.Show();
+                        Close();
+                    }
+                    else if (_productLotManager.UpdateProductLotPrice(_productLot, inspProdPrice) == 1)
                     {
                         MessageBox.Show("Product lot inspection entered.");
                         Close();
@@ -169,7 +175,14 @@ namespace WpfPresentationLayer
             }
             if (txtInspectionProductPrice.Text == "")
             {
-                throw new ApplicationException("A price must be entered.");
+                if(cboGradeSelect.Text == "Reject")
+                {
+                    txtInspectionProductPrice.Text = "0.0";
+                }
+                else
+                {
+                    throw new ApplicationException("A price must be entered.");
+                }
             }
             else
             {
