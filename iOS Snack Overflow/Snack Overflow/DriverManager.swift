@@ -26,12 +26,14 @@ class DriverManager: NSObject {
                     let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String:Any]]{
                     // print("jsonOb \(jsonObject)")
                     var driverRoutes = [Route]()
-                    let driverRoute = Route()
+                    
                     for route in jsonObject
                     {
+                        let driverRoute = Route()
                         driverRoute.DriverID =  route["DriverId"] as? Int
                         driverRoute.RouteID = route["RouteId"] as? Int
                         driverRoute.VehicleID = route["VehicleId"] as? Int
+                        driverRoute.AssignedDate = StringToDate(dateString: route["AssignedDate"] as? String)
                         let routes = route["Deliveries"] as? [Any]
                         for route in routes ?? []
                         {
@@ -73,12 +75,12 @@ class DriverManager: NSObject {
                                     {
                                         continue
                                     }
-                                    packageLineOb.PackageId = packageLineJson["packageId"] as? Int
-                                    packageLineOb.PackageLineId = packageLineJson["packageLineId"] as? Int
-                                    packageLineOb.PricePaid = packageLineJson["pricePaid"] as? Double
-                                    packageLineOb.ProductLotId = packageLineJson["productLotId"] as? Int
+                                    packageLineOb.PackageId = packageLineJson["PackageId"] as? Int
+                                    packageLineOb.PackageLineId = packageLineJson["PackageLineId"] as? Int
+                                    packageLineOb.PricePaid = packageLineJson["PricePaid"] as? Double
+                                    packageLineOb.ProductLotId = packageLineJson["ProductLotId"] as? Int
                                     packageLineOb.ProductName = packageLineJson["ProductName"] as? String
-                                    packageLineOb.Quantity = packageLineJson["quantity"] as? Int
+                                    packageLineOb.Quantity = packageLineJson["Quantity"] as? Int
                                     packageOb.PackageLineList.append(packageLineOb)
                                 }
                                 delivery.Packages.append(packageOb)

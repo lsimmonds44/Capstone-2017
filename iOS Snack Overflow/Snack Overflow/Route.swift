@@ -14,5 +14,6 @@ class Route: NSObject {
     var DriverID:Int?
     var RouteID:Int?
     var VehicleID:Int?
+    var AssignedDate:Date?
     
 }
