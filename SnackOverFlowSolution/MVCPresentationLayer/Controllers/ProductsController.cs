@@ -29,40 +29,47 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="page">Page Number</param>
         /// <returns></returns>
         // GET: Products
-        public ActionResult Index(string search = "", int page = 1)
+        public ActionResult Index(string category, string search = "", int page = 1)
         {
-            
+
             var productsList = _productManager.RetrieveProductsToBrowseProducts();
-            
+
             if (!search.Equals(""))
             {
                 var tempSearch = search.ToLower();
-                foreach(var str in tempSearch.Split())
+                foreach (var str in tempSearch.Split())
                 {
                     productsList = productsList.FindAll(p => p.CategoryID.ToLower().Contains(str) ||
                                                          p.Description.ToLower().Contains(str) ||
                                                          p.Name.ToLower().Contains(str) ||
                                                          p.Supplier_Name.ToLower().Contains(str));
                 }
-                
+
             }
 
             // for testing pagination. copy this line a couple of times to give you extra data
             // productsList.AddRange(productsList);
 
-
-            var products = new ProductsListViewModel {
-                    Products = productsList.OrderBy(p => p.ProductId)
+            IEnumerable<string> categories = productsList.Select(x => x.CategoryID)
+                                                         .Distinct()
+                                                         .OrderBy(x => x);
+            ViewBag.SelectedCategory = category;
+            var products = new ProductsListViewModel
+            {
+                Products = productsList.Where(p => category == null || p.CategoryID == category)
+                                           .OrderBy(p => p.ProductId)
                                            .Skip((page - 1) * PageSize)
                                            .Take(PageSize),
-                    PagingInfo = new PagingInfo
-                    {
-                        CurrentPage = page,
-                        ItemsPerPage = PageSize,
-                        TotalItems = productsList.Count()
-                    },
-                    searchPhrase = search
-                };
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = category == null ? productsList.Count() : productsList.Where(e => e.CategoryID == category).Count()
+                },
+                SearchPhrase = search,
+                CurrentCategory = category,
+                Categories = categories
+            };
             return View(products);
         }
 
@@ -100,17 +107,28 @@ namespace MVCPresentationLayer.Controllers
             try
             {
                 Product requested = _productManager.RetrieveProductById((int)id);
-                if(null!=requested)
+                if (null != requested)
                 {
                     var pictureArray = requested.ImageBinary;
                     return new FileContentResult(pictureArray, "image/jpeg");
                 }
-            } catch
+            }
+            catch
             {
 
             }
             Response.StatusCode = 404;
             return null;
+        }
+
+        public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase, string selectedCategory = "")
+        {
+            var navViewModel = new NavMenuViewModel {
+                Categories = categories,
+                SearchPhrase = searchPhrase,
+                SelectedCategory = selectedCategory
+            };
+            return PartialView(navViewModel);
         }
 
         //// GET: Products/Create
