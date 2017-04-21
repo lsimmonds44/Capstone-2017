@@ -129,15 +129,15 @@ namespace LogicLayer
         {
             //Vehicle vehicle = null;
 
-            //try
-            //{
-            return (VehicleAccessor.CheckVehicleOutIn(vehicle) == 1);
-            //}
-            //catch (Exception)
-            //{
+            try
+            {
+                return (VehicleAccessor.CheckVehicleOutIn(vehicle) == 1);
+            }
+            catch (Exception)
+            {
 
-            //    throw new ApplicationException("There was a problem updating the vehicle status");
-            //}         
+                throw new ApplicationException("There was a problem updating the vehicle status");
+            }         
         }
     }
 }

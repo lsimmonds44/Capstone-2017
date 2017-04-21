@@ -4,7 +4,14 @@
         Title="Inventory Settings" Height="400" Width="400"
         ResizeMode="NoResize">
     <!--Created by Michael Takrama on 24/03/17-->
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Inventory Settings Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="36"/>
@@ -33,32 +40,35 @@
             <RowDefinition Height="36"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-
-        <!--Preference Set-->
+        <!--End of Grid Definitions-->
+        <!--Inventory Preferences Controls-->
         <GroupBox Header="Preferences" Grid.Row="1" Grid.Column="1" 
                   Grid.RowSpan="8" 
                   Grid.ColumnSpan="10"
                   BorderBrush="LightGray" BorderThickness="1" Margin="5" >
-            <StackPanel Orientation="Vertical">
-                
-                <!--Expring Soon Field-->
+            <StackPanel Orientation="Vertical">        
                 <StackPanel Orientation="Horizontal" Margin="0 5 5 5">
+                    <!--Inventory Settings Expiring Soon Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="235"/>
                         </Grid.ColumnDefinitions>
-
-                        <Label Content ="Expring Soon:" Grid.Column="0"/>
-                        <TextBox Name="TxtPreference" Width="200" Grid.Column="1"/>
+                        <!--End of Grid Definitions-->
+                        <!--Inventory Settings Expiring Soon Controls-->
+                        <Label Content ="Expiring Soon:" Grid.Column="0"/>
+                        <TextBox Name="txtPreference" Width="200" Grid.Column="1"/>
+                        <!--Inventory Settings Expiring Soon Controls-->
                     </Grid>
+                    <!--End of Inventory Settings Expiring Soon Grid-->
                 </StackPanel>
                 <!--End of Expiring Soon Field-->
             </StackPanel>
         </GroupBox>
-        <!--End of Preference Set-->
+        <!--Inventory Preferences Controls-->
 
-        <!--Function Buttons-->
+        <!--Inventory Settings Controls-->
         <GroupBox Header="" Grid.Row="9" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="7"
                   BorderBrush="LightGray" BorderThickness="1" Margin="5" >
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" 
@@ -67,6 +77,9 @@
                 <Button Name="BtnSave" Content="Save" Click="BtnSave_OnClick" Width="100" Margin="5 0 0 0"/>
             </StackPanel>
         </GroupBox>
-        <!--End of Function Buttons-->
+        <!--End of Inventory Settings Controls-->
     </Grid>
+    <!--End of Inventory Settings-->
 </Window>
+<!--End of Inventory Setting Window-->   
+

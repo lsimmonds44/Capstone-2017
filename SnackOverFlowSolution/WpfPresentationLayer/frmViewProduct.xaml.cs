@@ -27,7 +27,13 @@ namespace WpfPresentationLayer
         IProductManager _productManager;
 
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize View Product Window.
+        /// Standaridized method.
+        /// </summary>
         public frmViewProduct()
         {
             _productManager = new ProductManager();
@@ -36,11 +42,14 @@ namespace WpfPresentationLayer
         }
 
         int productID;
-        //public frmViewProduct(int productID)
-        //{
-        //    this.productID = productID;          
-        //}
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Displays Product Details.
+        /// Standaridized method.
+        /// </summary>
         public void displayProductDetails()
         {
             try
@@ -59,13 +68,29 @@ namespace WpfPresentationLayer
             }
         }
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Cancels and Closes the View Product details.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void btnViewProdct_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Invokes the View Product Details Display.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewProduct_Click(object sender, RoutedEventArgs e)
         {
             this.displayProductDetails();
         }

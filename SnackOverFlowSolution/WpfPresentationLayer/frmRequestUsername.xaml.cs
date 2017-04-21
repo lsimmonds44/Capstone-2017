@@ -22,6 +22,14 @@ namespace WpfPresentationLayer
     {
         IUserManager _userManager;
         IEmailManager _emailManager;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Request Username Window.
+        /// Standaridized method.
+        /// </summary>
         public frmRequestUsername()
         {
             InitializeComponent();
@@ -31,7 +39,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 2/4/2017
+        /// 2017/02/04
         /// 
         /// retrieves the username by email and sends that info to the email manager
         /// to send the username to the email given
