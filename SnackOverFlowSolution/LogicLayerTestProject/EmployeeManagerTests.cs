@@ -53,7 +53,7 @@ namespace LogicLayerTestProject
             _userManager.CreateNewUser(testUser, password, password2);
 
             testUser = _userManager.RetrieveUserByUserName("Test");
-            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(1000,01,01), Salary = 100, UserId = testUser.UserId };
+            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(2000,01,01), Salary = 100, UserId = testUser.UserId };
 
             int expectedRowsAffected = 1;
             int actualRowsAffected = _employeeMgr.CreateEmployee(testEmployee);
@@ -76,10 +76,10 @@ namespace LogicLayerTestProject
 
             //Act
 
-            testEmployee = new Employee() { Active = true, DateOfBirth = DateTime.Now, Salary = 100, UserId = invalidUserID };
+            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(2000, 01, 01), Salary = 100, UserId = invalidUserID };
 
             //Assert
-            _employeeMgr.CreateEmployee(testEmployee);
+            Assert.AreEqual(1, _employeeMgr.CreateEmployee(testEmployee));
 
 
         }
@@ -236,7 +236,7 @@ namespace LogicLayerTestProject
             _userManager.CreateNewUser(testUser, password, password2);
 
             testUser = _userManager.RetrieveUserByUserName("Test");
-            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(1000, 01, 01), Salary = 100, UserId = testUser.UserId };
+            testEmployee = new Employee() { Active = true, DateOfBirth = new DateTime(2000, 01, 01), Salary = 100, UserId = testUser.UserId };
 
             _employeeMgr.CreateEmployee(testEmployee);
             expectedResult = _employeeMgr.RetrieveEmployeeByUserName("Test");
@@ -245,7 +245,7 @@ namespace LogicLayerTestProject
             //Assert
             RemoveTestEmployeeData();
             RemoveTestUserData();
-            Assert.IsTrue(result.Active == true && result.DateOfBirth == new DateTime(1000, 01, 01) && result.Salary == 100 && result.EmployeeId == expectedResult.EmployeeId && result.UserId == expectedResult.UserId);
+            Assert.IsTrue(result.Active == true && result.DateOfBirth == new DateTime(2000, 01, 01) && result.Salary == 100 && result.EmployeeId == expectedResult.EmployeeId && result.UserId == expectedResult.UserId);
         }
 
 
