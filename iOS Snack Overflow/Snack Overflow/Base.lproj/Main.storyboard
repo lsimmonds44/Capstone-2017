@@ -244,6 +244,17 @@
                                 <rect key="frame" x="16" y="617" width="343" height="30"/>
                                 <state key="normal" title="Mark Delivered"/>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XGi-FF-Nkj">
+                                <rect key="frame" x="16" y="282" width="343" height="327"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ft-bX-2VG">
+                                <rect key="frame" x="16" y="246" width="343" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -252,22 +263,29 @@
                             <constraint firstItem="I6L-uX-xch" firstAttribute="top" secondItem="H5E-zs-HtZ" secondAttribute="bottom" constant="2.5" id="24t-hg-w4L"/>
                             <constraint firstItem="H5E-zs-HtZ" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="2wm-uI-3Zx"/>
                             <constraint firstItem="H5E-zs-HtZ" firstAttribute="top" secondItem="qiD-Bq-1Uf" secondAttribute="bottom" constant="8" id="CFJ-IG-tuV"/>
+                            <constraint firstItem="9ft-bX-2VG" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="CXH-3h-1g6"/>
                             <constraint firstItem="uUk-mH-wCf" firstAttribute="top" secondItem="5dQ-Gp-csI" secondAttribute="bottom" constant="20" id="DQL-1O-3x9"/>
+                            <constraint firstItem="XGi-FF-Nkj" firstAttribute="top" secondItem="9ft-bX-2VG" secondAttribute="bottom" constant="9" id="G5p-iR-4Il"/>
+                            <constraint firstItem="XGi-FF-Nkj" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="IYm-Oo-Zdo"/>
                             <constraint firstItem="78A-3Q-e73" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="LtD-XG-FdF"/>
                             <constraint firstItem="I6L-uX-xch" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="OQR-hl-Mup"/>
+                            <constraint firstItem="9ft-bX-2VG" firstAttribute="top" secondItem="hiy-DL-4Hr" secondAttribute="bottom" constant="8" id="OvJ-7q-eb9"/>
                             <constraint firstItem="78A-3Q-e73" firstAttribute="top" secondItem="ZGu-84-fua" secondAttribute="bottom" constant="8" id="QB4-sU-fje"/>
                             <constraint firstItem="5dQ-Gp-csI" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="SSX-Q3-QXn"/>
                             <constraint firstItem="ZGu-84-fua" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="XrA-IE-Bwd"/>
                             <constraint firstItem="hiy-DL-4Hr" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="Yi1-Nb-qRp"/>
+                            <constraint firstItem="5dQ-Gp-csI" firstAttribute="top" secondItem="XGi-FF-Nkj" secondAttribute="bottom" constant="8" id="ae9-Mi-5XB"/>
                             <constraint firstItem="I6L-uX-xch" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="ckP-Tj-8F1"/>
                             <constraint firstItem="78A-3Q-e73" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="cwc-GW-VO2"/>
                             <constraint firstItem="M7P-sO-V7K" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="efp-wZ-nxk"/>
                             <constraint firstItem="M7P-sO-V7K" firstAttribute="top" secondItem="I6L-uX-xch" secondAttribute="bottom" constant="8" id="hNu-N4-llH"/>
+                            <constraint firstItem="9ft-bX-2VG" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="hhS-gQ-lZR"/>
                             <constraint firstItem="hiy-DL-4Hr" firstAttribute="top" secondItem="78A-3Q-e73" secondAttribute="bottom" constant="8" id="idm-L9-Jmp"/>
                             <constraint firstItem="ZGu-84-fua" firstAttribute="top" secondItem="M7P-sO-V7K" secondAttribute="bottom" constant="8" id="j02-kX-KhW"/>
                             <constraint firstItem="M7P-sO-V7K" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="nl5-jS-MyQ"/>
                             <constraint firstItem="5dQ-Gp-csI" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="o63-BE-z06"/>
                             <constraint firstItem="H5E-zs-HtZ" firstAttribute="trailing" secondItem="kzp-5S-p7K" secondAttribute="trailingMargin" id="plF-YE-Oey"/>
+                            <constraint firstItem="XGi-FF-Nkj" firstAttribute="leading" secondItem="kzp-5S-p7K" secondAttribute="leadingMargin" id="tTo-rM-Jno"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Delivery Details" id="5Ar-NS-qHd"/>
@@ -278,6 +296,7 @@
                         <outlet property="_addressState" destination="78A-3Q-e73" id="SD5-QL-nvd"/>
                         <outlet property="_addressZip" destination="ZGu-84-fua" id="Nli-8c-eqV"/>
                         <outlet property="_btnMarkDelivered" destination="5dQ-Gp-csI" id="Gst-Sj-SQq"/>
+                        <outlet property="_packagesTable" destination="XGi-FF-Nkj" id="CxW-Yz-s7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvz-km-OcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
