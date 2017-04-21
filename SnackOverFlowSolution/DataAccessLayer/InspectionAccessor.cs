@@ -15,7 +15,7 @@ namespace DataAccessLayer
     /// 
     /// Manages accessing the database for Inspection related actions.
     /// </summary>
-    public class InspectionAccessor
+    public static class InspectionAccessor
     {
         /// <summary>
         /// Christian Lopez

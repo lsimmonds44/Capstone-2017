@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html class="no-js no-flash">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snack Overflow</title>
+    <meta name="description" content="Snackoverflow connects local growers to consumers seamlessly">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+
+    <!-- Icon Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="~/Content/fontello.css" rel="stylesheet" />
+
+    <!-- Plugins CSS -->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/rev-slider-settings.css" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/snackoverflow.css" rel="stylesheet" />
+
+    <!-- Head JS Libraries -->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body class="frame-on">
+
+    <!-- Start page-frame -->
+    <div class="page-frame">
+        <div class="frame-top"></div>
+        <div class="frame-right"></div>
+        <div class="frame-bottom"></div>
+        <div class="frame-left"></div>
+    </div>
+    <!-- End page-frame -->
+    <!-- Start mobile-nav -->
+    <div class="mobile-nav-container clearfix">
+        <div class="main-nav-trigger mobile-nav-trigger">
+            <a href="#"></a>
+        </div>
+    </div>
+    <!-- End mobile-nav -->
+    <!-- Start main-nav-trigger -->
+    <div class="main-nav-trigger style2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="handle" href="#">
+                        <span class="bars">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </span>
+                    </a>
+                </div><!-- /col-md-12 -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div>
+    <!-- End main-nav-trigger -->
+    <!-- Start main-nav -->
+    <div class="main-nav-container style3">
+       @Html.Partial("_HomeMainNavPartial")
+    </div><!-- /main-nav-container -->
+    <!-- End main-nav -->
+    <!-- Start wrapper -->
+    <div class="wrapper">
+        @RenderBody()
+    </div><!-- /wrapper -->
+    <!-- End wrapper -->
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
+    <script src="~/Scripts/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Scripts/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/Scripts/jquery.scrollme.min.js"></script>
+    <script src="~/Scripts/jquery.mixitup.min.js"></script>
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/snackoverflow.js"></script>
+    <script type="text/javascript">
+            jQuery(document).ready(function() {
+               jQuery('.main-slider').revolution(
+                {
+                    delay:9000,
+                    startwidth:1170,
+                    startheight: 960,
+                    hideThumbs:10,
+                    fullScreen: 'on',
+                    hideTimerBar: 'on',
+                    navigationStyle: 'preview1'
+                });
+            });
+    </script>
+
+</body>
+</html>
+
+

@@ -101,10 +101,10 @@ namespace WpfPresentationLayer
                 //Creating a package line to pass to the manager
                 PackageLine pl = new PackageLine()
                 {
-                    packageId = _package.PackageId,
-                    productLotId = productLotID,
-                    quantity = quantity,
-                    pricePaid = price
+                    PackageId = _package.PackageId,
+                    ProductLotId = productLotID,
+                    Quantity = quantity,
+                    PricePaid = price
                 };
 
                 try

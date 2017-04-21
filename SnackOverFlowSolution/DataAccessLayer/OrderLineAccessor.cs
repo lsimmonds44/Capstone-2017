@@ -15,7 +15,7 @@ namespace DataAccessLayer
     /// 
     /// Class to handle database interactions involving product order lines.
     /// </summary>
-    public class OrderLineAccessor
+    public static class OrderLineAccessor
     {
 
         /// <summary>

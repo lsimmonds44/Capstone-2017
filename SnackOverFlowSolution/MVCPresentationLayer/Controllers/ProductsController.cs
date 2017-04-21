@@ -24,7 +24,7 @@ namespace MVCPresentationLayer.Controllers
 
         /// <summary>
         /// Author: Skyler Hiscock
-        /// Updated: 4/14/17
+        /// Updated: 4/20/17
         /// </summary>
         /// <param name="page">Page Number</param>
         /// <returns></returns>
@@ -121,6 +121,14 @@ namespace MVCPresentationLayer.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Author: Skyler Hiscock
+        /// Added: 4/20/17
+        /// </summary>
+        /// <param name="categories"></param>
+        /// <param name="searchPhrase"></param>
+        /// <param name="selectedCategory"></param>
+        /// <returns>Nav Menu Partial View</returns>
         public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase = "", string selectedCategory = "")
         {
             var navViewModel = new NavMenuViewModel {
@@ -129,6 +137,11 @@ namespace MVCPresentationLayer.Controllers
                 SelectedCategory = selectedCategory
             };
             return PartialView(navViewModel);
+        }
+
+        public ActionResult IndexTemp()
+        {
+            return View();
         }
 
         //// GET: Products/Create

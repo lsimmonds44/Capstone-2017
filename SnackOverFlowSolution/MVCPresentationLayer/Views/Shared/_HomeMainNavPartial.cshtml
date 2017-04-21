@@ -1,0 +1,19 @@
+﻿<div class="main-nav-inner">
+    <div class="logo-container">
+        <a href="#">
+            <img src="~/Images/slider-images/Flogo2.png" alt="snack overflow logo">
+        </a>
+    </div><!-- /logo-container -->
+    <nav class="main-nav">
+        <ul>
+            <li class="active"><a href="#">Home</a></li>
+            <li>@Html.ActionLink("Store", "Index", "Products")</li>
+            
+
+            <li>@Html.ActionLink("Apply for a Supplier Account", "Create", "SupplierWithAgreements")</li>  @*Shall be changes to a central supplier page*@
+            <li>@Html.ActionLink("View Orders Placed", "Index", "CompanyOrderWithLines")</li>
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    </nav>
+</div><!-- /main-nav-inner -->

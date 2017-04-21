@@ -34,8 +34,8 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (route, userMessage) in
-            self.displayPin(routes: route)
+        _driverMgr.getRouteByDriverID(driverID: _driver.UserId!) { (routes, userMessage) in
+            self.displayPin(routes: routes?[0])
         }
         
         // Do any additional setup after loading the view.

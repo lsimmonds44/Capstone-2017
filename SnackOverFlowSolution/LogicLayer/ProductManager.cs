@@ -104,7 +104,7 @@ namespace LogicLayer
 
             try
             {
-                products = ProductAccessor.RetrieveProductbyId(productId);
+                products = ProductAccessor.RetrieveProduct(productId);
             }
             catch (Exception ex)
             {
@@ -266,7 +266,7 @@ namespace LogicLayer
         {
             try
             {
-                return ProductAccessor.GetPriceOptionsForProduct(productId);
+                return ProductAccessor.RetrievePriceOptionsForProduct(productId);
             }
             catch (SqlException ex)
             {

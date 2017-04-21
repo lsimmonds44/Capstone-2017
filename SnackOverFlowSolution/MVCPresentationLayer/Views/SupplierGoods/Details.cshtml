@@ -1,4 +1,4 @@
-﻿@model DataObjects.ProductLot
+﻿@model DataObjects.SupplierProductLot
 
 @{
     ViewBag.Title = "Details";
@@ -11,91 +11,11 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ProductLotId)
+            @Html.DisplayNameFor(model => model.SupplierProductLotId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductLotId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WarehouseId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WarehouseId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SupplierId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SupplierId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SupplyManagerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SupplyManagerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AvailableQuantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AvailableQuantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Grade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Grade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateReceived)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateReceived)
+            @Html.DisplayFor(model => model.SupplierProductLotId)
         </dd>
 
         <dt>
@@ -107,11 +27,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayNameFor(model => model.ProductId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductName)
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
         </dd>
 
     </dl>

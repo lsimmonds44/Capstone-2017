@@ -9,36 +9,47 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/21
+    /// 
+    /// Class to handle database interactions involving products.
+    /// </summary>
     public static class ProductAccessor
     {
 
-        ///<summary> 
+        /// <summary> 
         /// Dan Brown
-        /// Created on 3/2/17
+        /// Created: 2017/03/02
         ///
-        /// Delete an individual product from the SnackOverflowDB product table (following documentation guidlines)
-        ///</summary>
-        ///<param name="productID"> The ID field of the product to be deleted </param>
-        ///<returns> Returns rows affected (int) </returns>
-        ///<exception cref="System.Exception"> Thrown if there is an error oppening a connection to the database </exception>
+        /// Deletes a product from the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productID"> Id of the product to be deleted.</param>
+        /// <returns>Rows affected</returns>
         public static int DeleteProduct(int productID)
         {
-            int rowsAffected = 0;
+            int rows = 0;
 
             var cmdText = "@sp_delete_product";
             var conn = DBConnection.GetConnection();
-
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.Int);
-            cmd.Parameters["@PRODUCT_ID"].Value = productID;
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", productID);
 
             try
             {
                 conn.Open();
 
-                rowsAffected = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -49,22 +60,32 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return rowsAffected;
+            return rows;
         }
 
         /// <summary>
-        /// Created by Natacha Ilunga 
-        /// Created on 2/10/17
+        /// Natacha Ilunga 
+        /// Created: 2017/02/10
         /// 
         /// Retrieves Products from DB to Browse Product View Model
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <returns></returns>
         public static List<BrowseProductViewModel> RetrieveProductsToBrowseProducts()
         {
-            var productsInDB = new List<BrowseProductViewModel>();
+            var products = new List<BrowseProductViewModel>();
+
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_retrieve_products_to_customer";
-            var cmd = new SqlCommand(cmdText, conn) { CommandType = CommandType.StoredProcedure };
+            var cmdText = @"sp_retrieve_products_to_customer";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
@@ -75,7 +96,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        var product = new BrowseProductViewModel()
+                        products.Add(new BrowseProductViewModel()
                         {
                             ProductId = reader.GetInt32(0),
                             Name = reader.GetString(1),
@@ -86,9 +107,7 @@ namespace DataAccessLayer
                             Supplier_Name = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
                             CategoryID = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
                             Image_Binary = reader["image_binary"] as byte[]
-                        };
-
-                        productsInDB.Add(product);
+                        });
                     }
                     reader.Close();
                 }
@@ -98,163 +117,193 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return productsInDB;
+            return products;
         }
 
 
         /// <summary>
         /// Laura Simmonds
-        /// Created on 2017/02/15
+        /// Created: 2017/02/15
         /// 
         /// Retrieves a product from the database
         /// </summary>
-        /// <param name="ProductID"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productID"></param>
         /// <returns>product</returns>
 
-        public static Product RetrieveProductbyId(int ProductID)
+        public static Product RetrieveProduct
+            (int productID)
         {
-            {
-                var product = new Product();
 
-                var conn = DBConnection.GetConnection();
-                var cmdText = @"sp_retrieve_product";
-                var cmd = new SqlCommand(cmdText, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.Int);
-                cmd.Parameters["@PRODUCT_ID"].Value = ProductID;
+            var product = new Product();
 
-                try
-                {
-                    conn.Open();
-                    var reader = cmd.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            // ProductID, Name, Description, UnitPrice, ImageName, DeliveryChargePerUnit
-
-                            product = new Product()
-                            {
-                                ProductId = reader.GetInt32(0),
-                                Name = reader.GetString(1),
-                                Description = reader.GetString(2),
-                                UnitPrice = reader.GetDecimal(3),
-                                ImageName = reader.GetString(4),
-                                Active = reader.GetBoolean(5),
-                                UnitOfMeasurement = reader.GetString(6),
-                                DeliveryChargePerUnit = reader.GetDecimal(7),
-                                ImageBinary = new byte[reader.GetStream(8).Length]
-                            };
-                            reader.GetStream(8).Read(product.ImageBinary, 0, (int)reader.GetStream(8).Length);
-                        }
-                        reader.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-                finally
-                {
-                    conn.Close();
-                }
-                return product;
-            }
-        }
-
-        /// <summary>
-        /// Created by Michael Takrama 
-        /// Created on 2/15/2017
-        /// 
-        /// Adds New Product
-        /// </summary>
-        /// <param name="product">Product Object to be Created</param>
-        /// <returns>Returns and integer indicating write success</returns>
-        public static int CreateProduct(Product product)
-        {
             var conn = DBConnection.GetConnection();
-            const string cmdText = @"sp_create_product";
+            var cmdText = @"sp_retrieve_product";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            var count = 0;
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Name", product.Name);
-            cmd.Parameters.AddWithValue("@Description", product.Description);
-            cmd.Parameters.AddWithValue("@Unit_Price", product.UnitPrice);
-            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary ?? new Byte[0]);
-            cmd.Parameters.AddWithValue("@Active", product.Active);
-            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement );
-            cmd.Parameters.AddWithValue("@Delivery_Charge_Per_Unit", product.DeliveryChargePerUnit);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", productID);
 
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        product = new Product()
+                        {
+                            ProductId = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Description = reader.GetString(2),
+                            UnitPrice = reader.GetDecimal(3),
+                            ImageName = reader.GetString(4),
+                            Active = reader.GetBoolean(5),
+                            UnitOfMeasurement = reader.GetString(6),
+                            DeliveryChargePerUnit = reader.GetDecimal(7),
+                            ImageBinary = new byte[reader.GetStream(8).Length]
+                        };
+                        reader.GetStream(8).Read(product.ImageBinary, 0, (int)reader.GetStream(8).Length);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return count;
+            return product;
+
+        }
+
+        /// <summary>
+        /// Michael Takrama 
+        /// Created: 2017/02/15
+        /// 
+        /// Adds a new product to the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="product">The product to be added.</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateProduct(Product product)
+        {
+            var rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_product";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Name", product.Name);
+            cmd.Parameters.AddWithValue("@Description", product.Description);
+            cmd.Parameters.AddWithValue("@Unit_Price", product.UnitPrice);
+            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary ?? new Byte[0]);
+            cmd.Parameters.AddWithValue("@Active", product.Active);
+            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement);
+            cmd.Parameters.AddWithValue("@Delivery_Charge_Per_Unit", product.DeliveryChargePerUnit);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
 
         /// <summary>
         /// Ryan Spurgetis
-        /// 02/17/2017
+        /// Created: 201702/17
         /// 
-        /// Writes an updated product unit price to the database
+        /// Updates the price of a given product in the database.
         /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="oldPrice"></param>
-        /// <param name="newPrice"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productID">The id of the product to update.</param>
+        /// <param name="oldPrice">The price as it was.</param>
+        /// <param name="newPrice">The price as it should be.</param>
+        /// <returns>Rows affected.</returns>
         public static int UpdateProductPrice(int productID, decimal oldPrice, decimal newPrice)
         {
-            int result = 0;
+            int rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_update_product_price";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@ProductID", SqlDbType.Int);
-            cmd.Parameters.Add("@OldPrice", SqlDbType.Decimal);
-            cmd.Parameters.Add("@NewPrice", SqlDbType.Decimal);
-
-            cmd.Parameters["@ProductID"].Value = productID;
-            cmd.Parameters["@OldPrice"].Value = oldPrice;
-            cmd.Parameters["@NewPrice"].Value = newPrice;
+            cmd.Parameters.AddWithValue("@ProductID", productID);
+            cmd.Parameters.AddWithValue("@OldPrice", oldPrice);
+            cmd.Parameters.AddWithValue("@NewPrice", newPrice);
 
             try
             {
                 conn.Open();
-                result = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
-
-                throw new ApplicationException("A problem occurred updating the product price.");
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return result;
+            return rows;
         }
-       
+
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created: 2017/03/08
         /// 
         /// Get a list of all products in the database
         /// </summary>
-        public static List<Product> RetrieveProductList() 
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        ///<returns>List of all products in the database.</returns>
+        public static List<Product> RetrieveProductList()
         {
-            List<Product> products = new List<Product>();
+            var products = new List<Product>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_product_list";
@@ -269,7 +318,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        Product p = new Product()
+                        products.Add(new Product()
                         {
                             ProductId = reader.GetInt32(0),
                             Name = reader.GetString(1),
@@ -279,15 +328,13 @@ namespace DataAccessLayer
                             Active = reader.GetBoolean(5),
                             UnitOfMeasurement = reader.GetString(6),
                             DeliveryChargePerUnit = reader.GetDecimal(7)
-                        };
-                        products.Add(p);
+                        });
                     }
                 }
                 reader.Close();
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -297,7 +344,7 @@ namespace DataAccessLayer
 
             return products;
         }
-
+        /*This is very, very wrong and needs to be redone as its own stored procedure.*/
         /// <summary>
         /// Created by Natacha Ilunga
         /// 03/29/2017
@@ -313,12 +360,20 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/04/13
+        /// Created: 2017/04/13
         /// 
         /// Retrieves the name of a product based on the passed in product lot id
         /// </summary>
-        /// <param name="productLotId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productLotId">The id of the needed product lot.</param>
+        /// <returns>The name of the product lot.</returns>
         public static string RetrieveProductNameFromProductLotId(int? productLotId)
         {
             string productName = null;
@@ -327,6 +382,8 @@ namespace DataAccessLayer
             var cmdText = @"sp_retrieve_product_name_from_product_lot_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+
             cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", productLotId);
 
             try
@@ -337,7 +394,6 @@ namespace DataAccessLayer
                 {
                     reader.Read();
                     productName = reader.GetString(0);
-                    reader.Close();
                 }
             }
             catch (Exception)
@@ -348,42 +404,66 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
+
             return productName;
         }
 
         /// <summary>
         /// William Flood
-        /// Created 2017/04/14
+        /// Created: 2017/04/14
+        /// 
+        /// Retrieves the price options for a given product from the database.
         /// </summary>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public static List<ProductGradePrice> GetPriceOptionsForProduct(int productID)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="productID">The id of the relevant product.</param>
+        /// <returns>List of options.</returns>
+        public static List<ProductGradePrice> RetrievePriceOptionsForProduct(int productID)
         {
-            var optionList = new List<ProductGradePrice>();
+            var options = new List<ProductGradePrice>();
+
             var conn = DBConnection.GetConnection();
             var procedureName = "sp_retrieve_product_grade_price_from_search";
             var cmd = new SqlCommand(procedureName, conn);
-            cmd.Parameters.AddWithValue("@PRODUCT_ID", productID);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", productID);
+           
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    optionList.Add(new ProductGradePrice
+                    while (reader.Read())
                     {
-                        ProductID = reader.GetInt32(0),
-                        GradeID = reader.GetString(1),
-                        Price = reader.GetDecimal(2)
-                    });
+                        options.Add(new ProductGradePrice
+                        {
+                            ProductID = reader.GetInt32(0),
+                            GradeID = reader.GetString(1),
+                            Price = reader.GetDecimal(2)
+                        });
+                    }
                 }
-                return optionList;
+                
+                
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
+            finally
+            {
+                conn.Close();
+            }
+
+            return options;
         }
     }
 }
