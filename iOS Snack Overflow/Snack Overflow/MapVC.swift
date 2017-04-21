@@ -9,12 +9,13 @@
 import UIKit
 import MapKit
 
-class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
+class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,DeliveryVCDelegate {
     
     let _driverMgr = DriverManager()
     var _driver:User!
     var _route:Route!{didSet{self.displayPin(routes: _route)}}
     let mapModel = MapVCModel()
+    let _deliveryVC = DeliveryVC()
 
     // outlets
         private var _locationManager = CLLocationManager()
@@ -44,6 +45,16 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updatePin() {
+        DispatchQueue.main.async {
+        let allPins = self.map.annotations
+        self.map.removeAnnotations(allPins)
+        self.displayPin(routes: self._route)
+        }
+    }
+    
+    
     
     func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
         
@@ -120,6 +131,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
             if let deliveryVC:DeliveryVC = segue.destination as? DeliveryVC{
                 deliveryVC.navigationItem.title = "Delivery Details"
                 deliveryVC._delivery = _selectedDelivery
+                deliveryVC.delegate = self
             }
         }else if segue.identifier == "PickupSeg"{
             

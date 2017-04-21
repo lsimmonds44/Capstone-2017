@@ -22,7 +22,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var btnCancel: UIButton!{didSet{btnCancel.layer.cornerRadius = 8}}
     
     // Variables
-    var delegate:RouteListViewDelegate? = nil
+    var delegate:RouteListViewDelegate!
     let _driverMgr = DriverManager()
     var _routes = [Route]()
     var _pickups = ["Test"]
@@ -76,7 +76,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
         if self._driveType == 0 {
             cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
-            cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!)"
+            cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
         }else if self._driveType == 1{
             cell.textLabel?.text = _pickups[indexPath.row]
 //            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
