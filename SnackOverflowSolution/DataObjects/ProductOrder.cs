@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataObjects
 {
     public class ProductOrder
     {
+        [Key]
         public int OrderId { get; set; }
         public int? CustomerId { get; set; }
         public int? EmployeeId { get; set; }
