@@ -24,6 +24,7 @@
 		614D2F131EA111EE00E6D8A3 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614D2F121EA111EE00E6D8A3 /* AppUser.swift */; };
 		618F424D1EA1E093006E0B16 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618F424C1EA1E093006E0B16 /* Pin.swift */; };
 		618F424F1EA1E2F2006E0B16 /* MapVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618F424E1EA1E2F2006E0B16 /* MapVCModel.swift */; };
+		61B632CE1EAACC7A0061EF55 /* PickupLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B632CD1EAACC7A0061EF55 /* PickupLine.swift */; };
 		61BA887C1EA6FEA800811605 /* DriverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA887B1EA6FEA800811605 /* DriverManager.swift */; };
 		61BA887E1EA6FEBB00811605 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA887D1EA6FEBB00811605 /* Route.swift */; };
 		61BA88801EA6FEC800811605 /* Pickup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA887F1EA6FEC800811605 /* Pickup.swift */; };
@@ -77,6 +78,7 @@
 		614D2F121EA111EE00E6D8A3 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		618F424C1EA1E093006E0B16 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		618F424E1EA1E2F2006E0B16 /* MapVCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVCModel.swift; sourceTree = "<group>"; };
+		61B632CD1EAACC7A0061EF55 /* PickupLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupLine.swift; sourceTree = "<group>"; };
 		61BA887B1EA6FEA800811605 /* DriverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverManager.swift; sourceTree = "<group>"; };
 		61BA887D1EA6FEBB00811605 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		61BA887F1EA6FEC800811605 /* Pickup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pickup.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				61BA88851EA7DA5000811605 /* Address.swift */,
 				D40B83C51EA853B200A7BD2B /* Package.swift */,
 				D40B83C71EA8540300A7BD2B /* PackageLine.swift */,
+				61B632CD1EAACC7A0061EF55 /* PickupLine.swift */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				614B2EE81E8E08C8006EF1FA /* UserManager.swift in Sources */,
 				614B2EB71E8DF36C006EF1FA /* AppDelegate.swift in Sources */,
 				61BA887C1EA6FEA800811605 /* DriverManager.swift in Sources */,
+				61B632CE1EAACC7A0061EF55 /* PickupLine.swift in Sources */,
 				61BA88821EA7167100811605 /* Delivery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

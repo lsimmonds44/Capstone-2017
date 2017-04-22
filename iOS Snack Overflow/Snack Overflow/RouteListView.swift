@@ -10,7 +10,7 @@ import UIKit
 
 protocol RouteListViewDelegate {
     func RouteSelected(route:Route)
-    func PickupSelected()
+    func PickupSelected(pickup:Pickup)
     func RouteSelectionCanceled()
 }
 
@@ -25,7 +25,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     var delegate:RouteListViewDelegate!
     let _driverMgr = DriverManager()
     var _routes = [Route]()
-    var _pickups = ["Test"]
+    var _pickups = [Pickup]()
     var _driveType:Int!
     
     func addView(apiToCall:String, driverId:Int)
@@ -47,8 +47,11 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
             }
         }else{
             _driveType = 1
-            _driverMgr.getPickupByDriverID(driverID: driverId, completion: { (Pickups, userMessage) in
-                
+            _driverMgr.getPickupByDriverID(driverID: driverId, completion: { (pickups, userMessage) in
+                DispatchQueue.main.async {
+                    self._pickups = pickups!
+                    self.RouteTV.reloadData()
+                }
             })
         }
         
@@ -78,9 +81,9 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
             cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
         }else if self._driveType == 1{
-            cell.textLabel?.text = _pickups[indexPath.row]
-//            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
-//            cell.detailTextLabel?.text = "Vehicle #: \(_pickups[indexPath.row].VehicleID!)"
+            cell.textLabel?.text = "\(_pickups[indexPath.row].PickupId!)"
+            //            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
+            //            cell.detailTextLabel?.text = "Vehicle #: \(_pickups[indexPath.row].VehicleID!)"
         }
         
         return cell
@@ -88,9 +91,9 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if _driveType == 0 {
-             delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
+            delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
         }else if _driveType == 1{
-            delegate?.PickupSelected()
+            delegate?.PickupSelected(pickup: _pickups[indexPath.row])
         }
     }
     

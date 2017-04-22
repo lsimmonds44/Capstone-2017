@@ -13,13 +13,14 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
     
     let _driverMgr = DriverManager()
     var _driver:User!
-    var _route:Route!{didSet{self.displayPin(routes: _route)}}
+    var _route:Route!{didSet{self.displayAllRoutePins(routes: _route)}}
+    var _pickup:Pickup!{didSet{self.displayPickupPin(pickup: _pickup)}}
     let mapModel = MapVCModel()
     let _deliveryVC = DeliveryVC()
-
+    
     // outlets
-        private var _locationManager = CLLocationManager()
-        private let delVC = DeliveryVC()
+    private var _locationManager = CLLocationManager()
+    private let delVC = DeliveryVC()
     @IBOutlet weak var map: MKMapView!{didSet{
         map.delegate = self
         map.mapType = .hybrid
@@ -48,15 +49,15 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
     
     func updatePin() {
         DispatchQueue.main.async {
-        let allPins = self.map.annotations
-        self.map.removeAnnotations(allPins)
-        self.displayPin(routes: self._route)
+            let allPins = self.map.annotations
+            self.map.removeAnnotations(allPins)
+            self.displayAllRoutePins(routes: self._route)
         }
     }
     
     
     
-    func displayPin(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
+    func displayAllRoutePins(routes:Route?){ // will probably be changed to display all pins and iterate through the list of deliveries
         
         for delivery in routes?.Deliveries ?? []{
             let pinToAdd = Pin()
@@ -81,6 +82,38 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
                 }
             }
         }
+    }
+    
+    func displayPickupPin(pickup:Pickup){
+        
+        let pinToAdd = Pin()
+        let addLine1 = (pickup.Address!.AddressLine1 ?? "")
+        let addCity = (pickup.Address!.City ?? "")
+        let addState = (pickup.Address!.State ?? "")
+        let addZip = (pickup.Address!.Zip ?? "")
+        
+        mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
+            DispatchQueue.main.async {
+                pinToAdd.title = "\(pickup.Address!.AddressLine1 ?? "")"
+                pinToAdd.subtitle = "TBD"
+                pinToAdd.coordinate = returnedCoord
+                var pickedupCount = 0
+                for pickupLine in pickup.PickupLineList{
+                    if pickupLine.PickupStatus!
+                    {
+                        pickedupCount = pickedupCount + 1
+                    }
+                }
+                if pickedupCount == pickup.PickupLineList.count
+                {
+                    pinToAdd.pinColor = "green"
+                }else{
+                    pinToAdd.pinColor = "blue"
+                }
+                self.map.addAnnotation(pinToAdd)
+            }
+        }
+        
     }
     
     
@@ -111,9 +144,12 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let pin = view.annotation as! Pin
-        
-        _selectedDelivery = pin.delivery
-        self.performSegue(withIdentifier: "DeliveryDetailSeg", sender: nil)
+        if _route != nil {
+            _selectedDelivery = pin.delivery
+            self.performSegue(withIdentifier: "DeliveryDetailSeg", sender: nil)
+        }else{
+            print("Time to build PickupDetailVC")
+        }
     }
     
     

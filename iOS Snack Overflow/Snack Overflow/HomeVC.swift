@@ -15,6 +15,8 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     var _driver:User!
     var _routeListView = RouteListView()
     var _route:Route!
+    var _pickup:Pickup!
+    
     @IBOutlet weak var userMessageLbl: UILabel!{didSet{userMessageLbl?.text = "Welcome\n \(_driver.FirstName ?? "Anonymous") \(_driver.LastName ?? "???")"}}
     
     @IBOutlet var btns: [UIButton]!{didSet{
@@ -29,7 +31,8 @@ class HomeVC: UIViewController,RouteListViewDelegate {
         self.performSegue(withIdentifier: "DeliverySeg", sender: nil)
     }
     
-    func PickupSelected() {
+    func PickupSelected(pickup: Pickup) {
+        _pickup = pickup
         self.performSegue(withIdentifier: "PickupSeg", sender: nil)
     }
     
@@ -79,6 +82,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
             if let mapVC:MapVC = segue.destination as? MapVC{
                 mapVC.navigationItem.title = "Pick-Ups"
                 mapVC._driver = _driver
+                mapVC._pickup = _pickup
             }
         }
     } // end of prepare
