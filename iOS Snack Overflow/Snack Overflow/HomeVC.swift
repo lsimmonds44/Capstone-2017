@@ -68,9 +68,15 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     }
     
     func displayRouteListView(){
-            _routeListView.RouteListView.frame = CGRect(x: 10, y: self.view.frame.midY / 3, width: self.view.bounds.size.width - 20, height: _routeListView.RouteListView.bounds.height)
+            _routeListView.RouteListView.frame = CGRect(x: 10, y: self.view.frame.midY / 3, width: self.view.bounds.size.width - 20, height: self.view.bounds.height / 2)
             _routeListView.delegate = self
             self.view.addSubview(_routeListView.RouteListView)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if _routeListView.RouteListView != nil{
+            dismissRouteListView()
+        }
     }
     
     
