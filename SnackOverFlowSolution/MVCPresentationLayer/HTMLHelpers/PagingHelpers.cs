@@ -26,9 +26,9 @@ namespace MVCPresentationLayer.HtmlHelpers
                 if (i == pagingInfo.CurrentPage)
                 {
                     tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-primary");
+                    tag.AddCssClass("custom-button");
                 }
-                tag.AddCssClass("btn btn-default");
+                tag.AddCssClass("button-style2");
                 result.Append(tag.ToString());
             }
             return MvcHtmlString.Create(result.ToString());
