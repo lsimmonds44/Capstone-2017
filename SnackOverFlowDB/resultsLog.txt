@@ -1,0 +1,1019 @@
+ 
+*** Dropping database SnackOverflowDB
+ 
+*** Creating database SnackOverflowDB
+ 
+*** using database SnackOverflowDB
+Changed database context to 'SnackOverflowDB'.
+ 
+*** Creating TABLE AGREEMENT
+ 
+*** Creating TABLE APP_USER
+ 
+*** Creating TABLE BACKORDER_PREORDER
+ 
+*** Creating TABLE CATEGORY
+ 
+*** Creating TABLE CHARITY
+ 
+*** Creating TABLE CHARITY_PRODUCTS
+ 
+*** Creating TABLE COMMERCIAL
+ 
+*** Creating TABLE COMMERCIAL_INVOICE
+ 
+*** Creating TABLE COMPANY_ORDER
+ 
+*** Creating TABLE COMPANY_ORDER_LINE
+ 
+*** Creating TABLE CUSTOMER
+ 
+*** Creating TABLE DEAL
+ 
+*** Creating TABLE DEAL_CATEGORY
+ 
+*** Creating TABLE DEAL_PRODUCT
+ 
+*** Creating TABLE DELIVERY
+ 
+*** Creating TABLE DELIVERY_TYPE
+ 
+*** Creating TABLE DISPATCHER_MESSAGE
+ 
+*** Creating TABLE DRIVER
+ 
+*** Creating TABLE EMPLOYEE
+ 
+*** Creating TABLE EMPLOYEE_MESSAGE
+ 
+*** Creating TABLE EMPLOYEE_ORDER_RESPONSIBILITY
+ 
+*** Creating TABLE EMPLOYEE_ROLE
+ 
+*** Creating TABLE GRADE
+ 
+*** Creating TABLE INSPECTION
+ 
+*** Creating TABLE LOCATION
+ 
+*** Creating TABLE MAINTENANCE_SCHEDULE
+ 
+*** Creating TABLE MAINTENANCE_SCHEDULE_LINE
+ 
+*** Creating TABLE MESSAGE_LINE
+ 
+*** Creating TABLE ORDER_STATUS
+ 
+*** Creating TABLE ORDER_LINE
+ 
+*** Creating TABLE ORDER_TYPE
+ 
+*** Creating TABLE PACKAGE
+ 
+*** Creating TABLE PACKAGE_LINE
+ 
+*** Creating TABLE PICKUP
+ 
+*** Creating TABLE PICKUP_LINE
+ 
+*** Creating TABLE PRODUCT
+ 
+*** Creating TABLE PRODUCT_CATEGORY
+ 
+*** Creating TABLE PRODUCT_GRADE_PRICE
+ 
+*** Creating TABLE PRODUCT_LOT
+ 
+*** Creating TABLE PRODUCT_ORDER
+ 
+*** Creating TABLE PRODUCT_REVIEW
+ 
+*** Creating TABLE REPAIR
+ 
+*** Creating TABLE REPAIR_LINE
+ 
+*** Creating TABLE ROLE
+ 
+*** Creating TABLE ROUTE
+ 
+*** Creating TABLE SHIPPING_ADDRESS
+ 
+*** Creating TABLE STATUS
+ 
+*** Creating TABLE SUPPLIER
+ 
+*** Creating TABLE SUPPLIER_APPLICATION_STATUS
+ 
+*** Creating TABLE SUPPLIER_INVENTORY
+ 
+*** Creating TABLE SUPPLIER_INVOICE
+ 
+*** Creating TABLE SUPPLIER_INVOICE_LINE
+ 
+*** Creating TABLE USER_ADDRESS
+ 
+*** Creating TABLE USER_CART_LINE
+ 
+*** Creating TABLE VEHICLE
+ 
+*** Creating TABLE VEHICLE_TYPE
+ 
+*** Creating TABLE WAREHOUSE
+ 
+*** Create TABLE SUPPLIER_PRODUCT
+ 
+*** Creating TABLE WISHLIST_LINE
+ 
+*** Creating Foreign Key AGREEMENT_PRODUCT_ID
+ 
+*** Creating Foreign Key AGREEMENT_SUPPLIER_ID
+ 
+*** Creating Foreign Key BACKORDER_PREORDER_ORDER_ID
+ 
+*** Creating Foreign Key BACKORDER_PREORDER_CUSTOMER_ID
+ 
+*** Creating Foreign Key CHARITY_USER_ID
+ 
+*** Creating Foreign Key CHARITY_EMPLOYEE_ID
+ 
+*** Creating Foreign Key CHARITY_PRODUCTS_CHARITY_ID
+ 
+*** Creating Foreign Key CHARITY_PRODUCTS_PRODUCT_LOT_ID
+ 
+*** Creating Foreign Key COMMERCIAL_USER_ID
+ 
+*** Creating Foreign Key COMMERCIAL_INVOICE_COMMERCIAL_ID
+ 
+*** Creating Foreign Key COMMERCIAL_INVOICE_LINE_COMMERCIAL_INVOICE_ID
+ 
+*** Creating Foreign Key COMPANY_ORDER_EMPLOYEE_ID
+ 
+*** Creating Foreign Key COMPANY_ORDER_SUPPLIER_ID
+ 
+*** Creating Foreign Key COMPANY_ORDER_LINE_COMPANY_ORDER_ID
+ 
+*** Creating Foreign Key COMPANY_ORDER_LINE_PRODUCT_ID
+ 
+*** Creating Foreign Key CUSTOMER_CUSTOMER_ID
+ 
+*** Creating Foreign Key DEAL_CATEGORY_DEAL_ID
+ 
+*** Creating Foreign Key DEAL_CATEGORY_CATEGORY_ID
+ 
+*** Creating Foreign Key DEAL_PRODUCT_DEAL_ID
+ 
+*** Creating Foreign Key DEAL_PRODUCT_PRODUCT_ID
+ 
+*** Creating Foreign Key DELIVERY_ROUTE_ID
+ 
+*** Creating Foreign Key DELIVERY_STATUS_ID
+ 
+*** Creating Foreign Key DELIVERY_DELIVERY_TYPE_ID
+ 
+*** Creating Foreign Key DELIVERY_ORDER_ID
+ 
+*** Creating Foreign Key DISPATCHER_MESSAGE_EMPLOYEE_ID
+ 
+*** Creating Foreign Key DISPATCHER_MESSAGE_DRIVER_ID
+ 
+*** Creating Foreign Key DRIVER_DRIVER_ID
+ 
+*** Creating Foreign Key EMPLOYEE_USER_ID
+ 
+*** Creating Foreign Key EMPLOYEE_MESSAGE_SENDER_ID
+ 
+*** Creating Foreign Key EMPLOYEE_MESSAGE_RECEIVER_ID
+ 
+*** Creating Foreign Key EMPLOYEE_ORDER_RESPONSIBILITY_ORDER_ID
+ 
+*** Creating Foreign Key EMPLOYEE_ORDER_RESPONSIBILITY_EMPLOYEE_ID
+ 
+*** Creating Foreign Key EMPLOYEE_ROLE_EMPLOYEE_ID
+ 
+*** Creating Foreign Key EMPLOYEE_ROLE_ROLE_ID
+ 
+*** Creating Foreign Key INSPECTION_EMPLOYEE_ID
+ 
+*** Creating Foreign Key INSPECTION_PRODUCT_LOT_ID
+ 
+*** Creating Foreign Key INSPECTION_GRADE_ID
+ 
+*** Creating Foreign Key MAINTENANCE_SCHEDULE_VEHICLE_ID
+ 
+*** Creating Foreign Key MAINTENANCE_SCHEDULE_LINE_MAINTENANCE_SCHEDULE_ID
+ 
+*** Creating Foreign Key MESSAGE_LINE_DISPATCHER_MESSAGE_ID
+ 
+*** Creating Foreign Key ORDER_LINE_PRODUCT_ORDER_ID
+ 
+*** Creating Foreign Key ORDER_STATUS_ORDER_STATUS_ID
+ 
+*** Creating Foreign Key PACKAGE_DELIVERY_ID
+ 
+*** Creating Foreign Key PACKAGE_ORDER_ID
+ 
+*** Creating Foreign Key PACKAGE_LINE_PACKAGE_ID
+ 
+*** Creating Foreign Key PACKAGE_LINE_PRODUCT_LOT_ID
+ 
+*** Creating Foreign Key PICKUP_SUPPLIER_ID
+ 
+*** Creating Foreign Key PICKUP_WAREHOUSE_ID
+ 
+*** Creating Foreign Key PICKUP_DRIVER_ID
+ 
+*** Creating Foreign Key PICKUP_EMPLOYEE_ID
+ 
+*** Creating Foreign Key PICKUP_LINE_PICKUP_ID
+ 
+*** Creating Foreign Key PICKUP_LINE_PRODUCT_LOT_ID
+ 
+*** Creating Foreign Key PRODUCT_CATEGORY_PRODUCT_ID
+ 
+*** Creating Foreign Key PRODUCT_CATEGORY_CATEGORY_ID
+ 
+*** Creating Foreign Key PRODUCT_GRADE_PRICE_PRODUCT_ID
+ 
+*** Creating Foreign Key PRODUCT_GRADE_PRICE_GRADE_ID
+ 
+*** Creating Foreign Key PRODUCT_LOT_WAREHOUSE_ID
+ 
+*** Creating Foreign Key PRODUCT_LOT_SUPPLIER_ID
+ 
+*** Creating Foreign Key PRODUCT_LOT_LOCATION_ID
+ 
+*** Creating Foreign Key PRODUCT_LOT_PRODUCT_ID
+ 
+*** Creating Foreign Key PRODUCT_LOT_SUPPLY_MANAGER_ID
+ 
+*** Creating Foreign Key PRODUCT_REVIEW_PRODUCT_ID
+ 
+*** Creating Foreign Key PRODUCT_REVIEW_USER_ID
+ 
+*** Creating Foreign Key PRODUCT_REVIEW_SUPPLIER_ID
+ 
+*** Creating Foreign Key REPAIR_VEHICLE_ID
+ 
+*** Creating Foreign Key REPAIR_LINE_REPAIR_ID
+ 
+*** Creating Foreign Key ROUTE_VEHICLE_ID
+ 
+*** Creating Foreign Key ROUTE_DRIVER_ID
+ 
+*** Creating Foreign Key SHIPPING_ADDRESS_USER_ID
+ 
+*** Creating Foreign Key SUPPLIER_USER_ID
+ 
+*** Creating Foreign Key SUPPLIER_USER_ID
+ 
+*** Creating Foreign Key SUPPLIER_INVOICE_SUPPLIER_ID
+ 
+*** Creating Foreign Key SUPPLIER_INVOICE_LINE_SUPPLIER_INVOICE_ID
+ 
+*** Creating Foreign Key SUPPLIER_INVOICE_LINE_PRODUCT_LOT_ID
+ 
+*** Creating Foreign Key USER_ADDRESS_USER_ID
+ 
+*** Creating Foreign Key USER_CART_LINE_PRODUCT_ID
+ 
+*** Creating Foreign Key USER_CART_LINE_PRODUCT_ID
+ 
+*** Creating Foreign Key USER_CART_LINE_USER_ID
+ 
+*** Creating Foreign Key VEHICLE_LAST_DRIVER_ID
+ 
+*** Creating Foreign Key VEHICLE_VEHICLE_TYPE_ID
+ 
+*** Creating Foreign Key WISHLIST_LINE_CUSTOMER_ID
+ 
+*** Creating Foreign Key WISHLIST_LINE_PRODUCT_ID
+ 
+*** Creating Foreign Key SUPPLIER_PRODUCT_SUPPLIER_ID
+ 
+*** Creating Foreign Key SUPPLIER_PRODUCT_PRODUCT_ID
+ 
+*** Creating procedure sp_retrieve_app_user_from_search
+ 
+*** Creating procedure sp_retrieve_app_username_by_email
+ 
+*** Creating CREATE stored procedures
+ 
+*** Creating procedure sp_create_agreement
+ 
+*** Creating procedure sp_create_agreement_application
+ 
+*** Creating procedure sp_create_app_user
+ 
+*** Creating procedure sp_create_backorder_preorder
+ 
+*** Creating procedure sp_create_category
+ 
+*** Creating procedure sp_create_charity
+ 
+*** Creating procedure sp_create_charity_application
+ 
+*** Creating procedure sp_create_charity_products
+ 
+*** Creating procedure sp_create_commercial
+ 
+*** Creating procedure sp_create_commercial_invoice
+ 
+*** Creating procedure sp_create_customer
+ 
+*** Creating procedure sp_create_deal
+ 
+*** Creating procedure sp_create_deal_category
+ 
+*** Creating procedure sp_create_deal_product
+ 
+*** Creating procedure sp_create_delivery
+ 
+*** Creating procedure sp_create_delivery_return_delivery_id
+ 
+*** Creating procedure sp_create_delivery_type
+ 
+*** Creating procedure sp_create_dispatcher_message
+ 
+*** Creating procedure sp_create_driver
+ 
+*** Creating procedure sp_create_employee
+ 
+*** Creating procedure sp_create_employee_message
+ 
+*** Creating procedure sp_create_employee_order_responsibility
+ 
+*** Creating procedure sp_create_employee_role
+ 
+*** Creating procedure sp_create_grade
+ 
+*** Creating procedure sp_create_inspection
+ 
+*** Creating procedure sp_create_location
+ 
+*** Creating procedure sp_create_maintenance_schedule
+ 
+*** Creating procedure sp_create_maintenance_schedule_line
+ 
+*** Creating procedure sp_create_message_line
+ 
+*** Creating procedure sp_create_order_line
+ 
+*** Creating procedure sp_create_order_status
+ 
+*** Creating procedure sp_create_order_type
+ 
+*** Creating procedure sp_create_package
+ 
+*** Creating procedure sp_create_package_line
+ 
+*** Creating procedure sp_create_pickup
+ 
+*** Creating procedure sp_create_pickup_line
+ 
+*** Creating sp_create_product
+ 
+*** Creating procedure sp_create_product_category
+ 
+*** Creating procedure sp_create_product_grade_price
+ 
+*** Creating procedure sp_create_product_lot
+ 
+*** Creating procedure sp_create_product_order
+ 
+*** Creating procedure sp_create_product_review
+ 
+*** Creating procedure sp_create_repair
+ 
+*** Creating procedure sp_create_repair_line
+ 
+*** Creating procedure sp_create_role
+ 
+*** Creating procedure sp_create_route
+ 
+*** Creating procedure sp_create_shipping_address
+ 
+*** Creating procedure sp_create_status
+ 
+*** Creating procedure sp_create_supplier
+ 
+*** Creating procedure sp_create_supplier_application
+ 
+*** Creating procedure sp_create_supplier_invoice
+ 
+*** Creating procedure sp_create_supplier_invoice_line
+ 
+*** Creating procedure sp_create_supplier_not_approved
+ 
+*** Creating procedure sp_create_user_address
+ 
+*** Creating procedure sp_create_user_cart_line
+ 
+*** Creating procedure sp_add_to_cart
+ 
+*** Creating procedure sp_create_vehicle
+ 
+*** Creating procedure sp_create_vehicle_type
+ 
+*** Creating procedure sp_create_warehouse
+ 
+*** Creating procedure sp_create_wishlist_line
+ 
+*** Creating DELETE stored procedures
+ 
+*** Creating procedure sp_delete_agreement
+ 
+*** Creating procedure sp_delete_app_user
+ 
+*** Creating procedure sp_delete_backorder_preorder
+ 
+*** Creating procedure sp_delete_category
+ 
+*** Creating procedure sp_delete_charity
+ 
+*** Creating procedure sp_delete_charity_products
+ 
+*** Creating procedure sp_delete_commercial
+ 
+*** Creating procedure sp_delete_customer
+ 
+*** Creating procedure sp_delete_deal
+ 
+*** Creating procedure sp_delete_deal_category
+ 
+*** Creating procedure sp_delete_deal_product
+ 
+*** Creating procedure sp_delete_delivery
+ 
+*** Creating procedure sp_delete_delivery_type
+ 
+*** Creating procedure sp_delete_dispatcher_message
+ 
+*** Creating procedure sp_delete_driver
+ 
+*** Creating procedure sp_delete_employee
+ 
+*** Creating procedure sp_delete_test_employee
+ 
+*** Creating procedure sp_delete_test_commercial_customer
+ 
+*** Creating procedure sp_delete_test_product
+ 
+*** Creating procedure sp_delete_employee_message
+ 
+*** Creating procedure sp_delete_employee_order_responsibility
+ 
+*** Creating procedure sp_delete_employee_role
+ 
+*** Creating procedure sp_delete_grade
+ 
+*** Creating procedure sp_delete_inspection
+ 
+*** Creating procedure sp_delete_location
+ 
+*** Creating procedure sp_delete_maintenance_schedule
+ 
+*** Creating procedure sp_delete_maintenance_schedule_line
+ 
+*** Creating procedure sp_delete_message_line
+ 
+*** Creating procedure sp_delete_order_status
+ 
+*** Creating procedure sp_delete_order_type
+ 
+*** Creating procedure sp_delete_package
+ 
+*** Creating procedure sp_delete_package_line
+ 
+*** Creating procedure sp_delete_pickup
+ 
+*** Creating procedure sp_delete_pickup_line
+ 
+*** Creating procedure sp_delete_product
+ 
+*** Creating procedure sp_delete_product_category
+ 
+*** Creating procedure sp_delete_product_grade_price
+ 
+*** Creating procedure sp_delete_product_lot
+ 
+*** Creating procedure sp_delete_product_order
+ 
+*** Creating procedure sp_delete_product_review
+ 
+*** Creating procedure sp_delete_repair
+ 
+*** Creating procedure sp_delete_repair_line
+ 
+*** Creating procedure sp_delete_role
+ 
+*** Creating procedure sp_delete_route
+ 
+*** Creating procedure sp_delete_shipping_address
+ 
+*** Creating procedure sp_delete_status
+ 
+*** Creating procedure sp_delete_supplier
+ 
+*** Creating procedure sp_delete_supplier_invoice
+ 
+ *** creating procedure sp_delete_test_user
+ 
+*** Creating procedure sp_delete_user_address
+ 
+*** Creating procedure sp_delete_user_cart_line
+ 
+*** Creating procedure sp_remove_from_cart
+ 
+*** Creating procedure sp_delete_vehicle
+ 
+*** Creating procedure sp_delete_vehicle_type
+ 
+*** Creating procedure sp_delete_warehouse
+ 
+*** Creating procedure sp_delete_wishlist_line
+ 
+*** Creating RETRIEVE stored procedures
+ 
+*** Creating procedure sp_login
+ 
+*** Creating procedure sp_web_login
+ 
+*** Creating procedure sp_retrieve_agreement
+ 
+*** Creating procedure sp_retrieve_agreement_list_by_supplier_id
+ 
+*** Creating procedure sp_retrieve_agreement_list
+ 
+*** Creating procedure sp_retrieve_app_user
+ 
+*** Creating procedure sp_retrieve_app_user_by_username
+ 
+*** Creating procedure sp_retrieve_app_user_list
+ 
+*** Creating procedure sp_retrieve_backorder_preorder
+ 
+*** Creating procedure sp_retrieve_category
+ 
+*** Creating procedure sp_retrieve_category_list
+ 
+*** Creating procedure sp_retrieve_charity
+ 
+*** Creating procedure sp_retrieve_charity_products
+ 
+*** Creating procedure sp_retrieve_charity_products_list
+ 
+*** Creating procedure sp_retrieve_charity_list
+ 
+*** Creating procedure sp_retrieve_commercial
+ 
+*** Creating procedure sp_retrieve_commercial_list
+ 
+*** Creating procedure sp_retrieve_commercial_invoice_list_by_commercial_invoice_id
+ 
+*** Creating procedure sp_retrieve_commercial_invoice_list_by_commercial_id
+ 
+*** Creating procedure sp_retrieve_commercial_invoice_list_by_user_name
+ 
+*** Creating procedure sp_retrieve_commercial_invoice_lines_by_commercial_invoice_id
+ 
+*** Creating procedure sp_retrieve_company_order_by_id
+ 
+*** Creating procedure sp_retrieve_company_order_list
+ 
+*** Creating procedure sp_retrieve_company_order_list_by_supplier_id
+ 
+*** Creating procedure sp_retrieve_company_order_lines_by_order_id
+ 
+*** Creating procedure sp_retrieve_customer
+ 
+*** Creating procedure sp_retrieve_customer_list
+ 
+*** Creating procedure sp_retrieve_deal
+ 
+*** Creating procedure sp_retrieve_deal_category
+ 
+*** Creating procedure sp_retrieve_deal_category_list
+ 
+*** Creating procedure sp_retrieve_deal_product
+ 
+*** Creating procedure sp_retrieve_deal_product_list
+ 
+*** Creating procedure sp_retrieve_deal_list
+ 
+*** Creating procedure sp_retrieve_delivery
+ 
+*** Creating procedure sp_retrieve_delivery_type
+ 
+*** Creating procedure sp_retrieve_delivery_type_list
+ 
+*** Creating procedure sp_retrieve_delivery_list
+ 
+*** Creating procedure sp_retrieve_dispatcher_message
+ 
+*** Creating procedure sp_retrieve_dispatcher_message_list
+ 
+*** Creating procedure sp_retrieve_driver
+ 
+*** Creating procedure sp_retrieve_driver_list
+ 
+*** Creating procedure sp_retrieve_employee
+ 
+*** Creating procedure sp_retrieve_employee_by_user_id
+ 
+*** Creating procedure sp_retrieve_employee_by_username
+ 
+*** Creating procedure sp_retrieve_employee_message
+ 
+*** Creating procedure sp_retrieve_employee_message_list
+ 
+*** Creating procedure sp_retrieve_employee_order_responsibility
+ 
+*** Creating procedure sp_retrieve_employee_order_responsibility_list
+ 
+*** Creating procedure sp_retrieve_employee_role
+ 
+*** Creating procedure sp_retrieve_employee_role_list
+ 
+*** Creating procedure sp_retrieve_employee_list
+ 
+*** Creating procedure sp_retrieve_expired_product_lot_list
+ 
+*** Creating procedure sp_retrieve_grade
+ 
+*** Creating procedure sp_retrieve_grade_list
+ 
+*** Creating procedure sp_retrieve_inspection
+ 
+*** Creating procedure sp_retrieve_inspection_list
+ 
+*** Creating procedure sp_retrieve_location
+ 
+*** Creating procedure sp_retrieve_location_list
+ 
+*** Creating procedure sp_retrieve_maintenance_schedule
+ 
+*** Creating procedure sp_retrieve_maintenance_schedule_list
+ 
+*** Creating procedure sp_retrieve_message_line
+ 
+*** Creating procedure sp_retrieve_message_line_list
+ 
+*** Creating procedure sp_retrieve_order_status
+ 
+*** Creating procedure sp_retrieve_order_status_list
+ 
+*** Creating procedure sp_retrieve_order_type
+ 
+*** Creating procedure sp_retrieve_order_type_list
+ 
+*** Creating procedure sp_retrieve_package
+ 
+*** Creating procedure sp_retrieve_package_line
+ 
+*** Creating procedure sp_retrieve_package_lines_in_package_list
+ 
+*** Creating procedure sp_retrieve_package_line_list
+ 
+*** Creating procedure sp_retrieve_package_list
+ 
+*** Creating procedure sp_retrieve_packages_in_order_list
+ 
+*** Creating procedure sp_retrieve_pickup
+ 
+*** Creating procedure sp_retrieve_pickup_line
+ 
+*** Creating procedure sp_retrieve_pickup_line_list
+ 
+*** Creating procedure sp_retrieve_pickup_list
+ 
+*** Creating procedure sp_retrieve_product
+ 
+*** Creating procedure sp_retrieve_product_category
+ 
+*** Creating procedure sp_retrieve_product_category_list
+ 
+*** Creating procedure sp_retrieve_product_grade_price
+ 
+*** Creating procedure sp_retrieve_product_grade_price_list
+ 
+*** Creating procedure sp_retrieve_product_lot
+ 
+*** Creating procedure sp_retrieve_product_lot_by_supplier_id
+ 
+*** Creating procedure sp_retrieve_product_lot_list
+ 
+*** Creating procedure sp_retrieve_active_product_lot_list
+ 
+*** Creating procedure sp_retrieve_product_order
+ 
+*** Creating procedure sp_retrieve_product_order_by_status
+ 
+*** Creating procedure sp_retrieve_product_order_list
+ 
+*** Creating procedure sp_retrieve_product_review
+ 
+*** Creating procedure sp_retrieve_product_review_list
+ 
+*** Creating procedure sp_retrieve_product_list
+ 
+*** Creating sp_retrieve_products_to_customer
+ 
+*** Creating procedure sp_retrieve_product_orderline_list_by_order_id
+ 
+*** Creating procedure sp_retrieve_repair
+ 
+*** Creating procedure sp_retrieve_repair_line
+ 
+*** Creating procedure sp_retrieve_repair_line_list
+ 
+*** Creating procedure sp_retrieve_repair_list
+ 
+*** Creating procedure sp_retrieve_role
+ 
+*** Creating procedure sp_retrieve_role_list
+ 
+*** Creating procedure sp_retrieve_route
+ 
+*** Creating procedure sp_retrieve_route_list
+ 
+*** Creating procedure sp_retrieve_shipping_address
+ 
+*** Creating procedure sp_retrieve_shipping_address_list
+ 
+*** Creating procedure sp_retrieve_status
+ 
+*** Creating procedure sp_retrieve_status_list
+ 
+*** Creating procedure sp_retrieve_supplier
+ 
+*** Creating procedure sp_retrieve_supplier_by_user_id
+ 
+*** Creating procedure sp_retrieve_supplier_list
+ 
+*** Creating procedure sp_retrieve_supplier_invoice_list
+ 
+*** Creating procedure sp_retrieve_supplier_invoice_list_by_supplier_id
+ 
+*** Creating procedure sp_retrieve_supplier_invoice_lines_by_supplier_invoice_id
+ 
+*** Creating procedure sp_retrieve_supplier_application_status_list
+ 
+*** Creating procedure sp_retrieve_user_address
+ 
+*** Creating procedure sp_retrieve_user_address_list
+ 
+*** Creating procedure sp_retrieve_user_cart_line
+ 
+*** Creating procedure sp_retrieve_user_cart_line_list
+ 
+*** Creating procedure sp_retrieve_cart_for_user
+ 
+*** Creating procedure sp_retrieve_user_salt
+ 
+*** Creating procedure sp_retrieve_user_salt_by_email
+ 
+*** Creating procedure sp_retrieve_vehicle
+ 
+*** Creating procedure sp_retrieve_vehicle_type
+ 
+*** Creating procedure sp_retrieve_vehicle_type_list
+ 
+*** Creating procedure sp_retrieve_vehicle_list
+ 
+*** Creating procedure sp_retrieve_warehouse
+ 
+*** Creating procedure sp_retrieve_warehouse_list
+ 
+*** Creating procedure sp_retrieve_wishlist_line
+ 
+*** Creating procedure sp_retrieve_wishlist_line_list
+ 
+*** Creating SEARCH stored procedures
+ 
+*** Creating procedure sp_log_in_user
+ 
+*** Creating procedure sp_retrieve_agreement_from_search
+ 
+*** Creating procedure sp_retrieve_app_user_from_search
+ 
+*** Creating procedure sp_retrieve_backorder_preorder_from_search
+ 
+*** Creating procedure sp_retrieve_category_from_search
+ 
+*** Creating procedure sp_retrieve_charity_from_search
+ 
+*** Creating procedure sp_retrieve_charity_products_from_search
+ 
+*** Creating procedure sp_retrieve_commercial_from_search
+ 
+*** Creating procedure sp_retrieve_customer_from_search
+ 
+*** Creating procedure sp_retrieve_deal_category_from_search
+ 
+*** Creating procedure sp_retrieve_deal_from_search
+ 
+*** Creating procedure sp_retrieve_deal_product_from_search
+ 
+*** Creating procedure sp_retrieve_delivery_from_search
+ 
+*** Creating procedure sp_retrieve_delivery_type_from_search
+ 
+*** Creating procedure sp_retrieve_dispatcher_message_from_search
+ 
+*** Creating procedure sp_retrieve_driver_from_search
+ 
+*** Creating procedure sp_retrieve_employee_from_search
+ 
+*** Creating procedure sp_retrieve_employee_message_from_search
+ 
+*** Creating procedure sp_retrieve_employee_order_responsibility_from_search
+ 
+*** Creating procedure sp_retrieve_employee_role_from_search
+ 
+*** Creating procedure sp_retrieve_grade_from_search
+ 
+*** Creating procedure sp_retrieve_inspection_from_search
+ 
+*** Creating procedure sp_retrieve_location_from_search
+ 
+*** Creating procedure sp_retrieve_maintenance_schedule_from_search
+ 
+*** Creating procedure sp_retrieve_maintenance_schedule_line_from_search
+ 
+*** Creating procedure sp_retrieve_message_line_from_search
+ 
+*** Creating procedure sp_retrieve_order_status_from_search
+ 
+*** Creating procedure sp_retrieve_order_type_from_search
+ 
+*** Creating procedure sp_retrieve_package_from_search
+ 
+*** Creating procedure sp_retrieve_package_line_from_search
+ 
+*** Creating procedure sp_retrieve_pickup_from_search
+ 
+*** Creating procedure sp_retrieve_pickup_line_from_search
+ 
+*** Creating procedure sp_retrieve_product_category_from_search
+ 
+*** Creating procedure sp_retrieve_product_from_search
+ 
+*** Creating procedure sp_retrieve_product_grade_price_from_search
+ 
+*** Creating procedure sp_retrieve_product_lot_from_search
+ 
+*** Creating procedure sp_retrieve_product_order_from_search
+ 
+*** Creating procedure sp_retrieve_product_review_from_search
+ 
+*** Creating procedure sp_retrieve_repair_from_search
+ 
+*** Creating procedure sp_retrieve_repair_line_from_search
+ 
+*** Creating procedure sp_retrieve_role_from_search
+ 
+*** Creating procedure sp_retrieve_route_from_search
+ 
+*** Creating procedure sp_retrieve_shipping_address_from_search
+ 
+*** Creating procedure sp_retrieve_status_from_search
+ 
+*** Creating procedure sp_retrieve_supplier_from_search
+ 
+*** Creating procedure sp_retrieve_user_address_from_search
+ 
+*** Creating procedure sp_retrieve_user_cart_line_from_search
+ 
+*** Creating procedure sp_retrieve_vehicle_from_search
+ 
+*** Creating procedure sp_retrieve_vehicle_type_from_search
+ 
+*** Creating procedure sp_retrieve_warehouse_from_search
+ 
+*** Creating procedure sp_retrieve_wishlist_line_from_search
+ 
+*** Creating UPDATE stored procedures
+ 
+*** Creating procedure sp_reset_user_password
+ 
+*** Creating procedure sp_update_agreement
+ 
+*** Creating procedure sp_update_app_user
+ 
+*** Creating procedure sp_update_backorder_preorder
+ 
+*** Creating procedure sp_update_charity
+ 
+*** Creating procedure sp_update_commercial_customer_approval
+ 
+*** Creating procedure sp_update_commercial_customer_approval
+ 
+*** Creating procedure sp_update_charity_approve
+ 
+*** Creating procedure sp_update_charity_deny
+ 
+*** Creating procedure sp_update_charity_products
+ 
+*** Creating procedure sp_update_commercial
+ 
+*** Creating procedure sp_update_deal
+ 
+*** Creating procedure sp_update_deal_category
+ 
+*** Creating procedure sp_update_deal_product
+ 
+*** Creating procedure sp_update_delivery
+ 
+*** Creating procedure sp_update_delivery_type
+ 
+*** Creating procedure sp_update_dispatcher_message
+ 
+*** Creating procedure sp_update_driver
+ 
+*** Creating procedure sp_update_employee
+ 
+*** Creating procedure sp_update_employee_message
+ 
+*** Creating procedure sp_update_employee_order_responsibility
+ 
+*** Creating procedure sp_update_inspection
+ 
+*** Creating procedure sp_update_location
+ 
+*** Creating procedure sp_update_maintenance_schedule
+ 
+*** Creating procedure sp_update_maintenance_schedule_line
+ 
+*** Creating procedure sp_update_message_line
+ 
+*** Creating procedure sp_update_package
+ 
+*** Creating procedure sp_update_package_delivery
+ 
+*** Creating procedure sp_update_package_line
+ 
+*** Creating procedure sp_update_pickup
+ 
+*** Creating procedure sp_update_pickup_line
+ 
+*** Creating procedure sp_update_product
+ 
+*** Creating procedure sp_update_product_grade_price
+ 
+*** Creating procedure sp_update_product_lot
+ 
+*** Creating procedure sp_update_product_lot_available_quantity
+ 
+*** Creating procedure sp_update_product_order
+ 
+*** Creating procedure sp_update_product_order_status
+ 
+ *** creating procedure sp_update_product_price
+ 
+*** Creating procedure sp_update_product_review
+ 
+*** Creating procedure sp_update_repair
+ 
+*** Creating procedure sp_update_repair_line
+ 
+*** Creating procedure sp_update_role
+ 
+*** Creating procedure sp_update_route
+ 
+*** Creating procedure sp_update_shipping_address
+ 
+*** Creating procedure sp_update_supplier
+ 
+*** Creating procedure sp_update_approve_supplier_invoice_by_supplier_invoice_id
+ 
+*** Creating procedure sp_update_user_address
+ 
+*** Creating procedure sp_update_user_password
+ 
+*** Creating procedure sp_update_vehicle
+ 
+*** Creating procedure sp_update_warehouse
+ 
+*** Creating procedure sp_retrieve_commercial_customer_by_user_id
+ 
+*** Creating procedure sp_retrieve_charity_by_user_id
+ 
+*** Creating procedure sp_retrieve_maintenance_schedule_by_vehicle_id
+ 
+*** Creating procedure sp_create_supplier_inventory
+ 
+*** Creating procedure sp_update_supplier_invoice
+ 
+ *** creating procedure sp_update_checked_out_status
+ 
+*** Creating procedure sp_retrieve_product_name_from_product_lot_id
+ 
+*** Creating procedure sp_retrieve_user_address_from_supplier_id
+ 
+*** Creating procedure sp_retrieve_routes_for_driver_after_date
+ 
+*** Creating procedure sp_retrieve_user_address_for_delivery
+ 
+*** Creating procedure sp_retrieve_vehicle_from_delivery
+ 
+*** Creating procedure sp_save_order
