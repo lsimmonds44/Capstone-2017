@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Product Lot Search View" Height="300" Width="388.085">
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Product Lot Search View Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -18,8 +25,13 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Product Lot Search View Controls-->
         <Label Name="lblExpiring" Grid.Row="0" Grid.Column="2" Content="Show Expiring:"></Label>
         <CheckBox Name="chkBoxExpiring" Grid.Row="0" Grid.Column="3" Margin="0 6 0 0"></CheckBox>
         <Button Grid.Column="3" Grid.Row="2" Name="btnSend" Click="btnSend_Click">Apply</Button>
+        <!--End of Product Lot Search View Controls-->
     </Grid>
+    <!--End of Product Lot Search View Grid-->
 </Window>
+<!--End of Window-->

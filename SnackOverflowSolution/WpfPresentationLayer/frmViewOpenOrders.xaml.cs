@@ -25,7 +25,13 @@ namespace WpfPresentationLayer
     {
         private ProductOrderManager _myProductOrderManager = new ProductOrderManager();
         List<ProductOrder> _currentOpenOrders;
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Open Orders Window and Open Orders List View.
+        /// Standaridized method.
+        /// </summary>
         public frmViewOrdersByStatus()
         {
             InitializeComponent();

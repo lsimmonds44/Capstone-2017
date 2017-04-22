@@ -18,7 +18,7 @@ namespace WpfPresentationLayer
 {
     /// <summary>
     /// Created by Michael Takrama
-    /// 3/2/2017
+    /// 2017/04/02
     /// 
     /// Interaction logic for frmManageProductSubAdjustQty.xaml
     /// </summary>
@@ -27,6 +27,14 @@ namespace WpfPresentationLayer
         private ProductLot _oldProductLot;
         private int? _newQuantity;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Manage Stock Sub Adjust Qty Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="oldProductLot"></param>
         public frmManageStockSubAdjustQty(ProductLot oldProductLot)
         {
             InitializeComponent();
@@ -35,6 +43,13 @@ namespace WpfPresentationLayer
             SetupWindow();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Setup of Manage Stock Sub Adjust Qty Window.
+        /// Standaridized method.
+        /// </summary>
         private void SetupWindow()
         {
             ProductManager pm = new ProductManager();
@@ -46,8 +61,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Created by Michael Takrama
-        /// 3/2/2017
-        /// Modified on 4/1/17
+        /// 2017/03/02
+        /// Modified on 2017/04/01
         /// 
         /// Returns newQuantity to parent form
         /// </summary>
@@ -57,6 +72,15 @@ namespace WpfPresentationLayer
             return _newQuantity;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Updates Available Quantity.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnUpdate_OnClick(object sender, RoutedEventArgs e)
         {
             if (ValidateInput())
@@ -73,8 +97,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Created by Michael Takrama
-        /// 3/2/2017
-        /// Modified on 4/1/17
+        /// 2017/03/02
+        /// Modified on 2017/04/17
         /// 
         /// Validates user input
         /// </summary>

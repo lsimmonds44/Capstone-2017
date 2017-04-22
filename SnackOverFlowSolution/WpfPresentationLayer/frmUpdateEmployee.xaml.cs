@@ -22,7 +22,7 @@ namespace WpfPresentationLayer
 
     public partial class frmUpdateEmployee : Window
     {
-        public List<Employee> listOfEmployees { get; set; }
+        public List<Employee> _listOfEmployees { get; set; }
         private Employee _employee;
         private EmployeeManager _employeeManager;
         private List<Employee> employeeList = new List<Employee>();
@@ -94,7 +94,7 @@ namespace WpfPresentationLayer
                 
                 _employeeManager.UpdateEmployee(_employee, newEmp);
 
-                listOfEmployees = _employeeManager.RetrieveEmployeeList();
+                _listOfEmployees = _employeeManager.RetrieveEmployeeList();
                 MessageBox.Show("Update Completed!");
                 this.DialogResult = true;
             }

@@ -25,6 +25,14 @@ namespace WpfPresentationLayer
     {
         public int OldQty { get; set; }
         public int NewQty { get; set; }
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize the Split Product Lot Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="selectedItem"></param>
         public frmSplitProductLot(ProductLot selectedItem)
         {
             InitializeComponent();
@@ -33,19 +41,43 @@ namespace WpfPresentationLayer
             txtOld.Text = OldQty.ToString();
             txtNew.Text = NewQty.ToString();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Saves the changes to Split Product Lot.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
             this.Close();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Cancels Changes made to Split Product Lot.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
             this.Close();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Changes New Text.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtNew_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
@@ -64,18 +96,32 @@ namespace WpfPresentationLayer
             }
             // Make sure that the text box does not show data which did not pass validation
 
-           // txtNew.Text = txtNew.ToString();
-
             txtNew.Text = NewQty.ToString();
 
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Inputs Text Preview for New text.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtNew_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Changes Old Text.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtOld_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value;
@@ -95,7 +141,15 @@ namespace WpfPresentationLayer
             // Make sure that the text box does not show data which did not pass validation
             txtOld.Text = OldQty.ToString();
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Inputs Text Preview for Old text.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtOld_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))

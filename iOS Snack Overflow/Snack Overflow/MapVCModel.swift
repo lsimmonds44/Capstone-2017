@@ -18,7 +18,8 @@ class MapVCModel: NSObject, MKMapViewDelegate,CLLocationManagerDelegate {
     
     func convertAddressToCoord(address:String,completion: @escaping (_ result:CLLocationCoordinate2D)->()){
         var coord:CLLocationCoordinate2D?
-        geoCoder.geocodeAddressString(address) { (placeMark, error) in
+            geoCoder = CLGeocoder()
+            geoCoder.geocodeAddressString(address) { (placeMark, error) in
             if nil == error{
             coord = placeMark?.first?.location?.coordinate
             print("coord: \(coord!.latitude) \(coord!.longitude)")

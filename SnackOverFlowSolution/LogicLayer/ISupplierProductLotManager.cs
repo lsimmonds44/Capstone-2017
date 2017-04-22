@@ -1,4 +1,5 @@
-﻿using DataObjects;
+﻿using DataAccessLayer;
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace LogicLayer
         bool AddProduct(SupplierProductLot p);
 
         List<SupplierProductLot> RetrieveSupplierProductLots();
-        List<SupplierProductLot> RetrieveActiveSupplierProductLots();
         bool DeleteSupplierProductLot(SupplierProductLot lot);
 
         List<SupplierProductLot> RetrieveSupplierProductLotsBySupplier(Supplier supplier);

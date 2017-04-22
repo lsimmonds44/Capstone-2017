@@ -30,7 +30,13 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/30
         /// 
+        /// Initialize Update Supplier Invoice Window.
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
         /// 
+        /// Standaridized method.
         /// </summary>
         /// <param name="invoice">The invoice to edit</param>
         public frmUpdateSupplierInvoice(SupplierInvoice invoice)
@@ -57,7 +63,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/30
         /// 
-        /// Attempts to update the invoice to use the newly input values
+        /// Attempts to update the invoice to use the newly input values.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -106,7 +112,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/30
         /// 
-        /// checks if the values entered into the fields are valid and adds error messages if they are not
+        /// Checks if the values entered into the fields are valid and adds error messages if they are not.
         /// </summary>
         /// <returns></returns>
         private bool Validate()
@@ -137,10 +143,10 @@ namespace WpfPresentationLayer
             }
 
 
-            //decimal variable to hold values in try parse since it cant be used without outputting a vlaue
+            //Decimal variable to hold values in try parse since it cant be used without outputting a value.
             decimal tempValueHolder;
 
-            //Sub total validation
+            //Sub total validation.
             if(txtSubTotal.Text == ""){
                 txtSubTotal.BorderBrush = System.Windows.Media.Brushes.Red;
                 txtSubTotal.ToolTip = "You must enter a value for the sub total";
@@ -156,7 +162,7 @@ namespace WpfPresentationLayer
                 txtSubTotal.ToolTip = "";
             }
 
-            //Tax Amount Validation
+            //Tax Amount Validation.
             if (txtTaxAmount.Text == "")
             {
                 txtTaxAmount.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -175,7 +181,7 @@ namespace WpfPresentationLayer
                 txtTaxAmount.ToolTip = "";
             }
 
-            //Total Validation
+            //Total Validation.
             if (txtTotal.Text == "")
             {
                 txtTotal.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -194,7 +200,7 @@ namespace WpfPresentationLayer
                 txtTotal.ToolTip = "";
             }
 
-            //Amount Paid Validation
+            //Amount Paid Validation.
             if (txtAmountPaid.Text == "")
             {
                 txtAmountPaid.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -220,7 +226,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/03/30
         /// 
-        /// Sets the default values for the fields in the window
+        /// Sets the default values for the fields in the window.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

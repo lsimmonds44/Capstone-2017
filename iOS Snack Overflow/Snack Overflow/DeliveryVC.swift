@@ -9,17 +9,22 @@
 import Foundation
 import UIKit
 
+protocol DeliveryVCDelegate {
+    func updatePin()
+}
+
+
 class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     let _deliveryMgr = DeliveryManager()
     var _delivery:Delivery!
+    var delegate:DeliveryVCDelegate!
     
     @IBOutlet weak var _addressLine1: UILabel!
     @IBOutlet weak var _addressLine2: UILabel!
     @IBOutlet weak var _addressCity: UILabel!
     @IBOutlet weak var _addressState: UILabel!
     @IBOutlet weak var _addressZip: UILabel!
-    
-    @IBOutlet weak var _btnMarkDelivered: UIButton!
+    @IBOutlet weak var _btnMarkDelivered: UIButton!{didSet{_btnMarkDelivered.layer.cornerRadius = 8}}
     @IBOutlet weak var _packagesTable: UITableView!
     
     /**
@@ -51,6 +56,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return _delivery.Packages.count
+        
     }
     
     /**
@@ -109,6 +115,8 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func btnMarkDeliveredClicked() {
         _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered"){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
+            self._delivery.StatusId = "Delivered"
+            self.delegate.updatePin()
         }
     }
     

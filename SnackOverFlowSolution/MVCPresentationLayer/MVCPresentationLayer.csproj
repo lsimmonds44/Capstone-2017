@@ -208,10 +208,13 @@
     <Compile Include="Controllers\CompanyOrderWithLinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductOrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SupplierGoodsController.cs" />
     <Compile Include="Controllers\SupplierInvoiceController.cs" />
-    <Compile Include="Controllers\SupplierWithAgreementsController.cs" />
+    <Compile Include="Controllers\SupplierWithAgreementsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +238,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductsListViewModel.cs" />
     <Compile Include="Models\ProductWithGradeOptions.cs" />
+    <Compile Include="Models\SupplierApplicantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -407,6 +411,7 @@
     <Content Include="Views\Shared\AlreadyAccepted.cshtml" />
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
     <Content Include="Views\Home\Application-Success.cshtml" />
+    <Content Include="Views\CompanyOrderWithLines\Invoice.cshtml" />
     <Content Include="Views\CommercialInvoice\Index.cshtml" />
     <Content Include="Views\CommercialInvoice\Details.cshtml" />
     <Content Include="Views\CommercialInvoice\View.cshtml" />
@@ -418,6 +423,11 @@
     <Content Include="Views\Shared\_ShopLayout.cshtml" />
     <Content Include="Views\Shared\_CartPartial.cshtml" />
     <Content Include="Views\Shared\_TopSectionPartial.cshtml" />
+    <Content Include="Views\ProductOrders\Create.cshtml" />
+    <Content Include="Views\ProductOrders\Delete.cshtml" />
+    <Content Include="Views\ProductOrders\Details.cshtml" />
+    <Content Include="Views\ProductOrders\Edit.cshtml" />
+    <Content Include="Views\ProductOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -459,7 +469,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8333</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

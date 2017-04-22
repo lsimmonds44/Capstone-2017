@@ -971,7 +971,7 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Mason Allen
         /// 2017/3/01
-        /// Invokes Add New Vehicle form to create a new vehicle record
+        /// Invokes Add New Vehicle form to create a new _vehicle record
         /// </summary>
         private void btnAddNewVehicle_Click(object sender, RoutedEventArgs e)
         {
@@ -1032,8 +1032,8 @@ namespace WpfPresentationLayer
         /// Laura Simmonds
         /// 2017/03/24
         /// 
-        /// Invokes Check Out Vehicle form with vehicle data
-        /// and allows user to update the vehicle status to checked out or checked in.
+        /// Invokes Check Out Vehicle form with _vehicle data
+        /// and allows user to update the _vehicle status to checked out or checked in.
         /// </summary>
         /// <summary>
         /// Alissa Duffy
@@ -1100,7 +1100,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Add Edit Vehicle form
-        /// Invokes the ability to edit a vehicle from a list of vehicles.
+        /// Invokes the ability to edit a _vehicle from a list of vehicles.
         /// Standaridized method.
         /// </summary>
         /// <param name="sender"></param>
@@ -1373,7 +1373,7 @@ namespace WpfPresentationLayer
         /// William Flood
         /// 2017/03/09
         /// 
-        /// Retrieve criteria to filter product lots
+        /// Retrieve _criteria to filter product lots
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1526,7 +1526,8 @@ namespace WpfPresentationLayer
         {
 
             var supplierData =  (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
-
+            dgProductListAgreements.Visibility = Visibility.Hidden;
+            dgProductList.Visibility = Visibility.Visible;
             RefreshSupplierProductDataGrid(supplierData.SupplierID);
 
         }
@@ -2592,9 +2593,61 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred" + ex.Message + ex.StackTrace);
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/20/2017
+        /// 
+        /// View agreements of supplier selected in supplier catalogue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAgreement_Click(object sender, RoutedEventArgs e)
+        {
+            List<Agreement> agreementList = null;
+            SupplierCatalogViewModel supplier = null;
+            try
+            {
+                supplier = (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
+                int supplierId = supplier.SupplierID;
+                agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplierId);
+                
+                List < AgreementWithProductName > newList = new List<AgreementWithProductName>();
+                foreach(var agreement in agreementList)
+                {
+                    AgreementWithProductName temp = new AgreementWithProductName()
+                    {
+                        ProductName = _productLotManager.RetrieveProductLotById(agreement.ProductId).ProductName,
+                        Active = agreement.Active,
+                        AgreementId = agreement.AgreementId,
+                        ProductId = agreement.ProductId,
+                        SupplierId = agreement.SupplierId,
+                        DateSubmitted = agreement.DateSubmitted,
+                        IsApproved = agreement.IsApproved,
+                        ApprovedBy = agreement.ApprovedBy
+                    };
+                    newList.Add(temp);
+                }
+                
+
+                if(agreementList == null)
+                {
+                    MessageBox.Show("No agreement product list found for this supplier.");
+                }
+                else
+                {
+                    dgProductList.Visibility = Visibility.Hidden;
+                    dgProductListAgreements.Visibility = Visibility.Visible;
+                    dgProductListAgreements.ItemsSource = newList;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
     } // end of class
 } // end of namespace 

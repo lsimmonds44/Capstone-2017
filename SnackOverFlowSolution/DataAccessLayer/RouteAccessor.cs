@@ -11,32 +11,39 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/04/13
+    /// Created: 2017/04/13
+    /// 
+    /// Class to handle database interactions involving routes.
     /// </summary>
     public static class RouteAccessor
     {
-
-
         /// <summary>
         /// Robert Forbes
-        /// 2017/04/13
+        /// Created: 2017/04/13
         /// 
-        /// Gets all routes assigned to the driver with the passed in id
+        /// Gets all routes assigned to the driver with the passed in id that occur in the future.
         /// </summary>
-        /// <param name="driverId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="driverId">The id of the relevant driver.</param>
+        /// <returns>A list of future routes for the the given driver.</returns>
         public static List<Route> RetrieveFutureRoutesForDriver(int? driverId)
         {
-            List<Route> routes = new List<Route>();
+            var routes = new List<Route>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_routes_for_driver_after_date";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@DRIVER_ID", driverId);
             cmd.Parameters.AddWithValue("@TODAYS_DATE", DateTime.Now);
-
-            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
@@ -47,15 +54,13 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        var route = new Route()
+                        routes.Add(new Route()
                         {
                             RouteId = reader.GetInt32(0),
                             VehicleId = reader.GetInt32(1),
                             DriverId = reader.GetInt32(2),
                             AssignedDate = reader.GetDateTime(3)
-                        };
-
-                        routes.Add(route);
+                        });
                     }
                 }
             }

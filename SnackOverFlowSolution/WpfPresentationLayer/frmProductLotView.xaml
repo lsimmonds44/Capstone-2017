@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Product Lot View" Height="300" Width="505.263">
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Product Lot View Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -21,6 +28,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Product Lot View Controls-->
         <Label Name="lblWarehouseID" Grid.Column="2" Grid.Row="0">Warehouse ID</Label>
         <Label Name="lblSupplier" Grid.Column="0" Grid.Row="0">Supplier</Label>
         <Label Name="lblLocationID" Grid.Column="2" Grid.Row="1">Location ID</Label>
@@ -77,5 +86,8 @@
         </ComboBox>
         <Button Name="btnPost" Grid.Column="2" Visibility="Collapsed" Grid.Row="5" Click="btnPost_Click">Add</Button>
         <Button Name="btnClose" Content="Cancel" Grid.Column="3" Visibility="Visible" Grid.Row="5" Click="btnClose_Click" />
+        <!--End Product Lot View Controls-->
     </Grid>
+    <!--End of Product Lot View-->
 </Window>
+<!--End of Product Lot View Window-->

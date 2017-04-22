@@ -4,6 +4,12 @@
         Title="Manage Stock" Height="500" Width="950"
         WindowStartupLocation="CenterScreen">
     <!--Created by Michael Takrama on 3/1/2017-->
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Manage Stock Grid-->
     <Grid>
         <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
@@ -50,7 +56,6 @@
             </StackPanel>
         </Border>
         <!--End of Top Title Bar-->
-
         <!--Search Controls-->
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="0 5 5 5"
                     Grid.ColumnSpan="6">
@@ -58,12 +63,10 @@
             <Button Click="btnSearch_OnClick" Content="Search" Width="100" Margin="5 0 5 0"/>
         </StackPanel>
         <!--End of Search Controls-->
-
         <!--Refresh Button-->
         <Button Name="btnRefreshData" Click="btnRefreshData_OnClick" Content="Refresh Data" Grid.Column="13" Grid.ColumnSpan="2" Background="Azure"/>
         <!--End of Refresh Button-->
-
-        <!--Datagrid-->
+        <!--Product List Datagrid-->
         <DataGrid Name="dgProductList" GridLinesVisibility="Horizontal"
                   AutoGenerateColumns="False" CanUserSortColumns="True" VerticalScrollBarVisibility="Auto"
                   Grid.Column="1" Grid.ColumnSpan="14" Grid.Row="3" Grid.RowSpan="8"
@@ -79,8 +82,7 @@
                 <DataGridTextColumn Header="Product Lot #" Width="55*" Binding="{Binding ProductLotId}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <!--End of DataGrid-->
-
+        <!--End of Product List DataGrid-->
         <!--Filter Controls Panel-->
         <GroupBox Header="Filter Controls" Grid.Row="11" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="7"
                   BorderBrush="LightGray" BorderThickness="1" Margin="5" >
@@ -90,7 +92,6 @@
             </StackPanel>
         </GroupBox>
         <!--End of Filter Controls Panel-->
-
         <!--Operation Controls Panel-->
         <GroupBox Header="Functions" Grid.Row="11" Grid.Column="8" Grid.RowSpan="2" Grid.ColumnSpan="7"
                   BorderBrush="LightGray" BorderThickness="1" Margin="5" >
@@ -101,7 +102,6 @@
             </StackPanel>
         </GroupBox>
         <!--End of Operation Control Panel-->
-
         <!--Bottom Bar-->
         <Border Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="16" Background="LightGray">
             <StackPanel Orientation="Horizontal" Margin="5">
@@ -109,6 +109,7 @@
             </StackPanel>
         </Border>
         <!--End of Bottom Bar-->
-
     </Grid>
+    <!--End of Manage Stock Grid-->
 </Window>
+<!--End of Manage Stock Window-->

@@ -20,14 +20,28 @@ namespace WpfPresentationLayer
     /// Interaction logic for frmProductOrderDetails.xaml
     /// </summary>
     public partial class frmProductOrderDetails : Window
-    {
+    {   
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Product Order Details Window.
+        /// Standaridized method.
+        /// </summary>
         public frmProductOrderDetails()
         {
             InitializeComponent();
         }
 
         int orderID;
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Product Order Details Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="orderID"></param>
         public frmProductOrderDetails(int orderID)
         {
             InitializeComponent();
@@ -35,28 +49,33 @@ namespace WpfPresentationLayer
             displayDetails();
         }
 
-        ProductOrder prodOrd = new ProductOrder();
-        IProductOrderManager ordMgr = new ProductOrderManager();
+        ProductOrder _prodOrd = new ProductOrder();
+        IProductOrderManager _ordMgr = new ProductOrderManager();
 
-
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Displays Product Order Details.
+        /// Standaridized method.
+        /// </summary>
         public void displayDetails()
         {
             try
             {
-                prodOrd = ordMgr.retrieveProductOrderDetails(orderID);
-                txtOrderId.Text = prodOrd.OrderId.ToString();
-                txtCustomerId.Text = prodOrd.CustomerId.ToString();
-                txtOrderType.Text = prodOrd.OrderTypeId;
-                txtAddressType.Text = prodOrd.AddressType;
-                txtDeliveryType.Text = prodOrd.DeliveryTypeId;
-                txtAmount.Text = prodOrd.Amount.ToString();
-                txtOrderDate.Text = prodOrd.OrderDate.ToString();
-                txtExpectedDate.Text = prodOrd.DateExpected.ToString();
-                txtDiscount.Text = prodOrd.Discount.ToString();
-                txtOrderStatus.Text = prodOrd.OrderStatusId;
-                txtUserAddress.Text = prodOrd.UserAddressId.ToString();
-                txtHasArrived.Text = prodOrd.HasArrived.ToString();
+                _prodOrd = _ordMgr.retrieveProductOrderDetails(orderID);
+                txtOrderId.Text = _prodOrd.OrderId.ToString();
+                txtCustomerId.Text = _prodOrd.CustomerId.ToString();
+                txtOrderType.Text = _prodOrd.OrderTypeId;
+                txtAddressType.Text = _prodOrd.AddressType;
+                txtDeliveryType.Text = _prodOrd.DeliveryTypeId;
+                txtAmount.Text = _prodOrd.Amount.ToString();
+                txtOrderDate.Text = _prodOrd.OrderDate.ToString();
+                txtExpectedDate.Text = _prodOrd.DateExpected.ToString();
+                txtDiscount.Text = _prodOrd.Discount.ToString();
+                txtOrderStatus.Text = _prodOrd.OrderStatusId;
+                txtUserAddress.Text = _prodOrd.UserAddressId.ToString();
+                txtHasArrived.Text = _prodOrd.HasArrived.ToString();
 
             }
             catch (Exception e)
@@ -64,13 +83,31 @@ namespace WpfPresentationLayer
                 MessageBox.Show(e.Message);
             }
         }
-
+        
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Save Packaging Changes.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPackaging_Click(object sender, RoutedEventArgs e)
         {
             frmProductOrderPackages pakMgr = new frmProductOrderPackages(this.orderID);
             pakMgr.ShowDialog();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Closes Add Product Lot Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

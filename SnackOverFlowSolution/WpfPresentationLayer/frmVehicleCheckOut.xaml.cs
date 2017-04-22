@@ -23,18 +23,39 @@ namespace WpfPresentationLayer
     {
         private Vehicle _vehicle = new Vehicle();
         VehicleManager _vehicleManager = new VehicleManager();
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Vehicle Checkout Window.
+        /// Standaridized method. 
+        /// </summary>
         public frmVehicleCheckOut()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Vehicle Checkout Window and populates the vehicle view.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="vehicle"></param>
         public frmVehicleCheckOut(Vehicle vehicle)
         {
             InitializeComponent();
             populateView(vehicle);
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Populate the View of a vehicle.
+        /// Standaridized method.  
+        /// </summary>
+        /// <param name="vehicle"></param>
         private void populateView(Vehicle vehicle)
         {
             txtVIN.Text = vehicle.VIN;
@@ -48,7 +69,7 @@ namespace WpfPresentationLayer
         /// Laura Simmonds
         /// Created 2017/03/30
         /// 
-        /// Changes vehicle status to checked out or checked in
+        /// Changes _vehicle status to checked out or checked in
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -68,7 +89,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show("There was an error updating the vehicle" + ex);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Closes the Vehicle Checkout Window.
+        /// Standaridized method.  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

@@ -29,3 +29,12 @@ func StringToDate(dateString:String?)-> Date
     result = dateFormatter.date(from: dateString ?? "") ?? Date()
     return result
 }
+
+func formatDate(dateToFormat:NSDate) -> String
+{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd yyyy"
+    let dateToDisplay = dateFormatter.string(from: dateToFormat as Date)
+    
+    return dateToDisplay
+}
