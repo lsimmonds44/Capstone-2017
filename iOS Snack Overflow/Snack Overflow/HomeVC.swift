@@ -29,14 +29,20 @@ class HomeVC: UIViewController,RouteListViewDelegate {
         _routeListView.RouteListView.removeFromSuperview()
         _route = route
         self.performSegue(withIdentifier: "DeliverySeg", sender: nil)
+        dismissRouteListView()
     }
     
     func PickupSelected(pickup: Pickup) {
         _pickup = pickup
         self.performSegue(withIdentifier: "PickupSeg", sender: nil)
+        dismissRouteListView()
     }
     
     func RouteSelectionCanceled() {
+        dismissRouteListView()
+    }
+    
+    func dismissRouteListView(){
         _routeListView.RouteListView.removeFromSuperview()
     }
     
@@ -45,7 +51,7 @@ class HomeVC: UIViewController,RouteListViewDelegate {
         edgesForExtendedLayout = []
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,14 +68,14 @@ class HomeVC: UIViewController,RouteListViewDelegate {
     }
     
     func displayRouteListView(){
-        _routeListView.RouteListView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: _routeListView.RouteListView.bounds.height)
-        _routeListView.delegate = self
-        self.view.addSubview(_routeListView.RouteListView)
+            _routeListView.RouteListView.frame = CGRect(x: 10, y: self.view.frame.midY / 3, width: self.view.bounds.size.width - 20, height: _routeListView.RouteListView.bounds.height)
+            _routeListView.delegate = self
+            self.view.addSubview(_routeListView.RouteListView)
     }
     
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DeliverySeg"{
@@ -86,8 +92,8 @@ class HomeVC: UIViewController,RouteListViewDelegate {
             }
         }
     } // end of prepare
- 
-
+    
+    
 } // end of class
 
 

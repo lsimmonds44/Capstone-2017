@@ -29,3 +29,9 @@ func StringToDate(dateString:String?)-> Date
     result = dateFormatter.date(from: dateString ?? "") ?? Date()
     return result
 }
+
+func cutTimeOffDate(dateString:String?) -> String{
+    let indexToCutFrom = dateString?.index(dateString!.endIndex, offsetBy: -15)
+    let incomingString = dateString?.substring(to: indexToCutFrom!)
+    return incomingString!
+}

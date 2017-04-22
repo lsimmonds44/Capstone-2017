@@ -16,8 +16,8 @@ protocol RouteListViewDelegate {
 
 class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet var RouteListView: RouteListView!
-    @IBOutlet weak var RouteTV: UITableView!
+    @IBOutlet var RouteListView: RouteListView!{didSet{RouteListView.layer.cornerRadius = 8}}
+    @IBOutlet weak var RouteTV: UITableView!{didSet{RouteTV.layer.cornerRadius = 8}}
     @IBOutlet weak var RouteCell: UITableViewCell!
     @IBOutlet weak var btnCancel: UIButton!{didSet{btnCancel.layer.cornerRadius = 8}}
     
@@ -78,7 +78,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
         if self._driveType == 0 {
-            cell.textLabel?.text = "Delivery Date: \(_routes[indexPath.row].AssignedDate!)"
+            cell.textLabel?.text = cutTimeOffDate(dateString:"Delivery Date: \(_routes[indexPath.row].AssignedDate!)")
             cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
         }else if self._driveType == 1{
             cell.textLabel?.text = "\(_pickups[indexPath.row].PickupId!)"
