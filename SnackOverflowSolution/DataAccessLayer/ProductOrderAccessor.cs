@@ -29,6 +29,9 @@ namespace DataAccessLayer
         /// Aaron Usher
         /// Updated: 2017/04/21
         /// 
+        /// Laura Simmonds
+        /// Updated: 2017/04/21
+        /// 
         /// Standardized method.
         /// </remarks>
         /// 
@@ -47,13 +50,16 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@EMPLOYEE_ID", productOrder.EmployeeId);
             cmd.Parameters.AddWithValue("@ORDER_TYPE_ID", productOrder.OrderTypeId);
             cmd.Parameters.AddWithValue("@ADDRESS_TYPE", productOrder.AddressType);
+            cmd.Parameters.AddWithValue("@ADDRESS1", productOrder.Address1);
+            cmd.Parameters.AddWithValue("@CITY", productOrder.City);
+            cmd.Parameters.AddWithValue("@STATE", productOrder.State);
+            cmd.Parameters.AddWithValue("@ZIP", productOrder.Zip);
             cmd.Parameters.AddWithValue("@DELIVERY_TYPE_ID", productOrder.DeliveryTypeId);
             cmd.Parameters.AddWithValue("@AMOUNT", productOrder.Amount);
             cmd.Parameters.AddWithValue("@ORDER_DATE", productOrder.OrderDate);
             cmd.Parameters.AddWithValue("@DATE_EXPECTED", productOrder.DateExpected);
             cmd.Parameters.AddWithValue("@DISCOUNT", productOrder.Discount);
             cmd.Parameters.AddWithValue("@ORDER_STATUS_ID", productOrder.OrderStatusId);
-            cmd.Parameters.AddWithValue("@USER_ADDRESS_ID", productOrder.UserAddressId);
             cmd.Parameters.AddWithValue("@HAS_ARRIVED", productOrder.HasArrived);
 
             try

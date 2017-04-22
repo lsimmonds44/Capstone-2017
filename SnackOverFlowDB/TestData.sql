@@ -314,15 +314,16 @@ print '*** Inserting Product_Order Test Data ***'
 GO
 INSERT INTO [dbo].[PRODUCT_ORDER]
 	(CUSTOMER_ID, AMOUNT, ORDER_DATE, DATE_EXPECTED,
-		DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, HAS_ARRIVED
+		DISCOUNT, ORDER_STATUS_ID, USER_ADDRESS_ID, ADDRESS1, CITY, STATE, 
+      ZIP, HAS_ARRIVED
 	)
 VALUES
-	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, 0),
-	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, 0),
-	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, 0),
-	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, 0),
-	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, 0),
-	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, 0)
+	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, "141 C St SW", "Cedar Rapids", "IA", "52405", 0),
+	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, "24 Main Street", "A Town", "IL", "35482", 0),
+	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, "51 First St", "Springfield", "MO", "22241", 0),
+	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, "1138 H Ave", "Marion", "IA", "52423", 0),
+	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, "23 45th Ave", "Hiawatha", "IA", "52402", 0),
+	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, "62 River Street", "Dubuque", "IA", "55932", 0)
 GO
 
 print '*** Inserting Order Line Test Data ***'

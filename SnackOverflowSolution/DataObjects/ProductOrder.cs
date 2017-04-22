@@ -26,6 +26,11 @@ namespace DataObjects
         public String OrderStatusId { get; set; }
         public int? UserAddressId { get; set; }
         public bool? HasArrived { get; set; }
+        public String Address1 { get; set; }
+        public String Address2 { get; set; }
+        public String City { get; set; }
+        public String State { get; set; }
+        public String Zip { get; set; }
         public List<BackorderPreorder> BackorderPreorderList { get; set; }
         public List<Delivery> DeliveryList { get; set; }
         public List<EmployeeOrderResponsibility> EmployeeOrderResponsibilityList { get; set; }

@@ -18,6 +18,9 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
+    /// Laura Simmonds
+    /// 2017/27/02
+    /// 
     /// Interaction logic for ViewProduct.xaml
     /// </summary>
     public partial class frmViewProduct : Window
@@ -44,6 +47,9 @@ namespace WpfPresentationLayer
         int productID;
 
         /// <summary>
+        /// Laura Simmonds 
+        /// 2017/27/02
+        /// 
         /// Alissa Duffy
         /// Updated: 2017/04/21
         /// 
