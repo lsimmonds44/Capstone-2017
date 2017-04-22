@@ -131,17 +131,58 @@ namespace MVCPresentationLayer.Controllers
         /// <returns>Nav Menu Partial View</returns>
         public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase = "", string selectedCategory = "")
         {
+
             var navViewModel = new NavMenuViewModel {
                 Categories = categories,
                 SearchPhrase = searchPhrase,
                 SelectedCategory = selectedCategory
             };
+
             return PartialView(navViewModel);
+
         }
 
-        public ActionResult IndexTemp()
+        public ActionResult IndexTemp(string category, string search = "", int page = 1)
         {
-            return View();
+            var productsList = _productManager.RetrieveProductsToBrowseProducts();
+
+            if (!search.Equals(""))
+            {
+                var tempSearch = search.ToLower();
+                foreach (var str in tempSearch.Split())
+                {
+                    productsList = productsList.FindAll(p => p.CategoryID.ToLower().Contains(str) ||
+                                                         p.Description.ToLower().Contains(str) ||
+                                                         p.Name.ToLower().Contains(str) ||
+                                                         p.Supplier_Name.ToLower().Contains(str));
+                }
+
+            }
+
+            // for testing pagination. copy this line a couple of times to give you extra data
+            // productsList.AddRange(productsList);
+
+            IEnumerable<string> categories = productsList.Select(x => x.CategoryID)
+                                                         .Distinct()
+                                                         .OrderBy(x => x);
+
+            var products = new ProductsListViewModel
+            {
+                Products = productsList.Where(p => category == null || p.CategoryID == category)
+                                           .OrderBy(p => p.ProductId)
+                                           .Skip((page - 1) * PageSize)
+                                           .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = category == null ? productsList.Count() : productsList.Where(e => e.CategoryID == category).Count()
+                },
+                SearchPhrase = search,
+                CurrentCategory = category,
+                Categories = categories
+            };
+            return View(products);
         }
 
         //// GET: Products/Create

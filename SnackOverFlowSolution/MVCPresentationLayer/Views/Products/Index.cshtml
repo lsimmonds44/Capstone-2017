@@ -12,6 +12,8 @@
     <div id="categories" class="col-xs-2">
         @Html.Action("NavMenu", "Products", new { categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory })
     </div>
+    
+
     @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
     {
         <p>
