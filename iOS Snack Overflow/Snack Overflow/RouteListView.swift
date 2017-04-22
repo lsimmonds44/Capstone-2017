@@ -78,7 +78,8 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
         if self._driveType == 0 {
-            cell.textLabel?.text = cutTimeOffDate(dateString:"Delivery Date: \(_routes[indexPath.row].AssignedDate!)")
+            
+            cell.textLabel?.text = "Delivery Date: \(formatDate(dateToFormat: _routes[indexPath.row].AssignedDate! as NSDate))"
             cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
         }else if self._driveType == 1{
             cell.textLabel?.text = "\(_pickups[indexPath.row].PickupId!)"

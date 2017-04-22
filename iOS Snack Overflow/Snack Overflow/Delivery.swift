@@ -30,8 +30,11 @@ func StringToDate(dateString:String?)-> Date
     return result
 }
 
-func cutTimeOffDate(dateString:String?) -> String{
-    let indexToCutFrom = dateString?.index(dateString!.endIndex, offsetBy: -15)
-    let incomingString = dateString?.substring(to: indexToCutFrom!)
-    return incomingString!
+func formatDate(dateToFormat:NSDate) -> String
+{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd yyyy"
+    let dateToDisplay = dateFormatter.string(from: dateToFormat as Date)
+    
+    return dateToDisplay
 }
