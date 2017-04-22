@@ -428,6 +428,7 @@
     <Content Include="Views\ProductOrders\Details.cshtml" />
     <Content Include="Views\ProductOrders\Edit.cshtml" />
     <Content Include="Views\ProductOrders\Index.cshtml" />
+    <Content Include="Views\Shared\ApprovalStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

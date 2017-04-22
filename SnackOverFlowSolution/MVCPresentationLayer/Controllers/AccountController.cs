@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -86,14 +87,17 @@ namespace MVCPresentationLayer.Controllers
                 return View(model);
             }
 
-            //If not approved, assignRoles returns false
-            if ( !AssignRoles(new ApplicationDbContext(), model) )
-                return View("Error");
-
+            //Check if user exists
             var context = new ApplicationDbContext();
-            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName);
-            if (user != null) model.UserName = user.UserName;
+            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ??
+                       context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
+            //If not approved, HasOrAssignRoles returns false
+            if (!HasOrAssignRoles(context, model) && user != null)
+                return View("ApprovalStatus");
+
+            //Finds username in case of email is provided during login
+            if (user != null) model.UserName = user.UserName;
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -176,14 +180,16 @@ namespace MVCPresentationLayer.Controllers
             {
                 return View(model);
             }
+
             DataObjects.User userFound = null;
+
             try
             {
                 userFound = _appUserManager.AuthenticateWebUser(model.Email, model.Password);
             }
-            catch
+            catch ( Exception ex )
             {
-
+                Debug.WriteLine(ex.Message);
             }
             if (null != userFound)
             {
@@ -212,71 +218,6 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        public bool AssignRoles(ApplicationDbContext context, LoginViewModel model)
-        {
-            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ?? context.Users.FirstOrDefault(x => x.UserName == model.UserName);
-
-            if ( user != null && user.Email != null )
-                model.UserName = user.Email;
-
-            User userFound = null;
-            try
-            {
-                userFound = _appUserManager.AuthenticateWebUser(model.UserName, model.Password); // uses only email
-            }
-            catch
-            {
-
-            }
-
-            if (null != userFound)
-            {
-                bool[] roles = null;
-                try
-                {
-                    roles = _appUserManager.GetUserRoles(userFound.UserId);
-                }
-                catch (Exception)
-                {
-
-                }
-
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-
-                // Add Roles
-               // var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ?? context.Users.FirstOrDefault(x => x.UserName == model.UserName);
-
-                if (user == null)
-                    return false;
-
-                var identityUserRoles = user.Roles;
-
-                if ( identityUserRoles.Count != 0 )
-                    return true;
-
-                if (roles != null)
-                {
-                    if (roles[0])
-                    {
-                        manager.AddToRole(user.Id, "Customer");
-                        return true;
-                    }
-                    if (roles[1])
-                    {
-                        manager.AddToRole(user.Id, "Employee");
-                        return true;
-                    }
-                    if (roles[2])
-                    {
-                        manager.AddToRole(user.Id, "Supplier");
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -577,6 +518,81 @@ namespace MVCPresentationLayer.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 4/22/2017
+        /// 
+        /// Assigns Roles to Users Based On Approval Status from Snack Overflow
+        /// </summary>
+        /// <param name="context">DbContext</param>
+        /// <param name="model">Login View Model</param>
+        /// <returns>Boolean indicatinng Role Assignment Success</returns>
+        public bool HasOrAssignRoles(ApplicationDbContext context, LoginViewModel model)
+        {
+            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ??
+                       context.Users.FirstOrDefault(x => x.UserName == model.UserName);
+
+            //Force email
+            if (user != null && user.Email != null)
+                model.UserName = user.Email;
+
+            User userFound = null;
+            try
+            {
+                userFound = _appUserManager.AuthenticateWebUser(model.UserName, model.Password); //uses only email
+            }
+            catch
+            {
+
+            }
+
+            if (null != userFound)
+            {
+                bool[] roles = null;
+                try
+                {
+                    roles = _appUserManager.GetUserRoles(userFound.UserId);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+
+                //var store = new UserStore<ApplicationUser>(context);
+                //var manager = new UserManager<ApplicationUser>(store);
+
+                if (user == null)
+                    return false;
+
+                var identityUserRoles = user.Roles;
+
+                if (identityUserRoles.Count != 0)
+                    return true;
+
+                if (roles != null)
+                {
+                    if (roles[0])
+                    {
+                        UserManager.AddToRole(user.Id, "Customer");
+                        return true;
+                    }
+                    if (roles[1])
+                    {
+                        UserManager.AddToRole(user.Id, "Employee");
+                        return true;
+                    }
+                    if (roles[2])
+                    {
+                        UserManager.AddToRole(user.Id, "Supplier");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+
         }
 
         #region Helpers

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DataObjects;
@@ -63,25 +64,26 @@ namespace MVCPresentationLayer.Controllers
             try
             {
                 // SnackOverflow System Application
-                var v =  View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
+                var v = View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
 
                 // Idenitiy System Registration
-                if ( v.ViewName == "Application-Success" )
+                if (v.ViewName == "Application-Success")
                 {
-                    var rvm = new RegisterViewModel{ Email=user.EmailAddress, Password=user.Password};
+                    var rvm = new RegisterViewModel { Email = user.EmailAddress, Password = user.Password };
 
                     var controller = DependencyResolver.Current.GetService<AccountController>();
+
                     controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+
                     var result = await controller.Register(rvm);
 
-                    //var c = RedirectToAction("Register", "AccountController", rvm);
                 }
 
                 return v;
             }
             catch (ApplicationException ex)
             {
-                ViewBag.Error = "Error: "+  ex.Message;
+                ViewBag.Error = "Error: " + ex.Message;
                 return View();
             }
             catch (Exception ex)
