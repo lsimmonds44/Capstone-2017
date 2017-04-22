@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using MVCPresentationLayer.Models;
 using LogicLayer;
 using DataObjects;
 using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -83,6 +85,15 @@ namespace MVCPresentationLayer.Controllers
             {
                 return View(model);
             }
+
+            //If not approved, assignRoles returns false
+            if ( !AssignRoles(new ApplicationDbContext(), model) )
+                return View("Error");
+
+            var context = new ApplicationDbContext();
+            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName);
+            if (user != null) model.UserName = user.UserName;
+
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -161,7 +172,7 @@ namespace MVCPresentationLayer.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
 
-            if (!ModelState.IsValid)
+           if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -182,7 +193,7 @@ namespace MVCPresentationLayer.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -190,40 +201,10 @@ namespace MVCPresentationLayer.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    //UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, userFound.FirstName));
+                    //UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, userFound.LastName));
+                    //UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Email, userFound.EmailAddress));
 
-
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, userFound.FirstName));
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, userFound.LastName));
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Email, userFound.EmailAddress));
-
-                    bool[] roles = null;
-                    try
-                    {
-                        roles = _appUserManager.GetUserRoles(userFound.UserId);
-                    }
-                    catch (Exception)
-                    {
-
-                        return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
-                    }
-
-                    if (roles != null) // it should not be null if we are here
-                    {
-                        if (roles[0])
-                        {
-                            UserManager.AddToRole(user.Id, "Customer");
-                        }
-                        if (roles[1])
-                        {
-                            UserManager.AddToRole(user.Id, "Employee");
-                        }
-                        if (roles[2])
-                        {
-                            UserManager.AddToRole(user.Id, "Supplier");
-                        }
-                    }
-                    
-                    
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -231,6 +212,71 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
+        public bool AssignRoles(ApplicationDbContext context, LoginViewModel model)
+        {
+            var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ?? context.Users.FirstOrDefault(x => x.UserName == model.UserName);
+
+            if ( user != null && user.Email != null )
+                model.UserName = user.Email;
+
+            User userFound = null;
+            try
+            {
+                userFound = _appUserManager.AuthenticateWebUser(model.UserName, model.Password); // uses only email
+            }
+            catch
+            {
+
+            }
+
+            if (null != userFound)
+            {
+                bool[] roles = null;
+                try
+                {
+                    roles = _appUserManager.GetUserRoles(userFound.UserId);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+
+                // Add Roles
+               // var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ?? context.Users.FirstOrDefault(x => x.UserName == model.UserName);
+
+                if (user == null)
+                    return false;
+
+                var identityUserRoles = user.Roles;
+
+                if ( identityUserRoles.Count != 0 )
+                    return true;
+
+                if (roles != null)
+                {
+                    if (roles[0])
+                    {
+                        manager.AddToRole(user.Id, "Customer");
+                        return true;
+                    }
+                    if (roles[1])
+                    {
+                        manager.AddToRole(user.Id, "Employee");
+                        return true;
+                    }
+                    if (roles[2])
+                    {
+                        manager.AddToRole(user.Id, "Supplier");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
