@@ -34,7 +34,7 @@
 
                     @*Search Bar*@
                     <div class="col-md-3">
-                        @using (Html.BeginForm("IndexTemp", "Products", FormMethod.Get, new { @class = "search-form" }))
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "search-form" }))
                         {
                             @Html.TextBox("search", null, new { name = "search", id = "search-clear", placeholder = "Search products" })
                             <button type="submit">

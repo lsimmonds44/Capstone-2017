@@ -4,7 +4,7 @@
     
     <li>
         <span>
-            @Html.ActionLink("Home", "IndexTemp", "Products", null, new { @class = ("" == Model.SelectedCategory ? "selectedCat" : "notSelected") })
+            @Html.ActionLink("Home", "Index", "Products", null, new { @class = ("" == Model.SelectedCategory ? "selectedCat" : "notSelected") })
         </span>
     </li>
 
@@ -15,7 +15,7 @@
                 @Html.RouteLink(link, new
                 {
                     controller = "Products",
-                    action = "IndexTemp",
+                    action = "Index",
                     category = link,
                     search = Model.SearchPhrase
                 }, new
