@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@*Main Nav to be changed*@
+<h2>Index</h2>
+
+<ul>
+    @*Anonymous*@
+    <li>@Html.ActionLink("Apply for a Supplier Account", "Create", "SupplierWithAgreements")</li>
+    <li>@Html.ActionLink("View Available Products", "Index", "Products")</li>
+    
+    @*Requires Activated Account*@
+    <li>@Html.ActionLink("View Orders Placed", "Index", "CompanyOrderWithLines")</li>
+    <li>@Html.ActionLink("View Cart", "ViewCart", "Account")</li>
+</ul>
+

@@ -54,6 +54,7 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="productId"></param>
         /// <param name="returnUrl"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Supplier, Customer")]
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
             try
