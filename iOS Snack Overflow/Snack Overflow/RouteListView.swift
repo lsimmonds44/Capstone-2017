@@ -82,7 +82,8 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.text = "Delivery Date: \(formatDate(dateToFormat: _routes[indexPath.row].AssignedDate! as NSDate))"
             cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
         }else if self._driveType == 1{
-            cell.textLabel?.text = "\(_pickups[indexPath.row].PickupId!)"
+            cell.textLabel?.text = "\(_pickups[indexPath.row].Address?.AddressLine1! ?? "")"
+            cell.detailTextLabel?.text = _pickups[indexPath.row].Address?.City! ?? ""
             //            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
             //            cell.detailTextLabel?.text = "Vehicle #: \(_pickups[indexPath.row].VehicleID!)"
         }

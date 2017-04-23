@@ -22,6 +22,7 @@ class Pin : NSObject, MKAnnotation {
     var pinCreationDate = NSDate()
     var pinID: CKRecordID?
     var delivery = Delivery()
+    var pickup = Pickup()
     
     override init() {
         

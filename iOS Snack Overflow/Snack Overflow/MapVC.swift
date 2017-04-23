@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,DeliveryVCDelegate {
+class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,DeliveryVCDelegate,PickupVCDelegate {
     
     let _driverMgr = DriverManager()
     var _driver:User!
@@ -52,6 +52,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
             let allPins = self.map.annotations
             self.map.removeAnnotations(allPins)
             self.displayAllRoutePins(routes: self._route)
+            self.displayPickupPin(pickup: self._pickup)
         }
     }
     
@@ -95,8 +96,9 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
         mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
             DispatchQueue.main.async {
                 pinToAdd.title = "\(pickup.Address!.AddressLine1 ?? "")"
-                pinToAdd.subtitle = "TBD"
+                pinToAdd.subtitle = pickup.Address?.City
                 pinToAdd.coordinate = returnedCoord
+                pinToAdd.pickup = pickup
                 var pickedupCount = 0
                 for pickupLine in pickup.PickupLineList{
                     if pickupLine.PickupStatus!
@@ -110,6 +112,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
                 }else{
                     pinToAdd.pinColor = "blue"
                 }
+                
                 self.map.addAnnotation(pinToAdd)
             }
         }
@@ -139,8 +142,9 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
         return outPin
     }
     
-    //Holds the delivery for the pin that has been selected
+    //Holds the delivery/pickup for the pin that has been selected
     var _selectedDelivery = Delivery()
+    var _selectedPickup = Pickup()
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let pin = view.annotation as! Pin
@@ -148,7 +152,8 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
             _selectedDelivery = pin.delivery
             self.performSegue(withIdentifier: "DeliveryDetailSeg", sender: nil)
         }else{
-            print("Time to build PickupDetailVC")
+            _selectedPickup = pin.pickup
+            self.performSegue(withIdentifier: "PickupDetailSeg", sender: nil)
         }
     }
     
@@ -169,8 +174,12 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
                 deliveryVC._delivery = _selectedDelivery
                 deliveryVC.delegate = self
             }
-        }else if segue.identifier == "PickupSeg"{
-            
+        }else if segue.identifier == "PickupDetailSeg"{
+            if let PickupVC:PickupVC = segue.destination as? PickupVC{
+                PickupVC.navigationItem.title = "Pickup Details"
+                PickupVC._pickup = _selectedPickup
+                PickupVC.delegate = self
+            }
         }
     }
 }
