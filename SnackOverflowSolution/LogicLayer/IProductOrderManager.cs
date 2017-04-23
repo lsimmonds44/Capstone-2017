@@ -13,5 +13,6 @@ namespace LogicLayer
 		List<ProductOrder> RetrieveProductOrdersByStatus(String Status);
         bool UpdateProductOrderStatus(int productOrderID, string status);
         int createProductOrder(ProductOrder productOrder);
+        bool UpdateProductOrder(ProductOrder oldOrder, ProductOrder newOrder);
     }
 }

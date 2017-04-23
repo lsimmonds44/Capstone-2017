@@ -12,7 +12,7 @@ namespace MVCPresentationLayer.Controllers.Api
     public class DeliveryController : ApiController
     {
         IDeliveryManager _deliveryManager = new DeliveryManager();
-
+        IProductOrderManager _orderManager = new ProductOrderManager();
 
         /// <summary>
         /// Robert Forbes
@@ -26,6 +26,7 @@ namespace MVCPresentationLayer.Controllers.Api
         [System.Web.Http.HttpGet]
         public bool UpdateDeliveryStatus(int deliveryId, string newDeliveryStatus)
         {
+            bool result = false;
             try
             {
                 Delivery oldDelivery = _deliveryManager.RetrieveDeliveryById(deliveryId);
@@ -33,17 +34,35 @@ namespace MVCPresentationLayer.Controllers.Api
                 newDelivery.StatusId = newDeliveryStatus;
 
                 if(_deliveryManager.UpdateDelivery(oldDelivery, newDelivery)){
-                    return true;
+                    result = true;
                 }
                 else
                 {
-                    return false;
+                    result = false;
+                }
+
+                List<Delivery> ordersDeliveries = _deliveryManager.RetrieveDeliveriesByOrderId((int)oldDelivery.OrderId);
+                bool allDelivered = true;
+                foreach(Delivery d in ordersDeliveries){
+                    if(d.StatusId != "Delivered"){
+                        allDelivered = false;
+                    }
+                }
+
+                if(allDelivered){
+                    ProductOrder oldOrder = _orderManager.retrieveProductOrderDetails((int)oldDelivery.OrderId);
+                    ProductOrder newOrder = _orderManager.retrieveProductOrderDetails((int)oldDelivery.OrderId);
+                    newOrder.OrderStatusId = "Delivered";
+                    newOrder.HasArrived = true;
+                    _orderManager.UpdateProductOrder(oldOrder, newOrder);
                 }
             }
             catch
             {
-                return false;
+                result = false;
             }
+
+            return result;
         }
     }
 }

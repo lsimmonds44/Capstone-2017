@@ -93,7 +93,12 @@ namespace DataAccessLayer
         /// 
         /// Standardized method.
         /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// Updates: 2017/04/23
         /// 
+        /// Fixed nullable values in DB causing an exception
+        /// </remarks>
         /// <param name="orderID">The id of the needed product order.</param>
         /// <returns>The product order with the given id.</returns>
         public static ProductOrder RetrieveProductOrder(int orderID)
@@ -118,15 +123,15 @@ namespace DataAccessLayer
                     {
                         OrderId = reader.GetInt32(0),
                         CustomerId = reader.GetInt32(1),
-                        OrderTypeId = reader.GetString(2),
-                        AddressType = reader.GetString(3),
-                        DeliveryTypeId = reader.GetString(4),
-                        Amount = reader.GetDecimal(5),
+                        OrderTypeId = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        AddressType = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        DeliveryTypeId = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Amount = reader.IsDBNull(5) ? 0 : reader.GetDecimal(5),
                         OrderDate = reader.GetDateTime(6),
                         DateExpected = reader.GetDateTime(7),
                         Discount = reader.GetDecimal(8),
                         OrderStatusId = reader.GetString(9),
-                        UserAddressId = reader.GetInt32(10),
+                        UserAddressId = reader.IsDBNull(10) ? (int?)null : reader.GetInt32(10),
                         HasArrived = reader.GetBoolean(11)
                     };
                 }
@@ -229,6 +234,167 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@ORDER_ID", productOrderID);
             cmd.Parameters.AddWithValue("@NEW_ORDER_STATUS_ID", newStatus);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/04/23
+        /// 
+        /// Updates the provided order
+        /// </summary>
+        /// 
+        /// <param name="oldOrder"></param>
+        /// <param name="newOrder"></param>
+        /// <returns>Rows affected</returns>
+        public static int UpdateProductOrder(ProductOrder oldOrder, ProductOrder newOrder)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_product_order";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //Old Values
+            cmd.Parameters.AddWithValue("@old_ORDER_ID", oldOrder.OrderId);
+            cmd.Parameters.AddWithValue("@old_CUSTOMER_ID", oldOrder.CustomerId);
+            cmd.Parameters.AddWithValue("@old_ORDER_DATE", oldOrder.OrderDate);
+            cmd.Parameters.AddWithValue("@old_DATE_EXPECTED", oldOrder.DateExpected);
+            cmd.Parameters.AddWithValue("@old_DISCOUNT", oldOrder.Discount);
+            cmd.Parameters.AddWithValue("@old_ORDER_STATUS_ID", oldOrder.OrderStatusId);
+            cmd.Parameters.AddWithValue("@old_HAS_ARRIVED", oldOrder.HasArrived);
+
+            //Old Values Nullables
+            cmd.Parameters.Add("@old_ORDER_TYPE_ID", SqlDbType.VarChar, 250);
+            if (oldOrder.OrderTypeId == null)
+            {
+                cmd.Parameters["@old_ORDER_TYPE_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@old_ORDER_TYPE_ID"].Value = oldOrder.OrderTypeId;
+            }
+
+            cmd.Parameters.Add("@old_ADDRESS_TYPE", SqlDbType.VarChar);
+            if (oldOrder.AddressType == null)
+            {
+                cmd.Parameters["@old_ADDRESS_TYPE"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@old_ADDRESS_TYPE"].Value = oldOrder.AddressType;
+            }
+
+            cmd.Parameters.Add("@old_DELIVERY_TYPE_ID", SqlDbType.VarChar, 50);
+            if (oldOrder.DeliveryTypeId == null)
+            {
+                cmd.Parameters["@old_DELIVERY_TYPE_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@old_DELIVERY_TYPE_ID"].Value = oldOrder.DeliveryTypeId;
+            }
+
+            SqlParameter oldAmountParam = new SqlParameter("@old_AMOUNT", SqlDbType.Decimal);
+            oldAmountParam.Precision = 6;
+            oldAmountParam.Scale = 2;
+            cmd.Parameters.Add(oldAmountParam);
+            if (oldOrder.Amount == null)
+            {
+                cmd.Parameters["@old_AMOUNT"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@old_AMOUNT"].Value = oldOrder.Amount;
+            }
+
+            cmd.Parameters.Add("@old_USER_ADDRESS_ID", SqlDbType.Int);
+            if (oldOrder.UserAddressId == null)
+            {
+                cmd.Parameters["@old_USER_ADDRESS_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@old_USER_ADDRESS_ID"].Value = oldOrder.UserAddressId;
+            }
+
+            //New Values
+            cmd.Parameters.AddWithValue("@new_CUSTOMER_ID", newOrder.CustomerId);
+            cmd.Parameters.AddWithValue("@new_ORDER_DATE", newOrder.OrderDate);
+            cmd.Parameters.AddWithValue("@new_DATE_EXPECTED", newOrder.DateExpected);
+            cmd.Parameters.AddWithValue("@new_DISCOUNT", newOrder.Discount);
+            cmd.Parameters.AddWithValue("@new_ORDER_STATUS_ID", newOrder.OrderStatusId);
+            cmd.Parameters.AddWithValue("@new_HAS_ARRIVED", newOrder.HasArrived);
+
+            //New Values Nullables
+            cmd.Parameters.Add("@new_ORDER_TYPE_ID", SqlDbType.VarChar, 250);
+            if (newOrder.OrderTypeId == null)
+            {
+                cmd.Parameters["@new_ORDER_TYPE_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@new_ORDER_TYPE_ID"].Value = newOrder.OrderTypeId;
+            }
+
+            cmd.Parameters.Add("@new_ADDRESS_TYPE", SqlDbType.VarChar);
+            if (newOrder.AddressType == null)
+            {
+                cmd.Parameters["@new_ADDRESS_TYPE"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@new_ADDRESS_TYPE"].Value = newOrder.AddressType;
+            }
+
+            cmd.Parameters.Add("@new_DELIVERY_TYPE_ID", SqlDbType.VarChar, 50);
+            if (newOrder.DeliveryTypeId == null)
+            {
+                cmd.Parameters["@new_DELIVERY_TYPE_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@new_DELIVERY_TYPE_ID"].Value = newOrder.DeliveryTypeId;
+            }
+
+            SqlParameter newAmountParam = new SqlParameter("@new_AMOUNT", SqlDbType.Decimal);
+            newAmountParam.Precision = 6;
+            newAmountParam.Scale = 2;
+            cmd.Parameters.Add(newAmountParam);
+            if (newOrder.Amount == null)
+            {
+                cmd.Parameters["@new__AMOUNT"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@new_AMOUNT"].Value = newOrder.Amount;
+            }
+
+            cmd.Parameters.Add("@new_USER_ADDRESS_ID", SqlDbType.Int);
+            if (newOrder.UserAddressId == null)
+            {
+                cmd.Parameters["@new_USER_ADDRESS_ID"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@new_USER_ADDRESS_ID"].Value = newOrder.UserAddressId;
+            }
+
 
             try
             {

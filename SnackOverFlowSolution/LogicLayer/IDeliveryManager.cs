@@ -27,5 +27,6 @@ namespace LogicLayer
         int CreateDeliveryAndRetrieveDeliveryId(Delivery delivery);
 
         bool UpdateDelivery(Delivery oldDelivery, Delivery newDelivery);
+        List<Delivery> RetrieveDeliveriesByOrderId(int orderId);
     }
 }

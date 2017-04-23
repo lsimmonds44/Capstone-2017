@@ -130,5 +130,34 @@ namespace LogicLayer
             }
             return result;
         }
+
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/04/23
+        /// </summary>
+        /// <param name="oldOrder"></param>
+        /// <param name="newOrder"></param>
+        /// <returns></returns>
+        public bool UpdateProductOrder(ProductOrder oldOrder, ProductOrder newOrder)
+        {
+            bool result = false;
+
+            try
+            {
+                if (ProductOrderAccessor.UpdateProductOrder(oldOrder, newOrder) > 0)
+                {
+                    result = true;
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+        }
     }
 }

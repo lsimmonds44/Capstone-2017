@@ -480,5 +480,57 @@ namespace DataAccessLayer
 
             return delivery;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/23
+        /// 
+        /// Gets all deliveries for the specified order
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public static List<Delivery> RetrieveDeliveriesForOrder(int? orderId)
+        {
+            var deliveries = new List<Delivery>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_delivery_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@ORDER_ID", orderId);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        deliveries.Add(new Delivery()
+                        {
+                            DeliveryId = reader.GetInt32(0),
+                            RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                            DeliveryDate = reader.GetDateTime(2),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            StatusId = reader.GetString(4),
+                            DeliveryTypeId = reader.GetString(5),
+                            OrderId = reader.GetInt32(6)
+                        });
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return deliveries;
+        }
     }
 }

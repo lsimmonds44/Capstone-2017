@@ -193,7 +193,8 @@ INSERT INTO [dbo].[Order_Status]
 VALUES
 	("Open"),
 	("Ready For Shipment"),
-	("Saved")
+	("Saved"),
+	("Delivered")
 GO
 
 print '*** Inserting Delivery_Type Test Data ***'
