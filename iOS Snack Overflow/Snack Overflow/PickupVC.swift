@@ -18,7 +18,7 @@ class PickupVC : UIViewController,UITableViewDataSource,UITableViewDelegate{
     var _pickup:Pickup!
     
     @IBOutlet weak var _txtAddress: UITextView!
-    @IBOutlet weak var _btnMarkPickedUp: UIButton!
+    @IBOutlet weak var _btnMarkPickedUp: UIButton!{didSet{_btnMarkPickedUp.layer.cornerRadius = 8}}
     @IBOutlet weak var _tblProducts: UITableView!
     var delegate:PickupVCDelegate!
     

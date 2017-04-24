@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: Address object
 class Address: NSObject {
     var AddressLine1:String?
     var AddressLine2:String?

@@ -26,7 +26,7 @@ class UserManager: NSObject {
         var timer = Timer()
         var vegTimer = Timer()
         var vegArray = ["🍎","🌽","🍅","🥕"]
-        var i = 0
+        var vegIndex = 0
         var output = ""
         
         let url:URL = URL(string:getIPAsString() + "user/\(username)/\(password)")!
@@ -61,12 +61,12 @@ class UserManager: NSObject {
         vegTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (theVegTimer) in
             
             
-            if i < vegArray.count{
-                output += vegArray[i]
-                i = i + 1
+            if vegIndex < vegArray.count{
+                output += vegArray[vegIndex]
+                vegIndex = vegIndex + 1
                 completion(nil,output)
             }else{
-                i = 0
+                vegIndex = 0
                 output = ""
                 completion(nil,output)
             }

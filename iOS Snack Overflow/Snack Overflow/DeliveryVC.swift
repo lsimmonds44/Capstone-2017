@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+
+/// Eric Walton
+/// 2017/04/23
+/// Description: Protocal used to update the pin to green 
+///when a delivery is delivered
 protocol DeliveryVCDelegate {
     func updatePin()
 }
@@ -113,6 +118,8 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func btnMarkDeliveredClicked() {
         _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered"){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
+            // Eric Walton
+            // 2017/04/23
             self._delivery.StatusId = "Delivered"
             self.delegate.updatePin()
         }

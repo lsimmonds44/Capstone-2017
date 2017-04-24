@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Eric Walton
+/// 2017/04/23
+/// Description User object
 class User: NSObject {
     var UserId:Int?
     var FirstName:String?

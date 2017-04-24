@@ -8,7 +8,9 @@
 
 import Foundation
 
-
+/// Eric Walton
+/// 2017/04/23
+/// Description: Pickup object
 class Pickup: NSObject {
  
     var DriverId:Int?
