@@ -21,6 +21,12 @@ namespace WpfPresentationLayer
     /// Created 2017-03-30 by William Flood
     /// Interaction logic for frmAddSupplierInventory.xaml
     /// </summary>
+    /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized methods and Naming conventions.
+    /// </summary>
     public partial class frmAddSupplierInventory : Window
     {
         ISupplierInventoryManager _supplyInventorymanager;
@@ -28,7 +34,8 @@ namespace WpfPresentationLayer
         List<Agreement> _agreementList;
 
         /// <summary>
-        /// Created 2017-03-30 by William Flood
+        /// William Flood
+        /// Created: 2017/03/30
         /// </summary>
         /// <param name="_supplyInventorymanager">Handles business logic related to supplier inventory</param>
         /// <param name="_agreementList">A list of agreements associated with the user</param>
@@ -37,12 +44,13 @@ namespace WpfPresentationLayer
             this._supplyInventorymanager = _supplyInventorymanager;
             InitializeComponent();
             this._agreementList = _agreementList;
-            this.cbxAgreement.ItemsSource = _agreementList;
-            this.dateAdded.SelectedDate = DateTime.Now;
+            this.cboAgreement.ItemsSource = _agreementList;
+            this.dpDateAdded.SelectedDate = DateTime.Now;
         }
 
         /// <summary>
-        /// Created 2017-03-30 by William Flood
+        /// William Flood
+        /// Created: 2017/03/30
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -59,15 +67,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Quantity needs an integer");
                 return;
             }
-            if(cbxAgreement.SelectedIndex >=0)
+            if(cboAgreement.SelectedIndex >=0)
             {
-                agreementId = _agreementList[cbxAgreement.SelectedIndex].AgreementId;
+                agreementId = _agreementList[cboAgreement.SelectedIndex].AgreementId;
             } else
             {
                 MessageBox.Show("Select an agreement");
                 return;
             }
-            if(null==dateAdded.SelectedDate)
+            if(null==dpDateAdded.SelectedDate)
             {
                 MessageBox.Show("Select a date");
                 return;
@@ -77,7 +85,7 @@ namespace WpfPresentationLayer
                 var toAdd = new SupplierInventory()
                 {
                     AgreementID = agreementId,
-                    DateAdded = dateAdded.SelectedDate,
+                    DateAdded = dpDateAdded.SelectedDate,
                     Quantity = quantity
                 };
                 _supplyInventorymanager.CreateSupplierInventory(toAdd);
@@ -95,5 +103,5 @@ namespace WpfPresentationLayer
                 }
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace

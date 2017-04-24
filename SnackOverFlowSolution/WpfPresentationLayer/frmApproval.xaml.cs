@@ -34,6 +34,16 @@ namespace WpfPresentationLayer
 
         int _userid;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Approval form Window for a supplier manager.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="supplierMrg"></param>
+        /// <param name="supplier"></param>
+        /// <param name="userid"></param>
         public frmApproval(ISupplierManager supplierMrg, Supplier supplier, int userid)
         {
             _supplier = supplier;
@@ -44,6 +54,17 @@ namespace WpfPresentationLayer
             _userid = userid;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Approval form Window for a customer manager.
+        /// Standaridized methods.
+        /// </summary>
+        /// </summary>
+        /// <param name="customerMrg"></param>
+        /// <param name="commercialCustomer"></param>
+        /// <param name="userid"></param>
         public frmApproval(ICustomerManager customerMrg, CommercialCustomer commercialCustomer, int userid)
         {
             _commercialCustomer = commercialCustomer;
@@ -116,6 +137,16 @@ namespace WpfPresentationLayer
 
             this.Close();
         }
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Deny Approval.
+        /// Standaridized methods.
+        /// </summary>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
             //if (_charity != null)
@@ -185,5 +216,5 @@ namespace WpfPresentationLayer
             }
 
         }
-    }
-}
+    } // End of class
+} // End of namespace

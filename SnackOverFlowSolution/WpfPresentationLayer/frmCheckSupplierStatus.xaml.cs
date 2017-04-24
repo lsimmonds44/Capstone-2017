@@ -19,6 +19,13 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for frmCheckSupplierStatus.xaml
     /// </summary>
+    /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized Commments.
+    /// Standaridized Methods.
+    /// </summary>
     public partial class frmCheckSupplierStatus : Window
     {
         User _user;
@@ -29,7 +36,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/10/2017
+        /// Created: 2017/03/10
         /// 
         /// Initailized the checkSupplierStatus window
         /// More work is needed to add an ability to apply after
@@ -50,12 +57,28 @@ namespace WpfPresentationLayer
             _agreementManager = (AgreementManager)agreementManager;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Check Supplier Status.
+        /// Standaridized Methods.
+        /// </summary>
         public frmCheckSupplierStatus()
         {
             InitializeComponent();
             
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// When a user can apply for a supplier.
+        /// Standaridized Methods.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Apply_Click(object sender, RoutedEventArgs e)
         {
             //frmAddSupplier addSupplier = new frmAddSupplier(_user,_userManager,_supplierManager,_productManager,_agreementManager);
@@ -64,9 +87,18 @@ namespace WpfPresentationLayer
             this.Close();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel/Closes Check Supplier Status Window.
+        /// Standaridized Methods.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-    }
-}
+    } // End of class
+} // End of namespace

@@ -26,12 +26,28 @@ namespace WpfPresentationLayer
                               "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND",
                               "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
                               "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"};
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Add Warehouse form.
+        /// Standaridized method.
+        /// </summary>
         public frmAddWarehouse()
         {
             InitializeComponent();
             cboState.ItemsSource = states;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Saves New Warehouse information.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string address1 = txtAddress1.Text;
@@ -58,9 +74,18 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel/Closes Add Warehouse form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-    }
-}
+    } // End of class
+} // End of namespace

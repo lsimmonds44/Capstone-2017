@@ -19,6 +19,13 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for frmCreateCommercialCustomer.xaml
     /// </summary>
+    /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized Commments.
+    /// Standaridized Methods.
+    /// </summary>
     public partial class frmCreateCommercialCustomer : Window
     {
         UserManager _userMngr = new UserManager();
@@ -27,7 +34,11 @@ namespace WpfPresentationLayer
         CommercialCustomer _commercialCustomer = null;
 
         /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
         /// 
+        /// Initialize Create Commercial Customer Form.
+        /// Standaridized methods. 
         /// </summary>
         /// <param name="employeeId"></param>
         public frmCreateCommercialCustomer(int employeeId)
@@ -38,7 +49,7 @@ namespace WpfPresentationLayer
         
         /// <summary>
         /// Eric Walton
-        /// Created 2017/06/02
+        /// Created: 2017/06/02
         /// 
         /// Button to find a user so a commercial account for them can be created.
         /// If the user is found; populates the fields related to the user.
@@ -75,7 +86,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/31/2017
+        /// Created: 2017/3/31
         /// 
         /// Used for applying for Commercial Customer Account
         /// </summary>
@@ -107,7 +118,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02
+        /// Created: 2017/06/02
         /// 
         /// Cancel button
         /// Closes the create commecrcial customer window negating any changes that have not been saved to the database.
@@ -121,7 +132,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02
+        /// Created: 2017/06/02
         /// 
         /// Create button
         /// If a user that an _employee wants to create a commercial account for has been found and all needed info is supplied an attempt to create a commercial account will be made.
@@ -158,7 +169,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02
+        /// Created: 2017/06/02
         /// 
         /// This is a helper method that checks CreateCommercialCustomer Window making sure all the data needed to create a commercial customer is supplied
         /// 
@@ -190,7 +201,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02 
+        /// Created: 2017/06/02 
         /// 
         /// Helper method to parse a string to an int
         /// </summary>
@@ -205,5 +216,5 @@ namespace WpfPresentationLayer
         }
 
 
-    } // end class
-} // end namespace
+    } // End class
+} // End namespace

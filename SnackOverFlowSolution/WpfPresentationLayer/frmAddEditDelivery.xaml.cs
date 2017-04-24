@@ -26,6 +26,17 @@ namespace WpfPresentationLayer
         IDeliveryManager _deliveryManager;
         bool _isEdit;
         Delivery _delivery;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Edit Delivery form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="delivery"></param>
+        /// <param name="deliveryManager"></param>
+        /// <param name="isEdit"></param>
         public frmAddEditDelivery(Delivery delivery, IDeliveryManager deliveryManager, bool isEdit = false)
         {
             InitializeComponent();
@@ -36,6 +47,15 @@ namespace WpfPresentationLayer
             _isEdit = isEdit;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Loads Add Edit Delivery Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -58,12 +78,30 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Closes the Add Edit Delivery Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
             this.Close();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Saves changes made to Add Edit Delivery form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (_isEdit)
@@ -105,5 +143,5 @@ namespace WpfPresentationLayer
             }
         }
 
-    }
-}
+    } // End of class
+} // End of namespace

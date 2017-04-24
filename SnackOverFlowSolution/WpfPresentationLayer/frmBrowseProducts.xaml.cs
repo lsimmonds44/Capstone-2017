@@ -17,9 +17,17 @@ using System.Windows.Shapes;
 namespace WpfPresentationLayer
 {
     /// <summary>
-    /// Created By Natacha Ilunga on 2/10/2017
+    /// Natacha Ilunga 
+    /// Created: 2017/02/10
     /// 
     /// Code Behind for BrowseProducts.xaml
+    /// </summary>
+    /// /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized Naming and Comments
+    /// Standaridized Methods.
     /// </summary>
     public partial class frmBrowseProducts : Window
     {
@@ -41,6 +49,15 @@ namespace WpfPresentationLayer
         User _currentUser;
         IProductManager _productManager;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Browse Products Window
+        /// Standaridized Methods.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="iProductManager"></param>
         public frmBrowseProducts(User user, IProductManager iProductManager)
         {
             InitializeComponent();
@@ -53,7 +70,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Created by Natacha Ilunga 
-        /// Created on 2/10/2017
+        /// Created: 2017/02/10 
         /// 
         /// Retrieves Products from DB
         /// </summary>
@@ -81,7 +98,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Created By Natacha Ilunga 
-        /// Created on 02/15/17
+        /// Created: 2017/02/15
         /// 
         /// Applies Filters to Products
         /// </summary>
@@ -236,6 +253,5 @@ namespace WpfPresentationLayer
         {
             dgProductList.ItemsSource = null;
         }
-    }
-
-}
+    } // End of class
+} // End of namespace

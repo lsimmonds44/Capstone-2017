@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add Product" Height="500" Width="950" ResizeMode="CanMinimize" 
         WindowStartupLocation="CenterScreen">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Add Product Grid-->
     <Grid>
-        <!--Created by Michael Takrama-->
-        
+        <!--Created by Michael Takrama-->    
         <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
@@ -42,19 +47,15 @@
             <RowDefinition Height="36"/>
         </Grid.RowDefinitions>
         <!--End of Grid Definitions-->
-
         <!--Picture Group Controls-->
         <GroupBox Name="gboxImage" Grid.Row="1" Grid.Column="1" Margin="0" Grid.ColumnSpan="8" Grid.RowSpan="7"
                   Header="Image">
             <StackPanel Orientation="Vertical">
-
                 <!--Image Box-->
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <Image Name="ImgProduct" Height="180" Margin="5 5 5 5" />
                 </Border>
                 <!--End of Image Box-->
-
-
                 <!--Image Event Controls-->
                 <StackPanel Orientation="Horizontal" Margin="0 5 0 5" HorizontalAlignment="Left">
                     <Button Name="btnUpload" Click="btnUpload_Click" Content="Upload" Width="100" Height="30" Margin="0 0 10 0"/>
@@ -63,114 +64,134 @@
             </StackPanel>
         </GroupBox>
         <!--End of Picture Group Controls-->
-
         <!--Product Main Information-->
         <GroupBox Name="gboxProductInformation" Grid.Row="1" Grid.Column="10" Margin="0" Grid.ColumnSpan="5" Grid.RowSpan="10" 
                   Header="Product Information">
             <StackPanel Orientation="Vertical">
-
                 <!--Name-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Name Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="95"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--Name Controls-->
                         <Label Name="lblName" Content="Name :"/>
                         <TextBox Name="txtName" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 0"/>
+                        <!--End of Name Controls-->
                     </Grid>
+                    <!--End of Name Grid-->
                 </StackPanel>
                 <!--End of Name-->
-
                 <!--Product Description-->
                 <Label Name="lblProductDescription" Content="Product Description:"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Product Description Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="75"/>
-
                         </Grid.ColumnDefinitions>
-
-
+                        <!--End of Grid Definitions-->
+                        <!--Product Description Controls-->
                         <TextBox Name="txtProductDescription" Height="120" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 0"/>
+                        <!--End of Product Description Controls-->
                     </Grid>
+                    <!--End of Product Description Grid-->
                 </StackPanel>
                 <!--End of Product Description-->
-
                 <!--Unit Price-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Unit Price Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="65"/>
-
                         </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Unit Price Controls-->
                         <Label Name="lblUnitPrice" Content="Unit Price:"/>
                         <TextBox Name="txtUnitPrice" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 0"/>
+                        <!--End of Unit Price Controls-->
                     </Grid>
+                    <!--End of Unit Price Grid-->
                 </StackPanel>
                 <!--End of Unit Price-->
-
-                <!--Unit Price-->
+                <!--Active Status-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Active Status Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="65"/>
-
                         </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Active Status Controls-->
                         <Label Name="lblActive" Content="Active:"/>
                         <CheckBox Name="chkActive" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+                        <!--End of Active Status Controls-->
                     </Grid>
+                    <!--End of Active Status Grid-->
                 </StackPanel>
-                <!--End of Unit Price-->
-
+                <!--End of Active Status-->
                 <!--Unit Of Measurement-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <Grid>
+                        <!--Unit Of Measurement Grid-->
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="65"/>
                         </Grid.ColumnDefinitions>
-
+                        <!--End of Grid Definitions-->
+                        <!--Unit Of Measurement Controls-->
                         <Label Name="lblUnitOfMeasure" Content="Unit Of Measurement:"/>
                         <TextBox Name="txtUnitOfMeasure" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <!--We might probably need this to be a dropdown - MTR-->
+                        <!--End of Unit Of Measurement Controls-->
                     </Grid>
+                    <!--End of Unit Of Measurement Grid-->
                 </StackPanel>
                 <!--End of Unit Of Measurement-->
-
                 <!--Delivery Charge Per Unit-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Delivery Charge Per Unit Grid-->
                     <Grid>
+                        <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="45"/>
-
                         </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Delivery Charge Per Unit Controls-->
                         <Label Name="lblDeliveryChargePerUnit" Content="Delivery Charge Per Unit:"/>
                         <TextBox Name="txtDeliveryChargePerUnit" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <!--End of Delivery Charge Per Unit Controls-->
                     </Grid>
+                    <!--End of Delivery Charge Per Unit Grid-->
                 </StackPanel>
                 <!--End of Delivery Charge Per Unit-->
             </StackPanel>
         </GroupBox>
         <!--End of Product Main Information-->
-
         <!--Function Buttons-->
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="11" Grid.ColumnSpan="4" FlowDirection="RightToLeft">
             <Button Name="btnCancel" Click="btnCancel_Click" Content="Cancel" Width="100" Margin="0 0 0 0" />
             <Button Name="btnSave" Click="btnSave_Click" IsDefault="True" Content="Save" Width="100" Margin="10 0 0 0" />
         </StackPanel>
         <!--End of Function Buttons-->
-
     </Grid>
+    <!--End of Add Product Grid-->
 </Window>
+<!--End of Add Product Window-->

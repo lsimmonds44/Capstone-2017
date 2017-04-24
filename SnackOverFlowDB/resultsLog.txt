@@ -1,4 +1,6 @@
  
+*** Dropping database SnackOverflowDB
+ 
 *** Creating database SnackOverflowDB
  
 *** using database SnackOverflowDB

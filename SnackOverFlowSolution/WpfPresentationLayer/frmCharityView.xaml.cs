@@ -28,11 +28,27 @@ namespace WpfPresentationLayer
         private List<User> _userList;
         private User _charityUser;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Charity View Form.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="userID"></param>
         public frmCharityView(int userID)
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Charity View Form by Charity Manager.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="charityManager"></param>
         public frmCharityView(ICharityManager charityManager)
         {
             InitializeComponent();
@@ -40,6 +56,15 @@ namespace WpfPresentationLayer
             inAddMode = true;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Charity View Form by Charity Manager and Employee ID.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="charityManager"></param>
+        /// <param name="employeeID"></param>
         public frmCharityView(ICharityManager charityManager, int employeeID)
         {
             InitializeComponent();
@@ -50,6 +75,15 @@ namespace WpfPresentationLayer
             lblStatus.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Charity View Form by a Charity Manager and Charity.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="charityManager"></param>
+        /// <param name="charity"></param>
         public frmCharityView(ICharityManager charityManager, DataObjects.Charity charity)
         {
             // TODO: Complete member initialization
@@ -71,7 +105,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created: 2017/03/08
         /// 
         /// The constructor for a _charity user to apply for a _charity.
         /// </summary>
@@ -87,6 +121,13 @@ namespace WpfPresentationLayer
             
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Set Editable.
+        /// Standaridized methods.
+        /// </summary>
         public void SetEditable()
         {
             lblCharityNameVal.Visibility = Visibility.Collapsed;
@@ -134,6 +175,15 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Post Charity View.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             int employeeIDParsed;
@@ -260,5 +310,5 @@ namespace WpfPresentationLayer
         }
 
         
-    }
-}
+    } // End of class
+} // End of namespace

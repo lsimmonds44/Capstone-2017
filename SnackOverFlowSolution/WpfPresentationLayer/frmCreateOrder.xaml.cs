@@ -40,7 +40,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
         /// Window initializer for a commercial customer
         /// </summary>
         /// <param name="employee_Id"></param>
@@ -55,7 +55,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
         /// Sets the approprite fields on the window to the data for the selected customer.
         /// 
         /// Laura Simmonds
@@ -94,7 +94,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
         /// Checks to make sure all the needed info is supplied to create and order.
         /// 
         /// Laura Simmonds
@@ -149,7 +149,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
+        /// 
         /// Invokes a method in the product order manager to create an order
         /// and get the order number for the created order from the database
         /// and then sets the order number on the window to the order number.
@@ -174,7 +175,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
         /// helper method to display the product lots information
         /// </summary>
         private void displayProductLots()
@@ -207,7 +208,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/10
+        /// Created: 2017/03/10
+        /// 
         /// The action for start order button click
         /// </summary>
         /// <param name="sender"></param>
@@ -239,7 +241,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/02/06
+        /// Created: 2017/02/06
         /// 
         /// Helper method to parse a string to an int
         /// </summary>
@@ -255,7 +257,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/24
+        /// Created: 2017/03/24
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -272,7 +274,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// /// 2017/02/06 
+        /// Created: 2017/02/06 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -322,7 +324,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/02/06
+        /// Created: 2017/02/06
         /// Refreshes the list of orderlines
         /// </summary>
         private void RefreshOrderLines()
@@ -331,6 +333,15 @@ namespace WpfPresentationLayer
             dgOrderLines.ItemsSource = oLines;
         }
 
+        /// <summary>
+        //// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel Create Order Window.
+        /// Standaridized Methods. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
@@ -339,5 +350,5 @@ namespace WpfPresentationLayer
         
 
 
-    } // end of class
-} // end of namespace
+    } // End of class
+} // End of namespace

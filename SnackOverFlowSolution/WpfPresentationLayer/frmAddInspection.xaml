@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add Inspection" Height="300" Width="300" Initialized="Window_Initialized">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Add Inspection Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="111" />
@@ -10,8 +17,12 @@
             <RowDefinition Height="25" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Add Inspection Top Controls-->
         <Label Grid.Row="0" Name="lblInspection" Content="Inspection" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <!--Add Inspection Top Controls Grid-->
         <Grid Grid.Row="1">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75" />
                 <ColumnDefinition Width="*" />
@@ -21,38 +32,61 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <!--End of Grid Definitions-->
             <Label Name="lblProduct" Grid.Column="0" Grid.Row="0" Content="Product: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <Label Name="lblSupplier" Grid.Column="0" Grid.Row="1" Content="Supplier: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <Label Name="lblFarm" Grid.Column="0" Grid.Row="2" Content="Farm: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Name="txtProduct" Grid.Column="1" Grid.Row="0" Margin="0 2 5 2" IsEnabled="False"/>
             <TextBox Name="txtSupplier" Grid.Column="1" Grid.Row="1" Margin="0 2 5 2" IsEnabled="False" />
             <TextBox Name="txtFarm" Grid.Column="1" Grid.Row="2" Margin="0 2 5 2" IsEnabled="False" />
+            <!--End of Add Inspection Top Controls-->
         </Grid>
+        <!--End of Add Inspection Top Controls Grid-->
+        <!--Add Inspection Grade Controls Grid-->
         <Grid Grid.Row="2">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Add Inspection Grade Controls-->
             <Label Name="lblGradeSelect" Grid.Column="0" Content="Select Grade: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <ComboBox Name="cboGradeSelect" Grid.Column="1" Margin="0 2 75 2" />
+            <!--End of Add Inspection Grade Controls-->
         </Grid>
+        <!--End of Add Inspection Grade Controls Grid-->
+        <!--Add Inspection Price Controls Grid-->
         <Grid Grid.Row="3">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Add Inspection Price Controls-->
             <Label Name="lblSetPrice" Grid.Column="0" Content="Set Price: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Name="txtInspectionProductPrice" Grid.Column="1" Margin="0 2 75 2" IsEnabled="True" MaxLength="8" />
+            <!--End of Add Inspection Price Controls-->
         </Grid>
+        <!--End of Add Inspection Price Controls Grid-->
+        <!--Add Inspection Bottom Controls Grid-->
         <Grid Grid.Row="4">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Add Inspection Bottom Controls-->
             <Button Grid.Column="2" Name="btnCancel" Margin="3 10 3 10" IsCancel="True" Content="Cancel" />
             <Button Grid.Column="3" Name="btnSave" Margin="3 10 3 10" IsDefault="True" Content="Save" Click="btnSave_Click" />
+            <!--End of Add Inspection Bottom Controls-->
         </Grid>
+        <!--End of Add Inspection Bottom Controls Grid-->
     </Grid>
+    <!--End of Add Inspection Grid-->
 </Window>
+<!--End of Add Inspection Window-->

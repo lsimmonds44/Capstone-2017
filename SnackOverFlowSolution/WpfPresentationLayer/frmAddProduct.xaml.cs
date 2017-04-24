@@ -18,6 +18,15 @@ namespace WpfPresentationLayer
         private User _currentUser;
         private IProductManager _productManager;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Product form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="currentUser"></param>
+        /// <param name="iproductManager"></param>
         public frmAddProduct(User currentUser, IProductManager iproductManager)
         {
             InitializeComponent();
@@ -25,6 +34,15 @@ namespace WpfPresentationLayer
             _productManager = iproductManager;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Saves Product's Image.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -41,7 +59,8 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama on 2017-02-10
+        /// Michael Takrama 
+        /// Created: 2017/02/10
         /// 
         /// Close form event
         /// </summary>
@@ -53,7 +72,8 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama on 2017-02-10
+        /// Michael Takrama 
+        /// Created: 2017/02/10
         /// 
         /// Saves User Input To DB
         /// </summary>
@@ -85,7 +105,8 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama on 2017-02-10
+        /// Michael Takrama 
+        /// Created: 2017/02/10
         /// 
         /// Clears fields
         /// </summary>
@@ -102,7 +123,8 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama on 2017-02-10
+        /// Michael Takrama 
+        /// Created: 2017/02/10
         /// 
         /// Gets User Input
         /// </summary>
@@ -119,9 +141,10 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Created by Michael Takrama on 2017-02-10
+        /// Michael Takrama 
+        /// Created: 2017/02/10
         /// 
-        /// Validates User Input
+        /// Validates User Input.
         /// </summary>
         private int ValidateInput()
         {
@@ -174,5 +197,5 @@ namespace WpfPresentationLayer
             return signal;
 
         }
-    }
-}
+    } // End of class
+} // End of namespace

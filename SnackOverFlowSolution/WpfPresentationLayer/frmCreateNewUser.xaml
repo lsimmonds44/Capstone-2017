@@ -9,7 +9,14 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
     </Window.Background>
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Create New User Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -31,7 +38,8 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-
+        <!--End of Grid Definitions-->
+        <!--Create New User Controls-->
         <Label Name="lblUserName" Grid.Row="0" Grid.Column="0" Content="Username" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
         <TextBox Name="txtUserName" Grid.Row="0" Grid.Column="1" Margin="8,8" FontSize="18" TextAlignment="Center" ToolTip="Enter a username"/>
 
@@ -81,5 +89,8 @@
         <Label Name="lblLastNameWarning" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="lastname invalid" Visibility="Hidden" Foreground="Red"/>
         <Label Name="lblPhoneWarning" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="phone invalid" Visibility="Hidden" Foreground="Red"/>
         <Label Name="lblEmailWarning" Grid.Row="11" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0" Content="Email invalid" Visibility="Hidden" Foreground="Red"/>
+        <!--End of Create New User Controls-->
     </Grid>
+    <!--End of Create New User Grid-->
 </Window>
+<!--End of Create New User Window-->

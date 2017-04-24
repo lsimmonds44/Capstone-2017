@@ -24,17 +24,44 @@ namespace WpfPresentationLayer
         MaintenanceScheduleManager _myMaintenanceScheduleManager = new MaintenanceScheduleManager();
         MaintenanceScheduleLineManager _myMaintenanceScheduleLineManager = new MaintenanceScheduleLineManager();
         int vehicleId;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Maintenance Record  form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="vehicleId"></param>
         public frmAddMaintenanceRecord(int vehicleId)
         {
             InitializeComponent();
             this.vehicleId = vehicleId;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancels and Closes the Add Maintenance Record form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// CSaves Changes made to the Add Maintenance Record form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -54,5 +81,5 @@ namespace WpfPresentationLayer
                 MessageBox.Show("There was an error saving the maintenance record." + ex);
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace

@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Create Supplier" Height="570" Width="450" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Create Supplier Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
             <RowDefinition Height="30" />
@@ -11,17 +18,26 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Look Up Username Grid-->
         <Grid Grid.Row="1">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Look Up Username Controls-->
             <Label Name="lblUsername" Grid.Column="0" Content="UserName: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Name="txtUsername" Grid.Column="1" Margin="0 0 3 0" MaxLength="50" TextChanged="txtUsername_TextChanged"/>
             <Button Name="btnLookup"  Grid.Column="2" Content="Lookup" Margin="0 0 10 0" Click="btnLookup_Click"/>
+            <!--End of Look Up Username Controls-->
         </Grid>
+        <!--End of Look Up Username Grid-->
+        <!--Supplier Information Grid-->
         <Grid Grid.Row="2">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
@@ -35,17 +51,23 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Supplier Information Controls-->
             <Label Name="lblName" Grid.Column="0" Grid.Row="0" Content="Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <Label Name="lblPhone"  Grid.Column="0" Grid.Row="1" Content="Phone: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <Label Name="lblFarmName" Grid.Column="0" Grid.Row="2" Content="Farm Name: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <Label Name="lblFarmAddress" Grid.Column="0" Grid.Row="3" Content="Farm Address: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <!--City Grid-->
             <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <!--Grid Definitions-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="65" />
                     <ColumnDefinition Width="75" />
                 </Grid.ColumnDefinitions>
+                <!--End of Grid Definitions-->
+                <!--City Controls-->
                 <Label Name="lblFarmCity" Grid.Column="0" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBox Name="txtFarmCity" Grid.Column="1" Margin="0 5 0 5" MaxLength="50" IsEnabled="False" />
                 <Label Name="lblFarmState" Grid.Column="2" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
@@ -101,7 +123,9 @@
                     <ComboBoxItem Content="WV" />
                     <ComboBoxItem Content="WY" />
                 </ComboBox>
+                <!--End of City Controls-->
             </Grid>
+            <!--End of City Grid-->
             <Label Name="lblFarmTaxID" Grid.Column="0" Grid.Row="5" Content="Farm Tax ID: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <Label Name="lblActive" Grid.Column="0" Grid.Row="6" Content="Active: " HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Name="txtName" Grid.Column="1" Grid.Row="0" Margin="0 5 10 5" IsEnabled="False"/>
@@ -110,57 +134,90 @@
             <TextBox Name="txtFarmAddress" Grid.Column="1" Grid.Row="3" Margin="0 5 10 5" IsEnabled="False"/>
             <TextBox Name="txtFarmTaxId" Grid.Column="1" Grid.Row="5" Margin="0 5 10 5" MaxLength="64" IsEnabled="False"/>
             <CheckBox Name="chkActive" Grid.Column="1" Grid.Row="6" Margin="0" VerticalAlignment="Center" IsChecked="True" IsEnabled="False" />
+            <!--End of Supplier Information Controls-->
         </Grid>
+        <!--End of Supplier Information Grid-->
+        <!--Product Section Grid-->
         <Grid Name="productSection" Grid.Row="3" IsEnabled="False">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Available Product Grid-->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <!--End of Grid Definitions-->
+                <!--Available Product Controls-->
                 <Label Name="lblAvailableProducts" Grid.Row="0" Content="Available Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 0 0 0"/>
+                <!--Available Product Data Grid-->
                 <DataGrid Name="dgAvailableProducts" Grid.Row="1" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
                           SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="10 0 0 0">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="dgtcAvailableProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <!--End of Available Product Data Grid-->
+                <!--End of Available Product Controls-->
             </Grid>
+            <!--End of Available Product Grid-->
+            <!--Add/Remove Product Grid-->
             <Grid Grid.Column="1">
+                <!--Grid Definitions-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <!--End of Grid Definitions-->
+                <!--Add/Remove Product Controls-->
                 <Button Name="btnAddToApproved" Grid.Row="1" Content="-->" Height="20" VerticalAlignment="Bottom" Margin="5 0 5 15" Click="btnAddToApproved_Click"/>
                 <Button Name="btnRemoveFromApproved" Grid.Row="2" Content="&lt;--" Height="20" VerticalAlignment="Top" Margin="5 15 5 0" Click="btnRemoveFromApproved_Click" />
+                <!--End of Add/Remove Product Controls-->
             </Grid>
+            <!--End of Add/Remove Product Grid-->
+            <!--Approved Product Grid-->
             <Grid Grid.Column="2">
+                <!--Grid Definitions-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <!--End of Grid Definitions-->
+                <!--Approved Product Controls-->
                 <Label Name="lblApprovedProducts" Grid.Row="0" Content="Approved Products" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 0 10 0"/>
+                <!--Approved Product Data Grid-->
                 <DataGrid Name="dgApprovedProducts" Grid.Row="1" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False"
                           SelectionMode="Single" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0 0 10 0">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="dgtcApprovedProductNameCol" Binding="{Binding Path=Name}" Header="Name" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <!--End of Approved Product Data Grid-->
+                <!--End of Approved Product Controls-->
             </Grid>
+            <!--End of Approved Product Grid-->
         </Grid>
+        <!--End of Product Section Grid-->
+        <!--Add Supplier Cancel Sumbit Grid-->
         <Grid Grid.Row="4">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
             <Button Name="btnCancel" Grid.Column="0" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
             <Button Name="btnSubmit" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
             <Button Name="btnSubmitAgreement" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="False"  Visibility="Hidden" Click="btnSubmitAgreement_Click"  />
         </Grid>
+        <!--End of Add Supplier Cancel Submit Grid-->
     </Grid>
+    <!-- End of Add Supplier Grid-->
 </Window>
+<!--End of Add Supplier Window-->

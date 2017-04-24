@@ -18,17 +18,32 @@ namespace WpfPresentationLayer
 {
     /// <summary>
     /// Daniel Brown
-    /// 03/15/2017
+    /// Created: 2017/03/15
     /// 
     /// Allows employees to approve or deny charity applications
     /// Interaction logic for frmCharityApproval.xaml
+    /// </summary>
+    /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized comments.
+    /// Standaridized methods.
     /// </summary>
     public partial class frmCharityApproval : Window
     {
         Charity _charity;
         ICharityManager _charityMgr;
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Charity Approval form.
+        /// Standaridized methods.
+        /// </summary>
+        /// <param name="charityMgr"></param>
+        /// <param name="charity"></param>
         public frmCharityApproval(ICharityManager charityMgr, Charity charity)
         {
             _charity = charity;
@@ -42,7 +57,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Daniel Brown
-        /// 03/15/2017
+        /// Created: 2017/03/15
         /// 
         /// Denies the current selected charity application
         /// </summary>
@@ -72,7 +87,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Daniel Brown
-        /// 03/15/2017
+        /// Created: 2017/03/15
         /// 
         /// Approves the current selected charity application
         /// </summary>
@@ -97,5 +112,5 @@ namespace WpfPresentationLayer
            
             this.Close();
         }
-    }
-}
+    } // End of class
+} // End of namespace

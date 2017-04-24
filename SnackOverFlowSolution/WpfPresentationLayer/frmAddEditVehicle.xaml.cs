@@ -23,21 +23,37 @@ namespace WpfPresentationLayer
     {
         VehicleManager _myVehicleManager = new VehicleManager();
         VehicleTypeManager _myVehicleTypeManager = new VehicleTypeManager();
-        List<VehicleType> currentVehicleTypes;
+        List<VehicleType> _currentVehicleTypes;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Edit Vehicle form.
+        /// Standaridized method.
+        /// </summary>
         public frmAddEditVehicle()
         {
             InitializeComponent();
-            ddlType.ItemsSource = getCurrentVehicleTypes();
-            ddlType.DisplayMemberPath = "VehicleTypeID";
-            ddlType.SelectedValuePath = "VehicleTypeID";
+            cboType.ItemsSource = getCurrentVehicleTypes();
+            cboType.DisplayMemberPath = "VehicleTypeID";
+            cboType.SelectedValuePath = "VehicleTypeID";
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Edit Vehicle form Update.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="vehicle"></param>
         public frmAddEditVehicle(Vehicle vehicle)
         {
             InitializeComponent();
-            ddlType.ItemsSource = getCurrentVehicleTypes();
-            ddlType.DisplayMemberPath = "VehicleTypeID";
-            ddlType.SelectedValuePath = "VehicleTypeID";
+            cboType.ItemsSource = getCurrentVehicleTypes();
+            cboType.DisplayMemberPath = "VehicleTypeID";
+            cboType.SelectedValuePath = "VehicleTypeID";
             txtVIN.Text = vehicle.VIN;
             txtMake.Text = vehicle.Make;
             txtModel.Text = vehicle.Model;
@@ -52,7 +68,7 @@ namespace WpfPresentationLayer
             {
                 radNo.IsChecked = true;
             }
-            ddlType.SelectedValue = vehicle.VehicleTypeID;
+            cboType.SelectedValue = vehicle.VehicleTypeID;
             btnSave.Content = "Update";
 
         }
@@ -60,7 +76,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Mason Allen
-        /// Created 03/01/2017
+        /// Created: 2017/03/01
         /// Retrieves a list of current _vehicle types
         /// </summary>
         /// <returns></returns>
@@ -68,13 +84,13 @@ namespace WpfPresentationLayer
         {
             try
             {
-                currentVehicleTypes = _myVehicleTypeManager.retreiveVehicleTypeList();
+                _currentVehicleTypes = _myVehicleTypeManager.retreiveVehicleTypeList();
             }
             catch (Exception)
             {
                 MessageBox.Show("There was a problem retrieving the current vehicle types");
             }
-            return currentVehicleTypes;
+            return _currentVehicleTypes;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -84,7 +100,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Mason Allen
-        /// Created 03/01/2017
+        /// Created: 2017/03/01
         /// Saves a new _vehicle record to the db based on information entered into text fields
         /// </summary>
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -103,7 +119,7 @@ namespace WpfPresentationLayer
                         Year = txtYear.Text,
                         Color = txtColor.Text,
                         Active = active,
-                        VehicleTypeID = ((VehicleType)ddlType.SelectedItem).VehicleTypeID.ToString()
+                        VehicleTypeID = ((VehicleType)cboType.SelectedItem).VehicleTypeID.ToString()
                     });
                     MessageBox.Show("Vehicle saved successfully");
                     this.Close();

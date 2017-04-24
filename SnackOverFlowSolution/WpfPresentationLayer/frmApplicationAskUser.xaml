@@ -6,26 +6,40 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Application Ask User" Height="200" Width="450">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Grid Status-->
     <Grid Name="dgGridStatus">
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Apply/Cancel Grid-->
         <Grid Grid.Row="2">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Apply/Cancel Controls-->
             <Button Name="btnApply" Grid.Column="0" Content="Apply" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Apply_Click"></Button>
             <Button Name="btnCancel" Grid.Column="1" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Cancel_Click"></Button>
+            <!--End of Apply/Cancel Controls-->
         </Grid>
+        <!--End of Apply/Cancel Grid-->
+        <!--Grid Status Controls-->
         <Label Name="lblWindowTitle" Content="Content is set by code" FontWeight="Bold" FontSize="15"  VerticalAlignment="center" HorizontalAlignment="Center"/>
-
+        <!--End of Grid Status Controls-->
     </Grid>
-
+    <!--End of Grid Status-->
 </Window>
+<!--End of Application Ask User Window-->

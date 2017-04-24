@@ -6,26 +6,40 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Check Supplier Status" Height="200" Width="350">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Check Supplier Status Grid-->
     <Grid Name="dgGridStatus">
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Check Supplier Status Control Grid-->
         <Grid Grid.Row="2">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Check Supplier Status Control Grid Controls-->
             <Button Name="btnApply" Grid.Column="0" Content="Apply" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Apply_Click"></Button>
             <Button Name="btnCancel" Grid.Column="1" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="Cancel_Click"></Button>
+            <!--End of Check Supplier Status Control Grid Controls-->
         </Grid>
+        <!--End of Check Supplier Status Control Grid-->
+        <!--Check Supplier Status Controls-->
         <Label Name="lblApplyForSupplier" Content="Would You Like to apply to be a supplier?" FontWeight="Bold" FontSize="15"  VerticalAlignment="center" HorizontalAlignment="Center"/>
-
+        <!--End of Check Supplier Status Controls-->
     </Grid>
-
+    <!--End of Check Supplier Status Grid-->
 </Window>
+<!--End of Check Supplier Status Window-->

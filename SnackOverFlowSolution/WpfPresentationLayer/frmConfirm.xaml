@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="frmConfirm" Height="200" Width="350">
+        Title="Confirm" Height="200" Width="350">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Confirm Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -17,9 +24,14 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Confirm Controls-->
         <Label Name="ConfirmTitle" Grid.Row="0" Grid.Column="0" Content="Confirm Product Lot Removal" Grid.ColumnSpan="2" FontSize="18" />
         <TextBlock Name="ConfirmBody" Text="Are you sure you want to remove or reject the product lot?" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" Margin="8 10 5 5" />
         <Button Name="ConfirmOk" Grid.Row="2" Grid.Column="0" Content="OK" Margin="35 10 10 7" Click="ConfirmOk_Click"  />
         <Button Name="ConfirmCancel" Grid.Row="2" Grid.Column="1" Content="Cancel" Margin="10 10 35 7" Click="ConfirmCancel_Click"  />
+        <!--End of Confirm Controls-->
     </Grid>
+    <!--End of Confirm Grid-->
 </Window>
+<!--End of Confirm Window-->

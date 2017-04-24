@@ -21,6 +21,14 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmCreateNewUser : Window
     {
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Create New User Window.
+        /// Standaridized Methods. 
+        /// </summary>
         public frmCreateNewUser()
         {
             InitializeComponent();
@@ -28,10 +36,10 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 2/12/17
-        /// Update
+        /// Created: 2017/02/12
+        /// 
         /// Bobby Thorne
-        /// 3/10/2017
+        /// Updated: 2017/3/10
         /// 
         /// This manages the create new user it checks each field and
         /// indicates what is invalid later update needs a better check
@@ -152,10 +160,19 @@ namespace WpfPresentationLayer
 
         }
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel Create New User Window.
+        /// Standaridized Methods. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
-    }
-}
+    } // End of class
+} // End of namespace
+
