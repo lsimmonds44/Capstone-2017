@@ -31,13 +31,14 @@ class PickupVC : UIViewController,UITableViewDataSource,UITableViewDelegate{
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        let address = _pickup.Address! 
+        let address = _pickup.Address!
         let addLine1 = address.AddressLine1 ?? ""
-        let addLine2 = address.AddressLine2 ?? ""
+        //Address line 2 was causing problems when creating a link to navigation
+        //let addLine2 = address.AddressLine2 ?? ""
         let addCity = address.City ?? ""
         let addState = address.State ?? ""
         let addZip = address.Zip ?? ""
-        _txtAddress.text = addLine1 + ", " + addLine2 + "\n" + addCity + ", " + addState + ", " + addZip
+        _txtAddress.text = addLine1 + ", \n" + addCity + ", " + addState + ", " + addZip
         _btnMarkPickedUp.addTarget(self, action: #selector(PickupVC.btnMarkPickedUpClicked), for: .touchUpInside)
         
         _tblProducts.dataSource = self

@@ -70,8 +70,13 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
         DispatchQueue.main.async {
             let allPins = self.map.annotations
             self.map.removeAnnotations(allPins)
-            self.displayAllRoutePins(routes: self._route)
-            self.displayPickupPin(pickup: self._pickup)
+            if(self._route != nil){
+                self.displayAllRoutePins(routes: self._route)
+            }
+            if(self._pickup != nil){
+                self.displayPickupPin(pickup: self._pickup)
+            }
+            
         }
     }
     

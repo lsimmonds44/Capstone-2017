@@ -27,8 +27,8 @@ class DeliveryManager : NSObject{
         - DeliveryId: The id of the delivery you want to update
         - newDeliveryStatus: A string representing the new status you want to give to the delivery
      */
-    func UpdateDeliveryStatus(DeliveryId:Int, newDeliveryStatus:String, completion: @escaping (_ result:Bool, _ userMessage:String)->()){
-        let url:URL = URL(string:getIPAsString() + "delivery/\(DeliveryId)/\(newDeliveryStatus)")!
+    func UpdateDeliveryStatus(DeliveryId:Int, newDeliveryStatus:String, verificationImageStr:String ,completion: @escaping (_ result:Bool, _ userMessage:String)->()){
+        let url:URL = URL(string:getIPAsString() + "delivery/\(DeliveryId)/\(newDeliveryStatus)/\(verificationImageStr)")!
 
         let task = session.dataTask(with: getRequest(url: url)) { (data, response, error) in
             do{

@@ -2,9 +2,11 @@
 using LogicLayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace MVCPresentationLayer.Controllers.Api
@@ -24,7 +26,7 @@ namespace MVCPresentationLayer.Controllers.Api
         /// <param name="newDeliveryStatus"></param>
         /// <returns></returns>
         [System.Web.Http.HttpGet]
-        public bool UpdateDeliveryStatus(int deliveryId, string newDeliveryStatus)
+        public bool UpdateDeliveryStatus(int deliveryId, string newDeliveryStatus, string verificationImage)
         {
             bool result = false;
             try
@@ -32,6 +34,17 @@ namespace MVCPresentationLayer.Controllers.Api
                 Delivery oldDelivery = _deliveryManager.RetrieveDeliveryById(deliveryId);
                 Delivery newDelivery = _deliveryManager.RetrieveDeliveryById(deliveryId);
                 newDelivery.StatusId = newDeliveryStatus;
+                byte[] verificationAsBytes = null;
+                try
+                {
+                    verificationAsBytes = Convert.FromBase64String(verificationImage);
+                }
+                catch
+                {
+                    verificationAsBytes = null;
+                }
+
+                newDelivery.Verification = verificationAsBytes;
 
                 if(_deliveryManager.UpdateDelivery(oldDelivery, newDelivery)){
                     result = true;

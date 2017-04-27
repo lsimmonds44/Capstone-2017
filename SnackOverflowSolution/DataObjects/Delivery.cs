@@ -13,7 +13,7 @@ namespace DataObjects
         public int? DeliveryId { get; set; }
         public int? RouteId { get; set; }
         public DateTime? DeliveryDate { get; set; }
-        public Stream Verification { get; set; }
+        public byte[] Verification { get; set; }
         public String StatusId { get; set; }
         public String DeliveryTypeId { get; set; }
         public int? OrderId { get; set; }

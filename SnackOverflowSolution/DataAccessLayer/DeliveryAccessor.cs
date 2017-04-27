@@ -66,7 +66,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -121,7 +121,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -355,7 +355,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -460,7 +460,7 @@ namespace DataAccessLayer
                         DeliveryId = reader.GetInt32(0),
                         RouteId = reader.GetInt32(1),
                         DeliveryDate = reader.GetDateTime(2),
-                        Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                        Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                         StatusId = reader.GetString(4),
                         DeliveryTypeId = reader.GetString(5),
                         OrderId = reader.GetInt32(6)
@@ -513,7 +513,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
