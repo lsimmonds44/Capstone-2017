@@ -276,13 +276,14 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@old_DELIVERY_DATE", oldDelivery.DeliveryDate);
 
             //Checking if the verification is null before assigning it as it used to break before doing this
-            cmd.Parameters.Add("@old_VERIFICATION", SqlDbType.VarBinary);
+            
             if (oldDelivery.Verification != null)
             {
-                cmd.Parameters["@old_VERIFICATION"].Value = oldDelivery.Verification;
+                cmd.Parameters.AddWithValue("@old_VERIFICATION", oldDelivery.Verification);
             }
             else
             {
+                cmd.Parameters.Add("@old_VERIFICATION", SqlDbType.VarBinary);
                 cmd.Parameters["@old_VERIFICATION"].Value = DBNull.Value;
             }
 
@@ -292,13 +293,14 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@new_ROUTE_ID", newDelivery.RouteId);
             cmd.Parameters.AddWithValue("@new_DELIVERY_DATE", newDelivery.DeliveryDate);
-            cmd.Parameters.Add("@new_VERIFICATION", SqlDbType.VarBinary);
+            
             if (newDelivery.Verification != null)
             {
-                cmd.Parameters["@new_VERIFICATION"].Value = newDelivery.Verification;
+                cmd.Parameters.AddWithValue("@new_VERIFICATION", newDelivery.Verification);
             }
             else
             {
+                cmd.Parameters.Add("@new_VERIFICATION", SqlDbType.VarBinary);
                 cmd.Parameters["@new_VERIFICATION"].Value = DBNull.Value;
             }          
 

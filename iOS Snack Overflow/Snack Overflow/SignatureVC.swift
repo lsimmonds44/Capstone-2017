@@ -149,7 +149,7 @@ class SignatureVC : UIViewController{
      */
     func btnSubmitClicked(){
         let data = UIImageJPEGRepresentation(_imageView.image!, 1.0)
-        let dataString = data?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+        let dataString = data?.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
         
         _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered", verificationImageStr: dataString!){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
             

@@ -25,8 +25,8 @@ namespace MVCPresentationLayer.Controllers.Api
         /// <param name="deliveryId"></param>
         /// <param name="newDeliveryStatus"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        public bool UpdateDeliveryStatus(int deliveryId, string newDeliveryStatus, string verificationImage)
+        [System.Web.Http.HttpPost]
+        public bool UpdateDeliveryStatus(int deliveryId, string newDeliveryStatus, [FromBody] string verificationImage)
         {
             bool result = false;
             try
@@ -34,17 +34,16 @@ namespace MVCPresentationLayer.Controllers.Api
                 Delivery oldDelivery = _deliveryManager.RetrieveDeliveryById(deliveryId);
                 Delivery newDelivery = _deliveryManager.RetrieveDeliveryById(deliveryId);
                 newDelivery.StatusId = newDeliveryStatus;
-                byte[] verificationAsBytes = null;
                 try
                 {
-                    verificationAsBytes = Convert.FromBase64String(verificationImage);
+                    byte[] verificationAsBytes = Convert.FromBase64String(verificationImage);
+                    newDelivery.Verification = verificationAsBytes;
                 }
                 catch
                 {
-                    verificationAsBytes = null;
+                    byte[] verificationAsBytes = null;
+                    newDelivery.Verification = verificationAsBytes;
                 }
-
-                newDelivery.Verification = verificationAsBytes;
 
                 if(_deliveryManager.UpdateDelivery(oldDelivery, newDelivery)){
                     result = true;
