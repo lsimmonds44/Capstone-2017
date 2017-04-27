@@ -61,6 +61,8 @@ namespace MVCPresentationLayer.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.UpdatedSuccess ? "Your account was updated."
+                : message == ManageMessageId.AppliedSuccess ? "Your appication will be reviewed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -379,7 +381,9 @@ namespace MVCPresentationLayer.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            UpdatedSuccess,
+            AppliedSuccess
         }
 
 #endregion

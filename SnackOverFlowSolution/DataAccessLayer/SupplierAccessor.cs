@@ -656,6 +656,126 @@ namespace DataAccessLayer
             return userAddress;
         }
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        public static SupplierWithAgreements RetrieveSupplierWithAggreementsBySupplierId(int supplierId)
+        {
+            SupplierWithAgreements supplier = null;
+
+            try
+            {
+                Supplier s = RetrieveSupplierBySupplierId(supplierId);
+                if (null == s)
+                {
+                    throw new ArgumentException("Unable to find supplier");
+                }
+                supplier = new SupplierWithAgreements()
+                {
+                    Active = s.Active,
+                    ApprovedBy = s.ApprovedBy,
+                    FarmAddress = s.FarmAddress,
+                    FarmCity = s.FarmCity,
+                    FarmName = s.FarmName,
+                    FarmState = s.FarmState,
+                    FarmTaxID = s.FarmTaxID,
+                    SupplierID = s.SupplierID,
+                    IsApproved = s.IsApproved,
+                    UserId = s.UserId
+                };
+                List<Agreement> temp = AgreementAccessor.retrieveAgreementsBySupplierId(supplierId);
+                List<AgreementWithProductName> agreements = new List<AgreementWithProductName>();
+                foreach(Agreement a in temp) 
+                {
+                    AgreementWithProductName newAgrement = new AgreementWithProductName()
+                    {
+                        Active = a.Active,
+                        AgreementId = a.AgreementId,
+                        ApprovedBy = a.ApprovedBy,
+                        DateSubmitted = a.DateSubmitted,
+                        IsApproved = a.IsApproved,
+                        ProductId = a.ProductId,
+                        SupplierId = a.ProductId,
+                        ProductName = ProductAccessor.RetrieveProduct(a.ProductId).Name
+                    };
+                    agreements.Add(newAgrement);
+                }
+                supplier.Agreements = agreements;
+                
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return supplier;
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static SupplierWithAgreements RetrieveSupplierWithAggreementsByUserId(int userId)
+        {
+            SupplierWithAgreements supplier = null;
+
+            try
+            {
+                Supplier s = RetrieveSupplierByUserId(userId);
+                if (null == s)
+                {
+                    throw new ArgumentException("Unable to find supplier");
+                }
+                supplier = new SupplierWithAgreements()
+                {
+                    Active = s.Active,
+                    ApprovedBy = s.ApprovedBy,
+                    FarmAddress = s.FarmAddress,
+                    FarmCity = s.FarmCity,
+                    FarmName = s.FarmName,
+                    FarmState = s.FarmState,
+                    FarmTaxID = s.FarmTaxID,
+                    SupplierID = s.SupplierID,
+                    IsApproved = s.IsApproved,
+                    UserId = s.UserId
+                };
+                List<Agreement> temp = AgreementAccessor.retrieveAgreementsBySupplierId(supplier.SupplierID);
+                List<AgreementWithProductName> agreements = new List<AgreementWithProductName>();
+                foreach (Agreement a in temp)
+                {
+                    AgreementWithProductName newAgrement = new AgreementWithProductName()
+                    {
+                        Active = a.Active,
+                        AgreementId = a.AgreementId,
+                        ApprovedBy = a.ApprovedBy,
+                        DateSubmitted = a.DateSubmitted,
+                        IsApproved = a.IsApproved,
+                        ProductId = a.ProductId,
+                        SupplierId = a.ProductId,
+                        ProductName = ProductAccessor.RetrieveProduct(a.ProductId).Name
+                    };
+                    agreements.Add(newAgrement);
+                }
+                supplier.Agreements = agreements;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return supplier;
+        }
+
 
     }
 }
