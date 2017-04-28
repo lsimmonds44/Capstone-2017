@@ -137,5 +137,18 @@ namespace MVCPresentationLayer.Controllers
         //    }
         //    base.Dispose(disposing);
         //}
+
+        public ActionResult Save(int? id)
+        {
+            try
+            {
+                ordMgr.SaveOrder((int)id);
+            }
+            catch (Exception ex)
+            {
+                ViewBag["Error"] = ex.Message + ex.InnerException.Message;
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

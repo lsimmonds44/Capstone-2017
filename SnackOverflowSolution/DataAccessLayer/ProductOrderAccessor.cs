@@ -412,5 +412,129 @@ namespace DataAccessLayer
 
             return rows;
         }
+
+
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/27
+        /// 
+        /// Saves a previously placed order
+        /// </summary>
+        /// 
+        /// <param name="productOrderID">The id of the product order to be updated.</param>
+        /// <param name="newStatus">The status as it should be.</param>
+        /// <returns>Rows affected</returns>
+        public static int SaveOrder(int productOrderID)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_save_order";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@ORDER_ID", productOrderID);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/27
+        /// 
+        /// Loads a previously placed order
+        /// </summary>
+        /// 
+        /// <param name="productOrderID">The id of the product order to be updated.</param>
+        /// <param name="newStatus">The status as it should be.</param>
+        /// <returns>Rows affected</returns>
+        public static int LoadOrder(int productOrderID)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_load_order";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@ORDER_ID", productOrderID);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+
+
+        /// <summary>
+        /// William Flood
+        /// Created: 2017/04/27
+        /// 
+        /// Saves a previously placed order
+        /// </summary>
+        /// 
+        /// <param name="productOrderID">The id of the product order to be updated.</param>
+        /// <param name="newStatus">The status as it should be.</param>
+        /// <returns>Rows affected</returns>
+        public static List<int> RetrieveSaveOrders(string username)
+        {
+            List<int> orderIDs = new List<int>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_saved_orders_by_user";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@USER_NAME", username);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    orderIDs.Add(reader.GetInt32(0));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return orderIDs;
+        }
     }
 }

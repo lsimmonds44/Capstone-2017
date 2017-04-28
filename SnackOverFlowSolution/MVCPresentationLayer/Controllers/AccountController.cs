@@ -26,20 +26,23 @@ namespace MVCPresentationLayer.Controllers
         private ApplicationUserManager _userManager;
         private IUserManager _appUserManager;
         private IUserCartManager _userCartManager;
+        private IProductOrderManager _orderManager;
 
-        public AccountController(IUserManager appUserManager, IUserCartManager _userCartManager)
+        public AccountController(IUserManager appUserManager, IUserCartManager _userCartManager, IProductOrderManager _orderManager)
         {
             this._appUserManager = appUserManager;
             this._userCartManager = _userCartManager;
+            this._orderManager = _orderManager;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager,
-            IUserCartManager _userCartManager)
+            IUserCartManager _userCartManager, IProductOrderManager _orderManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             this._appUserManager = appUserManager;
             this._userCartManager = _userCartManager;
+            this._orderManager = _orderManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -457,19 +460,20 @@ namespace MVCPresentationLayer.Controllers
         public ActionResult ViewCart()
         {
             var userName = User.Identity.Name;
-            var cartList = new List<UserCartLine>();
+            var pageModel = new CartPageModel();
 
             // Access IClaimsIdentity which contains claims
             //IClaimsIdentity claimsIdentity = (IClaimsIdentity)icp.Identity;
             try
             {
-                cartList = _userCartManager.RetrieveUserCart(userName);
+                pageModel.ItemsInCart = _userCartManager.RetrieveUserCart(userName);
+                pageModel.SavedOrderList = _orderManager.RetrieveSaveOrders(userName);
             }
             catch
             {
                 return new HttpStatusCodeResult(500);
             }
-            return View(cartList);
+            return View(pageModel);
         }
 
         /// <summary>
@@ -593,6 +597,19 @@ namespace MVCPresentationLayer.Controllers
 
             return false;
 
+        }
+
+        public ActionResult LoadOrder(int? orderID)
+        {
+            try
+            {
+                _orderManager.LoadOrder((int)orderID);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return RedirectToAction("ViewCart");
         }
 
         #region Helpers

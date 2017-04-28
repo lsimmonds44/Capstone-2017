@@ -159,5 +159,47 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/04/27
+        /// </summary>
+        /// <param name="orderID"></param>
+        public int SaveOrder(int orderID)
+        {
+            try
+            {
+                return ProductOrderAccessor.SaveOrder(orderID);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occured: ", ex);
+            }
+        }
+
+
+        public int LoadOrder(int productOrderID)
+        {
+            try
+            {
+                return ProductOrderAccessor.LoadOrder(productOrderID);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occured: ", ex);
+            }
+        }
+
+        public List<int> RetrieveSaveOrders(string username)
+        {
+            try
+            {
+                return ProductOrderAccessor.RetrieveSaveOrders(username);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occured: ", ex);
+            }
+        }
     }
 }

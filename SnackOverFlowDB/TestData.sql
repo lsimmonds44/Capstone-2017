@@ -332,7 +332,8 @@ GO
 INSERT INTO [dbo].[ORDER_LINE] (PRODUCT_ORDER_ID,PRODUCT_ID,PRODUCT_NAME,QUANTITY,GRADE_ID,PRICE,UNIT_DISCOUNT)
 VALUES
 (10003,10000,'Should not matter',5,'GRADE A', 5, 0),
-(10003,10001,'Who cares', 7, 'GRADE B', 16, 1)
+(10003,10001,'Who cares', 7, 'GRADE B', 16, 1),
+(10002,10001,'Who cares', 7, 'GRADE B', 16, 1)
 	
 
 print '*** Inserting Inspection Test Data ***'
