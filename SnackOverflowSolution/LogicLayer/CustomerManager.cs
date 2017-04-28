@@ -181,7 +181,7 @@ namespace LogicLayer
                 {
                     UserId = userData.UserId,
                     FederalTaxId = int.Parse(user.FederalTaxID),
-                    ApprovedBy = null,
+                    ApprovedBy = 0,
                     Active = true
                 };
 
