@@ -226,7 +226,7 @@ Changed database context to 'SnackOverflowDB'.
  
 *** Creating Foreign Key PICKUP_LINE_PICKUP_ID
  
-*** Creating Foreign Key PICKUP_LINE_PRODUCT_LOT_ID
+*** Creating Foreign Key PICKUP_LINE_PRODUCT_ID
  
 *** Creating Foreign Key PRODUCT_CATEGORY_PRODUCT_ID
  
@@ -685,6 +685,8 @@ Changed database context to 'SnackOverflowDB'.
 *** Creating procedure sp_retrieve_pickup_line_list
  
 *** Creating procedure sp_retrieve_pickup_list
+ 
+*** Creating procedure sp_retrieve_pickup_line_pickups_receieved
  
 *** Creating procedure sp_retrieve_product
  
