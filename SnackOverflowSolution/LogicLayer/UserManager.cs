@@ -81,12 +81,11 @@ namespace LogicLayer
         public bool AuthenticateUser(string userName, string password)
         {
             bool userFound;
-            UserAccessor accessor = new UserAccessor();
-            String foo = accessor.RetrieveUserSalt(userName);
-            String bar = HashSha256(password + foo);
+            String salt = UserAccessor.RetrieveUserSalt(userName);
+            String hash = HashSha256(password + salt);
             try
             {
-                userInstance = UserAccessor.Login(userName, bar);
+                userInstance = UserAccessor.Login(userName, hash);
                 if (null != userInstance)
                 {
                     userFound = true;
@@ -184,7 +183,7 @@ namespace LogicLayer
         /// <returns></returns>
         public string CreateNewUser(User user, string password, string confirmPassword)
         {
-            UserAccessor userAccessor = new UserAccessor();
+
             if (user.UserName.Length > 20 || user.UserName.Length < 4)
             {
                 return "Invalid Username";
@@ -231,7 +230,7 @@ namespace LogicLayer
             {
                 MailAddress m = new MailAddress(user.EmailAddress);
                 string username = "";
-                username = userAccessor.RetrieveUsernameByEmail(user.EmailAddress);
+                username = UserAccessor.RetrieveUsernameByEmail(user.EmailAddress);
                 if (username != null)
                 {
                     return "Used Email";
@@ -306,14 +305,14 @@ namespace LogicLayer
             var returnValue = 0;
             if (newPassword.Equals(confirmPassword))
             {
-                var accessor = new UserAccessor();
-                String oldSalt = accessor.RetrieveUserSalt(userName);
+
+                String oldSalt = UserAccessor.RetrieveUserSalt(userName);
                 String oldHash = HashSha256(oldPassword + oldSalt);
                 String newSalt = RandomString(32);
                 String newHash = HashSha256(newPassword + newSalt);
                 try
                 {
-                    returnValue = accessor.UpdatePassword(userName, oldSalt, oldHash, newSalt, newHash);
+                    returnValue = UserAccessor.UpdatePassword(userName, oldSalt, oldHash, newSalt, newHash);
                 }
                 catch
                 {
@@ -342,7 +341,7 @@ namespace LogicLayer
             String bar = HashSha256(password + foo);
             try
             {
-                results = (new UserAccessor()).ResetPassword(userName, foo, bar);
+                results = UserAccessor.ResetPassword(userName, foo, bar);
             }
             catch
             {
@@ -362,7 +361,7 @@ namespace LogicLayer
         public string RetrieveUsernameByEmail(string email)
         {
 
-            return (new UserAccessor()).RetrieveUsernameByEmail(email);
+            return UserAccessor.RetrieveUsernameByEmail(email);
         }
 
         /// <summary>
@@ -378,7 +377,7 @@ namespace LogicLayer
             User user = null;
             try
             {
-                user = UserAccessor.RetrieveUserByUserId(userId);
+                user = UserAccessor.RetrieveUser(userId);
             }
             catch (SqlException ex)
             {

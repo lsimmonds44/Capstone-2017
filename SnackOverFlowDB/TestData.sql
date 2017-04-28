@@ -141,12 +141,12 @@ GO
 INSERT INTO [dbo].[Supplier]
 	(User_ID, IS_Approved, Approved_BY, Farm_Name, Farm_Address, Farm_City, Farm_State, Farm_Tax_ID,Active)
 VALUES
-	(10002,1,10001,'Glasgow Foods', 'Glasgow Drive', '"Cedar Rapids"', 'IA', '2322',1),
-	(10003,1,10001,'Trapp Foods', '6301 Trapp Drive', '"Cedar Rapids"', 'IA', '2322',1),
-	(10004,1,10001,'Browmich Foods', '212 Browmich Drive', '"Cedar Rapids"', 'IA', '2322',1),
-	(10005,1,10001,'Hench Foods', '222 Hench AV', '"Cedar Rapids"', 'IA', '2322',1),
-	(10006,0,null,'Parker Produce', '4985 Vegetable Ln', '"Cedar Rapids"', 'IA', '2452',1),
-	(10007,0,null,'Marion Farms', '5643 170th St', 'Marion', 'IA', '2782',1)
+	(10002,1,10001,'Glasgow Foods', '6309 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
+	(10003,1,10001,'Trapp Foods', '6301 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
+	(10004,1,10001,'Browmich Foods', '6310 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
+	(10005,1,10001,'Hench Foods', '6306 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
+	(10006,0,null,'Parker Produce', '6321 Kirkwood Blvd', "Cedar Rapids", 'IA', '2452',1),
+	(10007,0,null,'Marion Farms', '6306 Kirkwood Blvd', 'Marion', 'IA', '2782',1)
 GO
 
 print '*** Inserting Product Test Data ***'
@@ -319,12 +319,12 @@ INSERT INTO [dbo].[PRODUCT_ORDER]
       ZIP, HAS_ARRIVED
 	)
 VALUES
-	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, "141 C St SW", "Cedar Rapids", "IA", "52405", 0),
-	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, "24 Main Street", "A Town", "IL", "35482", 0),
-	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, "51 First St", "Springfield", "MO", "22241", 0),
-	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, "1138 H Ave", "Marion", "IA", "52423", 0),
-	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, "23 45th Ave", "Hiawatha", "IA", "52402", 0),
-	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, "62 River Street", "Dubuque", "IA", "55932", 0)
+	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, "6302 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, "6311 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, "6307 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, "6303 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, "6310 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, "6314 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0)
 GO
 
 print '*** Inserting Order Line Test Data ***'

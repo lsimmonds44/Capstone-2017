@@ -9,7 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class UserAccessor
+    /// <summary>
+    /// Aaron Usher
+    /// Updated: 2017/04/14
+    ///
+    /// Class to handle test database interactions.
+    public static class UserAccessor
     {
 
         /// <summary>
@@ -213,7 +218,9 @@ namespace DataAccessLayer
             if (user.Zip != null)
             {
                 cmd.Parameters.AddWithValue("@ZIP", user.Zip);
-            }else{
+            }
+            else
+            {
                 cmd.Parameters.AddWithValue("@ZIP", DBNull.Value);
             }
 
@@ -250,7 +257,7 @@ namespace DataAccessLayer
         /// </remarks>
         /// <param name="username">The username to search on.</param>
         /// <returns>Salt of the user.</returns>
-        public string RetrieveUserSalt(string username)
+        public static string RetrieveUserSalt(string username)
         {
 
             var salt = "";
@@ -268,7 +275,7 @@ namespace DataAccessLayer
                 var result = cmd.ExecuteScalar();
                 if (result != null)
                 {
-                    salt = result.ToString();                  
+                    salt = result.ToString();
                 }
             }
             catch
@@ -448,7 +455,7 @@ namespace DataAccessLayer
                         State = reader.IsDBNull(11) ? null : reader.GetString(11),
                         Zip = reader.IsDBNull(12) ? null : reader.GetString(12)
                     };
-                }    
+                }
             }
             catch
             {
@@ -477,7 +484,7 @@ namespace DataAccessLayer
         /// </remarks>
         /// <param name="emailAddress">The email to search on.</param>
         /// <returns>The username.</returns>
-        public string RetrieveUsernameByEmail(string emailAddress)
+        public static string RetrieveUsernameByEmail(string emailAddress)
         {
             var username = "";
 
@@ -523,7 +530,7 @@ namespace DataAccessLayer
         /// <param name="newSalt">The new salt.</param>
         /// <param name="newPasswordHash">The new password hash.</param>
         /// <returns>Rows affected.</returns>
-        public int UpdatePassword(string username, string oldSalt, string oldPasswordHash, string newSalt, string newPasswordHash)
+        public static int UpdatePassword(string username, string oldSalt, string oldPasswordHash, string newSalt, string newPasswordHash)
         {
             var rows = 0;
 
@@ -572,7 +579,7 @@ namespace DataAccessLayer
         /// <param name="salt">The new salt for the user.</param>
         /// <param name="passwordHash">The new password for the user.</param>
         /// <returns>Rows affected.</returns>
-        public int ResetPassword(string username, string salt, string passwordHash)
+        public static int ResetPassword(string username, string salt, string passwordHash)
         {
             var rows = 0;
 
@@ -584,7 +591,7 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@USERNAME", username);
             cmd.Parameters.AddWithValue("@PASSWORD_SALT", salt);
             cmd.Parameters.AddWithValue("@PASSWORD_HASH", passwordHash);
-            
+
             try
             {
                 conn.Open();
@@ -604,13 +611,13 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
-        /// Attempts to retrieve a user from the DB associated with the userId
+        /// Attempts to retrieve a user from the DB.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static User RetrieveUserByUserId(int userId)
+        /// <param name="userId">The id of the relevant user.</param>
+        /// <returns>The user.</returns>
+        public static User RetrieveUser(int userId)
         {
             User user = null;
 
@@ -620,6 +627,7 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@USER_ID", userId);
+
             try
             {
                 conn.Open();
@@ -656,30 +664,48 @@ namespace DataAccessLayer
 
             return user;
         }
-
-        public static int DeleteUser(int id)
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Deletes a user from the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="userId">The id of the user to delete.</param>
+        /// <returns>Rows affected.</returns>
+        public static int DeleteUser(int userId)
         {
-            int rowsAffected = 0;
+            int rows = 0;
 
-            const string cmdText = @"sp_delete_app_user";
+            var cmdText = @"sp_delete_app_user";
             var conn = DBConnection.GetConnection();
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            using (var cmd = new SqlCommand(cmdText, conn) {CommandType = CommandType.StoredProcedure})
+            cmd.Parameters.AddWithValue("@USER_ID", userId);
+
+            try
             {
-                cmd.Parameters.AddWithValue("@USER_ID", id);
-
-                try
-                {
-                    conn.Open();
-                    rowsAffected = cmd.ExecuteNonQuery();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
             }
 
-            return rowsAffected;
+            return rows;
         }
     }
 }
