@@ -112,6 +112,11 @@ namespace WpfPresentationLayer
         {
             decimal parsedSalary;
             bool shouldPost=true;
+            if (0 > cboUserID.SelectedIndex)
+            {
+                shouldPost = false;
+                MessageBox.Show("Select a user to assign to role");
+            }
             if (!Decimal.TryParse(txtSalary.Text, out parsedSalary))
             {
                 shouldPost = false;
@@ -151,7 +156,6 @@ namespace WpfPresentationLayer
 
                 }
             }
-            this.Close();
         }
     } // End of class
 } // End of namespace
