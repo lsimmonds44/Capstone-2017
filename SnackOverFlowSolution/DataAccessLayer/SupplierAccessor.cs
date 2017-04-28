@@ -582,7 +582,7 @@ namespace DataAccessLayer
 
             try
             {
-                Supplier s = RetrieveSupplierBySupplierId(supplierId);
+                Supplier s = RetrieveSupplier(supplierId);
                 if (null == s)
                 {
                     throw new ArgumentException("Unable to find supplier");
