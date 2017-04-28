@@ -11,13 +11,20 @@
             @if (!Request.IsAuthenticated)
             {
                 <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             }
             else
             {
-                <li>@Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                <li>@Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { id = "accountLink" })</li>
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                }
+
             }
             
-            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            
         </ul>
     </nav>
 </div><!-- /main-nav-inner -->
