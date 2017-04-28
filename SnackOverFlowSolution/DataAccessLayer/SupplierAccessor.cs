@@ -29,6 +29,11 @@ namespace DataAccessLayer
         /// Updated: 2017/04/21
         /// 
         /// Standardized method; changed signature from fields of a Supplier to a Supplier itself.
+        /// 
+        /// Christian Lopez
+        /// Updated: 2017/04/28
+        /// 
+        /// Fixed standardization
         /// </remarks>
         /// 
         /// <param name="supplier">The supplier to create.</param>
@@ -38,18 +43,40 @@ namespace DataAccessLayer
             int rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_create_supplier";
+            string cmdText;
+            if (supplier.ApprovedBy == null)
+            {
+                cmdText = @"sp_create_supplier_application";
+            }
+            else
+            {
+                cmdText = @"sp_create_supplier";
+            }
+            
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@USER_ID", supplier.UserId);
-            cmd.Parameters.AddWithValue("@IS_APPROVED", supplier.IsApproved);
-            cmd.Parameters.AddWithValue("@APPROVED_BY", supplier.ApprovedBy);
-            cmd.Parameters.AddWithValue("@FARM_NAME", supplier.FarmName);
-            cmd.Parameters.AddWithValue("@FARM_ADDRESS", supplier.FarmAddress);
-            cmd.Parameters.AddWithValue("@FARM_CITY", supplier.FarmCity);
-            cmd.Parameters.AddWithValue("@FARM_STATE", supplier.FarmState);
-            cmd.Parameters.AddWithValue("@FARM_TAX_ID", supplier.FarmTaxID);
+            if (supplier.ApprovedBy == null)
+            {
+                cmd.Parameters.AddWithValue("@USER_ID", supplier.UserId);
+                cmd.Parameters.AddWithValue("@FARM_NAME", supplier.FarmName);
+                cmd.Parameters.AddWithValue("@FARM_ADDRESS", supplier.FarmAddress);
+                cmd.Parameters.AddWithValue("@FARM_CITY", supplier.FarmCity);
+                cmd.Parameters.AddWithValue("@FARM_STATE", supplier.FarmState);
+                cmd.Parameters.AddWithValue("@FARM_TAX_ID", supplier.FarmTaxID);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@USER_ID", supplier.UserId);
+                cmd.Parameters.AddWithValue("@IS_APPROVED", supplier.IsApproved);
+                cmd.Parameters.AddWithValue("@APPROVED_BY", supplier.ApprovedBy);
+                cmd.Parameters.AddWithValue("@FARM_NAME", supplier.FarmName);
+                cmd.Parameters.AddWithValue("@FARM_ADDRESS", supplier.FarmAddress);
+                cmd.Parameters.AddWithValue("@FARM_CITY", supplier.FarmCity);
+                cmd.Parameters.AddWithValue("@FARM_STATE", supplier.FarmState);
+                cmd.Parameters.AddWithValue("@FARM_TAX_ID", supplier.FarmTaxID);
+            }
+            
 
             try
             {

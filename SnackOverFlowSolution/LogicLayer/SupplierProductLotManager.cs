@@ -80,7 +80,7 @@ namespace LogicLayer
         {
             bool result = false;
 
-            result = SupplierProductLotAccessor.DeleteSupplierProductLot(lot);
+            result = 1 == SupplierProductLotAccessor.DeleteSupplierProductLot(lot);
 
             return result;
         }
@@ -125,7 +125,7 @@ namespace LogicLayer
         {
             try
             {
-                SupplierProductLot lot = SupplierProductLotAccessor.RetrieveSupplierProductLotById(id);
+                SupplierProductLot lot = SupplierProductLotAccessor.RetrieveSupplierProductLot(id);
                 return lot;
             }
             catch (SqlException ex)

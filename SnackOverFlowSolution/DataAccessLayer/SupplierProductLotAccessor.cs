@@ -10,44 +10,50 @@ using System.Data;
 namespace DataAccessLayer
 {
     /// <summary>
-	/// Ethan Jorgensen
-    /// Created on 2017-04-13
-	///
-    /// Contains the access methods for Product Lots
-    /// </summary>
+    /// Ethan Jorgensen
+    /// Created: 2017/04/13
+    ///
+    /// Class to handle database interactions involving supplier product lots.
     public static class SupplierProductLotAccessor
     {
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created: 2017-04-13
+        /// Created: 2017/04/13
         /// 
         /// Adds a new product lot to the database.
         /// </summary>
-        /// <param name="productLot">THe product lot to add.</param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierProductLot">The product lot to add.</param>
         /// <returns>Rows affected.</returns>
-        public static int CreateSupplierProductLot(SupplierProductLot productLot)
+        public static int CreateSupplierProductLot(SupplierProductLot supplierProductLot)
         {
             int rows = 0;
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_supplier_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SUPPLIER_ID", productLot.SupplierId);
-            cmd.Parameters.AddWithValue("@PRODUCT_ID", productLot.ProductId);
-            cmd.Parameters.AddWithValue("@QUANTITY", productLot.Quantity);
-            cmd.Parameters.AddWithValue("@EXPIRATION_DATE", productLot.ExpirationDate);
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierProductLot.SupplierId);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", supplierProductLot.ProductId);
+            cmd.Parameters.AddWithValue("@QUANTITY", supplierProductLot.Quantity);
+            cmd.Parameters.AddWithValue("@EXPIRATION_DATE", supplierProductLot.ExpirationDate);
 
             try
             {
                 conn.Open();
-
                 rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -60,27 +66,31 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// 2017-04-13
+        /// Created: 2017/04/13
         /// 
         /// Gets a product lot object using the productlotid 
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="productLotID">the id to search on</param>
         /// <returns>A product lot</returns>
-        public static SupplierProductLot RetrieveSupplierProductLot(int? productLotID)
+        public static SupplierProductLot RetrieveSupplierProductLot(int productLotID)
         {
-            SupplierProductLot lot = new SupplierProductLot();
+            SupplierProductLot supplierProductLot = null;
 
-            // Getting a SqlCommand object
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
-
             cmd.CommandType = CommandType.StoredProcedure;
-
 
             cmd.Parameters.AddWithValue("@SUPPLIER_PRODUCT_LOT_ID", productLotID);
 
-            // Attempting to run the stored procedure
             try
             {
                 conn.Open();
@@ -88,8 +98,7 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-
-                    lot = new SupplierProductLot()
+                    supplierProductLot = new SupplierProductLot()
                     {
                         SupplierProductLotId = reader.GetInt32(0),
                         SupplierId = reader.GetInt32(1),
@@ -98,7 +107,6 @@ namespace DataAccessLayer
                         ExpirationDate = reader.GetDateTime(4)
 
                     };
-                    reader.Close();
                 }
             }
             catch (Exception)
@@ -109,28 +117,37 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return lot;
+
+            return supplierProductLot;
         }
 
         /// <summary>
         /// Ethan Jorgensen
-        /// 2017-04-13
+        /// Created: 2017/04/13
         /// 
         /// Returns a list of SupplierProductLots by supplier
         /// </summary>
-        /// <param name="supplier"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The relevant supplier.</param>
+        /// <returns>A list of SupplierProductLots.</returns>
         public static List<SupplierProductLot> RetrieveSupplierProductLotsBySupplier(Supplier supplier)
         {
-            List<SupplierProductLot> productLots = new List<SupplierProductLot>();
+            var supplierProductLots = new List<SupplierProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_product_lot_by_supplier_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_ID"].Value = supplier.SupplierID;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplier.SupplierID);
+
             try
             {
                 conn.Open();
@@ -139,45 +156,49 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        SupplierProductLot lot = new SupplierProductLot();
-
-                        lot.SupplierProductLotId = reader.GetInt32(0);
-                        lot.SupplierId = reader.GetInt32(1);
-                        lot.ProductId = reader.GetInt32(2);
-                        lot.Quantity = reader.GetInt32(3);
-                        lot.ExpirationDate = reader.GetDateTime(4);
-                        if (!reader.IsDBNull(5))
+                        SupplierProductLot lot = new SupplierProductLot()
                         {
-                            lot.Price = reader.GetDecimal(5);
-                        }
+                            SupplierProductLotId = reader.GetInt32(0),
+                            SupplierId = reader.GetInt32(1),
+                            ProductId = reader.GetInt32(2),
+                            Quantity = reader.GetInt32(3),
+                            ExpirationDate = reader.GetDateTime(4),
+                            Price = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5)
+                        };
 
-
-                        productLots.Add(lot);
                     }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 conn.Close();
             }
-            return productLots;
+
+            return supplierProductLots;
         }
 
         /// <summary>
         /// Ethan Jorgensen
-        /// 2017-04-13
+        /// Created: 2017/04/13
+        /// 
         /// Gets a list of product lots from the database.
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardzied method.
+        /// </remarks>
+        /// 
+        /// <returns>A list of all supplier product lots.</returns>
         public static List<SupplierProductLot> RetrieveSupplierProductLots()
         {
-            List<SupplierProductLot> lots = new List<SupplierProductLot>();
+            var supplierProductLots = new List<SupplierProductLot>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_product_lot_list";
@@ -192,26 +213,20 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        SupplierProductLot lot = new SupplierProductLot();
-
-                        lot.SupplierProductLotId = reader.GetInt32(0);
-                        lot.SupplierId = reader.GetInt32(1);
-                        lot.ProductId = reader.GetInt32(2);
-                        lot.Quantity = reader.GetInt32(3);
-                        lot.ExpirationDate = reader.GetDateTime(4);
-                        if (!reader.IsDBNull(5))
+                        supplierProductLots.Add(new SupplierProductLot()
                         {
-                            lot.Price = reader.GetDecimal(5);
-                        }
-
-
-                        lots.Add(lot);
+                            SupplierProductLotId = reader.GetInt32(0),
+                            SupplierId = reader.GetInt32(1),
+                            ProductId = reader.GetInt32(2),
+                            Quantity = reader.GetInt32(3),
+                            ExpirationDate = reader.GetDateTime(4),
+                            Price = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5)
+                        });
                     }
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -219,23 +234,40 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return lots;
+            return supplierProductLots;
         }
 
-        public static bool DeleteSupplierProductLot(SupplierProductLot lot)
+        /// <summary>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Deletes the given supplier product lot from the database.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardize method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierProductLot">The supplier product lot to delete.</param>
+        /// <returns>Rows affected.</returns>
+        public static int DeleteSupplierProductLot(SupplierProductLot supplierProductLot)
         {
-            var result = false;
+            var rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_delete_supplier_product_lot";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@SUPPLIER_PRODUCT_LOT_ID", lot.SupplierProductLotId);
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_PRODUCT_LOT_ID", supplierProductLot.SupplierProductLotId);
 
             try
             {
                 conn.Open();
-                result = cmd.ExecuteNonQuery() == 1;
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -247,58 +279,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return result;
-        }
-
-        /// <summary>
-        /// Ethan Jorgensen
-        /// 2017-04-13
-        /// 
-        /// Returns a product lot associated with the id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static SupplierProductLot RetrieveSupplierProductLotById(int id)
-        {
-            SupplierProductLot lot = null;
-
-            var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_supplier_product_lot";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@SUPPLIER_PRODUCT_LOT_ID", id);
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    lot = new SupplierProductLot();
-
-                    lot.SupplierProductLotId = reader.GetInt32(0);
-                    lot.SupplierId = reader.GetInt32(1);
-                    lot.ProductId = reader.GetInt32(2);
-                    lot.Quantity = reader.GetInt32(3);
-                    lot.ExpirationDate = reader.GetDateTime(4);
-                    if (!reader.IsDBNull(5))
-                    {
-                        lot.Price = reader.GetDecimal(5);
-                    }
-                }
-                reader.Close();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return lot;
+            return rows;
         }
     }
 }
