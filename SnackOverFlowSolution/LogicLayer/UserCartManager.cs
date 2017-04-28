@@ -16,9 +16,11 @@ namespace LogicLayer
             List<UserCartLine> userCart = null;
             try
             {
-                userCart = UserCartAccessor.RetrieveCartForUser(userName);
-            } catch (Exception ex) {
-                throw new ApplicationException("Error retrieving information:",ex);
+                userCart = UserCartAccessor.RetrieveCartByUsername(userName);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retrieving information:", ex);
             }
             return userCart;
         }
@@ -37,7 +39,9 @@ namespace LogicLayer
             try
             {
                 return UserCartAccessor.RemoveFromCart(productId, gradeId, quantity, userId);
-            } catch {
+            }
+            catch
+            {
                 throw;
             }
         }
@@ -47,9 +51,9 @@ namespace LogicLayer
         {
             try
             {
-                return UserCartAccessor.AddToCart(toAdd);
+                return UserCartAccessor.CreateUserCartLine(toAdd);
             }
-            catch(System.Data.SqlClient.SqlException ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 throw new ApplicationException("An error occured: ", ex);
             }
