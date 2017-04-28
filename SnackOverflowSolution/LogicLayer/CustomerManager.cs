@@ -182,7 +182,7 @@ namespace LogicLayer
                     UserId = userData.UserId,
                     FederalTaxId = int.Parse(user.FederalTaxID),
                     ApprovedBy = null,
-                    Active = false
+                    Active = true
                 };
 
                 if (CreateCommercialAccount(cm))

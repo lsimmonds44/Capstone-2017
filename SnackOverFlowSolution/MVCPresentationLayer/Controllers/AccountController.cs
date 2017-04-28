@@ -96,7 +96,7 @@ namespace MVCPresentationLayer.Controllers
                        context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
             //If not approved, HasOrAssignRoles returns false
-            if (!HasOrAssignRoles(context, model) && user != null)
+            if (!HasOrAssignRoles(context, model) )//&& user != null)
                 return View("ApprovalStatus");
 
             //Finds username in case of email is provided during login
@@ -552,6 +552,10 @@ namespace MVCPresentationLayer.Controllers
 
             }
 
+            var identityUserRoles = user.Roles;
+            if (identityUserRoles.Count != 0)
+                return true;
+
             if (null != userFound)
             {
                 bool[] roles = null;
@@ -570,10 +574,10 @@ namespace MVCPresentationLayer.Controllers
                 if (user == null)
                     return false;
 
-                var identityUserRoles = user.Roles;
+                //var identityUserRoles = user.Roles;
 
-                if (identityUserRoles.Count != 0)
-                    return true;
+                //if (identityUserRoles.Count != 0)
+                //    return true;
 
                 if (roles != null)
                 {
