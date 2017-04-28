@@ -151,7 +151,7 @@ namespace LogicLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Creaded: 2017/04/19
+        /// Created: 2017/04/19
         /// </summary>
         /// <param name="deliveryId"></param>
         /// <returns></returns>
