@@ -598,7 +598,12 @@ namespace MVCPresentationLayer.Controllers
             return false;
 
         }
-
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/04/27
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <returns></returns>
         public ActionResult LoadOrder(int? orderID)
         {
             try

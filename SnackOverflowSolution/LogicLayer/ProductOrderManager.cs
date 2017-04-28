@@ -178,6 +178,11 @@ namespace LogicLayer
         }
 
 
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/04/27
+        /// </summary>
+        /// <param name="productOrderID"></param>
         public int LoadOrder(int productOrderID)
         {
             try
@@ -190,6 +195,11 @@ namespace LogicLayer
             }
         }
 
+        /// <summary>
+        /// William Flood
+        /// Created on 2017/04/27
+        /// </summary>
+        /// <param name="username"></param>
         public List<int> RetrieveSaveOrders(string username)
         {
             try
