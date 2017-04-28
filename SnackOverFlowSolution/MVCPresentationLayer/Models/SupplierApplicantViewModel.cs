@@ -65,7 +65,7 @@ namespace MVCPresentationLayer.Models
         public bool Active { get; set; }
 
         [Required]
-        [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$", ErrorMessage="Passwords must be a combination of letters, digits, and special characters.")]
+        [MinLength(7, ErrorMessage = "Password must be at least 7 characters.")]
         public string Password { get; set; }
         [Required]
         [CompareAttribute("Password",ErrorMessage="Passwords do not match")]
