@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataObjects.UserCartLine>
+﻿@model MVCPresentationLayer.Models.CartPageModel
 
 @{
     ViewBag.Title = "View Cart";
@@ -13,7 +13,7 @@
             <th>Total:</th>
             <th>Remove:</th>
         </tr>
-    @foreach (var cartItem in Model)
+    @foreach (var cartItem in Model.ItemsInCart)
     {
         <tr>
             <td>@cartItem.Name</td>
@@ -31,6 +31,15 @@
         </tr>
     }
 </table>
+<form method="post" action="LoadOrder">
+    <select name="orderID">
+        @foreach (var orderID in Model.SavedOrderList)
+        {
+            <option value="@orderID">@orderID</option>
+        }
+    </select>
+    <input type="submit" value="Load" name="load" />
+</form>
 <div class="text-center">
     @Html.ActionLink("Continue Shpping", "Index", "Products", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Checkout now", "Checkout", "Cart", null, new { @class = "btn btn-primary" })

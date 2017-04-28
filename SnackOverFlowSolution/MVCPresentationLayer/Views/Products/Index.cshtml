@@ -1,57 +1,79 @@
 ﻿@model MVCPresentationLayer.Models.ProductsListViewModel
 @Scripts.Render("~/bundles/searchproducts")
+
 @{
-    ViewBag.Title = "Available Products";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    @Scripts.Render("~/bundles/searchproducts")
 }
-@*
-    Last updated 04/16/17 by Skyler Hiscock
-*@
 
-<h2>Available Products</h2>
-<div class="row panel">
-    <div id="categories" class="col-xs-2">
-        @Html.Action("NavMenu", "Products", new { categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory })
-    </div>
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
-    {
-        <p>
-            @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search products" })
-            <input type="submit" value="Search" class="btn btn-primary" />
-            <input type="button" value="Clear" class="btn" id="search-clear" />
-        </p>
-    }
-    <table class="col-xs-8">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().PriceString)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Supplier_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CategoryID)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.ImageBinary)
-                </th>*@
-            <th></th>
-            <th></th>
-        </tr>
+<!-- Start Top Bar Banner and Categories -->
+<header class="main-header scrollme" id="top">
 
-        @foreach (var item in Model.Products)
-        {
-            <tr>
-                @Html.Partial("_ProductSummary", item)
-            </tr>
-        }
-        <div class="btn-group pull-right">
-            @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search = Model.SearchPhrase, category = Model.CurrentCategory, page = x }))
+    @*Cart*@
+    <div class="container">
+        <div class="shopping-cart style3">
+            @Html.Partial("_CartPartial")
         </div>
-    </table>
+    </div>
+    @*End of Cart*@
+
+
+    <div class="top-banner-container top-banner-container-style2">
+        @Html.Partial("_TopSectionPartial")
+
+        @*Filters Strips*@
+        <div class="header-bottom-bar style3">
+            <div class="container">
+                <div class="row">
+
+                    @*Category Filter*@
+                    <div class="col-md-9">
+                        @Html.Action("NavMenu", "Products", new { categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory })
+                    </div>
+                    @*End of Category Filters*@
+
+                    @*Search Bar*@
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "search-form" }))
+                        {
+                            @Html.TextBox("search", null, new { name = "search", id = "search-clear", placeholder = "Search products" })
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        }
+                    </div>
+                    @*End of Search Bar*@
+
+                </div>
+            </div>
+        </div>
+        @*End of Filters Strip*@
+    </div>
+
+</header>
+<!-- End of top bar banner and categories -->
+
+@*Products Section*@
+<section class="store-items style3">
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model.Products)
+            {
+                @Html.Partial("_ProductSummary", item)
+            }
+
+        </div>
+
+    </div>
+
+
+
+</section>
+@*End of Products Section*@
+
+@*Pagination*@
+<div class="button-style2 load-more align-center fadeInUp ">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("IndexTemp", new { search = Model.SearchPhrase, category = Model.CurrentCategory, page = x }))
 </div>
+@*End of Pagination*@

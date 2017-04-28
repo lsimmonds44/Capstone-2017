@@ -5,7 +5,7 @@
     <div class="cart-items">
         <div class="cart-counter">
             <h5><span><span>2</span> Items</span> In Cart</h5>
-        </div><!-- /cart-counter -->
+        </div>
         <a href="" class="remove-items"><i class="fa fa-times-circle"></i></a>
         <ul>
 
@@ -15,7 +15,7 @@
                     <p class="food-name"><a href="#">Eggs</a>
                     </p>
                     <p class="food-price">$27</p>
-                </div><!-- /item-contaeinr -->
+                </div>
             </li>
 
             <li>
@@ -24,11 +24,12 @@
                     <p class="food-name"><a href="#">Eggs</a>
                     </p>
                     <p class="food-price">$24</p>
-                </div><!-- /item-contaeinr -->
+                </div>
             </li>
+
         </ul>
 
-        <a href="#" class="button view-cart-btn">View Cart</a>
-        <a href="#" class="button checkout-btn">Checkout</a>
+        @Html.ActionLink("View Cart", "Index", "Cart", null, new { @class = "button view-cart-btn" })
+        @Html.ActionLink("View Cart", "Checkout", "Cart", null, new { @class = "button checkout-btn" })
     </div><!-- /cart-items -->
 </div><!-- /cart-container -->

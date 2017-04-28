@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: Delivery Object
 class Delivery: NSObject {
     
     var Address:Address?
@@ -21,6 +24,12 @@ class Delivery: NSObject {
     
 }
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: get's a date string and converts it to Date
+///
+/// - Parameter dateString: String in format of "yyyy-MM-dd'T'hh:mm:ss"
+/// - Returns: Date of string if it can be converted or current date if it can't
 func StringToDate(dateString:String?)-> Date
 {
     var result = Date()
@@ -29,3 +38,22 @@ func StringToDate(dateString:String?)-> Date
     result = dateFormatter.date(from: dateString ?? "") ?? Date()
     return result
 }
+
+/// Eric Walton
+/// 2017/04/23
+/// Description: Converts a date to a specified string format
+///
+/// - Parameter dateToFormat: The date sent
+/// - Returns: A string that represents the date passed as a Month two digit day and 4 digit year
+func formatDate(dateToFormat:NSDate) -> String
+{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd yyyy"
+    let dateToDisplay = dateFormatter.string(from: dateToFormat as Date)
+    
+    return dateToDisplay
+}
+
+
+
+

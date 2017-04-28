@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Approval" Height="200" Width="400" WindowStartupLocation="CenterScreen">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Approval Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition/>
@@ -19,13 +26,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="PapayaWhip"/>
-
+        <!--End of Grid Definitions-->
+        <!--Approval Controls-->
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#FFE5E5E5"/>
         <Label Name="lblID" Grid.Column="0" Grid.Row="1" Content="ID" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5" FontFamily="Sitka Text"/>
         <Label Name="lblName" Grid.Column="0" Grid.Row="2"  Content="Name" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5" FontFamily="Sitka Text"/>
         <TextBox Name="txtID" Grid.Column="1" Grid.Row="1" Margin="10 13" IsReadOnly="True"/>
         <TextBox Name="txtName" Grid.Column="1" Grid.Row="2" Margin="10 13" IsReadOnly="True"/>
         <Button Name="btnApprove" Grid.Column="1" Grid.Row="3" Content="Approve" Padding="3" Margin="12" Click="btnApprove_Click"/>
         <Button Name="btnDeny" Grid.Column="2" Grid.Row="3" Content="Deny" Padding="3" Margin="12" Click="btnDeny_Click"/>
+        <!--End of Approval controls-->
     </Grid>
+    <!--End of Approval Grid-->
 </Window>
+<!--End of Approval Window-->

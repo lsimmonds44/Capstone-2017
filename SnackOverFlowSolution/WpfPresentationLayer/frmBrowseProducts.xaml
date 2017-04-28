@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         Title="Browse Products" Height="500" Width="950"
         Closed="BrowseProducts_OnClosed">
-
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Browse Products Grid-->
     <Grid>
         <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
@@ -24,7 +29,6 @@
             <ColumnDefinition Width="66*"/>
             <ColumnDefinition Width="66"/>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="36"/>
             <RowDefinition Height="36*"/>
@@ -41,9 +45,8 @@
             <RowDefinition Height="36*"/>
         </Grid.RowDefinitions>
         <!--End of Grid Definitions-->
-
         <!--Top Border-->
-        <Border Background="BurlyWood" Grid.Column="3" Grid.ColumnSpan="11" Grid.Row="0" FlowDirection="RightToLeft">
+        <Border Background="#FFE5E5E5" Grid.Column="3" Grid.ColumnSpan="11" Grid.Row="0" FlowDirection="RightToLeft">
             <StackPanel Orientation="Horizontal" >
                 <Button Name="btnHelp" Height="25" Width="90" Content="Help" Margin="0 0 5 0"/>
                 <Button Name="btnSettings" Height="25" Width="90" Content="Settings" Margin="0 0 5 0"/>
@@ -52,26 +55,20 @@
             </StackPanel>
         </Border>
         <!--End of Top Border-->
-
         <!--Cart Button-->
         <Button Name="btnCart" Content="Cart(0)" Grid.Column="13" Grid.Row="1" Background="WhiteSmoke"/>
         <!--End of Cart Button-->
-
-
         <!--Side Border-->
-        <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Grid.RowSpan="13" Background="BurlyWood">
+        <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Grid.RowSpan="13" Background="#FFE5E5E5">
             <StackPanel Orientation="Vertical">
-
                 <!--Software Logo-->
                 <Image Height="36"/>
                 <!--End of Software Logo-->
-
                 <!--General Nav-->
                 <TextBlock Name="txtblkGeneralNav" Height = "50" TextAlignment="Center">
                     General Nav
                 </TextBlock>
                 <!--End of General Nav-->
-
                 <!--Filter By Vendor-->
                 <GroupBox Name="gboxFilterByVender" Header="Filter By Vender" Margin="5 0 5 0" Height="125">
                     <StackPanel Orientation="Vertical">
@@ -90,15 +87,15 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid>
+                                                <!--Grid Definitions-->
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="50*"/>
                                                     <ColumnDefinition Width="200*"/>
                                                 </Grid.ColumnDefinitions>
-
+                                                <!--End of Grid Definitions-->
                                                 <!--CheckBox-->
                                                 <CheckBox Name="chkVendorItem" Grid.Column="0" Checked="chkVendorItem_Checked" Unchecked="chkVendorItem_Unchecked"/>
                                                 <!--End of CheckBox-->
-
                                                 <!--Item-->
                                                 <TextBlock Grid.Column="1" HorizontalAlignment="Left" Name="price" Text="{Binding}"/>
                                                 <!--End of Item-->
@@ -109,11 +106,9 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <!--End of Vendors DataGrid-->
-
                     </StackPanel>
                 </GroupBox>
                 <!--End of Filter By Vendor-->
-
                 <!--Filter By Price-->
                 <GroupBox Header="Filter By Price" Margin="5 5 5 0" Height="80">
                     <StackPanel Orientation="Vertical">
@@ -122,7 +117,6 @@
                     </StackPanel>
                 </GroupBox>
                 <!--End of Filter By Price-->
-
                 <!--Filter By Category-->
                 <GroupBox Header="Filter By Category" Margin="5 5 5 0" Height="125">
                     <!--Vendors Datagrid-->
@@ -140,17 +134,18 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
+                                            <!--Grid Definitions-->
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="50*"/>
                                                 <ColumnDefinition Width="200*"/>
                                             </Grid.ColumnDefinitions>
-
+                                            <!--End of Grid Definitions-->
                                             <!--CheckBox-->
                                             <CheckBox Name="chkCategoryItem" Grid.Column="0" Checked="chkCategoryItem_Checked" Unchecked="chkCategoryItem_Unchecked"/>
                                             <!--End of CheckBox-->
 
                                             <!--Item-->
-                                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Name="price" Text="{Binding}"/>
+                                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Name="txtblkPrice" Text="{Binding}"/>
                                             <!--End of Item-->
                                         </Grid>
                                     </DataTemplate>
@@ -159,19 +154,14 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Vendors DataGrid-->
-
-
                 </GroupBox>
                 <!--End of Filter By Category-->
-
                 <!--Filter Control Buttons-->
                 <Button Click="applyFilter_Click" Height="25" Width="120" Margin="0 5 0 0" Content="Apply Filter"/>
                 <!--End of Filter Control Buttons-->
-
             </StackPanel>
         </Border>
         <!--End of Side Border-->
-
         <!--Product Data Grid-->
         <DataGrid Name="dgProductList" GridLinesVisibility="Horizontal"
                   RowBackground="White"
@@ -184,18 +174,18 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
+                                <!--Grid Definitions-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50*"/>
                                     <ColumnDefinition Width="200*"/>
                                     <ColumnDefinition Width="250*"/>
                                     <ColumnDefinition Width="150*"/>
                                 </Grid.ColumnDefinitions>
-
+                                <!--End of Grid Definitions-->
                                 <!--Element One - Image-->
                                 <Image Source="{Binding SourceString}" Grid.Column="0" Height="40" Width="40"/>
                                 <!--Source of Image input here-->
                                 <!--End of Image-->
-
                                 <!--Product Information-->
                                 <StackPanel Orientation="Vertical" Width="180" Grid.Column="1">
                                     <TextBlock Name="productName" HorizontalAlignment="Left" Text ="{Binding Name}"/>
@@ -203,11 +193,9 @@
                                     <TextBlock Name="vendor"  Text="{Binding Supplier_Name}"/>
                                 </StackPanel>
                                 <!--End of Product Information-->
-
                                 <!--Price-->
                                 <TextBlock Grid.Column="2" HorizontalAlignment="Right" Name="price" Text="{Binding PriceString}"/>
                                 <!--End of Price-->
-
                                 <!--Action Buttons-->
                                 <StackPanel Grid.Column="3" Orientation="Vertical" Width="160">
                                     <Button Content="Add To Cart" Width="150" Height="25" Background="AliceBlue"/>
@@ -221,10 +209,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <!--End of DataGrid-->
-
         <!--User Prompts-->
         <TextBlock Name="txtPrompts" Grid.Column="9" Grid.Row="12" Grid.ColumnSpan="4" FlowDirection="RightToLeft"/>
         <!--End of User Prompts-->
-
     </Grid>
+    <!--End of Browse Products Grid-->
 </Window>
+<!--End of Browse Products Window-->

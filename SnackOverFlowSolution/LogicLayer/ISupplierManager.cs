@@ -84,6 +84,7 @@ namespace LogicLayer
         /// <returns></returns>
         List<string> SupplierAppStatusList();
 		
+        /// <summary>
         /// Christian Lopez
         /// 2017/04/06
         /// 
@@ -92,6 +93,26 @@ namespace LogicLayer
         /// <returns></returns>
         List<SupplierWithAgreements> RetrieveSuppliersWithAgreements();
 
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// 
+        /// Method signature to retrieve a SupplierWithAgreemnts
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        SupplierWithAgreements RetrieveSupplierWithAgreementsBySupplierId(int supplierId);
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// 
+        /// Method signature to retrieve a SupplierWithAgreements associated
+        /// with a user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        SupplierWithAgreements RetrieveSupplierWithAgreementsByUserId(int userId);
 
 
         bool DenySupplier(Supplier _supplier, int _userid);

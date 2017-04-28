@@ -76,7 +76,9 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/02/22
+        /// Created: 2017/02/22
+        /// 
+        /// Looks up a Supplier Username.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -160,6 +162,13 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Resets Add Supplier form.
+        /// Standaridized method.
+        /// </summary>
         private void resetForm()
         {
             txtName.Text = "";
@@ -213,7 +222,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Chrsitian Lopez
-        /// 2017/02/22
+        /// Created: 2017/02/22
         /// 
         /// Recursion binary search
         /// </summary>
@@ -245,7 +254,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/01/31
+        /// Created: 2017/01/31
         /// 
         /// Handles logic of sending data to manager
         /// </summary>
@@ -468,7 +477,9 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/08
+        /// Created: 2017/03/08
+        /// 
+        /// Adds Agreed Products.
         /// </summary>
         /// <param name="supplierUser"></param>
         private void addAgreedProducts(User supplierUser)
@@ -496,9 +507,16 @@ namespace WpfPresentationLayer
             }
         }
         /// <summary>
-        /// Updated 2017/04/07
         /// Ariel Sigo
+        /// Updated: 2017/04/07
         /// 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Validates User Input.
+        /// Standaridized method.
         /// </summary>
         private void validateInputs()
         {
@@ -541,7 +559,7 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// 
         /// Laura Simmonds
-        /// Edited 2017/04/14
+        /// Updated: 2017/04/14
         /// 
         /// Sets the screen depending on the type
         /// </summary>
@@ -656,7 +674,9 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/09
+        /// Created: 2017/03/09
+        /// 
+        /// Retrieves Supplier Agreements.
         /// </summary>
         private void getAgreements()
         {
@@ -681,7 +701,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created: 2017/03/08
         /// 
         /// Logic to take an product from the not approved list to the approved list
         /// </summary>
@@ -703,7 +723,15 @@ namespace WpfPresentationLayer
         }
 
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Removes Products from Approved.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemoveFromApproved_Click(object sender, RoutedEventArgs e)
         {
             if (0 > dgApprovedProducts.SelectedIndex)
@@ -719,6 +747,13 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Refreshed Available and Approved Tables.
+        /// Standaridized method.
+        /// </summary>
         private void refreshTables()
         {
             dgAvailableProducts.ItemsSource = null;
@@ -729,9 +764,10 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// 4/13/2017
+        /// Created: 2017/04/17
         /// 
-        /// The submit agreement button is only visible when approving suppliers, it sends new agreement request to AgreementManager
+        /// The submit agreement button is only visible when approving suppliers, 
+        /// it sends new agreement request to AgreementManager.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -752,5 +788,5 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Unable to create agreement: " + ex.Message + ex.StackTrace); ;
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace

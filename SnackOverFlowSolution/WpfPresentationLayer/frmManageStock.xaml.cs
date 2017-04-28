@@ -21,6 +21,17 @@ namespace WpfPresentationLayer
         private IProductManager _productManager;
         private ISupplierManager _supplierManager;
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize Manage Stock Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="productLotManager"></param>
+        /// <param name="productManager"></param>
+        /// <param name="supplierManager"></param>
+        /// <param name="locationManager"></param>
         public frmManageStock(IProductLotManager productLotManager, IProductManager productManager,
             ISupplierManager supplierManager, ILocationManager locationManager)
         {
@@ -35,9 +46,9 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        ///     Created by Michael Takrama
-        ///     3/2/2017
-        ///     Parses the lots into a View Model for Datagrid
+        ///Created by Michael Takrama
+        ///2017/03/02
+        /// Parses the lots into a View Model for Datagrid
         /// </summary>
         private void ParseLotsIntoViewModel()
         {
@@ -82,7 +93,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     2017/03/02
         ///     Refreshes Datagrid
         /// </summary>
         private void RefreshDgProductLot()
@@ -93,7 +104,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     32017/03/17
         ///     Retrieves Product Lots from Database
         /// </summary>
         private void RetrieveProductLots()
@@ -117,7 +128,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     2017/03/02
         ///     Updates Available Quantity of Product Lot
         /// </summary>
         /// <param name="sender"></param>
@@ -180,7 +191,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takram
-        ///     04/01/17
+        ///     2017/04/02
         ///     Validates quantities from user
         /// </summary>
         /// <param name="newProductLot"></param>
@@ -204,7 +215,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     2017/03/02
         ///     Makes Product Lots with 0 Available Products Visible
         /// </summary>
         /// <param name="sender"></param>
@@ -218,7 +229,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     2017/03/02
         ///     Hides Products Lots with 0 Available Products
         /// </summary>
         /// <param name="sender"></param>
@@ -237,7 +248,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     3/2/2017
+        ///     2017/03/02
         ///     Refreshes Datagrid
         /// </summary>
         /// <param name="sender"></param>
@@ -259,8 +270,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         ///     Created by Michael Takrama
-        ///     04/01/2017
-        ///     Search criteria
+        ///     2017/04/17
+        ///     Search _criteria
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

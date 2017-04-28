@@ -31,7 +31,7 @@ namespace WpfPresentationLayer
         /// Robert Forbes
         /// 2017/02/07
         /// 
-        /// Constructor for the window
+        /// Initialize Package Line Management Window.
         /// </summary>
         /// <param name="p">The package that the package lines a relevant to</param>
         public frmPackageLineManagementWindow(Package p)

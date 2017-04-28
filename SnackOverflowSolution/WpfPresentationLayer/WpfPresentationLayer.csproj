@@ -113,6 +113,9 @@
     <Compile Include="frmCheckSupplierStatus.xaml.cs">
       <DependentUpon>frmCheckSupplierStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmConfirm.xaml.cs">
+      <DependentUpon>frmConfirm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmCreateCategory.xaml.cs">
       <DependentUpon>frmCreateCategory.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmApproval.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmConfirm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

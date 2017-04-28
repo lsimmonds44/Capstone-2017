@@ -26,16 +26,20 @@ namespace LogicLayer
         public List<Route> RetrieveFutureRoutesForDriver(int? driverId)
         {
             List<Route> routes = new List<Route>();
-
+            
             try
             {
-
+                List<Route> routesToRemove = new List<Route>();
                 //Getting all the routes
                 routes = RouteAccessor.RetrieveFutureRoutesForDriver(driverId);
                 foreach(Route r in routes){
                     //Getting all the deliveries for each route
+                    List<Delivery> deliveriesToRemove = new List<Delivery>();
                     r.Deliveries = DeliveryAccessor.RetrieveDeliveriesForRoute(r.RouteId);
                     foreach(Delivery d in r.Deliveries){
+                        if(d.StatusId == "Delivered"){
+                            deliveriesToRemove.Add(d);
+                        }
                         //Getting the address for each delivery
                         d.Address = DeliveryAccessor.RetrieveUserAddressForDelivery(d.DeliveryId);
                         //Getting the packages for each delivery
@@ -49,7 +53,19 @@ namespace LogicLayer
                             }
                         }
                     }
+                    foreach (Delivery d in deliveriesToRemove)
+                    {
+                        r.Deliveries.Remove(d);
+                    }
+                    if(r.Deliveries.Count == 0){
+                        routesToRemove.Add(r);
+                    }
                 }
+
+                foreach(Route r in routesToRemove){
+                    routes.Remove(r);
+                }
+                
             }
             catch(Exception)
             {

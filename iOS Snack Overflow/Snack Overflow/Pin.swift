@@ -10,6 +10,9 @@ import Foundation
 import MapKit
 import CloudKit
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: Pin object an override of MKAnnotation
 class Pin : NSObject, MKAnnotation {
     
     var coorLat = Double()
@@ -22,6 +25,7 @@ class Pin : NSObject, MKAnnotation {
     var pinCreationDate = NSDate()
     var pinID: CKRecordID?
     var delivery = Delivery()
+    var pickup = Pickup()
     
     override init() {
         

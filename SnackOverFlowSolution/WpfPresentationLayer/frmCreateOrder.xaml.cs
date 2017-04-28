@@ -40,7 +40,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
         /// Window initializer for a commercial customer
         /// </summary>
         /// <param name="employee_Id"></param>
@@ -55,8 +55,11 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
         /// Sets the approprite fields on the window to the data for the selected customer.
+        /// 
+        /// Laura Simmonds
+        /// Updated: 2017/04/21
         /// </summary>
         private void displayCustomerInfo()
         {
@@ -73,7 +76,7 @@ namespace WpfPresentationLayer
             try
             {
                 //userAddress = _userManager.RetrieveUserAddress(_cCUser.PreferredAddressId.Value);
-                txtUserAddress.Text = (_cCUser.AddressLineOne ?? "") + "\n" + (_cCUser.AddressLineTwo ?? "") + "\n" + (_cCUser.City ?? "") + " " + (_cCUser.State ?? "") + " " + (_cCUser.Zip ?? "");
+                txtUserAddress.Text = (_cCUser.AddressLineOne ?? "") + (_cCUser.AddressLineTwo ?? "") + "\n" + (_cCUser.City ?? "") + " " + (_cCUser.State ?? "") + " " + (_cCUser.Zip ?? "");
                 //txtUserAddress.Text = userAddress.AddressLineOne + "\n" + userAddress.AddressLineTwo + "\n" + userAddress.City + " " + userAddress.State + " " + userAddress.Zip;
             }
             catch (Exception)
@@ -91,8 +94,11 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
         /// Checks to make sure all the needed info is supplied to create and order.
+        /// 
+        /// Laura Simmonds
+        /// Updated: 2017/04/21
         /// </summary>
         /// <returns></returns>
         private ProductOrder validateOrder()
@@ -123,6 +129,11 @@ namespace WpfPresentationLayer
                 order.EmployeeId = _employee_Id;
                 order.CustomerId = parseToInt(txtCustomerID.Text);
                 order.OrderTypeId = txtOrderType.Text;
+                order.Address1 = _cCUser.AddressLineOne;
+                order.Address2 = _cCUser.AddressLineTwo;
+                order.City = _cCUser.City;
+                order.State = _cCUser.State;
+                order.Zip = _cCUser.Zip;
                 order.AddressType = "Commercial";
                 order.DeliveryTypeId = cboDeliveryType.SelectedItem.ToString();
                 order.Amount = (decimal)0.0;
@@ -138,7 +149,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
+        /// 
         /// Invokes a method in the product order manager to create an order
         /// and get the order number for the created order from the database
         /// and then sets the order number on the window to the order number.
@@ -163,7 +175,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
         /// helper method to display the product lots information
         /// </summary>
         private void displayProductLots()
@@ -196,7 +208,8 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/10/3
+        /// Created: 2017/03/10
+        /// 
         /// The action for start order button click
         /// </summary>
         /// <param name="sender"></param>
@@ -228,7 +241,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/06/02 
+        /// Created: 2017/02/06
         /// 
         /// Helper method to parse a string to an int
         /// </summary>
@@ -244,7 +257,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// 2017/03/24
+        /// Created: 2017/03/24
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -261,7 +274,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// /// 2017/06/02 
+        /// Created: 2017/02/06 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -311,7 +324,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Eric Walton
-        /// /// 2017/06/02 
+        /// Created: 2017/02/06
         /// Refreshes the list of orderlines
         /// </summary>
         private void RefreshOrderLines()
@@ -320,6 +333,15 @@ namespace WpfPresentationLayer
             dgOrderLines.ItemsSource = oLines;
         }
 
+        /// <summary>
+        //// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel Create Order Window.
+        /// Standaridized Methods. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
@@ -328,5 +350,5 @@ namespace WpfPresentationLayer
         
 
 
-    } // end of class
-} // end of namespace
+    } // End of class
+} // End of namespace

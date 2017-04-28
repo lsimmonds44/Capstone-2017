@@ -8,67 +8,152 @@
 
 import UIKit
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: Protocol for RouteListViewDelegate
 protocol RouteListViewDelegate {
     func RouteSelected(route:Route)
+    func PickupSelected(pickup:Pickup)
     func RouteSelectionCanceled()
 }
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: List view that shows routes and pickups
 class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet var RouteListView: RouteListView!
-    @IBOutlet weak var RouteTV: UITableView!
+    @IBOutlet var RouteListView: RouteListView!{didSet{RouteListView.layer.cornerRadius = 8}}
+    @IBOutlet weak var RouteTV: UITableView!{didSet{RouteTV.layer.cornerRadius = 8}}
     @IBOutlet weak var RouteCell: UITableViewCell!
     @IBOutlet weak var btnCancel: UIButton!{didSet{btnCancel.layer.cornerRadius = 8}}
     
     // Variables
-    var delegate:RouteListViewDelegate? = nil
-    let _driverMgr = DriverManager()
-    var _routes = [Route]()
+    var delegate:RouteListViewDelegate!
+    private let _driverMgr = DriverManager()
+    private var _routes = [Route]()
+    private var _pickups = [Pickup]()
+    private var _driveType:Int! // 0 is delivery and 1 is pickup
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Preps the RouteListView to be called as a subview
+    ///
+    /// - Parameters:
+    ///   - apiToCall: calls the apiToCall funciton
+    ///   - driverId: The signed in driver's Id
     func addView(apiToCall:String, driverId:Int)
     {
         Bundle.main.loadNibNamed("RouteListView", owner: self, options: nil)
         self.addSubview(RouteListView)
         self.RouteTV.register(RouteCell.classForCoder, forCellReuseIdentifier: RouteCell.reuseIdentifier!)
         callDriverAPI(apiToCall: apiToCall, driverId: driverId)
+    }
+    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Calls a Route or Pickup api from Driver Manager
+    ///
+    /// - Parameters:
+    ///   - apiToCall: The string declaring which api to call
+    ///   - driverId: The signed in driver's Id
+    func callDriverAPI(apiToCall:String,driverId:Int){
+        if apiToCall == "Delivery" {
+            _driveType = 0
+            _driverMgr.getRouteByDriverID(driverID: driverId) { (routes, userMessage) in
+                DispatchQueue.main.async {
+                    self._routes = routes!
+                    self.RouteTV.reloadData()
+                }
+            }
+        }else{
+            _driveType = 1
+            _driverMgr.getPickupByDriverID(driverID: driverId, completion: { (pickups, userMessage) in
+                DispatchQueue.main.async {
+                    self._pickups = pickups!
+                    self.RouteTV.reloadData()
+                }
+            })
+        }
         
     }
     
-    func callDriverAPI(apiToCall:String,driverId:Int){
-        _driverMgr.getRouteByDriverID(driverID: driverId) { (routes, userMessage) in
-            DispatchQueue.main.async {
-                self._routes = routes!
-                self.RouteTV.reloadData()
-            }
-        }
-    }
-    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: The cancel button to dismiss the view
+    /// without making a selection
+    /// - Parameter sender:
     @IBAction func cancelBtn(_ sender: UIButton) {
+        _routes.removeAll()
         delegate?.RouteSelectionCanceled()
     }
     
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Sets the number or sections for the table view
+    ///
+    /// - Parameter tableView:
+    /// - Returns: 1
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Sets the number of rows for the table view based on
+    /// the number of items in routes or pickups
+    /// - Parameters:
+    ///   - tableView:
+    ///   - section:
+    /// - Returns: Number of items in routes or pickups
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _routes.count
+        var count = 0
+        if self._driveType == 0 {
+            count = _routes.count
+        }else if _driveType == 1{
+            count = _pickups.count
+        }
+        return count
     }
+    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Set's what to display for each cell
+    ///
+    /// - Parameters:
+    ///   - tableView:
+    ///   - indexPath:
+    /// - Returns: The set values of each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: RouteCell.reuseIdentifier)
-        cell.textLabel?.text = "RouteId: \(_routes[indexPath.row].RouteID!)"
-        cell.detailTextLabel?.text = "Delivery Date: \(_routes[indexPath.row].Deliveries[0].DeliverDate!)"
-        //        let pin = Pin()
-        //        pin.title =  _pinList[indexPath.row].value(forKey: Cloud.Attribute.PinTitle) as? String
-        //        pin.subtitle = _pinList[indexPath.row].value(forKey: Cloud.Attribute.PinSubtitle) as? String
-        //        cell.textLabel?.text = pin.title
-        //        cell.detailTextLabel?.text = pin.subtitle
+        if self._driveType == 0 {
+            
+            cell.textLabel?.text = "Delivery Date: \(formatDate(dateToFormat: _routes[indexPath.row].AssignedDate! as NSDate))"
+            cell.detailTextLabel?.text = "Vehicle #: \(_routes[indexPath.row].VehicleID!) | Delivery Count: \(_routes[indexPath.row].Deliveries.count)"
+        }else if self._driveType == 1{
+            cell.textLabel?.text = "\(_pickups[indexPath.row].Address?.AddressLine1! ?? "")"
+            cell.detailTextLabel?.text = _pickups[indexPath.row].Address?.City! ?? ""
+            //            cell.textLabel?.text = "Delivery Date: \(_pickups[indexPath.row].AssignedDate!)"
+            //            cell.detailTextLabel?.text = "Vehicle #: \(_pickups[indexPath.row].VehicleID!)"
+        }
         
         return cell
     }
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Called when a row is selected and set's a
+    /// pickup or route variable on the HomeVC using the RouteSelected
+    /// or PickupSelected delegate
+    /// - Parameters:
+    ///   - tableView:
+    ///   - indexPath:
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
+        if _driveType == 0 {
+            delegate?.RouteSelected(route: _routes[indexPath.row]) //.GoToPin(pinAsRecord: _pinList[indexPath.row])
+        }else if _driveType == 1{
+            delegate?.PickupSelected(pickup: _pickups[indexPath.row])
+        }
     }
     
     //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

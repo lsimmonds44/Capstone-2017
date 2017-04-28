@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DataObjects;
 using LogicLayer;
 using MVCPresentationLayer.Models;
+using System.Threading.Tasks;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -53,7 +55,7 @@ namespace MVCPresentationLayer.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegisterCommercial([Bind(Include = "FirstName, LastName, Phone, AddressLineOne, AddressLineTwo, City, State, Zip, EmailAddress, Username, Password, ConfirmPassword, FederalTaxID")] RegisterCommercialViewModel user)
+        public async Task<ActionResult> RegisterCommercial([Bind(Include = "FirstName, LastName, Phone, AddressLineOne, AddressLineTwo, City, State, Zip, EmailAddress, Username, Password, ConfirmPassword, FederalTaxID")] RegisterCommercialViewModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -61,11 +63,27 @@ namespace MVCPresentationLayer.Controllers
             }
             try
             {
-                return View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
+                // SnackOverflow System Application
+                var v = View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
+
+                // Idenitiy System Registration
+                if (v.ViewName == "Application-Success")
+                {
+                    var rvm = new RegisterViewModel { Email = user.EmailAddress, Password = user.Password };
+
+                    var controller = DependencyResolver.Current.GetService<AccountController>();
+
+                    controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
+
+                    var result = await controller.Register(rvm);
+
+                }
+
+                return v;
             }
             catch (ApplicationException ex)
             {
-                ViewBag.Error = "Error: "+  ex.Message;
+                ViewBag.Error = "Error: " + ex.Message;
                 return View();
             }
             catch (Exception ex)

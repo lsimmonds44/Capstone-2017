@@ -170,5 +170,27 @@ namespace LogicLayer
 
             return delivery;
         }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// Creaded: 2017/04/23
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public List<Delivery> RetrieveDeliveriesByOrderId(int orderId)
+        {
+            List<Delivery> deliveries = new List<Delivery>();
+            try
+            {
+                deliveries = DeliveryAccessor.RetrieveDeliveriesForOrder(orderId);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return deliveries;
+        }
     }
 }

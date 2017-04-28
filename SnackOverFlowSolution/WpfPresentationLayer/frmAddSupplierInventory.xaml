@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="frmAddSupplierInventory" Height="300" Width="630">
+        Title="Add Supplier Inventory" Height="300" Width="630">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Add Supplier Inventory Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -19,16 +26,12 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Grid.Row="0">
-            Agreement ID
-        </Label>
-        <Label Grid.Column="2" Grid.Row="0">
-            Quantity
-        </Label>
-        <Label Grid.Column="0" Grid.Row="1">
-            Date Added
-        </Label>
-        <ComboBox Name="cbxAgreement" Grid.Column="1" Grid.Row="0">
+        <!--End of Grid Definitions-->
+        <!--Add Supplier Inventory Controls-->
+        <Label Name="lblAgreementID" Content="Agreement ID: " Grid.Column="0" Grid.Row="0" />
+        <Label Name="lblQuantity" Content="Quantity: " Grid.Column="2" Grid.Row="0" />
+        <Label Name="lblDateAdded" Content="Date Added: " Grid.Column="0" Grid.Row="1" />
+        <ComboBox Name="cboAgreement" Grid.Column="1" Grid.Row="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding AgreementId}"></Label>
@@ -36,7 +39,10 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBox Name="txtQuantity" Grid.Column="3" Grid.Row="0"></TextBox>
-        <DatePicker Name="dateAdded" Grid.Column="1" Grid.Row="1"></DatePicker>
+        <DatePicker Name="dpDateAdded" Grid.Column="1" Grid.Row="1"></DatePicker>
         <Button Name="btnPost" Grid.Column="3" Grid.Row="3" Click="btnPost_Click">Add</Button>
+        <!--End of Add Supplier Inventory Controls-->
     </Grid>
+    <!--End of Add Supplier Inventory Grid-->
 </Window>
+<!--End of Add Supplier Inventory Window-->

@@ -1,24 +1,23 @@
 ﻿@model DataObjects.BrowseProductViewModel
 
-<td>
-    @Html.DisplayFor(modelItem => modelItem.Name)
-</td>
-<td>
-    @Html.DisplayFor(modelItem => modelItem.Description)
-</td>
-<td>
-    @Html.DisplayFor(modelItem => modelItem.PriceString)
-</td>
-<td>
-    @Html.DisplayFor(modelItem => modelItem.Supplier_Name)
-</td>
-<td>
-    @Html.DisplayFor(modelItem => modelItem.CategoryID)
-</td>
-<td>
-        <img src="@Url.Action("PictureOf", "Products", new { id = Model.ProductId})" width="100" height="100" />
-</td>
-<td>
-    @Html.ActionLink("Details", "Details", "Products", new { id = Model.ProductId, supplierId = Model.SupplierID }, null)
-</td>
+<div class="col-md-4 col-sm-6 col-xs-12 mix main">
+    <div class="store-item wow fadeInDown">
+        <figure>
+            <a href="#">
+                <img src="@Url.Action("PictureOf", "Products", new { id = Model.ProductId})" width="100" height="100" />
+            </a>
+        </figure>
+        <h3 class="food-name">
+            @Html.ActionLink(@Model.Name, "Details", "Products", new { id = Model.ProductId, supplierId = Model.SupplierID }, null)
+        </h3>
+        <ul class="food-category">
+            <li>@Model.CategoryID</li>
+            <li>@Model.Supplier_Name</li>
+        </ul>
+        <div class="food-order">
+            <p class="food-price">@Model.Price.ToString("c")</p>
+            @Html.ActionLink("Add To Cart", "Details", "Products", new { id = Model.ProductId, supplierId = Model.SupplierID } , new { @class = "add-to-cart-link" })
+        </div>
+    </div>
+</div>
 

@@ -24,14 +24,8 @@ namespace LogicLayerTestProject
         {
             //instantiate private variables
             _vehicleManager = new VehicleManager();
-        }
-
-        [TestMethod]
-        public void TestCreateVehicleWithCorrectData()
-        {
-            //arrange
-            //create new object
             testVehicle = new Vehicle();
+            //create new object
             testVehicle.Active = true;
             testVehicle.CheckedOut = false;
             testVehicle.Color = "White";
@@ -41,7 +35,13 @@ namespace LogicLayerTestProject
             testVehicle.VehicleTypeID = "Truck";
             testVehicle.VIN = "123TEST456";
             testVehicle.Year = "2000";
+        }
 
+        [TestMethod]
+        public void TestCreateVehicleWithCorrectData()
+        {
+            //arrange
+            
             //set expected result variable
 
             //act
@@ -57,14 +57,26 @@ namespace LogicLayerTestProject
         public void TestCheckVehicleOutIn()
         {
             //arrange
-            bool checkedOut = true;
+            bool expectedResult = true;
 
             //act
-            testVehicle = _vehicleManager.RetreiveVehicleById(testVehicleId);
-            _vehicleManager.CheckVehicleOutIn(testVehicle);
+            testVehicle = new Vehicle();
+            //create new object
+            testVehicle.Active = true;
+            testVehicle.CheckedOut = false;
+            testVehicle.Color = "White";
+            testVehicle.Make = "Test Make";
+            testVehicle.Model = "Test Model";
+            testVehicle.Mileage = 123456;
+            testVehicle.VehicleTypeID = "Truck";
+            testVehicle.VIN = "123TEST456";
+            testVehicle.Year = "2000";
+            testVehicleId = _vehicleManager.CreateVehicle(testVehicle);
+            testVehicle.VehicleID = testVehicleId;
+            bool actualResult = _vehicleManager.CheckVehicleOutIn(testVehicle);
 
             //assert
-            Assert.IsTrue(checkedOut == testVehicle.CheckedOut);
+            Assert.IsTrue(actualResult == expectedResult);
         }
 
         [TestMethod]

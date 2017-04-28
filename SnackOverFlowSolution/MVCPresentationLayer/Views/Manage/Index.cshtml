@@ -80,5 +80,11 @@
                     }
                 }*@
         </dd>
+        @if (Request.IsAuthenticated && User.IsInRole("Supplier"))
+        {
+            <dt>Supplier Account:</dt>
+            <dd>@Html.ActionLink("Edit Supplier Details", "Edit", "SupplierWithAgreements", new { username = User.Identity.Name}, null)
+        </dd>
+        }
     </dl>
 </div>

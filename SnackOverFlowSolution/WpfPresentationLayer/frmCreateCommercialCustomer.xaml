@@ -5,7 +5,14 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
     </Window.Background>
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!-- Create Commercial Customer Account Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -21,6 +28,8 @@
             <ColumnDefinition Width="340"/>
             <ColumnDefinition Width="90px"/>
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!-- Create Commercial Customer Account Controls-->
         <Label Name="lblUserName" Grid.Row="0" Grid.Column="0" Content="User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
         <TextBox Name="txtUserName" Grid.Row="0" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" ToolTip="Enter user name to find user"/>
         <Button Name="btnFindUser" Grid.Row="0" Grid.Column="2" Content="Search" Width="80" FontSize="18" Height="40" Click="findUserButton_Click"></Button>
@@ -40,6 +49,8 @@
         <CheckBox Name="cbkActive" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 10" IsChecked="True"/>
         <Button Name="btnCancel" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin=" 10 0 0 0" Content="Cancel" FontSize="18" Width="100" Height="40" Click="btnCancel_Click" />
         <Button Name="btnCreate" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Content="Create Account" FontSize="18" Width="160" Height="40" Click="btnCreate_Click" IsEnabled="False"/>
-
+        <!--End of Create Commercial Customer Account Controls-->
     </Grid>
+    <!--End of Create Commercial Customer Account Grid-->
 </Window>
+<!--End of Create Commercial Customer Account Window-->

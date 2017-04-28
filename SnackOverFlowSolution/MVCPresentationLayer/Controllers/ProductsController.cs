@@ -131,17 +131,15 @@ namespace MVCPresentationLayer.Controllers
         /// <returns>Nav Menu Partial View</returns>
         public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase = "", string selectedCategory = "")
         {
+
             var navViewModel = new NavMenuViewModel {
                 Categories = categories,
                 SearchPhrase = searchPhrase,
                 SelectedCategory = selectedCategory
             };
-            return PartialView(navViewModel);
-        }
 
-        public ActionResult IndexTemp()
-        {
-            return View();
+            return PartialView(navViewModel);
+
         }
 
         //// GET: Products/Create

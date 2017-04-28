@@ -340,5 +340,55 @@ namespace LogicLayer
             }
             return false;
         }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// 
+        /// Attempts to return a SupplierWithAgreements
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns></returns>
+        public SupplierWithAgreements RetrieveSupplierWithAgreementsBySupplierId(int supplierId)
+        {
+            try
+            {
+                return SupplierAccessor.RetrieveSupplierWithAggreementsBySupplierId(supplierId);
+            }
+            catch (SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error", ex);
+            }
+        }
+
+        /// <summary>
+        /// Christian Lopez
+        /// 2017/04/27
+        /// 
+        /// Attempts to return a SupplierWithAgreements by userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public SupplierWithAgreements RetrieveSupplierWithAgreementsByUserId(int userId)
+        {
+            try
+            {
+                return SupplierAccessor.RetrieveSupplierWithAggreementsByUserId(userId);
+            }
+            catch (SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error", ex);
+            }
+        }
     }
 }

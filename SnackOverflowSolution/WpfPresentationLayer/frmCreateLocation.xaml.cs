@@ -22,12 +22,30 @@ namespace WpfPresentationLayer
     public partial class frmCreateLocation : Window
     {
         ILocationManager _locationMgr;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Create Location Window.
+        /// Standaridized Methods.
+        /// </summary>
+        /// <param name="iLocationManager"></param>
         public frmCreateLocation(ILocationManager iLocationManager)
         {
             _locationMgr = iLocationManager;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Adds New Location.
+        /// Standaridized Methods.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddLocation_Click(object sender, RoutedEventArgs e)
         {
             if (txtDescription.Text.Equals(""))
@@ -52,5 +70,5 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Unable to create location. Error Message: " + ex.Message);
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace

@@ -1,1 +1,7 @@
-﻿
+﻿.selectedCat {
+    color: lightgrey;
+}
+
+.notSelected {
+    color: green;
+}

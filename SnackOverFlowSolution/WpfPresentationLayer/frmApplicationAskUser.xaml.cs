@@ -19,6 +19,14 @@ namespace WpfPresentationLayer
     /// <summary>
     /// Interaction logic for frmApplicationAskUser.xaml
     /// </summary>
+    /// <summary>
+    /// Alissa Duffy
+    /// Updated: 2017/04/24
+    /// 
+    /// Standaridized Comments.
+    /// Standaridized methods.
+    /// </summary>
+    
     public partial class frmApplicationAskUser : Window
     {
         User _user;
@@ -32,7 +40,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created: 2017/03/24
         /// 
         /// Customizes window to supplier application request
         /// </summary>
@@ -55,7 +63,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created: 2017/03/24
         /// 
         /// Customizes window to Charity application request
         /// </summary>
@@ -74,7 +82,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created: 2017/03/24
         /// 
         /// Customizes window to Commercial application request
         /// </summary>
@@ -98,7 +106,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created: 2017/03/24
         /// 
         /// Depending on Init setup of the window
         /// it decides what form to use
@@ -141,10 +149,19 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancel/Close Application Ask User Form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-    }
-}
+    } // End of class
+} // End of namespace

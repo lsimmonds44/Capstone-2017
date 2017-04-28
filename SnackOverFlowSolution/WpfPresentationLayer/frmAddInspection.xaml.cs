@@ -18,7 +18,7 @@ namespace WpfPresentationLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created on 2017/02/10
+    /// Created: 2017/02/10
     /// 
     /// Interaction logic for frmAddInspection.xaml
     /// </summary>
@@ -32,6 +32,21 @@ namespace WpfPresentationLayer
         private IInspectionManager _inspectionManager;
         private IProductLotManager _productLotManager;
         private decimal inspProdPrice = 0;
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize the Add Inspection form.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="productLot"></param>
+        /// <param name="gradeManager"></param>
+        /// <param name="currentEmp"></param>
+        /// <param name="productManager"></param>
+        /// <param name="supplierManager"></param>
+        /// <param name="InspectionManager"></param>
+        /// <param name="productLotManager"></param>
         public frmAddInspection(ProductLot productLot, IGradeManager gradeManager, 
             Employee currentEmp, IProductManager productManager, ISupplierManager supplierManager,
             IInspectionManager InspectionManager, IProductLotManager productLotManager)
@@ -48,7 +63,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/02/22
+        /// Created: 2017/02/22
         /// </summary>
         /// 
         /// <remarks>
@@ -135,7 +150,13 @@ namespace WpfPresentationLayer
                 }
                 try
                 {
-                    if (_productLotManager.UpdateProductLotPrice(_productLot, inspProdPrice) == 1)
+                    if (cboGradeSelect.Text == "Reject")
+                    {
+                        frmConfirm confirmReject = new frmConfirm(_productLotManager, _productLot);
+                        confirmReject.Show();
+                        Close();
+                    }
+                    else if (_productLotManager.UpdateProductLotPrice(_productLot, inspProdPrice) == 1)
                     {
                         MessageBox.Show("Product lot inspection entered.");
                         Close();
@@ -161,6 +182,13 @@ namespace WpfPresentationLayer
             }
         }
         
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Validates User Inputs.
+        /// Standaridized method.
+        /// </summary>
         private void validateInputs()
         {
             if (cboGradeSelect.Text == "")
@@ -169,7 +197,14 @@ namespace WpfPresentationLayer
             }
             if (txtInspectionProductPrice.Text == "")
             {
-                throw new ApplicationException("A price must be entered.");
+                if(cboGradeSelect.Text == "Reject")
+                {
+                    txtInspectionProductPrice.Text = "0.0";
+                }
+                else
+                {
+                    throw new ApplicationException("A price must be entered.");
+                }
             }
             else
             {
@@ -181,5 +216,5 @@ namespace WpfPresentationLayer
                 }
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace

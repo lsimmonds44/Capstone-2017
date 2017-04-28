@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Eric Walton
+/// 2017/04/23
+/// Description: Package object
 class Package: NSObject {
     
     var DeliveryId:Int?

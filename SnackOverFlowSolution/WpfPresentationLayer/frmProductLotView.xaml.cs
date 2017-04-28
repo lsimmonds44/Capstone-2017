@@ -30,6 +30,14 @@ namespace WpfPresentationLayer
         List<Employee> _employeeList;
         List<Warehouse> _warehouseList;
         public int supplierId { get; private set; }
+
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize of Add Product Lot View Window.
+        /// Standaridized method.
+        /// </summary>
         public frmAddProductLot()
         {
             InitializeComponent();
@@ -37,6 +45,15 @@ namespace WpfPresentationLayer
             FillDefaultValues();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Initialize of Add Product Lot View Window.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="prodMgr"></param>
+        /// <param name="prodLot"></param>
         public frmAddProductLot(ProductLotManager prodMgr, ProductLot prodLot)
         {
             InitializeComponent();
@@ -46,6 +63,13 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Fills in the Default Values
+        /// Standaridized method. 
+        /// </summary>
         private void FillDefaultValues()
         {
             txtQuantity.Text = "1";
@@ -53,6 +77,13 @@ namespace WpfPresentationLayer
             dpDateReceived.SelectedDate = DateTime.Now;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Set Editable View.
+        /// Standaridized method.
+        /// </summary>
         public void SetEditable()
         {
             dpDateReceived.Visibility = Visibility.Visible;
@@ -88,7 +119,15 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Saves Changes to Product Lot View.
+        /// Standaridized method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             int quantityRead = 0;
@@ -173,6 +212,15 @@ namespace WpfPresentationLayer
             }
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Closes Product Lot View Window.
+        /// Standaridized method. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();

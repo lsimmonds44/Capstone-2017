@@ -26,7 +26,17 @@ namespace WpfPresentationLayer
         SupplierInvoice _supplierInvoice;
         List<SupplierInvoiceLine> _invoiceLines;
 
-       
+       /// <summary>
+       /// Alissa Duffy
+       /// Updated: 2017/04/21
+       /// 
+       /// Initialize the Supplier Invoice Details Window.
+       /// Standaridized method.  
+       /// </summary>
+       /// </summary>
+       /// <param name="supplierInvoice"></param>
+       /// <param name="supplierInvoiceManager"></param>
+       /// <param name="supplierManager"></param>
         public frmSupplierInvoiceDetails(SupplierInvoice supplierInvoice, ISupplierInvoiceManager supplierInvoiceManager, ISupplierManager supplierManager)
         {
             _supplierInvoice = supplierInvoice;
@@ -59,7 +69,15 @@ namespace WpfPresentationLayer
                 btnApprove.Visibility = Visibility.Hidden;
             }
         }
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/21
+        /// 
+        /// Loads the Supplier Invoice Details Window.
+        /// Standaridized method.  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblInvoiceId.Content = "Invoice " + _supplierInvoice.SupplierInvoiceId;
@@ -114,7 +132,7 @@ namespace WpfPresentationLayer
         /// Christian Lopez
         /// 2017/03/23
         /// 
-        /// Approve the current invoice, and return to the selection screen
+        /// Approve the current invoice, and return to the selection screen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

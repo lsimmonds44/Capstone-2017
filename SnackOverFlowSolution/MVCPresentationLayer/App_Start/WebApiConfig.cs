@@ -38,7 +38,7 @@ namespace MVCPresentationLayer
             config.Routes.MapHttpRoute(
                 name: "updateDelivery",
                 routeTemplate: "api/delivery/{deliveryId}/{newDeliveryStatus}",
-                defaults: new { controller = "delivery", deliveryId = RouteParameter.Optional, newDeliveryStatus = RouteParameter.Optional }
+                defaults: new { controller = "delivery", deliveryId = RouteParameter.Optional, newDeliveryStatus = RouteParameter.Optional}
             );
 
             config.Routes.MapHttpRoute(

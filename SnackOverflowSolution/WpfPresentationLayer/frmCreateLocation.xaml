@@ -6,12 +6,19 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Create Location" Height="200" Width="300">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Create Location Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
+        <!--Create Location Description Grid-->
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -21,12 +28,19 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <!--End of Grid Definitions-->
+            <!--Create Location Description Controls-->
             <Label Name="lblDescription" Grid.Row="0" Content="Description:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Name="lblActive" Grid.Row="1" Content="Active:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox Name="txtDescription" Grid.Column="1" Margin="5" MaxLength="250"/>
             <CheckBox Name="chkActive" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True"/>
+            <!--End ofCreate Location Description Controls-->
         </Grid>
-        
+        <!--End of Create Location Description Grid-->
+        <!--Create Location Controls-->
         <Button Name="btnAddLocation" Grid.Row="2" Content="Add Location" Margin="10" Click="btnAddLocation_Click" />
+        <!--Create Location Controls-->
     </Grid>
+    <!--End of Create Location Grid-->
 </Window>
+<!--End of Create Location Window-->

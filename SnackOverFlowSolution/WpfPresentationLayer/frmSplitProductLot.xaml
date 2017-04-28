@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
         Title="Split Product Lot" Height="115" Width="240">
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Split Product Lot Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -16,11 +23,16 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Split Product Lot Controls-->
         <Label Name="lblOriginalQuantity" Content="Original Quantity"/>
         <Label Name="lblNewQuantity" Grid.Column="1" Content="New Quantity"/>
         <TextBox Name="txtOld" Grid.Row="1" PreviewTextInput="txtOld_PreviewTextInput" TextChanged="txtOld_TextChanged"/>
         <TextBox Name="txtNew" Grid.Row="1" Grid.Column="1" Text="0" TextChanged="txtNew_TextChanged" PreviewTextInput="txtNew_PreviewTextInput"/>
         <Button Name="btnCancel" IsCancel="True" Grid.Row="2" Content="Cancel" Click="btnCancel_Click"/>
         <Button Name="btnSave" IsDefault="True" Grid.Row="2" Content="Save" Grid.Column="1" Click="btnSave_Click"/>
+        <!--End of Split Product Lot Controls-->
     </Grid>
+    <!--Split Product Lot Grid-->
 </Window>
+<!--End of Split Product Lot Window-->

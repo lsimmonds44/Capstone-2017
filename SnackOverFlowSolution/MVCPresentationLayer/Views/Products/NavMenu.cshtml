@@ -1,19 +1,29 @@
-﻿
+﻿@model MVCPresentationLayer.Models.NavMenuViewModel
 
-@model MVCPresentationLayer.Models.NavMenuViewModel
-    @Html.ActionLink("Home", "Index", "Products", null,
-new { @class = "btn btn-block btn-default btn-lg" + ("" == Model.SelectedCategory ? " btn-primary" : "") })
+<ul class="category-filter store-category-filter">
+    
+    <li>
+        <span>
+            @Html.ActionLink("Home", "Index", "Products", null, new { @class = ("" == Model.SelectedCategory ? "selectedCat" : "notSelected") })
+        </span>
+    </li>
+
     @foreach (var link in Model.Categories)
     {
-        @Html.RouteLink(link, new
-{
-    controller = "Products",
-    action = "Index",
-    category = link,
-    search = Model.SearchPhrase,
-    page = 1
-}, new
-{
-    @class = "btn btn-block btn-default btn-lg" + (link == Model.SelectedCategory ? " btn-primary" : "")
-})
+        <li class="filter active" data-filter="all">
+            <span>
+                @Html.RouteLink(link, new
+                {
+                    controller = "Products",
+                    action = "Index",
+                    category = link,
+                    search = Model.SearchPhrase
+                }, new
+                {
+                    @class = (link == Model.SelectedCategory ? "selectedCat" : "notSelected")
+                })
+            </span>
+        </li>
     }
+
+</ul>

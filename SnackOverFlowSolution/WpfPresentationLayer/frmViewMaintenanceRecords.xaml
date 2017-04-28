@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Maintenance Records" Height="250" Width="400" Loaded="frmMaintenanceRecords_Loaded">
+    <!--
+        Updated: 2017/04/21
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Maintenance Records Main Grid-->
     <Grid>
+        <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
@@ -10,13 +17,23 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <!--End of Grid Definitions-->
+        <!--Maintenace Records List View-->
         <ListView x:Name="lvMaintenanceRecords" Margin="5" ></ListView>
+        <!--Maintenace Records List View Grid-->
         <Grid Grid.Row="1">
+            <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnClose" Margin="5" Padding="20 5" Grid.Column="1" Content="Close" Click="btnClose_Click"/>
+            <!--End of Grid Definitions-->
+            <!--Maintenace Records Controls-->
+            <Button Name="btnClose" Margin="5" Padding="20 5" Grid.Column="1" Content="Close" Click="btnClose_Click"/>
+            <!--End of Maintenace Records Controls-->
         </Grid>
+        <!--End of Maintenace Records List View Grid-->
     </Grid>
+    <!--Maintenance Records Main Grid-->
 </Window>
+<!--End of Maintenance Records Window-->

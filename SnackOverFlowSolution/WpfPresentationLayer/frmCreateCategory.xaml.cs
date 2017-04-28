@@ -24,11 +24,27 @@ namespace WpfPresentationLayer
 
         CategoryManager _prodCatMgr = new CategoryManager();
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Product Category Form.
+        /// Standaridized methods. 
+        /// </summary>
         public frmProductCategory()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Save new Product Category.
+        /// Standaridized methods. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var categoryName = txtCategoryName.Text;
@@ -76,9 +92,18 @@ namespace WpfPresentationLayer
 
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Cancels/Closes Product Category Form.
+        /// Standaridized methods. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-    }
-}
+    } // End of class
+} // End of namespace

@@ -10,7 +10,7 @@ import UIKit
 
 class LoginVC: UIViewController,UITextFieldDelegate {
     
-    // variables
+    // Private variables
     private let _userManager = UserManager()
     private let _testUserManager = TestUserManager()
     private var _user = User(){didSet{}}
@@ -22,27 +22,47 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var lblUserMessage: UILabel!
     @IBOutlet weak var btnLogin: UIButton!{didSet{btnLogin.layer.cornerRadius = 8}}
     
-    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Textfield delegate that is called when the return key on the
+    /// keyboard is pressed
+    /// - Parameter textField: Username or Password text field
+    /// - Returns:
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         dismissKeyboard()
         return true
     }
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: dismiss the keyboard
     func dismissKeyboard(){
         tfUsername.resignFirstResponder()
         tfPassword.resignFirstResponder()
     }
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: App lifecycle handling
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: App lifecycle handling
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func login(_ sender: UIButton) {
+    
+    /// Eric Walton
+    /// 2017/04/23
+    /// Description: Login button that calls a validateLogin method in UserManager
+    ///
+    /// - Parameter sender: 
+    @IBAction private func login(_ sender: UIButton) {
         dismissKeyboard()
         if tfUsername.text!.isEmpty || tfPassword.text!.isEmpty {
             lblUserMessage.text = "You must enter a username and a password"

@@ -15,20 +15,29 @@ class MapVCModel: NSObject, MKMapViewDelegate,CLLocationManagerDelegate {
     private var _locationManager = CLLocationManager()
     var geoCoder = CLGeocoder(){didSet{_locationManager.delegate = self}}
     
+    /// Eric Walton
+    /// 2017/04/23
     
+    /// Description: Gets an address string and converts it to coordinates
+    ///
+    /// - Parameters:
+    ///   - address: Address as a string format
+    ///   - completion: Returns an address coordinate
     func convertAddressToCoord(address:String,completion: @escaping (_ result:CLLocationCoordinate2D)->()){
         var coord:CLLocationCoordinate2D?
-        geoCoder.geocodeAddressString(address) { (placeMark, error) in
+            geoCoder = CLGeocoder()
+            geoCoder.geocodeAddressString(address) { (placeMark, error) in
             if nil == error{
             coord = placeMark?.first?.location?.coordinate
-            print("coord: \(coord!.latitude) \(coord!.longitude)")
             completion(coord!)
             }else{
-                print(error!)
+                // need to handle error here.
             }
         }
     }
     
+    /// Eric Walton
+    /// 2017/04/23
     /// Description
     /// Switches the pins color based on what color name is stored with the pin in iCloud
     /// Called from mapview view for annotations

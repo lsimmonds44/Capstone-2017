@@ -66,7 +66,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -121,7 +121,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -276,13 +276,14 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@old_DELIVERY_DATE", oldDelivery.DeliveryDate);
 
             //Checking if the verification is null before assigning it as it used to break before doing this
-            cmd.Parameters.Add("@old_VERIFICATION", SqlDbType.VarBinary);
+            
             if (oldDelivery.Verification != null)
             {
-                cmd.Parameters["@old_VERIFICATION"].Value = oldDelivery.Verification;
+                cmd.Parameters.AddWithValue("@old_VERIFICATION", oldDelivery.Verification);
             }
             else
             {
+                cmd.Parameters.Add("@old_VERIFICATION", SqlDbType.VarBinary);
                 cmd.Parameters["@old_VERIFICATION"].Value = DBNull.Value;
             }
 
@@ -292,13 +293,14 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@new_ROUTE_ID", newDelivery.RouteId);
             cmd.Parameters.AddWithValue("@new_DELIVERY_DATE", newDelivery.DeliveryDate);
-            cmd.Parameters.Add("@new_VERIFICATION", SqlDbType.VarBinary);
+            
             if (newDelivery.Verification != null)
             {
-                cmd.Parameters["@new_VERIFICATION"].Value = newDelivery.Verification;
+                cmd.Parameters.AddWithValue("@new_VERIFICATION", newDelivery.Verification);
             }
             else
             {
+                cmd.Parameters.Add("@new_VERIFICATION", SqlDbType.VarBinary);
                 cmd.Parameters["@new_VERIFICATION"].Value = DBNull.Value;
             }          
 
@@ -355,7 +357,7 @@ namespace DataAccessLayer
                             DeliveryId = reader.GetInt32(0),
                             RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                             DeliveryDate = reader.GetDateTime(2),
-                            Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                             StatusId = reader.GetString(4),
                             DeliveryTypeId = reader.GetString(5),
                             OrderId = reader.GetInt32(6)
@@ -460,7 +462,7 @@ namespace DataAccessLayer
                         DeliveryId = reader.GetInt32(0),
                         RouteId = reader.GetInt32(1),
                         DeliveryDate = reader.GetDateTime(2),
-                        Verification = reader.IsDBNull(3) ? null : reader.GetStream(3),
+                        Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                         StatusId = reader.GetString(4),
                         DeliveryTypeId = reader.GetString(5),
                         OrderId = reader.GetInt32(6)
@@ -479,6 +481,58 @@ namespace DataAccessLayer
             }
 
             return delivery;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/04/23
+        /// 
+        /// Gets all deliveries for the specified order
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public static List<Delivery> RetrieveDeliveriesForOrder(int? orderId)
+        {
+            var deliveries = new List<Delivery>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_delivery_from_search";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.Parameters.AddWithValue("@ORDER_ID", orderId);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        deliveries.Add(new Delivery()
+                        {
+                            DeliveryId = reader.GetInt32(0),
+                            RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                            DeliveryDate = reader.GetDateTime(2),
+                            Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
+                            StatusId = reader.GetString(4),
+                            DeliveryTypeId = reader.GetString(5),
+                            OrderId = reader.GetInt32(6)
+                        });
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return deliveries;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace WpfPresentationLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// 2017/03/09
+    /// Created: 2017/03/09
     /// 
     /// Interaction logic for frmCreateDeliveryForOrder.xaml
     /// </summary>
@@ -35,7 +35,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Creates the window using the passed orderId
         /// </summary>
@@ -50,7 +50,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Moves a package from the unassigned list to the proposed list
         /// </summary>
@@ -67,7 +67,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Moves a package from the proposed list to the unassigned list
         /// </summary>
@@ -84,7 +84,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created 2017/03/09
         /// 
         /// Refreshes both of the list views so they show the what is currently held in the proposed list and unassigned list
         /// </summary>
@@ -98,7 +98,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Creates a new delivery in the database and assignes all packages in the proposed list to the new delivery
         /// </summary>
@@ -156,7 +156,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// runs the LoadPackages method when the window is loaded to update the list views
         /// </summary>
@@ -170,7 +170,7 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/03/09
+        /// Created: 2017/03/09
         /// 
         /// Refreshes the list views with the current unassigned packages from the database
         /// </summary>
@@ -190,5 +190,6 @@ namespace WpfPresentationLayer
                 MessageBox.Show("There was a problem communicating with the database");
             }
         }
-    }
-}
+    } // End of class
+} // End of namespace
+

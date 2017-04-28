@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add New Vehicle" Height="392" Width="290" WindowStartupLocation="CenterScreen">
+    <!--
+        Updated: 2017/04/24
+        By: Alissa Duffy 
+        Summary: Comments and Standardization
+    -->
+    <!--Add New Vehicle Grid-->
     <Grid>
+        <!--Add New Vehicle Controls-->
         <Label Name="lblAddNewVehicle" Content="Add New Vehicle" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top"/>
         <Label Name="lblVIN" Content="VIN:" HorizontalAlignment="Left" Margin="41,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.688,0.538"/>
         <TextBox Name="txtVIN" HorizontalAlignment="Left" Height="23" Margin="129,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -18,11 +25,13 @@
         <TextBox Name="txtColor" HorizontalAlignment="Left" Height="23" Margin="129,191,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Name="lblMakeActive" Content="Make Active:" HorizontalAlignment="Left" Margin="41,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.688,0.538"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="41,245,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.688,0.538"/>
-        <ComboBox Name="ddlType" HorizontalAlignment="Left" Margin="129,249,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="cboType" HorizontalAlignment="Left" Margin="129,249,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Name="radYes" GroupName="makeActive" Content="Yes" HorizontalAlignment="Left" Margin="129,223,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="radNo" GroupName="makeActive" Content="No" HorizontalAlignment="Left" Margin="181,223,0,0" VerticalAlignment="Top"/>
         <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="53,303,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <Button Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="165,303,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
-
+        <!--End of Add New Vehicle Controls-->
     </Grid>
+    <!--End of Add New Vehicle Grid-->
 </Window>
+<!--End of Add New Vehicle Window-->

@@ -9,17 +9,23 @@
 import Foundation
 import UIKit
 
-class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
-    let _deliveryMgr = DeliveryManager()
+
+/// Eric Walton
+/// 2017/04/23
+/// Description: Protocal used to update the pin to green 
+///when a delivery is delivered
+protocol DeliveryVCDelegate {
+    func updatePin()
+}
+
+
+class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate,SignatureVCDelegate {
+    
+    
+    var delegate:DeliveryVCDelegate!
     var _delivery:Delivery!
-    
-    @IBOutlet weak var _addressLine1: UILabel!
-    @IBOutlet weak var _addressLine2: UILabel!
-    @IBOutlet weak var _addressCity: UILabel!
-    @IBOutlet weak var _addressState: UILabel!
-    @IBOutlet weak var _addressZip: UILabel!
-    
-    @IBOutlet weak var _btnMarkDelivered: UIButton!
+    @IBOutlet weak var _txtAddress: UITextView!
+    @IBOutlet weak var _btnMarkDelivered: UIButton!{didSet{_btnMarkDelivered.layer.cornerRadius = 8}}
     @IBOutlet weak var _packagesTable: UITableView!
     
     /**
@@ -31,11 +37,14 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        _addressLine1.text = _delivery.Address!.AddressLine1 ?? ""
-        _addressLine2.text = _delivery.Address!.AddressLine2 ?? ""
-        _addressCity.text = _delivery.Address!.City ?? ""
-        _addressState.text = _delivery.Address!.State ?? ""
-        _addressZip.text = _delivery.Address!.Zip ?? ""
+        let address = _delivery.Address!
+        let addLine1 = address.AddressLine1 ?? ""
+        //Address line 2 was causing problems when creating a link to navigation
+        //let addLine2 = address.AddressLine2 ?? ""
+        let addCity = address.City ?? ""
+        let addState = address.State ?? ""
+        let addZip = address.Zip ?? ""
+        _txtAddress.text = addLine1 + ", \n" + addCity + ", " + addState + ", " + addZip
         _btnMarkDelivered.addTarget(self, action: #selector(DeliveryVC.btnMarkDeliveredClicked), for: .touchUpInside)
         
         _packagesTable.dataSource = self
@@ -51,6 +60,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return _delivery.Packages.count
+        
     }
     
     /**
@@ -84,7 +94,7 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      2017/04/20
      */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 70
     }
     
     /**
@@ -95,11 +105,11 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      2017/04/20
      */
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 70
     }
     
     /**
-     Runs when the button is clicked, calles the manager to run the api call to update the delivery status
+     Runs when the button is clicked, calls the manager to run the api call to update the delivery status
      
      - Author
      Robert Forbes
@@ -108,30 +118,41 @@ class DeliveryVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
      2017/04/20
      */
     func btnMarkDeliveredClicked() {
-        _deliveryMgr.UpdateDeliveryStatus(DeliveryId: _delivery.DeliveryId!, newDeliveryStatus: "Delivered"){ (result, userMessage) in self.showCompletionMessage(result: result, userMessage: userMessage)
-        }
+        
     }
     
-    
     /**
-     Shows an alert showing either the error message or a success message
+     Runs when the button is clicked, calls the manager to run the api call to update the delivery status
      
      - Author
      Robert Forbes
      
      -Date
-     2017/04/20
+     2017/04/26
      */
-    func showCompletionMessage(result:Bool, userMessage:String){
-        var message = ""
-        if(result == false){
-            message = userMessage
-        }else if(result == true){
-            message = "Delivery Status Successfully updated"
-        }
-        let alertController = UIAlertController(title: "Delivery Update", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
+    func updateDelivery() {
+        self._delivery.StatusId = "Delivered"
+        self.delegate.updatePin()
     }
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SignatureSeg"{
+            if let signatureVC:SignatureVC = segue.destination as? SignatureVC{
+                signatureVC._delivery = _delivery
+                signatureVC.delegate = self
+            }
+        }
+    }
+    
+    
 }

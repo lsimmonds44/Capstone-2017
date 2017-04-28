@@ -26,12 +26,26 @@ namespace WpfPresentationLayer
         private Employee _employee;
         private List<User> _userList;
 
-
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Employee Views Window.
+        /// Standaridized Methods. 
+        /// </summary>
         public frmEmployeeViews()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Employee Views Window.
+        /// Standaridized Methods. 
+        /// </summary>
+        /// <param name="employeeManager"></param>
         public frmEmployeeViews(LogicLayer.IEmployeeManager employeeManager)
         {
             InitializeComponent();
@@ -39,6 +53,15 @@ namespace WpfPresentationLayer
             inAddMode = true;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Initialize Employee Views Window.
+        /// Standaridized Methods. 
+        /// </summary>
+        /// <param name="employeeManager"></param>
+        /// <param name="employee"></param>
         public frmEmployeeViews(IEmployeeManager employeeManager, Employee employee)
         {
             InitializeComponent();
@@ -46,6 +69,13 @@ namespace WpfPresentationLayer
             this._employee = employee;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Set Editable.
+        /// Standaridized Methods. 
+        /// </summary>
         internal void SetEditable()
         {
             lblActiveVal.Visibility = Visibility.Collapsed;
@@ -69,10 +99,24 @@ namespace WpfPresentationLayer
             btnPost.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        /// 
+        /// Post Employee Views/
+        /// Standaridized Methods.  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
         {
             decimal parsedSalary;
             bool shouldPost=true;
+            if (0 > cboUserID.SelectedIndex)
+            {
+                shouldPost = false;
+                MessageBox.Show("Select a user to assign to role");
+            }
             if (!Decimal.TryParse(txtSalary.Text, out parsedSalary))
             {
                 shouldPost = false;
@@ -112,7 +156,6 @@ namespace WpfPresentationLayer
 
                 }
             }
-            this.Close();
         }
-    }
-}
+    } // End of class
+} // End of namespace
