@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DataObjects;
 using LogicLayer;
 using MVCPresentationLayer.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -112,7 +113,20 @@ namespace MVCPresentationLayer.Controllers
 
         public ViewResult Checkout()
         {
-            return View(new ShippingDetails());
+            var identityUserName = User.Identity.GetUserName();
+            User user = _userManager.RetrieveUserByUserName(identityUserName);
+            var shippingDetails = new ShippingDetails()
+            {
+                Line1 = user.AddressLineOne == null ? "" : user.AddressLineOne,
+                Line2 = user.AddressLineTwo == null ? "" : user.AddressLineTwo,
+                City = user.City == null ? "" : user.City,
+                State = user.State == null ? "" : user.State,
+                Zip = user.Zip == null ? "" : user.Zip,
+                CustomerId = user.UserId,
+                IdentityUsername = identityUserName
+            };
+
+            return View(shippingDetails);
         }
 
         [HttpPost]

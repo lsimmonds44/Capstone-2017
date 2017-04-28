@@ -62,14 +62,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
             @Html.HiddenFor(m => m.IdentityUsername, new { @Value = User.Identity.GetUserName() })
 
             <div class="form-group">
