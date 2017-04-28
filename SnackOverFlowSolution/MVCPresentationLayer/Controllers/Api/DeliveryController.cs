@@ -36,7 +36,7 @@ namespace MVCPresentationLayer.Controllers.Api
                 newDelivery.StatusId = newDeliveryStatus;
                 try
                 {
-                    byte[] verificationAsBytes = Convert.FromBase64String(verificationImage);
+                    byte[] verificationAsBytes = Encoding.ASCII.GetBytes(verificationImage);
                     newDelivery.Verification = verificationAsBytes;
                 }
                 catch

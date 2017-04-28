@@ -65,23 +65,30 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (_charityMgr.DenyCharity(_charity))
-                {
-                    MessageBox.Show("Charity Denied.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                else
-                {
-                    MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("There was an error approving this record. Please try again later" + Environment.NewLine + ex, "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
 
-            MessageBox.Show("Charity not approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            if (_charity.Status.Equals("Denied")) //If charity is already approved, do not re-approve
+            {
+                MessageBox.Show("This charity is already Denied", "Already Denied", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                try
+                {
+                    if (_charityMgr.DenyCharity(_charity))
+                    {
+                        MessageBox.Show("Charity Denied.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error approving this record. Please try again later" + Environment.NewLine + ex, "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            
             this.Close();
         }
 
@@ -95,21 +102,29 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnApprove_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (_charity.Status.Equals("Approved")) //If charity is already approved, do not re-approve
             {
-                if (_charityMgr.ApproveCharity(_charity))
-                {
-                     MessageBox.Show("Charity approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                else
-                {
-                    MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
-                }
-            }catch(Exception ex){
-                MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("This charity is already approved", "Already Approved", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            
-           
+            else
+            {
+                try
+                {
+                    if (_charityMgr.ApproveCharity(_charity))
+                    {
+                        MessageBox.Show("Charity approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
             this.Close();
         }
     } // End of class

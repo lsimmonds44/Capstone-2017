@@ -74,6 +74,6 @@
 
 @*Pagination*@
 <div class="button-style2 load-more align-center fadeInUp ">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("IndexTemp", new { search = Model.SearchPhrase, category = Model.CurrentCategory, page = x }))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { search = Model.SearchPhrase, category = Model.CurrentCategory, page = x }))
 </div>
 @*End of Pagination*@
