@@ -1,0 +1,46 @@
+﻿@model MVCPresentationLayer.Models.SupplierUpdateAgreementViewModel
+@{
+    ViewBag.Title = "Update Agreements";
+}
+
+<h2>Update Agreements</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductsToSelect, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="list-group" data-toggle="items">
+                    @Html.ListBoxFor(model => model.ProductIDs, new MultiSelectList(Model.ProductsToSelect, "ProductId", "Name", Model.ProductIDs), new { Multiple = "multiple", @class = "list-group" })
+                    @*@foreach (var agreement in Model.Agreements)
+                        {
+                            <a href="#" class="list-group-item">@agreement.ProductName</a>
+                        }*@
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Details", "Edit", new { username = User.Identity.Name})
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/listgroup.min.js"></script>
+}
+

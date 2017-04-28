@@ -225,36 +225,183 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierApplicant);
         }
 
-        //// GET: SupplierWithAgreements/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    SupplierWithAgreements supplierWithAgreements = db.SupplierWithAgreements.Find(id);
-        //    if (supplierWithAgreements == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(supplierWithAgreements);
-        //}
+        [Authorize(Roles="Supplier")]
+        // GET: SupplierWithAgreements/Edit/5
+        public ActionResult Edit(string username)
+        {
+            if (username == null || username.Equals(""))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DataObjects.User usr = _userManager.RetrieveUserByUserName(username.ToString());
+            SupplierWithAgreements supplierWithAgreements = _supplierManager.RetrieveSupplierWithAgreementsByUserId(usr.UserId);
+            if (supplierWithAgreements == null)
+            {
+                return HttpNotFound();
+            }
+            supplierWithAgreements.Agreements.RemoveAll(a => a.IsApproved == false);
+            return View(supplierWithAgreements);
+        }
 
-        //// POST: SupplierWithAgreements/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ID,SupplierID,IsApproved,ApprovedBy,FarmTaxID,UserId,FarmName,FarmAddress,FarmCity,FarmState,Active")] SupplierWithAgreements supplierWithAgreements)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(supplierWithAgreements).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(supplierWithAgreements);
-        //}
+        // POST: SupplierWithAgreements/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Supplier")]
+        public ActionResult Edit([Bind(Include = "FarmTaxID,FarmName,FarmAddress,FarmCity,FarmState")] SupplierWithAgreements supplierWithAgreements)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Entry(supplierWithAgreements).State = EntityState.Modified;
+                //db.SaveChanges();
+                try
+                {
+                    DataObjects.User usr = _userManager.RetrieveUserByUserName(User.Identity.Name);
+                    if (usr == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    SupplierWithAgreements oldSupplier = _supplierManager.RetrieveSupplierWithAgreementsByUserId(usr.UserId);
+                    if (oldSupplier == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+
+                    //set unchangable values
+                    supplierWithAgreements.SupplierID = oldSupplier.SupplierID;
+                    supplierWithAgreements.IsApproved = oldSupplier.IsApproved;
+                    supplierWithAgreements.UserId = oldSupplier.UserId;
+                    supplierWithAgreements.Active = oldSupplier.Active;
+                    supplierWithAgreements.Agreements = oldSupplier.Agreements; // will be modifiable in a different area
+                    supplierWithAgreements.ApprovedBy = oldSupplier.ApprovedBy;
+
+                    if (!_supplierManager.UpdateSupplierAccount(oldSupplier, supplierWithAgreements))
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }
+
+                return RedirectToAction("Index", "Manage", new { Message = MVCPresentationLayer.Controllers.ManageController.ManageMessageId.UpdatedSuccess });
+            }
+            return View(supplierWithAgreements);
+        }
+
+        // GET: SupplierWithAgreements/UpdateAgreements/5
+        [Authorize(Roles="Supplier")]
+        public ActionResult UpdateAgreements(int? supplierId)
+        {
+            if (null == supplierId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            try
+            {
+                SupplierWithAgreements supplier = _supplierManager.RetrieveSupplierWithAgreementsBySupplierId((int)supplierId);
+                if (null == supplier)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (null != supplier.Agreements)
+                {
+                    supplier.Agreements.RemoveAll(a => a.IsApproved == false);
+                }
+                
+
+                SupplierUpdateAgreementViewModel model = new SupplierUpdateAgreementViewModel()
+                {
+                    SupplierId = (int)supplierId,
+                    ApprovedAgreements = supplier.Agreements,
+                    ProductsToSelect = _productManager.RetrieveProducts()
+                };
+
+                if (model.ApprovedAgreements != null)
+                {
+                    foreach (AgreementWithProductName a in model.ApprovedAgreements)
+                    {
+                        model.ProductsToSelect.RemoveAll(p => p.ProductId == a.ProductId);
+                    }
+                }
+
+                return View("UpdateAgreements", model);
+                
+
+            }
+            catch (Exception)
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+            }
+            
+        }
+
+        // POST: SupplierWithAgreements/UpdateAgreements/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Supplier")]
+        public ActionResult UpdateAgreements([Bind(Include = "ProductIDs")] SupplierUpdateAgreementViewModel model)
+        {
+            if (model.ProductIDs.Length == 0)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+            SupplierWithAgreements supplier = null;
+            try
+            {
+                DataObjects.User usr = _userManager.RetrieveUserByUserName(User.Identity.Name);
+                supplier = _supplierManager.RetrieveSupplierWithAgreementsByUserId(usr.UserId);
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message + "\n" + ex.InnerException.Message);
+                }
+                
+            }
+
+            if (null == supplier)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Unable to find supplier");
+            }
+
+            try
+            {
+                foreach (int id in model.ProductIDs)
+                {
+                    Product product = _productManager.RetrieveProductById(id);
+                    _agreementManager.CreateAgreementsForSupplier(supplier, product, null, false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                if (ex.InnerException == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable, ex.Message + "\n" + ex.InnerException.Message);
+                }
+            }
+
+            return RedirectToAction("Index", "Manage", new { Message = MVCPresentationLayer.Controllers.ManageController.ManageMessageId.AppliedSuccess });
+            
+        }
+
 
         //// GET: SupplierWithAgreements/Delete/5
         //public ActionResult Delete(int? id)

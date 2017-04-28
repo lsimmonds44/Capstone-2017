@@ -241,6 +241,7 @@
     <Compile Include="Models\ProductsListViewModel.cs" />
     <Compile Include="Models\ProductWithGradeOptions.cs" />
     <Compile Include="Models\SupplierApplicantViewModel.cs" />
+    <Compile Include="Models\SupplierUpdateAgreementViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -431,6 +432,7 @@
     <Content Include="Views\ProductOrders\Index.cshtml" />
     <Content Include="Views\Shared\ApprovalStatus.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\SupplierWithAgreements\UpdateAgreements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

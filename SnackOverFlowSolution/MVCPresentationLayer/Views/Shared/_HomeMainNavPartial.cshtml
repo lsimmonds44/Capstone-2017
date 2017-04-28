@@ -8,7 +8,15 @@
         <ul>
             <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
             <li>@Html.ActionLink("Store", "Index", "Products")</li>
-            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            @if (!Request.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            }
+            
             <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         </ul>
     </nav>
