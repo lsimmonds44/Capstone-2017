@@ -19,27 +19,27 @@ namespace LogicLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/02
+        /// Created: 2017/02/02
         /// 
         /// Creates a new supplier based on the given information
         /// </summary>
-        /// <param name="userId">The ID to associate a Supplier with a User</param>
-        /// <param name="isApproved">Whether or not a Supplier is approved</param>
-        /// <param name="approvedBy">The EmployeeID that reviewed the application</param>
-        /// <param name="farmName">The name of the farm</param>
-        /// <param name="farmCity">The city where the farm is</param>
-        /// <param name="farmState">The state where the farm is</param>
-        /// <param name="farmTaxId">The tax ID for the farm</param>
-        /// <returns>Whether or not it was updated</returns>
-        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
-            string farmCity, string farmState, string farmTaxId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Changed method signature to take a Supplier instead of the fields in a supplier.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The supplier to create</param>
+        /// <returns>Whether or not it was created</returns>
+        public bool CreateNewSupplier(Supplier supplier)
         {
             bool wasAdded = false;
 
             try
             {
-                if (1 == SupplierAccessor.CreateNewSupplier(userId, isApproved, approvedBy, farmName, farmAddress,
-                    farmCity, farmState, farmTaxId))
+                if (1 == SupplierAccessor.CreateNewSupplier(supplier))
                 {
                     wasAdded = true;
                 }
@@ -105,7 +105,7 @@ namespace LogicLayer
 
             try
             {
-                s = SupplierAccessor.RetrieveSupplierBySupplierId(supplierId);
+                s = SupplierAccessor.RetrieveSupplier(supplierId);
             }
             catch (SqlException ex)
             {
@@ -164,7 +164,7 @@ namespace LogicLayer
             List<Supplier> suppliers = null;
             try
             {
-                suppliers = SupplierAccessor.RetrieveAllSuppliers();
+                suppliers = SupplierAccessor.RetrieveSuppliers();
             }
             catch (SqlException ex)
             {
@@ -181,23 +181,28 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/02
+        /// Created: 2017/03/02
         /// 
         /// The logic to apply for a supplier account (add a supplier but is not approved)
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="farmName"></param>
-        /// <param name="farmCity"></param>
-        /// <param name="farmState"></param>
-        /// <param name="farmTaxId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Changed "ApplyForSupplierAccount" call to "CreateSupplier" call while setting certain fields,
+        /// because it does exactly the same thing and isn't as redudant.
+        /// </remarks>
+        /// 
+        /// <returns>Whether or not the account was successfully created.</returns>
         public bool ApplyForSupplierAccount(Supplier supplier)
         {
             bool wasAdded = false;
-
+            supplier.ApprovedBy = null;
+            supplier.IsApproved = false;
             try
             {
-                if (1 == SupplierAccessor.ApplyForSupplierAccount(supplier))
+                if (1 == SupplierAccessor.CreateNewSupplier(supplier))
                 {
                     wasAdded = true;
                 }

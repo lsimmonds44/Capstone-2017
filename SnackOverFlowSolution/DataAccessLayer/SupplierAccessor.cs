@@ -11,28 +11,29 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created on 2017/02/02
-    /// Accesses the database for information regarding Suppliers
+    /// Created: 2017/02/02
+    /// 
+    /// Class to handle database interactions involving suppliers.
     /// </summary>
     public class SupplierAccessor
     {
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/02
+        /// Created: 2017/02/02
         /// 
-        /// Access database to store a new Supplier with given information
+        /// Access database to create a new supplier with given information
         /// </summary>
-        /// <param name="userId">ID to associate the Supplier with</param>
-        /// <param name="isApproved">Wether or not it is approved</param>
-        /// <param name="approvedBy">The employee ID that approved the request</param>
-        /// <param name="farmName">The name of the farm</param>
-        /// <param name="farmCity">The city of the farm</param>
-        /// <param name="farmState">The state of the farm</param>
-        /// <param name="farmTaxId">The tax ID</param>
-        /// <returns>A 1 if successful</returns>
-        /// <remarks>Last modified by Christian Lopez on 2017/02/02</remarks>
-        public static int CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
-            string farmCity, string farmState, string farmTaxId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method; changed signature from fields of a Supplier to a Supplier itself.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The supplier to create.</param>
+        /// <returns>Rows affected</returns>
+        public static int CreateNewSupplier(Supplier supplier)
         {
             int rows = 0;
 
@@ -41,23 +42,14 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
-            cmd.Parameters.Add("@APPROVED_BY", SqlDbType.Int);
-            cmd.Parameters.Add("@FARM_NAME", SqlDbType.NVarChar, 300);
-            cmd.Parameters.Add("@FARM_ADDRESS", SqlDbType.NVarChar, 300);
-            cmd.Parameters.Add("@FARM_CITY", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
-            cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
-
-            cmd.Parameters["@USER_ID"].Value = userId;
-            cmd.Parameters["@IS_APPROVED"].Value = isApproved;
-            cmd.Parameters["@APPROVED_BY"].Value = approvedBy;
-            cmd.Parameters["@FARM_NAME"].Value = farmName;
-            cmd.Parameters["@FARM_ADDRESS"].Value = farmAddress;
-            cmd.Parameters["@FARM_CITY"].Value = farmCity;
-            cmd.Parameters["@FARM_STATE"].Value = farmState;
-            cmd.Parameters["@FARM_TAX_ID"].Value = farmTaxId;
+            cmd.Parameters.AddWithValue("@USER_ID", supplier.UserId);
+            cmd.Parameters.AddWithValue("@IS_APPROVED", supplier.IsApproved);
+            cmd.Parameters.AddWithValue("@APPROVED_BY", supplier.ApprovedBy);
+            cmd.Parameters.AddWithValue("@FARM_NAME", supplier.FarmName);
+            cmd.Parameters.AddWithValue("@FARM_ADDRESS", supplier.FarmAddress);
+            cmd.Parameters.AddWithValue("@FARM_CITY", supplier.FarmCity);
+            cmd.Parameters.AddWithValue("@FARM_STATE", supplier.FarmState);
+            cmd.Parameters.AddWithValue("@FARM_TAX_ID", supplier.FarmTaxID);
 
             try
             {
@@ -66,67 +58,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-
-            return rows;
-        }
-
-        /// <summary>
-        /// Christian Lopez
-        /// Created 2017/03/02
-        /// 
-        /// Connection to DB to store an applied for supplier account.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="isApproved"></param>
-        /// <param name="farmName"></param>
-        /// <param name="farmCity"></param>
-        /// <param name="farmState"></param>
-        /// <param name="farmTaxId"></param>
-        /// <returns></returns>
-        public static int ApplyForSupplierAccount(Supplier supplier)
-        {
-            //int userId, bool isApproved, string farmName, string farmAddress,
-            //string farmCity, string farmState, string farmTaxId
-
-            int rows = 0;
-
-            var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_create_supplier_not_approved";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@IS_APPROVED", SqlDbType.Bit);
-            cmd.Parameters.Add("@FARM_NAME", SqlDbType.NVarChar, 300);
-            cmd.Parameters.Add("@FARM_ADDRESS", SqlDbType.NVarChar, 300);
-            cmd.Parameters.Add("@FARM_CITY", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@FARM_STATE", SqlDbType.NChar, 2);
-            cmd.Parameters.Add("@FARM_TAX_ID", SqlDbType.NVarChar, 64);
-
-            cmd.Parameters["@USER_ID"].Value = supplier.UserId;
-            cmd.Parameters["@IS_APPROVED"].Value = supplier.IsApproved;
-            cmd.Parameters["@FARM_NAME"].Value = supplier.FarmName;
-            cmd.Parameters["@FARM_ADDRESS"].Value = supplier.FarmAddress;
-            cmd.Parameters["@FARM_CITY"].Value = supplier.FarmCity;
-            cmd.Parameters["@FARM_STATE"].Value = supplier.FarmState;
-            cmd.Parameters["@FARM_TAX_ID"].Value = supplier.FarmTaxID;
-
-            try
-            {
-                conn.Open();
-                rows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                
                 throw;
             }
             finally
@@ -139,23 +70,30 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created on 2017/02/15
+        /// Created: 2017/02/15
         /// 
         /// Retrieve and return a supplier based on a given user ID
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static Supplier RetrieveSupplierByUserId(int userId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="userID">The user id of the supplier.</param>
+        /// <returns>The supplier with the given user id.</returns>
+        public static Supplier RetrieveSupplierByUserId(int userID)
         {
-            Supplier s = null;
+            Supplier supplier = null;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_by_user_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters["@USER_ID"].Value = userId;
+            cmd.Parameters.AddWithValue("@USER_ID", userID);
 
             try
             {
@@ -164,12 +102,12 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    s = new Supplier
+                    supplier = new Supplier
                     {
                         SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        //ApprovedBy = reader.GetInt32(3),
+                        ApprovedBy = reader.IsDBNull(3) ? (int?)null : reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmAddress = reader.GetString(5),
                         FarmCity = reader.GetString(6),
@@ -177,20 +115,10 @@ namespace DataAccessLayer
                         FarmTaxID = reader.GetString(8),
                         Active = reader.GetBoolean(9)
                     };
-                    if (!reader.IsDBNull(3))
-                    {
-                        s.ApprovedBy = reader.GetInt32(3);
-                    }
-                    else
-                    {
-                        s.ApprovedBy = null;
-                    }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -198,26 +126,34 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return s;
+            return supplier;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/02/22
+        /// Created: 2017/02/22
+        /// Retrieves a given supplier from the database.
         /// </summary>
-        /// <param name="supplierId"></param>
-        /// <returns></returns>
-        public static Supplier RetrieveSupplierBySupplierId(int supplierId)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierId">The id of the supplier.</param>
+        /// <returns>The supplier.</returns>
+        public static Supplier RetrieveSupplier(int supplierID)
         {
-            Supplier s = null;
+            Supplier supplier = null;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_ID"].Value = supplierId;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierID);
 
             try
             {
@@ -226,12 +162,12 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    s = new Supplier
+                    supplier = new Supplier
                     {
                         SupplierID = reader.GetInt32(0),
                         UserId = reader.GetInt32(1),
                         IsApproved = reader.GetBoolean(2),
-                        //ApprovedBy = reader.GetInt32(3),
+                        ApprovedBy = reader.IsDBNull(3) ? (int?)null : reader.GetInt32(3),
                         FarmName = reader.GetString(4),
                         FarmAddress = reader.GetString(5),
                         FarmCity = reader.GetString(6),
@@ -239,20 +175,10 @@ namespace DataAccessLayer
                         FarmTaxID = reader.GetString(8),
                         Active = reader.GetBoolean(9)
                     };
-                    if (!reader.IsDBNull(3))
-                    {
-                        s.ApprovedBy = reader.GetInt32(3);
-                    }
-                    else
-                    {
-                        s.ApprovedBy = null;
-                    }
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -260,17 +186,25 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return s;
+            return supplier;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/03
+        /// Created: 2017/03/03
         /// 
         /// Get a list of all suppliers, regardless of status and approval.
         /// </summary>
-        /// <returns></returns>
-        public static List<Supplier> RetrieveAllSuppliers()
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>A list of all suppliers in the database.</returns>
+        public static List<Supplier> RetrieveSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>();
             var conn = DBConnection.GetConnection();
@@ -286,33 +220,24 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        Supplier s = new Supplier
+                        suppliers.Add(new Supplier
                         {
                             SupplierID = reader.GetInt32(0),
                             UserId = reader.GetInt32(1),
                             IsApproved = reader.GetBoolean(2),
+                            ApprovedBy = reader.IsDBNull(3) ? (int?)null : reader.GetInt32(3),
                             FarmName = reader.GetString(4),
                             FarmAddress = reader.GetString(5),
                             FarmCity = reader.GetString(6),
                             FarmState = reader.GetString(7),
                             FarmTaxID = reader.GetString(8),
                             Active = reader.GetBoolean(9)
-                        };
-                        if (!reader.IsDBNull(3))
-                        {
-                            s.ApprovedBy = reader.GetInt32(3);
-                        }
-                        else
-                        {
-                            s.ApprovedBy = null;
-                        }
-                        suppliers.Add(s);
+                        });
                     }
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -321,18 +246,25 @@ namespace DataAccessLayer
             }
 
             return suppliers;
-
         }
 
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/02/23
+        /// Created: 2017/02/23
         /// 
-        /// Retrieve the supplier name by userId
+        /// Retrieve the full supplier name by userId
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/21
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="userId">The user id of the supplier.</param>
+        /// <returns>The suppliers name.</returns>
         public static string RetrieveSupplierName(int userId)
         {
             string name = null;
@@ -342,8 +274,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@USER_ID", SqlDbType.Int);
-            cmd.Parameters["@USER_ID"].Value = userId;
+            cmd.Parameters.AddWithValue("@USER_ID", userId);
 
             try
             {
@@ -355,11 +286,9 @@ namespace DataAccessLayer
 
                     name = reader.GetString(0) + " " + reader.GetString(1);
                 }
-                reader.Close();
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -379,65 +308,48 @@ namespace DataAccessLayer
 
         public static int UpdateSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
-            var results = 0;
+            var rows = 0;
+
             var conn = DBConnection.GetConnection();
-            var cmd = new SqlCommand(@"sp_update_supplier", conn);
-
-            cmd.Parameters.Add("@old_SUPPLIER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@new_USER_ID", SqlDbType.Int);
-            cmd.Parameters.Add("@old_IS_APPROVED", SqlDbType.Bit);
-            cmd.Parameters.Add("@new_IS_APPROVED", SqlDbType.Bit);
-            cmd.Parameters.Add("@old_APPROVED_BY", SqlDbType.Int);
-            cmd.Parameters.Add("@new_APPROVED_BY", SqlDbType.Int);
-            cmd.Parameters.Add("@old_FARM_NAME", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@new_FARM_NAME", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@old_FARM_ADDRESS", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@new_FARM_ADDRESS", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@old_FARM_CITY", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@new_FARM_CITY", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@old_FARM_STATE", SqlDbType.NChar);
-            cmd.Parameters.Add("@new_FARM_STATE", SqlDbType.NChar);
-            cmd.Parameters.Add("@old_FARM_TAX_ID", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@new_FARM_TAX_ID", SqlDbType.NVarChar);
-            cmd.Parameters.Add("@old_ACTIVE", SqlDbType.Bit);
-            cmd.Parameters.Add("@new_ACTIVE", SqlDbType.Bit);
-
-            cmd.Parameters["@old_SUPPLIER_ID"].Value = oldSupplier.SupplierID;
-            cmd.Parameters["@old_USER_ID"].Value = oldSupplier.UserId;
-            cmd.Parameters["@new_USER_ID"].Value = newSupplier.UserId;
-            cmd.Parameters["@old_IS_APPROVED"].Value = oldSupplier.IsApproved;
-            cmd.Parameters["@new_IS_APPROVED"].Value = newSupplier.IsApproved;
-            cmd.Parameters["@old_APPROVED_BY"].Value = oldSupplier.ApprovedBy;
-            cmd.Parameters["@new_APPROVED_BY"].Value = newSupplier.ApprovedBy;
-            cmd.Parameters["@old_FARM_NAME"].Value = oldSupplier.FarmName;
-            cmd.Parameters["@new_FARM_NAME"].Value = newSupplier.FarmName;
-            cmd.Parameters["@old_FARM_ADDRESS"].Value = oldSupplier.FarmAddress;
-            cmd.Parameters["@new_FARM_ADDRESS"].Value = newSupplier.FarmAddress;
-            cmd.Parameters["@old_FARM_CITY"].Value = oldSupplier.FarmCity;
-            cmd.Parameters["@new_FARM_CITY"].Value = newSupplier.FarmCity;
-            cmd.Parameters["@old_FARM_STATE"].Value = oldSupplier.FarmState;
-            cmd.Parameters["@new_FARM_STATE"].Value = newSupplier.FarmState;
-            cmd.Parameters["@old_FARM_TAX_ID"].Value = oldSupplier.FarmTaxID;
-            cmd.Parameters["@new_FARM_TAX_ID"].Value = newSupplier.FarmTaxID;
-            cmd.Parameters["@old_ACTIVE"].Value = oldSupplier.Active;
-            cmd.Parameters["@new_ACTIVE"].Value = newSupplier.Active;
-
+            var cmdText = @"sp_update_supplier";
+            var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@old_SUPPLIER_ID", oldSupplier.SupplierID);
+            cmd.Parameters.AddWithValue("@old_USER_ID", oldSupplier.UserId);
+            cmd.Parameters.AddWithValue("@new_USER_ID", newSupplier.UserId);
+            cmd.Parameters.AddWithValue("@old_IS_APPROVED", oldSupplier.IsApproved);
+            cmd.Parameters.AddWithValue("@new_IS_APPROVED", newSupplier.IsApproved);
+            cmd.Parameters.AddWithValue("@old_APPROVED_BY", oldSupplier.ApprovedBy);
+            cmd.Parameters.AddWithValue("@new_APPROVED_BY", newSupplier.ApprovedBy);
+            cmd.Parameters.AddWithValue("@old_FARM_NAME", oldSupplier.FarmName);
+            cmd.Parameters.AddWithValue("@new_FARM_NAME", newSupplier.FarmName);
+            cmd.Parameters.AddWithValue("@old_FARM_ADDRESS", oldSupplier.FarmAddress);
+            cmd.Parameters.AddWithValue("@new_FARM_ADDRESS", newSupplier.FarmAddress);
+            cmd.Parameters.AddWithValue("@old_FARM_CITY", oldSupplier.FarmCity);
+            cmd.Parameters.AddWithValue("@new_FARM_CITY", newSupplier.FarmCity);
+            cmd.Parameters.AddWithValue("@old_FARM_STATE", oldSupplier.FarmState);
+            cmd.Parameters.AddWithValue("@new_FARM_STATE", newSupplier.FarmState);
+            cmd.Parameters.AddWithValue("@old_FARM_TAX_ID", oldSupplier.FarmTaxID);
+            cmd.Parameters.AddWithValue("@new_FARM_TAX_ID", newSupplier.FarmTaxID);
+            cmd.Parameters.AddWithValue("@old_ACTIVE", oldSupplier.Active);
+            cmd.Parameters.AddWithValue("@new_ACTIVE", newSupplier.Active);
+
             try
             {
                 conn.Open();
-                results = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
-            return results;
+
+            return rows;
         }
 
         /// <summary>
@@ -480,7 +392,7 @@ namespace DataAccessLayer
             }
 
             return supplierAppStatus;
-		}
+        }
 
         /// Christian Lopez
         /// 2017/04/06
@@ -495,8 +407,9 @@ namespace DataAccessLayer
 
             try
             {
-                List<Supplier> suppliers = RetrieveAllSuppliers();
-                foreach (Supplier supplier in suppliers) {
+                List<Supplier> suppliers = RetrieveSuppliers();
+                foreach (Supplier supplier in suppliers)
+                {
                     SupplierWithAgreements s = new SupplierWithAgreements()
                     {
                         ID = supplier.SupplierID,
@@ -516,7 +429,7 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
 

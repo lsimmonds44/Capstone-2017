@@ -181,25 +181,34 @@ namespace WpfPresentationLayer
             dgAvailableProducts.ItemsSource = null;
         }
 
-        /// <summary>
-        /// Christian Lopez
-        /// 2017/02/22
-        /// 
-        /// Create an array of state abbreviations
-        /// </summary>
-        /// <param name="stateAbr"></param>
-        /// <returns></returns>
-        private int getDropdown(string stateAbr)
-        {
-            // The way to get the index for the drop down combo box
 
-            string[] states = {"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "IA", "ID", "IL",
+        private static readonly string[] States = {"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "IA", "ID", "IL",
                               "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND",
                               "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
                               "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"};
 
-
-            return binarySearchStates(stateAbr, 0, states.Length, states);
+        /// <summary>
+        /// Christian Lopez
+        /// Created: 2017/02/22
+        /// 
+        /// Create an array of state abbreviations
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/27
+        /// 
+        /// Moved constant string array outside of method and made it effectively a constant, 
+        /// so it wouldn't be recreated every time the method was called.
+        /// </remarks>
+        /// 
+        /// <param name="stateAbr"></param>
+        /// <returns></returns>
+        private int getDropdown(string stateAbr)
+        {
+            
+            // The way to get the index for the drop down combo box
+            return binarySearchStates(stateAbr, 0, States.Length, States);
         }
 
         /// <summary>
@@ -240,6 +249,15 @@ namespace WpfPresentationLayer
         /// 
         /// Handles logic of sending data to manager
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/27
+        /// 
+        /// Changed method call of _supplierManager.CreateSupplier to just send a supplier,
+        /// instead of the information piece by piece.
+        /// </remarks>
+        /// 
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <remarks>Last modified 2017/03/09 by Skyler Hiscock</remarks>
@@ -260,10 +278,19 @@ namespace WpfPresentationLayer
                     {
                         validateInputs();
                         User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
-
+                        Supplier supplier = new Supplier()
+                        {
+                            UserId = supplierUser.UserId, 
+                            Active = chkActive.IsChecked.Value,
+                            ApprovedBy = _currentUser.UserId,
+                            FarmName = txtFarmName.Text,
+                            FarmAddress = txtFarmAddress.Text,
+                            FarmCity = txtFarmCity.Text, 
+                            FarmState = cboFarmState.Text,
+                            FarmTaxID = txtFarmTaxId.Text
+                        };
                         // Actually try to create the supplier
-                        if (_supplierManager.CreateNewSupplier(supplierUser.UserId, (bool)chkActive.IsChecked, _currentUser.UserId, txtFarmName.Text, txtFarmAddress.Text,
-                            txtFarmCity.Text, cboFarmState.Text, txtFarmTaxId.Text))
+                        if (_supplierManager.CreateNewSupplier(supplier))
                         {
                             //this.DialogResult = true;
                             try

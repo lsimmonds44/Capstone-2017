@@ -16,16 +16,9 @@ namespace LogicLayer
         /// 
         /// Method signature to create a new supplier
         /// </summary>
-        /// <param name="userId">ID to link the supplier to a User</param>
-        /// <param name="isApproved">Wether or not the supplier is approved</param>
-        /// <param name="approvedBy">EmployeeId that approved/denied the request</param>
-        /// <param name="farmName">The name of the farm</param>
-        /// <param name="farmCity">The city where the farm is</param>
-        /// <param name="farmState">The state where the farm is</param>
-        /// <param name="farmTaxId">The farm tax ID</param>
+        /// <param name="supplier">The supplier to add.</param>
         /// <returns></returns>
-        bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress,
-            string farmCity, string farmState, string farmTaxId);
+        bool CreateNewSupplier(Supplier supplier);
 
         /// <summary>
         /// Christian Lopez

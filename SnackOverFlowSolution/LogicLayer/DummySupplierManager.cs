@@ -16,7 +16,7 @@ namespace LogicLayer
         }
 
 
-        public bool CreateNewSupplier(int userId, bool isApproved, int approvedBy, string farmName, string farmAddress, string farmCity, string farmState, string farmTaxId)
+        public bool CreateNewSupplier(Supplier supplier)
         {
             throw new NotImplementedException();
         }
