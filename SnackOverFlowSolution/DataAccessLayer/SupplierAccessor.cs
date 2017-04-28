@@ -15,7 +15,7 @@ namespace DataAccessLayer
     /// 
     /// Class to handle database interactions involving suppliers.
     /// </summary>
-    public class SupplierAccessor
+    public static class SupplierAccessor
     {
         /// <summary>
         /// Christian Lopez
@@ -299,12 +299,22 @@ namespace DataAccessLayer
             return name;
         }
         /// <summary>
-        /// Author: Skyler Hiscock
+        /// Skyler Hiscock
         /// Created: 2017/03/09
+        /// 
+        /// Updates a supplier in the database.
         /// </summary>
-        /// <param name="oldSupplier"></param>
-        /// <param name="newSupplier"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="oldSupplier">The supplier as it currently is in the database.</param>
+        /// <param name="newSupplier">The supplier as it should be.</param>
+        /// <returns>Rows affected.</returns>
 
         public static int UpdateSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
@@ -354,14 +364,23 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ryan Spurgetis 
-        /// 4/6/2017
+        /// Created: 2017/04/06
         /// 
         /// Retrieves the list of supplier application statuses
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <returns>Application status list options</returns>
         public static List<string> RetrieveSupplierStatusList()
         {
-            List<string> supplierAppStatus = new List<string>();
+            var supplierStatuses = new List<string>();
+
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_application_status_list";
             var cmd = new SqlCommand(cmdText, conn);
@@ -375,42 +394,48 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        var appStatus = reader.GetString(0);
-
-                        supplierAppStatus.Add(appStatus);
+                        supplierStatuses.Add(reader.GetString(0));
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
                 conn.Close();
             }
 
-            return supplierAppStatus;
+            return supplierStatuses;
         }
-
+        /// <summary>
         /// Christian Lopez
-        /// 2017/04/06
+        /// Created: 2017/04/06
         /// 
         /// Returns a list of suppliers with their agreements by gettin a list of all suppliers and then finding the 
-        /// agreements associated.
+        /// agreements associated with them.
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <returns></returns>
         public static List<SupplierWithAgreements> RetrieveAllSuppliersWithAgreements()
         {
-            List<SupplierWithAgreements> suppliersWithAgreements = new List<SupplierWithAgreements>();
+            var suppliersWithAgreements = new List<SupplierWithAgreements>();
 
             try
             {
-                List<Supplier> suppliers = RetrieveSuppliers();
-                foreach (Supplier supplier in suppliers)
+                var suppliers = RetrieveSuppliers();
+                foreach (var supplier in suppliers)
                 {
-                    SupplierWithAgreements s = new SupplierWithAgreements()
+                    suppliersWithAgreements.Add(new SupplierWithAgreements()
                     {
                         ID = supplier.SupplierID,
                         FarmAddress = supplier.FarmAddress,
@@ -423,8 +448,7 @@ namespace DataAccessLayer
                         IsApproved = supplier.IsApproved,
                         Active = supplier.Active,
                         Agreements = AgreementAccessor.RetrieveAgreementsWithProductNameBySupplierId(supplier.SupplierID)
-                    };
-                    suppliersWithAgreements.Add(s);
+                    });
                 }
             }
             catch (Exception)
@@ -438,13 +462,21 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 4/7/2017
+        /// Created: 2017/04/07
         /// 
         /// Accessor method to approve supplier and updates who made the change
         /// </summary>
-        /// <param name="supplier"></param>
-        /// <param name="approvedBy"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/07
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The supplier as it was in the database.</param>
+        /// <param name="approvedBy">The id of the employee who approved the supplier.</param>
+        /// <returns>Rows affected.</returns>
         public static int ApproveSupplier(Supplier supplier, int approvedBy)
         {
             int rows = 0;
@@ -478,12 +510,20 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 4/7/2017
+        /// 2017/04/07
         /// 
         /// Accessor method to deny supplier and updates who made the change
         /// </summary>
-        /// <param name="supplier"></param>
-        /// <param name="approvedBy"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplier">The supplier as it was in the database.</param>
+        /// <param name="approvedBy">The id of the employee who denied the supplier.</param>
         /// <returns></returns>
         public static int DenySupplier(Supplier supplier, int approvedBy)
         {
@@ -519,13 +559,21 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// 2017/04/13
+        /// Created: 2017/04/13
         /// 
         /// Method to retrieve the address of a supplier
         /// </summary>
-        /// <param name="preferredAddressId"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierId">The id of the relevant supplier.</param>
         /// <returns>The UserAddress Object for the given supplier</returns>
-        public static UserAddress RetrieveSuppliersUserAddress(int? supplierId)
+        public static UserAddress RetrieveUserAddressBySupplier(int? supplierId)
         {
 
             UserAddress userAddress = null;
@@ -567,128 +615,144 @@ namespace DataAccessLayer
             }
 
             return userAddress;
+            
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/04/27
+        /// Created: 2017/04/27
         /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
         /// </summary>
-        /// <param name="supplierId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierId">The id of the relevant supplier.</param>
+        /// <returns>An improved supplier, with agreements! How crazy is that?</returns>
         public static SupplierWithAgreements RetrieveSupplierWithAggreementsBySupplierId(int supplierId)
         {
-            SupplierWithAgreements supplier = null;
+            SupplierWithAgreements supplierWithAgreements = null;
 
             try
             {
-                Supplier s = RetrieveSupplier(supplierId);
-                if (null == s)
+                var supplier = RetrieveSupplier(supplierId);
+                if (supplier == null)
                 {
                     throw new ArgumentException("Unable to find supplier");
                 }
-                supplier = new SupplierWithAgreements()
+                supplierWithAgreements = new SupplierWithAgreements()
                 {
-                    Active = s.Active,
-                    ApprovedBy = s.ApprovedBy,
-                    FarmAddress = s.FarmAddress,
-                    FarmCity = s.FarmCity,
-                    FarmName = s.FarmName,
-                    FarmState = s.FarmState,
-                    FarmTaxID = s.FarmTaxID,
-                    SupplierID = s.SupplierID,
-                    IsApproved = s.IsApproved,
-                    UserId = s.UserId
+                    Active = supplier.Active,
+                    ApprovedBy = supplier.ApprovedBy,
+                    FarmAddress = supplier.FarmAddress,
+                    FarmCity = supplier.FarmCity,
+                    FarmName = supplier.FarmName,
+                    FarmState = supplier.FarmState,
+                    FarmTaxID = supplier.FarmTaxID,
+                    SupplierID = supplier.SupplierID,
+                    IsApproved = supplier.IsApproved,
+                    UserId = supplier.UserId
                 };
-                List<Agreement> temp = AgreementAccessor.retrieveAgreementsBySupplierId(supplierId);
-                List<AgreementWithProductName> agreements = new List<AgreementWithProductName>();
-                foreach(Agreement a in temp) 
-                {
-                    AgreementWithProductName newAgrement = new AgreementWithProductName()
-                    {
-                        Active = a.Active,
-                        AgreementId = a.AgreementId,
-                        ApprovedBy = a.ApprovedBy,
-                        DateSubmitted = a.DateSubmitted,
-                        IsApproved = a.IsApproved,
-                        ProductId = a.ProductId,
-                        SupplierId = a.ProductId,
-                        ProductName = ProductAccessor.RetrieveProduct(a.ProductId).Name
-                    };
-                    agreements.Add(newAgrement);
-                }
-                supplier.Agreements = agreements;
-                
+                supplierWithAgreements.AddAgreements();  
             }
             catch (Exception)
             {
-                
                 throw;
             }
 
-            return supplier;
+            return supplierWithAgreements;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/04/27
+        /// Created: 2017/04/27
         /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/27
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="userId">The user id of the relevant supplier.</param>
+        /// <returns>The supplierWithAgreements.</returns>
         public static SupplierWithAgreements RetrieveSupplierWithAggreementsByUserId(int userId)
         {
-            SupplierWithAgreements supplier = null;
+            SupplierWithAgreements supplierWithAgreements = null;
 
             try
             {
-                Supplier s = RetrieveSupplierByUserId(userId);
-                if (null == s)
+                Supplier supplier = RetrieveSupplierByUserId(userId);
+                if (null == supplier)
                 {
                     throw new ArgumentException("Unable to find supplier");
                 }
-                supplier = new SupplierWithAgreements()
+                supplierWithAgreements = new SupplierWithAgreements()
                 {
-                    Active = s.Active,
-                    ApprovedBy = s.ApprovedBy,
-                    FarmAddress = s.FarmAddress,
-                    FarmCity = s.FarmCity,
-                    FarmName = s.FarmName,
-                    FarmState = s.FarmState,
-                    FarmTaxID = s.FarmTaxID,
-                    SupplierID = s.SupplierID,
-                    IsApproved = s.IsApproved,
-                    UserId = s.UserId
+                    Active = supplier.Active,
+                    ApprovedBy = supplier.ApprovedBy,
+                    FarmAddress = supplier.FarmAddress,
+                    FarmCity = supplier.FarmCity,
+                    FarmName = supplier.FarmName,
+                    FarmState = supplier.FarmState,
+                    FarmTaxID = supplier.FarmTaxID,
+                    SupplierID = supplier.SupplierID,
+                    IsApproved = supplier.IsApproved,
+                    UserId = supplier.UserId
                 };
-                List<Agreement> temp = AgreementAccessor.retrieveAgreementsBySupplierId(supplier.SupplierID);
-                List<AgreementWithProductName> agreements = new List<AgreementWithProductName>();
-                foreach (Agreement a in temp)
+                supplierWithAgreements.AddAgreements();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return supplierWithAgreements;
+        }
+
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/04/28
+        /// 
+        /// Extension method to add agreements to a SupplierWthAgreements.
+        /// </summary>
+        /// <param name="supplierWithAgreements">The supplierWithAgreements to modify.</param>
+        /// <returns>The same supplierWithAgreements, but with agreements!</returns>
+        private static SupplierWithAgreements AddAgreements(this SupplierWithAgreements supplierWithAgreements)
+        {
+            try
+            {
+                List<Agreement> agreements = AgreementAccessor.retrieveAgreementsBySupplierId(supplierWithAgreements.SupplierID);
+                List<AgreementWithProductName> agreementsWithProductName = new List<AgreementWithProductName>();
+                foreach (var agreement in agreements)
                 {
-                    AgreementWithProductName newAgrement = new AgreementWithProductName()
+                    agreementsWithProductName.Add(new AgreementWithProductName()
                     {
-                        Active = a.Active,
-                        AgreementId = a.AgreementId,
-                        ApprovedBy = a.ApprovedBy,
-                        DateSubmitted = a.DateSubmitted,
-                        IsApproved = a.IsApproved,
-                        ProductId = a.ProductId,
-                        SupplierId = a.ProductId,
-                        ProductName = ProductAccessor.RetrieveProduct(a.ProductId).Name
-                    };
-                    agreements.Add(newAgrement);
+                        Active = agreement.Active,
+                        AgreementId = agreement.AgreementId,
+                        ApprovedBy = agreement.ApprovedBy,
+                        DateSubmitted = agreement.DateSubmitted,
+                        IsApproved = agreement.IsApproved,
+                        ProductId = agreement.ProductId,
+                        SupplierId = agreement.ProductId,
+                        ProductName = ProductAccessor.RetrieveProduct(agreement.ProductId).Name
+                    });
                 }
-                supplier.Agreements = agreements;
+                supplierWithAgreements.Agreements = agreementsWithProductName;
 
             }
             catch (Exception)
             {
-
                 throw;
             }
 
-            return supplier;
+            return supplierWithAgreements;
         }
-
-
     }
 }

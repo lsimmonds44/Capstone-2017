@@ -31,7 +31,7 @@ namespace LogicLayer
                     foreach(PickupLine line in p.PickupLineList){
                         line.productName = ProductAccessor.RetrieveProductNameFromProductLotId(line.ProductLotId);
                     }
-                    p.address = SupplierAccessor.RetrieveSuppliersUserAddress(p.SupplierId);
+                    p.address = SupplierAccessor.RetrieveUserAddressBySupplier(p.SupplierId);
                 }
             }
             catch

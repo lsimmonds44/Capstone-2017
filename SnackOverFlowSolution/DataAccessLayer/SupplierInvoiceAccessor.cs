@@ -11,22 +11,30 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// 2017/03/22
+    /// Created: 2017/03/22
     /// 
-    /// Contains the information to connect to the DB regarding Supplier Invoices and their Lines
+    /// Class to handle database interactions involving supplier invoices.
     /// </summary>
     public class SupplierInvoiceAccessor
     {
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/22
+        /// Created: 2017/03/22
         /// 
         /// Retrieves a list of all supplier invoices in the database
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <returns>List of all supplier invoices in the database.</returns>
         public static List<SupplierInvoice> RetrieveSupplierInvoices()
         {
-            List<SupplierInvoice> invoices = new List<SupplierInvoice>();
+            var supplierInvoices = new List<SupplierInvoice>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_invoice_list";
@@ -41,7 +49,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        SupplierInvoice supplierInvoice = new SupplierInvoice
+                        supplierInvoices.Add(new SupplierInvoice
                         {
                             SupplierInvoiceId = reader.GetInt32(0),
                             SupplierId = reader.GetInt32(1),
@@ -52,16 +60,12 @@ namespace DataAccessLayer
                             AmountPaid = reader.GetDecimal(6),
                             Approved = reader.GetBoolean(7),
                             Active = reader.GetBoolean(8)
-                        };
-                        invoices.Add(supplierInvoice);
+                        });
                     }
                 }
-
-                reader.Close();
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -69,29 +73,35 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-
-            return invoices;
+            return supplierInvoices;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/22
+        /// Created: 2017/03/22
         /// 
         /// Gets a list of invoice lines for the given invoice id
         /// </summary>
-        /// <param name="invoiceId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="invoiceId">Id of the given invoice.</param>
+        /// <returns>The lines of the relevant invoice.</returns>
         public static List<SupplierInvoiceLine> RetrieveInvoiceLinesByInvoiceId(int invoiceId)
         {
-            List<SupplierInvoiceLine> lines = new List<SupplierInvoiceLine>();
+            var supplierInvoiceLines = new List<SupplierInvoiceLine>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_invoice_lines_by_supplier_invoice_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_INVOICE_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_INVOICE_ID"].Value = invoiceId;
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", invoiceId);
 
             try
             {
@@ -101,7 +111,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        SupplierInvoiceLine line = new SupplierInvoiceLine
+                        supplierInvoiceLines.Add(new SupplierInvoiceLine
                         {
                             SupplierInvoiceId = reader.GetInt32(0),
                             ProductLotId = reader.GetInt32(1),
@@ -109,15 +119,13 @@ namespace DataAccessLayer
                             PriceEach = reader.GetDecimal(3),
                             ItemDiscount = reader.GetDecimal(4),
                             ItemTotal = reader.GetDecimal(5)
-                        };
-                        lines.Add(line);
+                        });
                     }
                 }
                 reader.Close();
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -125,17 +133,25 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return lines;
+            return supplierInvoiceLines;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/23
+        /// Created: 2017/03/23
         /// 
         /// Tries to make a connection to approve the invoice associated with the given id
         /// </summary>
-        /// <param name="invoiceId"></param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="invoiceId">The id of the relevant invoice.</param>
+        /// <returns>Rows affected.</returns>
         public static int UpdateApproveSupplierInvoice(int invoiceId)
         {
             int rows = 0;
@@ -145,8 +161,7 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@SUPPLIER_INVOICE_ID", SqlDbType.Int);
-            cmd.Parameters["@SUPPLIER_INVOICE_ID"].Value = invoiceId;
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", invoiceId);
 
             try
             {
@@ -155,7 +170,7 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
             finally
@@ -168,36 +183,43 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/29
+        /// Created: 2017/03/29
         /// 
         /// Stores the invoice to the db and returns the id it was stored to
         /// </summary>
-        /// <param name="invoice"></param>
-        /// <returns></returns>
-        public static int CreateSupplierInvoice(SupplierInvoice invoice)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierInvoice">The supplierInvoice to create.</param>
+        /// <returns>The newly created id.</returns>
+        public static int CreateSupplierInvoice(SupplierInvoice supplierInvoice)
         {
-            int id = 0;
+            int supplierInvoiceID = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_create_supplier_invoice";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SUPPLIER_ID", invoice.SupplierId);
-            cmd.Parameters.AddWithValue("@INVOICE_DATE", invoice.InvoiceDate);
-            cmd.Parameters.AddWithValue("@SUB_TOTAL", invoice.SubTotal);
-            cmd.Parameters.AddWithValue("@TAX_AMOUNT", invoice.TaxAmount);
-            cmd.Parameters.AddWithValue("@TOTAL", invoice.Total);
-            cmd.Parameters.AddWithValue("@AMOUNT_PAID", invoice.AmountPaid);
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierInvoice.SupplierId);
+            cmd.Parameters.AddWithValue("@INVOICE_DATE", supplierInvoice.InvoiceDate);
+            cmd.Parameters.AddWithValue("@SUB_TOTAL", supplierInvoice.SubTotal);
+            cmd.Parameters.AddWithValue("@TAX_AMOUNT", supplierInvoice.TaxAmount);
+            cmd.Parameters.AddWithValue("@TOTAL", supplierInvoice.Total);
+            cmd.Parameters.AddWithValue("@AMOUNT_PAID", supplierInvoice.AmountPaid);
 
             try
             {
                 conn.Open();
-                int.TryParse(cmd.ExecuteScalar().ToString(), out id);
+                int.TryParse(cmd.ExecuteScalar().ToString(), out supplierInvoiceID);
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -205,18 +227,26 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return id;
+            return supplierInvoiceID;
         }
 
         /// <summary>
         /// Christian Lopez
-        /// 2017/03/29
+        /// Created: 2017/03/29
         /// 
         /// Creates a line for a supplier invoice
         /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        public static int CreateSupplierInvoiceLine(SupplierInvoiceLine line)
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierInvoiceLine">The supplierInvoiceLine to create.</param>
+        /// <returns>Rows affected.</returns>
+        public static int CreateSupplierInvoiceLine(SupplierInvoiceLine supplierInvoiceLine)
         {
             int rows = 0;
 
@@ -225,12 +255,12 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", line.SupplierInvoiceId);
-            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", line.ProductLotId);
-            cmd.Parameters.AddWithValue("@QUANTITY_SOLD", line.QuantitySold);
-            cmd.Parameters.AddWithValue("@PRICE_EACH", line.PriceEach);
-            cmd.Parameters.AddWithValue("@ITEM_DISCOUNT", line.ItemDiscount);
-            cmd.Parameters.AddWithValue("@ITEM_TOTAL", line.ItemTotal);
+            cmd.Parameters.AddWithValue("@SUPPLIER_INVOICE_ID", supplierInvoiceLine.SupplierInvoiceId);
+            cmd.Parameters.AddWithValue("@PRODUCT_LOT_ID", supplierInvoiceLine.ProductLotId);
+            cmd.Parameters.AddWithValue("@QUANTITY_SOLD", supplierInvoiceLine.QuantitySold);
+            cmd.Parameters.AddWithValue("@PRICE_EACH", supplierInvoiceLine.PriceEach);
+            cmd.Parameters.AddWithValue("@ITEM_DISCOUNT", supplierInvoiceLine.ItemDiscount);
+            cmd.Parameters.AddWithValue("@ITEM_TOTAL", supplierInvoiceLine.ItemTotal);
 
             try
             {
@@ -239,7 +269,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -252,14 +281,24 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
+        /// Created: 2017/??/??
+        /// 
         /// Updates the passed in "old Invoice" to match the passed in "new Invoice"
         /// </summary>
-        /// <param name="oldInvoice">The invoice as it was before editing</param>
-        /// <param name="newInvoice">The invoice after it has been edited</param>
-        /// <returns></returns>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="oldInvoice">The invoice as it is in the database.</param>
+        /// <param name="newInvoice">The invoice as it should be.</param>
+        /// <returns>Rows affected.</returns>
         public static int UpdateSupplierInvoice(SupplierInvoice oldInvoice, SupplierInvoice newInvoice)
         {
-            int result = 0;
+            int rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_update_supplier_invoice";
@@ -276,7 +315,6 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@old_APPROVED", oldInvoice.Approved);
             cmd.Parameters.AddWithValue("@old_ACTIVE", oldInvoice.Active);
 
-
             cmd.Parameters.AddWithValue("@new_SUPPLIER_ID", newInvoice.SupplierId);
             cmd.Parameters.AddWithValue("@new_INVOICE_DATE", newInvoice.InvoiceDate);
             cmd.Parameters.AddWithValue("@new_SUB_TOTAL", newInvoice.SubTotal);
@@ -289,7 +327,7 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                result = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -300,19 +338,27 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return result;
+            return rows;
         }
 
         /// <summary>
         /// Victor Algarin
         /// Created: 2017/04/06
-        /// Deletes the supplier invoice by the selected  supplier invoice ID
+        /// Deletes the supplier invoice by the selected supplier invoice ID
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
         /// <param name="invoice">The invoice to be deleted</param>
-        /// <returns>Number of rows affected(1 is expected to be returned on a successful query)</returns>
+        /// <returns>Rows affected.</returns>
         public static int DeleteSupplierInvoice(SupplierInvoice invoice)
         {
-            int count = 0;
+            int rows = 0;
 
             var conn = DBConnection.GetConnection();
             var cmdText = "sp_delete_supplier_invoice";
@@ -324,11 +370,10 @@ namespace DataAccessLayer
             try
             {
                 conn.Open();
-                count = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -336,27 +381,37 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-            return count;
+            return rows;
         }
 
 
         /// <summary>
         /// Bobby Thorne
-        /// 2017/04/14
+        /// Created: 2017/04/14
         /// 
         /// Retrieve the invoices by the supplier Id
         /// </summary>
-        /// <param name="supplierID"></param>
+        /// 
+        /// <remarks>
+        /// Aaron Usher
+        /// Updated: 2017/04/28
+        /// 
+        /// Standardized method.
+        /// </remarks>
+        /// 
+        /// <param name="supplierID">The id of the relevant supplier.</param>
         /// <returns>List of the supplier invoices</returns>
         public static List<SupplierInvoice> RetrieveSupplierInvoicesBySupplierID(int supplierID)
         {
-            List<SupplierInvoice> invoices = new List<SupplierInvoice>();
+            var supplierInvoices = new List<SupplierInvoice>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_supplier_invoice_list_by_supplier_id";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
             cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierID);
+
             try
             {
                 conn.Open();
@@ -365,7 +420,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        SupplierInvoice supplierInvoice = new SupplierInvoice
+                        supplierInvoices.Add(new SupplierInvoice
                         {
                             SupplierInvoiceId = reader.GetInt32(0),
                             SupplierId = reader.GetInt32(1),
@@ -376,16 +431,12 @@ namespace DataAccessLayer
                             AmountPaid = reader.GetDecimal(6),
                             Approved = reader.GetBoolean(7),
                             Active = reader.GetBoolean(8)
-                        };
-                        invoices.Add(supplierInvoice);
+                        });
                     }
                 }
-
-                reader.Close();
             }
             catch (Exception)
             {
-                
                 throw;
             }
             finally
@@ -393,10 +444,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-
-            return invoices;
+            return supplierInvoices;
         }
-        
     }
-
 }
