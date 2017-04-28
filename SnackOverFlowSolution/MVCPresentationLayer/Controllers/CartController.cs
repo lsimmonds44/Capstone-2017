@@ -32,7 +32,7 @@ namespace MVCPresentationLayer.Controllers
         public CartController(IProductManager repo, ICustomerOrderManager proc, IUserManager _userManager, IUserCartManager _userCartManager)
         {
             _productManager = repo;
-            _customerOrderManager = proc;
+            this._customerOrderManager = proc;
             this._userCartManager = _userCartManager;
             this._userManager = _userManager;
         }
@@ -68,23 +68,25 @@ namespace MVCPresentationLayer.Controllers
                     Price = productViewModel.Price,
                     Name = productViewModel.Name
                 };
-                
+
                 if (product.ProductId != 0)
                 {
-                    cart.AddItem(product, 1);
+                    
                     var currentUser = _userManager.RetrieveUserByUserName(User.Identity.Name);
                     var gradeId = Request.Params["Grade"];
-                    
+
                     var quantity = Int32.Parse(Request.Params["Quantity"]);
-                    var cartLine = new UserCartLine {
+                    cart.AddItem(product, quantity);
+                    var cartLine = new UserCartLine
+                    {
                         UserID = currentUser.UserId,
                         ProductID = (int)productId,
                         GradeID = gradeId,
                         Quantity = quantity
                     };
                     _userCartManager.AddToCart(cartLine);
-                    return RedirectToAction("Index","Products");
-            }
+                    return RedirectToAction("Index", "Products");
+                }
 
             }
             catch
@@ -114,15 +116,15 @@ namespace MVCPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, ShippingDetails
-            shippingDetails)
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            if (!cart.Lines.Any()) ModelState.AddModelError("", "Sorry, your cart is empty!");
+            if (!cart.Lines.Any()) 
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
 
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
                 return View(shippingDetails);
 
-            if (_customerOrderManager.ProcessOrder(cart, shippingDetails)) //returns bool
+            if (_customerOrderManager.ProcessOrder(cart, shippingDetails))
             {
                 cart.Clear();
                 return View("Completed");
@@ -131,7 +133,7 @@ namespace MVCPresentationLayer.Controllers
             {
                 return View("Error");
             }
-  
+
         }
     }
 }

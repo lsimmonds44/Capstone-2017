@@ -38,6 +38,7 @@ namespace MVCPresentationLayer.Infrastructure
             kernel.Bind<ICommercialInvoiceManager>().To<CommercialInvoiceManager>();
             kernel.Bind<ISupplierProductLotManager>().To<SupplierProductLotManager>();
             kernel.Bind<IProductOrderManager>().To<ProductOrderManager>();
+            kernel.Bind<ICustomerOrderManager>().To<CustomerOrderManager>();
             //kernel.Bind<IUserCartManager>().To<UserCartManager>();
         }
     }

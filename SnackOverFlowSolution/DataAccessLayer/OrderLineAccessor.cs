@@ -44,7 +44,7 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@PRODUCT_ORDER_ID", orderLine.ProductOrderID);
             cmd.Parameters.AddWithValue("@PRODUCT_ID", orderLine.ProductID);
-            cmd.Parameters.AddWithValue("@PRODUCT_NAME", orderLine.ProductName);
+            cmd.Parameters.AddWithValue("@PRODUCT_NAME", (object)orderLine.ProductName ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@QUANTITY", orderLine.Quantity);
             cmd.Parameters.AddWithValue("@GRADE_ID", orderLine.GradeID);
             cmd.Parameters.AddWithValue("@PRICE", orderLine.Price);

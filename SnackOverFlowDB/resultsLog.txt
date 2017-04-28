@@ -1017,3 +1017,7 @@ Changed database context to 'SnackOverflowDB'.
 *** Creating procedure sp_retrieve_vehicle_from_delivery
  
 *** Creating procedure sp_save_order
+ 
+*** Creating procedure sp_load_order
+ 
+*** Creating procedure sp_saved_orders_by_user

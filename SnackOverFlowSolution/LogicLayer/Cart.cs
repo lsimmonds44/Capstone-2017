@@ -12,19 +12,20 @@ namespace LogicLayer
     /// </summary>
     public class Cart
     {
-        private readonly List<CartLine> lineCollection = new List<CartLine>();
+        private readonly List<CartLine> _lineCollection = new List<CartLine>();
+
 
         public IEnumerable<CartLine> Lines
         {
-            get { return lineCollection; }
+            get { return _lineCollection; }
         }
 
         public void AddItem(Product product, int quantity)
         {
-            var line = lineCollection
+            var line = _lineCollection
                 .FirstOrDefault(p => p.Product.ProductId == product.ProductId);
             if (line == null)
-                lineCollection.Add(new CartLine
+                _lineCollection.Add(new CartLine
                 {
                     Product = product,
                     Quantity = quantity
@@ -34,17 +35,17 @@ namespace LogicLayer
 
         public void RemoveLine(Product product)
         {
-            lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
+            _lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
 
         public double ComputeTotalValue()
         {
-            return lineCollection.Sum(e => e.Product.Price * e.Quantity);
+            return _lineCollection.Sum(e => e.Product.Price * e.Quantity);
         }
 
         public void Clear()
         {
-            lineCollection.Clear();
+            _lineCollection.Clear();
         }
     }
 }

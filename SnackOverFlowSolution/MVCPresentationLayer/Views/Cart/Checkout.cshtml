@@ -1,35 +1,82 @@
-﻿@model DataObjects.ShippingDetails
+﻿@using Microsoft.AspNet.Identity
+@model DataObjects.ShippingDetails
 
 @{
     ViewBag.Title = "SnackOverflow: Checkout";
 }
 
-<h2>Check out now</h2>
+<h2>Check out now, @User.Identity.GetUserName()</h2>
 <p>Please enter your details, and we'll ship your goods right away!</p>
-@using (Html.BeginForm("Checkout", "Cart"))
-{
-    @Html.ValidationSummary()
-    <h3>Ship to</h3>
-    <div class="form-group">
-        <label>Name:</label>
-        @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
-    </div>
-    <h3>Address</h3>
 
-    foreach (var property in ViewData.ModelMetadata.Properties)
-    {
-        if (property.PropertyName != "Name" && property.PropertyName !=
-            "GiftWrap")
+<div class="row">
+    <section id="registerForm">
+
+        <h3>@ViewBag.Error</h3>
+
+        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="form-group">
-                <label>
-                    @(property.DisplayName ?? property.PropertyName)
-                </label>
-                @Html.TextBox(property.PropertyName, null, new {@class = "form-control"})
+                @Html.LabelFor(m => m.Line1, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Line1, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Line1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Line2, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Line2, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Line2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Zip, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(m => m.IdentityUsername, new { @Value = User.Identity.GetUserName() })
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Complete Order" class="btn btn-default" />
+                </div>
             </div>
         }
-    }
-    <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Complete order"/>
-    </div>
-}
+    </section>
+</div>
