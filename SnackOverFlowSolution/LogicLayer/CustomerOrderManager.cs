@@ -8,6 +8,10 @@ namespace LogicLayer
 {
     public class CustomerOrderManager : ICustomerOrderManager
     {
+        private readonly UserManager userManager = new UserManager();
+        private readonly CustomerManager customerManager = new CustomerManager();
+
+
         /// <summary>
         ///     Created by Michael Takrama
         ///     04/13/17
@@ -18,26 +22,37 @@ namespace LogicLayer
         /// <param name="shippingDetails">Contains shipping Details</param>
         public bool ProcessOrder(Cart cart, ShippingDetails shippingDetails)
         {
-            var orderId = 0;
+            var user = userManager.RetrieveUserByUserName(shippingDetails.IdentityUsername);
+            var customer = customerManager.RetrieveCommercialCustomerByUserId(user.UserId);
 
-            // Order Creation in Product Order
             try
             {
                 var p = new ProductOrder
                 {
-                    CustomerId = shippingDetails.CustomerId,
+                    CustomerId = customer.CommercialId, 
+                    OrderTypeId = "Commercial", 
+                    AddressType = null,
+                    Amount = (decimal)cart.ComputeTotalValue(),
                     OrderDate = DateTime.Now,
+                    Address1 = shippingDetails.Line1 + "," + shippingDetails.Line2,
+                    City = shippingDetails.City,
+                    State = shippingDetails.State,
+                    Zip = shippingDetails.Zip,
+                    OrderStatusId = "Open",
+                    HasArrived = false,
                     Discount = 0, // defaulted to 0 % until discount functionality added -- temporaire
-                    UserAddressId = 1
                 };
 
-                orderId = ProductOrderAccessor.CreateProductOrder(p);
+                var orderId = ProductOrderAccessorMvc.CreateProductOrder(p);
 
                 if (orderId == 0)
                 {
                     Debug.WriteLine("CustomerOrderManager: Error Creating order");
                     return false;
                 }
+
+                if (!SubmitOrderLines(cart, orderId))
+                    return false;
             }
             catch (Exception e)
             {
@@ -45,36 +60,39 @@ namespace LogicLayer
                 throw new ApplicationException("CustomerOrderManager: " + e.Message);
             }
 
-            // Writing Order Lines
+            
+
+            return true;
+        }
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 04/28/2017
+        /// 
+        /// Submits order lines for Order
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        private static bool SubmitOrderLines(Cart cart, int orderId)
+        {
             try
             {
-                if (cart.Lines.Select(o => new OrderLine
-                    {
-                        ProductOrderID = orderId,
-                        ProductID = o.Product.ProductId,
-                        Quantity = o.Quantity,
-                        GradeID = o.Product.GradeId,
-                        Price = (decimal)o.Product.Price,
-                        UnitDiscount = 0 //temporaire
-                    }).All( lineToWrite => 1 == OrderLineAccessor.CreateOrderLine(lineToWrite) )
-                )
+                bool all = cart.Lines.Select(o => new OrderLine
                 {
-                    Debug.WriteLine("CustomerOrderManager: Error during order line writing");
-                    // delete created order entry
+                    ProductOrderID = orderId,
+                    ProductName = o.Product.Name,
+                    ProductID = o.Product.ProductId,
+                    Quantity = o.Quantity,
+                    GradeID = o.Product.GradeId,
+                    Price = (decimal) o.Product.Price,
+                    UnitDiscount = 0 //temporaire
+                }).All(lineToWrite => 0 < OrderLineAccessor.CreateOrderLine(lineToWrite));
+
+                if (!all)
+                {
                     return false;
                 }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                throw;
-            }
-
-            //Write shipping details to user address. //USER ADDRESS TABLE
-            try
-            {
-                // lookup user id of customer
-                // update user address in user table
             }
             catch (Exception e)
             {

@@ -535,3 +535,12 @@ VALUES
     (10003, '2017-03-20', 4600.00, 20.00, 4620.00, 10003),
     (10001, '2017-03-20', 2300.00, 10.00, 2310.00, 10001),
     (10002, '2017-03-20', 2300.00, 10.00, 2310.00, 10002)
+	
+print '' print '*** Inserting Order Types ***'
+GO
+INSERT INTO [dbo].[Order_Type]
+	(Order_Type_ID)
+VALUES
+	('Commercial'),
+	('Supplier')
+GO

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace DataObjects
 {
@@ -10,18 +11,13 @@ namespace DataObjects
     /// </summary>
     public class ShippingDetails
     {
-        [Required(ErrorMessage = "Please enter a name")]
-        public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter the first address line")]
 
-        [Display(Name = "Line 1")]
+        [Required(ErrorMessage = "Please enter the first address line")]
+        [Display(Name = "Address Line 1")]
         public string Line1 { get; set; }
 
-        [Display(Name = "Line 2")]
+        [Display(Name = "Address Line 2")]
         public string Line2 { get; set; }
-
-        [Display(Name = "Line 3")]
-        public string Line3 { get; set; }
 
         [Required(ErrorMessage = "Please enter a city name")]
         public string City { get; set; }
@@ -35,5 +31,8 @@ namespace DataObjects
         public string Country { get; set; }
 
         public int CustomerId { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string IdentityUsername { get; set; }
     }
 }
