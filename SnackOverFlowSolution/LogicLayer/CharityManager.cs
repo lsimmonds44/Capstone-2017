@@ -9,8 +9,22 @@ using System.Data.SqlClient;
 
 namespace LogicLayer
 {
+    /// <summary>
+    /// Ariel Sigo 
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Charity Manager Class
+    /// </summary>
     public class CharityManager : ICharityManager
     {
+        /// <summary>
+        /// Ariel Sigo 
+        /// Updated:
+        /// 2017/04/29
+        ///
+        /// </summary>
+        /// <returns>List of Charities</returns>
         public List<Charity> RetrieveCharityList()
         {
             List<Charity> charities = new List<Charity>();
@@ -27,6 +41,13 @@ namespace LogicLayer
             return charities;
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// Upated:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="charity"></param>
+        /// <returns>int of rows affected if succesful</returns>
         public int AddCharity(Charity charity)
         {
             try
@@ -41,12 +62,13 @@ namespace LogicLayer
 
         /// <summary>
         /// Daniel Brown
-        /// Created 03/04/2017
+        /// Created 
+        /// 2017/03/04
         /// 
         /// Approves a charity application
         /// </summary>
         /// <param name="charityInstance"></param>
-        /// <returns></returns>
+        /// <returns>True if successful</returns>
         public bool ApproveCharity(Charity charityInstance)
         {
             bool result = false;
@@ -70,12 +92,13 @@ namespace LogicLayer
 
         /// <summary>
         /// Daniel Brown
-        /// Created 03/04/2017
+        /// Created 
+        /// 2017/03/04
         /// 
         /// Denies a charity application
         /// </summary>
         /// <param name="charityInstance"></param>
-        /// <returns></returns>
+        /// <returns>true if successful</returns>
         public bool DenyCharity(Charity charityInstance)
         {
             bool result = false;
@@ -99,12 +122,13 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created 
+        /// 2017/03/08
         /// 
         /// Handles the logic of creating an application for a charity.
         /// </summary>
         /// <param name="charityInstance"></param>
-        /// <returns></returns>
+        /// <returns>true if successful</returns>
         public bool AddCharityApplication(Charity charityInstance)
         {
             bool result = false;
@@ -131,12 +155,13 @@ namespace LogicLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// 3/24/2017
+        /// Created:
+        /// 2017/03/24
         /// 
         /// Retrieves Charity instance by user id
         /// </summary>
         /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <returns>Charity if successful</returns>
         public Charity RetrieveCharityByUserId(int userId)
         {
             Charity s = null;

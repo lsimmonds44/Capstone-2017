@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/14
+    /// Updated: 
+    /// 2017/04/14
     ///
     /// Class to handle test database interactions.
     public static class UserAccessor
@@ -19,14 +20,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Retrieves a list of all users from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method and added address fields.
         /// </remarks>
@@ -85,14 +88,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/01
+        /// Created: 
+        /// 2017/02/01
         /// 
         /// Access DB to get User by given username
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method and added address fields.
         /// </remarks>
@@ -148,14 +153,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Adds a user to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method and added address fields.
         /// </remarks>
@@ -244,14 +251,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Retrieves the salt of a user based on their username.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -292,14 +301,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood 
-        /// Created: 2017/04/12
+        /// Created: 
+        /// 2017/04/12
         /// 
         /// Retrieves the salt of a user based on their email.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -339,14 +350,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Authenticates a user and retrieves their information if it is correct.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method and added address fields.
         /// </remarks>
@@ -406,14 +419,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/04/12
+        /// Created: 
+        /// 2017/04/12
         /// 
         /// Uses a user's email address and hashed password to log in.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method and added address fields.
         /// </remarks>
@@ -471,14 +486,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// Created: 2017/03/04
+        /// Created:
+        /// 2017/03/04
         /// 
         /// Retrieves the username of the of the user with the given email.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -514,13 +531,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/02/28
+        /// Created: 
+        /// 2017/02/28
         /// 
         /// Updates a user's password in the database.
         /// </summary>
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -564,14 +583,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated:
+        /// 2017/04/14
         /// 
         /// Resets a user's password in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -611,7 +632,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         /// 
         /// Attempts to retrieve a user from the DB.
         /// </summary>
@@ -666,14 +688,16 @@ namespace DataAccessLayer
         }
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Deletes a user from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>

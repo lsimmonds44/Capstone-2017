@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Ethan Jorgensen
-    /// Created: 2017/04/13
+    /// Created: 
+    /// 2017/04/13
     ///
     /// Class to handle database interactions involving supplier product lots.
     public static class SupplierProductLotAccessor
@@ -19,14 +20,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Adds a new product lot to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -66,14 +69,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Gets a product lot object using the productlotid 
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -123,14 +128,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created: 2017/04/13
+        /// Created:
+        /// 2017/04/13
         /// 
         /// Returns a list of SupplierProductLots by supplier
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -183,14 +190,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Gets a list of product lots from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardzied method.
         /// </remarks>
@@ -239,14 +248,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Deletes the given supplier product lot from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardize method.
         /// </remarks>

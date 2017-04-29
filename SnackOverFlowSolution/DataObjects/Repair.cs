@@ -8,7 +8,11 @@ namespace DataObjects
 {
     /// <summary>
     /// Robert Forbes
+    /// 
+    /// Created:
     /// 2017/03/24
+    /// 
+    /// Repair Class
     /// </summary>
     public class Repair
     {

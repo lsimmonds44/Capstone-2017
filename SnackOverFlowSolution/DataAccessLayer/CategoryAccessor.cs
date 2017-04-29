@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/03
+    /// Updated: 
+    /// 2017/04/03
     /// 
     /// Class to handle database interactions inolving categories.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Ryan Spurgetis
-        /// Created: 2017/02/09
+        /// Created:
+        /// 2017/02/09
         /// 
         /// This method takes data for a new Category for Products from manager class and writes to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/03
+        /// Updated: 
+        /// 2017/04/03
         /// 
         /// Standardized method. Changed method signature to take a Category instead of information to make a category.
         /// </remarks>
@@ -63,8 +66,11 @@ namespace DataAccessLayer
         }
 
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 4/13/17
+        /// Mason Allen
+        /// 
+        /// Created:
+        /// 2017/04/13
+        /// 
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns>1 for success, 0 for fail</returns>

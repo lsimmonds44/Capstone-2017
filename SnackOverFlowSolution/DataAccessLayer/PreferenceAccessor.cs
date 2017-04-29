@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/21
+    /// Updated: 
+    /// 2017/04/21
     /// 
     /// Class to handle database interactions involving preferences.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Michael Takrama
-        /// Created: 2017/03/24
+        /// Created: 
+        /// 2017/03/24
         /// 
         /// Data Access Logic for Preference Settings.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Update: 2017/04/24
+        /// Update: 
+        /// 2017/04/24
         /// 
         /// Standardized method.
         /// </remarks>

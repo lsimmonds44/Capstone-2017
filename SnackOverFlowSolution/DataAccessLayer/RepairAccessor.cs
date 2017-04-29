@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// Created: 2017/03/24
+    /// Created:
+    /// 2017/03/24
     /// 
     /// Class to handle database interactions involving repairs.
     /// </summary>
@@ -20,14 +21,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/03/24
+        /// Created: 
+        /// 2017/03/24
         /// 
         /// Retrieves all repairs for a given vehicle
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

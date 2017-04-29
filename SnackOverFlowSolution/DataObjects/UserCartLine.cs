@@ -7,8 +7,21 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by William Flood on 2017-04-07
+    /// William Flood 
+    /// 
+    /// Created;
+    /// 2017/04/07
+    /// 
+    /// Class of User Cart Line
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// 
+    /// </remarks>
     public class UserCartLine
     {
         public int ProductID { get; set; }

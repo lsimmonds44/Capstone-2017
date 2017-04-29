@@ -7,9 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicLayer
+    
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated;
+    /// 2017/04/29
+    /// 
+    /// Commercial Invoice Manager class
+    /// </summary>
     public class CommercialInvoiceManager : ICommercialInvoiceManager
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public List<CommercialInvoice> RetrieveCommercialInvoiceByUserName(string userName)
         {
             try

@@ -5,6 +5,14 @@ using Microsoft.Owin.Security;
 
 namespace MVCPresentationLayer.Models
 {
+    /// <summary>
+    /// Ariel Sigo 
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Index View Model
+    /// </summary>
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
@@ -14,17 +22,41 @@ namespace MVCPresentationLayer.Models
         public bool BrowserRemembered { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Model for Managing Logins
+    /// </summary>
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
         public IList<AuthenticationDescription> OtherLogins { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Factor View Model
+    /// </summary>
     public class FactorViewModel
     {
         public string Purpose { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    ///  2017/04/29
+    ///  
+    /// View Model for setting passwords
+    /// </summary>
     public class SetPasswordViewModel
     {
         [Required]
@@ -39,6 +71,14 @@ namespace MVCPresentationLayer.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Model for Changing Password
+    /// </summary>
     public class ChangePasswordViewModel
     {
         [Required]
@@ -58,6 +98,14 @@ namespace MVCPresentationLayer.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Model for adding phone number
+    /// </summary>
     public class AddPhoneNumberViewModel
     {
         [Required]
@@ -66,6 +114,15 @@ namespace MVCPresentationLayer.Models
         public string Number { get; set; }
     }
 
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Model for Verifying phone number
+    /// </summary>
     public class VerifyPhoneNumberViewModel
     {
         [Required]
@@ -78,6 +135,15 @@ namespace MVCPresentationLayer.Models
         public string PhoneNumber { get; set; }
     }
 
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Model for configuring two factor
+    /// </summary>
     public class ConfigureTwoFactorViewModel
     {
         public string SelectedProvider { get; set; }

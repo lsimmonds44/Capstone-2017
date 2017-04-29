@@ -9,8 +9,21 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
+    /// 
+    /// Created:
     /// 2017/04/13
+    /// 
+    /// Properties for Company Order Object
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated
+    /// 2017/04/29
+    ///
+    /// Standardized Comment
+    /// 
+    /// </remarks> 
+    
     public class CompanyOrder
     {
         [Display(Name = "Order ID")]

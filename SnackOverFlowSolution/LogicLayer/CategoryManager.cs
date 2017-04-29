@@ -8,17 +8,34 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
+    /// <summary>
+    /// Ryan Spurgetis
+    /// 
+    /// Created:
+    /// 2017/02/09
+    /// 
+    /// Category Manager Interface
+    /// </summary>
     public class CategoryManager : ICategoryManager
     {
         /// <summary>
         /// Ryan Spurgetis
-        /// 02/09/2017
+        /// 
+        /// Created
+        /// 2017/02/09
         /// 
         /// Takes data for a new Category for Products from view, sends to the Accessor class.
         /// </summary>
+        /// <remarks>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// 
+        /// Standardized Comment
+        /// </remarks>
         /// <param name="productCategory">Name of category</param>
         /// <param name="prodCategoryDesc">Description of category</param>
-        /// <returns></returns>
+        /// <returns>True if succesfful</returns>
         public bool CreateCategory(Category category)
         {
             var result = false;
@@ -36,9 +53,17 @@ namespace LogicLayer
         }
 
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 4/13/17
+        /// Mason Allen
+        /// Created:
+        /// 2017/04/13
         /// </summary>
+        /// <remarks>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// 
+        /// Standardized Comment
+        /// </remarks>
         /// <param name="categoryId"></param>
         /// <returns>1 for success, 0 for fail</returns>
         public int DeleteCategory(string categoryId)

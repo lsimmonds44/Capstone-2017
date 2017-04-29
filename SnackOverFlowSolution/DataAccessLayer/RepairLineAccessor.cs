@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/21
+    /// Updated: 
+    /// 2017/04/21
     /// 
     /// Class to handle database interactions involving repair lines.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Retrieves all of the repair lines related to the given repair.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

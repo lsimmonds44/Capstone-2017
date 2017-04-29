@@ -8,11 +8,21 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by Natacha Ilunga
-    /// Created on 2-20-2017 
-    ///
+    /// Natacha Ilunga
+    /// Created: 
+    /// 2017/02/20
+    /// 
     /// View model for frmBrowseProducts
+    /// 
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// 
+    /// </remarks>
     public class BrowseProductViewModel
     {
         private string SupplierNameToView;

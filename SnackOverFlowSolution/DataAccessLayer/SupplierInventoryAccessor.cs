@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// William Flood
-    /// Created: 2017/03/29
+    /// Created:
+    /// 2017/03/29
     /// 
     /// Class to handle database interactions involving supplier inventories.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// William Flood
-        /// Created: 2017/03/29
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Adds a new supplier inventory to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

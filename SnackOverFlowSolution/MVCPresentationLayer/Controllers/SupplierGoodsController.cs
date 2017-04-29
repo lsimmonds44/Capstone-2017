@@ -14,10 +14,13 @@ using Microsoft.AspNet.Identity;
 namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
-    /// Controller logic for supplier product lots
-    /// 
     /// Ethan Jorgensen
-    /// Created: 04/06/2017
+    /// 
+    /// Created: 
+    /// 
+    /// 2017/04/06
+    /// 
+    /// Controller logic for supplier product lots
     /// </summary>
     public class SupplierGoodsController : Controller
     {
@@ -31,7 +34,15 @@ namespace MVCPresentationLayer.Controllers
             this.usrMgr = usrMgr;
         }
 
-        // GET: /SupplierGoods/
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierGoods/
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
@@ -39,7 +50,16 @@ namespace MVCPresentationLayer.Controllers
             return View(plMgr.RetrieveSupplierProductLotsBySupplier(sup));
         }
 
-        // GET: /SupplierGoods/Details/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        ///GET: /SupplierGoods/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of supplier good lot</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -56,15 +76,34 @@ namespace MVCPresentationLayer.Controllers
             return View(lot);
         }
 
-        // GET: /SupplierGoods/Create
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierGoods/Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /SupplierGoods/Create
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /SupplierGoods/Create
+        /// </summary>
+        /// <param name="lot"></param>
+        /// <returns>View of Lot</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SupplierProductLotId,ExpirationDate,ProductId,Quantity,SupplierId,Price")] SupplierProductLot lot)
@@ -78,6 +117,15 @@ namespace MVCPresentationLayer.Controllers
             return View(lot);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of Lot if successful</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,9 +141,19 @@ namespace MVCPresentationLayer.Controllers
             return View(lot);
         }
 
-        // POST: /SupplierGoods/Edit/5
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /SupplierGoods/Edit/5
+        /// </summary>
+        /// <param name="lot"></param>
+        /// <returns>View of Lot</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include= "SupplierProductLotId,ExpirationDate,ProductId,Quantity,SupplierId,Price")] SupplierProductLot lot)
@@ -110,7 +168,16 @@ namespace MVCPresentationLayer.Controllers
             return View(lot);
         }
 
-        // GET: /SupplierGoods/Delete/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierGoods/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of Lots</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -125,7 +192,16 @@ namespace MVCPresentationLayer.Controllers
             return View(lot);
         }
 
-        // POST: /SupplierGoods/Delete/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created
+        /// 2017/04/29
+        /// 
+        /// POST: /SupplierGoods/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>RedirectToAction("Index")</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

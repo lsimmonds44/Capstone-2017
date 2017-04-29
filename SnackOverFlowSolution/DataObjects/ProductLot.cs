@@ -8,6 +8,8 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
+    /// 
+    /// Created:
     /// 2017/02/20
     /// 
     /// The DTO for a Product Lot

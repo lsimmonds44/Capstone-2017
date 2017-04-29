@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Created: 2017/04/21
+    /// Created: 
+    /// 2017/04/21
     /// 
     /// Class to handle database interactions involving vehicle types.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Mason Allen
-        /// Created: 2017/03/01
+        /// Created: 
+        /// 2017/03/01
         /// 
         /// Retrieves a list of all vehicle types from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

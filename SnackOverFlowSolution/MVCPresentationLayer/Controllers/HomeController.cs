@@ -11,40 +11,82 @@ using MVCPresentationLayer.Models;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// 2017/04/29
+    /// 
+    /// Home Controller
+    /// </summary>
     public class HomeController : Controller
     {
         private IUserManager _userManager;
         private ICustomerManager _customerManager;
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="um"></param>
+        /// <param name="cm"></param>
         public HomeController(IUserManager um, ICustomerManager cm)
         {
             _userManager = um;
             _customerManager = cm;
         }
 
-
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View of Index</returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View of About</returns>
         public ActionResult About()
         {
             return View();
         }
 
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View of Contact</returns>
         public ActionResult Contact()
         {
             return View();
         }
 
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Updated: 4/28/17
+        /// Skyler Hiscock
+        /// 
+        /// Created:
+        /// 2017/04/21
+        /// 
+        /// Updated:
+        /// 2017/04/28
         /// </summary>
         /// <param name="username"></param>
         /// <param name="supOrCom">true = "Supplier"; false = "Commercial"</param>
-        /// <returns></returns>
+        /// <returns>View of successViewModel</returns>
         
         public ActionResult ApplicationSuccess(string username, bool supOrCom)
         {
@@ -59,16 +101,27 @@ namespace MVCPresentationLayer.Controllers
             return View(successViewModel);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View of RegisterCommercial</returns>
         public ActionResult RegisterCommercial()
         {
             return View();
         }
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 04/15/2017
-        /// Updated by Skyler Hiscock
-        /// 04/28/17
+        /// Michael Takrama
+        /// 
+        /// Created:
+        /// 2017/04/15
+        /// 
+        /// Skyler Hiscock
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Action to Register for Commercial Account
         /// </summary>

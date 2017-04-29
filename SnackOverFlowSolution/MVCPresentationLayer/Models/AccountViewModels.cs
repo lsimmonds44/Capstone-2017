@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVCPresentationLayer.Models
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -10,11 +16,25 @@ namespace MVCPresentationLayer.Models
         public string Email { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// 
+    /// </summary>
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -23,6 +43,14 @@ namespace MVCPresentationLayer.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// View model for verify code
+    /// </summary>
     public class VerifyCodeViewModel
     {
         [Required]
@@ -39,6 +67,14 @@ namespace MVCPresentationLayer.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// View model for forgotten email
+    /// </summary>
     public class ForgotViewModel
     {
         [Required]
@@ -46,6 +82,14 @@ namespace MVCPresentationLayer.Models
         public string Email { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// View model for logging in 
+    /// </summary>
     public class LoginViewModel
     {
         [Required]
@@ -61,6 +105,14 @@ namespace MVCPresentationLayer.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// View model for registration
+    /// </summary>
     public class RegisterViewModel
     {
         [Required]
@@ -80,6 +132,14 @@ namespace MVCPresentationLayer.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// View Model for Reset password
+    /// </summary>
     public class ResetPasswordViewModel
     {
         [Required]
@@ -101,6 +161,14 @@ namespace MVCPresentationLayer.Models
         public string Code { get; set; }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// ViewModel for ForgotPassword
+    /// </summary>
     public class ForgotPasswordViewModel
     {
         [Required]

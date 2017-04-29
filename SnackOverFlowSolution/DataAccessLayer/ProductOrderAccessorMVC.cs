@@ -12,11 +12,22 @@ namespace DataAccessLayer
 
 
         /// <summary>
-        /// Created by Michael Takrama
-        /// 04/28/2017
+        ///
+        /// Michael Takrama
+        /// 
+        /// Created:
+        /// 2017/04/28
         /// 
         /// Product Order Created customized for MVC layer
         /// </summary>
+        /// 
+        /// <remarks>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// 
+        /// Standardized Comment
+        /// </remarks>
         /// <param name="productOrder"></param>
         /// <returns></returns>
         public new static int CreateProductOrder(ProductOrder productOrder)

@@ -9,22 +9,69 @@ using LogicLayer;
 
 namespace MVCPresentationLayer.Infrastructure
 {
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Ninject Dependency Resolver
+    /// </summary>
     public class NinjectDependencyResolver : IDependencyResolver
     {
         private IKernel kernel;
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="kernelParam"></param>
         public NinjectDependencyResolver(IKernel kernelParam)
         {
             kernel = kernelParam;
             AddBindings();
         }
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
         public object GetService(Type serviceType)
         {
             return kernel.TryGet(serviceType);
         }
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
         public IEnumerable<object> GetServices(Type serviceType)
         {
             return kernel.GetAll(serviceType);
         }
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// Adds Binding to the interfaces.
+        /// </summary>
         private void AddBindings()
         {
             kernel.Bind<IProductManager>().To<ProductManager>();

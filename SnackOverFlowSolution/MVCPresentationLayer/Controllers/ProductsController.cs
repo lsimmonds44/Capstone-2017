@@ -12,23 +12,45 @@ using LogicLayer;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Products Controller
+    /// </summary>
     public class ProductsController : Controller
     {
         IProductManager _productManager;
         public int PageSize = 10; // change in v2?
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="productManager"></param>
         public ProductsController(IProductManager productManager)
         {
             _productManager = productManager;
         }
 
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Updated: 4/20/17
+        /// Skyler Hiscock
+        /// 
+        /// Created:
+        /// 2017/04/13
+        /// 
+        /// Skyler Hiscock
+        /// Updated:
+        /// 2017/04/20
+        /// 
+        ///  GET: Products
         /// </summary>
         /// <param name="page">Page Number</param>
-        /// <returns></returns>
-        // GET: Products
+        /// <returns>View(ProductS)</returns>
         public ActionResult Index(string category, string search = "", int page = 1)
         {
 
@@ -74,13 +96,20 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Updated 4/14/17
+        /// Skyler Hiscock
+        /// 
+        /// Created:
+        /// 2017/04/07
+        /// 
+        /// Skyler Hiscock
+        /// Updated:
+        /// 2017/04/14
+        /// 
+        /// GET: Products/Details/5
         /// </summary>
         /// <param name="id"></param>
         /// <param name="supplierId"></param>
         /// <returns>Detail view for specific product.</returns>
-        // GET: Products/Details/5
         public ActionResult Details(int? id, int? supplierId)
         {
             if (id == null || supplierId == null)
@@ -98,7 +127,10 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Created on 2017/04/06 by William Flood
+        /// William Flood
+        /// 
+        /// Created:
+        /// 2017/04/06
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -122,8 +154,10 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Added: 4/20/17
+        /// Skyler Hiscock
+        /// 
+        /// Created:
+        /// 2017/04/20
         /// </summary>
         /// <param name="categories"></param>
         /// <param name="searchPhrase"></param>

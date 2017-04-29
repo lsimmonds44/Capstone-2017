@@ -13,7 +13,8 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Victor Algarin
-        /// Created 2017/03/01
+        /// Created 
+        /// 2017/03/01
         /// 
         /// Retrieves details for a specific vehicle through a vehicle id
         /// </summary>
@@ -77,7 +78,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Mason Allen
-        /// Created 2017/03/01 
+        /// Created 
+        /// 2017/03/01 
         /// 
         /// Creates a new vehicle
         /// </summary>
@@ -182,7 +184,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Laura Simmonds
-        /// Created 2017/03/28
+        /// Created 
+        /// 2017/03/28
         /// 
         /// Changes vehicle status to checked out or checked in and records
         /// the date and time of the change.
@@ -222,7 +225,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Created: 2017/02/17
+        /// Created:
+        /// 2017/02/17
         /// 
         /// Gets a vehicle based on a specific deliveryId.
         /// </summary>
@@ -277,8 +281,19 @@ namespace DataAccessLayer
         }
 
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 4/13/17
+        /// Mason Allen
+        /// Created:
+        /// 2017/04/13
+        /// 
+        /// <remarks>
+        /// Ariel Sigo
+        /// 
+        /// Updated:
+        /// 2017/04/29
+        /// 
+        /// Standardized Comment
+        /// </remarks>
+        /// 
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>

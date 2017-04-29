@@ -11,6 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
+    /// 
+    /// Created:
     /// 2017/04/13
     /// 
     /// Handles data access for company orders and lines
@@ -19,6 +21,8 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// 
         /// Returns a list of all company orders in the DB
@@ -72,6 +76,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// 
         /// Returns a list of company orders placed to a specified supplier Id
@@ -127,6 +133,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// 
         /// Retrieves a list of lines associated with a particular order
@@ -181,6 +189,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// 
         /// Binds the lines to their orders
@@ -220,6 +230,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// 
         /// Retrieves bundled order and lines for a supplier id
@@ -261,6 +273,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// </summary>
         /// <param name="orderId"></param>
@@ -311,6 +325,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/13
         /// </summary>
         /// <param name="orderId"></param>

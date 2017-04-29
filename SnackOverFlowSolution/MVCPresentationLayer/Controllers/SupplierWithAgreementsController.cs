@@ -13,6 +13,14 @@ using System.Threading.Tasks;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created: 
+    /// 2017/04/29
+    /// 
+    /// Supplier With Agreements Controller
+    /// </summary>
     public class SupplierWithAgreementsController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,6 +29,17 @@ namespace MVCPresentationLayer.Controllers
         private IAgreementManager _agreementManager;
         private IUserManager _userManager;
 
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="supplierManager"></param>
+        /// <param name="productManager"></param>
+        /// <param name="agreementManager"></param>
+        /// <param name="userManager"></param>
         public SupplierWithAgreementsController(ISupplierManager supplierManager, IProductManager productManager, IAgreementManager agreementManager, IUserManager userManager)
         {
             _supplierManager = supplierManager;
@@ -29,8 +48,16 @@ namespace MVCPresentationLayer.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: SupplierWithAgreements
+        /// </summary>
+        /// <returns>View of Suppliers with Agreements</returns>
         [Authorize]
-        // GET: SupplierWithAgreements
         public ActionResult Index()
         {
             return View(_supplierManager.RetrieveSuppliersWithAgreements());
@@ -51,7 +78,15 @@ namespace MVCPresentationLayer.Controllers
         //    return View(supplierWithAgreements);
         //}
 
-        // GET: SupplierWithAgreements/Create
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: SupplierWithAgreements/Create
+        /// </summary>
+        /// <returns>View of Dummy Product List</returns>
         public ActionResult Create()
         {
             //if (User.IsInRole("Supplier"))
@@ -77,9 +112,20 @@ namespace MVCPresentationLayer.Controllers
             return View(dummy);
         }
 
-        // POST: SupplierWithAgreements/Create
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: SupplierWithAgreements/Create
+        /// </summary>
+        /// <param name="supplierApplicant"></param>
+        /// <returns>View of Supplier Applicant</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create([Bind(Include = "FarmTaxID,UserId,FarmName,FarmAddress,FarmCity,FarmState,Agreements")] SupplierWithAgreements supplierWithAgreements)
@@ -225,8 +271,18 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierApplicant);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: SupplierWithAgreements/Edit/5
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>View of Supplier with Agreements</returns>
         [Authorize(Roles="Supplier")]
-        // GET: SupplierWithAgreements/Edit/5
+        
         public ActionResult Edit(string username)
         {
             if (username == null || username.Equals(""))
@@ -243,9 +299,20 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierWithAgreements);
         }
 
-        // POST: SupplierWithAgreements/Edit/5
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// POST: SupplierWithAgreements/Edit/5
+        /// </summary>
+        /// <param name="supplierWithAgreements"></param>
+        /// <returns>View of SupplierWithAgreements</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Supplier")]
@@ -292,7 +359,16 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierWithAgreements);
         }
 
-        // GET: SupplierWithAgreements/UpdateAgreements/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: SupplierWithAgreements/UpdateAgreements/5
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <returns>view of updated agreement model</returns>
         [Authorize(Roles="Supplier")]
         public ActionResult UpdateAgreements(int? supplierId)
         {
@@ -341,9 +417,20 @@ namespace MVCPresentationLayer.Controllers
             
         }
 
-        // POST: SupplierWithAgreements/UpdateAgreements/5
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created;
+        /// 2017/04/29
+        /// 
+        ///  POST: SupplierWithAgreements/UpdateAgreements/5
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>RedirectToAction("Index", "Manage",</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Supplier")]

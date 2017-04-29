@@ -10,7 +10,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/03
+    /// Updated: 
+    /// 2017/04/03
     /// 
     /// Class to handle database interactions involving delivery types.
     /// </summary>
@@ -18,7 +19,8 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/03
+        /// Updated: 
+        /// 2017/04/03
         /// 
         /// Accessor method to retrieve a list of all delivery types.
         /// </summary>

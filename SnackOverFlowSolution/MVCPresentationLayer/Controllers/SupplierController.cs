@@ -7,14 +7,26 @@ using System.Web.Mvc;
 namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
-    /// Created by Natacha Ilunga
-    /// 4/23/17
+    /// Natacha Ilunga
     /// 
-    /// Main Menu for Supplier en relation Fonction
+    /// Created:
+    /// 2017/23/04
+    /// 
+    /// Main Menu for Supplier and relation Function
     /// </summary>
     public class SupplierController : Controller
     {
-        // GET: Supplier
+        
+        /// <summary>
+        /// Natcha Ilunga
+        ///
+        /// 
+        /// Created:
+        /// 2017/23/04
+        /// 
+        /// GET: Supplier
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();

@@ -14,8 +14,23 @@ using MVCPresentationLayer.Models;
 
 namespace MVCPresentationLayer
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Sends an email
+    /// </summary>
     public class EmailService : IIdentityMessageService
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Sends an Email
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Task.FromResult</returns>
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
@@ -23,8 +38,22 @@ namespace MVCPresentationLayer
         }
     }
 
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// Sends a text message
+    /// </summary>
     public class SmsService : IIdentityMessageService
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// Udpated:
+        /// 2017/04/29
+        /// Sends a text message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Task.FromResult</returns>
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
@@ -32,14 +61,36 @@ namespace MVCPresentationLayer
         }
     }
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application. 
+    /// </summary>
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Application user manager used in this application 
+        /// </summary>
+        /// <param name="store"></param>
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated: 
+        /// 2017/04/29
+        /// Creates new options for ApplicationUser
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns>Manager if successful</returns>
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
@@ -88,19 +139,49 @@ namespace MVCPresentationLayer
         }
     }
 
-    // Configure the application sign-in manager which is used in this application.
+ 
+   /// <summary>
+   /// Ariel Sigo
+   /// Updated:
+   /// 2017/04/29
+    /// Configure the application sign-in manager which is used in this application.
+   /// </summary>
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Validates the signIn Manager for Application User Manager
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="authenticationManager"></param>
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }
-
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Creates new userIdenity Async
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// UPdated:
+        /// 2017/04/29
+        /// Creates IdentityFactoryOptions for ApplicationSignInManager
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);

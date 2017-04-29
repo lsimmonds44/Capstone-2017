@@ -14,27 +14,53 @@ namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
     /// Victor Algarin
-    /// Controller logic for supplier invoices
     /// 
-    /// Created: 04/05/2017
+    /// Created: 
+    /// 2017/04/05
+    /// 
+    /// Controller logic for supplier invoices
     /// </summary>
     public class SupplierInvoiceController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         ISupplierInvoiceManager invMgr;
 
+        /// <summary>
+        /// Victor Algarin
+        /// 
+        /// Created:
+        /// 2017/04/05
+        /// </summary>
+        /// <param name="_invMgr"></param>
         public SupplierInvoiceController(ISupplierInvoiceManager _invMgr)
         {
             invMgr = _invMgr;
         }
 
-        // GET: /SupplierInvoice/
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierInvoice/
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(invMgr.RetrieveAllSupplierInvoices());
         }
 
-        // GET: /SupplierInvoice/Details/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  GET: /SupplierInvoice/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of Tuple with Supplier Invoice Details</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,15 +78,35 @@ namespace MVCPresentationLayer.Controllers
             return View(tuple);
         }
 
-        // GET: /SupplierInvoice/Create
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///GET: /SupplierInvoice/Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /SupplierInvoice/Create
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /SupplierInvoice/Create
+        /// </summary>
+        /// <param name="supplierInvoice"></param>
+        /// <returns>View of Supplier Invoice</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="SupplierInvoiceId,SupplierId,InvoiceDate,SubTotal,TaxAmount,Total,AmountPaid,Approved,Active")] SupplierInvoice supplierInvoice)
@@ -75,7 +121,17 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierInvoice);
         }
 
-        // GET: /SupplierInvoice/Edit/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierInvoice/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of supplier Invoice</returns>
+ 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,9 +146,20 @@ namespace MVCPresentationLayer.Controllers
             return View(supplierInvoice);
         }
 
-        // POST: /SupplierInvoice/Edit/5
+        
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  POST: /SupplierInvoice/Edit/5
+        /// </summary>
+        /// <param name="newSupplierInvoice"></param>
+        /// <returns>View of New Supplier invoice if successful</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SupplierInvoiceId,SupplierId,InvoiceDate,SubTotal,TaxAmount,Total,AmountPaid,Approved,Active")] SupplierInvoice newSupplierInvoice)
@@ -113,7 +180,16 @@ namespace MVCPresentationLayer.Controllers
             return View(newSupplierInvoice);
         }
 
-        // GET: /SupplierInvoice/Delete/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /SupplierInvoice/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)

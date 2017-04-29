@@ -7,8 +7,19 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Created 2017-03-29 by William Flood
+    /// William Flood
+    /// Created:
+    /// 2017/03/29
+    /// 
+    /// Class for Supplier Inventory
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class SupplierInventory
     {
         public int? SupplierInventoryID { get; set; }

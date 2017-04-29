@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/14
+    /// Updated:
+    /// 2017/04/14
     /// 
     /// Class to handle database interactions involving maintenance schedules.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Mason Allen
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         /// 
         /// Creates a new vehicle maintenance schedule
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -62,14 +65,17 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Mason Allen
-        /// Created: 03/09/17
+        /// Created: 
+        /// 03/09/17
+        /// 
         /// 
         /// Retrieves a maintenance schedule by vehicle id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>

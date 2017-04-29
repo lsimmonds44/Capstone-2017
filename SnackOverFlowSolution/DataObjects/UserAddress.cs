@@ -6,11 +6,27 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Christian Lopez
+    /// Created:
+    /// 2017/02/01
+    /// 
+    /// Represents a User Address
+    /// </summary>
+    /// <remarks>
+    /// Christian Lopez
+    /// Updated:
+    /// 2017/02/01
+    /// 
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// 
+    /// </remarks>
     public class UserAddress
     {
-        // Represents a User Address
-        // Created by Christian Lopez on 2017/02/01
-        // Last modified by Christian Lopez on 2017/02/01
 
         public int UserAddressId { get; set; }
         public int UserId { get; set; }

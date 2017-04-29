@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// Created: 2017/04/13
+    /// Created: 
+    /// 2017/04/13
     /// 
     /// Class to handle database interactions involving pickups.
     /// </summary>
@@ -20,14 +21,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/13
+        /// Created:
+        /// 2017/04/13
         /// 
         /// Retrieves all pickups related to a given driver.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
