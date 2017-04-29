@@ -414,7 +414,6 @@
     <Content Include="Views\Account\ViewCart.cshtml" />
     <Content Include="Views\Shared\AlreadyAccepted.cshtml" />
     <Content Include="Views\Home\RegisterCommercial.cshtml" />
-    <Content Include="Views\Home\Application-Success.cshtml" />
     <Content Include="Views\CompanyOrderWithLines\Invoice.cshtml" />
     <Content Include="Views\CommercialInvoice\Index.cshtml" />
     <Content Include="Views\CommercialInvoice\Details.cshtml" />
