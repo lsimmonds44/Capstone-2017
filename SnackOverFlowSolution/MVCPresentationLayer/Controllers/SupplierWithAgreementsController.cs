@@ -194,8 +194,8 @@ namespace MVCPresentationLayer.Controllers
                         controller.ControllerContext = new ControllerContext(this.Request.RequestContext, controller);
 
                         var result = await controller.Register(registerModel);
-
-                        return RedirectToAction("Index","Home");
+                        
+                        return RedirectToAction("ApplicationSuccess", "Home", new { username = newlyCreated.UserName, supOrCom = true });
                         //return RedirectToAction("Register", "Account", registerModel);
                     }
                     else

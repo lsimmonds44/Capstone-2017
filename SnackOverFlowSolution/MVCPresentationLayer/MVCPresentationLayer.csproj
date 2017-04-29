@@ -235,6 +235,7 @@
     <Compile Include="Models\CartIndexViewModel.cs" />
     <Compile Include="Models\CartPageModel.cs" />
     <Compile Include="Models\CommercialInvoiceDetails.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PagingInfo.cs" />
@@ -433,6 +434,7 @@
     <Content Include="Views\Shared\ApprovalStatus.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\SupplierWithAgreements\UpdateAgreements.cshtml" />
+    <Content Include="Views\Home\ApplicationSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
