@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using DataObjects;
 using LogicLayer;
 using MVCPresentationLayer.Models;
-using System.Threading.Tasks;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -39,6 +38,26 @@ namespace MVCPresentationLayer.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Author: Skyler Hiscock
+        /// Updated: 4/28/17
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="supOrCom">true = "Supplier"; false = "Commercial"</param>
+        /// <returns></returns>
+        
+        public ActionResult ApplicationSuccess(string username, bool supOrCom)
+        {
+            string supplierOrCommercial = supOrCom ? "Supplier" : "Commercial"; 
+            var _user = _userManager.RetrieveUserByUserName(username);
+            var successViewModel = new HomeViewModels.ApplicationSuccessViewModel()
+            {
+                SupplierOrCommercial = supplierOrCommercial,
+                FirstName = _user.FirstName,
+                LastName = _user.LastName
+            };
+            return View(successViewModel);
+        }
 
         public ActionResult RegisterCommercial()
         {
@@ -48,6 +67,8 @@ namespace MVCPresentationLayer.Controllers
         /// <summary>
         /// Created by Michael Takrama
         /// 04/15/2017
+        /// Updated by Skyler Hiscock
+        /// 04/28/17
         /// 
         /// Action to Register for Commercial Account
         /// </summary>
@@ -64,10 +85,7 @@ namespace MVCPresentationLayer.Controllers
             try
             {
                 // SnackOverflow System Application
-                var v = View(_customerManager.ApplyForCommercialAccount(user) ? "Application-Success" : "Error");
-
-                // Idenitiy System Registration
-                if (v.ViewName == "Application-Success")
+                if (_customerManager.ApplyForCommercialAccount(user))
                 {
                     var rvm = new RegisterViewModel { Email = user.EmailAddress, Password = user.Password };
 
@@ -77,9 +95,14 @@ namespace MVCPresentationLayer.Controllers
 
                     var result = await controller.Register(rvm);
 
-                }
 
-                return v;
+                    ViewBag.SupplierOrCommercial = "Commercial";
+                    return RedirectToAction("ApplicationSuccess", new { username = user.UserName, supOrCom = false });
+                }
+                else
+                {
+                    return View("Error");
+                }
             }
             catch (ApplicationException ex)
             {
@@ -93,6 +116,6 @@ namespace MVCPresentationLayer.Controllers
             }
 
         }
-        
+
     }
 }
