@@ -29,7 +29,7 @@ namespace LogicLayer
                 foreach(Pickup p in pickups){
                     p.PickupLineList = PickupLineAccessor.RetrievePickupLinesForPickup(p.PickupId);
                     foreach(PickupLine line in p.PickupLineList){
-                        line.productName = ProductAccessor.RetrieveProductNameFromProductLotId(line.ProductLotId);
+                        line.productName = ProductAccessor.RetrieveProductNameFromProductLotId(line.ProductId);
                     }
                     p.address = SupplierAccessor.RetrieveUserAddressBySupplier(p.SupplierId);
                 }
@@ -130,6 +130,66 @@ namespace LogicLayer
             {
                 throw;
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/27/2017
+        /// 
+        /// Retrieves a list of pickup lines, adding only those picked up
+        /// </summary>
+        /// <returns></returns>
+        public List<PickupLine> RetrievePickupLinesReceived()
+        {
+            List<PickupLine> pickupList = new List<PickupLine>();
+            bool pickupStatus = true;
+
+            try
+            {
+                pickupList = PickupLineAccessor.RetrievePickupLinesReceived(pickupStatus);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return pickupList;
+        }
+
+
+        public Pickup RetrievePickupById(int? pickupId)
+        {
+            Pickup pickup = null;
+
+            try
+            {
+                pickup = PickupAccessor.RetrievePickupById(pickupId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return pickup;
+        }
+
+        public bool DeletePickupLine(PickupLine pickupLine)
+        {
+            bool result = false;
+
+            try
+            {
+                result = (PickupLineAccessor.DeletePickupLine(pickupLine) >= 1);
+            }
+            catch
+            {
+                throw;
+            }
+
             return result;
         }
     }

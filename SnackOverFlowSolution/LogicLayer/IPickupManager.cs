@@ -15,5 +15,11 @@ namespace LogicLayer
         bool UpdatePickupLine(PickupLine oldLine, PickupLine newLine);
 
         PickupLine RetrievePickupLineById(int? pickupLineId);
+
+        List<PickupLine> RetrievePickupLinesReceived();
+
+        Pickup RetrievePickupById(int? pickupId);
+
+        bool DeletePickupLine(PickupLine pickupLine);
     }
 }

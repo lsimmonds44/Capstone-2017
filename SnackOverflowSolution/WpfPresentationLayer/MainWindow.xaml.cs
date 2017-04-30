@@ -42,6 +42,7 @@ namespace WpfPresentationLayer
         private IDeliveryManager _deliveryManager;
         private IWarehouseManager _warehouseManager = new WarehouseManager();
         private IAgreementManager _agreementManager = new AgreementManager();
+        private IPickupManager _pickupManager = new PickupManager();
         private List<Delivery> _deliveries;
         private List<Warehouse> _warehouseList;
         private ProductLotSearchCriteria _productLotSearchCriteria;
@@ -2647,6 +2648,64 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/27/2017
+        /// 
+        /// Invokes the list of product pickups from those received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabPickups_Selected(object sender, RoutedEventArgs e)
+        {
+            List<PickupLine> _pickupsList = null;
+
+            try
+            {
+                _pickupsList = _pickupManager.RetrievePickupLinesReceived();
+                if(_pickupsList != null)
+                {
+                    dgPickups.ItemsSource = _pickupsList;
+                }
+                else
+                {
+                    MessageBox.Show("No pickups have been received at this time.");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/28/2017
+        /// 
+        /// Create a product lot from pickups received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateLotFromPickup_Click(object sender, RoutedEventArgs e)
+        {
+            if(dgPickups.SelectedIndex >= 0)
+            {
+                var frmCreateLot = new frmAddProductLot(_pickupManager, (PickupLine)dgPickups.SelectedItem);
+                frmCreateLot.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a pickup record to create a product lot.");
             }
         }
     } // end of class

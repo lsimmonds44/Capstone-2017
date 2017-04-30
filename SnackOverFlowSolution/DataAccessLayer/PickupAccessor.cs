@@ -76,5 +76,54 @@ namespace DataAccessLayer
 
             return pickups;
         }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/29/2017
+        /// 
+        /// Retrieves pickup based on the pickupId field
+        /// </summary>
+        /// <param name="pickupId"></param>
+        /// <returns></returns>
+        public static Pickup RetrievePickupById(int? pickupId)
+        {
+            Pickup pickup = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_pickup";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PICKUP_ID", pickupId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    pickup = new Pickup()
+                    {
+                        PickupId = reader.GetInt32(0),
+                        SupplierId = reader.GetInt32(1),
+                        WarehouseId = reader.GetInt32(2),
+                        DriverId = reader.GetInt32(3),
+                        EmployeeId = reader.GetInt32(4)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return pickup;
+        }
     }
 }

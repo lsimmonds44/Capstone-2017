@@ -59,9 +59,9 @@ namespace DataAccessLayer
 
                 rows = cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

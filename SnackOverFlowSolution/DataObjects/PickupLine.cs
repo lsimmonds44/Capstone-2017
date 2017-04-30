@@ -14,7 +14,7 @@ namespace DataObjects
     {
         public bool? PickupStatus { get; set; }
         public int? Quantity { get; set; }
-        public int? ProductLotId { get; set; }
+        public int? ProductId { get; set; }
         public int? PickupId { get; set; }
         public int? PickupLineId { get; set; }
 
