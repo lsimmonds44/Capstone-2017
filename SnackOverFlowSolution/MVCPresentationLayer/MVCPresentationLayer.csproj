@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201704141505400_Added Roles and Administrator.Designer.cs">
       <DependentUpon>201704141505400_Added Roles and Administrator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704292342385_Adding_Default_Customer.cs" />
+    <Compile Include="Migrations\201704292342385_Adding_Default_Customer.Designer.cs">
+      <DependentUpon>201704292342385_Adding_Default_Customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
@@ -459,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704141505400_Added Roles and Administrator.resx">
       <DependentUpon>201704141505400_Added Roles and Administrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704292342385_Adding_Default_Customer.resx">
+      <DependentUpon>201704292342385_Adding_Default_Customer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
