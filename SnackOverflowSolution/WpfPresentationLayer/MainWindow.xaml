@@ -65,6 +65,7 @@
         </Grid>
         <!--End of Username and Password Control Grid-->
         <!--Main Tab Controls-->
+        <Image Name="MainImage" Grid.Row="2" Visibility="Collapsed" Stretch="UniformToFill" />
         <TabControl Name="tabSetMain" Grid.Row="2" >
             <!--Commercial Customer Tab Controls -->
             <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto"  >
