@@ -3,8 +3,20 @@ namespace MVCPresentationLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     public partial class InitialSetup : DbMigration
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
         public override void Up()
         {
             CreateTable(
@@ -77,6 +89,15 @@ namespace MVCPresentationLayer.Migrations
             
         }
         
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// Drops Foreign Keys and Indexes
+        /// </summary>
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");

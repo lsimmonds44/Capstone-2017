@@ -1,12 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataObjects
+
+    
 {
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// DTO for Register Commercial View Model
+    /// </summary>
     public class RegisterCommercialViewModel : User
     {
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [MinLength(7, ErrorMessage = "Password must be at least 7 characters long!")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

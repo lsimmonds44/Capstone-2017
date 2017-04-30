@@ -10,22 +10,52 @@ using MVCPresentationLayer.Models;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Ariel SIgo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Manage Controller
+    /// </summary>
     [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
         public ManageController()
         {
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -38,6 +68,12 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -50,8 +86,17 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  GET: /Manage/Index
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>view(Model)</returns>
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -77,8 +122,18 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemoveLogin
+        
+       /// <summary>
+       /// Ariel Sigo
+       /// 
+       /// Created:
+       /// 2017/04/29
+       /// 
+        /// POST: /Manage/RemoveLogin
+       /// </summary>
+       /// <param name="loginProvider"></param>
+       /// <param name="providerKey"></param>
+       /// <returns>RedirectToAction for Manage Logins</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
@@ -101,15 +156,33 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
+      
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/AddPhoneNumber
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AddPhoneNumber()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Manage/AddPhoneNumber
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>RedirectToAction("VerifyPhoneNumber"</returns>
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
@@ -132,8 +205,17 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
-        //
-        // POST: /Manage/EnableTwoFactorAuthentication
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        ///
+        /// POST: /Manage/EnableTwoFactorAuthentication
+        /// </summary>
+        /// <returns>RedirectToAction("Index", "Manage");</returns>
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
@@ -147,8 +229,17 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Manage/DisableTwoFactorAuthentication
+        /// </summary>
+        /// <returns>Redirect To action (Index, Manage)</returns>
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
@@ -162,8 +253,17 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // GET: /Manage/VerifyPhoneNumber
+        
+        /// <summary>
+        /// Ariel Sigo 
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/VerifyPhoneNumber
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns>Error if null, View if successful</returns>
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -171,8 +271,17 @@ namespace MVCPresentationLayer.Controllers
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
-        //
-        // POST: /Manage/VerifyPhoneNumber
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Manage/VerifyPhoneNumber
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>RedirectToAction(Index)</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
@@ -196,8 +305,17 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/RemovePhoneNumber
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created;
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/RemovePhoneNumber
+        /// </summary>
+        /// <returns>RedirectToAction("Index')</returns>
+ 
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -213,15 +331,34 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
-        // GET: /Manage/ChangePassword
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/ChangePassword
+        /// </summary>
+        /// <returns></returns>
+ 
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// 
+        ///  POST: /Manage/ChangePassword
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View Model</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -244,15 +381,31 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/SetPassword
+     /// <summary>
+     /// Ariel Sigo
+     /// 
+     /// Created:
+     /// 2017/04/29
+     /// 
+     /// GET: /Manage/SetPassword
+     /// </summary>
+     /// <returns></returns>
         public ActionResult SetPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/SetPassword
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  POST: /Manage/SetPassword
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -276,8 +429,17 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/ManageLogins
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/ManageLogins
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>View of new ManageLoginsViewModel</returns>
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -299,8 +461,17 @@ namespace MVCPresentationLayer.Controllers
             });
         }
 
-        //
-        // POST: /Manage/LinkLogin
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Manage/LinkLogin
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <returns>new AccountController.ChallengeResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
@@ -309,8 +480,17 @@ namespace MVCPresentationLayer.Controllers
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
-        //
-        // GET: /Manage/LinkLoginCallback
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Manage/LinkLoginCallback
+        /// </summary>
+        /// <returns>result.Succeeded if successful</returns>
+ 
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -322,6 +502,13 @@ namespace MVCPresentationLayer.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

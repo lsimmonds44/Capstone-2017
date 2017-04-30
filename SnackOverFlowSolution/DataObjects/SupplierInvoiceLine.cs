@@ -8,6 +8,8 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
+    /// Created:
+    /// 
     /// 2017/03/22
     /// 
     /// DTO for the Supplier Invoice Line, just one line on a Supplier Invoice

@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 3/2/2017
+    /// Michael Takrama
+    /// Created:
+    /// 2017/03/02
     /// 
     /// View Model for frmManageStock Datagrid
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class ManageStockViewModel
     {
         public int? ProductId { get; set; }

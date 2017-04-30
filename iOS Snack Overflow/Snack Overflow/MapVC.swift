@@ -96,7 +96,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
             let addState = (delivery.Address!.State ?? "")
             let addZip = (delivery.Address!.Zip ?? "")
             
-            mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
+            mapModel.convertAddressToCoord(address: addLine1 + " " + addCity + " " + addState + " " + addZip) { (returnedCoord) in
                 DispatchQueue.main.async {
                     pinToAdd.title = "\(delivery.Address!.AddressLine1 ?? "")"
                     pinToAdd.subtitle = "\(delivery.DeliverDate ?? Date())"
@@ -128,7 +128,7 @@ class MapVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,Delive
         let addState = (pickup.Address!.State ?? "")
         let addZip = (pickup.Address!.Zip ?? "")
         
-        mapModel.convertAddressToCoord(address: addLine1 + addCity + addState + addZip) { (returnedCoord) in
+        mapModel.convertAddressToCoord(address: addLine1 + " " + addCity + " " + addState + " " + addZip) { (returnedCoord) in
             DispatchQueue.main.async {
                 pinToAdd.title = "\(pickup.Address!.AddressLine1 ?? "")"
                 pinToAdd.subtitle = pickup.Address?.City

@@ -3,9 +3,31 @@ using System.Web.Optimization;
 
 namespace MVCPresentationLayer
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Configures all of the bundles for jquery
+    /// </summary>
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+       /// <summary>
+       /// Skyler Hiscock
+       /// 
+       /// Created:
+       /// 2017/04/19
+       /// </summary>
+       /// 
+       /// <remarks>
+       /// Ariel Sigo
+       /// Updated:
+       /// 2017/04/29
+       /// 
+       /// Standardized Comment
+       /// </remarks>
+       /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -14,7 +36,7 @@ namespace MVCPresentationLayer
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Added by Skyler Hiscock (4/16/17)
+ 
             bundles.Add(new ScriptBundle("~/bundles/searchproducts").Include("~/Scripts/searchproducts.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

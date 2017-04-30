@@ -4,11 +4,20 @@ using System.Web.Mvc;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 04/07/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/17
     /// 
     /// Shipping Details
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class ShippingDetails
     {
 
@@ -26,9 +35,6 @@ namespace DataObjects
         public string State { get; set; }
 
         public string Zip { get; set; }
-
-        [Required(ErrorMessage = "Please enter a country name")]
-        public string Country { get; set; }
 
         public int CustomerId { get; set; }
 

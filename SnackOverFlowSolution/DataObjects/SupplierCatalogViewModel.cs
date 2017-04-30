@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Class of Supplier Catalog View
+    /// </summary>
     public class SupplierCatalogViewModel
     {
         private bool _IsApproved;

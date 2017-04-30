@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// The DTO for Charity
+    /// </summary>
     public class Charity
     {
         public int CharityID { get; set; }

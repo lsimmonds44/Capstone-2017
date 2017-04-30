@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created 2017/03/03
+    /// Created 
+    /// 2017/03/03
     /// 
     /// Handles accessing the DB for warehouse information
     /// </summary>
@@ -19,7 +20,8 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Chrsitian Lopez
-        /// Created 2017/03/03
+        /// Created 
+        /// 2017/03/03
         /// 
         /// Gets a list of all warehouses in the DB
         /// </summary>
@@ -69,14 +71,28 @@ namespace DataAccessLayer
         }
 
         /// <summary>
-        /// Created by Mason Allen
-        /// Created on 03/30/2017
+        /// Mason Allen
+        /// Created:
+        /// 2017/03/30
         /// 
         /// Creates a new warehouse
         /// 
+        /// <remarks>
         /// Mason Allen
-        /// Updated on 4/13/17
+        /// Updated:
+        /// 2017/04/13
+        /// 
+        /// 
         /// Updated return int to sql generated warehouseId instead of numrows
+        /// 
+        /// Ariel Sigo
+        /// Updated: 
+        /// 2017/04/29
+        /// 
+        /// Standardized Comment
+        /// </remarks>
+        /// 
+        /// 
         /// </summary>
         /// <param name="newWarehouse">Warehouse Object to be Created</param>
         /// <returns>Returns an int of 1 if successful, 0 if not</returns>
@@ -113,6 +129,18 @@ namespace DataAccessLayer
             return warehouseId;
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// 
+        /// Added Comment,
+        /// 
+        /// Calls stored procedure to make a warehouse no longer active.
+        /// 
+        /// </summary>
+        /// <param name="warehouseId"></param>
+        /// <returns>rows that were changed in the Warehouse table</returns>
         public static int DeleteWarehouse(int warehouseId)
         {
             var conn = DBConnection.GetConnection();

@@ -11,7 +11,8 @@ namespace LogicLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created 2017/03/08
+    /// Created
+    /// 2017/03/08
     /// 
     /// Handles the business logic for Agreements
     /// </summary>
@@ -19,7 +20,8 @@ namespace LogicLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created 2017/03/08
+        /// Created
+        /// 2017/03/08
         /// 
         /// Retrieves a list of Agreements for a given supplier Id
         /// </summary>
@@ -48,14 +50,16 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/08
+        /// Created: 
+        /// 2017/03/08
         /// 
         /// Creates an agreement for the supplier for the given product
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/06
+        /// Updated: 
+        /// 2017/04/06
         /// 
         /// Modified method to be less redundant and to change default approverId from 0 to null.
         /// approverId was changed to be nullable as well.
@@ -101,6 +105,8 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/03/09
         /// 
         /// Deactivates a specified agreement.
@@ -132,6 +138,8 @@ namespace LogicLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/03/09
         /// 
         /// Creates an Agreement based on the inputs.

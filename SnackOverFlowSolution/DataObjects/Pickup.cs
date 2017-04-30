@@ -8,7 +8,11 @@ namespace DataObjects
 {
     /// <summary>
     /// Robert Forbes
+    /// 
+    /// Created:
     /// 2017/04/13
+    /// 
+    /// DTO for Pickup
     /// </summary>
     public class Pickup
     {

@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// DTO for Commercial Invoice Line
+    /// 
+    /// </summary>
     public class CommercialInvoiceLine
     {
         public int CommercialInvoiceId {get;set;}

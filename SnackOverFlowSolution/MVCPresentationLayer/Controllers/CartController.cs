@@ -6,12 +6,16 @@ using System.Web.Mvc;
 using DataObjects;
 using LogicLayer;
 using MVCPresentationLayer.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 4/7/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/07
+    /// 
     /// 
     /// Cart Controller
     /// </summary>
@@ -53,7 +57,7 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="cart"></param>
         /// <param name="productId"></param>
         /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <returns>RedirectToActiion</returns>
         [Authorize(Roles = "Supplier, Customer")]
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
@@ -96,42 +100,82 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
 
-        public RedirectToRouteResult RemoveFromCart(Cart cart, int? productId, string returnUrl)
-        {
-            var product = _productManager.RetrieveProducts()
-                .FirstOrDefault(p => p.ProductId == productId);
-            if (product != null)
-                cart.RemoveLine(product);
-            return RedirectToAction("Index", new { returnUrl });
-        }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns>PartialView(cart)</returns>
         public PartialViewResult Summary(Cart cart)
         {
             return PartialView(cart);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View(ShippingDetails)</returns>
         public ViewResult Checkout()
         {
-            return View(new ShippingDetails());
+            var identityUserName = User.Identity.GetUserName();
+            User user = _userManager.RetrieveUserByUserName(identityUserName);
+            var shippingDetails = new ShippingDetails()
+            {
+                Line1 = user.AddressLineOne == null ? "" : user.AddressLineOne,
+                Line2 = user.AddressLineTwo == null ? "" : user.AddressLineTwo,
+                City = user.City == null ? "" : user.City,
+                State = user.State == null ? "" : user.State,
+                Zip = user.Zip == null ? "" : user.Zip,
+                CustomerId = user.UserId,
+                IdentityUsername = identityUserName
+            };
+
+            return View(shippingDetails);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="shippingDetails"></param>
+        /// <returns>View(Completed) if successful, else Error</returns>
         [HttpPost]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            if (!cart.Lines.Any()) 
-                ModelState.AddModelError("", "Sorry, your cart is empty!");
 
             if (!ModelState.IsValid)
+            { 
                 return View(shippingDetails);
+            }
 
-            if (_customerOrderManager.ProcessOrder(cart, shippingDetails))
+            int orderID = -7;
+
+            try
             {
-                cart.Clear();
-                return View("Completed");
+                orderID = _customerOrderManager.ProcessOrder(shippingDetails);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "An error occured: " + ex.Message;
+            }
+            if (orderID==0)
+            {
+                ViewBag.Error = "Your cart is empty.";
+                return View();
             }
             else
             {
-                return View("Error");
+                return View("Completed");
             }
 
         }

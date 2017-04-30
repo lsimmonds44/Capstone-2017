@@ -26,8 +26,7 @@ namespace DataObjects
         [Required]
         [Display(Name = "Address Line 1")]
         public string AddressLineOne { get; set; }
-
-        [Required]
+        
         [Display(Name = "Address Line 2")]
         public string AddressLineTwo { get; set; }
 

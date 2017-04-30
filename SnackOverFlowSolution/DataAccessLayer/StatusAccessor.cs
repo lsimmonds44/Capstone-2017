@@ -10,7 +10,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Created: 2017/04/21
+    /// Created: 
+    /// 2017/04/21
     /// 
     /// Class to handle database interactions involving statuses.
     /// </summary>
@@ -18,14 +19,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Retrieves a list of all statuses from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

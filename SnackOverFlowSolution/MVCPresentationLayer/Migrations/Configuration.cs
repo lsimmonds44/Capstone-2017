@@ -9,8 +9,20 @@ namespace MVCPresentationLayer.Migrations
     using System.Linq;
     using System.Security.Claims;
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<MVCPresentationLayer.Models.ApplicationDbContext>
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -60,8 +72,33 @@ namespace MVCPresentationLayer.Migrations
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Employee" });
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Customer" });
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Supplier" });
-
             context.SaveChanges();
+
+            if (!context.Users.Any(u => u.UserName == "jmyers"))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "jmyers",
+                    Email = "jmyers@gmail.com"
+                    //FirstName = "John",
+                    //LastName = "Myers"
+                };
+
+                IdentityResult result = userManager.Create(user, "m0R3$e(ur3");
+
+                if (result.Succeeded)
+                {
+                    // add claims if we want - don't do first one
+                    //userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, "Administrator"));
+                    userManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, "John"));
+                    userManager.AddClaim(user.Id, new Claim(ClaimTypes.Surname, "Myers"));
+                }
+
+                context.SaveChanges();
+                userManager.AddToRole(user.Id, "Customer");
+                context.SaveChanges();
+            }
+
 
         }
     }

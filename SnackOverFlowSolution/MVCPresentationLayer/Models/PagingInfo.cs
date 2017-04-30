@@ -6,8 +6,11 @@ using System.Web;
 namespace MVCPresentationLayer.Models
 {
     /// <summary>
-    /// Added by: Skyler Hiscock
-    /// Date Added: 04/15/17
+    /// Skyler Hiscock
+    /// 
+    /// Created:
+    /// 2017/04/15
+    /// 
     /// Author: Adam Freeman (book: Pro ASP.NET MVC 5)
     /// </summary>
     public class PagingInfo

@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// The DTO for Vehicle 
+    /// </summary>
     public class Vehicle
     {
         public int VehicleID { get; set; }

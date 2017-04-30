@@ -8,8 +8,11 @@ namespace MVCPresentationLayer.HtmlHelpers
     public static class PagingHelpers
     {
         /// <summary>
-        /// Added by: Skyler Hiscock
-        /// Author: Adam Freeman (book: Pro ASP.NET MVC 5)
+        /// Skyler Hiscock
+        /// Referencing Adam Freeman (book: Pro ASP.NET MVC 5)
+        /// 
+        /// Created:
+        /// 2017/04/29
         /// </summary>
         /// <param name="html"></param>
         /// <param name="pagingInfo"></param>

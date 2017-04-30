@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// Created: 2017/04/13
+    /// Created:
+    /// 2017/04/13
     /// 
     /// Class to handle database interactions involving routes.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Gets all routes assigned to the driver with the passed in id that occur in the future.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

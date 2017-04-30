@@ -7,6 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVCPresentationLayer.Models
 {
+    /// <summary>
+    /// Ariel Sigo 
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Combines Supplier and Aggreement for View
+    /// </summary>
     public class SupplierUpdateAgreementViewModel
     {
         public int SupplierId { get; set; }

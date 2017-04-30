@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Robert Forbes
-    /// Created: 2017/04/13
+    /// Created: 
+    /// 2017/04/13
     /// 
     /// Class to handle database interactions involving pickup lines.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Retrieves pickup lines based on the given pickup id.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Created: 2017/04/21
+        /// Created: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -79,14 +82,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/19
+        /// Created: 
+        /// 2017/04/19
         /// 
         /// Updates a pickup line in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -132,12 +137,14 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/19
+        /// Created: 
+        /// 2017/04/19
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

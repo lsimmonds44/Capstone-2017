@@ -8,6 +8,7 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
+    /// Created:
     /// 2017/03/22
     /// 
     /// The DTO for a Supplier Invoice

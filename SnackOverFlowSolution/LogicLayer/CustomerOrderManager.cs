@@ -15,16 +15,20 @@ namespace LogicLayer
         /// <summary>
         ///     Created by Michael Takrama
         ///     04/13/17
-        /// 
+        ///     
         ///     Processes Orders from the MVC Layer
+        ///     William Flood
+        ///     2017/04/29
+        ///     Updated method to use cart from the database
+        /// 
         /// </summary>
         /// <param name="cart">Cart object containing OrderLine Items</param>
         /// <param name="shippingDetails">Contains shipping Details</param>
-        public bool ProcessOrder(Cart cart, ShippingDetails shippingDetails)
+        public int ProcessOrder(ShippingDetails shippingDetails)
         {
             var user = userManager.RetrieveUserByUserName(shippingDetails.IdentityUsername);
             var customer = customerManager.RetrieveCommercialCustomerByUserId(user.UserId);
-
+            int orderId = 0;
             try
             {
                 var p = new ProductOrder
@@ -32,7 +36,6 @@ namespace LogicLayer
                     CustomerId = customer.CommercialId, 
                     OrderTypeId = "Commercial", 
                     AddressType = null,
-                    Amount = (decimal)cart.ComputeTotalValue(),
                     OrderDate = DateTime.Now,
                     Address1 = shippingDetails.Line1 + "," + shippingDetails.Line2,
                     City = shippingDetails.City,
@@ -43,16 +46,8 @@ namespace LogicLayer
                     Discount = 0, // defaulted to 0 % until discount functionality added -- temporaire
                 };
 
-                var orderId = ProductOrderAccessorMvc.CreateProductOrder(p);
+                orderId = ProductOrderAccessorMvc.CreateProductOrder(p);
 
-                if (orderId == 0)
-                {
-                    Debug.WriteLine("CustomerOrderManager: Error Creating order");
-                    return false;
-                }
-
-                if (!SubmitOrderLines(cart, orderId))
-                    return false;
             }
             catch (Exception e)
             {
@@ -60,9 +55,9 @@ namespace LogicLayer
                 throw new ApplicationException("CustomerOrderManager: " + e.Message);
             }
 
-            
 
-            return true;
+
+            return orderId;
         }
 
         /// <summary>

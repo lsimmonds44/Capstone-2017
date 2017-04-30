@@ -11,21 +11,24 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/28
+    /// Updated: 
+    /// 2017/04/28
     ///
     /// Class to handle database interactions involving user cart lines.
     public class UserCartAccessor
     {
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/27
+        /// Updated: 
+        /// 2017/04/27
         /// 
         /// Retrieves a user's cart lines from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/27
+        /// Updated: 
+        /// 2017/04/27
         /// 
         /// Standardized method.
         /// </remarks>
@@ -80,14 +83,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Removes the given items from the cart.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -130,14 +135,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/27
+        /// Updated:
+        /// 2017/04/27
         /// 
         /// Creates a user cart line in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/27
+        /// Updated: 
+        /// 2017/04/27
         /// 
         /// Standardized method.
         /// </remarks>

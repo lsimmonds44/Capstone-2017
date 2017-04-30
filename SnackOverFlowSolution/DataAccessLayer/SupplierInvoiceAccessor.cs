@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created: 2017/03/22
+    /// Created:
+    /// 2017/03/22
     /// 
     /// Class to handle database interactions involving supplier invoices.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/22
+        /// Created: 
+        /// 2017/03/22
         /// 
         /// Retrieves a list of all supplier invoices in the database
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -78,14 +81,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/22
+        /// Created: 
+        /// 2017/03/22
         /// 
         /// Gets a list of invoice lines for the given invoice id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -138,14 +143,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/23
+        /// Created:
+        /// 2017/03/23
         /// 
         /// Tries to make a connection to approve the invoice associated with the given id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -183,14 +190,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/29
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Stores the invoice to the db and returns the id it was stored to
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -232,14 +241,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/29
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Creates a line for a supplier invoice
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -281,16 +292,23 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/??/??
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Updates the passed in "old Invoice" to match the passed in "new Invoice"
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
+        /// 
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Standardized Comment
         /// </remarks>
         /// 
         /// <param name="oldInvoice">The invoice as it is in the database.</param>
@@ -343,13 +361,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Victor Algarin
-        /// Created: 2017/04/06
+        /// Created: 
+        /// 2017/04/06
+        /// 
         /// Deletes the supplier invoice by the selected supplier invoice ID
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -387,14 +408,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// Created: 2017/04/14
+        /// Created: 
+        /// 2017/04/14
         /// 
         /// Retrieve the invoices by the supplier Id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
