@@ -26,22 +26,16 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dz-FS-iA1">
-                                <rect key="frame" x="10" y="188" width="300" height="104"/>
+                                <rect key="frame" x="10" y="205" width="300" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Please Log In" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Giy-af-7aw">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="24"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lof-9V-YV8">
-                                        <rect key="frame" x="0.0" y="34" width="300" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vAy-Wk-26o">
-                                        <rect key="frame" x="0.0" y="74" width="300" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="300" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -52,7 +46,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHH-Pl-4PV" userLabel="Login">
-                                <rect key="frame" x="114.5" y="299" width="92" height="36"/>
+                                <rect key="frame" x="114.5" y="282" width="92" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
                                 <state key="normal" title="    Login    ">
@@ -62,16 +56,25 @@
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wn4-28-pIK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Please Log In" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Giy-af-7aw">
+                                <rect key="frame" x="24" y="173" width="272" height="24"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="0Dz-FS-iA1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2wE-eF-N4O"/>
                             <constraint firstItem="rru-Ih-eGq" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="4Nv-qm-ciz"/>
                             <constraint firstItem="0Dz-FS-iA1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4b6-Qw-2kK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Giy-af-7aw" secondAttribute="trailing" constant="8" id="MyC-AC-GHm"/>
                             <constraint firstAttribute="trailing" secondItem="rru-Ih-eGq" secondAttribute="trailing" id="Rgx-QN-aOz"/>
                             <constraint firstItem="OHH-Pl-4PV" firstAttribute="top" secondItem="vAy-Wk-26o" secondAttribute="bottom" constant="7.5" id="T1e-06-dnQ"/>
+                            <constraint firstItem="Giy-af-7aw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="VM5-gu-Fdi"/>
                             <constraint firstItem="rru-Ih-eGq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vng-PU-qQw"/>
                             <constraint firstItem="OHH-Pl-4PV" firstAttribute="centerX" secondItem="vAy-Wk-26o" secondAttribute="centerX" id="mIE-LO-Wsf"/>
                             <constraint firstItem="0Dz-FS-iA1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="maQ-0m-aTU"/>
+                            <constraint firstItem="0Dz-FS-iA1" firstAttribute="top" secondItem="Giy-af-7aw" secondAttribute="bottom" constant="8" id="poa-bb-8U4"/>
                             <constraint firstItem="rru-Ih-eGq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="vlf-cL-N9h"/>
                         </constraints>
                         <variation key="default">

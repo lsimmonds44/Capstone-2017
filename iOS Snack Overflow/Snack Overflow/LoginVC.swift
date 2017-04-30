@@ -37,7 +37,6 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     /// 2017/04/23
     /// Description: dismiss the keyboard
     func dismissKeyboard(){
-        
         tfUsername.resignFirstResponder()
         tfPassword.resignFirstResponder()
     }
