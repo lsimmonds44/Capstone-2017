@@ -22,6 +22,7 @@ namespace DataObjects
         public int? WarehouseId { get; set; }
         public int? SupplierId { get; set; }
         public int? PickupId { get; set; }
+        public int? CompanyOrderId { get; set; }
 
         public UserAddress address { get; set; }
     }

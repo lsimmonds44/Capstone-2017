@@ -21,5 +21,7 @@ namespace LogicLayer
         Pickup RetrievePickupById(int? pickupId);
 
         bool DeletePickupLine(PickupLine pickupLine);
+
+        List<PickupLine> RetrievePickupLinesByPickupId(int? pickupId);
     }
 }

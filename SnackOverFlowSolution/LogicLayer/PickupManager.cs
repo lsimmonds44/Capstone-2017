@@ -29,7 +29,7 @@ namespace LogicLayer
                 foreach(Pickup p in pickups){
                     p.PickupLineList = PickupLineAccessor.RetrievePickupLinesForPickup(p.PickupId);
                     foreach(PickupLine line in p.PickupLineList){
-                        line.productName = ProductAccessor.RetrieveProductNameFromProductLotId(line.ProductId);
+                        line.productName = ProductAccessor.RetrieveProduct((int)line.ProductId).Name;
                     }
                     p.address = SupplierAccessor.RetrieveUserAddressBySupplier(p.SupplierId);
                 }
@@ -184,6 +184,28 @@ namespace LogicLayer
             try
             {
                 result = (PickupLineAccessor.DeletePickupLine(pickupLine) >= 1);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/04/30
+        /// </summary>
+        /// <param name="pickupId"></param>
+        /// <returns></returns>
+        public List<PickupLine> RetrievePickupLinesByPickupId(int? pickupId)
+        {
+            List<PickupLine> result = new List<PickupLine>();
+
+            try
+            {
+                result = PickupLineAccessor.RetrievePickupLinesForPickup(pickupId);
             }
             catch
             {

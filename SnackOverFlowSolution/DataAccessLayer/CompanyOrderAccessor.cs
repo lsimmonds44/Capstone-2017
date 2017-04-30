@@ -358,5 +358,48 @@ namespace DataAccessLayer
 
             return order;
         }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/04/30
+        /// 
+        /// Updates the has arrived bit field in the company order table
+        /// </summary>
+        /// <param name="companyOrderId">The company order to update</param>
+        /// <param name="oldHasArrived">The current value of the has arrived bit field</param>
+        /// <param name="newHasArrived">The value to change the has arrived bit field to</param>
+        /// <returns>The number of rows affected</returns>
+        public static int UpdateCompanyOrderHasArrived(int companyOrderId, bool oldHasArrived, bool newHasArrived)
+        {
+            int result = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_company_order_has_arrived";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@COMPANY_ORDER_ID", companyOrderId);
+            cmd.Parameters.AddWithValue("@old_HAS_ARRIVED", oldHasArrived);
+            cmd.Parameters.AddWithValue("@new_HAS_ARRIVED", newHasArrived);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
     }
 }

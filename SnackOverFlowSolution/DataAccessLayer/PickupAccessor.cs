@@ -34,6 +34,14 @@ namespace DataAccessLayer
         /// 
         /// Standardized method.
         /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Updated:
+        /// 2017/04/30
+        /// 
+        /// Added Company order id to database table so all accessors were updated to use the new field
+        /// </remarks>
         /// 
         /// <param name="driverId"></param>
         /// <returns></returns>
@@ -63,7 +71,8 @@ namespace DataAccessLayer
                             SupplierId = reader.GetInt32(1),
                             WarehouseId = reader.GetInt32(2),
                             DriverId = reader.GetInt32(3),
-                            EmployeeId = reader.GetInt32(4)
+                            EmployeeId = reader.GetInt32(4),
+                            CompanyOrderId = reader.GetInt32(5)
                         });
                     }
                 }
@@ -86,6 +95,14 @@ namespace DataAccessLayer
         /// 
         /// Retrieves pickup based on the pickupId field
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Updated:
+        /// 2017/04/30
+        /// 
+        /// Added Company order id to database table so had to update all accessors
+        /// </remarks>
         /// <param name="pickupId"></param>
         /// <returns></returns>
         public static Pickup RetrievePickupById(int? pickupId)
@@ -113,7 +130,8 @@ namespace DataAccessLayer
                         SupplierId = reader.GetInt32(1),
                         WarehouseId = reader.GetInt32(2),
                         DriverId = reader.GetInt32(3),
-                        EmployeeId = reader.GetInt32(4)
+                        EmployeeId = reader.GetInt32(4),
+                        CompanyOrderId = reader.GetInt32(5)
                     };
                 }
             }
