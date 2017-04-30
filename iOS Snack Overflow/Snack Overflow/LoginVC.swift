@@ -37,6 +37,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     /// 2017/04/23
     /// Description: dismiss the keyboard
     func dismissKeyboard(){
+        
         tfUsername.resignFirstResponder()
         tfPassword.resignFirstResponder()
     }
@@ -46,9 +47,35 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     /// Description: App lifecycle handling
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                               object: nil)
+        
+        
+    }
+    @IBOutlet var keyboardHeightLayoutConstraint: NSLayoutConstraint?
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as?     NSValue)?.cgRectValue
+//            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if (endFrame?.origin.y)! >= keyboardHeightLayoutConstraint!.constant + endFrame!.height {
+                self.keyboardHeightLayoutConstraint?.constant = 0.0
+            } else {
+                self.keyboardHeightLayoutConstraint?.constant = (endFrame!.size.height / 3) * -1
+            }
+            UIView.animate(withDuration: 0.02,
+                                       delay: TimeInterval(0),
+                                       options: animationCurve,
+                                       animations: { self.view.layoutIfNeeded() },
+                                       completion: nil)
+        }
     }
     
+
     /// Eric Walton
     /// 2017/04/23
     /// Description: App lifecycle handling

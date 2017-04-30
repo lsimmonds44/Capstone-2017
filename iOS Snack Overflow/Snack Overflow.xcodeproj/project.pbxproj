@@ -137,6 +137,7 @@
 				614B2EBA1E8DF36C006EF1FA /* Main.storyboard */,
 				612F4FB61EA9A22C00865008 /* RouteListView.swift */,
 				612F4FB71EA9A22C00865008 /* RouteListView.xib */,
+				614B2EBF1E8DF36C006EF1FA /* LaunchScreen.storyboard */,
 			);
 			name = PresentationLayer;
 			sourceTree = "<group>";
@@ -177,7 +178,6 @@
 				612F4FB51EA9A1E100865008 /* PresentationLayer */,
 				614D2F111EA111C200E6D8A3 /* DTOs */,
 				614B2EBD1E8DF36C006EF1FA /* Assets.xcassets */,
-				614B2EBF1E8DF36C006EF1FA /* LaunchScreen.storyboard */,
 				614B2EC21E8DF36C006EF1FA /* Info.plist */,
 			);
 			path = "Snack Overflow";
