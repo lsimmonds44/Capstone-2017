@@ -28,7 +28,7 @@
                   Margin="5" MouseDoubleClick="lvListPackages_MouseDoubleClick"/>
         <!--End of Order Packages List View-->
         <Button Name="btnAddPackage" Grid.Row="1" Content="Add" Margin="10" Click="btnAddPackage_Click"/>
-        <Button Name="btnReadyForShipment" Grid.Row="1" Grid.Column="1" Content="Ready For Shipment" Margin="10" Click="btnReadyForShipment_Click"/>
+        <Button Name="btnReadyForShipment" Grid.Row="1" Grid.Column="1" Content="Ready For Assignment" Margin="10" Click="btnReadyForShipment_Click"/>
         <!--End of Order Packages Controls-->
     </Grid>
     <!--End of Order Packages Grid-->

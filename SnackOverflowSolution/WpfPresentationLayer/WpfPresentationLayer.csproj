@@ -455,6 +455,21 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Flogo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wpfMainImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="loginBarImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loginBarBlur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wpfMainImageBlur.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

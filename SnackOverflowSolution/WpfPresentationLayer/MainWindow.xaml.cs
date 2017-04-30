@@ -72,6 +72,24 @@ namespace WpfPresentationLayer
         public MainWindow()
         {
             InitializeComponent();
+
+            var uriIcon = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/Flogo2.png",
+                 UriKind.RelativeOrAbsolute);
+            var uriMain = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/wpfMainImage.png",
+                 UriKind.RelativeOrAbsolute);
+
+            //StatusNotification.Content = uri.ToString();
+
+            this.Icon = BitmapFrame.Create(uriIcon);
+
+            BitmapImage mainImage = new BitmapImage();
+            mainImage.BeginInit();
+            mainImage.UriSource = uriMain;
+            mainImage.EndInit();
+
+            MainImage.Source = mainImage;
+            MainImage.Visibility = Visibility.Visible;
+
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
@@ -327,6 +345,7 @@ namespace WpfPresentationLayer
                         lblUsername.Visibility = Visibility.Collapsed;
                         txtUsername.Visibility = Visibility.Collapsed;
                         pwbPassword.Visibility = Visibility.Collapsed;
+                        MainImage.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
                         tabCommercialCustomer.Focus();
                         pwbPassword.Password = "";
@@ -414,6 +433,7 @@ namespace WpfPresentationLayer
                 mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
                 btnResetPassword.Visibility = Visibility.Collapsed;
+                MainImage.Visibility = Visibility.Visible;
             }
 
         }
@@ -1424,7 +1444,7 @@ namespace WpfPresentationLayer
         {
             if (lvOpenOrders.SelectedItem != null)
             {
-                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment"))
+                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Assignment"))
                 {
                     frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
                     deliveryWindow.ShowDialog();

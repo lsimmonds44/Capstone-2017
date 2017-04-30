@@ -100,24 +100,6 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
 
-        /// <summary>
-        /// Ariel Sigo
-        /// 
-        /// Created:
-        /// 2017/04/29
-        /// </summary>
-        /// <param name="cart"></param>
-        /// <param name="productId"></param>
-        /// <param name="returnUrl"></param>
-        /// <returns>RedirectToAction</returns>
-        public RedirectToRouteResult RemoveFromCart(Cart cart, int? productId, string returnUrl)
-        {
-            var product = _productManager.RetrieveProducts()
-                .FirstOrDefault(p => p.ProductId == productId);
-            if (product != null)
-                cart.RemoveLine(product);
-            return RedirectToAction("Index", new { returnUrl });
-        }
 
         /// <summary>
         /// Ariel Sigo
@@ -170,20 +152,30 @@ namespace MVCPresentationLayer.Controllers
         [HttpPost]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            if (!cart.Lines.Any()) 
-                ModelState.AddModelError("", "Sorry, your cart is empty!");
 
             if (!ModelState.IsValid)
+            { 
                 return View(shippingDetails);
+            }
 
-            if (_customerOrderManager.ProcessOrder(cart, shippingDetails))
+            int orderID = -7;
+
+            try
             {
-                cart.Clear();
-                return View("Completed");
+                orderID = _customerOrderManager.ProcessOrder(shippingDetails);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "An error occured: " + ex.Message;
+            }
+            if (orderID==0)
+            {
+                ViewBag.Error = "Your cart is empty.";
+                return View();
             }
             else
             {
-                return View("Error");
+                return View("Completed");
             }
 
         }

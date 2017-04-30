@@ -9,6 +9,9 @@
     -->
     <!--Main Grid-->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\wpfMainImageBlur.png" Stretch="UniformToFill"/>
+        </Grid.Background>
         <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,7 +24,7 @@
         </Grid.ColumnDefinitions>
         <!--End of Grid Definitions-->
         <!--Menu Group Controls -->
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Background="#FF7A876F" >
             <MenuItem  Header="File" >
                 <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
             </MenuItem>
@@ -42,13 +45,17 @@
         </Menu>
         <!--End of Menu Controls-->
         <!--Username and Password Controls Grid-->
-        <Grid Grid.Row="1" AllowDrop="True" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid Name="LoginBar" Grid.Row="1" AllowDrop="True">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\loginBarBlur.png" Stretch="UniformToFill"/>
+            </Grid.Background>
             <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  />
-                <ColumnDefinition  />
-                <ColumnDefinition  />
-                <ColumnDefinition  />
+                <ColumnDefinition Width="311*"  />
+                <ColumnDefinition Width="218*"  />
+                <ColumnDefinition Width="93*"/>
+                <ColumnDefinition Width="312*"  />
+                <ColumnDefinition Width="311*"  />
                 <ColumnDefinition  Width="auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -57,14 +64,22 @@
             </Grid.RowDefinitions>
             <!--End of Grid Definitions-->
             <!--Username and Password Controls-->
-            <TextBox Name="txtUsername" Grid.Column="2" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1"/>
-            <Label Name="lblUsername" Grid.Column="2" Grid.Row="1" Content="Username" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <PasswordBox Name="pwbPassword" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" KeyDown="pwbPassword_KeyDown"/>
-            <Label Name="lblPassword" Grid.Column="3" Grid.Row="1" Content="Password" Padding="0" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button Name="btnLogin" Grid.Column="4" Grid.Row="0" Content="Login" Padding="10 0" FontSize="10"  IsDefault="True" Click="btnLogin_Click" Margin="0.2,4,-0.4,24.6" Grid.RowSpan="2"/>
+            <TextBox Name="txtUsername" Grid.Column="3" Grid.Row="0" Margin="3 4 3 0" MaxLength="20" MaxLines="1" Background="#FFC2CEA7"/>
+            <Label Name="lblUsername" Grid.Column="3" Grid.Row="1" Content="Username" Padding="0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" Foreground="White" />
+            <PasswordBox Name="pwbPassword" Grid.Column="4" Grid.Row="0" Margin="3 4 3 0" KeyDown="pwbPassword_KeyDown" Background="#FFC2CEA7"/>
+            <Label Name="lblPassword" Grid.Column="4" Grid.Row="1" Content="Password" Padding="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" Foreground="White"/>
+            <Button Name="btnLogin" Grid.Column="5" Grid.Row="0" Content="Login" Padding="10 0" FontSize="12"  IsDefault="True" Click="btnLogin_Click" Margin="0,4,0,0" Foreground="White">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7A876F" Offset="0.674"/>
+                        <GradientStop Color="#FF88A78E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
         <!--End of Username and Password Control Grid-->
         <!--Main Tab Controls-->
+        <Image Name="MainImage" Grid.Row="2" Visibility="Collapsed" Stretch="UniformToFill" />
         <TabControl Name="tabSetMain" Grid.Row="2" >
             <!--Commercial Customer Tab Controls -->
             <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto"  >
@@ -804,87 +819,87 @@
                     <!--End of Supplier Invoices Controls Grid-->
                 </Grid>
                 <!--End of Supplier Invoices Grid-->
-            </TabItem>   
-			<!--End of Supplier Invoices Tab-->
+            </TabItem>
+            <!--End of Supplier Invoices Tab-->
             <!--My Account Tab-->
 
             <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabMyAccount_Selected">
                 <!--My Account Grid-->
                 <Grid Background="#FFE5E5E5">
-                        <!--Grid Definitions-->
+                    <!--Grid Definitions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height=".5*"/>
+                            <RowDefinition/>
+                            <RowDefinition Height=".5*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="98*"/>
+                            <ColumnDefinition Width="494*" />
+                            <ColumnDefinition Width="98*"/>
+                            <ColumnDefinition Width="494*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="91*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height=".5*"/>
-                                <RowDefinition/>
-                                <RowDefinition Height=".5*"/>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition/>
+                        <!--End of Grid Definitions-->
+                        <Label Name="lblMyInvoices" Grid.Row="2" FontSize="20" VerticalAlignment="Bottom" Content="My Invoices" Grid.ColumnSpan="2" Margin="98,0,0,0.4"/>
 
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="98*"/>
-                                <ColumnDefinition Width="494*" />
-                                <ColumnDefinition Width="98*"/>
-                                <ColumnDefinition Width="494*"/>
-                                <ColumnDefinition Width="8*"/>
-                                <ColumnDefinition Width="91*"/>
-                            </Grid.ColumnDefinitions>
-                            <!--End of Grid Definitions-->
-                            <Label Name="lblMyInvoices" Grid.Row="2" FontSize="20" VerticalAlignment="Bottom" Content="My Invoices" Grid.ColumnSpan="2" Margin="98,0,0,0.4"/>
-
-                            <DataGrid Name="dgMyInvoices" Grid.Row="2" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                        <DataGrid Name="dgMyInvoices" Grid.Row="2" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
                     	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" MouseDoubleClick="dgUserInvoices_MouseDoubleClick" Grid.ColumnSpan="4" Margin="98,64.4,2,129.4" Grid.RowSpan="3" />
 
-                            <!--Application Status Controls-->
+                        <!--Application Status Controls-->
 
-                            <Label Name="lblApplicationStatus" FontSize="20" VerticalAlignment="Bottom" Content="Application Status" Grid.ColumnSpan="2" Margin="98,0,0,0"/>
-                            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="98,0,0,64.4" Grid.RowSpan="2">
+                        <Label Name="lblApplicationStatus" FontSize="20" VerticalAlignment="Bottom" Content="Application Status" Grid.ColumnSpan="2" Margin="98,0,0,0"/>
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="98,0,0,64.4" Grid.RowSpan="2">
 
-                                
-                                
-                                <!--End Application Status Controls-->
-                                <!--My Account Controls Grid-->
-                                <Grid Grid.Column="1" Grid.Row="1">
-                                    <!--Grid Definitions-->
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <!--End of Grid Definitions-->
-                                    <!--My Account Controls-->
-                                    <Button Name="btnCommercialCustomerApplicationStatusCheck" Grid.Column="0" HorizontalContentAlignment="Center" Content="Check Commerical Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCommercialCustomerApplicationStatusCheck_Click"/>
-                                    <Button Name="btnSupplierApplicationStatusCheck" Grid.Column="1" HorizontalContentAlignment="Center" Content="Check Supplier Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSupplierApplicationStatusCheck_Click"/>
-                                    <Button Name="btnCharityApplicationStatusCheck" Grid.Column="2" HorizontalContentAlignment="Center" Content="Check Charity Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCharityApplicationStatusCheck_Click"/>
-                                    <!--End of My Account Controls-->
-                                </Grid>
-                                <!--End of My Account Controls Grid-->
-                            </Grid>
-                            <!--End of My Account Grid -->
-                            <!--My Accounts Back Grid-->
-                            <Grid Background="#FFE5E5E5" Grid.Row="1">
+
+
+                            <!--End Application Status Controls-->
+                            <!--My Account Controls Grid-->
+                            <Grid Grid.Column="1" Grid.Row="1">
                                 <!--Grid Definitions-->
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
                                 <!--End of Grid Definitions-->
+                                <!--My Account Controls-->
+                                <Button Name="btnCommercialCustomerApplicationStatusCheck" Grid.Column="0" HorizontalContentAlignment="Center" Content="Check Commerical Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCommercialCustomerApplicationStatusCheck_Click"/>
+                                <Button Name="btnSupplierApplicationStatusCheck" Grid.Column="1" HorizontalContentAlignment="Center" Content="Check Supplier Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSupplierApplicationStatusCheck_Click"/>
+                                <Button Name="btnCharityApplicationStatusCheck" Grid.Column="2" HorizontalContentAlignment="Center" Content="Check Charity Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCharityApplicationStatusCheck_Click"/>
+                                <!--End of My Account Controls-->
                             </Grid>
-                            <!--End of My Accounts Back Grid-->
+                            <!--End of My Account Controls Grid-->
                         </Grid>
+                        <!--End of My Account Grid -->
+                        <!--My Accounts Back Grid-->
+                        <Grid Background="#FFE5E5E5" Grid.Row="1">
+                            <!--Grid Definitions-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--End of Grid Definitions-->
+                        </Grid>
+                        <!--End of My Accounts Back Grid-->
                     </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
         <!--End Of Main Tab Control-->
