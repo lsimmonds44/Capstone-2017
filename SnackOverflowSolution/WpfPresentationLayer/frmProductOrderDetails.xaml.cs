@@ -22,8 +22,10 @@ namespace WpfPresentationLayer
     public partial class frmProductOrderDetails : Window
     {   
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// 
+        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Updated: 2017/04/30
         /// 
         /// Initialize Product Order Details Window.
         /// Standaridized method.
@@ -35,8 +37,10 @@ namespace WpfPresentationLayer
 
         int orderID;
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// 
+        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Updated: 2017/04/30
         /// 
         /// Initialize Product Order Details Window.
         /// Standaridized method.
@@ -53,8 +57,11 @@ namespace WpfPresentationLayer
         IProductOrderManager _ordMgr = new ProductOrderManager();
 
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// 
+        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Updated: 2017/04/30
+        /// 
         /// 
         /// Displays Product Order Details.
         /// Standaridized method.
@@ -83,10 +90,13 @@ namespace WpfPresentationLayer
                 MessageBox.Show(e.Message);
             }
         }
-        
+
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// 
+        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Updated: 2017/04/30
+        /// 
         /// 
         /// Save Packaging Changes.
         /// Standaridized method. 
@@ -100,8 +110,11 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// 
+        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Updated: 2017/04/30
+        /// 
         /// 
         /// Closes Add Product Lot Window.
         /// Standaridized method.

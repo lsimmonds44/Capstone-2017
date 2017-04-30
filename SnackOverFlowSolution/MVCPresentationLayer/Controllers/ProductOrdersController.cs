@@ -29,10 +29,10 @@ namespace MVCPresentationLayer.Controllers
 
 
         /// <summary>
-        /// Ariel Sigo
+        /// Victor Algarin
         /// 
         /// Created:
-        /// 2017/04/29
+        /// 2017/04/21
         /// 
         ///  GET: ProductOrders
         /// </summary>
@@ -44,10 +44,10 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Victor Algarin
         /// 
         /// Created:
-        /// 2017/04/29
+        /// 2017/04/21
         /// 
         /// GET: ProductOrders/Details/5
         /// </summary>
@@ -70,10 +70,10 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Victor Algarin
         /// 
         /// Created:
-        /// 2017/04/29
+        /// 2017/04/21
         /// 
         /// GET: ProductOrders/Create
         /// 
@@ -85,37 +85,65 @@ namespace MVCPresentationLayer.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Victor Algarin
+        /// 
+        /// Created:
+        /// 2017/04/30
+        /// 
+        /// POST: ProductOrders/Create
+        /// 
+        /// </summary>
+        /// <returns></returns>
+
         // POST: ProductOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "DummyOrderId,CustomerId,EmployeeId,OrderTypeId,AddressType,DeliveryTypeId,Amount,OrderDate,DateExpected,Discount,OrderStatusId,UserAddressId,HasArrived")] ProductOrder productOrder)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.DummyOrders.Add(dummyOrder);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProductOrderId,CustomerId,EmployeeId,OrderTypeId,AddressType,Address1,City,State,Zip,DeliveryTypeId,Amount,OrderDate,DateExpected,Discount,OrderStatusId,HasArrived")] ProductOrder productOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ordMgr.createProductOrder(productOrder) != 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }
+                
+            }
 
-        //    return View(dummyOrder);
-        //}
+            return View(productOrder);
+        }
 
-        //// GET: ProductOrders/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DummyOrder dummyOrder = db.DummyOrders.Find(id);
-        //    if (dummyOrder == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(dummyOrder);
-        //}
+        /// <summary>
+        /// Victor Algarin
+        /// 
+        /// Created:
+        /// 2017/04/30
+        /// 
+        /// GET: ProductOrders/Edit
+        /// 
+        /// </summary>
+        /// <returns></returns>
+
+        // GET: ProductOrders/Edit/5
+        public ActionResult Edit(int? id)
+        {            
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var order = ordMgr.RetrieveProductOrdersByStatus("Open").Find(o => o.OrderId == (int)id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
 
         //// POST: ProductOrders/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
