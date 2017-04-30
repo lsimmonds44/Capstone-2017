@@ -1444,7 +1444,7 @@ namespace WpfPresentationLayer
         {
             if (lvOpenOrders.SelectedItem != null)
             {
-                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment"))
+                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Assignment"))
                 {
                     frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
                     deliveryWindow.ShowDialog();
