@@ -72,6 +72,13 @@ namespace WpfPresentationLayer
         public MainWindow()
         {
             InitializeComponent();
+
+            var uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/Flogo2.png",
+                 UriKind.RelativeOrAbsolute);
+
+            //StatusNotification.Content = uri.ToString();
+            this.Icon = BitmapFrame.Create(uri);
+
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
