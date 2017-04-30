@@ -214,7 +214,15 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@ROUTE_ID", delivery.RouteId);
+            cmd.Parameters.Add("@ROUTE_ID", SqlDbType.Int);
+            if(delivery.RouteId != null){
+                cmd.Parameters["@ROUTE_ID"].Value = delivery.RouteId;
+            }
+            else
+            {
+                cmd.Parameters["@ROUTE_ID"].Value = DBNull.Value;
+            }
+            
             cmd.Parameters.AddWithValue("@DELIVERY_DATE", delivery.DeliveryDate);
             cmd.Parameters.AddWithValue("@VERIFICATION", delivery.Verification);
             cmd.Parameters.AddWithValue("@STATUS_ID", delivery.StatusId);

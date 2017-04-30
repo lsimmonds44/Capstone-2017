@@ -42,7 +42,15 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@DELIVERY_ID", package.DeliveryId);
+            cmd.Parameters.Add("@DELIVERY_ID", SqlDbType.Int);
+            if(package.DeliveryId != null){
+                cmd.Parameters["@DELIVERY_ID"].Value = package.DeliveryId;
+            }
+            else
+            {
+                cmd.Parameters["@DELIVERY_ID"].Value = DBNull.Value;
+            }
+            
             cmd.Parameters.AddWithValue("@ORDER_ID", package.OrderId);
 
             try

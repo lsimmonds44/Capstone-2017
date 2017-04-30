@@ -193,6 +193,7 @@ INSERT INTO [dbo].[Order_Status]
 VALUES
 	("Open"),
 	("Ready For Shipment"),
+	("Ready For Assignment"),
 	("Saved"),
 	("Delivered")
 GO
@@ -472,12 +473,12 @@ GO
 INSERT INTO [dbo].[DELIVERY]
 	(ROUTE_ID, DELIVERY_DATE, STATUS_ID, DELIVERY_TYPE_ID, ORDER_ID)
 VALUES
-	(10000, '2017-04-20', "Ready For Delivery", "Drop off", 10000),
-	(10000, '2017-04-20', "Ready For Delivery", "Drop off", 10001),
-	(10001, '2017-04-13', "Ready For Delivery", "Drop off", 10002),
-	(10001, '2017-04-13', "Ready For Delivery", "Drop off", 10003),
-	(10002, '2017-04-10', "Ready For Delivery", "Drop off", 10003),
-	(10002, '2017-04-10', "Ready For Delivery", "Drop off", 10004)
+	(10000, '2017-04-20', "Ready For Assignment", "Drop off", 10000),
+	(10000, '2017-04-20', "Ready For Assignment", "Drop off", 10001),
+	(10001, '2017-04-13', "Ready For Assignment", "Drop off", 10002),
+	(10001, '2017-04-13', "Ready For Assignment", "Drop off", 10003),
+	(10002, '2017-04-10', "Ready For Assignment", "Drop off", 10003),
+	(10002, '2017-04-10', "Ready For Assignment", "Drop off", 10004)
 GO
 
 print '*** Inserting Package Test Data ***'
