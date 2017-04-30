@@ -19,6 +19,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCPresentationLayer.Controllers
 {
+    /// <summary>
+    /// Ariel Sigo 
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// The Controller for the Account
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {
@@ -28,6 +35,17 @@ namespace MVCPresentationLayer.Controllers
         private IUserCartManager _userCartManager;
         private IProductOrderManager _orderManager;
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// Create instances for IUserManager, IUserCartManager, and IProductManager
+        /// </summary>
+        /// <param name="appUserManager"></param>
+        /// <param name="_userCartManager"></param>
+        /// <param name="_orderManager"></param>
         public AccountController(IUserManager appUserManager, IUserCartManager _userCartManager, IProductOrderManager _orderManager)
         {
             this._appUserManager = appUserManager;
@@ -35,6 +53,20 @@ namespace MVCPresentationLayer.Controllers
             this._orderManager = _orderManager;
         }
 
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// Creates instances for the Account Controller
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="appUserManager"></param>
+        /// <param name="_userCartManager"></param>
+        /// <param name="_orderManager"></param>
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserManager appUserManager,
             IUserCartManager _userCartManager, IProductOrderManager _orderManager)
         {
@@ -45,6 +77,14 @@ namespace MVCPresentationLayer.Controllers
             this._orderManager = _orderManager;
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// Instance of ApplicationSingInManager named SignInManager
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -57,6 +97,16 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// 
+        /// Instnace of ApplicationUserManager named UserManager
+        /// 
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -69,17 +119,39 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+     
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/Login
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>View</returns>
         [AllowAnonymous]
+        
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //
-        // POST: /Account/Login
+   
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/Login
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>View(model)</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -120,8 +192,20 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
+      
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/VerifyCode
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <param name="rememberMe"></param>
+        /// <returns>View</returns>
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -133,8 +217,17 @@ namespace MVCPresentationLayer.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/VerifyCode
+      
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/VerifyCode
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View(model)</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -163,16 +256,33 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/Register 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/Register
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View(Model)</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -221,8 +331,21 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
+     
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// 
+        /// Created:
+        /// 
+        ///2017/04/29
+        /// 
+        /// GET: /Account/ConfirmEmail
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="code"></param>
+        /// <returns>View if succeeded</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -234,16 +357,35 @@ namespace MVCPresentationLayer.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
-        // GET: /Account/ForgotPassword
+        
+      
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/ForgotPassword
+        /// </summary>
+        /// <returns>View</returns>
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ForgotPassword
+        
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/ForgotPassword 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View(model)</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -270,24 +412,48 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+   
+        /// <summary>
+        /// Ariel Sigo  
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/ForgotPasswordConfirmation
+        /// </summary>
+        /// <returns>View</returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // GET: /Account/ResetPassword
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/ResetPassword 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns>Error or View</returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
 
-        //
-        // POST: /Account/ResetPassword
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/ResetPassword 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns> Error is fails View if successful</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -312,16 +478,37 @@ namespace MVCPresentationLayer.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
+        
+    
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/ResetPasswordConfirmation
+        /// </summary>
+        /// <returns>View</returns>
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ExternalLogin
+       
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/ExternalLogin 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>New ChallengeResult </returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -331,8 +518,19 @@ namespace MVCPresentationLayer.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
-        // GET: /Account/SendCode
+        
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/SendCode 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <param name="rememberMe"></param>
+        /// <returns>View(new SendCodeViewModel) if successful</returns>
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -346,8 +544,16 @@ namespace MVCPresentationLayer.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/SendCode
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/SendCode
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View if successful or Error if unsuccessful</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -366,8 +572,17 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
+     
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: /Account/ExternalLoginCallback
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>Redirect to Login if null, View if successful</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -396,8 +611,18 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
+   
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/ExternalLoginConfirmation
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>ActionResult Index if authenticated. Error if info is null</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -434,8 +659,16 @@ namespace MVCPresentationLayer.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// POST: /Account/LogOff
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -444,8 +677,15 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  GET: /Account/ExternalLoginFailure
+        /// </summary>
+        /// <returns>View</returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
@@ -454,9 +694,14 @@ namespace MVCPresentationLayer.Controllers
 
 
         /// <summary>
-        /// Created on 2017/04/06 by William Flood
+        /// William Flood
+        /// 
+        /// Created:
+        /// 2017/04/06
+        /// 
+        /// 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>View(pageModel)</returns>
         public ActionResult ViewCart()
         {
             var userName = User.Identity.Name;
@@ -478,9 +723,11 @@ namespace MVCPresentationLayer.Controllers
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 
+        /// 2017/04/13
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ViewCart if successful, HttpStatusCodeResult if error</returns>
         public ActionResult RemoveFromCart()
         {
             try
@@ -504,6 +751,14 @@ namespace MVCPresentationLayer.Controllers
             }
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -525,7 +780,9 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Created by Michael Takrama
+        /// Michael Takrama
+        /// 
+        /// Created:
         /// 4/22/2017
         /// 
         /// Assigns Roles to Users Based On Approval Status from Snack Overflow
@@ -604,10 +861,11 @@ namespace MVCPresentationLayer.Controllers
         }
         /// <summary>
         /// William Flood
-        /// Created on 2017/04/27
+        /// Created:
+        /// 2017/04/27
         /// </summary>
         /// <param name="orderID"></param>
-        /// <returns></returns>
+        /// <returns>ViewCart</returns>
         public ActionResult LoadOrder(int? orderID)
         {
             try

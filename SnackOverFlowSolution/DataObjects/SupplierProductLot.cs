@@ -2,6 +2,13 @@
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Class of Supplier Product Lot
+    /// </summary>
     public class SupplierProductLot
     {
         public int SupplierProductLotId { get; set; }

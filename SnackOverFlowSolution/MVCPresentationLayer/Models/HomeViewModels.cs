@@ -3,8 +3,14 @@
     public class HomeViewModels
     {
         /// <summary>
-        /// Author: Skyler Hiscock
-        /// Updated: 4/28/17
+        /// Skyler Hiscock
+        /// 
+        /// Created:
+        /// 2017/21/04
+        /// 
+        /// Skyler Hiscock
+        /// Updated: 
+        /// 2017/28/04
         /// </summary>
         public class ApplicationSuccessViewModel
         {

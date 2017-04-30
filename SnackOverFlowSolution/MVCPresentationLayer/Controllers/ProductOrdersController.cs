@@ -13,8 +13,10 @@ using LogicLayer;
 namespace MVCPresentationLayer.Controllers
 {   
     /// <summary>
-    /// Created by Victor Algarin
-    /// Date: 04/21/2017
+    /// 
+    /// Victor Algarin
+    /// Created:
+    /// 2017/04/21
     /// 
     /// Controller for Product Orders
     /// Note: In order to create the controller, I had to remove nullable option for fields 
@@ -26,14 +28,32 @@ namespace MVCPresentationLayer.Controllers
         IProductOrderManager ordMgr = new ProductOrderManager();
 
 
-        // GET: ProductOrders
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        ///  GET: ProductOrders
+        /// </summary>
+        /// <returns>View(Order)</returns>
         public ActionResult Index()
         {
             var order = ordMgr.RetrieveProductOrdersByStatus("Open");
             return View(order);
         }
 
-        // GET: ProductOrders/Details/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: ProductOrders/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View(Order)</returns>
+ 
         public ActionResult Details(int? id)
         {
 
@@ -49,7 +69,17 @@ namespace MVCPresentationLayer.Controllers
             return View(order);
         }
 
-        // GET: ProductOrders/Create
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: ProductOrders/Create
+        /// 
+        /// </summary>
+        /// <returns></returns>
+ 
         public ActionResult Create()
         {
             return View();
@@ -140,10 +170,12 @@ namespace MVCPresentationLayer.Controllers
 
         /// <summary>
         /// William Flood
-        /// Created on 2017/04/27
+        /// 
+        /// Created:
+        /// 2017/04/27
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>RedirectToAction("Index")</returns>
         public ActionResult Save(int? id)
         {
             try

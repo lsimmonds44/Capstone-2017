@@ -11,8 +11,11 @@ using Microsoft.AspNet.Identity;
 namespace MVCPresentationLayer.Controllers
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 4/7/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/07
+    /// 
     /// 
     /// Cart Controller
     /// </summary>
@@ -54,7 +57,7 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="cart"></param>
         /// <param name="productId"></param>
         /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <returns>RedirectToActiion</returns>
         [Authorize(Roles = "Supplier, Customer")]
         public RedirectToRouteResult AddToCart(Cart cart, int? productId, string returnUrl)
         {
@@ -97,11 +100,27 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
 
+
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns>PartialView(cart)</returns>
         public PartialViewResult Summary(Cart cart)
         {
             return PartialView(cart);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>View(ShippingDetails)</returns>
         public ViewResult Checkout()
         {
             var identityUserName = User.Identity.GetUserName();
@@ -120,6 +139,16 @@ namespace MVCPresentationLayer.Controllers
             return View(shippingDetails);
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="shippingDetails"></param>
+        /// <returns>View(Completed) if successful, else Error</returns>
         [HttpPost]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {

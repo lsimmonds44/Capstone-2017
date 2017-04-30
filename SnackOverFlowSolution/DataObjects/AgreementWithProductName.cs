@@ -8,6 +8,8 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
+    /// 
+    /// Created:
     /// 2017/04/06
     /// 
     /// Created for MVC Modeling

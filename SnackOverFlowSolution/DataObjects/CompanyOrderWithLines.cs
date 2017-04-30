@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
-    /// <summary>
-    /// Christian Lopez
+    /// <summary> 
+    /// Christian Lopez 
+    /// 
+    /// Created:
     /// 2017/04/13
     /// 
     /// Used for MVC

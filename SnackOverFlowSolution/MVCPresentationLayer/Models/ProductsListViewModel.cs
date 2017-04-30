@@ -4,10 +4,14 @@ using DataObjects;
 namespace MVCPresentationLayer.Models
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 04/07/2017
-    /// Update by Skyler Hiscock
-    /// 04/20/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/07
+    /// 
+    /// Skyler Hiscock
+    /// Updated:
+    /// 2017/04/20
     /// Composite Data Object View Model for Product/Index
     /// </summary>
 
@@ -25,8 +29,10 @@ namespace MVCPresentationLayer.Models
     }
 
     /// <summary>
-    /// Author: Skyler Hiscock
-    /// Added: 4/20/17
+    /// Skyler Hiscock
+    /// 
+    /// Created:
+    /// 2017/04/20
     /// </summary>
 
     public class NavMenuViewModel

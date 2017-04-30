@@ -10,7 +10,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/14
+    /// Updated: 
+    /// 2017/04/14
     /// 
     /// Class to handle database interactions involving maintenance schedule lines.
     /// </summary>
@@ -18,14 +19,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Mason Allen
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         ///  
         /// Creates a new maintenance schedule line
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>

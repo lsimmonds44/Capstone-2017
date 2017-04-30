@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/04
+    /// Updated: 
+    /// 2017/04/04
     /// 
     /// Class to handle database interactions inolving charities.
     /// </summary>
@@ -19,7 +20,8 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Aaron Usher
-        /// Created: 2017/04/04
+        /// Created: 
+        /// 2017/04/04
         /// 
         /// Retrieves a list of all charities in the database.
         /// </summary>
@@ -73,14 +75,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// Created: 2017/24/03 
+        /// Created: 
+        /// 2017/24/03 
         /// 
         /// Retrieve Charity By User Id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/04
+        /// Updated:
+        /// 2017/04/04
         /// Standardized method.
         /// </remarks>
         /// 
@@ -135,14 +139,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Daniel Brown
-        /// Created: 2017/24/03
+        /// Created: 
+        /// 2017/24/03
         /// 
         /// Alters the status of a charity to approved
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/04
+        /// Updated: 
+        /// 2017/04/04
         /// 
         /// Standardized method.
         /// </remarks>
@@ -181,14 +187,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Daniel Brown
-        /// Created 2017/04/03
+        /// Created: 
+        /// 2017/04/03
         /// 
         /// Alters the status of a charity to denied
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/04
+        /// Updated: 
+        /// 2017/04/04
         /// 
         /// Standardized method.
         /// </remarks>
@@ -227,14 +235,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/08
+        /// Created: 
+        /// 2017/03/08
         /// 
         /// Handles the process of adding a charity application to the DB
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/04
+        /// Updated: 
+        /// 2017/04/04
         /// 
         /// Standardized method.
         /// </remarks>

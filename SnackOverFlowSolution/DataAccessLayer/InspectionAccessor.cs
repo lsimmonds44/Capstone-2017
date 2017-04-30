@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created on 2017/02/16
+    /// Created:
+    /// 2017/02/16
     /// 
     /// Manages accessing the database for Inspection related actions.
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/16
+        /// Created: 
+        /// 2017/02/16
         /// 
         /// Creates an inspection from the given data
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Standardized method and changed signature from inspection fields to an inspection object.
         /// </remarks>

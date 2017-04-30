@@ -7,11 +7,29 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataObjects
 {
+ 
+    /// <summary>
+    /// Christian Lopez
+    /// Created:
+    /// 2017/02/01
+    /// 
+    /// Represents a Supplier
+    /// </summary>
+    /// <remarks>
+    /// Christian Lopez
+    /// Updated:
+    /// 2017/04/06
+    /// Added Data Annotations
+    /// 
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standarized Comment
+    /// </remarks>
     public class Supplier
     {
-        // Represents a Supplier
-        // Created by Christian Lopez on 2017/02/01
-        // Last modified by Christian Lopez on 2017/04/06 - Added DataAnnotations
+        
         public int SupplierID { get; set; }
         public bool IsApproved { get; set; }
         public int? ApprovedBy { get; set; }
@@ -41,7 +59,8 @@ namespace DataObjects
 
         /// <summary>
         /// Skyler Hiscock
-        /// created 2017/03/09
+        /// created:
+        /// 2017/03/09
         /// 
         /// Returns clone of Supplier
         /// </summary>
@@ -62,6 +81,12 @@ namespace DataObjects
             };
         }
 
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated: 
+        /// 2017/04/29
+        /// </summary>
+        /// <returns>FarmName in a string format</returns>
         public override string ToString()
         {
             return FarmName;

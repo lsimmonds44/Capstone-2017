@@ -9,6 +9,13 @@ using MVCPresentationLayer.Models;
 
 namespace MVCPresentationLayer
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated: 
+    /// 2017/04/29
+    /// 
+    /// Start Up Class
+    /// </summary>
     public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864

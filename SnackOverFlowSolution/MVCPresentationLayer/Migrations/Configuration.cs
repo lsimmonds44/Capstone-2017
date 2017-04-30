@@ -9,8 +9,20 @@ namespace MVCPresentationLayer.Migrations
     using System.Linq;
     using System.Security.Claims;
 
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<MVCPresentationLayer.Models.ApplicationDbContext>
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// </summary>
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;

@@ -7,11 +7,22 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 03/24/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/03/24
     /// 
     /// Data Transfer Object for preferences
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// 
+    /// </remarks>
+
     public class Preferences
     {
         public int ExpiringSoonDuration { get; set; }

@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created: 2017/02/15
+    /// Created: 
+    /// 2017/02/15
     ///
     /// Class to handle database interactions involving product lots.
     /// </summary>
@@ -20,14 +21,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Created: 2017/04/07
+        /// Created: 
+        /// 2017/04/07
         /// 
         /// Adds a new product lot to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -73,14 +76,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/02/16
+        /// Created: 
+        /// 2017/02/16
         /// 
         /// Gets a product lot object using the given id 
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -136,14 +141,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/02/16
+        /// Created: 
+        /// 2017/02/16
         /// 
         /// Updates the available quantity in the product lot table
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -184,14 +191,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/15
+        /// Created: 
+        /// 2017/02/15
         /// 
         /// Retrieve the newest product lot based on the supplier
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -246,14 +255,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/29
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Returns all of the product lots related to the given supplier.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -309,14 +320,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         /// 
         /// Returns a list of all expired product lots.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -370,21 +383,24 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/27
+        /// Created: 
+        /// 2017/02/27
         /// 
         /// Gets a list of product lots from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Eric Walton
-        /// Updated: 2017/03/24
+        /// Updated: 
+        /// 2017/03/24
         /// 
         /// Added Grade and Price changed the while loop to handle a null price.
         /// </remarks>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -440,14 +456,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Retrieves a list of all active product lots in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -503,14 +521,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Deletes a product lot from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -548,14 +568,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/29
+        /// Created: 
+        /// 2017/03/29
         /// 
         /// Returns a product lot associated with the id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -611,14 +633,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// Created: 2017/02/17
+        /// Created: 
+        /// 2017/02/17
         /// 
         /// Writes an updated product unit price to the database
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

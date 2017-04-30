@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created: 2017/02/02
+    /// Created: 
+    /// 2017/02/02
     /// 
     /// Class to handle database interactions involving suppliers.
     /// </summary>
@@ -19,19 +20,22 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/02
+        /// Created: 
+        /// 2017/02/02
         /// 
         /// Access database to create a new supplier with given information
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method; changed signature from fields of a Supplier to a Supplier itself.
         /// 
         /// Christian Lopez
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Fixed standardization
         /// </remarks>
@@ -97,14 +101,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/15
+        /// Created: 
+        /// 2017/02/15
         /// 
         /// Retrieve and return a supplier based on a given user ID
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -158,13 +164,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/22
+        /// Created: 
+        /// 2017/02/22
         /// Retrieves a given supplier from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -218,14 +226,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/03
+        /// Created: 
+        /// 2017/03/03
         /// 
         /// Get a list of all suppliers, regardless of status and approval.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -278,14 +288,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/23
+        /// Created: 
+        /// 2017/02/23
         /// 
         /// Retrieve the full supplier name by userId
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -327,14 +339,16 @@ namespace DataAccessLayer
         }
         /// <summary>
         /// Skyler Hiscock
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         /// 
         /// Updates a supplier in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -391,14 +405,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ryan Spurgetis 
-        /// Created: 2017/04/06
+        /// Created:
+        /// 2017/04/06
         /// 
         /// Retrieves the list of supplier application statuses
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -439,7 +455,8 @@ namespace DataAccessLayer
         }
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/04/06
+        /// Created:
+        /// 2017/04/06
         /// 
         /// Returns a list of suppliers with their agreements by gettin a list of all suppliers and then finding the 
         /// agreements associated with them.
@@ -447,7 +464,8 @@ namespace DataAccessLayer
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -489,14 +507,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
-        /// Created: 2017/04/07
+        /// Created: 
+        /// 2017/04/07
         /// 
         /// Accessor method to approve supplier and updates who made the change
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated:
+        /// 2017/04/07
         /// 
         /// Standardized method.
         /// </remarks>
@@ -537,6 +557,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bobby Thorne
+        /// 
+        /// Created:
         /// 2017/04/07
         /// 
         /// Accessor method to deny supplier and updates who made the change
@@ -544,9 +566,15 @@ namespace DataAccessLayer
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated:
+        /// 2017/04/28
         /// 
         /// Standardized method.
+        /// 
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Standardized Comment
         /// </remarks>
         /// 
         /// <param name="supplier">The supplier as it was in the database.</param>
@@ -586,14 +614,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Method to retrieve the address of a supplier
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -647,13 +677,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/04/27
+        /// Created: 
+        /// 2017/04/27
         /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/28
+        /// Updated: 
+        /// 2017/04/28
         /// 
         /// Standardized method.
         /// </remarks>
@@ -696,13 +728,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/04/27
+        /// Created: 
+        /// 2017/04/27
         /// Retrieves the necessary information and bundles it into a SupplierWithAgreemnts
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/27
+        /// Updated: 
+        /// 2017/04/27
         /// 
         /// Standardized method.
         /// </remarks>
@@ -745,7 +779,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Created: 2017/04/28
+        /// Created: 
+        /// 2017/04/28
         /// 
         /// Extension method to add agreements to a SupplierWthAgreements.
         /// </summary>

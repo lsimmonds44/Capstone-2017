@@ -10,12 +10,27 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
-    /// Created on 2017/02/15
-    /// Edited By Michael Takrama on 2017/04/07
-    /// Detail - Added Data Annotation for Model Fields
+    /// 
+    /// Created:
+    /// 2017/02/15
     /// 
     /// The DTO for Product
+    /// 
     /// </summary>
+    /// <remarks>
+    /// Michael Takrama 
+    /// Updated:
+    /// 2017/04/07
+    /// 
+    /// Detail - Added Data Annotation for Model Fields
+    /// 
+    /// Ariel Sigo 
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// 
+    /// </remarks>
     public class Product
     {
 
@@ -31,7 +46,8 @@ namespace DataObjects
 
         /// <summary>
         /// Michael Takrama
-        /// Created on 2017/04/07
+        /// Created:
+        /// 2017/04/07
         /// 
         /// Price Property - MVC Layer
         /// </summary>

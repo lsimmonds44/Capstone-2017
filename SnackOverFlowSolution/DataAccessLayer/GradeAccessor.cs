@@ -10,7 +10,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created: 2017/02/22
+    /// Created: 
+    /// 2017/02/22
     /// 
     /// Class to handle database interactions involving grades.
     /// </summary>
@@ -18,14 +19,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/02/09
+        /// Created: 
+        /// 2017/02/09
         /// 
         /// Gets a list of acceptable grades
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Standardized method. Changed return type from string array to list of string.
         /// </remarks>

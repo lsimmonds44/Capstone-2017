@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/14
+    /// Updated: 
+    /// 2017/04/14
     /// 
     /// Class to handle database interactions involving product order lines.
     /// </summary>
@@ -20,13 +21,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Eric Walton
-        /// Created: 2017/03/10
+        /// Created: 
+        /// 2017/03/10
         /// Invokes a stored procedure to create a new order line in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>
@@ -69,6 +72,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Eric Walton
+        /// 
+        /// Created:
         /// 2017/10/3
         /// Invokes a stored procedure to retrieve order line by order id and
         /// update the amount on the order
@@ -76,7 +81,8 @@ namespace DataAccessLayer
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/14
+        /// Updated: 
+        /// 2017/04/14
         /// 
         /// Standardized method.
         /// </remarks>

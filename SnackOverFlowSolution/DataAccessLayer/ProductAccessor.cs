@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/21
+    /// Updated: 
+    /// 2017/04/21
     /// 
     /// Class to handle database interactions involving products.
     /// </summary>
@@ -20,14 +21,16 @@ namespace DataAccessLayer
 
         /// <summary> 
         /// Dan Brown
-        /// Created: 2017/03/02
+        /// Created: 
+        /// 2017/03/02
         ///
         /// Deletes a product from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -65,14 +68,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Natacha Ilunga 
-        /// Created: 2017/02/10
+        /// Created: 
+        /// 2017/02/10
         /// 
         /// Retrieves Products from DB to Browse Product View Model
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -123,14 +128,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Laura Simmonds
-        /// Created: 2017/02/15
+        /// Created: 
+        /// 2017/02/15
         /// 
         /// Retrieves a product from the database
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -190,14 +197,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Michael Takrama 
-        /// Created: 2017/02/15
+        /// Created: 
+        /// 2017/02/15
         /// 
         /// Adds a new product to the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated:
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -240,14 +249,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// Created: 201702/17
+        /// Created: 
+        /// 2017/02/17
         /// 
         /// Updates the price of a given product in the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -288,14 +299,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/08
+        /// Created: 
+        /// 2017/03/08
         /// 
         /// Get a list of all products in the database
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -346,8 +359,10 @@ namespace DataAccessLayer
         }
         /*This is very, very wrong and needs to be redone as its own stored procedure.*/
         /// <summary>
-        /// Created by Natacha Ilunga
-        /// 03/29/2017
+        /// Natacha Ilunga
+        /// 
+        /// Created:
+        /// 2017/03/29
         /// 
         /// Retrieves Products by suplier Id to Supplier Catalog View
         /// </summary>
@@ -360,14 +375,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Robert Forbes
-        /// Created: 2017/04/13
+        /// Created: 
+        /// 2017/04/13
         /// 
         /// Retrieves the name of a product based on the passed in product lot id
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>
@@ -410,14 +427,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
-        /// Created: 2017/04/14
+        /// Created: 
+        /// 2017/04/14
         /// 
         /// Retrieves the price options for a given product from the database.
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/21
+        /// Updated: 
+        /// 2017/04/21
         /// 
         /// Standardized method.
         /// </remarks>

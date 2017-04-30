@@ -1151,7 +1151,7 @@ namespace WpfPresentationLayer
                 _userList = usrMgr.RetrieveFullUserList();
                 dgUsers.ItemsSource = _userList;
             }catch(Exception){
-                MessageBox.Show("There are currenlty no users");
+                MessageBox.Show("There are currently no users");
             }
             if ("ADMIN" == _user.UserName)
             {
@@ -2520,7 +2520,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCCAccountApproval_Click(object sender, RoutedEventArgs e)
         {
-            if (dgSuppliers.SelectedIndex >= 0)
+            if (dgCustomer.SelectedIndex >= 0)
             {
                 frmApproval ApprovalWindow = new frmApproval(_customerManager, (CommercialCustomer)dgCustomer.SelectedItem, _user.UserId);
                 ApprovalWindow.ShowDialog();

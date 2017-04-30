@@ -4,11 +4,20 @@ using System.Web.Mvc;
 namespace DataObjects
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 04/07/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/17
     /// 
     /// Shipping Details
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class ShippingDetails
     {
 

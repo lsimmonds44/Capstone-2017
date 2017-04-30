@@ -6,6 +6,12 @@ using DataObjects;
 
 namespace MVCPresentationLayer.Models
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// </summary>
     public class ProductWithGradeOptions
     {
         public Product Product { get; set; }

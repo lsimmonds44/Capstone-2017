@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Aaron Usher
-    /// Updated: 2017/04/07
+    /// Updated: 
+    /// 2017/04/07
     /// 
     /// Class to handle database interactions involving locations.
     /// </summary>
@@ -19,13 +20,15 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Skyler Hiscock
-        /// Created: 2017/02/03
+        /// Created: 
+        /// 2017/02/03
         /// Creates a warehouse location
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// Standardized method.
         /// </remarks>
         /// 
@@ -62,7 +65,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Class to update a location in the database.
         /// </summary>
@@ -105,7 +109,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Retrieves a location from the database based on its Id.
         /// </summary>
@@ -153,13 +158,15 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Bill Flood
-        /// Created: 2017/03/28
+        /// Created: 
+        /// 2017/03/28
         /// 
         /// Retrieves all locations from the database.
         /// </summary>
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Standardized method.
         /// </remarks>

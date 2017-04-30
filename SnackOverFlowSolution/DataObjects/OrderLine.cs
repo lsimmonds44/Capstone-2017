@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
+    /// <summary>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// DTO for Order Line
+    /// </summary>
     public class OrderLine
     {
         public int OrderLineID { get; set; }

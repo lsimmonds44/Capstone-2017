@@ -1,7 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataObjects
+
+    
 {
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// DTO for Register Commercial View Model
+    /// </summary>
     public class RegisterCommercialViewModel : User
     {
 

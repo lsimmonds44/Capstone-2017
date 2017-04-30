@@ -11,7 +11,8 @@ namespace DataAccessLayer
 {
     /// <summary>
     /// Christian Lopez
-    /// Created 2017/03/08
+    /// Created:
+    /// 2017/03/08
     /// 
     /// Handles accessing a DB for data about Agreements
     /// </summary>
@@ -19,14 +20,16 @@ namespace DataAccessLayer
     {
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/08
+        /// Created: 
+        /// 2017/03/08
         /// 
         /// Retrieves a list of Agreements for a supplier from the DB
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/07
+        /// Updated: 
+        /// 2017/04/07
         /// 
         /// Standardized method.
         /// </remarks>
@@ -80,21 +83,24 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/08
+        /// Created: 
+        /// 2017/03/08
         /// 
         /// Attempts to store an  Agreement to the DB
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Updated: 2017/04/06
+        /// Updated: 
+        /// 2017/04/06
         ///
         /// Standardized method.
         /// </remarks>
         /// 
         /// Ariel Sigo
         /// Christian Lopez
-        /// Updated 2017/04/07
+        /// Updated 
+        /// 2017/04/07
         /// 
         /// Fixed crashing errors
         /// 
@@ -148,14 +154,16 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
-        /// Created: 2017/03/09
+        /// Created: 
+        /// 2017/03/09
         /// 
         /// Attempts to update an existing agreement in the DB
         /// </summary>
         /// 
         /// <remarks>
         /// Aaron Usher
-        /// Created: 2017/04/06
+        /// Created: 
+        /// 2017/04/06
         /// 
         /// Standardized method.
         /// 
@@ -208,6 +216,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created:
         /// 2017/04/06
         /// 
         /// Returns a list of agreements with the product names

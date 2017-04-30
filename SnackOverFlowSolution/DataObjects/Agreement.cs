@@ -8,7 +8,8 @@ namespace DataObjects
 {
     /// <summary>
     /// Christian Lopez
-    /// Created 2017/03/08
+    /// Created:
+    /// 2017/03/08
     /// 
     /// Represents the DTO for an Agreement
     /// </summary>

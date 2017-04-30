@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 namespace DataObjects
 {
     /// <summary>
+    /// Mason Allen
+    /// Created:
+    /// 2017/03/09
+    /// 
     /// Maintenance Schedule Line class
-    /// Created by Mason Allen
-    /// Created on 03/09/17
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class MaintenanceScheduleLine
     {
         public int MaintenanceScheduleLineId { get; set; }

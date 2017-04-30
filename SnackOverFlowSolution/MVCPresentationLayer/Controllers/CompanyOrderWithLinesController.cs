@@ -12,6 +12,15 @@ using LogicLayer;
 
 namespace MVCPresentationLayer.Controllers
 {
+
+    /// <summary>
+    /// Ariel Sigo
+    /// 
+    /// Created:
+    /// 2017/04/29
+    /// 
+    /// Company Order With Lines Controller
+    /// </summary>
     public class CompanyOrderWithLinesController : Controller
     {
         private ICompanyOrderManager _companyOrderManager;
@@ -26,7 +35,16 @@ namespace MVCPresentationLayer.Controllers
             _userManager = userManager;
         }
 
-        // GET: CompanyOrderWithLines
+        
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        ///
+        /// GET: CompanyOrderWithLines
+        /// </summary>
+        /// <returns>View of orders for Supplier Role</returns>
         [Authorize(Roles="Supplier")]
         public ActionResult Index()
         {
@@ -47,7 +65,16 @@ namespace MVCPresentationLayer.Controllers
             
         }
 
-        // GET: CompanyOrderWithLines/Details/5
+        /// <summary>
+        /// Ariel Sigo
+        /// 
+        /// Created:
+        /// 2017/04/29
+        /// 
+        /// GET: CompanyOrderWithLines/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View of Company order with lines if successful, error if not.</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -73,9 +100,13 @@ namespace MVCPresentationLayer.Controllers
 
         /// <summary>
         /// Christian Lopez
+        /// 
+        /// Created: 
+        /// 2017/04/29
+        /// 
         /// </summary>
         /// <param name="companyOrder"></param>
-        /// <returns></returns>
+        /// <returns>View of invoice and company order if successful</returns>
         [Authorize(Roles="Supplier")]
         public ActionResult InvoiceDetails(int? id)
         {

@@ -11,11 +11,26 @@ namespace MVCPresentationLayer.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
+    /// <summary>
+    /// Ariel Sigo
+    /// Udpated:
+    /// 2017/04/29
+    /// Ninject Web Common
+    /// </summary>
     public static class NinjectWebCommon 
     {
+        /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
+        /// Creates a read only isntance of BootStrapper
+        /// </summary>
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
         /// Starts the application
         /// </summary>
         public static void Start() 
@@ -26,6 +41,9 @@ namespace MVCPresentationLayer.App_Start
         }
         
         /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
         /// Stops the application.
         /// </summary>
         public static void Stop()
@@ -34,6 +52,9 @@ namespace MVCPresentationLayer.App_Start
         }
         
         /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
@@ -56,6 +77,9 @@ namespace MVCPresentationLayer.App_Start
         }
 
         /// <summary>
+        /// Ariel Sigo
+        /// Updated:
+        /// 2017/04/29
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>

@@ -5,11 +5,20 @@ using DataObjects;
 namespace LogicLayer
 {
     /// <summary>
-    /// Created by Michael Takrama
-    /// 04/07/2017
+    /// Michael Takrama
+    /// 
+    /// Created:
+    /// 2017/04/17
     /// 
     /// Cart Logic
     /// </summary>
+    /// <remarks>
+    /// Ariel Sigo
+    /// Updated:
+    /// 2017/04/29
+    /// 
+    /// Standardized Comment
+    /// </remarks>
     public class Cart
     {
         private readonly List<CartLine> _lineCollection = new List<CartLine>();

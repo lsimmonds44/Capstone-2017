@@ -14,6 +14,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
+        /// 
+        /// Created:
         /// 2017/04/19
         /// 
         /// Retrieve the invoices by the user name associated with a commercial account
@@ -71,6 +73,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
+        /// 
+        /// Created:
         /// 2017/04/20
         /// 
         /// Retrieve the invoices by the user name associated with a commercial account
@@ -127,6 +131,8 @@ namespace DataAccessLayer
 
         /// <summary>
         /// William Flood
+        /// 
+        /// Created:
         /// 2017/03/22
         /// 
         /// Gets a list of invoice lines for the given invoice id
