@@ -1,3 +1,3 @@
-sqlcmd -S LAPTOP-61UA4Q4T\SQLEXPRESS -E -i TestData.sql
+sqlcmd -S localhost -E -i TestData.sql
 
 PAUSE
