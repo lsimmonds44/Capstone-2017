@@ -953,7 +953,7 @@
             <!--End of Main Status Bar Grid-->
             <!--Status Bar Controls-->
             <StatusBarItem Grid.Column="0" Name="statusMessage" Margin="10 0" Content="Please Log in to continue...."  VerticalAlignment="Top"/>
-            <StatusBarItem Grid.Column="1"  Name="statusUpdate" Margin="10 0" Content="Messages will appear here...."  VerticalAlignment="Top"/>
+            <StatusBarItem Grid.Column="1"  Name="statusUpdate" Margin="10 0" Content=""  VerticalAlignment="Top"/>
         </StatusBar>
         <!--End of Main Status Bar-->
     </Grid>
