@@ -91,8 +91,16 @@ namespace MVCPresentationLayer.Controllers
                         GradeID = gradeId,
                         Quantity = quantity
                     };
-                    _userCartManager.AddToCart(cartLine);
-                    return RedirectToAction("Index", "Products");
+                    var results = _userCartManager.AddToCart(cartLine);
+                    if (results >= 0)
+                    {
+                        return RedirectToAction("Index", "Products");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"], errored="runout" });
+                    }
+                    
                 }
 
             }

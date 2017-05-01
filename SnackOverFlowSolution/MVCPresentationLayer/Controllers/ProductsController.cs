@@ -110,7 +110,7 @@ namespace MVCPresentationLayer.Controllers
         /// <param name="id"></param>
         /// <param name="supplierId"></param>
         /// <returns>Detail view for specific product.</returns>
-        public ActionResult Details(int? id, int? supplierId)
+        public ActionResult Details(int? id, int? supplierId, string errored = "")
         {
             if (id == null || supplierId == null)
             {
@@ -122,6 +122,9 @@ namespace MVCPresentationLayer.Controllers
             if (product == null)
             {
                 return HttpNotFound();
+            }
+            if (errored.Equals("runout")) {
+                ViewBag.Error = "Out of stock";
             }
             return View(product);
         }

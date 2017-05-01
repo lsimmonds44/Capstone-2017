@@ -31,17 +31,8 @@
         </tr>
     }
 </table>
-<form method="post" action="LoadOrder">
-    <select name="orderID">
-        @foreach (var orderID in Model.SavedOrderList)
-        {
-            <option value="@orderID">@orderID</option>
-        }
-    </select>
-    <input type="submit" value="Load" name="load" />
-</form>
 <div class="text-center">
-    @Html.ActionLink("Continue Shpping", "Index", "Products", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Checkout now", "Checkout", "Cart", null, new { @class = "btn btn-primary" })
 </div>
 
