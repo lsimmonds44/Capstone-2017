@@ -28,7 +28,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Create Location Window.
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         /// <param name="iLocationManager"></param>
         public frmCreateLocation(ILocationManager iLocationManager)
@@ -42,7 +42,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Adds New Location.
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -37,7 +37,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize the Submit Supplier Invoice Window.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="supplier"></param>
         /// <param name="productLotManager"></param>

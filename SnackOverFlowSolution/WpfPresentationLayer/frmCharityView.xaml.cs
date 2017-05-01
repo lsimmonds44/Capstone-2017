@@ -33,7 +33,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Charity View Form.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="userID"></param>
         public frmCharityView(int userID)
@@ -46,7 +46,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Charity View Form by Charity Manager.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="charityManager"></param>
         public frmCharityView(ICharityManager charityManager)
@@ -61,7 +61,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Charity View Form by Charity Manager and Employee ID.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="charityManager"></param>
         /// <param name="employeeID"></param>
@@ -80,7 +80,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Charity View Form by a Charity Manager and Charity.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="charityManager"></param>
         /// <param name="charity"></param>
@@ -126,7 +126,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Set Editable.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         public void SetEditable()
         {
@@ -180,7 +180,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Post Charity View.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

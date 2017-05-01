@@ -27,8 +27,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized comments.
-    /// Standaridized methods.
+    /// Standardized comments.
+    /// Standardized methods.
     /// </summary>
     public partial class frmCharityApproval : Window
     {
@@ -40,7 +40,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Charity Approval form.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="charityMgr"></param>
         /// <param name="charity"></param>

@@ -31,7 +31,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Add Warehouse form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmAddWarehouse()
         {
@@ -44,7 +44,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Saves New Warehouse information.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,7 +79,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancel/Closes Add Warehouse form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

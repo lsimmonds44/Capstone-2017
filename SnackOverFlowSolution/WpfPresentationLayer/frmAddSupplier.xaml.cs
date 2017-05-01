@@ -167,7 +167,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Resets Add Supplier form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         private void resetForm()
         {
@@ -516,7 +516,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Validates User Input.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         private void validateInputs()
         {
@@ -728,7 +728,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Removes Products from Approved.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -752,7 +752,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Refreshed Available and Approved Tables.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         private void refreshTables()
         {

@@ -26,8 +26,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized Naming and Comments
-    /// Standaridized Methods.
+    /// Standardized Naming and Comments
+    /// Standardized Methods.
     /// </summary>
     public partial class frmBrowseProducts : Window
     {
@@ -54,7 +54,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Browse Products Window
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="iProductManager"></param>

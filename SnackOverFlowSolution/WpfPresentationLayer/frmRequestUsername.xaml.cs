@@ -28,7 +28,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Request Username Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmRequestUsername()
         {

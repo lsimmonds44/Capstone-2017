@@ -32,7 +32,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Manage Stock Sub Adjust Qty Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="oldProductLot"></param>
         public frmManageStockSubAdjustQty(ProductLot oldProductLot)
@@ -47,8 +47,8 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/21
         /// 
-        /// Initialize Setup of Manage Stock Sub Adjust Qty Window.
-        /// Standaridized method.
+        /// Initialize Set-up of Manage Stock Sub Adjust Qty Window.
+        /// Standardized method.
         /// </summary>
         private void SetupWindow()
         {
@@ -77,7 +77,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Updates Available Quantity.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -23,7 +23,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Product form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="currentUser"></param>
         /// <param name="iproductManager"></param>
@@ -39,7 +39,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Saves Product's Image.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

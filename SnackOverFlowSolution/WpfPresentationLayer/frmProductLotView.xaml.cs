@@ -39,7 +39,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize of Add Product Lot View Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmAddProductLot()
         {
@@ -53,7 +53,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize of Add Product Lot View Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="prodMgr"></param>
         /// <param name="prodLot"></param>
@@ -88,7 +88,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Fills in the Default Values
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         private void FillDefaultValues()
         {
@@ -102,7 +102,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Set Editable View.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public void SetEditable()
         {
@@ -144,7 +144,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Saves Changes to Product Lot View.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -355,7 +355,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Closes Product Lot View Window.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

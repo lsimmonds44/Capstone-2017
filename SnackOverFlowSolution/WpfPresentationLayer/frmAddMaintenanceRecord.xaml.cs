@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Maintenance Record  form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="vehicleId"></param>
         public frmAddMaintenanceRecord(int vehicleId)
@@ -44,7 +44,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancels and Closes the Add Maintenance Record form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -57,8 +57,8 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/24
         /// 
-        /// CSaves Changes made to the Add Maintenance Record form.
-        /// Standaridized method.
+        /// Saves Changes made to the Add Maintenance Record form.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

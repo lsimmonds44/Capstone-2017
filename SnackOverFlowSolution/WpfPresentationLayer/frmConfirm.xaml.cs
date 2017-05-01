@@ -26,8 +26,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized Commments.
-    /// Standaridized Methods.
+    /// Standardized Comments.
+    /// Standardized Methods.
     /// </summary>
     public partial class frmConfirm : Window
     {
@@ -39,7 +39,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Confirm Form.
-        /// Standaridized methods. 
+        /// Standardized methods. 
         /// </summary>
         /// <param name="prodLotManager"></param>
         /// <param name="prodLot"></param>
@@ -55,7 +55,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Confirm ok to Delete product.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,7 +81,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Confirm Cancel.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

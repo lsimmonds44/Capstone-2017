@@ -110,7 +110,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -149,7 +149,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -170,7 +170,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/4/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -221,7 +221,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/4/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -267,7 +267,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/4/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -286,7 +286,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/4/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -330,7 +330,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/4/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -459,7 +459,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Create New User form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -473,7 +473,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Charity Tab and returns a List of Charities 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -494,7 +494,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Charity View form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -513,7 +513,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the ability to Add Charity
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -553,7 +553,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Employee Tab with a list of Employees.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -574,7 +574,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the ability to Add an Employee.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -590,7 +590,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Order tab.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -603,7 +603,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Employee View form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -621,7 +621,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Product Lot tab and a lists of Product Lot.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -659,7 +659,7 @@ namespace WpfPresentationLayer
         /// 
         /// Invokes the ability to add a new Product Lot. 
         /// Invokes the Add Inspection form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -704,7 +704,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -764,7 +764,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Password KeyDown.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -783,7 +783,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -837,7 +837,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the List View of Open Orders from Product Order.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -868,7 +868,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -898,7 +898,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Add Product form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -934,7 +934,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -960,7 +960,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1004,7 +1004,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Manage Stock form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1024,7 +1024,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1060,7 +1060,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1084,7 +1084,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1104,7 +1104,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Change Password form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1122,7 +1122,7 @@ namespace WpfPresentationLayer
         /// 
         /// Invokes the Add Edit Vehicle form
         /// Invokes the ability to edit a _vehicle from a list of vehicles.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1188,7 +1188,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Reset Password form and populates a User list.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1221,7 +1221,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Supplier Tab and populates a Supplier Application Status List.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1285,7 +1285,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1299,7 +1299,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Request Username form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1317,7 +1317,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Charity Approval form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1341,7 +1341,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1437,7 +1437,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1471,7 +1471,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1539,7 +1539,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1563,7 +1563,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         private void RefreshSupplierCatalog()
         {
@@ -1647,7 +1647,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Add Maintenance Record form to create a new maintenance record.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1682,7 +1682,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1769,7 +1769,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the View Vehicle form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1793,7 +1793,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1862,7 +1862,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1923,7 +1923,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1971,7 +1971,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2025,7 +2025,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2080,7 +2080,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2187,7 +2187,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2209,7 +2209,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2225,7 +2225,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Menu Quit.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2241,7 +2241,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Menu Preferences.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2256,7 +2256,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the Deliveries Tab.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2293,7 +2293,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes the list View of Deliveries and ability to Add Edit a Delivery.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2324,7 +2324,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2369,7 +2369,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2425,7 +2425,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Invokes Add Warehouse form to create a new warehouse.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2446,7 +2446,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2509,7 +2509,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2535,7 +2535,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/17
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

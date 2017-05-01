@@ -25,7 +25,7 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized methods and Naming conventions.
+    /// Standardized methods and Naming conventions.
     /// </summary>
     public partial class frmAddSupplierInventory : Window
     {

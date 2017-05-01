@@ -29,7 +29,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Product Category Form.
-        /// Standaridized methods. 
+        /// Standardized methods. 
         /// </summary>
         public frmProductCategory()
         {
@@ -41,7 +41,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Save new Product Category.
-        /// Standaridized methods. 
+        /// Standardized methods. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -97,7 +97,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancels/Closes Product Category Form.
-        /// Standaridized methods. 
+        /// Standardized methods. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

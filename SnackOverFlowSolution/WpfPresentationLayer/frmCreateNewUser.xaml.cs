@@ -27,7 +27,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Create New User Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         public frmCreateNewUser()
         {
@@ -165,7 +165,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancel Create New User Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

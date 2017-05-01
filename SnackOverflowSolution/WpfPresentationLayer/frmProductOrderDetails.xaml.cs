@@ -23,12 +23,14 @@ namespace WpfPresentationLayer
     {   
         /// <summary>
         /// Victor Algarin
-        /// 
-        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
-        /// Updated: 2017/04/30
+        /// Created: 2017/03/23 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
         /// 
         /// Initialize Product Order Details Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmProductOrderDetails()
         {
@@ -38,12 +40,14 @@ namespace WpfPresentationLayer
         int orderID;
         /// <summary>
         /// Victor Algarin
-        /// 
-        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
-        /// Updated: 2017/04/30
+        /// Created: 2017/03/23 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
         /// 
         /// Initialize Product Order Details Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="orderID"></param>
         public frmProductOrderDetails(int orderID)
@@ -58,13 +62,15 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Victor Algarin
-        /// 
-        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
-        /// Updated: 2017/04/30
+        /// Created: 2017/03/23 
+        /// </summary>
+        /// <summary>
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
         /// 
         /// 
         /// Displays Product Order Details.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public void displayDetails()
         {
@@ -93,13 +99,15 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Victor Algarin
-        /// 
-        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
-        /// Updated: 2017/04/30
+        /// Created: 2017/03/23 
+        /// </summary>
+        /// <summary> 
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
         /// 
         /// 
         /// Save Packaging Changes.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -111,13 +119,15 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Victor Algarin
-        /// 
-        /// Alissa don't remove my comments and putting YOUR name from code that you did not work on!!!
+        /// Created: 2017/03/23 
+        /// </summary>
+        /// <summary> 
+        /// Alissa Duffy
         /// Updated: 2017/04/30
         /// 
         /// 
         /// Closes Add Product Lot Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

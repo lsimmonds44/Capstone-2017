@@ -23,8 +23,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized Commments.
-    /// Standaridized Methods.
+    /// Standardized Comments.
+    /// Standardized Methods.
     /// </summary>
     public partial class frmCheckSupplierStatus : Window
     {
@@ -38,7 +38,7 @@ namespace WpfPresentationLayer
         /// Bobby Thorne
         /// Created: 2017/03/10
         /// 
-        /// Initailized the checkSupplierStatus window
+        /// Initialized the checkSupplierStatus window
         /// More work is needed to add an ability to apply after
         /// this window if they choose to
         /// </summary>
@@ -62,7 +62,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Check Supplier Status.
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         public frmCheckSupplierStatus()
         {
@@ -75,7 +75,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// When a user can apply for a supplier.
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,7 +92,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancel/Closes Check Supplier Status Window.
-        /// Standaridized Methods.
+        /// Standardized Methods.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

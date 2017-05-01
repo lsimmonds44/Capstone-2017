@@ -28,7 +28,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Vehicle Checkout Window.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         public frmVehicleCheckOut()
         {
@@ -40,7 +40,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Vehicle Checkout Window and populates the vehicle view.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="vehicle"></param>
         public frmVehicleCheckOut(Vehicle vehicle)
@@ -53,7 +53,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Populate the View of a vehicle.
-        /// Standaridized method.  
+        /// Standardized method.  
         /// </summary>
         /// <param name="vehicle"></param>
         private void populateView(Vehicle vehicle)
@@ -94,7 +94,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Closes the Vehicle Checkout Window.
-        /// Standaridized method.  
+        /// Standardized method.  
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

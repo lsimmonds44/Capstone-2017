@@ -23,8 +23,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized Commments.
-    /// Standaridized Methods.
+    /// Standardized Comments.
+    /// Standardized Methods.
     /// </summary>
     public partial class frmCreateCommercialCustomer : Window
     {
@@ -38,7 +38,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Create Commercial Customer Form.
-        /// Standaridized methods. 
+        /// Standardized methods. 
         /// </summary>
         /// <param name="employeeId"></param>
         public frmCreateCommercialCustomer(int employeeId)

@@ -31,7 +31,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Employee Views Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         public frmEmployeeViews()
         {
@@ -43,7 +43,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Employee Views Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         /// <param name="employeeManager"></param>
         public frmEmployeeViews(LogicLayer.IEmployeeManager employeeManager)
@@ -58,7 +58,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Employee Views Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         /// <param name="employeeManager"></param>
         /// <param name="employee"></param>
@@ -74,7 +74,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Set Editable.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         internal void SetEditable()
         {
@@ -104,7 +104,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Post Employee Views/
-        /// Standaridized Methods.  
+        /// Standardized Methods.  
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

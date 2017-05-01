@@ -32,7 +32,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Edit Delivery form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="delivery"></param>
         /// <param name="deliveryManager"></param>
@@ -52,7 +52,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Loads Add Edit Delivery Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,7 +83,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Closes the Add Edit Delivery Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,7 +98,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Saves changes made to Add Edit Delivery form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

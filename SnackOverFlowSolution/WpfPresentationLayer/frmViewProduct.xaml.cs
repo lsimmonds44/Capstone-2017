@@ -35,7 +35,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize View Product Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmViewProduct()
         {
@@ -54,7 +54,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Displays Product Details.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public void displayProductDetails()
         {
@@ -79,7 +79,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Cancels and Closes the View Product details.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,7 +92,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Invokes the View Product Details Display.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

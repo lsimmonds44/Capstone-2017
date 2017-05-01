@@ -31,7 +31,7 @@ namespace WpfPresentationLayer
        /// Updated: 2017/04/21
        /// 
        /// Initialize the Supplier Invoice Details Window.
-       /// Standaridized method.  
+       /// Standardized method.  
        /// </summary>
        /// </summary>
        /// <param name="supplierInvoice"></param>
@@ -74,7 +74,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Loads the Supplier Invoice Details Window.
-        /// Standaridized method.  
+        /// Standardized method.  
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

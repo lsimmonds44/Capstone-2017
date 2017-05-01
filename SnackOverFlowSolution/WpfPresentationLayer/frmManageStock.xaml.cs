@@ -26,7 +26,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Manage Stock Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="productLotManager"></param>
         /// <param name="productManager"></param>

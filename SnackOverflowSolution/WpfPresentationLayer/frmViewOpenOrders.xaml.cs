@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Open Orders Window and Open Orders List View.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmViewOrdersByStatus()
         {

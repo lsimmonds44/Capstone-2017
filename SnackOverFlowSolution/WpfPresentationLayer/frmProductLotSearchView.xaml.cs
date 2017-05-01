@@ -26,7 +26,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Product Lot Search View Window.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="criteria"></param>
         public frmProductLotSearchView(ProductLotSearchCriteria criteria)
@@ -41,7 +41,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Invokes search of Criteria and Closes Window.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

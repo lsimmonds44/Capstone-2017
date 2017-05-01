@@ -29,7 +29,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Reset Password Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="_userManager"></param>
         /// <param name="_users"></param>
@@ -45,7 +45,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Updates Password.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,7 +79,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Generates Password.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

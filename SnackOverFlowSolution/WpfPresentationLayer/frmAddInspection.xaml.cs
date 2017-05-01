@@ -38,7 +38,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Inspection form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="productLot"></param>
         /// <param name="gradeManager"></param>
@@ -187,7 +187,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Validates User Inputs.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         private void validateInputs()
         {

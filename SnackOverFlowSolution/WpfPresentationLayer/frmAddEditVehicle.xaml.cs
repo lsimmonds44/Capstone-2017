@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Edit Vehicle form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         public frmAddEditVehicle()
         {
@@ -45,7 +45,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize the Add Edit Vehicle form Update.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="vehicle"></param>
         public frmAddEditVehicle(Vehicle vehicle)

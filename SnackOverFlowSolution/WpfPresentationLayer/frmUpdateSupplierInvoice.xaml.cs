@@ -36,7 +36,7 @@ namespace WpfPresentationLayer
         /// Alissa Duffy
         /// Updated: 2017/04/21
         /// 
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="invoice">The invoice to edit</param>
         public frmUpdateSupplierInvoice(SupplierInvoice invoice)

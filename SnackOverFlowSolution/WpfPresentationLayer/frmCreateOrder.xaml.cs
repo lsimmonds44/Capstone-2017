@@ -338,7 +338,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancel Create Order Window.
-        /// Standaridized Methods. 
+        /// Standardized Methods. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

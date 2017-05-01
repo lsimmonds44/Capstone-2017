@@ -32,8 +32,13 @@ namespace WpfPresentationLayer
         /// 
         /// Victor Algarin
         /// Created 2017/02/28  
-        /// 
-        /// Standaridized method.
+        /// </summary>
+        ///
+        /// <summary> 
+        /// Alissa Duffy
+        /// Updated: 2017/04/24
+        ///
+        /// Standardized method.
         /// Initialize the View Vehicle Window.
         /// </summary>
         /// <param name="_vehicleId"></param>
@@ -50,8 +55,12 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Victor Algarin
         /// Created 2017/02/28 
-        /// 
-        /// Standaridized method.
+        /// </summary>
+        /// <summary> 
+        /// Alissa Duffy
+        ///
+        /// Updated: 2017/04/24
+        /// Standardized method.
         /// This method sends the _vehicleId to the _vehicle manager class
         /// then sets the retreived data as text in the corresponding textboxes on the form  
         /// </summary>
@@ -80,7 +89,11 @@ namespace WpfPresentationLayer
         /// <summary>
         /// Victor Algarin
         /// Created 2017/02/28 
-        /// 
+        /// </summary>
+        /// <summary> 
+        /// Alissa Duffy
+        ///
+        /// Updated: 2017/04/24
         /// Close Method that closes the View Vehicle Window.
         /// Standaridized method.
         /// </summary>

@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize the Split Product Lot Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="selectedItem"></param>
         public frmSplitProductLot(ProductLot selectedItem)
@@ -46,7 +46,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Saves the changes to Split Product Lot.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -60,7 +60,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Cancels Changes made to Split Product Lot.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -74,7 +74,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Changes New Text.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -104,7 +104,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Inputs Text Preview for New text.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -118,7 +118,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Changes Old Text.
-        /// Standaridized method. 
+        /// Standardized method. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -146,7 +146,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Inputs Text Preview for Old text.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

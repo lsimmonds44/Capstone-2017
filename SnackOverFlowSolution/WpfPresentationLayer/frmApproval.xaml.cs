@@ -39,7 +39,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Approval form Window for a supplier manager.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// <param name="supplierMrg"></param>
         /// <param name="supplier"></param>
@@ -59,7 +59,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Initialize Approval form Window for a customer manager.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// </summary>
         /// <param name="customerMrg"></param>
@@ -78,25 +78,7 @@ namespace WpfPresentationLayer
 
         private void btnApprove_Click(object sender, RoutedEventArgs e)
         {
-            //if (_charityMgr != null)
-            //{
-            //    try
-            //    {
-            //        if (_charityMgr.ApproveCharity(_charity))
-            //        {
-            //            MessageBox.Show("Charity approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
-            //        }
-            //    }
-            //    catch (Exception)
-            //    {
-            //        MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
-
+ 
             if (_supplierMgr != null)
             {
                 try
@@ -142,35 +124,13 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Deny Approval.
-        /// Standaridized methods.
+        /// Standardized methods.
         /// </summary>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
-            //if (_charity != null)
-            //{
-            //    try
-            //    {
-            //        if (_charityMgr.DenyCharity(_charity))
-            //        {
-            //            MessageBox.Show("Charity Denied.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Charity record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("There was an error approving this record. Please try again later" + Environment.NewLine + ex, "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-
-            //    MessageBox.Show("Charity not approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            //    this.Close();
-            //}
-
             if (_supplier != null)
             {
                 try

@@ -32,7 +32,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Select Supplier Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="suppliers"></param>
         public frmSelectSupplier(List<Supplier> suppliers)

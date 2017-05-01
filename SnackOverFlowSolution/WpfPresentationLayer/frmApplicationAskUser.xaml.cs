@@ -23,8 +23,8 @@ namespace WpfPresentationLayer
     /// Alissa Duffy
     /// Updated: 2017/04/24
     /// 
-    /// Standaridized Comments.
-    /// Standaridized methods.
+    /// Standardized Comments.
+    /// Standardized methods.
     /// </summary>
     
     public partial class frmApplicationAskUser : Window
@@ -154,7 +154,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/24
         /// 
         /// Cancel/Close Application Ask User Form.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

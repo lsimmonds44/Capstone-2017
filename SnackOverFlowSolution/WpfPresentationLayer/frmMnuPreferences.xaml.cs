@@ -31,7 +31,7 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/21
         /// 
         /// Initialize Preferences Menu Window.
-        /// Standaridized method.
+        /// Standardized method.
         /// </summary>
         /// <param name="preferenceManager"></param>
         public frmMnuPreferences(IPreferenceManager preferenceManager)
