@@ -34,5 +34,14 @@ namespace LogicLayer
         /// <returns></returns>
         List<CommercialInvoiceLine> RetrieveCommercialInvoiceLinesByInvoiceId(int invoiceId);
 
+        /// <summary>
+        /// William Flood
+        /// 2017/04/20
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="taxRate"></param>
+        /// <returns></returns>
+        int CreateCustomerInvoice(int orderId, decimal taxRate);
+
     }
 }

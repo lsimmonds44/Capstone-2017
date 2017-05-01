@@ -76,5 +76,18 @@ namespace LogicLayer
                 throw new ApplicationException("There was an unknown error.", ex);
             }
         }
+
+
+        public int CreateCustomerInvoice(int orderId, decimal taxRate)
+        {
+            try
+            {
+                return CommercialInvoiceAccessor.CreateCustomerInvoice(orderId, taxRate);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occured", ex);
+            }
+        }
     }
 }

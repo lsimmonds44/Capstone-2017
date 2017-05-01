@@ -49,7 +49,8 @@ namespace DataAccessLayer
                             Total = reader.GetDecimal(5),
                             AmountPaid = reader.GetDecimal(6),
                             Approved = reader.GetBoolean(7),
-                            Active = reader.GetBoolean(8)
+                            Active = reader.GetBoolean(8),
+                            OrderId = reader.GetInt32(9)
                         };
                         invoices.Add(commercialInvoice);
                     }
@@ -108,7 +109,8 @@ namespace DataAccessLayer
                             Total = reader.GetDecimal(5),
                             AmountPaid = reader.GetDecimal(6),
                             Approved = reader.GetBoolean(7),
-                            Active = reader.GetBoolean(8)
+                            Active = reader.GetBoolean(8),
+                            OrderId = reader.GetInt32(9)
                         };
                     }
                 }
@@ -186,6 +188,43 @@ namespace DataAccessLayer
 
             return lines;
         }
+
+
+        /// <summary>
+        /// William Flood
+        /// Created 2017/04/30
+        /// 
+        /// <param name="supplierInvoice">The supplierInvoice to create.</param>
+        /// <returns>The newly created id.</returns>
+        public static int CreateCustomerInvoice(int orderID, decimal taxRate)
+        {
+            int supplierInvoiceID = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_commercial_invoice";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@TAX_RATE", taxRate);
+            cmd.Parameters.AddWithValue("@ORDER_ID", orderID);
+
+            try
+            {
+                conn.Open();
+                int.TryParse(cmd.ExecuteScalar().ToString(), out supplierInvoiceID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return supplierInvoiceID;
+        }
+
         
     }
 }

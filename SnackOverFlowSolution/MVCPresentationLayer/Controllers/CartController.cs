@@ -25,20 +25,23 @@ namespace MVCPresentationLayer.Controllers
         private readonly ICustomerOrderManager _customerOrderManager;
         private readonly IUserManager _userManager;
         private readonly IUserCartManager _userCartManager;
+        private readonly ICommercialInvoiceManager _invoiceManager;
 
-        public CartController(IProductManager repo, IUserManager _userManager, IUserCartManager _userCartManager)
+        public CartController(IProductManager repo, IUserManager _userManager, IUserCartManager _userCartManager, ICommercialInvoiceManager _invoiceManager)
         {
             _productManager = repo;
             this._userCartManager = _userCartManager;
             this._userManager = _userManager;
+            this._invoiceManager = _invoiceManager;
         }
 
-        public CartController(IProductManager repo, ICustomerOrderManager proc, IUserManager _userManager, IUserCartManager _userCartManager)
+        public CartController(IProductManager repo, ICustomerOrderManager proc, IUserManager _userManager, IUserCartManager _userCartManager, ICommercialInvoiceManager _invoiceManager)
         {
             _productManager = repo;
             this._customerOrderManager = proc;
             this._userCartManager = _userCartManager;
             this._userManager = _userManager;
+            this._invoiceManager = _invoiceManager;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -175,6 +178,8 @@ namespace MVCPresentationLayer.Controllers
             }
             else
             {
+                decimal taxRate = Decimal.Parse(System.Configuration.ConfigurationManager.AppSettings["TaxRate"]);
+                _invoiceManager.CreateCustomerInvoice(orderID, taxRate);
                 return View("Completed");
             }
 

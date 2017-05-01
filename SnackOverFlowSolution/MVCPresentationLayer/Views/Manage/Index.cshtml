@@ -86,5 +86,12 @@
             <dd>@Html.ActionLink("Edit Supplier Details", "Edit", "SupplierWithAgreements", new { username = User.Identity.Name}, null)
         </dd>
         }
+        @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+        {
+            <dt>Commercial Account:</dt>
+            <dd>
+                @Html.ActionLink("Invoices", "Index", "CommercialInvoice", null, null)
+        </dd>
+        }
     </dl>
 </div>

@@ -25,5 +25,8 @@ namespace DataObjects
         public decimal AmountPaid { get; set; }
         public bool Approved { get; set; }
         public bool Active { get; set; }
+        public int OrderId { get; set; }
+        public bool Paid { get; set; }
+        
     }
 }

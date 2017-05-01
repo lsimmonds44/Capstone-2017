@@ -54,7 +54,7 @@ namespace MVCPresentationLayer.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag["ErrorMessage"] = "Internal error: " + ex.Message;
+                ViewBag.ErrorMessage = "Internal error: " + ex.Message;
             }
             return View(invoiceList);
         }
