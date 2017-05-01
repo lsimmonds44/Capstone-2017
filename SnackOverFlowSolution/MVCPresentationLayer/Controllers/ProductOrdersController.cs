@@ -52,8 +52,7 @@ namespace MVCPresentationLayer.Controllers
         /// GET: ProductOrders/Details/5
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>View(Order)</returns>
- 
+        /// <returns>View(Order)</returns> 
         public ActionResult Details(int? id)
         {
 
@@ -78,8 +77,7 @@ namespace MVCPresentationLayer.Controllers
         /// GET: ProductOrders/Create
         /// 
         /// </summary>
-        /// <returns></returns>
- 
+        /// <returns></returns> 
         public ActionResult Create()
         {
             return View();
@@ -95,7 +93,6 @@ namespace MVCPresentationLayer.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-
         // POST: ProductOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -129,7 +126,6 @@ namespace MVCPresentationLayer.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-
         // GET: ProductOrders/Edit/5
         public ActionResult Edit(int? id)
         {            
@@ -145,21 +141,39 @@ namespace MVCPresentationLayer.Controllers
             return View(order);
         }
 
-        //// POST: ProductOrders/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "DummyOrderId,CustomerId,EmployeeId,OrderTypeId,AddressType,DeliveryTypeId,Amount,OrderDate,DateExpected,Discount,OrderStatusId,UserAddressId,HasArrived")] DummyOrder dummyOrder)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(dummyOrder).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(dummyOrder);
-        //}
+
+        /// <summary>
+        /// Victor Algarin
+        /// 
+        /// Created:
+        /// 2017/05/01
+        /// 
+        /// POST: ProductOrders/Edit
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        // POST: ProductOrders/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProductOrderId,CustomerId,EmployeeId,OrderTypeId,AddressType,DeliveryTypeId,Amount,OrderDate,DateExpected,Discount,OrderStatusId,UserAddressId,HasArrived")] ProductOrder newOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                var oldOrder = ordMgr.RetrieveProductOrdersByStatus("Open").Find(o => o.OrderId == (int)newOrder.OrderId);
+                if (ordMgr.UpdateProductOrder(oldOrder, newOrder) == true)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }                
+            }
+            return View(newOrder);
+        }
+
 
         //// GET: ProductOrders/Delete/5
         //public ActionResult Delete(int? id)
