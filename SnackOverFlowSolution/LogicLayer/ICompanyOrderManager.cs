@@ -24,5 +24,7 @@ namespace LogicLayer
         List<CompanyOrderWithLines> RetrieveCompanyOrdersWithLinesBySupplierId(int supplierId);
 
         CompanyOrderWithLines RetrieveCompanyOrderWithLinesById(int orderId);
+
+        bool UpdateCompanyOrderHasArrived(int companyOrderId, bool oldHasArrived, bool newHasArrived);
     }
 }

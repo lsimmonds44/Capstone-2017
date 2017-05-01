@@ -135,9 +135,9 @@ namespace WpfPresentationLayer
         {
             try
             {
-                if (_orderManager.UpdateProductOrderStatus(_orderId, "Ready For Shipment"))
+                if (_orderManager.UpdateProductOrderStatus(_orderId, "Ready For Assignment"))
                 {
-                    MessageBox.Show("The order status has successfully been marked as ready for shipment");
+                    MessageBox.Show("The order status has successfully been marked as ready for Assignment");
                 }
                 else
                 {

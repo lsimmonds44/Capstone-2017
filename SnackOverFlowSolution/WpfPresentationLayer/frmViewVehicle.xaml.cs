@@ -29,8 +29,9 @@ namespace WpfPresentationLayer
 
         private int _vehicleId;
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// 
+        /// Victor Algarin
+        /// Created 2017/02/28  
         /// 
         /// Standaridized method.
         /// Initialize the View Vehicle Window.
@@ -47,8 +48,8 @@ namespace WpfPresentationLayer
         IVehicleManager _vehMgr = new VehicleManager();
         
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// Created 2017/02/28 
         /// 
         /// Standaridized method.
         /// This method sends the _vehicleId to the _vehicle manager class
@@ -77,8 +78,8 @@ namespace WpfPresentationLayer
             }
         }
         /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
+        /// Victor Algarin
+        /// Created 2017/02/28 
         /// 
         /// Close Method that closes the View Vehicle Window.
         /// Standaridized method.

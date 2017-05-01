@@ -42,6 +42,7 @@ namespace WpfPresentationLayer
         private IDeliveryManager _deliveryManager;
         private IWarehouseManager _warehouseManager = new WarehouseManager();
         private IAgreementManager _agreementManager = new AgreementManager();
+        private IPickupManager _pickupManager = new PickupManager();
         private List<Delivery> _deliveries;
         private List<Warehouse> _warehouseList;
         private ProductLotSearchCriteria _productLotSearchCriteria;
@@ -72,6 +73,24 @@ namespace WpfPresentationLayer
         public MainWindow()
         {
             InitializeComponent();
+
+            var uriIcon = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/Flogo2.png",
+                 UriKind.RelativeOrAbsolute);
+            var uriMain = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/wpfMainImage.png",
+                 UriKind.RelativeOrAbsolute);
+
+            //StatusNotification.Content = uri.ToString();
+
+            this.Icon = BitmapFrame.Create(uriIcon);
+
+            BitmapImage mainImage = new BitmapImage();
+            mainImage.BeginInit();
+            mainImage.UriSource = uriMain;
+            mainImage.EndInit();
+
+            MainImage.Source = mainImage;
+            MainImage.Visibility = Visibility.Visible;
+
             _userManager = new UserManager();
             _charityManager = new CharityManager();
             _employeeManager = new EmployeeManager();
@@ -327,6 +346,7 @@ namespace WpfPresentationLayer
                         lblUsername.Visibility = Visibility.Collapsed;
                         txtUsername.Visibility = Visibility.Collapsed;
                         pwbPassword.Visibility = Visibility.Collapsed;
+                        MainImage.Visibility = Visibility.Collapsed;
                         mnuRequestUsername.Visibility = Visibility.Collapsed;
                         tabCommercialCustomer.Focus();
                         pwbPassword.Password = "";
@@ -414,6 +434,7 @@ namespace WpfPresentationLayer
                 mnuRequestUsername.Visibility = Visibility.Visible;
                 mnuChangePassword.Visibility = Visibility.Collapsed;
                 btnResetPassword.Visibility = Visibility.Collapsed;
+                MainImage.Visibility = Visibility.Visible;
             }
 
         }
@@ -1424,7 +1445,7 @@ namespace WpfPresentationLayer
         {
             if (lvOpenOrders.SelectedItem != null)
             {
-                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Shipment"))
+                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId.Equals("Ready For Assignment"))
                 {
                     frmCreateDeliveryForOrder deliveryWindow = new frmCreateDeliveryForOrder(((ProductOrder)lvOpenOrders.SelectedItem).OrderId);
                     deliveryWindow.ShowDialog();
@@ -2647,6 +2668,64 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/27/2017
+        /// 
+        /// Invokes the list of product pickups from those received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabPickups_Selected(object sender, RoutedEventArgs e)
+        {
+            List<PickupLine> _pickupsList = null;
+
+            try
+            {
+                _pickupsList = _pickupManager.RetrievePickupLinesReceived();
+                if(_pickupsList != null)
+                {
+                    dgPickups.ItemsSource = _pickupsList;
+                }
+                else
+                {
+                    MessageBox.Show("No pickups have been received at this time.");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/28/2017
+        /// 
+        /// Create a product lot from pickups received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateLotFromPickup_Click(object sender, RoutedEventArgs e)
+        {
+            if(dgPickups.SelectedIndex >= 0)
+            {
+                var frmCreateLot = new frmAddProductLot(_pickupManager, (PickupLine)dgPickups.SelectedItem);
+                frmCreateLot.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a pickup record to create a product lot.");
             }
         }
     } // end of class

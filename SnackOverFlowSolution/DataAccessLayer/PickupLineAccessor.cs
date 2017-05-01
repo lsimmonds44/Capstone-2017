@@ -60,7 +60,7 @@ namespace DataAccessLayer
                         {
                             PickupLineId = reader.GetInt32(0),
                             PickupId = reader.GetInt32(1),
-                            ProductLotId = reader.GetInt32(2),
+                            ProductId = reader.GetInt32(2),
                             Quantity = reader.GetInt32(3),
                             PickupStatus = reader.GetBoolean(4)
                         });
@@ -110,11 +110,11 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@old_PICKUP_LINE_ID", oldPickupLine.PickupLineId);
             cmd.Parameters.AddWithValue("@old_PICKUP_ID", oldPickupLine.PickupId);
-            cmd.Parameters.AddWithValue("@old_PRODUCT_LOT_ID", oldPickupLine.ProductLotId);
+            cmd.Parameters.AddWithValue("@old_PRODUCT_ID", oldPickupLine.ProductId);
             cmd.Parameters.AddWithValue("@old_QUANTITY", oldPickupLine.Quantity);
             cmd.Parameters.AddWithValue("@old_PICK_UP_STATUS", oldPickupLine.PickupStatus);
             cmd.Parameters.AddWithValue("@new_PICKUP_ID", newPickupLine.PickupId);
-            cmd.Parameters.AddWithValue("@new_PRODUCT_LOT_ID", newPickupLine.ProductLotId);
+            cmd.Parameters.AddWithValue("@new_PRODUCT_ID", newPickupLine.ProductId);
             cmd.Parameters.AddWithValue("@new_QUANTITY", newPickupLine.Quantity);
             cmd.Parameters.AddWithValue("@new_PICK_UP_STATUS", newPickupLine.PickupStatus);
 
@@ -174,7 +174,7 @@ namespace DataAccessLayer
                     {
                         PickupLineId = reader.GetInt32(0),
                         PickupId = reader.GetInt32(1),
-                        ProductLotId = reader.GetInt32(2),
+                        ProductId = reader.GetInt32(2),
                         Quantity = reader.GetInt32(3),
                         PickupStatus = reader.GetBoolean(4)
                     };
@@ -192,5 +192,87 @@ namespace DataAccessLayer
             return line;
         }
 
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/27/2017
+        /// 
+        /// Retrieves a list of pickups picked up by drivers
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public static List<PickupLine> RetrievePickupLinesReceived(bool? status)
+        {
+            var lines = new List<PickupLine>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_pickup_line_pickups_receieved";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PICK_UP_STATUS", status);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        lines.Add(new PickupLine()
+                        {
+                            PickupLineId = reader.GetInt32(0),
+                            PickupId = reader.GetInt32(1),
+                            ProductId = reader.GetInt32(2),
+                            Quantity = reader.GetInt32(3),
+                            PickupStatus = reader.GetBoolean(4)
+                        });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return lines;
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/29/2017
+        /// 
+        /// Removes PickupLine from database
+        /// </summary>
+        /// <param name="pickupLine"></param>
+        /// <returns></returns>
+        public static int DeletePickupLine(PickupLine pickupLine)
+        {
+            int result = 0;
+            
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_delete_pickup_line";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PICKUP_LINE_ID", pickupLine.PickupLineId);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+        }
     }
 }

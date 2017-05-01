@@ -34,6 +34,14 @@ namespace DataAccessLayer
         /// 
         /// Standardized method.
         /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Updated:
+        /// 2017/04/30
+        /// 
+        /// Added Company order id to database table so all accessors were updated to use the new field
+        /// </remarks>
         /// 
         /// <param name="driverId"></param>
         /// <returns></returns>
@@ -63,7 +71,8 @@ namespace DataAccessLayer
                             SupplierId = reader.GetInt32(1),
                             WarehouseId = reader.GetInt32(2),
                             DriverId = reader.GetInt32(3),
-                            EmployeeId = reader.GetInt32(4)
+                            EmployeeId = reader.GetInt32(4),
+                            CompanyOrderId = reader.GetInt32(5)
                         });
                     }
                 }
@@ -78,6 +87,64 @@ namespace DataAccessLayer
             }
 
             return pickups;
+        }
+
+        /// <summary>
+        /// Ryan Spurgetis
+        /// 4/29/2017
+        /// 
+        /// Retrieves pickup based on the pickupId field
+        /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Updated:
+        /// 2017/04/30
+        /// 
+        /// Added Company order id to database table so had to update all accessors
+        /// </remarks>
+        /// <param name="pickupId"></param>
+        /// <returns></returns>
+        public static Pickup RetrievePickupById(int? pickupId)
+        {
+            Pickup pickup = null;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_pickup";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PICKUP_ID", pickupId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    pickup = new Pickup()
+                    {
+                        PickupId = reader.GetInt32(0),
+                        SupplierId = reader.GetInt32(1),
+                        WarehouseId = reader.GetInt32(2),
+                        DriverId = reader.GetInt32(3),
+                        EmployeeId = reader.GetInt32(4),
+                        CompanyOrderId = reader.GetInt32(5)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return pickup;
         }
     }
 }

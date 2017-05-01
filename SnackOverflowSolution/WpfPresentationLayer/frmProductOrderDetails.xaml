@@ -6,9 +6,8 @@
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>
     <!--
-        Updated: 2017/04/21
-        By: Alissa Duffy 
-        Summary: Comments and Standardization
+        Updated: 2017/04/30
+        By: Victor Algarin
     -->
     <!--Product Order Details Grid-->
     <Grid>

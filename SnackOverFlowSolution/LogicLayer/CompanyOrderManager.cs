@@ -152,5 +152,37 @@ namespace LogicLayer
                 throw new ApplicationException("There was an unknown error.", ex);
             }
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/04/30
+        /// 
+        /// Updates the has arrived bit field in the company order table in the DB
+        /// </summary>
+        /// <param name="companyOrderId">The company order to update</param>
+        /// <param name="oldHasArrived">The current value of the has arrived bit field</param>
+        /// <param name="newHasArrived">The new value to set the has arrived bit field to</param>
+        /// <returns></returns>
+        public bool UpdateCompanyOrderHasArrived(int companyOrderId, bool oldHasArrived, bool newHasArrived)
+        {
+            bool result = false;
+
+            try
+            {
+                result = 0 < CompanyOrderAccessor.UpdateCompanyOrderHasArrived(companyOrderId, oldHasArrived, newHasArrived);
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new ApplicationException("There was a database error.", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+
+            return result;
+        }
     }
 }

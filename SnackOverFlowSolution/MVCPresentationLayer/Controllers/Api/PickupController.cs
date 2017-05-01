@@ -12,6 +12,7 @@ namespace MVCPresentationLayer.Controllers.Api
     public class PickupController : ApiController
     {
         IPickupManager _pickupManager = new PickupManager();
+        ICompanyOrderManager _companyOrderManager = new CompanyOrderManager();
 
         /// <summary>
         /// Robert Forbes
@@ -41,17 +42,29 @@ namespace MVCPresentationLayer.Controllers.Api
         [System.Web.Http.HttpGet]
         public bool MarkPickupLineAsPickedup(int? pickupLineId)
         {
+            var result = false;
             try
             {
                 var oldLine = _pickupManager.RetrievePickupLineById(pickupLineId);
                 var newLine = _pickupManager.RetrievePickupLineById(pickupLineId);
                 newLine.PickupStatus = true;
-                return _pickupManager.UpdatePickupLine(oldLine, newLine);
+                result =  _pickupManager.UpdatePickupLine(oldLine, newLine);
+
+                //Checking to see if there are any pickup lines that haven't been picked up
+                //Before updating the company order to show that the order has been fully picked up
+                var pickupLines = _pickupManager.RetrievePickupLinesByPickupId(oldLine.PickupId);
+                if(pickupLines.Count(l => l.PickupStatus == false) == 0){
+                    var pickup = _pickupManager.RetrievePickupById(oldLine.PickupId);
+                    var companyOrder = _companyOrderManager.RetrieveCompanyOrderWithLinesById((int)pickup.CompanyOrderId);
+                    _companyOrderManager.UpdateCompanyOrderHasArrived(companyOrder.CompanyOrderID, companyOrder.HasArrived, true);
+                }
             }
             catch
             {
-                return false;
+                result = false;
             }
+
+            return result;
         }
 
     }

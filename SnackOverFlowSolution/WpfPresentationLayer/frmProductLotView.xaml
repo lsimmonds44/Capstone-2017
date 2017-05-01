@@ -85,6 +85,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Name="btnPost" Grid.Column="2" Visibility="Collapsed" Grid.Row="5" Click="btnPost_Click">Add</Button>
+        <Button Name="btnCreateFromPickup" Grid.Column="2" Visibility="Collapsed" Grid.Row="5" Click="btnCreateFromPickup_Click" >Create Lot</Button>
         <Button Name="btnClose" Content="Cancel" Grid.Column="3" Visibility="Visible" Grid.Row="5" Click="btnClose_Click" />
         <!--End Product Lot View Controls-->
     </Grid>
