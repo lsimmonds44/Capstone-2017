@@ -961,15 +961,19 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Packages Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabPackages_Selected(object sender, RoutedEventArgs e)
-        {
-            RefreshPackageList();
-            dgPackages.ItemsSource = _packageList;
-            dgPackages.Items.Refresh();
-        }
+        //private void tabPackages_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    RefreshPackageList();
+        //    dgPackages.ItemsSource = _packageList;
+        //    dgPackages.Items.Refresh();
+        //}
 
         /// <summary>
         /// Robert Forbes
@@ -1794,28 +1798,32 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabSupplierInvoice_Selected(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoices();
-                dgSupplierInvoices.ItemsSource = _supplierInvoiceList;
-            }
-            catch (Exception ex)
-            {
-                if (null != ex.InnerException)
-                {
-                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
+        //private void tabSupplierInvoice_Selected(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoices();
+        //        dgSupplierInvoices.ItemsSource = _supplierInvoiceList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (null != ex.InnerException)
+        //        {
+        //            MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //}
 
         private void tabMyAccount_Selected(object sender, RoutedEventArgs e)
         {
@@ -1863,26 +1871,30 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <remarks>Last modified by Christian Lopez 2017/03/23</remarks>
-        private void dgSupplierInvoices_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (!(dgSupplierInvoices.SelectedIndex < 0))
-            {
-                var supplierInvoiceDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgSupplierInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager);
-                var result = supplierInvoiceDetail.ShowDialog();
-                if (result == true)
-                {
-                    tabSupplierInvoice_Selected(sender, e);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select an invoice to view.");
-            }
-        }
+        //private void dgSupplierInvoices_Mouse_Double_Click(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (!(dgSupplierInvoices.SelectedIndex < 0))
+        //    {
+        //        var supplierInvoiceDetail = new frmSupplierInvoiceDetails((SupplierInvoice)dgSupplierInvoices.SelectedItem, _supplierInvoiceManager, _supplierManager);
+        //        var result = supplierInvoiceDetail.ShowDialog();
+        //        if (result == true)
+        //        {
+        //            tabSupplierInvoice_Selected(sender, e);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Please select an invoice to view.");
+        //    }
+        //}
 
 
         /// <summary>
@@ -1890,6 +1902,10 @@ namespace WpfPresentationLayer
         /// 2017/03/22
         /// 
         /// Handles what happens if the datagrid in my account is double clicked. Launches the detail window.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1902,13 +1918,13 @@ namespace WpfPresentationLayer
                 var result = MyInvoicesDetail.ShowDialog();
                 if (result == true)
                 {
-                    tabSupplierInvoice_Selected(sender, e);
+                    //tabSupplierInvoice_Selected(sender, e);
                 }
             }
             else
             {
 
-                MessageBox.Show("Please select an invoice to view. " );
+                MessageBox.Show("Please select an invoice to view. ");
             }
         }
 
@@ -1924,38 +1940,42 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnApproveInvoice_Click(object sender, RoutedEventArgs e)
-        {
-            if (!(dgSupplierInvoices.SelectedIndex < 0))
-            {
-                try
-                {
-                    if (_supplierInvoiceManager.ApproveSupplierInvoice(((SupplierInvoice)dgSupplierInvoices.SelectedItem).SupplierInvoiceId))
-                    {
-                        tabSupplierInvoice_Selected(sender, e);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Unable to approve the invoice.");
-                    }
-                }
-                catch (Exception ex)
-                {
+        //private void btnApproveInvoice_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!(dgSupplierInvoices.SelectedIndex < 0))
+        //    {
+        //        try
+        //        {
+        //            if (_supplierInvoiceManager.ApproveSupplierInvoice(((SupplierInvoice)dgSupplierInvoices.SelectedItem).SupplierInvoiceId))
+        //            {
+        //                tabSupplierInvoice_Selected(sender, e);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Unable to approve the invoice.");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
 
-                    if (null != ex.InnerException)
-                    {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-        }
+        //            if (null != ex.InnerException)
+        //            {
+        //                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(ex.Message);
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Bobby Thorne
@@ -2370,56 +2390,60 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSubmitSupplierInvoice_Click(object sender, RoutedEventArgs e)
-        {
-            if (_supplierList == null)
-            {
-                try
-                {
-                    _supplierList = _supplierManager.ListSuppliers();
-                }
-                catch (Exception ex)
-                {
+        //private void btnSubmitSupplierInvoice_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_supplierList == null)
+        //    {
+        //        try
+        //        {
+        //            _supplierList = _supplierManager.ListSuppliers();
+        //        }
+        //        catch (Exception ex)
+        //        {
 
-                    if (null != ex.InnerException)
-                    {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    return;
-                }
+        //            if (null != ex.InnerException)
+        //            {
+        //                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(ex.Message);
+        //            }
+        //            return;
+        //        }
                 
-            }
-            // See if the current user is a supplier
-            if (_supplierList.Find(s => s.UserId == _user.UserId) != null)
-            {
-                var supplierInvoiceForm = new frmSubmitSupplierInvoice(_supplierList.Find(s => s.UserId == _user.UserId), _productLotManager, _supplierInvoiceManager);
-                supplierInvoiceForm.ShowDialog();
-            }
-            else
-            {
-                var selectSupplierForm = new frmSelectSupplier(_supplierList);
-                var result = selectSupplierForm.ShowDialog();
-                if (result == true)
-                {
-                    // We have a supplier in the form
-                    var supplierInvoiceForm = new frmSubmitSupplierInvoice(selectSupplierForm.selectedSupplier, _productLotManager, _supplierInvoiceManager);
-                    var innerResult = supplierInvoiceForm.ShowDialog();
-                    if (innerResult == true)
-                    {
-                        tabSupplierInvoice_Selected(sender, e);
-                        MessageBox.Show("Invoice submitted");
-                    }
-                }
-            }
+        //    }
+        //    // See if the current user is a supplier
+        //    if (_supplierList.Find(s => s.UserId == _user.UserId) != null)
+        //    {
+        //        var supplierInvoiceForm = new frmSubmitSupplierInvoice(_supplierList.Find(s => s.UserId == _user.UserId), _productLotManager, _supplierInvoiceManager);
+        //        supplierInvoiceForm.ShowDialog();
+        //    }
+        //    else
+        //    {
+        //        var selectSupplierForm = new frmSelectSupplier(_supplierList);
+        //        var result = selectSupplierForm.ShowDialog();
+        //        if (result == true)
+        //        {
+        //            // We have a supplier in the form
+        //            var supplierInvoiceForm = new frmSubmitSupplierInvoice(selectSupplierForm.selectedSupplier, _productLotManager, _supplierInvoiceManager);
+        //            var innerResult = supplierInvoiceForm.ShowDialog();
+        //            if (innerResult == true)
+        //            {
+        //                tabSupplierInvoice_Selected(sender, e);
+        //                MessageBox.Show("Invoice submitted");
+        //            }
+        //        }
+        //    }
             
-        }
+        //}
         /// <summary>
         /// Alissa Duffy
         /// Updated: 2017/04/17
@@ -2447,22 +2471,26 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Disabled Supplier Invoice Tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnUpdateInvoice_Click(object sender, RoutedEventArgs e)
-        {
+        //private void btnUpdateInvoice_Click(object sender, RoutedEventArgs e)
+        //{
 
-            if(dgSupplierInvoices.SelectedIndex >= 0){
-                frmUpdateSupplierInvoice updateSupplierInvoiceWindow = new frmUpdateSupplierInvoice((SupplierInvoice)dgSupplierInvoices.SelectedItem);
-                updateSupplierInvoiceWindow.ShowDialog();
-                tabSupplierInvoice_Selected(sender, e);
-            }
-            else
-            {
-                MessageBox.Show("Please select an invoice");
-            }
-        }
+        //    if(dgSupplierInvoices.SelectedIndex >= 0){
+        //        frmUpdateSupplierInvoice updateSupplierInvoiceWindow = new frmUpdateSupplierInvoice((SupplierInvoice)dgSupplierInvoices.SelectedItem);
+        //        updateSupplierInvoiceWindow.ShowDialog();
+        //        tabSupplierInvoice_Selected(sender, e);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Please select an invoice");
+        //    }
+        //}
 
         /// <summary>
         /// Ryan Spurgetis
