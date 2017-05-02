@@ -258,7 +258,7 @@
             </TabItem>
             <!--End of Employee Tab-->
             <!--Product Tab-->
-            <TabItem Name="tabProduct" Header="Product" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto"   >
+            <TabItem Name="tabProduct" Header="Product" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabProduct_Selected">
                 <!--Product Grid-->
                 <Grid>
                     <!--Grid Definitions-->

@@ -784,12 +784,16 @@ namespace WpfPresentationLayer
         /// Updated: 2017/04/17
         /// 
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Updated frmViewProduct call to include selected product argument
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnViewProduct_Click(object sender, RoutedEventArgs e)
         {
-            frmViewProduct btnViewProduct = new frmViewProduct();
+            frmViewProduct btnViewProduct = new frmViewProduct((Product)dgProduct.SelectedItem);
             btnViewProduct.ShowDialog();
 
         }
@@ -1857,6 +1861,27 @@ namespace WpfPresentationLayer
                         MessageBox.Show(ex.Message);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 5/2/17
+        /// Populates data grid on Products tab with a list of current products
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void tabProduct_Selected(object sender, RoutedEventArgs e)
+        {
+            List<Product> currentProductList;
+            try
+            {
+                currentProductList = _productManager.RetrieveProducts();
+                dgProduct.ItemsSource = currentProductList;
+            }
+            catch (Exception)
+            {
+
             }
         }
 

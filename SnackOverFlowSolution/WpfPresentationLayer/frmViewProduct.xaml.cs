@@ -22,10 +22,14 @@ namespace WpfPresentationLayer
     /// 2017/27/02
     /// 
     /// Interaction logic for ViewProduct.xaml
+    /// 
+    /// Updated by Mason Allen
+    /// Updated on 5/2/17
+    /// Updated to include params for the passed product instead of creating a new blank one
     /// </summary>
     public partial class frmViewProduct : Window
     {
-        Product _product = new Product();
+        Product currentProduct;
 
         IProductManager _productManager;
 
@@ -36,15 +40,19 @@ namespace WpfPresentationLayer
         /// 
         /// Initialize View Product Window.
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Added product arg to constructor
         /// </summary>
-        public frmViewProduct()
+        public frmViewProduct(Product selectedProduct)
         {
             _productManager = new ProductManager();
+            currentProduct = selectedProduct;
             InitializeComponent();
-
+            displayProductDetails();
         }
 
-        int productID;
 
         /// <summary>
         /// Laura Simmonds 
@@ -55,22 +63,25 @@ namespace WpfPresentationLayer
         /// 
         /// Displays Product Details.
         /// Standardized method.
+        /// 
+        /// Updated by Mason Allen
+        /// Updated on 5/2/17
+        /// Method now retrieves the db record for the selected product instead of a test record
         /// </summary>
         public void displayProductDetails()
         {
             try
             {
-                int productID = 10000;
-                _product = _productManager.RetrieveProductById(productID);
-                txtProductID.Text = _product.ProductId.ToString();
-                txtDescription.Text = _product.Description;
-                txtProductName.Text = _product.Name;
-                txtPrice.Text = _product.DeliveryChargePerUnit.ToString();
+                currentProduct = _productManager.RetrieveProductById(currentProduct.ProductId);
+                txtProductID.Text = currentProduct.ProductId.ToString();
+                txtDescription.Text = currentProduct.Description;
+                txtProductName.Text = currentProduct.Name;
+                txtPrice.Text = currentProduct.DeliveryChargePerUnit.ToString();
 
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("There was an error retrieving product details");
             }
         }
 
@@ -86,19 +97,6 @@ namespace WpfPresentationLayer
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-        /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/04/21
-        /// 
-        /// Invokes the View Product Details Display.
-        /// Standardized method.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnViewProduct_Click(object sender, RoutedEventArgs e)
-        {
-            this.displayProductDetails();
         }
     }
 }

@@ -21,8 +21,8 @@
         <Label Name="lblProductName" Content="Product Name" HorizontalAlignment="Left" Margin="34,352,0,0" VerticalAlignment="Top"/>
         <Label Name="lblProductID" Content="Product ID" HorizontalAlignment="Left" Margin="55,269,0,0" VerticalAlignment="Top"/>
         <Label Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="278,33,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnViewProdct" Content="ViewProduct" HorizontalAlignment="Left" Margin="376,352,0,0" VerticalAlignment="Top" Width="75" Click="btnViewProduct_Click"/>
-        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="496,352,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        
+        <Button Name="btnCancel" Content="Close" HorizontalAlignment="Left" Margin="496,352,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <!--View Product Controls -->
     </Grid>
     <!--View Product Main Grid-->
