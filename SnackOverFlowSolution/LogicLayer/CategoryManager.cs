@@ -81,5 +81,26 @@ namespace LogicLayer
 
             return success;
         }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 5/2/17
+        /// Returns a list of all categories in the db
+        /// </summary>
+        /// <returns></returns>
+        public List<Category> RetrieveCategoryList()
+        {
+            List<Category> categoryList;
+            try 
+            {
+                categoryList = CategoryAccessor.RetrieveCategoryList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return categoryList;
+        }
     }
 }

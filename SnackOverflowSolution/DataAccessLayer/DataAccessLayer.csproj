@@ -72,6 +72,7 @@
     <Compile Include="PickupLineAccessor.cs" />
     <Compile Include="PreferenceAccessor.cs" />
     <Compile Include="ProductAccessor.cs" />
+    <Compile Include="ProductCategoryAccessor.cs" />
     <Compile Include="ProductOrderAccessorMvc.cs" />
     <Compile Include="SupplierProductLotAccessor.cs" />
     <Compile Include="ProductLotAccessor.cs" />

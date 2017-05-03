@@ -248,6 +248,47 @@ namespace DataAccessLayer
         }
 
         /// <summary>
+        /// Mason Allen
+        /// Created on 5/2/17
+        /// Inserts new product record and returns the generated product id
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public static int CreateProductAndRetrieveProductId(Product product)
+        {
+            int productId = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_product_return_product_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Name", product.Name);
+            cmd.Parameters.AddWithValue("@Description", product.Description);
+            cmd.Parameters.AddWithValue("@Unit_Price", product.UnitPrice);
+            cmd.Parameters.AddWithValue("@Image_Binary", product.ImageBinary ?? new Byte[0]);
+            cmd.Parameters.AddWithValue("@Active", product.Active);
+            cmd.Parameters.AddWithValue("@Unit_Of_Measurement", product.UnitOfMeasurement);
+            cmd.Parameters.AddWithValue("@Delivery_Charge_Per_Unit", product.DeliveryChargePerUnit);
+
+            try
+            {
+                conn.Open();
+                productId = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return productId;
+        }
+
+        /// <summary>
         /// Ryan Spurgetis
         /// Created: 
         /// 2017/02/17

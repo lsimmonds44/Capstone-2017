@@ -101,5 +101,47 @@ namespace DataAccessLayer
 
             return rows;
         }
+
+        /// <summary>
+        /// Created by Mason Allen
+        /// Created on 5/2/17
+        /// Returns a list of all categories in the db
+        /// </summary>
+        /// <returns></returns>
+        public static List<Category> RetrieveCategoryList()
+        {
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_category_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            List<Category> currentCategoryList = new List<Category>();
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Category currentCategory = new Category();
+                        currentCategory.CategoryID = reader.GetString(0);
+
+                        currentCategoryList.Add(currentCategory);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return currentCategoryList;
+        }
     }
 }

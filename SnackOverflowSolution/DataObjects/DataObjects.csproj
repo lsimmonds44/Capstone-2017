@@ -104,6 +104,7 @@
     <Compile Include="PickupLine.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductCategory.cs" />
     <Compile Include="ProductGradePrice.cs" />
     <Compile Include="ProductOrder.cs" />
     <Compile Include="RegisterCommercialViewModel.cs" />

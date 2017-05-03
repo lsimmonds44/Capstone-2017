@@ -910,6 +910,7 @@ namespace WpfPresentationLayer
         {
             var frmAddProduct = new frmAddProduct(_user, _productManager);
             frmAddProduct.ShowDialog();
+            tabProduct_Selected(sender, e);
         }
 
         /// <summary>

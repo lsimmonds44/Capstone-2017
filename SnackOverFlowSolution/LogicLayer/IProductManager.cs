@@ -24,6 +24,7 @@ namespace LogicLayer
         Product RetrieveProductById(int productId);
 
         int CreateProduct(Product product);
+        int CreateProductReturnProductId(Product product);
 
         List<BrowseProductViewModel> RetrieveProductsToBrowseProducts();
 

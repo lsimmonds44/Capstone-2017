@@ -2490,6 +2490,28 @@ AS
 		RETURN @@ROWCOUNT
 	END
 GO
+
+print '' print '*** Creating sp_create_product_return_product_id'
+GO
+CREATE PROCEDURE [dbo].[sp_create_product_return_product_id]
+(
+	@NAME[NVARCHAR](50),
+	@DESCRIPTION[NVARCHAR](200),
+	@UNIT_PRICE[DECIMAL](10,2),
+	@IMAGE_BINARY[IMAGE],
+	@ACTIVE[BIT],
+	@UNIT_OF_MEASUREMENT[NVARCHAR](20),
+	@DELIVERY_CHARGE_PER_UNIT[DECIMAL](5,2)
+)
+AS
+	BEGIN
+		INSERT INTO [dbo].[Product]
+			(NAME, DESCRIPTION, UNIT_PRICE, IMAGE_BINARY, ACTIVE, UNIT_OF_MEASUREMENT, DELIVERY_CHARGE_PER_UNIT)
+		VALUES
+			(@NAME, @DESCRIPTION, @UNIT_PRICE, @IMAGE_BINARY, @ACTIVE, @UNIT_OF_MEASUREMENT, @DELIVERY_CHARGE_PER_UNIT)
+		SELECT SCOPE_IDENTITY()
+	END
+GO
 /* Very nice looking, but completely redundant with sp_create_product, to the point of originally being identical. If this is found missing in the solution (and it doesn't seem to be used at all right now), switch the reference to that.
 print '' print '*** Creating sp_create_new_product'
 GO

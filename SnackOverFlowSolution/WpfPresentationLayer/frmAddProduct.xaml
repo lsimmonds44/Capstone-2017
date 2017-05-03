@@ -7,6 +7,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+        
+        Updated: 5/2/17
+        By: Mason Allen
+        Summary: Added category selection
     -->
     <!--Add Product Grid-->
     <Grid>
@@ -82,11 +86,33 @@
                         <!--Name Controls-->
                         <Label Name="lblName" Content="Name :"/>
                         <TextBox Name="txtName" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 0"/>
+                        
                         <!--End of Name Controls-->
                     </Grid>
+                    
+                    
                     <!--End of Name Grid-->
                 </StackPanel>
                 <!--End of Name-->
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <!--Name Grid-->
+                    <Grid>
+                        <!--Grid Definitions-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="95"/>
+                        </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Name Controls-->
+                        <Label Name="lblCategory" Content="Category :"/>
+                        <ComboBox Name="cboCategory" Grid.Column="1" Grid.ColumnSpan="2"></ComboBox>
+                        <!--End of Name Controls-->
+                    </Grid>
+
+
+                    <!--End of Name Grid-->
+                </StackPanel>
                 <!--Product Description-->
                 <Label Name="lblProductDescription" Content="Product Description:"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">

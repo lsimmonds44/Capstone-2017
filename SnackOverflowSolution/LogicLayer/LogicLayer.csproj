@@ -113,6 +113,7 @@
     <Compile Include="PackageManager.cs" />
     <Compile Include="PickupManager.cs" />
     <Compile Include="PreferenceManager.cs" />
+    <Compile Include="ProductCategoryManager.cs" />
     <Compile Include="SupplierProductLotManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ProductLotManager.cs" />

@@ -32,6 +32,10 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        public int CreateProductReturnProductId(Product product)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<BrowseProductViewModel> RetrieveProductsToBrowseProducts()
         {

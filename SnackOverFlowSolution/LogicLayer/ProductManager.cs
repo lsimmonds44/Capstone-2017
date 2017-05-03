@@ -25,10 +25,31 @@ namespace LogicLayer
 
             int result = 0;
 
-            result = ProductAccessor.CreateProduct(product);
+            result = ProductAccessor.CreateProductAndRetrieveProductId(product);
 
             return result;
 
+        }
+
+        /// <summary>
+        /// Mason Allen
+        /// Created on 5/2/17
+        /// Creates a new product record and returns the generated product id
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public int CreateProductReturnProductId(Product product)
+        {
+            int productId = 0;
+            try
+            {
+                productId = ProductAccessor.CreateProductAndRetrieveProductId(product);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return productId;
         }
 
 
