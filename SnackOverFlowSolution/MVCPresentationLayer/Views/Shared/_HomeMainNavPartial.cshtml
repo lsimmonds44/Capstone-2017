@@ -7,7 +7,11 @@
     <nav class="main-nav">
         <ul>
             <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("Store", "Index", "Products")</li>
+            @if (Request.IsAuthenticated && User.IsInRole("Customer") || !Request.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Store", "Index", "Products")</li>
+            }
+            
             @if (!Request.IsAuthenticated)
             {
                 <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>

@@ -62,21 +62,27 @@
 
     </dl>
 </div>
-@using (Html.BeginForm("AddToCart", "Cart"))
+@if (Request.IsAuthenticated && User.IsInRole("Customer")) { 
+    using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <input type="number" name="Quantity" value="1" />
+        <select name="Grade">
+            @foreach (var gradeOption in Model.GradeOptions)
+            {
+                <option value="@gradeOption.GradeID">@gradeOption.GradeID: @gradeOption.Price</option>
+            }
+        </select>
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="hidden" name="supplierId" value="@Model.SupplierID" />
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        </div>
+    }
+}
+else
 {
-    <input type="number" name="Quantity" value="1" />
-    <select name="Grade">
-        @foreach (var gradeOption in Model.GradeOptions)
-        {
-            <option value="@gradeOption.GradeID">@gradeOption.GradeID: @gradeOption.Price</option>
-        }
-    </select>
-    <div class="pull-right">
-        @Html.HiddenFor(x => x.ProductId)
-        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-        <input type="hidden" name="supplierId" value="@Model.SupplierID" />
-        <input type="submit" class="btn btn-success" value="Add to cart" />
-    </div>
+    <h3>Please log in as a customer to purchase items.</h3>
 }
 <p>
     @Html.ActionLink("Back to List", "Index")

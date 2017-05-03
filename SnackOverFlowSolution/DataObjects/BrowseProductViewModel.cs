@@ -31,6 +31,7 @@ namespace DataObjects
 
         public int ProductId { get; set; }
 
+        [Display(Name="Picture")]
         public byte[] Image_Binary { get; set; }
 
         public string SourceString { get; set; }

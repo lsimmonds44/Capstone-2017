@@ -29,7 +29,8 @@ namespace MVCPresentationLayer.Models
         public String LastName { get; set; }
 
         [Required]
-        [RegularExpression(@"[0-9]{10}", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"[0-9]{10}", ErrorMessage = "Not a valid Phone number. Please enter only numerical digits.")]
+        //[Phone(ErrorMessage="Not a valid phone number")]
         public String Phone { get; set; }
 
         [Required]
