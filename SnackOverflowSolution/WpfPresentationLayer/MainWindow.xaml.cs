@@ -25,7 +25,7 @@ namespace WpfPresentationLayer
     public partial class MainWindow : Window
     {
         private ICustomerManager _customerManager = new CustomerManager();
-        private EmployeeManager _employeeManager = new EmployeeManager();
+        private IEmployeeManager _employeeManager = new EmployeeManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
         private IVehicleManager _vehicleManager = new VehicleManager();
         List<ProductOrder> _currentOpenOrders;
@@ -282,20 +282,24 @@ namespace WpfPresentationLayer
         /// 
         /// Invokes the Update Employee form.
         /// </summary>
-        /// <summary>
-        /// Alissa Duffy
-        /// Updated: 2017/4/17
+        /// <remarks>
+        /// Edited by Christian Lopez
+        /// 2017/05/03
         /// 
-        /// Standardized method.
-        /// </summary>
+        /// Modified the constructor to work with new parameter list. Also refresh the tab upon update.
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Update_Employee_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _employeeList[dgEmployee.SelectedIndex]);
-                fUE.ShowDialog();
+                frmUpdateEmployee fUE = new frmUpdateEmployee(_employeeManager, _userManager, _employeeList[dgEmployee.SelectedIndex]);
+                var result = fUE.ShowDialog();
+                if (result == true)
+                {
+                    tabEmployee_Selected(sender, e);
+                }
             }
             catch
             {

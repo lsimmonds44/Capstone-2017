@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Update Employee" Height="350" Width="525" Loaded="Window_Loaded">
     <!--
-        Updated: 2017/04/21
-        By: Alissa Duffy 
-        Summary: Comments and Standardization
+        Updated: 2017/05/03
+        By: Christian Lopez
+        Summary: Removed text boxes for unchangeable data and salary information. Swapped buttons around for UX. 
     -->
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
@@ -32,16 +32,20 @@
         <!--Update Employee Controls-->
         <Label Name="lblEmployeeId" Grid.Row="1" Grid.Column="0" Content="Employee ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
         <Label Name="lblUserId" Grid.Row="2" Grid.Column="0" Content="User ID:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Name="lblSalary" Grid.Row="3" Grid.Column="0" Content="Salary:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+        <!--<Label Name="lblSalary" Grid.Row="3" Grid.Column="0" Content="Salary:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>-->
+        <Label Name="lblName" Grid.Row="3" Grid.Column="0" Content="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
         <Label Name="lblActive" Grid.Row="4" Grid.Column="0" Content="Active:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <Label Name="lblDateOfBirth" Grid.Row="5" Grid.Column="0" Content="Date of Birth:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <TextBox Name="txtEmployeeID"  Grid.Row="1" Grid.Column="1" Margin="3" IsReadOnly="True" />
-        <TextBox Name="txtUserID" Grid.Row="2" Grid.Column="1" Margin="3" />
-        <TextBox Name="txtSalary" Grid.Row="3" Grid.Column="1" Margin="3" />
+        <!--<Label Name="lblDateOfBirth" Grid.Row="5" Grid.Column="0" Content="Date of Birth:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>-->
+        <!--<TextBox Name="txtEmployeeID"  Grid.Row="1" Grid.Column="1" Margin="3" IsReadOnly="True" />-->
+        <Label Name="lblEmpid" Grid.Row="1" Grid.Column="1" Margin="3" Content="EmpId" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <!--<TextBox Name="txtUserID" Grid.Row="2" Grid.Column="1" Margin="3" />-->
+        <Label Name="lblEmpUserId" Grid.Row="2" Grid.Column="1" Margin="3" Content="UserId" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <!--<TextBox Name="txtSalary" Grid.Row="3" Grid.Column="1" Margin="3" />-->
+        <Label Name="lblEmpName" Grid.Row="3" Grid.Column="1" Margin="3" Content="EmpName" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
         <CheckBox Name="chkActive" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Margin="75 0 0 0" />
-        <TextBox Name="txtDateOfBirth" Grid.Row="5" Grid.Column="1" Margin="3" IsReadOnly="True" />
-        <Button Name="btnConfirm" Grid.Column="0" Grid.Row="6" Margin="5" Content="Confirm" Click="btnConfirm_Click" />
-        <Button Name="btnCancel" Grid.Column="3" Grid.Row="6" Margin="5" Content="Cancel" Click="btnCancel_Click" />
+        <!--<TextBox Name="txtDateOfBirth" Grid.Row="5" Grid.Column="1" Margin="3" IsReadOnly="True" />-->
+        <Button Name="btnConfirm" Grid.Column="3" Grid.Row="6" Margin="5" Content="Confirm" Click="btnConfirm_Click" />
+        <Button Name="btnCancel" Grid.Column="0" Grid.Row="6" Margin="5" Content="Cancel" Click="btnCancel_Click" />
         <!--End of Update Employee Controls-->
     </Grid>
     <!--End of Update Employee Main Grid-->
