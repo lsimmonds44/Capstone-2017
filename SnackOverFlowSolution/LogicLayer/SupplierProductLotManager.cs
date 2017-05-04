@@ -39,38 +39,6 @@ namespace LogicLayer
 
         /// <summary>
         /// Ethan Jorgensen
-        /// Created on 2017/04/13
-        /// 
-        /// Gets a list of product lots from the database
-        /// </summary>
-        /// <returns></returns>
-        public List<SupplierProductLot> RetrieveSupplierProductLots()
-        {
-            List<SupplierProductLot> lots = null;
-            try
-            {
-                lots = SupplierProductLotAccessor.RetrieveSupplierProductLots();
-                IProductManager productManager = new ProductManager();
-                foreach (var lot in lots)
-                {
-                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
-                }
-            }
-            catch (SqlException ex)
-            {
-
-                throw new ApplicationException("There was a database error.", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("There was an unknown error.", ex);
-            }
-
-            return lots;
-        }
-
-        /// <summary>
-        /// Ethan Jorgensen
         /// 2017/03/23
         /// 
         /// Sets a product lot inactive.
