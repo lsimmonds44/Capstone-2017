@@ -78,24 +78,33 @@ namespace WpfPresentationLayer
 
         private void btnApprove_Click(object sender, RoutedEventArgs e)
         {
- 
+            
             if (_supplierMgr != null)
             {
-                try
+                if (_supplier.IsApproved)
                 {
-                    if (_supplierMgr.ApproveSupplier(_supplier, _userid))
+                    MessageBox.Show("Cannot re-add supplier, Supplier already approved", "Supplier already approved", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    this.Close();
+                }
+                else
+                {
+                    try
                     {
-                        MessageBox.Show("Supplier approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        if (_supplierMgr.ApproveSupplier(_supplier, _userid))
+                        {
+                            MessageBox.Show("Supplier approved.", "System Updated", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Supplier record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        MessageBox.Show("Supplier record not altered", "Oops, no record was modified", MessageBoxButton.OK, MessageBoxImage.Hand);
+                        MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                
             }
 
             if (_customerMgr != null)
