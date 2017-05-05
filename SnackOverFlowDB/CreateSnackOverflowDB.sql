@@ -273,7 +273,7 @@ GO
 CREATE TABLE [dbo].[DELIVERY] (
 	[DELIVERY_ID]	  [INT]IDENTITY(10000, 1) NOT NULL,
 	[ROUTE_ID]		  [INT]							  ,
-	[DELIVERY_DATE]  [DATETIME] 			  NOT NULL,
+	[DELIVERY_DATE]   [DATETIME] 			  NOT NULL,
 	[VERIFICATION] 	  [VARBINARY](MAX)					  ,
 	[STATUS_ID]		  [NVARCHAR](50) 		  NOT NULL,
 	[DELIVERY_TYPE_ID][NVARCHAR](50) 		  NOT NULL,
@@ -5112,7 +5112,7 @@ AS
 	END
 GO
 
-print '' print  '*** Creating procedure sp_retrieve_product_lot_by_supplier_id'
+print '' print  '*** Creating procedure sp_retrieve_supplier_product_lot_by_supplier_id'
 GO
 CREATE PROCEDURE sp_retrieve_supplier_product_lot_by_supplier_id
 (
@@ -5122,14 +5122,14 @@ AS
 	BEGIN
 		SELECT SUPPLIER_PRODUCT_LOT_ID, SUPPLIER_ID, PRODUCT_ID, QUANTITY, EXPIRATION_DATE, PRICE
 		FROM supplier_product_lot
-		WHERE SUPPLIER_PRODUCT_LOT_ID = @SUPPLIER_PRODUCT_LOT_ID
+		WHERE SUPPLIER_ID = @SUPPLIER_ID
 		ORDER BY SUPPLIER_PRODUCT_LOT_ID DESC
 	END
 GO
 
 print '' print  '*** Creating procedure sp_retrieve_supplier_product_lot'
 GO
-CREATE PROCEDURE sp_retrieve_product_lot
+CREATE PROCEDURE sp_retrieve_supplier_product_lot
 (
 	@SUPPLIER_ID[INT]
 )
@@ -8402,7 +8402,6 @@ AS
 	END
 GO
 
-
 print '' print  '*** Creating procedure sp_retrieve_routes_list'
 GO
 CREATE PROCEDURE sp_retrieve_routes_list
@@ -8445,5 +8444,20 @@ AS
 		SET ROUTE_ID = @ROUTE_ID
 		WHERE (DELIVERY_ID = @DELIVERY_ID)
 		RETURN @@ROWCOUNT
+	END
+GO
+
+print'' print '*** Creating procedure sp_assign_delivery_to_route'
+GO
+CREATE PROCEDURE sp_assign_delivery_to_route
+(
+	@DELIVERY_ID [INT],
+	@ROUTE_ID	 [INT]
+)
+AS
+	BEGIN
+		UPDATE DELIVERY
+		SET ROUTE_ID = @ROUTE_ID
+		WHERE @DELIVERY_ID = DELIVERY_ID
 	END
 GO

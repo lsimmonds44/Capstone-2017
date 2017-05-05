@@ -141,6 +141,8 @@ namespace DataAccessLayer
             return deliveries;
         }
 
+      
+
         /// <summary>
         /// Robert Forbes
         /// Created: 2017/03/09
@@ -584,18 +586,53 @@ namespace DataAccessLayer
         /// <param name="RouteId"></param>
         /// <returns></returns>
         public static int AssignRouteToDelivery(int DeliveryId, int RouteId)
-        {
-            var rows = 0;
+		{
+			var rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_assign_route_to_delivery";
+			var cmdText = @"sp_assign_route_to_delivery";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@DELIVERY_ID", DeliveryId);
             cmd.Parameters.AddWithValue("@ROUTE_ID", RouteId);
-            
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+				    throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
 
+            return rows;
+        }
+		
+		/// <summary>
+        /// Aaron Usher
+        /// Created: 2017/05/04
+        /// 
+        /// Assigns the delivery with the given id to the route with the given id.
+        /// </summary>
+        /// <param name="deliveryId">The id of the relevant delivery.</param>
+        /// <param name="routeId">The id of the relevant route.</param>
+        /// <returns>Rows affected.</returns>
+        public static int AssignDeliveryToRoute(int deliveryId, int routeId)
+        {
+            var rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_assign_delivery_to_route";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", deliveryId);
+            cmd.Parameters.AddWithValue("@ROUTE_ID", routeId);
             try
             {
                 conn.Open();

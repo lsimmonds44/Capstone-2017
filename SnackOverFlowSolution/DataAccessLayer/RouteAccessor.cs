@@ -70,6 +70,53 @@ namespace DataAccessLayer
 
             return routes;
         }
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/05/04
+        /// 
+        /// Retrieves all routes from the database.
+        /// </summary>
+        ///
+        /// <returns>A list of all routes in the database.</returns>
+        public static List<Route> RetrieveRoutes()
+        {
+            var routes = new List<Route>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_route_list";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        routes.Add(new Route()
+                        {
+                            RouteId = reader.GetInt32(0),
+                            VehicleId = reader.GetInt32(1),
+                            DriverId = reader.GetInt32(2),
+                            AssignedDate = reader.GetDateTime(3)
+                        });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return routes;
+        }
 
         /// <summary>
         /// Robert Forbes

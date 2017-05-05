@@ -35,7 +35,7 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created: 
         /// 2017/04/29
@@ -46,12 +46,24 @@ namespace MVCPresentationLayer.Controllers
         public ActionResult Index()
         {
             var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
-            Supplier sup = supMgr.RetrieveSupplierByUserId(userId);
+            Supplier sup;
+            try
+            {
+                sup = supMgr.RetrieveSupplierByUserId(userId);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            if (sup == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(plMgr.RetrieveSupplierProductLotsBySupplier(sup));
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created: 
         /// 2017/04/29
@@ -67,7 +79,19 @@ namespace MVCPresentationLayer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
-            Supplier sup = supMgr.RetrieveSupplierByUserId(userId);
+            Supplier sup;
+            try
+            {
+                sup = supMgr.RetrieveSupplierByUserId(userId);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            if (sup == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             var lot = plMgr.RetrieveSupplierProductLotsBySupplier(sup).Find(i => i.SupplierProductLotId == (int)id);
             if (lot == null)
             {
@@ -77,7 +101,7 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created:
         /// 2017/04/29
@@ -95,7 +119,7 @@ namespace MVCPresentationLayer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created:
         /// 2017/04/29
@@ -118,7 +142,7 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created:
         /// 2017/04/29
@@ -145,7 +169,7 @@ namespace MVCPresentationLayer.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created:
         /// 2017/04/29
@@ -160,16 +184,16 @@ namespace MVCPresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Write backend to update a product lot
-                //db.Entry(supplierinvoice).State = EntityState.Modified;
-                //db.SaveChanges();
+                // TODO: Edit
+                plMgr.DeleteSupplierProductLot(lot);
+                plMgr.CreateSupplierProductLot(lot);
                 return RedirectToAction("Index");
             }
             return View(lot);
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created:
         /// 2017/04/29
@@ -193,7 +217,7 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ariel Sigo
+        /// Ethan Jorgensen
         /// 
         /// Created
         /// 2017/04/29
