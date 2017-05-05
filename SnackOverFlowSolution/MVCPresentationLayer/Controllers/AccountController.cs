@@ -795,6 +795,12 @@ namespace MVCPresentationLayer.Controllers
         /// 
         /// Assigns Roles to Users Based On Approval Status from Snack Overflow
         /// </summary>
+        /// <remarks>
+        /// Modified by Christian Lopez
+        /// 2017/05/05
+        /// 
+        /// Fix introduced bug when logging in with unregistered user
+        /// </remarks>
         /// <param name="context">DbContext</param>
         /// <param name="model">Login View Model</param>
         /// <returns>Boolean indicatinng Role Assignment Success</returns>
