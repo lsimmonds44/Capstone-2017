@@ -740,7 +740,7 @@
             </TabItem>
             <!--End of Vehicle Management Tab-->
             <!--Deliveries Tab-->
-            <TabItem Name="tabDeliveries" Header="Deliveries" Loaded="tabDeliveries_Loaded"  >
+            <TabItem Name="tabDeliveries" Header="Deliveries" Selector.Selected="tabDeliveries_Selected" >
                 <!--Deliveries Grid-->
                 <Grid Margin="0">
                     <!--Grid Definitions-->

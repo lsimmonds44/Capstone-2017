@@ -320,12 +320,12 @@ INSERT INTO [dbo].[PRODUCT_ORDER]
       ZIP, HAS_ARRIVED
 	)
 VALUES
-	(10000, 200.50, GETDATE(), GETDATE(), .25, "shipped", 1, "6302 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
-	(10001, 57.20, GETDATE(), GETDATE(), .05, "delivered", 2, "6311 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
-	(10002, 100.75, GETDATE(), GETDATE(), .10, "in warehouse", 1, "6307 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
-	(10003, 480.50, GETDATE(), GETDATE(), .10, "ordered", 2, "6303 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
-	(10002, 98.30, GETDATE(), GETDATE(), .20, "shipped", 1, "6310 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
-	(10001, 206.33, GETDATE(), GETDATE(), .05, "shipped", 2, "6314 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0)
+	(10000, 200.50, GETDATE(), GETDATE(), .25, "Ready For Shipment", 1, "6302 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10001, 57.20, GETDATE(), GETDATE(), .05, "Delivered", 2, "6311 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10002, 100.75, GETDATE(), GETDATE(), .10, "Ready For Assignment", 1, "6307 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10003, 480.50, GETDATE(), GETDATE(), .10, "Open", 2, "6303 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10002, 98.30, GETDATE(), GETDATE(), .20, "Ready For Shipment", 1, "6310 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0),
+	(10001, 206.33, GETDATE(), GETDATE(), .05, "Ready For Shipment", 2, "6314 Kirkwood Blvd", "Cedar Rapids", "IA", "52241", 0)
 GO
 
 print '*** Inserting Order Line Test Data ***'
