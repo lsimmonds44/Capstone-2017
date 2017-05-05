@@ -2786,5 +2786,11 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Select a pickup record to create a product lot.");
             }
         }
+
+        private void tabCommercialCustomer_GotFocus(object sender, RoutedEventArgs e)
+        {
+            dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
+            //dgCustomer.ItemsSource
+        }
     } // end of class
 } // end of namespace 

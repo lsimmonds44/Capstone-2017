@@ -63,6 +63,33 @@ namespace LogicLayer
             }
         }
 
+        public User RetrieveUser(int? approvedBy)
+        {
+            if (approvedBy == null)
+            {
+                User user = new User
+                {
+                    UserId = 0,
+                    FirstName = "NO",
+                    LastName = "APPROVAL"
+
+                };
+                return user;
+            }
+            else
+            {
+
+                User user = new User
+                {
+                    UserId = 0,
+                    FirstName = "NO",
+                    LastName = "APPROVAL"
+
+                };
+                return user;
+            }
+        }
+
         /// <summary>
         /// Bobby Thorne
         /// 2/11/17
