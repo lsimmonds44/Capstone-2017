@@ -2628,7 +2628,7 @@ GO
 
 print '' print  '*** Creating procedure sp_create_supplier_product_lot'
 GO
-CREATE PROCEDURE sp_create_product_lot
+CREATE PROCEDURE sp_create_supplier_product_lot
 (
 	@SUPPLIER_ID[INT],
 	@PRODUCT_ID[INT],
