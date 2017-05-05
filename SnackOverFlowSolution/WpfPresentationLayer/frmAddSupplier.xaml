@@ -29,13 +29,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             <!--End of Grid Definitions-->
             <!--Look Up Username Controls-->
             <Label Name="lblUsername" Grid.Column="0" Content="UserName: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox Name="txtUsername" Grid.Column="1" Margin="0 0 3 0" MaxLength="50" TextChanged="txtUsername_TextChanged"/>
-            <Button Name="btnLookup"  Grid.Column="2" Content="Lookup" Margin="0 0 10 0" Click="btnLookup_Click"/>
+            <ComboBox Name="cboUsername" Grid.Column="1" Margin="0 0 10 0" SelectionChanged="cboUsername_SelectionChanged" />
             <!--End of Look Up Username Controls-->
         </Grid>
         <!--End of Look Up Username Grid-->

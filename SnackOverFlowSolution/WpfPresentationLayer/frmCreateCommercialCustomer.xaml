@@ -35,8 +35,7 @@
         <!--End of Grid Definitions-->
         <!-- Create Commercial Customer Account Controls-->
         <Label Name="lblUserName" Grid.Row="0" Grid.Column="0" Content="User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-        <TextBox Name="txtUserName" Grid.Row="0" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" ToolTip="Enter user name to find user"/>
-        <Button Name="btnFindUser" Grid.Row="0" Grid.Column="2" Content="Search" Width="80" FontSize="18" Height="40" Click="findUserButton_Click"></Button>
+        <ComboBox Name="cboUserName" Grid.Row="0" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" SelectionChanged="cboUserName_SelectionChanged"/>
         <Label Name="lblName" Grid.Row="1" Grid.Column="0" Content="Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
         <TextBox Name="txtName" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
         <Label Name="lblPhone" Grid.Row="2" Grid.Column="0" Content="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
