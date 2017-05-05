@@ -32,7 +32,7 @@ namespace DataObjects
         {
             try
             {
-                return Address.AddressLineOne + ", " + ", " + Address.City + ", " + Address.State;
+                return Address.AddressLineOne + ", " + Address.City + ", " + Address.State;
             }
             catch
             {

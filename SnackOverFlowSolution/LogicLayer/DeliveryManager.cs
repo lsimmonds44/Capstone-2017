@@ -23,6 +23,14 @@ namespace LogicLayer
         /// 
         /// Retrieves every delivery from the database.
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Updated:
+        /// 2017/05/05
+        /// 
+        /// Now pulls address for each delivery
+        /// </remarks>
         /// <returns>The deliveries.</returns>
         public List<Delivery> RetrieveDeliveries()
         {
@@ -31,6 +39,9 @@ namespace LogicLayer
             try
             {
                 list = DeliveryAccessor.RetrieveDeliveries();
+                foreach(var d in list){
+                    d.Address = DeliveryAccessor.RetrieveUserAddressForDelivery(d.DeliveryId);
+                }
             }
             catch (Exception)
             {
