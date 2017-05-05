@@ -111,6 +111,15 @@ namespace MVCPresentationLayer.Controllers
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
 
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int? productId, string returnUrl)
+        {
+            var product = _productManager.RetrieveProducts()
+                .FirstOrDefault(p => p.ProductId == productId);
+            if (product != null)
+                cart.RemoveLine(product);
+            return RedirectToAction("Index", new { returnUrl });
+        }
+
 
         /// <summary>
         /// Ariel Sigo

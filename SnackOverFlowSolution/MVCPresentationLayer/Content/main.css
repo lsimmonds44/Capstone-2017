@@ -4570,42 +4570,42 @@ p.big{
 .related-items-container .section-title{
     margin-bottom: 47px;
 }
-form.cart-items table{
+div.cart-items table{
     width: 100%;
 }
-form.cart-items table thead,
-form.cart-items table tfoot{
+div.cart-items table thead,
+div.cart-items table tfoot{
     background: #f7f5ef;
 }
-form.cart-items table thead th,
-form.cart-items table tbody td{
+div.cart-items table thead th,
+div.cart-items table tbody td{
     padding: 20px;
     text-align: center;
 }
-form.cart-items table .item-thumb,
-form.cart-items table .item-desc{
+div.cart-items table .item-thumb,
+div.cart-items table .item-desc{
     text-align: left;
 }
-form.cart-items table .item-thumb{
+div.cart-items table .item-thumb{
     width: 250px;
     border-right: none;
 }
-form.cart-items table .item-desc{
+div.cart-items table .item-desc{
     width: 180px;
 }
-form.cart-items table figure{
+div.cart-items table figure{
     width: 230px;
     display: inline-block;
 }
-form.cart-items table .remove-item{
+div.cart-items table .remove-item{
     width: 45px;
     padding-right: 0;
     padding-left: 0;
 }
-form.cart-items table thead{
+div.cart-items table thead{
     border: 1px solid #eceded;
 }
-form.cart-items table thead th{
+div.cart-items table thead th{
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -4614,14 +4614,15 @@ form.cart-items table thead th{
     padding-top: 13px;
     padding-bottom: 14px;
 }
-form.cart-items table tbody{
+
+div.cart-items table tbody{
     border: 1px solid #eceded;
     border-top: none;
 }
-form.cart-items table tbody tr{
+div.cart-items table tbody tr{
     border-bottom: 1px solid #eceded;
 }
-form.cart-items table tbody td{
+div.cart-items table tbody td{
     font-size: 14px;
     color: #283233;
     vertical-align: top;
@@ -4629,16 +4630,16 @@ form.cart-items table tbody td{
     padding-bottom: 20px;
     border-right: 1px solid #eceded;
 }
-form.cart-items table tbody .item-desc{
+div.cart-items table tbody .item-desc{
     font-size: 18px;
 }
-form.cart-items table tbody strong{
+div.cart-items table tbody strong{
     font-weight: 700;
 }
-form.cart-items table .stepper{
+div.cart-items table .stepper{
     position: relative;
 }
-form.cart-items table .stepper span{
+div.cart-items table .stepper span{
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -4648,19 +4649,19 @@ form.cart-items table .stepper span{
     color: #19242a;
     cursor: pointer;
 }
-form.cart-items table .stepper .stepper-arrow.down{
-    background-image: url(../img/template-assets/icon-minus.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    left: 0;
-}
-form.cart-items table .stepper .stepper-arrow.up{
-    background-image: url(../img/template-assets/icon-plus.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    right: 0;
-}
-form.cart-items table .cart-item-count{
+    div.cart-items table .stepper .stepper-arrow.down {
+        background-image: url('../Images/CartImages/icon-minus.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        left: 0;
+    }
+    div.cart-items table .stepper .stepper-arrow.up {
+        background-image: url('../Images/CartImages/icon-plus.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        right: 0;
+    }
+div.cart-items table .cart-item-count{
     font-size: 14px;
     font-weight: 700;
     text-align: center;

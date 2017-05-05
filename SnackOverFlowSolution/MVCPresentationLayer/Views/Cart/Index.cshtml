@@ -1,52 +1,91 @@
 ﻿@model MVCPresentationLayer.Models.CartIndexViewModel
 @{
-    ViewBag.Title = "Sports Store: Your Cart";
+    ViewBag.Title = "SnackOverflow: Your Cart!";
+    Layout = "~/Views/Shared/_CartLayout.cshtml";
 }
 
-<h2>Your cart</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Quantity</th>
-        <th>Item</th>
-        <th class="text-right">Price</th>
-        <th class="text-right">Subtotal</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var line in Model.Cart.Lines)
-    {
-        <tr>
-            <td class="text-center">@line.Quantity</td>
-            <td class="text-left">@line.Product.Name</td>
-            <td class="text-right">
-                @line.Product.Price.ToString("c")
-            </td>
-            <td class="text-right">
-                @((line.Quantity * line.Product.Price).ToString("c"))
-            </td>
-            <td>
-                @using (Html.BeginForm("RemoveFromCart", "Cart"))
-                {
-                    @Html.Hidden("ProductId", line.Product.ProductId)
-                    @Html.HiddenFor(x => x.ReturnUrl)
-                    <input class="btn btn-sm btn-warning" type="submit" value="Remove"/>
-                }
-            </td>
-        </tr>
-    }
-    </tbody>
-    <tfoot>
-    <tr>
-        <td colspan="3" class="text-right">Total:</td>
-        <td class="text-right">
-            @Model.Cart.ComputeTotalValue().ToString("c")
-        </td>
-    </tr>
-    </tfoot>
-</table>
+@*Cart Content*@
+<section class="store-cart style3">
+    <div class="container">
+        <div class="cart-items wow fadeInDown">
+            <h1>Your Beautiful Cart:</h1>
 
-<div class="text-center">
-    @Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Checkout now", "Checkout", null, new {@class = "btn btn-primary"})
-</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td class="item-thumb">
+                            <figure>
+                                <img src="@Url.Action("PictureOf", "Products", new {id = line.Product.ProductId})" width="100" height="100" alt="Product Image"/>
+                            </figure>
+                        </td>
+
+                        <td class="item-desc">@line.Product.Name</td>
+
+                        <td>
+                            @line.Quantity
+                        </td>
+
+                        <td>@line.Product.Price.ToString("c")</td>
+
+                        <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
+
+                        <td class="remove-item">
+                            @using (Html.BeginForm("RemoveFromCart", "Cart")) //"RemoveFromCart", "Cart"))
+                            {
+                                @Html.Hidden("ProductId", line.Product.ProductId)
+                                @Html.HiddenFor(x => x.ReturnUrl)
+                                <input class="btn btn-default" type="submit" value="Remove"/>
+                            }
+                        </td>
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        @*Order Summary*@
+        <div class="estimate-shopping wow fadeInDown">
+            <div class="row">
+                <div class="cart-subtotal-container col-md-3 col-md-offset-9">
+                    <h6>Cart Subtotal</h6>
+                    <div class="subtotals">
+                        <div class="subtotal">
+                            <h6>Subtotal:</h6>
+                            <span>
+                                <strong>@Model.Cart.ComputeTotalValue().ToString("c")</strong>
+                            </span>
+                        </div>
+                        <div class="subtotal total">
+                            <h6>Total:</h6>
+                            <span>
+                                <strong>@Model.Cart.ComputeTotalValue().ToString("c")</strong>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 align-right">
+                    @Html.ActionLink("Continue Shopping", "Index", "Products", null, new {@class = "custom-button button-style3 large"})
+                    @Html.ActionLink("Checkout now", "Checkout", null, new {@class = "custom-button button-style3 large filled"})
+                </div>
+            </div>
+        </div>
+        @*End of Order Summary*@
+
+    </div>
+</section>
+@*End of Cart Content*@

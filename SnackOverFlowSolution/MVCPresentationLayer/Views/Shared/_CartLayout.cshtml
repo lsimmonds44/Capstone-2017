@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html class="no-js no-flash">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snack Overflow - Cart</title>
+    <meta name="description" content="Snack Overflow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#23292c">
+
+    <!-- Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,400" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet" type="text/css">
+
+    <!-- Icon Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="~/Content/fontello.css" rel="stylesheet" />
+
+    <!-- Plugins CSS -->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+
+    <!-- Demo Purpose CSS -->
+    <link href="~/Content/custom-bg.css" rel="stylesheet" />
+
+    <!-- Head JS Libraries -->
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+<body class="page">
+
+    @*Start Page Frame*@
+    <div class="page-frame">
+        <div class="frame-top"></div>
+        <div class="frame-right"></div>
+        <div class="frame-bottom"></div>
+        <div class="frame-left"></div>
+    </div>
+    @*End of Start Page Frame*@
+
+    @*Start Mobile Nav*@
+    <div class="mobile-nav-container clearfix">
+        <div class="main-nav-trigger mobile-nav-trigger">
+            <a href="#"></a>
+        </div>
+    </div>
+    @*End of Start Mobile Nav*@
+
+    <!-- Start main-nav-trigger -->
+    <div class="main-nav-trigger style2 handles-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="handle" href="#">
+                        <span class="bars">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </span>
+                    </a>
+                </div><!-- /col-md-12 -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div>
+    <!-- End main-nav-trigger -->
+    @*Main Nav Content*@
+    <div class="main-nav-container style3">
+        @Html.Partial("_HomeMainNavPartial")
+    </div>
+    @*End Main Nav Content*@
+
+
+    @*Wrapper*@
+    <div class="wrapper">
+
+        @*Start Main Header*@
+        <header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+            <div class="logo-container align-center style2">
+                <a href="#" class="logo">
+                    <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+                </a>
+            </div>
+        </header>
+        @*End of Main Header*@
+
+        @RenderBody()
+
+        @*Footer*@
+        <footer class="main-footer style3">
+            <div class="bottom-bar">
+                @Html.Partial("_FooterPartial")
+            </div>
+        </footer>
+        @*End of footer*@
+
+    </div>
+    @*End of Wrapper*@
+
+    @*Scripts*@
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/jquery.fs.stepper.min.js"></script>
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    @*End of Scriptss*@
+
+</body>
+</html>
+
+
+<div class="text-center">
+
+</div>
