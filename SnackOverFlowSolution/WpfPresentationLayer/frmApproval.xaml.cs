@@ -103,6 +103,15 @@ namespace WpfPresentationLayer
                     {
                         MessageBox.Show("There was an error approving this record. Please try again later", "Oops, something went wrong", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+                    try
+                    {
+                        ((MainWindow)Owner).createAgreementForApprovedSupplier(_supplier);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("An error occurred on creating agreement for new supplier. " + ex.Message);
+                    }
                 }
                 
             }
