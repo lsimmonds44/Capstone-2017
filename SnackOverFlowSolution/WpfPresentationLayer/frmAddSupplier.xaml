@@ -6,6 +6,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Create Supplier Grid-->
     <Grid>
@@ -212,8 +216,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--End of Grid Definitions-->
-            <Button Name="btnCancel" Grid.Column="0" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0 5 20 0" IsCancel="True"/>
-            <Button Name="btnSubmit" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="True" Click="btnSubmit_Click"/>
+            <Button Name="btnCancel" Grid.Column="1" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Right" Width="75" Margin="0,10,126,0" IsCancel="True"/>
+            <Button Name="btnSubmit" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="131,10,0,0" IsDefault="True" Click="btnSubmit_Click"/>
             <Button Name="btnSubmitAgreement" Grid.Column="1" Content="Submit" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Margin="20 5 0 0" IsDefault="False"  Visibility="Hidden" Click="btnSubmitAgreement_Click"  />
         </Grid>
         <!--End of Add Supplier Cancel Submit Grid-->

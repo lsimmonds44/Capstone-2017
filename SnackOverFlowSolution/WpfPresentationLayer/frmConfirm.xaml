@@ -10,6 +10,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Confirm Grid-->
     <Grid>
@@ -26,7 +30,7 @@
         </Grid.ColumnDefinitions>
         <!--End of Grid Definitions-->
         <!--Confirm Controls-->
-        <Label Name="ConfirmTitle" Grid.Row="0" Grid.Column="0" Content="Confirm Product Lot Removal" Grid.ColumnSpan="2" FontSize="18" />
+        <Label Name="ConfirmTitle" Grid.Row="0" Grid.Column="0" Content="Confirm Product Lot Removal" Grid.ColumnSpan="2" FontSize="18" Margin="50,5,-50,47.8" Grid.RowSpan="2" />
         <TextBlock Name="ConfirmBody" Text="Are you sure you want to remove or reject the product lot?" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" Margin="8 10 5 5" />
         <Button Name="ConfirmOk" Grid.Row="2" Grid.Column="0" Content="OK" Margin="35 10 10 7" Click="ConfirmOk_Click"  />
         <Button Name="ConfirmCancel" Grid.Row="2" Grid.Column="1" Content="Cancel" Margin="10 10 35 7" Click="ConfirmCancel_Click"  />

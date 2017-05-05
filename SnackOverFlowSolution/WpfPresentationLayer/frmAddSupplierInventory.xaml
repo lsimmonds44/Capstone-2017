@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPresentationLayer"
         mc:Ignorable="d"
-        Title="Add Supplier Inventory" Height="300" Width="630">
+        Title="Add Supplier Inventory" Height="215" Width="390">
     <!--
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Add Supplier Inventory Grid-->
-    <Grid>
+    <Grid Margin="0,0,16,-15">
         <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -28,19 +32,19 @@
         </Grid.ColumnDefinitions>
         <!--End of Grid Definitions-->
         <!--Add Supplier Inventory Controls-->
-        <Label Name="lblAgreementID" Content="Agreement ID: " Grid.Column="0" Grid.Row="0" />
-        <Label Name="lblQuantity" Content="Quantity: " Grid.Column="2" Grid.Row="0" />
-        <Label Name="lblDateAdded" Content="Date Added: " Grid.Column="0" Grid.Row="1" />
-        <ComboBox Name="cboAgreement" Grid.Column="1" Grid.Row="0">
+        <Label Name="lblAgreementID" Content="Agreement ID: " Grid.Column="0" Grid.Row="0" Margin="9,18,23,19" Grid.RowSpan="2" />
+        <Label Name="lblQuantity" Content="Quantity: " Grid.Column="2" Grid.Row="0" Margin="34,18,0,19" Grid.RowSpan="2" />
+        <Label Name="lblDateAdded" Content="Date Added: " Grid.Column="0" Grid.Row="1" Margin="10,25,18,74" Grid.RowSpan="2" />
+        <ComboBox Name="cboAgreement" Grid.Column="1" Grid.Row="0" Margin="0,22,0,23" Grid.RowSpan="2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding AgreementId}"></Label>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox Name="txtQuantity" Grid.Column="3" Grid.Row="0"></TextBox>
-        <DatePicker Name="dpDateAdded" Grid.Column="1" Grid.Row="1"></DatePicker>
-        <Button Name="btnPost" Grid.Column="3" Grid.Row="3" Click="btnPost_Click">Add</Button>
+        <TextBox Name="txtQuantity" Grid.Column="3" Grid.Row="0" Margin="3,24,15,20" Grid.RowSpan="2"/>
+        <DatePicker Name="dpDateAdded" Grid.Row="1" Margin="1,27,0,72" Grid.Column="1" Grid.RowSpan="2"/>
+        <Button Name="btnPost" Grid.Column="2" Grid.Row="2" Click="btnPost_Click" Margin="77,61,27,9" Grid.ColumnSpan="2">Add</Button>
         <!--End of Add Supplier Inventory Controls-->
     </Grid>
     <!--End of Add Supplier Inventory Grid-->

@@ -6,6 +6,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Create Order Grid-->
     <Grid>
@@ -36,22 +40,22 @@
             </Grid.ColumnDefinitions>
             <!--End of Grid Definitions-->
             <!--Create Order Information Controls-->
-            <Label Name="lblCustomerID" Grid.Row="1" Grid.Column="2" Content="Customer ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="txtCustomerID" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
-            <Label Name="lblOrderNumber" Grid.Row="1" Grid.Column="0" Content="Order #" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="txtOrderNumber" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
-            <Label Name="lblCustomerUserName" Grid.Row="2" Grid.Column="0" Content="Customer User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="txtCustomerUserName" Grid.Row="2" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
-            <Label Name="lblCustomerAddress" Grid.Row="2" Grid.Column="2" Content="Customer Address" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="txtUserAddress" Grid.Row="2" Grid.Column="3" TextWrapping="Wrap" MaxLines="5" MinLines="3" AcceptsReturn="True"
-                     Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
-            <Label Name="lblOrderType" Grid.Row="3" Grid.Column="0" Content="Order Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <TextBox Name="txtOrderType" Grid.Row="3" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
-            <Label Name="lblDeliveryType" Grid.Row="3" Grid.Column="2" Content="Delivery Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Name="cboDeliveryType" Grid.Row="3" Grid.Column="3" Width="250" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Label Name="lblOrderDate" Grid.Row="4" Grid.Column="0" Content="Order Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <DatePicker Name="dpOrderDate" Grid.Row="4" Grid.Column="1" SelectedDateFormat="Short" IsEnabled="False" />
-            <Label Name="lblExpectedDate" Grid.Row="4" Grid.Column="2" Content="Estimated Delivery Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+            <Label Name="lblCustomerID" Grid.Row="1" Grid.Column="2" Content="Customer ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="43.2,10.4,140.2,4.6"/>
+            <TextBox Name="txtCustomerID" Grid.Row="1" Grid.Column="2" Margin="298.2,10.4,7.6,10.2" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <Label Name="lblOrderNumber" Grid.Row="1" Grid.Column="0" Content="Order #" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="33,4.4,190.4,8"/>
+            <TextBox Name="txtOrderNumber" Grid.Row="1" Grid.Column="1" Margin="7.6,10.4,290.2,10" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <Label Name="lblCustomerUserName" Grid.Row="2" Grid.Column="0" Content="Customer User Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="33,10,76.4,52.8"/>
+            <TextBox Name="txtCustomerUserName" Grid.Row="2" Grid.Column="1" Margin="9.6,19,290.2,67.8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <Label Name="lblCustomerAddress" Grid.Row="2" Grid.Column="2" Content="Customer Address" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="43.2,16.8,90.2,49.2"/>
+            <TextBox Name="txtUserAddress" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" MaxLines="5" MinLines="3" AcceptsReturn="True"
+                     Margin="298.2,14.8,7.6,54" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False" Height="40" Grid.ColumnSpan="2"/>
+            <Label Name="lblOrderType" Grid.Row="2" Grid.Column="0" Content="Order Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="33,77.2,161.4,30.6" Grid.RowSpan="2"/>
+            <TextBox Name="txtOrderType" Grid.Row="2" Grid.Column="1" Margin="7.6,68,290.2,16.4" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <Label Name="lblDeliveryType" Grid.Row="2" Grid.Column="2" Content="Delivery Type" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="43.2,72.6,129.2,36.8" Grid.RowSpan="2"/>
+            <ComboBox Name="cboDeliveryType" Grid.Row="2" Grid.Column="2" Width="289" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="298.2,80.8,9.6,32.2" Height="31" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <Label Name="lblOrderDate" Grid.Row="3" Grid.Column="0" Content="Order Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="33,29.6,161.4,10" Grid.RowSpan="2"/>
+            <DatePicker Name="dpOrderDate" Grid.Row="3" Grid.Column="1" SelectedDateFormat="Short" IsEnabled="False" Grid.ColumnSpan="2" Margin="7.6,29.6,290.2,10" Grid.RowSpan="2" />
+            <Label Name="lblExpectedDate" Grid.Row="3" Grid.Column="2" Content="Estimated Delivery Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="43.2,31,42.2,15.8" Grid.RowSpan="2"/>
             <DatePicker Name="dpExpectedDate" Grid.Row="4" Grid.Column="3" Margin="0 0 10 0" IsEnabled="False" />
             <!--End of Create Order Information Controls-->
         </Grid>

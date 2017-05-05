@@ -5102,7 +5102,7 @@ print '' print  '*** Creating procedure sp_retrieve_supplier_product_lot'
 GO
 CREATE PROCEDURE sp_retrieve_supplier_product_lot
 (
-	@SUPPLIER_PRODUCT_LOT[INT]
+	@SUPPLIER_PRODUCT_LOT_ID[INT]
 )
 AS
 	BEGIN

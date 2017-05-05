@@ -197,13 +197,13 @@
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="8*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!--Grid Definitions-->
                     <!--Charity Data Grid-->
@@ -211,14 +211,14 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
                             <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
-                            <DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >
+                            <!--<DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >-->
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End Of Charity Data Grid-->
                     <!--Charity Controls-->
-                    <Button Name="btnAddCharity" Grid.Row="1" Grid.Column="2" Click="btnAddCharity_Click">Add</Button>
-                    <Button Name="btnViewCharity" Grid.Row="1" Grid.Column="3" Click="btnViewCharity_Click">View</Button>
-                    <Button Name="btnApproveDeny" Content="Approve / Deny" Grid.Row="1" Grid.Column="1" Click="btnApproveDeny_Click"/>
+                    <Button Name="btnAddCharity" Content="Add Charity" Grid.Row="1" Grid.Column="2" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnAddCharity_Click" />
+                    <Button Name="btnViewCharity" Content="View Charity" Grid.Row="1" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnViewCharity_Click" />
+                    <!--<Button Name="btnApproveDeny" Content="Approve / Deny" Grid.Row="1" Grid.Column="1" Click="btnApproveDeny_Click"/>-->
                 </Grid>
                 <!--End of Charity Grid-->
             </TabItem>
@@ -729,7 +729,7 @@
                         <!--End of Grid Definitions-->
                         <!--Vehicle Management Controls-->
                         <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
-                        <Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditVehicle_Click"/>
+                       <!--<Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditVehicle_Click"/> -->
                         <Button Name="btnAddMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="3" Content="Add Maintenance Record" Click="btnAddMaintenance_Click"/>
                         <Button Name="btnViewMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="4" Content="View Maintenance Records" Click="btnViewMaintenance_Click"/>
                         <Button Name="btnCheckOutVehicle" Grid.Row="0" Margin="10 0 0 0" Grid.Column="5" Content="Check Vehicle Out / In" Click="btnCheckOutVehicle_Click"/>

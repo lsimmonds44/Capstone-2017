@@ -61,7 +61,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
             _driveType = 0
             _driverMgr.getRouteByDriverID(driverID: driverId) { (routes, userMessage) in
                 DispatchQueue.main.async {
-                    self._routes = routes!
+                    self._routes = routes ?? []
                     self.RouteTV.reloadData()
                 }
             }
@@ -69,7 +69,7 @@ class RouteListView: UIView,UITableViewDelegate,UITableViewDataSource {
             _driveType = 1
             _driverMgr.getPickupByDriverID(driverID: driverId, completion: { (pickups, userMessage) in
                 DispatchQueue.main.async {
-                    self._pickups = pickups!
+                    self._pickups = pickups ?? []
                     self.RouteTV.reloadData()
                 }
             })
