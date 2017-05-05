@@ -32,6 +32,7 @@ namespace WpfPresentationLayer
         CustomerManager _customerMngr = new CustomerManager();
         User _userToUpdate = null;
         CommercialCustomer _commercialCustomer = null;
+        List<string> _usernames;
 
         /// <summary>
         /// Alissa Duffy
@@ -45,6 +46,8 @@ namespace WpfPresentationLayer
         {
             InitializeComponent();
             txtApprovedBy.Text = employeeId.ToString();
+            _usernames = _userMngr.RetrieveFullUserList().Select(u => u.UserName).ToList();
+            cboUserName.ItemsSource = _usernames;
         }
         
         /// <summary>
@@ -59,11 +62,10 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void findUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (txtUserName.Text.Length > 0)
-            {// retrieves user from database by username
+                
                 try
                 {
-                    _userToUpdate = _userMngr.RetrieveUserByUserName(txtUserName.Text);
+                    _userToUpdate = _userMngr.RetrieveUserByUserName((string)cboUserName.SelectedItem);
                 }
                 catch (Exception )
                 {
@@ -81,7 +83,12 @@ namespace WpfPresentationLayer
                 {
                     MessageBox.Show("User not found!");
                 }
-            }
+            
+        }
+
+        private void cboUserName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            findUserButton_Click(sender, e);
         }
 
         /// <summary>
@@ -110,9 +117,8 @@ namespace WpfPresentationLayer
             txtUserId.IsEnabled = false;
             cbkIsApproved.Visibility = Visibility.Collapsed;
             lblIsApproved.Visibility = Visibility.Collapsed;
-            txtUserName.Text = _userToUpdate.UserName;
-            txtUserName.IsEnabled = false;
-            btnFindUser.Visibility = Visibility.Hidden;
+            //txtUserName.Text = _userToUpdate.UserName;
+            //txtUserName.IsEnabled = false;
             btnCreate.IsEnabled = true;
         }
 
@@ -160,9 +166,9 @@ namespace WpfPresentationLayer
                     MessageBox.Show(_userToUpdate.UserName + "'s Commercial Customer account created.");
                     this.DialogResult = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Creating Commercial Customer account for " + _userToUpdate.UserName + " failed.");
+                    MessageBox.Show("Creating Commercial Customer account for " + _userToUpdate.UserName + " failed." + ex.Message);
                 }
             }
         } // end of btnCreate_Click
@@ -214,6 +220,8 @@ namespace WpfPresentationLayer
             int.TryParse(input,out result);
             return result;
         }
+
+        
 
 
     } // End class
