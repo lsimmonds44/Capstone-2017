@@ -74,5 +74,51 @@ namespace LogicLayer
 
             return routes;
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <returns>A list of all routes in the database</returns>
+        public List<Route> RetrieveAllRoutes()
+        {
+            List<Route> routes= null;
+
+            try
+            {
+                routes = RouteAccessor.RetrieveAllRoutes();
+            }
+            catch
+            {
+                throw new ApplicationException("Failed To Retrieve Routes");
+            }
+
+            return routes;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <returns>The ID of the newly created route</returns>
+        public int CreateRouteAndRetrieveRouteId(Route route)
+        {
+            int result = 0;
+
+            try
+            {
+                result = RouteAccessor.CreateRouteAndRetrieveRouteId(route);
+            }
+            catch
+            {
+                throw new ApplicationException("Failed To Create Route");
+            }
+
+            return result;
+        }
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="CustomerOrderManager.cs" />
     <Compile Include="DeliveryManager.cs" />
     <Compile Include="DeliveryTypeManager.cs" />
+    <Compile Include="DriverManager.cs" />
     <Compile Include="DummyLocationManager.cs" />
     <Compile Include="DummyProductManager.cs" />
     <Compile Include="DummySupplierManager.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IDeliveryManager.cs" />
     <Compile Include="IDeliveryTypeManager.cs" />
+    <Compile Include="IDriverManager.cs" />
     <Compile Include="IEmailManager.cs" />
     <Compile Include="IEmployeeManager.cs" />
     <Compile Include="ILocationManager.cs" />
