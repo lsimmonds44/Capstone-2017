@@ -344,7 +344,7 @@ namespace WpfPresentationLayer
             try
             {
                 _productLotManager.CreateProductLot(newLot);
-                MessageBox.Show("Product Lot Added");
+                MessageBox.Show("Product lot added. Be sure to create an inspection for lot.");
                 _pickupManager.DeletePickupLine(_pickupLine);
                 Close();
             }
