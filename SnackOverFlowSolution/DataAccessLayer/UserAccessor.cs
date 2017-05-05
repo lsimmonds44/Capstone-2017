@@ -251,6 +251,70 @@ namespace DataAccessLayer
 
         /// <summary>
         /// Aaron Usher
+        /// Created: 2017/05/05
+        /// 
+        /// Updates a user in the database.
+        /// </summary>
+        /// <param name="oldUser">The user as they were.</param>
+        /// <param name="newUser">The user as they should be.</param>
+        /// <returns>Rows affected.</returns>
+        public static int UpdateUser(User oldUser, User newUser)
+        {
+            int rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_update_app_user";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("USER_ID", oldUser.UserId);
+
+            cmd.Parameters.AddWithValue("@old_FIRST_NAME", oldUser.FirstName);
+            cmd.Parameters.AddWithValue("@old_LAST_NAME", oldUser.LastName);
+            cmd.Parameters.AddWithValue("@old_PHONE", oldUser.Phone);
+            cmd.Parameters.AddWithValue("@old_E_MAIL_ADDRESS", oldUser.EmailAddress);
+            cmd.Parameters.AddWithValue("@old_E_MAIL_PREFERENCES", oldUser.EmailPreferences);
+            cmd.Parameters.AddWithValue("@old_USER_NAME", oldUser.UserName);
+            cmd.Parameters.AddWithValue("@old_ACTIVE", oldUser.Active);
+            cmd.Parameters.AddWithValue("@old_ADDRESS1", oldUser.AddressLineOne);
+            cmd.Parameters.AddWithValue("@old_ADDRESS2", oldUser.AddressLineTwo);
+            cmd.Parameters.AddWithValue("@old_CITY", oldUser.City);
+            cmd.Parameters.AddWithValue("@old_STATE", oldUser.State);
+            cmd.Parameters.AddWithValue("@old_ZIP", oldUser.Zip);
+
+            cmd.Parameters.AddWithValue("@new_FIRST_NAME", newUser.FirstName);
+            cmd.Parameters.AddWithValue("@new_LAST_NAME", newUser.LastName);
+            cmd.Parameters.AddWithValue("@new_PHONE", newUser.Phone);
+            cmd.Parameters.AddWithValue("@new_E_MAIL_ADDRESS", newUser.EmailAddress);
+            cmd.Parameters.AddWithValue("@new_E_MAIL_PREFERENCES", newUser.EmailPreferences);
+            cmd.Parameters.AddWithValue("@new_USER_NAME", newUser.UserName);
+            cmd.Parameters.AddWithValue("@new_ACTIVE", newUser.Active);
+            cmd.Parameters.AddWithValue("@new_ADDRESS1", newUser.AddressLineOne);
+            cmd.Parameters.AddWithValue("@new_ADDRESS2", newUser.AddressLineTwo);
+            cmd.Parameters.AddWithValue("@new_CITY", newUser.City);
+            cmd.Parameters.AddWithValue("@new_STATE", newUser.State);
+            cmd.Parameters.AddWithValue("@new_ZIP", newUser.Zip);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
+        }
+
+        /// <summary>
+        /// Aaron Usher
         /// Updated: 
         /// 2017/04/14
         /// 

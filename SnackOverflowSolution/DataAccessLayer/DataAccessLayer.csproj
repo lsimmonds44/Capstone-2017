@@ -57,6 +57,7 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="DeliveryAccessor.cs" />
     <Compile Include="DeliveryTypeAccessor.cs" />
+    <Compile Include="DriverAccessor.cs" />
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="EmployeeOrderResponsibilityAccessor.cs" />
     <Compile Include="LocationAccessor.cs" />

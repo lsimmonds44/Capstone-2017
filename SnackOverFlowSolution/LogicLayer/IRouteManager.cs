@@ -15,6 +15,7 @@ namespace LogicLayer
     {
 
         List<Route> RetrieveFutureRoutesForDriver(int? driverId);
-
+        List<Route> RetrieveAllRoutes();
+        int CreateRouteAndRetrieveRouteId(Route route);
     }
 }

@@ -183,7 +183,7 @@
                         <!--Users Controls-->
                         <Button Name="btnResetPassword" Visibility="Collapsed" Grid.Row="0" Grid.Column="1" Click="btnResetPassword_Click">Reset Password</Button>
                         <Button Name="btnCreateUserAccount" Grid.Row="0" Grid.Column="2" Content="Create Account" Click="btnCreateNewUser_Click" Margin="10 0 0 0" HorizontalAlignment="left"/>
-                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="3" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="3" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditUserAccount_Click"/>
                     </Grid>
                     <!--End of Users Controls Grid -->
                 </Grid>
@@ -766,6 +766,50 @@
                 <!--End of Deliveries Grid-->
             </TabItem>
             <!--End of Deliveries Tab-->
+
+            <!--Routes Tab-->
+            <TabItem Name="tabRoutes" Header="Routes" Selector.Selected="tabRoutes_Selected" >
+                <!--Routes Grid-->
+                <Grid Margin="0">
+                    <!--Grid Definitions-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <!--End of Grid Definitions-->
+                    <!--Routes List View-->
+                    <ListView Name="lvRoutes" Margin="10">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Driver" Width="150" DisplayMemberBinding="{Binding Driver}"/>
+                                    <GridViewColumn Header="Vehicle ID" Width="150" DisplayMemberBinding="{Binding VehicleId}"/>
+                                    <GridViewColumn Header="Assigned Date" Width="150" DisplayMemberBinding="{Binding AssignedDate}"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <!--End of Routes List View-->
+                    <!--Routes Buttons Grid-->
+                    <Grid Grid.Row="1">
+                        <!--Grid Definitions-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+
+                        <Button Name="btnCreateRoute" Grid.Column="2" Margin="5" Content="Create Route" Click="btnCreateRoute_Click"  />
+                    </Grid>
+                    <!--End of Routes Buttons Grid-->
+                </Grid>
+                <!--End of Routes Grid-->
+            </TabItem>
+            <!--End of Routes Tab-->
+
             <!--Pickups Tab-->
             <TabItem Name="tabPickups" Header="Pickups" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabPickups_Selected" >
                 <Grid>
