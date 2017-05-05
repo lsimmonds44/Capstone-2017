@@ -2753,6 +2753,7 @@ namespace WpfPresentationLayer
                     var result = ApprovalWindow.ShowDialog();
                     if (result == true)
                     {
+                        MessageBox.Show("Approve products for the supplier to create an agreement.");
                         var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
                                     _agreementManager, "Editing", currentSupplier);
                         frmEditSupplier.btnSubmit.Visibility = Visibility.Hidden;
@@ -2835,28 +2836,6 @@ namespace WpfPresentationLayer
 
         /// <summary>
         /// Ryan Spurgetis
-        /// 4/13/2017
-        /// 
-        /// Prompts the user to create an agreement for supplier after clicking approve supplier.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="supplier"></param>
-        //public void createAgreementForApprovedSupplier(Supplier supplier)
-        //{
-        //    MessageBox.Show("Select products for the approved supplier to create an agreement.");
-
-        //    try
-        //    {
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message + ex.StackTrace);
-        //    }
-        //    GlobalRefresh();
-        //}
-
-        /// <summary>
-        /// Ryan Spurgetis
         /// 4/20/2017
         /// 
         /// View agreements of supplier selected in supplier catalogue
@@ -2918,8 +2897,6 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void tabPickups_Selected(object sender, RoutedEventArgs e)
         {
-
-
             try
             {
                 _pickupsList = _pickupManager.RetrievePickupLinesReceived();
@@ -2955,9 +2932,10 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCreateLotFromPickup_Click(object sender, RoutedEventArgs e)
         {
+            _employee = _employeeManager.RetrieveEmployeeByUserName(_user.UserName);
             if (dgPickups.SelectedIndex >= 0)
             {
-                var frmCreateLot = new frmAddProductLot(_pickupManager, (PickupLine)dgPickups.SelectedItem);
+                var frmCreateLot = new frmAddProductLot(_pickupManager, (PickupLine)dgPickups.SelectedItem, _employee);
                 frmCreateLot.Show();
             }
             else
@@ -2969,7 +2947,7 @@ namespace WpfPresentationLayer
 
         private void tabCommercialCustomer_GotFocus(object sender, RoutedEventArgs e)
         {
-            dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
+            //dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
             //dgCustomer.ItemsSource
         }
 
