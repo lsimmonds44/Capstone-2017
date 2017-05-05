@@ -183,7 +183,7 @@
                         <!--Users Controls-->
                         <Button Name="btnResetPassword" Visibility="Collapsed" Grid.Row="0" Grid.Column="1" Click="btnResetPassword_Click">Reset Password</Button>
                         <Button Name="btnCreateUserAccount" Grid.Row="0" Grid.Column="2" Content="Create Account" Click="btnCreateNewUser_Click" Margin="10 0 0 0" HorizontalAlignment="left"/>
-                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="3" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left"/>
+                        <Button Name="btnEditUserAccount" Grid.Row="0" Grid.Column="3" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditUserAccount_Click"/>
                     </Grid>
                     <!--End of Users Controls Grid -->
                 </Grid>

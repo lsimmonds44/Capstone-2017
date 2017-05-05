@@ -3027,5 +3027,21 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
+
+        private void btnEditUserAccount_Click(object sender, RoutedEventArgs e)
+        {
+            User user = (User)dgUsers.SelectedItem;
+            if (user!= null)
+            {
+                var form = new frmCreateNewUser(user);
+                form.ShowDialog();
+                GlobalRefresh();
+            }
+            else
+            {
+                MessageBox.Show("Please select a user to edit.");
+            }
+            
+        }
     } // end of class
 } // end of namespace 
