@@ -280,6 +280,8 @@
     <Content Include="Images\Background\custom-bg41.jpg" />
     <Content Include="Images\Background\herbs.jpg" />
     <Content Include="Images\cart.png" />
+    <Content Include="Images\CartImages\icon-minus.png" />
+    <Content Include="Images\CartImages\icon-plus.png" />
     <Content Include="Images\Footer\footerlogo.png" />
     <Content Include="Images\Gallery\bracoli.jpg" />
     <Content Include="Images\Gallery\carrot.jpeg" />
@@ -330,6 +332,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.fs.stepper.min.js" />
     <Content Include="Scripts\jquery.mixitup.min.js" />
     <Content Include="Scripts\jquery.scrollme.min.js" />
     <Content Include="Scripts\jquery.themepunch.revolution.min.js" />
@@ -438,6 +441,7 @@
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\SupplierWithAgreements\UpdateAgreements.cshtml" />
     <Content Include="Views\Home\ApplicationSuccess.cshtml" />
+    <Content Include="Views\Shared\_CartLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,9 +2,101 @@
 
 @{
     ViewBag.Title = "View Cart";
+    Layout = "~/Views/Shared/_CartLayout.cshtml";
 }
 
-<h2>Cart:</h2>
+
+@*Cart Content*@
+<section class="store-cart style3">
+    <div class="container">
+        <div class="cart-items wow fadeInDown">
+            <table>
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name:</th>
+                    <th>Grade:</th>
+                    <th>Quantity:</th>
+                    <th>Total:</th>
+                    <th>Remove:</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var cartItem in Model.ItemsInCart)
+                    {
+                        <tr>
+                            <td class="item-thumb">
+                                <figure>
+                                    <img src="@Url.Action("PictureOf", "Products", new {id = cartItem.ProductID})" width="100" height="100" alt="Product Image" />
+                                </figure>
+                            </td>
+
+                            <td class="item-desc">@cartItem.Name</td>
+
+                            <td>
+                                @cartItem.GradeID
+                            </td>
+
+                            <td>@cartItem.Quantity</td>
+
+                            <td>@cartItem.Total</td>
+
+                            <td class="remove-item">
+                                <form action="RemoveFromCart" method="post">
+                                    <input type="hidden" name="userId" value="@cartItem.UserID" />
+                                    <input type="hidden" name="productId" value="@cartItem.ProductID" />
+                                    <input type="hidden" name="quantity" value="@cartItem.Quantity" />
+                                    <input type="hidden" name="gradeId" value="@cartItem.GradeID" />
+                                    <input type="submit" class="btn btn-sm btn-warning" value="Remove" name="submit" />
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @*Order Summary*@
+        <div class="estimate-shopping wow fadeInDown">
+            <div class="row">
+                @*<div class="cart-subtotal-container col-md-3 col-md-offset-9">
+                    <h6>Cart Subtotal</h6>
+                    <div class="subtotals">
+                        <div class="subtotal">
+                            <h6>Subtotal:</h6>
+                            <span>
+                                <strong>PLEASE ADD TOTAL FUNCTIONALITY HERE IF POSSIBLE</strong>
+                            </span>
+                        </div>
+                        <div class="subtotal total">
+                            <h6>Total:</h6>
+                            <span>
+                                <strong>PLEASE ADD TOTAL FUNCTIONALITY HERE IF POSSIBLE</strong>
+                            </span>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="col-md-12 align-right">
+                    @Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @class = "custom-button button-style3 large" })
+                    @Html.ActionLink("Checkout now", "Checkout", "Cart", null, new { @class = "custom-button button-style3 large filled" })
+                </div>
+            </div>
+        </div>
+        @*End of Order Summary*@
+
+    </div>
+</section>
+@*End of Cart Content*@
+
+
+
+
+@*Original Copy*@
+
+@*<h2>Cart:</h2>
 <table>
         <tr>
             <th>Product Name:</th>
@@ -34,5 +126,5 @@
 <div class="text-center">
     @Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Checkout now", "Checkout", "Cart", null, new { @class = "btn btn-primary" })
-</div>
+</div>*@
 
