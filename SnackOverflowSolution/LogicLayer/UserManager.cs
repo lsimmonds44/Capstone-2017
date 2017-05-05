@@ -70,22 +70,15 @@ namespace LogicLayer
                 User user = new User
                 {
                     UserId = 0,
-                    FirstName = "NO",
-                    LastName = "APPROVAL"
+                    FirstName = "",
+                    LastName = ""
 
                 };
                 return user;
             }
             else
             {
-
-                User user = new User
-                {
-                    UserId = 0,
-                    FirstName = "NO",
-                    LastName = "APPROVAL"
-
-                };
+                User user = RetrieveUser((int)approvedBy); 
                 return user;
             }
         }

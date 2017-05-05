@@ -98,13 +98,13 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Customer Date Grid-->
-                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="Customer_Selected" Grid.ColumnSpan="4">
+                    <DataGrid Name="dgCustomer" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="Customer_Selected" Grid.ColumnSpan="4">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" Width="*"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
                             <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FederalTaxId}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Approved" Binding="{Binding IsApproved}" Width="auto"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedByName}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -152,7 +152,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Users Data Grid-->
-                    <DataGrid Name="dgUsers" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended">
+                    <DataGrid Name="dgUsers" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="*"/>
                             <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*"/>
@@ -207,7 +207,7 @@
                     </Grid.ColumnDefinitions>
                     <!--Grid Definitions-->
                     <!--Charity Data Grid-->
-                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Name="dgCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" GridLinesVisibility="Horizontal" Name="dgCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
                             <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
@@ -241,7 +241,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Employee Data Grid-->
-                    <DataGrid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="5" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  Grid.ColumnSpan="5" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" Width="100"/>
                             <DataGridTextColumn Header="UserID" Binding="{Binding UserId}" Width="100"/>
@@ -386,7 +386,7 @@
                     </Grid>
                     <!--End of Supplier Status Grid-->
                     <!--Suppliers Data Grid-->
-                    <DataGrid Name="dgSuppliers" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    <DataGrid Name="dgSuppliers" Grid.Row="1" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
                     	CanUserDeleteRows="False" >
                     <DataGrid.Columns>
                         
@@ -723,7 +723,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Vehicle Data Grid-->
-                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_Mouse_Double_Click">
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_Mouse_Double_Click">
                     </DataGrid>
                     <!--End of Vehicle Data Grid-->
                     <!--Vehicle Management Control Grid-->
@@ -835,7 +835,7 @@
                     </Grid.ColumnDefinitions>
                     <!--Pickups Datagrid-->
                     <DataGrid x:Name="dgPickups" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionMode="Single"
-                              IsSynchronizedWithCurrentItem="True" CanUserReorderColumns="False" ItemsSource="{Binding}" CanUserDeleteRows="False" IsReadOnly="True"
+                              IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" CanUserReorderColumns="False" ItemsSource="{Binding}" CanUserDeleteRows="False" IsReadOnly="True"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Pickup ID" Binding="{Binding PickupId}" Width="*"/>
