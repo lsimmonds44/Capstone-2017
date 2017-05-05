@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
         <!--End of Grid Definitions-->
         <!--Menu Group Controls -->
-        <Menu Grid.Row="0" Background="#FF7A876F" >
+        <Menu Grid.Row="0" Background="#FF7A876F" Foreground="White">
             <MenuItem  Header="File" >
                 <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
             </MenuItem>
@@ -102,10 +102,10 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" Width="*"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
-                            <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}" Width="*"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
                             <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FederalTaxId}" Width="*"/>
-                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Approved" Binding="{Binding IsApproved}" Width="auto"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Customer Data Grid -->
@@ -164,7 +164,7 @@
                             <DataGridTextColumn Header="Email Address" Binding="{Binding EmailAddress}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*"/>
-                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Users Data Grid-->
@@ -386,8 +386,21 @@
                     </Grid>
                     <!--End of Supplier Status Grid-->
                     <!--Suppliers Data Grid-->
-                    <DataGrid Name="dgSuppliers" Grid.Row="1" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
-                    	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
+                    <DataGrid Name="dgSuppliers" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                    	CanUserDeleteRows="False" >
+                    <DataGrid.Columns>
+                        
+                        <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="*"/>
+                        <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="*"/>
+                        <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddress}" Width="*"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding FarmCity}" Width="*"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding FarmState}" Width="*"/>
+                        <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="*"/>
+                        <DataGridCheckBoxColumn Header="Is Approved" Binding="{Binding IsApproved}" Width="auto"/>
+                        <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                        <DataGridCheckBoxColumn Header="Active"  Binding="{Binding Active}" Width="auto"/>
+                    </DataGrid.Columns>
+                    </DataGrid>
                     <!--Supplier Controls Grid-->
                     <Grid Background="#FFE5E5E5" Grid.Row="2">
                         <!--Grid Definitions-->

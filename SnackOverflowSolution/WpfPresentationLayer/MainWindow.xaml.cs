@@ -2947,7 +2947,7 @@ namespace WpfPresentationLayer
 
         private void tabCommercialCustomer_GotFocus(object sender, RoutedEventArgs e)
         {
-            dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
+            //dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
             //dgCustomer.ItemsSource
         }
 

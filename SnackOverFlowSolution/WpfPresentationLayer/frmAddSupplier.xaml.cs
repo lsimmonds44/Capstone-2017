@@ -36,6 +36,7 @@ namespace WpfPresentationLayer
         List<Product> _notAgreedProducts;
         List<Product> _agreedProducts = new List<Product>();
         List<Agreement> _agreements;
+        List<string> _usernames;
 
         /// <summary>
         /// Christian Lopez
@@ -72,6 +73,9 @@ namespace WpfPresentationLayer
                 _type = type;
                 supplierFound = true;
             }
+            
+            _usernames = _userManager.RetrieveFullUserList().Select(u => u.UserName).ToList();
+            cboUsername.ItemsSource = _usernames;
         }
 
         /// <summary>
@@ -88,37 +92,29 @@ namespace WpfPresentationLayer
             User supplierUser = null;
             resetForm();
 
-            if (txtUsername.Text.Length != 0)
-            {
-                try
-                {
-                    supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
-                }
-                catch (Exception ex)
-                {
 
-                    if (null != ex.InnerException)
-                    {
-                        MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    return;
-                }
-            }
-            else
+            try
             {
-                MessageBox.Show("Please enter a username");
-                txtUsername.Focus();
+                supplierUser = _userManager.RetrieveUserByUserName((string)cboUsername.SelectedItem);
+            }
+            catch (Exception ex)
+            {
+
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 return;
             }
 
             // Check whether or not we actually got a user
             if (supplierUser == null)
             {
-                MessageBox.Show("Unable to find user: " + txtUsername.Text);
+                MessageBox.Show("Unable to find user: " + (string)cboUsername.SelectedItem);
             }
             else
             {
@@ -141,7 +137,7 @@ namespace WpfPresentationLayer
                     cboFarmState.SelectedIndex = 0;
                 }
                 txtFarmAddress.Text = supplierUser.AddressLineOne + " " + (supplierUser.AddressLineTwo ?? "");
-                
+
                 // Let the _employee modify the form
                 txtPhone.Text = supplierUser.Phone;
                 txtFarmAddress.IsEnabled = true;
@@ -215,7 +211,7 @@ namespace WpfPresentationLayer
         /// <returns></returns>
         private int getDropdown(string stateAbr)
         {
-            
+
             // The way to get the index for the drop down combo box
             return binarySearchStates(stateAbr, 0, States.Length, States);
         }
@@ -277,7 +273,7 @@ namespace WpfPresentationLayer
             // See if we even have a user found for the supplier
             if (!supplierFound && null == _supplierToEdit)
             {
-                MessageBox.Show("Please look up the supplier by the username.");
+                MessageBox.Show("Please select a supplier.");
             }
             else
             {
@@ -286,15 +282,15 @@ namespace WpfPresentationLayer
                     try
                     {
                         validateInputs();
-                        User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
+                        User supplierUser = _userManager.RetrieveUserByUserName((string)cboUsername.SelectedItem);
                         Supplier supplier = new Supplier()
                         {
-                            UserId = supplierUser.UserId, 
+                            UserId = supplierUser.UserId,
                             Active = chkActive.IsChecked.Value,
                             ApprovedBy = _currentUser.UserId,
                             FarmName = txtFarmName.Text,
                             FarmAddress = txtFarmAddress.Text,
-                            FarmCity = txtFarmCity.Text, 
+                            FarmCity = txtFarmCity.Text,
                             FarmState = cboFarmState.Text,
                             FarmTaxID = txtFarmTaxId.Text
                         };
@@ -346,7 +342,7 @@ namespace WpfPresentationLayer
                     try
                     {
                         validateInputs();
-                        User supplierUser = _userManager.RetrieveUserByUserName(txtUsername.Text);
+                        User supplierUser = _userManager.RetrieveUserByUserName((string)cboUsername.SelectedItem);
 
                         // Actually try to create the supplier
                         if (_supplierManager.ApplyForSupplierAccount(new Supplier()
@@ -538,7 +534,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                
+
                 throw new ApplicationException("Please enter a valid farm tax ID");
             }
             if (txtFarmTaxId.Text.Length != 9)
@@ -582,11 +578,10 @@ namespace WpfPresentationLayer
                 try
                 {
                     this.Title = "View Application Details";
-                    btnLookup.IsEnabled = false;
-                    txtUsername.IsEnabled = false;
+                    cboUsername.IsEnabled = false;
                     btnSubmit.IsEnabled = false;
                     User supplierUser = _userManager.RetrieveUser(_supplierToEdit.UserId);
-                    txtUsername.Text = supplierUser.UserName;
+                    cboUsername.Text = supplierUser.UserName;
                     txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
                     txtPhone.Text = supplierUser.Phone;
                     txtFarmName.Text = _supplierToEdit.FarmName;
@@ -607,11 +602,10 @@ namespace WpfPresentationLayer
             {
                 try
                 {
-                    btnLookup.IsEnabled = false;
-                    txtUsername.IsEnabled = false;
+                    cboUsername.IsEnabled = false;
                     btnSubmit.Content = "Update";
                     User supplierUser = _userManager.RetrieveUser(_supplierToEdit.UserId);
-                    txtUsername.Text = supplierUser.UserName;
+                    cboUsername.Text = supplierUser.UserName;
                     txtName.Text = supplierUser.FirstName + " " + supplierUser.LastName;
                     txtPhone.Text = supplierUser.Phone;
                     txtFarmName.Text = _supplierToEdit.FarmName;
@@ -635,7 +629,7 @@ namespace WpfPresentationLayer
                         MessageBox.Show(ex.Message);
                     }
                 }
-                
+
             }
             try
             {
@@ -696,7 +690,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show(ex.Message);
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -787,6 +781,11 @@ namespace WpfPresentationLayer
 
                 MessageBox.Show("Unable to create agreement: " + ex.Message + ex.StackTrace); ;
             }
+        }
+
+        private void cboUsername_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnLookup_Click(sender, e);
         }
     } // End of class
 } // End of namespace
