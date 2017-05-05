@@ -109,8 +109,8 @@ namespace DataAccessLayer
                         SupplierId = reader.GetInt32(1),
                         ProductId = reader.GetInt32(2),
                         Quantity = reader.GetInt32(3),
-                        ExpirationDate = reader.GetDateTime(4)
-
+                        ExpirationDate = reader.GetDateTime(4),
+                        Price = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5)
                     };
                 }
             }
@@ -187,65 +187,6 @@ namespace DataAccessLayer
 
             return supplierProductLots;
         }
-
-        /// <summary>
-        /// Ethan Jorgensen
-        /// Created: 
-        /// 2017/04/13
-        /// 
-        /// Gets a list of product lots from the database.
-        /// </summary>
-        /// 
-        /// <remarks>
-        /// Aaron Usher
-        /// Updated:
-        /// 2017/04/28
-        /// 
-        /// Standardzied method.
-        /// </remarks>
-        /// 
-        /// <returns>A list of all supplier product lots.</returns>
-        public static List<SupplierProductLot> RetrieveSupplierProductLots()
-        {
-            var supplierProductLots = new List<SupplierProductLot>();
-
-            var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_supplier_product_lot_list";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        supplierProductLots.Add(new SupplierProductLot()
-                        {
-                            SupplierProductLotId = reader.GetInt32(0),
-                            SupplierId = reader.GetInt32(1),
-                            ProductId = reader.GetInt32(2),
-                            Quantity = reader.GetInt32(3),
-                            ExpirationDate = reader.GetDateTime(4),
-                            Price = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5)
-                        });
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return supplierProductLots;
-        }
-
         /// <summary>
         /// Aaron Usher
         /// Updated: 

@@ -168,8 +168,16 @@ namespace MVCPresentationLayer.Controllers
                        context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
             //If not approved, HasOrAssignRoles returns false
-            if (!HasOrAssignRoles(context, model) )//&& user != null)
+            if (!HasOrAssignRoles(context, model))//&& user != null)
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
                 return View("ApprovalStatus");
+            }
+            
+                
 
             //Finds username in case of email is provided during login
             if (user != null) model.UserName = user.UserName;
@@ -787,6 +795,12 @@ namespace MVCPresentationLayer.Controllers
         /// 
         /// Assigns Roles to Users Based On Approval Status from Snack Overflow
         /// </summary>
+        /// <remarks>
+        /// Modified by Christian Lopez
+        /// 2017/05/05
+        /// 
+        /// Fix introduced bug when logging in with unregistered user
+        /// </remarks>
         /// <param name="context">DbContext</param>
         /// <param name="model">Login View Model</param>
         /// <returns>Boolean indicatinng Role Assignment Success</returns>
@@ -809,12 +823,22 @@ namespace MVCPresentationLayer.Controllers
 
             }
 
-            var identityUserRoles = user.Roles;
-            if (identityUserRoles.Count != 0)
-                return true;
+            if (null == userFound)
+            {
+                model.Password = "";
+                ModelState.AddModelError("Password", "Incorrect username or password");
+            }
+
+            //var identityUserRoles = user.Roles;
+            //if (identityUserRoles.Count != 0)
+            //    return true;
 
             if (null != userFound)
             {
+                var identityUserRoles = user.Roles;
+                if (identityUserRoles.Count != 0)
+                    return true;
+                
                 bool[] roles = null;
                 try
                 {

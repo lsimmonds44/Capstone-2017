@@ -63,6 +63,33 @@ namespace LogicLayer
             }
         }
 
+        public User RetrieveUser(int? approvedBy)
+        {
+            if (approvedBy == null)
+            {
+                User user = new User
+                {
+                    UserId = 0,
+                    FirstName = "NO",
+                    LastName = "APPROVAL"
+
+                };
+                return user;
+            }
+            else
+            {
+
+                User user = new User
+                {
+                    UserId = 0,
+                    FirstName = "NO",
+                    LastName = "APPROVAL"
+
+                };
+                return user;
+            }
+        }
+
         /// <summary>
         /// Bobby Thorne
         /// 2/11/17
@@ -184,6 +211,79 @@ namespace LogicLayer
         public string CreateNewUser(User user, string password, string confirmPassword)
         {
 
+            var result = ValidateUser(user, password, confirmPassword);
+            if (result != "")
+            {
+                return result;
+            }
+            user.PasswordSalt = RandomString(32);
+            user.PasswordHash = HashSha256(password + user.PasswordSalt);
+
+            try
+            {
+
+                if (1 == UserAccessor.CreateUser(user))
+                {
+                    return "Created";
+                }
+            }
+            catch
+            {
+                return "UnableToCreate";
+            }
+
+            return "UnableToCreate";
+
+        }
+        /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/05/04
+        /// 
+        /// Updates a user in the database, but does not update their password.
+        /// </summary>
+        /// <param name="oldUser"></param>
+        /// <param name="newUser"></param>
+        /// <returns></returns>
+        public string UpdateUser(User oldUser, User newUser)
+        {
+            string result = ValidateUser(newUser);
+            if (result != "")
+            {
+                try
+                {
+                    if (1 == UserAccessor.UpdateUser(oldUser, newUser))
+                    {
+                        result = "Updated";
+                    }
+                    else
+                    {
+                        throw new Exception("Unable to update user");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+            return result;
+        }
+
+        private string ValidateUser(User user, string password, string confirmPassword)
+        {
+            if (password.Length < 7)
+            {
+                return "Invalid Password";
+            }
+            if (password != confirmPassword)
+            {
+                return "Password No Match";
+            }
+            return ValidateUser(user);
+        }
+
+        private string ValidateUser(User user)
+        {
             if (user.UserName.Length > 20 || user.UserName.Length < 4)
             {
                 return "Invalid Username";
@@ -205,14 +305,7 @@ namespace LogicLayer
             {
                 return "Invalid LastName";
             }
-            if (password.Length < 7)
-            {
-                return "Invalid Password";
-            }
-            if (password != confirmPassword)
-            {
-                return "Password No Match";
-            }
+
 
             if (user.FirstName == null || user.FirstName.Equals("") || user.FirstName.Equals(" "))
             {
@@ -240,29 +333,7 @@ namespace LogicLayer
             {
                 return "Invalid Email";
             }
-            user.PasswordSalt = RandomString(32);
-            user.PasswordHash = HashSha256(password + user.PasswordSalt);
-
-            //if (!UserAccessor.UserNameCheck(user.UserName))
-            //{
-            //    //need to add sp_UserName_Check to see if another user has the same username
-            //      return "Used Username"
-            //}
-            try
-            {
-
-                if (1 == UserAccessor.CreateUser(user))
-                {
-                    return "Created";
-                }
-            }
-            catch
-            {
-                return "UnableToCreate";
-            }
-
-            return "UnableToCreate";
-
+            return "";
         }
 
         /// <summary>

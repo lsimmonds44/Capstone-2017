@@ -1,7 +1,9 @@
 ﻿using DataObjects;
 using LogicLayer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
@@ -28,13 +30,6 @@ namespace WpfPresentationLayer
         private IEmployeeManager _employeeManager = new EmployeeManager();
         private IProductOrderManager _orderManager = new ProductOrderManager();
         private IVehicleManager _vehicleManager = new VehicleManager();
-        List<ProductOrder> _currentOpenOrders;
-        List<Employee> _employeeList;
-        List<Charity> _charityList;
-        private List<ProductLot> _productLotList;
-        private List<CommercialCustomer> _commercialCustomers;
-        private List<Vehicle> _vehicleList;
-        private List<Supplier> _supplierList;
         private IUserManager _userManager = new UserManager();
         private ISupplierManager _supplierManager = new SupplierManager();
         private IProductLotManager _productLotManager = new ProductLotManager();
@@ -43,32 +38,40 @@ namespace WpfPresentationLayer
         private IWarehouseManager _warehouseManager = new WarehouseManager();
         private IAgreementManager _agreementManager = new AgreementManager();
         private IPickupManager _pickupManager = new PickupManager();
-        private List<Delivery> _deliveries;
-        private List<Warehouse> _warehouseList;
-        private ProductLotSearchCriteria _productLotSearchCriteria;
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
         private ISupplierInventoryManager _supplierInventoryManager;
         private ILocationManager _locationManager;
-        
-
-
-        Employee _employee = null;
-        Supplier _supplier = null;
-        CommercialCustomer _commercialCustomer = null;
-        Charity _charity = null;
-        User _user = null;
-        Role _role = null;
-
+		private IRouteManager _routeManager = new RouteManager();
         private IPackageManager _packageManager = new PackageManager();
-        List<Package> _packageList = null;
         private IOrderStatusManager _orderStatusManager = new OrderStatusManager();
-        List<string> _orderStatusList = null;
-        ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
-        List<SupplierInvoice> _supplierInvoiceList;
-        List<string> _supplierApplicationStatus = null;
-        List<User> _userList = null;
+        private ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
+
+        private List<ProductOrder> _currentOpenOrders;
+        private List<Employee> _employeeList;
+        private List<Charity> _charityList;
+        private List<Product> _currentProductList;
+        private List<ProductLot> _productLotList;
+        private List<CommercialCustomer> _commercialCustomers;
+        private List<Vehicle> _vehicleList;
+        private List<Supplier> _supplierList;
+        private List<Delivery> _deliveries;
+        private List<Warehouse> _warehouseList;
+        private List<Package> _packageList = null;
+        private List<string> _orderStatusList = null;
+        private List<SupplierInvoice> _supplierInvoiceList;
+        private List<string> _supplierApplicationStatus = null;
+        private List<User> _userList = null;
+        private List<PickupLine> _pickupsList = null;
         private List<SupplierCatalogViewModel> _parsedSupplierCatalogueData = null;
+
+        private Employee _employee = null;
+        private Supplier _supplier = null;
+        private CommercialCustomer _commercialCustomer = null;
+        private Charity _charity = null;
+        private User _user = null;
+        private Role _role = null;
+        private ProductLotSearchCriteria _productLotSearchCriteria;
 
         public MainWindow()
         {
@@ -101,6 +104,96 @@ namespace WpfPresentationLayer
         }
 
         /// <summary>
+        /// Aaron Usher
+        /// Created: 2017/05/05
+        /// 
+        /// Helper method that refreshes all datagrids.
+        /// </summary>
+        private void GlobalRefresh()
+        {
+
+            DataGrid[] datagrids =
+            {
+                dgCharity,
+                dgCustomer,
+                dgEmployee,
+                dgMyInvoices,
+                dgPickups,
+                dgProduct,
+                dgProductList,
+                dgProductListAgreements,
+                dgProductLots,
+                dgSupplierCatalogue,
+                dgSuppliers,
+                dgUsers,
+                dgWarehouses,
+                dgVehicle
+            };
+            foreach (var datagrid in datagrids)
+            {
+                datagrid.ItemsSource = null;
+            }
+            try
+            {
+                _charityList = _charityManager.RetrieveCharityList();
+                dgCharity.ItemsSource = _charityList;
+                _employeeList = _employeeManager.RetrieveEmployeeList();
+                dgEmployee.ItemsSource = _employeeList;
+                _supplierInvoiceList = _supplierInvoiceManager.RetrieveAllSupplierInvoices();
+                dgSuppliers.ItemsSource = _supplierList;
+                _pickupsList = _pickupManager.RetrievePickupLinesReceived();
+                dgPickups.ItemsSource = _pickupsList;
+                _currentProductList = _productManager.RetrieveProducts();
+                dgProduct.ItemsSource = _currentProductList;
+
+                _productLotList = _productLotManager.RetrieveProductLots();
+                dgProductLots.ItemsSource = _productLotList;
+                _supplierList = _supplierManager.ListSuppliers();
+
+                var filteredSupplierList = _supplierList;
+                if (cboSupplierStatus.SelectedItem != null)
+                {
+                    if ((string)cboSupplierStatus.SelectedValue == "Pending")
+                    {
+                        filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == false);
+                    }
+                    else if ((string)cboSupplierStatus.SelectedValue == "Approved")
+                    {
+                        filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == true);
+                    }
+                }
+
+                dgSuppliers.ItemsSource = filteredSupplierList;
+                _userList = _userManager.RetrieveFullUserList();
+                dgUsers.ItemsSource = _userList;
+                _vehicleList = _vehicleManager.RetrieveAllVehicles();
+                dgVehicle.ItemsSource = _vehicleList;
+                _warehouseList = _warehouseManager.ListWarehouses();
+                dgWarehouses.ItemsSource = _warehouseList;
+                _commercialCustomers = _customerManager.RetrieveCommercialCustomers();
+                dgCustomer.ItemsSource = _commercialCustomers;
+                _parsedSupplierCatalogueData = parseIntoSupplierCatalog(_supplierList);
+                dgSupplierCatalogue.ItemsSource = _parsedSupplierCatalogueData;
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+            }
+            catch (Exception ex)
+            {
+                if (null != ex.InnerException)
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message + "\n\n" + ex.StackTrace);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+                }
+            }
+            foreach (var datagrid in datagrids)
+            {
+                datagrid.Items.Refresh();
+            }
+        }
+
+        /// <summary>
         /// Eric Walton
         /// 2017/02/06
         /// 
@@ -116,7 +209,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void Create_CommercialCustomer_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (cboCustomerType.SelectedItem as String == "Commercial")
             {
                 try
@@ -138,6 +231,7 @@ namespace WpfPresentationLayer
             {
                 // If creating a residential customer is added to desktop code will go here to create one.
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -230,7 +324,7 @@ namespace WpfPresentationLayer
             if (dgCustomer.SelectedIndex >= 0)
             {
                 var selectedCustomer = (CommercialCustomer)dgCustomer.SelectedItem;
-         
+
                 if (selectedCustomer.Active)
                 {
                     try
@@ -249,13 +343,13 @@ namespace WpfPresentationLayer
                 else
                 {
                     MessageBox.Show(selectedCustomer.CommercialId + " Must be active");
-                }   
+                }
             }
             else
             {
                 MessageBox.Show("Must select a user to create an order!");
             }
-            
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -305,6 +399,7 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Please Select an Employee to Edit.");
             }
+            GlobalRefresh();
         }
 
 
@@ -394,7 +489,7 @@ namespace WpfPresentationLayer
                             else
                             {
                                 MessageBox.Show("Employee table is empty or DB connection error." + "\n\n" + ex.Message);
-                            }                           
+                            }
                         }
                         statusMessage.Content = "Welcome " + _user.UserName;
                         showTabs(); // This needs to be updated so it will show just one that is 
@@ -470,7 +565,9 @@ namespace WpfPresentationLayer
         private void btnCreateNewUser_Click(object sender, RoutedEventArgs e)
         {
             frmCreateNewUser fCU = new frmCreateNewUser();
-            fCU.ShowDialog();
+            var x = fCU.ShowDialog();
+            GlobalRefresh();
+
         }
         /// <summary>
         /// Alissa Duffy
@@ -547,10 +644,11 @@ namespace WpfPresentationLayer
 
                 }
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            GlobalRefresh();
         }
         /// <summary>
         /// Alissa Duffy
@@ -588,6 +686,7 @@ namespace WpfPresentationLayer
             EmployeeViewInstance.SetEditable();
             EmployeeViewInstance.ShowDialog();
             tabEmployee_Selected(sender, e);
+            GlobalRefresh();
         }
         /// <summary>
         /// Alissa Duffy
@@ -697,6 +796,7 @@ namespace WpfPresentationLayer
                 }
             }
             tabProductLot_Selected(sender, e);
+            GlobalRefresh();
         }
         /// <summary>
         /// Christian Lopez
@@ -722,6 +822,7 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Supplier added!");
                 tabSupplier_Selected(sender, e);
             }
+            GlobalRefresh();
         }
         /// <summary>
         /// Christian Lopez
@@ -762,6 +863,7 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Please select a product lot to create a new inspection");
             }
+            GlobalRefresh();
         }
         /// <summary>
         /// Alissa Duffy
@@ -915,6 +1017,7 @@ namespace WpfPresentationLayer
             var frmAddProduct = new frmAddProduct(_user, _productManager);
             frmAddProduct.ShowDialog();
             tabProduct_Selected(sender, e);
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -1010,7 +1113,9 @@ namespace WpfPresentationLayer
         private void btnAddNewVehicle_Click(object sender, RoutedEventArgs e)
         {
             var addNewVehicleWindow = new frmAddEditVehicle();
-            addNewVehicleWindow.Show();
+            addNewVehicleWindow.ShowDialog();
+            GlobalRefresh();
+
         }
         /// <summary>
         /// Alissa Duffy
@@ -1110,6 +1215,7 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Application Submitted!");
                 tabSupplier_Selected(sender, e);
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -1164,6 +1270,7 @@ namespace WpfPresentationLayer
                     }
                 }
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -1184,7 +1291,9 @@ namespace WpfPresentationLayer
                 UserManager usrMgr = new UserManager();
                 _userList = usrMgr.RetrieveFullUserList();
                 dgUsers.ItemsSource = _userList;
-            }catch(Exception){
+            }
+            catch (Exception)
+            {
                 MessageBox.Show("There are currently no users");
             }
             if ("ADMIN" == _user.UserName)
@@ -1258,6 +1367,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show(ex.Message);
                 }
             }
+            cboSupplierStatus.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -1306,6 +1416,7 @@ namespace WpfPresentationLayer
         {
             frmProductCategory prodCategoryWindow = new frmProductCategory();
             prodCategoryWindow.Show();
+            GlobalRefresh();
         }
         /// <summary>
         /// Alissa Duffy
@@ -1342,6 +1453,7 @@ namespace WpfPresentationLayer
                 frmCharityApproval.ShowDialog();
                 tabCharity_Selected(sender, e);
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -1375,6 +1487,7 @@ namespace WpfPresentationLayer
                     tabSupplier_Selected(sender, e);
                 }
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -1465,14 +1578,15 @@ namespace WpfPresentationLayer
                 }
                 else
                 {
-                    MessageBox.Show("Please select a delivery that is ready for shipment");
+                    MessageBox.Show("Please select a delivery that is Ready for Assignment");
                 }
 
             }
             else
             {
-                MessageBox.Show("Please select a delivery that is ready for shipment");
+                MessageBox.Show("Please select a delivery that is Ready for Assignment");
             }
+            GlobalRefresh();
         }
         /// <summary>
         /// Created by Natacha Ilunga
@@ -1507,6 +1621,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show(ex.Message);
                 }
             }
+
 
         }
         /// <summary>
@@ -1559,7 +1674,7 @@ namespace WpfPresentationLayer
         private void btnLoadProductsBySupplierId_Click(object sender, MouseButtonEventArgs e)
         {
 
-            var supplierData =  (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
+            var supplierData = (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
             dgProductListAgreements.Visibility = Visibility.Hidden;
             dgProductList.Visibility = Visibility.Visible;
             RefreshSupplierProductDataGrid(supplierData.SupplierID);
@@ -1672,6 +1787,7 @@ namespace WpfPresentationLayer
                 selectedVehicle = (Vehicle)dgVehicle.SelectedItem;
                 frmAddMaintenanceRecord addMaint = new frmAddMaintenanceRecord(selectedVehicle.VehicleID);
                 addMaint.Show();
+                GlobalRefresh();
             }
 
         }
@@ -1842,7 +1958,7 @@ namespace WpfPresentationLayer
                 dgMyInvoices.Visibility = Visibility.Visible;
                 lblMyInvoices.Visibility = Visibility.Visible;
             }
-            catch 
+            catch
             {
                 dgMyInvoices.Visibility = Visibility.Hidden;
                 lblMyInvoices.Visibility = Visibility.Hidden;
@@ -1878,11 +1994,11 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         public void tabProduct_Selected(object sender, RoutedEventArgs e)
         {
-            List<Product> currentProductList;
+
             try
             {
-                currentProductList = _productManager.RetrieveProducts();
-                dgProduct.ItemsSource = currentProductList;
+                _currentProductList = _productManager.RetrieveProducts();
+                dgProduct.ItemsSource = _currentProductList;
             }
             catch (Exception)
             {
@@ -2224,7 +2340,7 @@ namespace WpfPresentationLayer
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -2243,7 +2359,8 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnViewMaintenance_Click(object sender, RoutedEventArgs e)
         {
-            if(dgVehicle.SelectedIndex > 0){
+            if (dgVehicle.SelectedIndex > 0)
+            {
                 frmViewMaintenanceRecords viewMaintenanceRecordsWindow = new frmViewMaintenanceRecords(((Vehicle)dgVehicle.SelectedItem).RepairList);
                 viewMaintenanceRecordsWindow.ShowDialog();
             }
@@ -2269,6 +2386,7 @@ namespace WpfPresentationLayer
             var productLotMgr = new ProductLotManager();
             var productLotDetail = new frmAddProductLot(productLotMgr, productLot);
             productLotDetail.ShowDialog();
+            GlobalRefresh();
         }
         /// <summary>
         /// Alissa Duffy
@@ -2338,6 +2456,52 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/05/04
+        /// 
+        /// Loads the data to populate the deliveries tab.
+        /// Created to replace the tabDeliveries_Loaded method as it needs to be refreshed when the tab is selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabDeliveries_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+                var deliveriesWithVehicleId = new List<ExpandoObject>();
+                foreach (var item in _deliveries)
+                {
+                    dynamic newItem = new ExpandoObject();
+                    newItem.DeliveryDate = item.DeliveryDate;
+                    newItem.StatusId = item.StatusId;
+                    newItem.DeliveryTypeId = item.DeliveryTypeId;
+                    try
+                    {
+                        newItem.VehicleId = _deliveryManager.RetrieveVehicleByDelivery(item.DeliveryId.Value).VehicleID;
+                    }
+                    catch
+                    {
+                        newItem.VehicleId = null;
+                    }
+                    deliveriesWithVehicleId.Add(newItem);
+                }
+                lvDeliveries.Items.Clear();
+
+                for (int i = 0; i < _deliveries.Count; i++)
+                {
+                    lvDeliveries.Items.Add(deliveriesWithVehicleId[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
         /// <summary>
         /// Alissa Duffy
         /// Updated: 2017/04/17
@@ -2361,8 +2525,7 @@ namespace WpfPresentationLayer
             }
             var editForm = new frmAddEditDelivery(delivery, _deliveryManager, true);
             var result = editForm.ShowDialog();
-            _deliveries = _deliveryManager.RetrieveDeliveries();
-            lvDeliveries.Items.Refresh();
+            tabDeliveries_Selected(sender, e);
         }
 
         /// <summary>
@@ -2384,18 +2547,19 @@ namespace WpfPresentationLayer
             try
             {
                 var supplier = _supplierManager.RetrieveSupplierByUserId(_user.UserId);
-                if(null!=supplier)
+                if (null != supplier)
                 {
                     var agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplier.SupplierID);
-                    if(0==agreementList.Count)
+                    if (0 == agreementList.Count)
                     {
                         MessageBox.Show("Create an agreement first!");
                         return;
                     }
-                    var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager,agreementList);
+                    var supplierInventoryWindow = new frmAddSupplierInventory(_supplierInventoryManager, agreementList);
                     supplierInventoryWindow.ShowDialog();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 if (null != ex.InnerException)
                 {
@@ -2406,9 +2570,10 @@ namespace WpfPresentationLayer
                     MessageBox.Show(ex.Message);
                 }
             }
+            GlobalRefresh();
 
         }
-        
+
         /// <summary>
         /// Christian Lopez
         /// 2017/03/29
@@ -2448,7 +2613,7 @@ namespace WpfPresentationLayer
         //            }
         //            return;
         //        }
-                
+
         //    }
         //    // See if the current user is a supplier
         //    if (_supplierList.Find(s => s.UserId == _user.UserId) != null)
@@ -2472,7 +2637,7 @@ namespace WpfPresentationLayer
         //            }
         //        }
         //    }
-            
+
         //}
         /// <summary>
         /// Alissa Duffy
@@ -2487,8 +2652,9 @@ namespace WpfPresentationLayer
         {
             frmAddWarehouse addWarehouseWindow = new frmAddWarehouse();
             addWarehouseWindow.ShowDialog();
-		}
-		
+            GlobalRefresh();
+        }
+
         /// <summary>
         /// Robert Forbes
         /// 2017/03/30
@@ -2555,9 +2721,9 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
-			}
-		}
-		
+            }
+        }
+
         /// Bobby Thorne
         /// 2017/04/12
         /// 
@@ -2575,10 +2741,18 @@ namespace WpfPresentationLayer
         {
             if (dgSuppliers.SelectedIndex >= 0)
             {
-                frmApproval ApprovalWindow = new frmApproval(_supplierManager, (Supplier)dgSuppliers.SelectedItem, _user.UserId);
-                ApprovalWindow.ShowDialog();
-                createAgreementForApprovedSupplier((Supplier)dgSuppliers.SelectedItem);
-                tabSupplier_Selected(sender, e);
+                var currentSupplier = (Supplier)dgSuppliers.SelectedItem;
+                if (currentSupplier.IsApproved)
+                {
+                    MessageBox.Show("This supplier is already approved.");
+                }
+                else
+                {
+                    frmApproval ApprovalWindow = new frmApproval(_supplierManager, currentSupplier, _user.UserId);
+                    ApprovalWindow.Owner = this;
+                    ApprovalWindow.ShowDialog();
+                    GlobalRefresh();
+                }
             }
             else
             {
@@ -2604,6 +2778,7 @@ namespace WpfPresentationLayer
                 frmApproval ApprovalWindow = new frmApproval(_customerManager, (CommercialCustomer)dgCustomer.SelectedItem, _user.UserId);
                 ApprovalWindow.ShowDialog();
                 tabSupplier_Selected(sender, e);
+                GlobalRefresh();
             }
             else
             {
@@ -2658,7 +2833,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="supplier"></param>
-        private void createAgreementForApprovedSupplier(Supplier supplier)
+        public void createAgreementForApprovedSupplier(Supplier supplier)
         {
             MessageBox.Show("Select products for the approved supplier to create an agreement.");
 
@@ -2674,6 +2849,7 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
+            GlobalRefresh();
         }
 
         /// <summary>
@@ -2693,9 +2869,9 @@ namespace WpfPresentationLayer
                 supplier = (SupplierCatalogViewModel)dgSupplierCatalogue.SelectedItem;
                 int supplierId = supplier.SupplierID;
                 agreementList = _agreementManager.RetrieveAgreementsBySupplierId(supplierId);
-                
-                List < AgreementWithProductName > newList = new List<AgreementWithProductName>();
-                foreach(var agreement in agreementList)
+
+                List<AgreementWithProductName> newList = new List<AgreementWithProductName>();
+                foreach (var agreement in agreementList)
                 {
                     AgreementWithProductName temp = new AgreementWithProductName()
                     {
@@ -2710,9 +2886,9 @@ namespace WpfPresentationLayer
                     };
                     newList.Add(temp);
                 }
-                
 
-                if(agreementList == null)
+
+                if (agreementList == null)
                 {
                     MessageBox.Show("No agreement product list found for this supplier.");
                 }
@@ -2739,12 +2915,12 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void tabPickups_Selected(object sender, RoutedEventArgs e)
         {
-            List<PickupLine> _pickupsList = null;
+
 
             try
             {
                 _pickupsList = _pickupManager.RetrievePickupLinesReceived();
-                if(_pickupsList != null)
+                if (_pickupsList != null)
                 {
                     dgPickups.ItemsSource = _pickupsList;
                 }
@@ -2776,7 +2952,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void btnCreateLotFromPickup_Click(object sender, RoutedEventArgs e)
         {
-            if(dgPickups.SelectedIndex >= 0)
+            if (dgPickups.SelectedIndex >= 0)
             {
                 var frmCreateLot = new frmAddProductLot(_pickupManager, (PickupLine)dgPickups.SelectedItem);
                 frmCreateLot.Show();
@@ -2785,6 +2961,87 @@ namespace WpfPresentationLayer
             {
                 MessageBox.Show("Select a pickup record to create a product lot.");
             }
+            GlobalRefresh();
+        }
+
+        private void tabCommercialCustomer_GotFocus(object sender, RoutedEventArgs e)
+        {
+            dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
+            //dgCustomer.ItemsSource
+        }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created:
+        /// 2017/05/04
+        /// 
+        /// Loaded the all routes when the tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabRoutes_Selected(object sender, RoutedEventArgs e)
+        {
+            RefreshRoutesTab();
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateRoute_Click(object sender, RoutedEventArgs e)
+        {
+            frmCreateRoute createRouteForm = new frmCreateRoute();
+            createRouteForm.ShowDialog();
+            RefreshRoutesTab();
+        }
+
+        private void RefreshRoutesTab()
+        {
+            try
+            {
+                var _routes = _routeManager.RetrieveAllRoutes().OrderBy(r => r.AssignedDate).ToList();
+                var routesDisplayList = new List<ExpandoObject>();
+                foreach (var item in _routes)
+                {
+                    dynamic newItem = new ExpandoObject();
+                    User driverUser = _userManager.RetrieveUser((int)_employeeManager.RetrieveEmployee((int)item.DriverId).UserId);
+                    newItem.Driver = driverUser.FirstName + " " + driverUser.LastName;
+                    newItem.VehicleId = item.VehicleId;
+                    newItem.AssignedDate = item.AssignedDate;
+                    routesDisplayList.Add(newItem);
+                }
+                lvRoutes.Items.Clear();
+
+                for (int i = 0; i < _routes.Count; i++)
+                {
+                    lvRoutes.Items.Add(routesDisplayList[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void btnEditUserAccount_Click(object sender, RoutedEventArgs e)
+        {
+            User user = (User)dgUsers.SelectedItem;
+            if (user!= null)
+            {
+                var form = new frmCreateNewUser(user);
+                form.ShowDialog();
+                GlobalRefresh();
+            }
+            else
+            {
+                MessageBox.Show("Please select a user to edit.");
+            }
+            
         }
     } // end of class
 } // end of namespace 

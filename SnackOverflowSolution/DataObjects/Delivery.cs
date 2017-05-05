@@ -20,5 +20,25 @@ namespace DataObjects
         public List<Package> PackageList { get; set; }
 
         public UserAddress Address { get; set; }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/05/04
+        /// 
+        /// overrides the default ToString method
+        /// </summary>
+        /// <returns>a string representation of the delivery</returns>
+        public override string ToString()
+        {
+            try
+            {
+                return Address.AddressLineOne + ", " + Address.City + ", " + Address.State;
+            }
+            catch
+            {
+                return DeliveryId.ToString();
+            }
+            
+        }
     }
 }

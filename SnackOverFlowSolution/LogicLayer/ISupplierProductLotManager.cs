@@ -14,7 +14,6 @@ namespace LogicLayer
 
         bool AddProduct(SupplierProductLot p);
 
-        List<SupplierProductLot> RetrieveSupplierProductLots();
         bool DeleteSupplierProductLot(SupplierProductLot lot);
 
         List<SupplierProductLot> RetrieveSupplierProductLotsBySupplier(Supplier supplier);

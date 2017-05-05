@@ -23,8 +23,8 @@
         <!--Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Name="rowPassword"/>
+            <RowDefinition Name="rowConfirmPassword"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>

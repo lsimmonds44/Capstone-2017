@@ -19,6 +19,14 @@ namespace MVCPresentationLayer.Controllers
     /// 
     /// Cart Controller
     /// </summary>
+    /// <remarks>
+    /// Modified by Christian Lopez
+    /// 2017/05/05
+    /// 
+    /// Made class authorized to customer - this fits business rules as well as
+    /// fixes bugs looking when trying to find a non-existant user.
+    /// </remarks>
+    [Authorize(Roles = "Customer")]
     public class CartController : Controller
     {
         private readonly IProductManager _productManager;
@@ -109,6 +117,15 @@ namespace MVCPresentationLayer.Controllers
 
             }
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
+        }
+
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int? productId, string returnUrl)
+        {
+            var product = _productManager.RetrieveProducts()
+                .FirstOrDefault(p => p.ProductId == productId);
+            if (product != null)
+                cart.RemoveLine(product);
+            return RedirectToAction("Index", new { returnUrl });
         }
 
 

@@ -14,5 +14,7 @@ namespace DataObjects
         public int? ApprovedBy { get; set; }
         public int FederalTaxId { get; set; }
         public bool Active { get; set; }
+        public string name { get; set; }
+        public string ApprovedByName { get; set; }
     }
 }

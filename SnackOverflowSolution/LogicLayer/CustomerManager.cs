@@ -51,7 +51,17 @@ namespace LogicLayer
             List<CommercialCustomer> commercialCustomers = null;
             try
             {
+                UserManager userManager = new UserManager();
+                EmployeeManager employeeManager = new EmployeeManager();
                 commercialCustomers = CustomerAccessor.RetrieveAllCommercialCustomers();
+                foreach(CommercialCustomer e in commercialCustomers)
+                {
+                    e.name = userManager.RetrieveUser(e.UserId).FirstName + " " + userManager.RetrieveUser(e.UserId).LastName;
+                    if (e.ApprovedBy != null)
+                    {
+                        e.ApprovedByName = userManager.RetrieveUser(e.ApprovedBy).FirstName +" "+ userManager.RetrieveUser(e.ApprovedBy).LastName;
+                    }
+                }
             }
             catch (Exception)
             {
