@@ -154,6 +154,14 @@ namespace DataAccessLayer
         /// 
         /// Retrieves all product orders from the database with the given status.
         /// </summary>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// 
+        /// Fixed nullable fields causing exception
+        /// </remarks>
         /// <param name="status">The status to search on.</param>
         /// <returns>All product orders in the database with the given status.</returns>
         public static List<ProductOrder> RetrieveProductOrdersByStatus(string status)
@@ -179,15 +187,15 @@ namespace DataAccessLayer
                         {
                             OrderId = reader.GetInt32(0),
                             CustomerId = reader.GetInt32(1),
-                            OrderTypeId = reader.GetString(2),
-                            AddressType = reader.GetString(3),
-                            DeliveryTypeId = reader.GetString(4),
-                            Amount = reader.GetDecimal(5),
+                            OrderTypeId = reader.IsDBNull(2) ? null : reader.GetString(2),
+                            AddressType = reader.IsDBNull(3) ? null : reader.GetString(3),
+                            DeliveryTypeId = reader.IsDBNull(4) ? null : reader.GetString(4),
+                            Amount = reader.IsDBNull(5) ? null : (decimal?)reader.GetDecimal(5),
                             OrderDate = reader.GetDateTime(6),
-                            DateExpected = reader.GetDateTime(7),
+                            DateExpected = reader.IsDBNull(7) ? null : (DateTime?)reader.GetDateTime(7),
                             Discount = reader.GetDecimal(8),
                             OrderStatusId = reader.GetString(9),
-                            UserAddressId = reader.GetInt32(10),
+                            UserAddressId = reader.IsDBNull(10) ? null : (int?)reader.GetInt32(10),
                             HasArrived = reader.GetBoolean(11)
                         });
                     }
