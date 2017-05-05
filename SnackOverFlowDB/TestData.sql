@@ -156,13 +156,13 @@ GO
 print '*** Inserting Product Test Data ***'
 GO
 INSERT INTO [dbo].[Product_Lot]
-	(Warehouse_ID, Supplier_ID, Location_ID,Product_ID, Supply_Manager_ID, Quantity, Available_Quantity, Date_Received, Expiration_Date)
+	(Warehouse_ID, Supplier_ID, Location_ID,Product_ID, Supply_Manager_ID, Quantity, Available_Quantity, Date_Received, Expiration_Date, Grade)
 VALUES
-	(10000,10000,10000,10000,10000,30,5,'2012-08-08','2120-01-01'),
-	(10000,10001,10000,10001,10000,30,5,'2012-08-08','2120-01-01'),
-	(10000,10002,10000,10002,10000,30,5,'2012-08-08','2120-01-01'),
-	(10000,10003,10000,10003,10000,30,5,'2012-08-08','2120-01-01'),
-	(10000,10003,10000,10004,10000,30,5,'2012-08-08','2120-01-01')
+	(10000,10000,10000,10000,10000,30,5,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10001,10000,10001,10000,30,5,'2012-08-08','2120-01-01','Grade B'),
+	(10000,10002,10000,10002,10000,30,5,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10003,10000,30,5,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10004,10000,30,5,'2012-08-08','2120-01-01','Grade A')
 GO
 
 print '*** Inserting Product_Grade_Price Test Data ***'
