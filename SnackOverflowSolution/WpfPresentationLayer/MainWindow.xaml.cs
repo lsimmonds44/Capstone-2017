@@ -2338,6 +2338,52 @@ namespace WpfPresentationLayer
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created: 2017/05/04
+        /// 
+        /// Loads the data to populate the deliveries tab.
+        /// Created to replace the tabDeliveries_Loaded method as it needs to be refreshed when the tab is selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabDeliveries_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _deliveries = _deliveryManager.RetrieveDeliveries();
+                var deliveriesWithVehicleId = new List<ExpandoObject>();
+                foreach (var item in _deliveries)
+                {
+                    dynamic newItem = new ExpandoObject();
+                    newItem.DeliveryDate = item.DeliveryDate;
+                    newItem.StatusId = item.StatusId;
+                    newItem.DeliveryTypeId = item.DeliveryTypeId;
+                    try
+                    {
+                        newItem.VehicleId = _deliveryManager.RetrieveVehicleByDelivery(item.DeliveryId.Value).VehicleID;
+                    }
+                    catch
+                    {
+                        newItem.VehicleId = null;
+                    }
+                    deliveriesWithVehicleId.Add(newItem);
+                }
+                lvDeliveries.Items.Clear();
+
+                for (int i = 0; i < _deliveries.Count; i++)
+                {
+                    lvDeliveries.Items.Add(deliveriesWithVehicleId[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
         /// <summary>
         /// Alissa Duffy
         /// Updated: 2017/04/17

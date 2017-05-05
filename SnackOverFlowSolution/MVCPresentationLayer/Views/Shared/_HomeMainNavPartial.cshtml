@@ -11,6 +11,9 @@
             {
                 <li>@Html.ActionLink("Store", "Index", "Products")</li>
             }
+            else if (Request.IsAuthenticated && User.IsInRole("Supplier")) {
+                <li>@Html.ActionLink("My Products", "Index", "SupplierGoods")</li>
+            }
             
             @if (!Request.IsAuthenticated)
             {
