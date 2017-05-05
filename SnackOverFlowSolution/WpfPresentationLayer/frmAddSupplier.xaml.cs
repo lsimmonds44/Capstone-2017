@@ -778,9 +778,9 @@ namespace WpfPresentationLayer
                 foreach (Product p in _agreedProducts)
                 {
                     _agreementManager.CreateAgreementsForSupplier(_supplierToEdit, p, _currentUser.UserId, true);
-                    MessageBox.Show("Agreement created.");
                     Close();
                 }
+                MessageBox.Show("Agreement created.");
             }
             catch (Exception ex)
             {
