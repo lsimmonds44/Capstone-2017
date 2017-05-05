@@ -2628,10 +2628,10 @@ namespace WpfPresentationLayer
                 }
                 else
                 {
-                frmApproval ApprovalWindow = new frmApproval(_supplierManager, currentSupplier, _user.UserId);
-                ApprovalWindow.ShowDialog();
-                createAgreementForApprovedSupplier((Supplier)dgSuppliers.SelectedItem);
-                tabSupplier_Selected(sender, e);
+                    frmApproval ApprovalWindow = new frmApproval(_supplierManager, currentSupplier, _user.UserId);
+                    ApprovalWindow.Owner = this;
+                    ApprovalWindow.ShowDialog();
+                    tabSupplier_Selected(sender, e);
                 }
             }
             else
@@ -2712,7 +2712,7 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="supplier"></param>
-        private void createAgreementForApprovedSupplier(Supplier supplier)
+        public void createAgreementForApprovedSupplier(Supplier supplier)
         {
             MessageBox.Show("Select products for the approved supplier to create an agreement.");
 
