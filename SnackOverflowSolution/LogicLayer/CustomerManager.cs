@@ -56,10 +56,10 @@ namespace LogicLayer
                 commercialCustomers = CustomerAccessor.RetrieveAllCommercialCustomers();
                 foreach(CommercialCustomer e in commercialCustomers)
                 {
-                    e.name = userManager.RetrieveUser(e.UserId).FirstName + " " + userManager.RetrieveUser(e.UserId).LastName;
+                    e.name =  userManager.RetrieveUser(e.UserId).LastName + ", " + userManager.RetrieveUser(e.UserId).FirstName;
                     if (e.ApprovedBy != null)
                     {
-                        e.ApprovedByName = userManager.RetrieveUser(e.ApprovedBy).FirstName +" "+ userManager.RetrieveUser(e.ApprovedBy).LastName;
+                        e.ApprovedByName = userManager.RetrieveUser(e.ApprovedBy).LastName + ", " + userManager.RetrieveUser(e.ApprovedBy).FirstName;
                     }
                 }
             }
