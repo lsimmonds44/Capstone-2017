@@ -273,7 +273,7 @@ GO
 CREATE TABLE [dbo].[DELIVERY] (
 	[DELIVERY_ID]	  [INT]IDENTITY(10000, 1) NOT NULL,
 	[ROUTE_ID]		  [INT]							  ,
-	[DELIVERY_DATE]  [DATETIME] 			  NOT NULL,
+	[DELIVERY_DATE]   [DATETIME] 			  NOT NULL,
 	[VERIFICATION] 	  [VARBINARY](MAX)					  ,
 	[STATUS_ID]		  [NVARCHAR](50) 		  NOT NULL,
 	[DELIVERY_TYPE_ID][NVARCHAR](50) 		  NOT NULL,
@@ -8402,5 +8402,17 @@ AS
 	END
 GO
 
-
-
+print'' print '*** Creating procedure sp_assign_delivery_to_route'
+GO
+CREATE PROCEDURE sp_assign_delivery_to_route
+(
+	@DELIVERY_ID [INT],
+	@ROUTE_ID	 [INT]
+)
+AS
+	BEGIN
+		UPDATE DELIVERY
+		SET ROUTE_ID = @ROUTE_ID
+		WHERE @DELIVERY_ID = DELIVERY_ID
+	END
+GO
