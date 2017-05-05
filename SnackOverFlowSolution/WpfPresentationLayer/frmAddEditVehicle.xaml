@@ -7,6 +7,11 @@
         By: Alissa Duffy 
         Summary: Comments and Standardization
     -->
+    <!--
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
+    -->
     <!--Add New Vehicle Grid-->
     <Grid>
         <!--Add New Vehicle Controls-->
@@ -28,8 +33,8 @@
         <ComboBox Name="cboType" HorizontalAlignment="Left" Margin="129,249,0,0" VerticalAlignment="Top" Width="120"/>
         <RadioButton Name="radYes" GroupName="makeActive" Content="Yes" HorizontalAlignment="Left" Margin="129,223,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="radNo" GroupName="makeActive" Content="No" HorizontalAlignment="Left" Margin="181,223,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="53,303,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
-        <Button Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="165,303,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
+        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        <Button Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="43,300,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
         <!--End of Add New Vehicle Controls-->
     </Grid>
     <!--End of Add New Vehicle Grid-->
