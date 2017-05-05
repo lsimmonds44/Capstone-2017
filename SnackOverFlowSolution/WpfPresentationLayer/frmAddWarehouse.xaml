@@ -6,6 +6,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Add Warehouse Grid-->
     <Grid>
@@ -20,7 +24,7 @@
         <Label Grid.Row="0" Name="lblAddWarehouse" Content="Add Warehouse" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
         <!--End of Add Warehouse Controls-->
         <!--Add Warehouse Information Grid-->
-        <Grid Grid.Row="1">
+        <Grid Margin="3,61,-3,8" Grid.RowSpan="2">
             <!--Grid Definitions-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -35,15 +39,15 @@
             </Grid.RowDefinitions>
             <!--End of Grid Definitions-->
             <!--Add Warehouse Information Controls-->
-            <Label Name="lblAddress1" Grid.Column="0" Grid.Row="0" Content="Address: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Name="lblAddress1" Grid.Column="0" Grid.Row="0" Content="Address: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,4,34,0"/>
             <Label Name="lblAddress2" Grid.Column="0" Grid.Row="1" Content="Address Line 2: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Name="lblCity" Grid.Column="0" Grid.Row="2" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Name="lblState" Grid.Column="0" Grid.Row="3" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <Label Name="lblZip" Grid.Column="0" Grid.Row="4" Content="Zip: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Name="lblCity" Grid.Column="0" Grid.Row="2" Content="City: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,53,29" Grid.RowSpan="2"/>
+            <Label Name="lblState" Grid.Column="0" Grid.Row="3" Content="State: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2,48,2" />
+            <Label Name="lblZip" Grid.Column="0" Grid.Row="4" Content="Zip: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,2,56,2" />
             <TextBox Name="txtAddress1" Grid.Column="1" Grid.Row="0" Margin="0 2 5 2"/>
             <TextBox Name="txtAddress2" Grid.Column="1" Grid.Row="1" Margin="0 2 5 2"/>
             <TextBox Name="txtCity" Grid.Column="1" Grid.Row="2" Margin="0 2 5 2"/>
-            <ComboBox Name="cboState" Grid.Column="1" Grid.Row="3" Margin="0 2 5 2"/> 
+            <ComboBox Name="cboState" Grid.Column="1" Grid.Row="3" Margin="0 2 5 2"/>
             <TextBox Name="txtZip" Grid.Column="1" Grid.Row="4" Margin="0 2 5 2"/>
             <!--End of Add Warehouse Information Controls-->
         </Grid>
@@ -59,8 +63,8 @@
             </Grid.ColumnDefinitions>
             <!--End of Grid Definitions-->
             <!--Cancel/Save Controls-->
-            <Button Name="btnCancel" Grid.Column="2" Margin="3 10 3 10" IsCancel="True" Content="Cancel" Click="btnCancel_Click" />
-            <Button Name="btnSave" Grid.Column="3" Margin="3 10 3 10" IsDefault="True" Content="Save" Click="btnSave_Click" />
+            <Button Name="btnCancel" Grid.Column="2" Margin="66,12,13,8" IsCancel="True" Content="Cancel" Click="btnCancel_Click" Grid.ColumnSpan="2" />
+            <Button Name="btnSave" Margin="61,12,18,8" IsDefault="True" Content="Save" Click="btnSave_Click" Grid.ColumnSpan="2" Grid.Column="1" />
             <!--End of Cancel/Save Controls-->
         </Grid>
         <!--End ofCancel/Save Grid-->
