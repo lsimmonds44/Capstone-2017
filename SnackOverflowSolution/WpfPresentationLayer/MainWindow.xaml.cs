@@ -2575,10 +2575,18 @@ namespace WpfPresentationLayer
         {
             if (dgSuppliers.SelectedIndex >= 0)
             {
-                frmApproval ApprovalWindow = new frmApproval(_supplierManager, (Supplier)dgSuppliers.SelectedItem, _user.UserId);
+                var currentSupplier = (Supplier)dgSuppliers.SelectedItem;
+                if (currentSupplier.IsApproved)
+                {
+                    MessageBox.Show("This supplier is already approved.");
+                }
+                else
+                {
+                frmApproval ApprovalWindow = new frmApproval(_supplierManager, currentSupplier, _user.UserId);
                 ApprovalWindow.ShowDialog();
                 createAgreementForApprovedSupplier((Supplier)dgSuppliers.SelectedItem);
                 tabSupplier_Selected(sender, e);
+                }
             }
             else
             {
