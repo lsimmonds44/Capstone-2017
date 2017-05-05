@@ -2628,7 +2628,7 @@ GO
 
 print '' print  '*** Creating procedure sp_create_supplier_product_lot'
 GO
-CREATE PROCEDURE sp_create_product_lot
+CREATE PROCEDURE sp_create_supplier_product_lot
 (
 	@SUPPLIER_ID[INT],
 	@PRODUCT_ID[INT],
@@ -8398,6 +8398,51 @@ AS
 		SET HAS_ARRIVED = @new_HAS_ARRIVED
 		WHERE COMPANY_ORDER_ID = @COMPANY_ORDER_ID
 		AND HAS_ARRIVED = @old_HAS_ARRIVED
+		RETURN @@ROWCOUNT
+	END
+GO
+
+print '' print  '*** Creating procedure sp_retrieve_routes_list'
+GO
+CREATE PROCEDURE sp_retrieve_routes_list
+AS
+	BEGIN
+		SELECT ROUTE_ID, VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE
+		FROM ROUTE
+	END
+GO
+
+print '' print  '*** Creating procedure sp_create_route_return_route_id'
+GO
+CREATE PROCEDURE sp_create_route_return_route_id
+(
+	@VEHICLE_ID[INT],
+	@DRIVER_ID[INT],
+	@ASSIGNED_DATE[DATETIME],
+	@ROUTE_ID[INT] OUTPUT
+)
+AS
+	BEGIN
+		INSERT INTO ROUTE 
+			(VEHICLE_ID, DRIVER_ID, ASSIGNED_DATE)
+		VALUES
+			(@VEHICLE_ID, @DRIVER_ID, @ASSIGNED_DATE)
+		SELECT @ROUTE_ID = SCOPE_IDENTITY()
+	END
+GO
+
+print '' print  '*** Creating procedure sp_assign_route_to_delivery'
+GO
+CREATE PROCEDURE sp_assign_route_to_delivery
+(
+	@DELIVERY_ID[INT],
+	@ROUTE_ID[INT]
+)
+AS
+	BEGIN
+		UPDATE delivery
+		SET ROUTE_ID = @ROUTE_ID
+		WHERE (DELIVERY_ID = @DELIVERY_ID)
 		RETURN @@ROWCOUNT
 	END
 GO

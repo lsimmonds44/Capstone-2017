@@ -125,6 +125,9 @@
     <Compile Include="frmCreateOrder.xaml.cs">
       <DependentUpon>frmCreateOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateRoute.xaml.cs">
+      <DependentUpon>frmCreateRoute.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmManageStock.xaml.cs">
       <DependentUpon>frmManageStock.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmCreateOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCreateRoute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

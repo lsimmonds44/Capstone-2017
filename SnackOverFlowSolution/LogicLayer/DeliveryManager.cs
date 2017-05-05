@@ -107,6 +107,14 @@ namespace LogicLayer
         /// 
         /// Standardized method. Changed signature to take delivery object instead of individual parameters.
         /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// 
+        /// Removed random assigning of a route.
+        /// </remarks>
         /// <param name="delivery">The delivery to create.</param>
         /// <returns>The delivery id of the newly created delivery</returns>
         public int CreateDeliveryAndRetrieveDeliveryId(Delivery delivery)
@@ -115,6 +123,7 @@ namespace LogicLayer
             try
             {
                 result = DeliveryAccessor.CreateDeliveryAndRetrieveDeliveryId(delivery);
+                /* Removed because deliveries are acutally being assigned to routes when a route is created. And setting a random route doesn't make sense
                 if (result != 0)
                 {
                     bool success = AssignDeliveryToRoute(result);
@@ -123,7 +132,7 @@ namespace LogicLayer
                         throw new ApplicationException("Delivery could not be assigned to a route!");
                     }
                 }
-                
+                */
             }
             catch (Exception)
             {
@@ -232,6 +241,32 @@ namespace LogicLayer
             }
 
             return deliveries;
+        }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <param name="routeId"></param>
+        /// <returns></returns>
+        public bool AssignRouteToDelivery(int deliveryId, int routeId)
+        {
+            var result = false;
+
+            try
+            {
+                result = (DeliveryAccessor.AssignRouteToDelivery(deliveryId, routeId) == 1);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
         }
     }
 }

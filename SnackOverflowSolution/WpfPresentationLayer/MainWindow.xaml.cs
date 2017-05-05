@@ -42,6 +42,7 @@ namespace WpfPresentationLayer
         private IPreferenceManager _preferenceManager;
         private ISupplierInventoryManager _supplierInventoryManager;
         private ILocationManager _locationManager;
+		private IRouteManager _routeManager = new RouteManager();
         private IPackageManager _packageManager = new PackageManager();
         private IOrderStatusManager _orderStatusManager = new OrderStatusManager();
         private ISupplierInvoiceManager _supplierInvoiceManager = new SupplierInvoiceManager();
@@ -1577,13 +1578,13 @@ namespace WpfPresentationLayer
                 }
                 else
                 {
-                    MessageBox.Show("Please select a delivery that is ready for assignment");
+                    MessageBox.Show("Please select a delivery that is Ready for Assignment");
                 }
 
             }
             else
             {
-                MessageBox.Show("Please select a delivery that is ready for assignment");
+                MessageBox.Show("Please select a delivery that is Ready for Assignment");
             }
             GlobalRefresh();
         }
@@ -2967,6 +2968,64 @@ namespace WpfPresentationLayer
         {
             dgCustomer.ItemsSource = _customerManager.RetrieveCommercialCustomers();
             //dgCustomer.ItemsSource
+        }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created:
+        /// 2017/05/04
+        /// 
+        /// Loaded the all routes when the tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabRoutes_Selected(object sender, RoutedEventArgs e)
+        {
+            RefreshRoutesTab();
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateRoute_Click(object sender, RoutedEventArgs e)
+        {
+            frmCreateRoute createRouteForm = new frmCreateRoute();
+            createRouteForm.ShowDialog();
+            RefreshRoutesTab();
+        }
+
+        private void RefreshRoutesTab()
+        {
+            try
+            {
+                var _routes = _routeManager.RetrieveAllRoutes().OrderBy(r => r.AssignedDate).ToList();
+                var routesDisplayList = new List<ExpandoObject>();
+                foreach (var item in _routes)
+                {
+                    dynamic newItem = new ExpandoObject();
+                    User driverUser = _userManager.RetrieveUser((int)_employeeManager.RetrieveEmployee((int)item.DriverId).UserId);
+                    newItem.Driver = driverUser.FirstName + " " + driverUser.LastName;
+                    newItem.VehicleId = item.VehicleId;
+                    newItem.AssignedDate = item.AssignedDate;
+                    routesDisplayList.Add(newItem);
+                }
+                lvRoutes.Items.Clear();
+
+                for (int i = 0; i < _routes.Count; i++)
+                {
+                    lvRoutes.Items.Add(routesDisplayList[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
         }
     } // end of class
 } // end of namespace 

@@ -29,5 +29,18 @@ namespace DataObjects
         public List<Repair> RepairList { get; set; }
         public bool CheckedOut { get; set; }
         public DateTime? CheckedOutTimeDate { get; set; }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 2017/05/04
+        /// 
+        /// overrides the default ToString method
+        /// </summary>
+        /// <returns>a string representation of the vehicle</returns>
+        public override string ToString()
+        {
+            return VehicleID.ToString();
+
+        }
     }
 }

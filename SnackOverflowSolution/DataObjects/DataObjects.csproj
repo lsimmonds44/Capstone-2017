@@ -90,6 +90,7 @@
     <Compile Include="CompanyOrderLine.cs" />
     <Compile Include="CompanyOrderWithLines.cs" />
     <Compile Include="Delivery.cs" />
+    <Compile Include="Driver.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeOrderResponsibility.cs" />
     <Compile Include="Location.cs" />

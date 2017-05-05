@@ -8,9 +8,6 @@ namespace DataAccessLayer
     public class ProductOrderAccessorMvc : ProductOrderAccessor
     {
 
-
-
-
         /// <summary>
         ///
         /// Michael Takrama
