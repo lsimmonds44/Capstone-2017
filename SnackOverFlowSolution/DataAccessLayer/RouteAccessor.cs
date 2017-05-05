@@ -33,7 +33,7 @@ namespace DataAccessLayer
             var routes = new List<Route>();
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_routes_list";
+            var cmdText = @"sp_retrieve_routes_for_driver_after_date";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

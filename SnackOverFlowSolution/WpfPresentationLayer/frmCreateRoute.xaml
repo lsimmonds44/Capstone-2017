@@ -1,7 +1,7 @@
 ﻿<Window x:Name="frmRoute" x:Class="WpfPresentationLayer.frmCreateRoute"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Create Route" Height="450" Width="500" Loaded="frmRoute_Loaded">
+        Title="Create Route" Height="450" Width="600" Loaded="frmRoute_Loaded">
     <!--Create Route Grid-->
     <Grid>
         <!--Grid Definitions-->
