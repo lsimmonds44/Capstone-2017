@@ -852,9 +852,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
-                        <Button Name="btnCreateLotFromPickup" Grid.Row="1" Grid.Column="2" Margin="10 0 0 0" Content="Create Product Lot" Click="btnCreateLotFromPickup_Click"  />
+                        <Button Name="btnCreateLotFromPickup" Grid.Row="1" Grid.Column="4" Margin="15 0 15 0" Content="Create Product Lot" Click="btnCreateLotFromPickup_Click"  />
                     </Grid>
                 </Grid>
             </TabItem>
