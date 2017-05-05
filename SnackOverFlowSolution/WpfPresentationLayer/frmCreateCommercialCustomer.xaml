@@ -9,6 +9,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!-- Create Commercial Customer Account Grid-->
     <Grid>
@@ -47,8 +51,8 @@
         <Label Name="lblActive" Grid.Row="6" Grid.Column="0" Content="Active" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold"/>
         <CheckBox Name="cbkIsApproved" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0" IsChecked="True" />
         <CheckBox Name="cbkActive" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 10" IsChecked="True"/>
-        <Button Name="btnCancel" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin=" 10 0 0 0" Content="Cancel" FontSize="18" Width="100" Height="40" Click="btnCancel_Click" />
-        <Button Name="btnCreate" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Content="Create Account" FontSize="18" Width="160" Height="40" Click="btnCreate_Click" IsEnabled="False"/>
+        <Button Name="btnCancel" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="209,10.4,0,8" Content="Cancel" FontSize="18" Width="100" Height="40" Click="btnCancel_Click" />
+        <Button Name="btnCreate" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,8.4,156,10" Content="Create Account" FontSize="18" Width="160" Height="40" Click="btnCreate_Click" IsEnabled="False" Grid.Column="1"/>
         <!--End of Create Commercial Customer Account Controls-->
     </Grid>
     <!--End of Create Commercial Customer Account Grid-->

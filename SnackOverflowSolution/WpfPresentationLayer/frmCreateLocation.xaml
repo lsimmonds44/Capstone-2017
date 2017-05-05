@@ -10,6 +10,10 @@
         Updated: 2017/04/24
         By: Alissa Duffy 
         Summary: Comments and Standardization
+    
+        Updated: 2017/05/04
+        By: Jessica Hoppe 
+        Summary: format Layout of Window
     -->
     <!--Create Location Grid-->
     <Grid>
@@ -33,12 +37,12 @@
             <Label Name="lblDescription" Grid.Row="0" Content="Description:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Name="lblActive" Grid.Row="1" Content="Active:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox Name="txtDescription" Grid.Column="1" Margin="5" MaxLength="250"/>
-            <CheckBox Name="chkActive" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True"/>
+            <CheckBox Name="chkActive" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" Margin="9.8,25.4,195.6,12"/>
             <!--End ofCreate Location Description Controls-->
         </Grid>
         <!--End of Create Location Description Grid-->
         <!--Create Location Controls-->
-        <Button Name="btnAddLocation" Grid.Row="2" Content="Add Location" Margin="10" Click="btnAddLocation_Click" />
+        <Button Name="btnAddLocation" Grid.Row="1" Content="Add Location" Margin="95,20,96.6,20" Click="btnAddLocation_Click" />
         <!--Create Location Controls-->
     </Grid>
     <!--End of Create Location Grid-->

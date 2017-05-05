@@ -2750,7 +2750,15 @@ namespace WpfPresentationLayer
                 {
                     frmApproval ApprovalWindow = new frmApproval(_supplierManager, currentSupplier, _user.UserId);
                     ApprovalWindow.Owner = this;
-                    ApprovalWindow.ShowDialog();
+                    var result = ApprovalWindow.ShowDialog();
+                    if (result == true)
+                    {
+                        var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
+                                    _agreementManager, "Editing", currentSupplier);
+                        frmEditSupplier.btnSubmit.Visibility = Visibility.Hidden;
+                        frmEditSupplier.btnSubmitAgreement.Visibility = Visibility.Visible;
+                        result = frmEditSupplier.ShowDialog();
+                    }
                     GlobalRefresh();
                 }
             }
@@ -2833,24 +2841,19 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="user"></param>
         /// <param name="supplier"></param>
-        public void createAgreementForApprovedSupplier(Supplier supplier)
-        {
-            MessageBox.Show("Select products for the approved supplier to create an agreement.");
+        //public void createAgreementForApprovedSupplier(Supplier supplier)
+        //{
+        //    MessageBox.Show("Select products for the approved supplier to create an agreement.");
 
-            try
-            {
-                var frmEditSupplier = new frmAddSupplier(_user, _userManager, _supplierManager, _productManager,
-                            _agreementManager, "Editing", supplier);
-                frmEditSupplier.btnSubmit.Visibility = Visibility.Hidden;
-                frmEditSupplier.btnSubmitAgreement.Visibility = Visibility.Visible;
-                var result = frmEditSupplier.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.StackTrace);
-            }
-            GlobalRefresh();
-        }
+        //    try
+        //    {
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message + ex.StackTrace);
+        //    }
+        //    GlobalRefresh();
+        //}
 
         /// <summary>
         /// Ryan Spurgetis
