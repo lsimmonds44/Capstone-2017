@@ -28,5 +28,6 @@ namespace LogicLayer
 
         bool UpdateDelivery(Delivery oldDelivery, Delivery newDelivery);
         List<Delivery> RetrieveDeliveriesByOrderId(int orderId);
+        bool AssignRouteToDelivery(int deliveryId, int routeId);
     }
 }

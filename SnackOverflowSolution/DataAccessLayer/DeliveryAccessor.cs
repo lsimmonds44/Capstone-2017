@@ -266,6 +266,13 @@ namespace DataAccessLayer
         /// 
         /// Updated to check if the verification is null before assigning it
         /// </remarks>
+        /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// Updates: 2017/05/04
+        /// 
+        /// Updated to check if the route id is null before assignment
+        /// </remarks>
         /// <param name="oldDelivery">The old delivery.</param>
         /// <param name="newDelivery">The new delivery.</param>
         /// <returns>How many rows were affected.</returns>
@@ -280,7 +287,16 @@ namespace DataAccessLayer
 
             cmd.Parameters.AddWithValue("@DELIVERY_ID", oldDelivery.DeliveryId);
 
-            cmd.Parameters.AddWithValue("@old_ROUTE_ID", oldDelivery.RouteId);
+            if (oldDelivery.RouteId != null)
+            {
+                cmd.Parameters.AddWithValue("@old_ROUTE_ID", oldDelivery.RouteId);
+            }
+            else
+            {
+                cmd.Parameters.Add("@old_ROUTE_ID", SqlDbType.Int);
+                cmd.Parameters["@old_ROUTE_ID"].Value = DBNull.Value;
+            }
+            
             cmd.Parameters.AddWithValue("@old_DELIVERY_DATE", oldDelivery.DeliveryDate);
 
             //Checking if the verification is null before assigning it as it used to break before doing this
@@ -299,7 +315,15 @@ namespace DataAccessLayer
             cmd.Parameters.AddWithValue("@old_DELIVERY_TYPE_ID", oldDelivery.DeliveryTypeId);
             cmd.Parameters.AddWithValue("@old_ORDER_ID", oldDelivery.OrderId);
 
-            cmd.Parameters.AddWithValue("@new_ROUTE_ID", newDelivery.RouteId);
+            if (newDelivery.RouteId != null)
+            {
+                cmd.Parameters.AddWithValue("@new_Route_ID", newDelivery.RouteId);
+            }
+            else
+            {
+                cmd.Parameters.Add("@new_Route_ID", SqlDbType.Int);
+                cmd.Parameters["@new_Route_ID"].Value = DBNull.Value;
+            }
             cmd.Parameters.AddWithValue("@new_DELIVERY_DATE", newDelivery.DeliveryDate);
             
             if (newDelivery.Verification != null)
@@ -444,6 +468,13 @@ namespace DataAccessLayer
         /// 
         /// Retrieves a delivery with the passed in id
         /// </summary>
+        /// </remarks>
+        /// <remarks>
+        /// Robert Forbes
+        /// Updates: 2017/05/04
+        /// 
+        /// Updated to check if the route id is null before assigning it
+        /// </remarks>
         /// <param name="deliveryId"></param>
         /// <returns></returns>
         public static Delivery RetrieveDeliveryById(int deliveryId)
@@ -468,7 +499,7 @@ namespace DataAccessLayer
                     delivery = new Delivery()
                     {
                         DeliveryId = reader.GetInt32(0),
-                        RouteId = reader.GetInt32(1),
+                        RouteId = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
                         DeliveryDate = reader.GetDateTime(2),
                         Verification = reader.IsDBNull(3) ? null : reader.GetSqlBytes(3).Buffer,
                         StatusId = reader.GetString(4),
@@ -541,6 +572,45 @@ namespace DataAccessLayer
             }
 
             return deliveries;
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <param name="DeliveryId"></param>
+        /// <param name="RouteId"></param>
+        /// <returns></returns>
+        public static int AssignRouteToDelivery(int DeliveryId, int RouteId)
+        {
+            var rows = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_assign_route_to_delivery";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@DELIVERY_ID", DeliveryId);
+            cmd.Parameters.AddWithValue("@ROUTE_ID", RouteId);
+            
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
     }
 }

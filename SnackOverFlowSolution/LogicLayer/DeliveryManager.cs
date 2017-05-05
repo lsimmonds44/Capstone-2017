@@ -192,5 +192,31 @@ namespace LogicLayer
 
             return deliveries;
         }
+
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/04
+        /// </summary>
+        /// <param name="deliveryId"></param>
+        /// <param name="routeId"></param>
+        /// <returns></returns>
+        public bool AssignRouteToDelivery(int deliveryId, int routeId)
+        {
+            var result = false;
+
+            try
+            {
+                result = (DeliveryAccessor.AssignRouteToDelivery(deliveryId, routeId) == 1);
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+        }
     }
 }
