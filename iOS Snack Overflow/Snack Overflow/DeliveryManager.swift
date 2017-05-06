@@ -34,7 +34,7 @@ class DeliveryManager : NSObject{
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let parameter = ["verificationImage": verificationImageStr]
+        _ = ["verificationImage": verificationImageStr]
         /*
         do{
             request.httpBody = try JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)

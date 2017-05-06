@@ -31,6 +31,7 @@ class SignatureVC : UIViewController{
     var opacity: CGFloat = 1.0
     var swiped = false
     
+    
 
     /**
      -Author
@@ -133,9 +134,15 @@ class SignatureVC : UIViewController{
             self.delegate.updateDelivery()
         }
         let alertController = UIAlertController(title: "Delivery Update", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default) { _ in
+            self.navigationController?.popToViewController(self.navigationController!.viewControllers[1], animated: true)
+        })
+        
         
         self.present(alertController, animated: true, completion: nil)
+        
+        
+        
     }
     
     

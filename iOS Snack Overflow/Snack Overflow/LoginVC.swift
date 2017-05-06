@@ -129,8 +129,15 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     
     
     
+    
+    
 } // end of class
 
+class ReplaceSegue: UIStoryboardSegue {
+    override func perform() {
+        source.navigationController?.setViewControllers([destination], animated: true)
+    }
+}
 
 
 

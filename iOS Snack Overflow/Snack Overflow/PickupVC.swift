@@ -130,8 +130,23 @@ class PickupVC : UIViewController,UITableViewDataSource,UITableViewDelegate{
             message = "Pickup Status Successfully updated"
         }
         let alertController = UIAlertController(title: "Pickup Update", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default){
+           _ in
+            // This pops the view
+            self.navigationController?.popToViewController(self.navigationController!.viewControllers[1], animated: true)
+        })
         
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
+
+
+
+
+
+
+
+
+

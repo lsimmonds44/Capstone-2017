@@ -25,10 +25,10 @@ func getIPAsString() -> String{
 //    let RobbieHomeURLString = "http://192.168.1.5:8333/api/" // ip of Robbies home computer
 //    let EricURLString = "http://10.0.1.27:8333/api/" // Home ip
 //    let EricSchoolIP = "http://10.132.18.15:8333/api/" // School ip
-//    let EricWorkIP =   "http://192.168.3.129:8333/api/"
-    let InstructorIP = "http://10.108.2.29:8333/api/"
+    let EricWorkIP =   "http://192.168.3.129:8333/api/"
+//    let InstructorIP = "http://10.108.2.29:8333/api/"
     
-    return InstructorIP
+    return EricWorkIP
 }
 
 /// Eric Walton
