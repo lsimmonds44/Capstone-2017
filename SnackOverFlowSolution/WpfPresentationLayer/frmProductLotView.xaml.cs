@@ -26,6 +26,7 @@ namespace WpfPresentationLayer
         private ISupplierManager _supplierManager;
         private ProductLot _productLot;
         private PickupLine _pickupLine;
+        private Employee _employee;
 
         List<Location> _locationList;
         List<Product> _productList;
@@ -74,12 +75,13 @@ namespace WpfPresentationLayer
         /// </summary>
         /// <param name="pickupManager"></param>
         /// <param name="pickupLine"></param>
-        public frmAddProductLot(IPickupManager pickupManager, PickupLine pickupLine)
+        public frmAddProductLot(IPickupManager pickupManager, PickupLine pickupLine, Employee employee)
         {
             InitializeComponent();
             _productLotManager = new ProductLotManager();
             _pickupManager = pickupManager;
             _pickupLine = pickupLine;
+            _employee = employee;
             SetValuesFromPickupLine(_pickupLine);
         }
 
@@ -264,9 +266,8 @@ namespace WpfPresentationLayer
                 _locationList = (new LocationManager()).ListLocations();
                 cboLocationIDVal.ItemsSource = _locationList;
                 cboLocationIDVal.Visibility = Visibility.Visible;
-                _employeeList = (new EmployeeManager()).RetrieveEmployeeList();
-                cboSupplyManagerIDVal.ItemsSource = _employeeList;
-                cboSupplyManagerIDVal.Visibility = Visibility.Visible;
+                lblSupplyManagerID.Visibility = Visibility.Hidden;
+                cboSupplyManagerIDVal.Visibility = Visibility.Hidden;
                 dpDateReceived.SelectedDate = DateTime.Now;
             }
             catch (Exception ex)
@@ -311,18 +312,20 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Select a location for lot.");
                 return;
             }
-            if (null == cboSupplyManagerIDVal.SelectedItem)
-            {
-                MessageBox.Show("Select a supply manager for lot.");
-                return;
-            }
+            //if (null == cboSupplyManagerIDVal.SelectedItem)
+            //{
+            //    MessageBox.Show("Select a supply manager for lot.");
+            //    return;
+            //}
             if (null == dpDateReceived.SelectedDate)
             {
                 MessageBox.Show("Add a date for Date Received");
+                return;
             }
             if (null == dpExpirationDate.SelectedDate)
             {
                 MessageBox.Show("Add a date for the Expiration Date");
+                return;
             }
             ProductLot newLot = new ProductLot()
             {
@@ -330,7 +333,8 @@ namespace WpfPresentationLayer
                 SupplierId = lotSupplierId,
                 LocationId = _locationList[cboLocationIDVal.SelectedIndex].LocationId,
                 ProductId = productId,
-                SupplyManagerId = (int)_employeeList[cboSupplyManagerIDVal.SelectedIndex].EmployeeId,
+                SupplyManagerId = _employee.EmployeeId,
+                //SupplyManagerId = (int)_employeeList[cboSupplyManagerIDVal.SelectedIndex].EmployeeId,
                 Quantity = lotQuantity,
                 AvailableQuantity = lotQuantity,
                 DateReceived = dpDateReceived.SelectedDate,
@@ -340,12 +344,12 @@ namespace WpfPresentationLayer
             try
             {
                 _productLotManager.CreateProductLot(newLot);
-                MessageBox.Show("Product Lot Added");
+                MessageBox.Show("Product lot added. Be sure to create an inspection for lot.");
                 _pickupManager.DeletePickupLine(_pickupLine);
+                Close();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("An error occured. " + ex.Message + ex.StackTrace);
             }
         }

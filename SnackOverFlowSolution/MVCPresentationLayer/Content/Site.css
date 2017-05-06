@@ -23,4 +23,29 @@ textarea {
     max-width: 280px;
 }
 
+#supplierApplyLeft {
+    width: 55%;
+    margin-right: 0px;
+    height:100%;
+    float: left;
+}
+#supplierApplyRight {
+    margin-left: 0px;
+    padding-left: 0px;
+    float: right;
+    width: 45%;
+}
 
+/*#supplierAgg {
+    border: solid;
+}*/
+
+#supplierApplyRight a.list-group-item {
+    width: 280px;
+}
+
+#submitSupplierApp {
+    position: absolute;
+    bottom: 10%;
+    right: 60%
+}

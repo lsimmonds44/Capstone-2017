@@ -5102,13 +5102,13 @@ print '' print  '*** Creating procedure sp_retrieve_supplier_product_lot'
 GO
 CREATE PROCEDURE sp_retrieve_supplier_product_lot
 (
-	@SUPPLIER_PRODUCT_LOT[INT]
+	@SUPPLIER_PRODUCT_LOT_ID[INT]
 )
 AS
 	BEGIN
 		SELECT SUPPLIER_PRODUCT_LOT_ID, SUPPLIER_ID, PRODUCT_ID, QUANTITY, EXPIRATION_DATE, PRICE
 		FROM supplier_product_lot
-		WHERE SUPPLIER_PRODUCT_LOT_ID = @SUPPLIER_PRODUCT_LOT
+		WHERE SUPPLIER_PRODUCT_LOT_ID = @SUPPLIER_PRODUCT_LOT_ID
 	END
 GO
 
@@ -5124,20 +5124,6 @@ AS
 		FROM supplier_product_lot
 		WHERE SUPPLIER_ID = @SUPPLIER_ID
 		ORDER BY SUPPLIER_PRODUCT_LOT_ID DESC
-	END
-GO
-
-print '' print  '*** Creating procedure sp_retrieve_supplier_product_lot'
-GO
-CREATE PROCEDURE sp_retrieve_supplier_product_lot
-(
-	@SUPPLIER_ID[INT]
-)
-AS
-	BEGIN
-		SELECT SUPPLIER_PRODUCT_LOT_ID, SUPPLIER_ID, PRODUCT_ID, QUANTITY, EXPIRATION_DATE, PRICE
-		FROM supplier_product_lot
-		WHERE SUPPLIER_PRODUCT_LOT_ID = @SUPPLIER_PRODUCT_LOT_ID
 	END
 GO
 

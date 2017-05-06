@@ -122,6 +122,11 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
+            products = products.Select(c => c.ProductId)
+                .Distinct()
+                .Select(c => products.FirstOrDefault(t => t.ProductId == c))
+                .ToList();
+
             return products;
         }
 

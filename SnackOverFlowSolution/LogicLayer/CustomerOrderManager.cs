@@ -33,7 +33,7 @@ namespace LogicLayer
             {
                 var p = new ProductOrder
                 {
-                    CustomerId = customer.CommercialId, 
+                    CustomerId = customer.UserId, 
                     OrderTypeId = "Commercial", 
                     AddressType = null,
                     OrderDate = DateTime.Now,

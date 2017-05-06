@@ -70,6 +70,7 @@ namespace MVCPresentationLayer.Models
         public string Password { get; set; }
         [Required]
         [CompareAttribute("Password",ErrorMessage="Passwords do not match")]
+        [Display(Name="Confirm Password")]
         public string ConfirmPassword { get; set; }
 
         //Supplier

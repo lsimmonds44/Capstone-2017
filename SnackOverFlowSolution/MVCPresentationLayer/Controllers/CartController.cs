@@ -112,9 +112,9 @@ namespace MVCPresentationLayer.Controllers
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
-
+                var test = "breaker";
             }
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
@@ -191,21 +191,22 @@ namespace MVCPresentationLayer.Controllers
             try
             {
                 orderID = _customerOrderManager.ProcessOrder(shippingDetails);
+                if (orderID==0)
+                {
+                    ViewBag.Error = "Your cart is empty.";
+                    return View();
+                }
+                else
+                {
+                    decimal taxRate = Decimal.Parse(System.Configuration.ConfigurationManager.AppSettings["TaxRate"]);
+                    _invoiceManager.CreateCustomerInvoice(orderID, taxRate);
+                    return View("Completed");
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "An error occured: " + ex.Message;
-            }
-            if (orderID==0)
-            {
-                ViewBag.Error = "Your cart is empty.";
+                ViewBag.Error = "An error occured: " + ex.Message+(null==ex.InnerException?"":ex.InnerException.Message);
                 return View();
-            }
-            else
-            {
-                decimal taxRate = Decimal.Parse(System.Configuration.ConfigurationManager.AppSettings["TaxRate"]);
-                _invoiceManager.CreateCustomerInvoice(orderID, taxRate);
-                return View("Completed");
             }
 
         }
