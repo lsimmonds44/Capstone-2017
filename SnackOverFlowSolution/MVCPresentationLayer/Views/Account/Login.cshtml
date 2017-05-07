@@ -1,11 +1,71 @@
-﻿@using MVCPresentationLayer.Models
-@model LoginViewModel
+﻿@model MVCPresentationLayer.Models.LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
+
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo"/>
+        </a>
+    </div>
+</header>
+@*End of Main Header*@
+
+<br/><br/>
+
+<div class="container wow fadeInDown">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="login-form-container">
+                <h1>Login</h1>
+
+                @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                {
+                    <p>Don't have an account? @Html.ActionLink("Click here to register", "Register", "Account")</p>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+                    <div class="input-container row">
+                        <div class="col-md-6">
+                            @*<input type="text" class="small-input white-bg" name="login-username" id="login-username" placeholder="Username">*@
+                            @Html.TextBoxFor(m => m.UserName, new {@class = "small-input white-bg", name = "login-username", id = "login-username", placeholder = "Username"})
+                            @Html.ValidationMessageFor(m => m.UserName, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="intput-container row">
+                        <div class="col-md-6">
+                            @Html.PasswordFor(m => m.Password, new {@class = "small-input white-bg", name = "login-password", id = "login-password", placeholder = "Password"})
+                            <br/>
+                            @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"}) <br/><br/>
+                            @*<input type="password" class="small-input white-bg" name="login-password" id="login-password" placeholder="Password">*@
+                        </div>
+
+                    </div>
+                    <!-- /input-container -->
+                    <div class="input-container">
+                        <input type="submit" value="Log in" class="custom-button button-style3 medium"/>
+                        @*<button type="submit" class="custom-button button-style3 medium">Login</button>*@
+                        @*<a href="#" class="lost-password-link">Lost Password?</a>*@
+                    </div>
+                    <!-- /input-container -->
+                }
+
+
+                @*<form action="#" class="login-form">
+
+                </form>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="row">
     <div class="col-md-12">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -42,19 +102,18 @@
                     </div>
                 </div>
                 <ul>
-                    <li>@Html.ActionLink("Register as a new user", "Register")</li>
                     <li>@Html.ActionLink("Apply for a Supplier Account", "Create", "SupplierWithAgreements")</li>
                     <li>@Html.ActionLink("Apply for a Commerical Account", "RegisterCommercial", "Home")</li>
                 </ul>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p> 
             }
         </section>
     </div>
-</div>
+</div>*@
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

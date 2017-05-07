@@ -167,6 +167,7 @@ namespace MVCPresentationLayer.Controllers
             var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ??
                        context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
+
             //If not approved, HasOrAssignRoles returns false
             if (!HasOrAssignRoles(context, model))//&& user != null)
             {
