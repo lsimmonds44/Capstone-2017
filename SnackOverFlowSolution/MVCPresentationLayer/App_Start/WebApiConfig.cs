@@ -6,16 +6,18 @@ using System.Web.Http;
 namespace MVCPresentationLayer
 {
     /// <summary>
-    /// Ariel Sigo
-    /// Updated:
-    /// 2017/04/29
+    /// Robert Forbes
+    /// Created:
+    /// 2017/04/02
     /// </summary>
+    /// <param name="config"></param>
     public static class WebApiConfig
     {
+
         /// <summary>
-        /// Ariel Sigo
-        /// Updated:
-        /// 2017/04/29
+        /// Robert Forbes
+        /// Created:
+        /// 2017/04/02
         /// </summary>
         /// <param name="config"></param>
         public static void Register(HttpConfiguration config)

@@ -915,6 +915,11 @@ namespace WpfPresentationLayer
         /// Updated: 2017/03/01
         /// 
         /// Modified to work with drop down to select status
+        /// 
+        /// Robert Forbes
+        /// Updated: 2017/03/01
+        /// 
+        /// Replaced with tabOpenOrders_Selected so the tab data can be refreshed when selected
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -942,6 +947,86 @@ namespace WpfPresentationLayer
                 lblStatus.Content += ex.ToString();
             }
         }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/06
+        /// 
+        /// Created to replace the tab loaded method so orders are updated when the tab is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabOpenOrders_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _orderStatusList = _orderStatusManager.RetrieveAllOrderStatus();
+                cboOrderStatus.ItemsSource = _orderStatusList;
+                cboOrderStatus.SelectedIndex = 0;
+                if (cboOrderStatus.SelectedItem != null)
+                {
+                    _currentOpenOrders = _orderManager.RetrieveProductOrdersByStatus((string)cboOrderStatus.SelectedItem);
+                    lvOpenOrders.Items.Clear();
+
+                    for (int i = 0; i < _currentOpenOrders.Count; i++)
+                    {
+                        this.lvOpenOrders.Items.Add(_currentOpenOrders[i]);
+                    }
+                    lblStatus.Content = "Status: Success";
+                }
+                if(lvOpenOrders.SelectedItem != null){
+                    if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId == "Ready For Assignment")
+                    {
+                        btnCreateDeliveries.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        btnCreateDeliveries.Visibility = Visibility.Hidden;
+                    }
+                }
+                else
+                {
+                    btnCreateDeliveries.Visibility = Visibility.Hidden;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Content += ex.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Robert Forbes
+        /// 
+        /// Created:
+        /// 2017/05/06
+        /// 
+        /// Created to allow the create deliveries button to be hidden when not usable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvOpenOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvOpenOrders.SelectedItem != null)
+            {
+                if (((ProductOrder)lvOpenOrders.SelectedItem).OrderStatusId == "Ready For Assignment")
+                {
+                    btnCreateDeliveries.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btnCreateDeliveries.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                btnCreateDeliveries.Visibility = Visibility.Hidden;
+            }
+        }
+        
         /// <summary>
         /// Alissa Duffy
         /// Updated: 2017/04/17
@@ -3024,5 +3109,7 @@ namespace WpfPresentationLayer
             }
             
         }
+
+        
     } // end of class
 } // end of namespace 

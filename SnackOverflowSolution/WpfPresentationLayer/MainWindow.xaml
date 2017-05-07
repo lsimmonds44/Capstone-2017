@@ -318,14 +318,14 @@
                                AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_Mouse_Double_Click" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ProductLotId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Product" Width="*" Binding="{Binding ProductName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Product" Width="2*" Binding="{Binding ProductName}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Warehouse" Width="*" Binding="{Binding WarehouseId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Supplier" Width="*" Binding="{Binding SupplierId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Location" Width="*" Binding="{Binding LocationId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Supply Manager" Width="*" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supply Manager" Width="2*" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Date Received" Width="*" Binding="{Binding DateReceived}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Date Expiring" Width="*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Received" Width="2*" Binding="{Binding DateReceived}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date Expiring" Width="2*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grade" Width="*" Binding="{Binding Grade}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"></DataGridTextColumn>
                         </DataGrid.Columns>
@@ -580,7 +580,7 @@
             </TabItem>
             <!--End of Supplier Catalog Tab-->
             <!--Open Orders Tab-->
-            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Loaded="tabOpenOrders_Loaded">
+            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabOpenOrders_Selected">
                 <Grid Margin="0">
                     <!--Open Orders Grid-->
                     <Grid.ColumnDefinitions>
@@ -606,14 +606,14 @@
                     </Grid>
                     <!--End of Open Orders Grid-->
                     <!--List View Open Orders-->
-                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_Mouse_Double_Click">
+                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_Mouse_Double_Click" SelectionChanged="lvOpenOrders_SelectionChanged">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="75" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
-                                <GridViewColumn Width="75" Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}"/>
-                                <GridViewColumn Width="140" Header="Order Date" DisplayMemberBinding="{Binding OrderDate}"/>
-                                <GridViewColumn Width="140" Header="Date Expected" DisplayMemberBinding="{Binding DateExpected}"/>
-                                <GridViewColumn Width="100" Header="Order Status" DisplayMemberBinding="{Binding OrderStatusId}"/>
+                                <GridViewColumn Width="120" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
+                                <GridViewColumn Width="120" Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}"/>
+                                <GridViewColumn Width="200" Header="Order Date" DisplayMemberBinding="{Binding OrderDate}"/>
+                                <GridViewColumn Width="200" Header="Date Expected" DisplayMemberBinding="{Binding DateExpected}"/>
+                                <GridViewColumn Width="200" Header="Order Status" DisplayMemberBinding="{Binding OrderStatusId}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
