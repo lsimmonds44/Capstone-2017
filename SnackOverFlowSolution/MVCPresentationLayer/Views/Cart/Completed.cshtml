@@ -1,8 +1,35 @@
 ﻿@{
     ViewBag.Title = "Snack Oveflow: Order Submitted";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<h2>Thanks for shopping with Us!</h2>
-We'll ship your goods as soon as possible.
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+        </a>
+        <h1 style="color: white;">Application Success</h1>
+    </div>
+</header>
+@*End of Main Header*@
 
-@Html.ActionLink("Continue Shopping", "Index", "Products", null, null)
+<section class="store-checkout" style="margin-bottom: -100px">
+    <div class="container wow fadeInDown billing-address">
+        <div class="row">
+
+            <div class="col-md-12 align-center">
+                <h2>
+                    Thanks for shopping with Us!
+                    We'll ship your goods as soon as possible
+                </h2>
+            </div>
+
+            <div class="col-md-12 align-center" style="margin-top: 30px">
+                <h3>@Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @style = "color: blue;" })</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
+

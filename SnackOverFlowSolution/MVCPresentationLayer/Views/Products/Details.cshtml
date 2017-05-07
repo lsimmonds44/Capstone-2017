@@ -6,9 +6,106 @@
 
 @*
     Updated by Skyler Hiscock 04/08/17
+    Updated by Natacha Ilunga 07/05/2017
 *@
 
-<h2>Details</h2>
+@{
+    ViewBag.Title = "SnackOverflow: Your Cart!";
+    Layout = "~/Views/Shared/_CartLayout.cshtml";
+}
+
+@*Product Details*@
+<section class="store-cart style3">
+    <div class="container">
+        <div class="cart-items wow fadeInDown">
+            <h1>Product Details</h1>
+            <p class="error">@ViewBag.Error</p>
+            <br/><br/>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <th>@Html.DisplayNameFor(model => model.PriceString)</th>
+                    <th>@Html.DisplayNameFor(model => model.Supplier_Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.CategoryID)</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td class="item-thumb">
+                        <figure class="align-center">
+                            <img src="@Url.Action("PictureOf", "Products", new {id = Model.ProductId})" width="100" height="100" alt="@Html.DisplayNameFor(model => model.Name)"/>
+                        </figure>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Description)</td>
+                    <td>@Html.DisplayFor(model => model.PriceString)</td>
+                    <td>@Html.DisplayFor(model => model.Supplier_Name)</td>
+                    <td>@Html.DisplayFor(model => model.CategoryID)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        
+        @*Quantity Grade Section*@
+        <div class="estimate-shopping wow fadeInDown">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-9">
+                    @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                    {
+                        using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            <label style="margin-bottom: 10px;">Quantity</label>
+                            <input type="number" name="Quantity" value="1">
+
+                            <label style="margin-bottom: 10px;">Grades</label>
+                            <select name="Grade" style="height: 40px;">
+                                @foreach (var gradeOption in Model.GradeOptions)
+                                {
+                                    <option value="@gradeOption.GradeID">@gradeOption.GradeID: @gradeOption.Price</option>
+                                }
+                            </select>
+                            
+                            <div class="col-md-12">
+                                @Html.HiddenFor(x => x.ProductId)
+                                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                                <input type="hidden" name="supplierId" value="@Model.SupplierID" />
+                            </div>
+
+                            <div class="align-right">
+                                <input type="submit" value="Add To Cart" class="custom-button button-style3 filled medium" style="height: 40px;"/>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h3>Please log in as a customer to purchase items.</h3>
+                    }
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12 align-right">
+                    <hr />
+                    <h3>@Html.ActionLink("Continue Shopping", "Index", "Products")</h3>
+                </div>
+            </div>
+
+
+        </div>
+        @*End of Quantity Grade Section*@
+    </div>
+</section>
+
+
+@{
+    /*
+    <h2>Details</h2>
 <div>
     <p class="error">@ViewBag.Error</p>
     <h4>Product</h4>
@@ -62,7 +159,8 @@
 
     </dl>
 </div>
-@if (Request.IsAuthenticated && User.IsInRole("Customer")) { 
+@if (Request.IsAuthenticated && User.IsInRole("Customer"))
+{
     using (Html.BeginForm("AddToCart", "Cart"))
     {
         <input type="number" name="Quantity" value="1" />
@@ -87,3 +185,5 @@ else
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+*/
+}

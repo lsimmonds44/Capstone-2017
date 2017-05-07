@@ -1,15 +1,71 @@
 ﻿@model IEnumerable<DataObjects.SupplierProductLot>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Commercial Invoice";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<h2>Index</h2>
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo"/>
+        </a>
+        <h1 style="color: white;">Supplier Products</h1>
+    </div>
+</header>
+@*End of Main Header*@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+<section class="store-cart style3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 align-right" style="margin-bottom: 20px;">
+                @Html.ActionLink("Create New", "Create", "SupplierGoods", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+
+        <div class="cart-items wow fadeInDown">
+            <table>
+                <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.SupplierProductLotId)</td>
+                    <td>@Html.DisplayNameFor(model => model.ExpirationDate)</td>
+                    <td>@Html.DisplayNameFor(model => model.ProductId)</td>
+                    <td>@Html.DisplayNameFor(model => model.Quantity)</td>
+                    <td>@Html.DisplayNameFor(model => model.SupplierId)</td>
+                    <td>@Html.DisplayNameFor(model => model.Price)</td>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.SupplierProductLotId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ExpirationDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SupplierId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new {id = item.SupplierProductLotId}) |
+                            @Html.ActionLink("Details", "Details", new {id = item.SupplierProductLotId}) |
+                            @Html.ActionLink("Delete", "Delete", new {id = item.SupplierProductLotId})
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+@{
+    /*
+   <table class="table">
     <tr>
         <td>
             @Html.DisplayNameFor(model => model.SupplierProductLotId)
@@ -70,4 +126,6 @@
     </tr>
 }
 
-</table>
+</table> 
+*/
+}

@@ -1,15 +1,67 @@
 ﻿@model MVCPresentationLayer.Models.IndexViewModel
+
 @{
     ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+        </a>
+        <h1 style="color: white;">Manage Account</h1>
+    </div>
+</header>
+@*End of Main Header*@
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
+
+
+<div class="container">
+    <br/><br/>
+    <p class="text-success">@ViewBag.StatusMessage</p>
     <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <hr/>
+    
+    <div class="row">
+        <div class="col-md-3">
+            Password:
+        </div>
+
+        <div class="col-md-3">
+            [ @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword")) ]
+        </div>
+    </div>
+    
+    <div class="row">
+            @if (Request.IsAuthenticated && User.IsInRole("Supplier"))
+            {
+                <div class="col-md-3">
+                    <p>Supplier Account</p>
+                </div>
+                
+                <div class="col-md-3" >
+                    <p>@Html.ActionLink("Edit Supplier Details", "Edit", "SupplierWithAgreements", new { username = User.Identity.Name }, null)</p> 
+                </div>
+            }
+            
+            @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+            {
+                <div class="col-md-3">
+                    <p>Commercial Account:</p>
+                </div>
+                
+                <div class="col-md-3" >
+                    <p>@Html.ActionLink("Invoices", "Index", "CommercialInvoice", null, null)</p> 
+                </div>
+            } 
+    </div>
+
+
+
+
+    @*<dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
             [
@@ -22,12 +74,12 @@
                 @Html.ActionLink("Create", "SetPassword")
             }
             ]
-        </dd>
-        <dt>External Logins:</dt>
+        </dd>*@
+        @*<dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [
             @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
+        </dd>*@
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
              
@@ -53,13 +105,13 @@
                 ]
             </dd>
         *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
+        <dt>@*Two-Factor Authentication:*@</dt>
+    <dd>
+        @*<p>
                 There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
+            </p>*@
+        @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
@@ -79,19 +131,23 @@
                         </text>
                     }
                 }*@
-        </dd>
-        @if (Request.IsAuthenticated && User.IsInRole("Supplier"))
+    </dd>
+                
+    @{/*
+         @if (Request.IsAuthenticated && User.IsInRole("Supplier"))
         {
             <dt>Supplier Account:</dt>
-            <dd>@Html.ActionLink("Edit Supplier Details", "Edit", "SupplierWithAgreements", new { username = User.Identity.Name}, null)
-        </dd>
+            <dd>@Html.ActionLink("Edit Supplier Details", "Edit", "SupplierWithAgreements", new {username = User.Identity.Name}, null)
+            </dd>
         }
         @if (Request.IsAuthenticated && User.IsInRole("Customer"))
         {
             <dt>Commercial Account:</dt>
             <dd>
                 @Html.ActionLink("Invoices", "Index", "CommercialInvoice", null, null)
-        </dd>
+            </dd>
         }
     </dl>
+    */}
+   
 </div>

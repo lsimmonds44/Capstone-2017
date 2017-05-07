@@ -1,11 +1,45 @@
 ﻿@model MVCPresentationLayer.Models.HomeViewModels.ApplicationSuccessViewModel
 @{
     ViewBag.Title = "Application Success";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<div class="jumbotron">
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+        </a>
+        <h1 style="color: white;">Application Success</h1>
+    </div>
+</header>
+@*End of Main Header*@
+
+<section class="store-checkout" style="margin-bottom: -100px">
+    <div class="container wow fadeInDown billing-address">
+        <div class="row">
+            
+            <div class="col-md-12 align-center">
+                <h2>
+                    Thank you, @Model.FirstName @Model.LastName. <br/>
+                    Your @Model.SupplierOrCommercial application has been successfully submitted.
+                </h2>
+            </div>
+
+            <div class="col-md-12 align-center" style="margin-top: 30px">
+                <h3>@Html.ActionLink("Home", "Index", "Home", new { @style="color: blue;"})</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+@*<div class="jumbotron">
     <p>
-        Thank you, @Model.FirstName @Model.LastName. <br/>
+        Thank you, @Model.FirstName @Model.LastName. <br />
         Your @Model.SupplierOrCommercial application has been successfully submitted.
     </p>
-</div>
+</div>*@

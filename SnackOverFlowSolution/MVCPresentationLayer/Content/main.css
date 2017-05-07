@@ -4673,6 +4673,33 @@ div.cart-items table .cart-item-count{
     border: 2px solid #19242a;
     color: #19242a;
 }
+
+div.cart-items .cart-item-count{
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding-left: 0;
+    padding-right: 0;
+    border: 2px solid #19242a;
+    color: #19242a;
+}
+
+    div.cart-items .stepper .stepper-arrow.down {
+        background-image: url('../Images/CartImages/icon-minus.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        left: 0;
+    }
+    div.cart-items .stepper .stepper-arrow.up {
+        background-image: url('../Images/CartImages/icon-plus.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        right: 0;
+    }
+
 .estimate-shopping{
     padding-top: 28px;
     padding-right: 40px;
