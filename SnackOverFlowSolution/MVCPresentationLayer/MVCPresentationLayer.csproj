@@ -442,6 +442,7 @@
     <Content Include="Views\SupplierWithAgreements\UpdateAgreements.cshtml" />
     <Content Include="Views\Home\ApplicationSuccess.cshtml" />
     <Content Include="Views\Shared\_CartLayout.cshtml" />
+    <Content Include="Views\Shared\_AccountsLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

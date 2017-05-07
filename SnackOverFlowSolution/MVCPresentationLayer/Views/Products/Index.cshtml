@@ -27,22 +27,27 @@
                 <div class="row">
 
                     @*Category Filter*@
-                    <div class="col-md-9">
-                        @Html.Action("NavMenu", "Products", new { categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory })
+                    <div class="col-md-6">
+                        @Html.Action("NavMenu", "Products", new {categories = Model.Categories, searchPhrase = Model.SearchPhrase, selectedCategory = Model.CurrentCategory})
                     </div>
                     @*End of Category Filters*@
 
                     @*Search Bar*@
                     <div class="col-md-3">
-                        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "search-form" }))
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new {@class = "search-form"}))
                         {
-                            @Html.TextBox("search", null, new { name = "search", id = "search-clear", placeholder = "Search products" })
+                            @Html.TextBox("search", null, new {name = "search", id = "search-clear", placeholder = "Search products"})
                             <button type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
                         }
                     </div>
                     @*End of Search Bar*@
+                    
+                    @*Login Partia*@
+                    <div class="col-md-3"style="color: white;">
+                        @Html.Partial("_LoginPartial")
+                    </div>
 
                 </div>
             </div>

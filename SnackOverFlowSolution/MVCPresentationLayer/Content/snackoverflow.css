@@ -5,3 +5,7 @@
 .notSelected {
     color: green;
 }
+
+.customcolor a {
+    color: white;
+}

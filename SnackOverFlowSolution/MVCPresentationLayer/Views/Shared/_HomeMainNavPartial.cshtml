@@ -1,8 +1,17 @@
-﻿<div class="main-nav-inner">
+﻿@using Microsoft.AspNet.Identity
+<div class="main-nav-inner">
     <div class="logo-container">
         <a href="#">
             <img src="~/Images/slider-images/Flogo2.png" alt="snack overflow logo">
         </a>
+
+        <p>
+            @if ( Request.IsAuthenticated && (User.IsInRole("Customer") || User.IsInRole("Supplier")) )
+            {
+                <br/>
+                <h3 style="color: white; font-family: nevis-Bold, sans-serif;">LOGGED IN AS @User.Identity.GetUserName().ToUpper()</h3>
+            }        
+        </p>
     </div><!-- /logo-container -->
     <nav class="main-nav">
         <ul>

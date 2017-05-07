@@ -2,50 +2,199 @@
 
 @{
     ViewBag.Title = "Apply";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
+}
+
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+        </a>
+        <h1 style="color: white;">Supplier Registration</h1>
+    </div>
+</header>
+@*End of Main Header*@
+
+
+@using (Html.BeginForm("Create", "SupplierWithAgreements", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <section class="store-checkout" style="margin-bottom:-100px">
+        <div class="container wow fadeInDown billing-address">
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 20px;">
+                    <h3>Personal Information</h3>
+                </div>
+
+                <div class="input-container col-md-12">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control small-input white-bg", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control small-input white-bg", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control small-input white-bg", @placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control small-input white-bg", @placeholder = "First Name" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control small-input white-bg", @placeholder = "Last Name" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control small-input white-bg", @placeholder = "Phone" })
+                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control small-input white-bg", @placeholder = "Email Address" })
+                    @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.AddressLineOne, new { @class = "form-control small-input white-bg", @placeholder = "Address Line 1" })
+                    @Html.ValidationMessageFor(m => m.AddressLineOne, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.AddressLineTwo, new { @class = "form-control small-input white-bg", @placeholder = "Address Line 2" })
+                    @Html.ValidationMessageFor(m => m.AddressLineTwo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control small-input white-bg", @placeholder = "City" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.State, new { @class = "form-control small-input white-bg", @placeholder = "State" })
+                    @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control small-input white-bg", @placeholder = "Zip" })
+                    @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </section>
+
+    //Farm Information
+    <section class="store-checkout" >
+        <div class="container wow fadeInDown billing-address">
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 20px;">
+                    <h3>Farm Information</h3>
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.TextBoxFor(m => m.FarmTaxID, new {@class = "form-control small-input white-bg", @placeholder = "Federal Tax ID"})
+                    @Html.ValidationMessageFor(m => m.FarmTaxID, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.EditorFor(model => model.FarmName, new {htmlAttributes = new { @class = "form-control small-input white-bg", @placeholder = "Farm Name" }})
+                    @Html.ValidationMessageFor(model => model.FarmName, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.EditorFor(model => model.FarmAddress, new {htmlAttributes = new {@class = "form-control small-input white-bg", @placeholder = "Farm Address"}})
+                    @Html.ValidationMessageFor(model => model.FarmAddress, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.EditorFor(model => model.FarmCity, new {htmlAttributes = new {@class = "form-control small-input white-bg", @placeholder = "Farm City"}})
+                    @Html.ValidationMessageFor(model => model.FarmCity, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.EditorFor(model => model.FarmState, new {htmlAttributes = new {@class = "form-control small-input white-bg", @placeholder = "Farm State"}})
+                    @Html.ValidationMessageFor(model => model.FarmState, "", new {@class = "text-danger"})
+                </div>
+                
+                <div class="col-md-12" style="margin-bottom: 20px; margin-top: 20px">
+                    @Html.LabelFor(model => model.Agreements, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                
+                <br/><br/>
+
+                <div class="form-group col-md-12" >
+                    <div class="list-group" data-toggle="items">
+                        @Html.ListBoxFor(model => model.ProductIDs, new MultiSelectList(Model.Agreements, "ProductId", "ProductName", Model.ProductIDs), new { Multiple = "multiple", @class = "list-group", @id = "supplierAgg" })
+                    </div>
+                </div>
+                
+                <div class="col-md-12 align-right">
+                    <input type="submit" value="Create" class="custom-button button-style3 filled medium" id="submitSupplierApp" />
+                    <p>@ViewBag.Message</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    //End of Farm Information
+}
+
+@*Old version*@
+@{
+    /*@model MVCPresentationLayer.Models.SupplierApplicantViewModel
+
+@{
+    ViewBag.Title = "Apply";
 }
 
 <h2>Apply</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Supplier</h4>
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <hr />
         @*<div class="form-group">
-            @Html.LabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SupplierID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.IsApproved, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsApproved)
-                    @Html.ValidationMessageFor(model => model.IsApproved, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.IsApproved, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsApproved)
+                        @Html.ValidationMessageFor(model => model.IsApproved, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ApprovedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ApprovedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ApprovedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.ApprovedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ApprovedBy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ApprovedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
         <div id="supplierApplyLeft">
             <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 fullWidth"})
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 fullWidth" })
                 <div class="col-md-10 clearPadding">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control nudgeRight"} })
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control nudgeRight" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -150,12 +299,12 @@
             </div>
 
             @*<div class="form-group">
-                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                    @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.FarmName, htmlAttributes: new { @class = "control-label col-md-2 fullWidth" })
@@ -190,14 +339,14 @@
             </div>
 
             @*<div class="form-group">
-                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Active)
-                        @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Active)
+                            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Agreements, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -205,9 +354,9 @@
                     <div class="list-group" data-toggle="items">
                         @Html.ListBoxFor(model => model.ProductIDs, new MultiSelectList(Model.Agreements, "ProductId", "ProductName", Model.ProductIDs), new { Multiple = "multiple", @class = "list-group", @id = "supplierAgg" })
                         @*@foreach (var agreement in Model.Agreements)
-                        {
-                            <a href="#" class="list-group-item">@agreement.ProductName</a>
-                        }*@
+                            {
+                                <a href="#" class="list-group-item">@agreement.ProductName</a>
+                            }*@
                     </div>
                 </div>
             </div>
@@ -215,7 +364,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" id="submitSupplierApp"/>
+                <input type="submit" value="Create" class="btn btn-default" id="submitSupplierApp" />
                 <p>@ViewBag.Message</p>
             </div>
         </div>
@@ -223,10 +372,52 @@
 }
 
 @*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/listgroup.min.js"></script>
+}*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
