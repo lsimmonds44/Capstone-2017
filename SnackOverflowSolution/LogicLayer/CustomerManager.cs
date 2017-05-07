@@ -54,12 +54,20 @@ namespace LogicLayer
                 UserManager userManager = new UserManager();
                 EmployeeManager employeeManager = new EmployeeManager();
                 commercialCustomers = CustomerAccessor.RetrieveAllCommercialCustomers();
-                foreach(CommercialCustomer e in commercialCustomers)
+                foreach (CommercialCustomer e in commercialCustomers)
                 {
-                    e.name =  userManager.RetrieveUser(e.UserId).LastName + ", " + userManager.RetrieveUser(e.UserId).FirstName;
+                    e.name = userManager.RetrieveUser(e.UserId).LastName + ", " + userManager.RetrieveUser(e.UserId).FirstName;
                     if (e.ApprovedBy != null)
                     {
-                        e.ApprovedByName = userManager.RetrieveUser(e.ApprovedBy).LastName + ", " + userManager.RetrieveUser(e.ApprovedBy).FirstName;
+                        var approvalUser = userManager.RetrieveUser(e.ApprovedBy);
+                        if(approvalUser.FirstName.Equals("") && approvalUser.LastName.Equals(""))
+                        {
+                            e.ApprovedByName = "";
+                        }
+                        else
+                        {
+                            e.ApprovedByName = approvalUser.LastName + ", " + approvalUser.FirstName;
+                        }
                     }
                 }
             }
