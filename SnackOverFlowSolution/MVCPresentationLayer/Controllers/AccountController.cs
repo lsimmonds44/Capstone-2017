@@ -807,12 +807,30 @@ namespace MVCPresentationLayer.Controllers
         /// <returns>Boolean indicatinng Role Assignment Success</returns>
         public bool HasOrAssignRoles(ApplicationDbContext context, LoginViewModel model)
         {
+
+
+            DataObjects.User usr = null;
+
+            try
+            {
+                usr = _appUserManager.RetrieveUserByUserName(model.UserName);
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+
             var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ??
                        context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
             //Force email
-            if (user != null && user.Email != null)
-                model.UserName = user.Email;
+            if (user != null && usr.EmailAddress != null)
+            {
+                model.UserName = usr.EmailAddress;
+
+            }
+
 
             User userFound = null;
             try
