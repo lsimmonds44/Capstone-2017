@@ -98,7 +98,7 @@ namespace WpfPresentationLayer
             lblEmailVal.Content = charity.Email;
             lblEmployeeIDVal.Content = charity.EmployeeID;
             lblPhoneNumberVal.Content = charity.PhoneNumber;
-            lblUserIDVal.Content = charity.UserID;
+            //lblUserIDVal.Content = charity.UserID;
             lblStatusVal.Content = charity.Status;
             inAddMode = false;
         }
@@ -137,7 +137,7 @@ namespace WpfPresentationLayer
             lblEmailVal.Visibility = Visibility.Collapsed;
             lblEmployeeIDVal.Visibility = Visibility.Collapsed;
             lblPhoneNumberVal.Visibility = Visibility.Collapsed;
-            lblUserIDVal.Visibility = Visibility.Collapsed;
+            //lblUserIDVal.Visibility = Visibility.Collapsed;
 
             txtCharityName.Visibility = Visibility.Visible;
             txtContactFirstName.Visibility = Visibility.Visible;
@@ -148,25 +148,26 @@ namespace WpfPresentationLayer
             txtPhoneNumber.Visibility = Visibility.Visible;
             if (!_inApplyMode)
             {
-                try
-                {
-                    _userList = (new UserManager()).RetrieveFullUserList();
-                    cboUserID.ItemsSource = _userList;
-                    cboUserID.Visibility = Visibility.Visible;
-                }
-                catch (System.Data.SqlClient.SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                lblCharityID.Visibility = Visibility.Hidden;
+                //try
+                //{
+                //    _userList = (new UserManager()).RetrieveFullUserList();
+                //    cboUserID.ItemsSource = _userList;
+                //    cboUserID.Visibility = Visibility.Visible;
+                //}
+                //catch (System.Data.SqlClient.SqlException ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //}
             }
 
             
             btnPost.Visibility = Visibility.Visible;
             if (_inApplyMode)
             {
-                lblUserIDVal.Visibility = Visibility.Visible;
-                lblUserIDVal.Content = _charityUser.UserName;
-                lblUserIDVal.IsEnabled = false;
+                //lblUserIDVal.Visibility = Visibility.Visible;
+                //lblUserIDVal.Content = _charityUser.UserName;
+                //lblUserIDVal.IsEnabled = false;
                 txtEmployeeID.Visibility = Visibility.Hidden;
                 txtContactFirstName.Text = _charityUser.FirstName;
                 txtContactLastName.Text = _charityUser.LastName;
@@ -182,6 +183,12 @@ namespace WpfPresentationLayer
         /// Post Charity View.
         /// Standardized methods.
         /// </summary>
+        /// <remarks>
+        /// Christian Lopez
+        /// 2017/05/07
+        /// 
+        /// Removed userID from charity
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnPost_Click(object sender, RoutedEventArgs e)
@@ -245,10 +252,10 @@ namespace WpfPresentationLayer
                     ContactHours = txtContactHours.Text,
                     ContactLastName = txtContactLastName.Text,
                     Email = txtEmail.Text,
-                    EmployeeID = employeeID,
+                    EmployeeID = (int)employeeID,
                     PhoneNumber = txtPhoneNumber.Text,
-                    UserID = _userList[cboUserID.SelectedIndex].UserId,
-                    Status = "PENDING"
+                    //UserID = _userList[cboUserID.SelectedIndex].UserId,
+                    Status = employeeID == null? "PENDING" : "Approved"
                 };
 
                 if (inAddMode)
@@ -257,6 +264,7 @@ namespace WpfPresentationLayer
                     {
                         _charityManager.AddCharity(charityAsEntered);
                         MessageBox.Show("Charity Added");
+                        this.DialogResult = true;
                     }
                     catch (System.Data.SqlClient.SqlException ex)
                     {
@@ -282,7 +290,7 @@ namespace WpfPresentationLayer
                     Email = txtEmail.Text,
                     EmployeeID = null,
                     PhoneNumber = txtPhoneNumber.Text,
-                    UserID = _charityUser.UserId
+                    //UserID = _charityUser.UserId
                 };
 
                 try

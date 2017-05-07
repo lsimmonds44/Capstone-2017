@@ -160,28 +160,34 @@ namespace LogicLayer
         /// 
         /// Retrieves Charity instance by user id
         /// </summary>
+        /// <remarks>
+        /// Christian Lopez
+        /// 2017/05/07
+        /// 
+        /// Removed due to business rules separating user from charity
+        /// </remarks>
         /// <param name="userId"></param>
         /// <returns>Charity if successful</returns>
-        public Charity RetrieveCharityByUserId(int userId)
-        {
-            Charity s = null;
+        //public Charity RetrieveCharityByUserId(int userId)
+        //{
+        //    Charity s = null;
 
-            try
-            {
-                s = CharityAccessor.RetrieveCharityByUserId(userId);
-            }
-            catch (Exception)
-            {
+        //    try
+        //    {
+        //        s = CharityAccessor.RetrieveCharityByUserId(userId);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
+        //        throw;
+        //    }
 
-            if (null == s)
-            {
-                throw new ApplicationException("Could not find supplier for that user ID.");
-            }
+        //    if (null == s)
+        //    {
+        //        throw new ApplicationException("Could not find supplier for that user ID.");
+        //    }
 
-            return s;
-        }
+        //    return s;
+        //}
     }
 }

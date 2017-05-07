@@ -46,15 +46,14 @@ namespace DataAccessLayer
                         charities.Add(new Charity()
                         {
                             CharityID = reader.GetInt32(0),
-                            UserID = reader.GetInt32(1),
-                            EmployeeID = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2),
-                            CharityName = reader.GetString(3),
-                            ContactFirstName = reader.GetString(4),
-                            ContactLastName = reader.GetString(5),
-                            PhoneNumber = reader.GetString(6),
-                            Email = reader.GetString(7),
-                            ContactHours = reader.GetString(8),
-                            Status = reader.GetString(9)
+                            EmployeeID = reader.IsDBNull(1) ? (int?)null : reader.GetInt32(1),
+                            CharityName = reader.GetString(2),
+                            ContactFirstName = reader.GetString(3),
+                            ContactLastName = reader.GetString(4),
+                            PhoneNumber = reader.GetString(5),
+                            Email = reader.GetString(6),
+                            ContactHours = reader.GetString(7),
+                            Status = reader.GetString(8)
                         });
                     }
                 }
@@ -86,55 +85,60 @@ namespace DataAccessLayer
         /// Updated:
         /// 2017/04/04
         /// Standardized method.
+        /// 
+        /// Christian Lopez
+        /// 2017/05/07
+        /// 
+        /// Removed due to business rules separating charity from user
         /// </remarks>
         /// 
         /// <param name="userId">The User Id to search on.</param>
         /// <returns>The charity associated with the given User Id.</returns>
-        public static Charity RetrieveCharityByUserId(int userId)
-        {
-            Charity charity = null;
+        //public static Charity RetrieveCharityByUserId(int userId)
+        //{
+        //    Charity charity = null;
 
-            var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_retrieve_charity_by_user_id";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
+        //    var conn = DBConnection.GetConnection();
+        //    var cmdText = @"sp_retrieve_charity_by_user_id";
+        //    var cmd = new SqlCommand(cmdText, conn);
+        //    cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@USER_ID", userId);
+        //    cmd.Parameters.AddWithValue("@USER_ID", userId);
 
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    charity = new Charity
-                    {
-                        CharityID = reader.GetInt32(0),
-                        UserID = reader.GetInt32(1),
-                        EmployeeID = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2),
-                        CharityName = reader.GetString(3),
-                        ContactFirstName = reader.GetString(4),
-                        ContactLastName = reader.GetString(5),
-                        PhoneNumber = reader.GetString(6),
-                        Email = reader.GetString(7),
-                        ContactHours = reader.GetString(8),
-                        Status = reader.GetString(9)
-                    };
-                }
-            }
-            catch (Exception)
-            {
+        //    try
+        //    {
+        //        conn.Open();
+        //        var reader = cmd.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            reader.Read();
+        //            charity = new Charity
+        //            {
+        //                CharityID = reader.GetInt32(0),
+        //                UserID = reader.GetInt32(1),
+        //                EmployeeID = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2),
+        //                CharityName = reader.GetString(3),
+        //                ContactFirstName = reader.GetString(4),
+        //                ContactLastName = reader.GetString(5),
+        //                PhoneNumber = reader.GetString(6),
+        //                Email = reader.GetString(7),
+        //                ContactHours = reader.GetString(8),
+        //                Status = reader.GetString(9)
+        //            };
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
 
-            return charity;
-        }
+        //    return charity;
+        //}
 
 
         /// <summary>
@@ -255,12 +259,23 @@ namespace DataAccessLayer
             int rows = 0;
 
             var conn = DBConnection.GetConnection();
-            var cmdText = @"sp_create_charity_application";
+            string cmdText;
+            if (charity.EmployeeID == null)
+            {
+                cmdText = @"sp_create_charity_application";
+            }
+            else
+            {
+                cmdText = @"sp_create_charity";
+            }
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-
-            cmd.Parameters.AddWithValue("@USER_ID", charity.UserID);
+            if (charity.EmployeeID != null)
+            {
+                cmd.Parameters.AddWithValue("@EMPLOYEE_ID", charity.EmployeeID);
+                cmd.Parameters.AddWithValue("@STATUS", charity.Status);
+            }
             cmd.Parameters.AddWithValue("@CHARITY_NAME", charity.CharityName);
             cmd.Parameters.AddWithValue("@CONTACT_FIRST_NAME", charity.ContactFirstName);
             cmd.Parameters.AddWithValue("@CONTACT_LAST_NAME", charity.ContactLastName);

@@ -597,15 +597,22 @@ namespace WpfPresentationLayer
         /// Invokes Charity View form.
         /// Standardized method.
         /// </summary>
+        /// <remarks>
+        /// Christian Lopez
+        /// 2017/05/07
+        /// 
+        /// Fixed pulling from wrong value if the grid is filtered.
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnViewCharity_Click(object sender, RoutedEventArgs e)
         {
             if (dgCharity.SelectedIndex >= 0)
             {
-                var CharityViewInstance = new frmCharityView(_charityManager, _charityList[dgCharity.SelectedIndex]);
+                //var CharityViewInstance = new frmCharityView(_charityManager, _charityList[dgCharity.SelectedIndex]);
+                var CharityViewInstance = new frmCharityView(_charityManager, (Charity)dgCharity.SelectedItem);
                 CharityViewInstance.ShowDialog();
-                tabCharity_Selected(sender, e);
+                //tabCharity_Selected(sender, e);
             }
 
         }
@@ -629,8 +636,11 @@ namespace WpfPresentationLayer
                     employeeId = (int)employeeSearchList[0].EmployeeId;
                     var CharityViewInstance = new frmCharityView(_charityManager, employeeId);
                     CharityViewInstance.SetEditable();
-                    CharityViewInstance.ShowDialog();
-                    tabCharity_Selected(sender, e);
+                    var result = CharityViewInstance.ShowDialog();
+                    if (result == true)
+                    {
+                        tabCharity_Selected(sender, e);
+                    }
                 }
                 else
                 {
@@ -2341,7 +2351,7 @@ namespace WpfPresentationLayer
             {
                 try
                 {
-                    _charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
+                    //_charity = _charityManager.RetrieveCharityByUserId(_user.UserId);
 
                     if (_charity.Status.Equals("Approved"))
                     {

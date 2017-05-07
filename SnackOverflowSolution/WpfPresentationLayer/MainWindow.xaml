@@ -957,7 +957,7 @@
             <!--End of Supplier Invoices Tab-->
             <!--My Account Tab-->
 
-            <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabMyAccount_Selected">
+            <TabItem Name="tabMyAccount" Header="My Account" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Bottom" Width="Auto" Selector.Selected="tabMyAccount_Selected" Visibility="Collapsed">
                 <!--My Account Grid-->
                 <Grid Background="#FFE5E5E5">
                     <!--Grid Definitions-->
@@ -1011,7 +1011,7 @@
                                 <!--My Account Controls-->
                                 <Button Name="btnCommercialCustomerApplicationStatusCheck" Grid.Column="0" HorizontalContentAlignment="Center" Content="Check Commerical Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCommercialCustomerApplicationStatusCheck_Click"/>
                                 <Button Name="btnSupplierApplicationStatusCheck" Grid.Column="1" HorizontalContentAlignment="Center" Content="Check Supplier Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnSupplierApplicationStatusCheck_Click"/>
-                                <Button Name="btnCharityApplicationStatusCheck" Grid.Column="2" HorizontalContentAlignment="Center" Content="Check Charity Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCharityApplicationStatusCheck_Click"/>
+                                <Button Name="btnCharityApplicationStatusCheck" Grid.Column="2" HorizontalContentAlignment="Center" Content="Check Charity Status" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnCharityApplicationStatusCheck_Click" Visibility="Hidden"/>
                                 <!--End of My Account Controls-->
                             </Grid>
                             <!--End of My Account Controls Grid-->

@@ -19,6 +19,7 @@ namespace LogicLayer
 
         bool AddCharityApplication(Charity charityInstance);
 
-        Charity RetrieveCharityByUserId(int userId);
+        /*Removed by Christian Lopez - separating charity from user*/
+        //Charity RetrieveCharityByUserId(int userId);
     }
 }

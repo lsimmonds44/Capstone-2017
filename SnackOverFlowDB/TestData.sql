@@ -370,14 +370,14 @@ GO
 print '*** Inserting Charity Test Data ***'
 GO
 INSERT INTO [dbo].[CHARITY]
-	(USER_ID, EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME,
+	(EMPLOYEE_ID, CHARITY_NAME, CONTACT_FIRST_NAME, CONTACT_LAST_NAME,
 		PHONE_NUMBER, EMAIL, CONTACT_HOURS, STATUS
 	)
 VALUES
-	(10000, 10000, "Action Against Hunger", "Sam", "Jones", "5157879235", "sam@gmail.com", "9am to 2pm", "PENDING"),
-	(10001, 10001, "Feed Iowa First", "Greg", "Miller", "6584824412", "gregm@feedia.com", "8am to 5pm", "PENDING"),
-	(10003, 10002, "The Hunger Project", "Pat", "Davis", "3354588886", "pat21@gmail.com", "7am to 3pm", "PENDING"),
-	(10004, 10003, "Meals on Wheels", "Mary", "Smith", "9887772602", "mary@charity4.com", "9am to 7pm", "PENDING")
+	(10000, "Action Against Hunger", "Sam", "Jones", "5157879235", "sam@gmail.com", "9am to 2pm", "Approved"),
+	(10001, "Feed Iowa First", "Greg", "Miller", "6584824412", "gregm@feedia.com", "8am to 5pm", "Approved"),
+	(10002, "The Hunger Project", "Pat", "Davis", "3354588886", "pat21@gmail.com", "7am to 3pm", "Approved"),
+	(10003, "Meals on Wheels", "Mary", "Smith", "9887772602", "mary@charity4.com", "9am to 7pm", "Approved")
 GO 
 
 print '*** Inserting Shipping Address Test Data ***'
