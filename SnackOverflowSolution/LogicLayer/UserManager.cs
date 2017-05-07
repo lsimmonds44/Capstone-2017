@@ -65,7 +65,7 @@ namespace LogicLayer
 
         public User RetrieveUser(int? approvedBy)
         {
-            if (approvedBy == null)
+            if (approvedBy == null || approvedBy == 0)
             {
                 User user = new User
                 {
