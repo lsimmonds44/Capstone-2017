@@ -53,6 +53,38 @@ namespace LogicLayer
             return result;
         }
 
+        /// <summary>
+        /// Laura Simmonds
+        /// Created: 2017/05/05
+        /// 
+        /// Gets a list of product lots from the database
+        /// </summary>
+        /// <returns></returns>
+        public List<SupplierProductLot> RetrieveSupplierProducts(int supplierId)
+        {
+            List<SupplierProductLot> lots = null;
+            try
+            {
+                lots = SupplierProductLotAccessor.RetrieveSupplierProducts(supplierId);
+                IProductManager productManager = new ProductManager();
+                foreach (var lot in lots)
+                {
+                    var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw new ApplicationException("There was a database error.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("There was an unknown error.", ex);
+            }
+
+            return lots;
+        }
+
 
         /// <summary>
         /// Ethan Jorgensen

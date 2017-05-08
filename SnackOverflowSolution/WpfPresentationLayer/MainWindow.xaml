@@ -388,18 +388,18 @@
                     <!--Suppliers Data Grid-->
                     <DataGrid Name="dgSuppliers" Grid.Row="1" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
                     	CanUserDeleteRows="False" >
-                    <DataGrid.Columns>
-                        
-                        <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="*"/>
-                        <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="*"/>
-                        <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddress}" Width="*"/>
-                        <DataGridTextColumn Header="City" Binding="{Binding FarmCity}" Width="*"/>
-                        <DataGridTextColumn Header="State" Binding="{Binding FarmState}" Width="*"/>
-                        <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="*"/>
-                        <DataGridCheckBoxColumn Header="Is Approved" Binding="{Binding IsApproved}" Width="auto"/>
-                        <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
-                        <DataGridCheckBoxColumn Header="Active"  Binding="{Binding Active}" Width="auto"/>
-                    </DataGrid.Columns>
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="*"/>
+                            <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="*"/>
+                            <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddress}" Width="*"/>
+                            <DataGridTextColumn Header="City" Binding="{Binding FarmCity}" Width="*"/>
+                            <DataGridTextColumn Header="State" Binding="{Binding FarmState}" Width="*"/>
+                            <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Is Approved" Binding="{Binding IsApproved}" Width="auto"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Active"  Binding="{Binding Active}" Width="auto"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                     <!--Supplier Controls Grid-->
                     <Grid Background="#FFE5E5E5" Grid.Row="2">
@@ -579,6 +579,108 @@
                 <!--End of Supplier Catalog Grid-->
             </TabItem>
             <!--End of Supplier Catalog Tab-->
+            <!--Supplier Orders Tab-->
+            <TabItem Name="tabSupplierOrders" Header="Create Supplier Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="SupplierOrdersTabSelected">
+                <Grid>
+                    <!--Grid Definitions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!--End of Grid Definitions-->
+                    <!--Create Order Information Grid-->
+                    <Grid Grid.Row="0">
+                        <!--Grid Definitions-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Create Order Information Controls-->
+                        <Label Name="lblSupplierID" Grid.Row="1" Grid.Column="2" Content="Supplier ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <TextBox Name="txtSupplierID" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+                        <Label Name="lblOrderNumber" Grid.Row="1" Grid.Column="0" Content="Order #" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <TextBox Name="txtOrderNumber" Grid.Row="1" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+                        <Label Name="lblSupplierName" Grid.Row="2" Grid.Column="0" Content="Supplier Name" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <TextBox Name="txtSupplierName" Grid.Row="2" Grid.Column="1" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="True" KeyUp="txtSupplierName_KeyUp"/>
+                        <Label Name="lblAvailableoptions" Grid.Row="2" Grid.Column="2" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </Grid>
+                    <!--End of Create Order Information Grid-->
+                    <!--Order Lines Data Grid-->
+                    <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" Grid.Row="1" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="10 0 10 0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                            <DataGridTextColumn Header="Order Line ID" Binding="{Binding OrderLineID}" Width="*"/>
+                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" Width="*"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--End of Order Lines Data Grid-->
+                    <!--Product Grid-->
+                    <Grid Grid.Row="2">
+                        <!--Grid Definitions-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Product Grid Controls-->
+                        <Label Name="lblProduct" Grid.Row="1" Grid.Column="0" Content="Products" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <ComboBox Name="cboProducts" Grid.Row="1" Grid.Column="1"  Margin="8 8 8 8" IsEnabled="False" DropDownClosed="productSelected"  />
+                        <Label Name="lblProductQty" Grid.Row="1" Grid.Column="2" Content="Qty" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <TextBox Name="txtQty" Grid.Row="1" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"/>
+                        <Button Name="btnAddOrderLine" Grid.Row="1" Grid.Column="3" Content="Add" Width="50" Margin="10 4 10 4" HorizontalAlignment="Right" IsEnabled="False" Click="AddOrderLineClick" />
+                        <Label Name="lblProductGradeResult" Grid.Row="2" Grid.Column="0" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <Label Name="lblProductPrice" Grid.Row="2" Grid.Column="1" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <Label Name="lblAmount" Grid.Row="3" Grid.Column="2" Content="Order Total" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                        <TextBox Name="txtOrderAmount" Grid.Row="3" Grid.Column="3" Margin="8 8 8 8" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" IsEnabled="False"/>
+                        <!--End of Product Grid Controls-->
+                    </Grid>
+                    <!--End of Product Grid-->
+                    <!--Bottom Grid-->
+                    <Grid Grid.Row="3" Background="#FFE5E5E5">
+                        <!--Grid Definitions-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Bottom Grid Controls-->
+                        <Button Name="btnStartOrder" Grid.Row="0" Grid.Column="2" Content="Start Order" Margin="10 0 10 0" HorizontalAlignment="left" Click="StartOrderClick" />
+                        <!--End of Bottom Grid Controls-->
+                    </Grid>
+                    <!--End of Bottom Grid-->
+                </Grid>
+                <!--End of Supplier Order Grid-->
+            </TabItem>
+            <!--End of Supplier Order Tab-->
             <!--Open Orders Tab-->
             <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabOpenOrders_Selected">
                 <Grid Margin="0">
@@ -742,7 +844,7 @@
                         <!--End of Grid Definitions-->
                         <!--Vehicle Management Controls-->
                         <Button Grid.Row="0" Grid.Column="1" x:Name="btnAddNewVehicle" Content="Add New Vehicle" Margin="10 0 0 0" Click="btnAddNewVehicle_Click"/>
-                       <!--<Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditVehicle_Click"/> -->
+                        <!--<Button Name="btnEditVehicle" Grid.Row="0" Grid.Column="2" Content="Edit Vehicle" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditVehicle_Click"/> -->
                         <Button Name="btnAddMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="3" Content="Add Maintenance Record" Click="btnAddMaintenance_Click"/>
                         <Button Name="btnViewMaintenance" Grid.Row="0" Margin="10 0 0 0" Grid.Column="4" Content="View Maintenance Records" Click="btnViewMaintenance_Click"/>
                         <Button Name="btnCheckOutVehicle" Grid.Row="0" Margin="10 0 0 0" Grid.Column="5" Content="Check Vehicle Out / In" Click="btnCheckOutVehicle_Click"/>

@@ -109,6 +109,7 @@
     <Compile Include="ProductGradePrice.cs" />
     <Compile Include="ProductOrder.cs" />
     <Compile Include="RegisterCommercialViewModel.cs" />
+    <Compile Include="SupplierOrderLine.cs" />
     <Compile Include="SupplierProductLot.cs" />
     <Compile Include="ProductLot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
