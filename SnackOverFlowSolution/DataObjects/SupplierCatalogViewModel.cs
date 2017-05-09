@@ -32,7 +32,17 @@ namespace DataObjects
 
         public int SupplierID { get; set; }
 
-        public bool IsApproved { get;  set; }
+        public bool IsApproved
+        {
+            get
+            {
+                return _IsApproved;
+            }
+            set
+            {
+                _IsApproved = value;
+            }
+        }
 
         public String IsApprovedString 
         { 

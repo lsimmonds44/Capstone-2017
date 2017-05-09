@@ -88,7 +88,7 @@ namespace WpfPresentationLayer
                     a.SourceString = WpfExtensionMethods.FilePath + a.ProductId + ".jpg";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show(ex.Message);
             }

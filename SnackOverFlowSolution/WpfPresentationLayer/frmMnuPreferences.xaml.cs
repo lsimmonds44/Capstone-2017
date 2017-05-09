@@ -110,7 +110,7 @@ namespace WpfPresentationLayer
                 {
                     Int32.Parse(txtPreference.Text);
                 }
-                catch (FormatException fe)
+                catch (FormatException)
                 {
                     txtPreference.BorderBrush = System.Windows.Media.Brushes.Red;
                     signal = 0;

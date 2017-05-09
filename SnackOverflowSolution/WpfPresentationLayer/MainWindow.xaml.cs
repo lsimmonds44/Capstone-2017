@@ -43,7 +43,7 @@ namespace WpfPresentationLayer
         private ISupplierInventoryManager _supplierInventoryManager;
         private ISupplierOrderManager _supplierOrderManager = new SupplierOrderManager();
         private ISupplierOrderLineManager _supplierOrderLineManager = new SupplierOrderLineManager();
-        private ILocationManager _locationManager;
+        private ILocationManager _locationManager = new LocationManager();
 		private IRouteManager _routeManager = new RouteManager();
         private IPackageManager _packageManager = new PackageManager();
         private IOrderStatusManager _orderStatusManager = new OrderStatusManager();
@@ -72,7 +72,7 @@ namespace WpfPresentationLayer
         private CommercialCustomer _commercialCustomer = null;
         private Charity _charity = null;
         private User _user = null;
-        private Role _role = null;
+        //private Role _role = null;
         private ProductLotSearchCriteria _productLotSearchCriteria;
         private Product _selectedProduct;
 
@@ -472,7 +472,7 @@ namespace WpfPresentationLayer
                                 btnResetPassword.Visibility = Visibility.Collapsed;
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             MessageBox.Show("Failed to find user.");
                             btnLogin_Click(sender, e);
@@ -1154,7 +1154,7 @@ namespace WpfPresentationLayer
             {
                 this.DisposeImages();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show(ex.Message);
             }
@@ -2057,7 +2057,7 @@ namespace WpfPresentationLayer
                         a.SourceString = WpfExtensionMethods.FilePath + a.ProductId + ".jpg";
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //MessageBox.Show(ex.Message);
                 }
@@ -2118,7 +2118,7 @@ namespace WpfPresentationLayer
         {
             bool isSupplierApproved = false;
             bool isCommercialCustomerApproved = false;
-            bool isCharityApproved = false;
+            //bool isCharityApproved = false;
             if (_user != null)
             {
                 //btnCheckStatusDone.Visibility = Visibility.Visible;
