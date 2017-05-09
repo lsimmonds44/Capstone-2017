@@ -27,6 +27,8 @@ namespace DataObjects
             }
         }
 
+        //private new int SupplierID { get; set; }
+
         public List<AgreementWithProductName> Agreements { get; set; }
 
         public int[] ProductIDs { get; set; }

@@ -462,7 +462,7 @@ namespace LogicLayer
             {
                 Int64.Parse(number);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

@@ -9,7 +9,7 @@ namespace LogicLayer
 {
     public class DummyProductManager : IProductManager
     {
-        int dummyProductID = 10000;
+        //int dummyProductID = 10000;
         public List<Product> ListProducts()
         {
             return new List<Product>(new Product[] { new Product { ProductId = 10000 } });

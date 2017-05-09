@@ -53,7 +53,7 @@ namespace WpfPresentationLayer
                 cboCategory.DisplayMemberPath = "CategoryID";
                 cboCategory.SelectedValuePath = "CategoryID";
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -208,7 +208,7 @@ namespace WpfPresentationLayer
                 {
                     decimal.Parse(txtUnitPrice.Text);
                 }
-                catch (FormatException fe)
+                catch (FormatException)
                 {
                     txtUnitPrice.BorderBrush = System.Windows.Media.Brushes.Red;
                     signal = 1;
@@ -221,7 +221,7 @@ namespace WpfPresentationLayer
                 {
                     decimal.Parse(txtDeliveryChargePerUnit.Text);
                 }
-                catch (FormatException fe)
+                catch (FormatException)
                 {
 
                     txtDeliveryChargePerUnit.BorderBrush = System.Windows.Media.Brushes.Red;

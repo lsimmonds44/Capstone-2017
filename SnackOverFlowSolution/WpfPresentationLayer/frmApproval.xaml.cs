@@ -23,8 +23,8 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class frmApproval : Window
     {
-        Charity _charity;
-        ICharityManager _charityMgr;
+        //Charity _charity;
+        //ICharityManager _charityMgr;
 
         Supplier _supplier;
         ISupplierManager _supplierMgr;

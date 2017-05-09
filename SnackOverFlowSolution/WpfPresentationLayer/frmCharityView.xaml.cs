@@ -25,7 +25,7 @@ namespace WpfPresentationLayer
         private Charity _charity;
         private bool inAddMode;
         private bool _inApplyMode;
-        private List<User> _userList;
+        //private List<User> _userList;
         private User _charityUser;
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace WpfPresentationLayer
         {
             int employeeIDParsed;
             int? employeeID = null;
-            bool shouldPost = true;
+            //bool shouldPost = true;
             if (!_inApplyMode)
             {
                 if (txtCharityName.Text.Equals(""))
