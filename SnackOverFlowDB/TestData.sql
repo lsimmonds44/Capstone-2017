@@ -87,7 +87,7 @@ GO
 INSERT INTO [dbo].[Warehouse]
 	(Address_1, Address_2, City, State, Zip)
 VALUES
-	('Ware A St', 'Block B', '"Cedar Rapids"', 'IA', '52304')
+	('Ware A St', 'Block B', 'Cedar Rapids', 'IA', '52304')
 GO
 
 print '*** Inserting Product Test Data ***'
