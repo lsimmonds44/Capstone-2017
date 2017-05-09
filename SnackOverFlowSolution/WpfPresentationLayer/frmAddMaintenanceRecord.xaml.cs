@@ -66,8 +66,13 @@ namespace WpfPresentationLayer
         {
             try
             {
-                MaintenanceSchedule currentMaintenanceSchedule = _myMaintenanceScheduleManager.retrieveMaintenanceScheduleByVehicleId(vehicleId);
-                _myMaintenanceScheduleLineManager.createMaintenanceScheduleLine(new MaintenanceScheduleLine
+                MaintenanceSchedule currentMaintenanceSchedule = _myMaintenanceScheduleManager.RetrieveMaintenanceScheduleByVehicleId(vehicleId);
+                if (currentMaintenanceSchedule == null)
+                {
+                    _myMaintenanceScheduleManager.CreateMaintenanceSchedule(vehicleId);
+                    currentMaintenanceSchedule = _myMaintenanceScheduleManager.RetrieveMaintenanceScheduleByVehicleId(vehicleId);
+                }
+                _myMaintenanceScheduleLineManager.CreateMaintenanceScheduleLine(new MaintenanceScheduleLine
                 {
                     MaintenanceScheduleId = currentMaintenanceSchedule.MaintenanceScheduleId,
                     Description = txtMaintenanceDescription.Text,
@@ -78,7 +83,7 @@ namespace WpfPresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error saving the maintenance record." + ex);
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
     } // End of class

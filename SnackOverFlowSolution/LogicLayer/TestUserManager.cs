@@ -119,29 +119,29 @@ namespace LogicLayer
         {
             User newUser = null;
 
-            
-                newUser = new User()
-                {
-                    UserId = userId,
-                    FirstName = "Test",
-                    LastName = "User",
-                    Phone = "1234567890",
-                    EmailAddress = "test@test.com",
-                    EmailPreferences = true,
-                    UserName = "test",
-                    Active = true,
-                    AddressLineOne = "818 45th St NE",
-                    AddressLineTwo = "test address line two",
-                    City = "Test New York",
-                    State = "TT",
-                    Zip = "66666"
-                };
-            
-            
-                throw new ApplicationException("Unable to find user " + userId);
-            
 
-            return newUser;
+            newUser = new User()
+            {
+                UserId = userId,
+                FirstName = "Test",
+                LastName = "User",
+                Phone = "1234567890",
+                EmailAddress = "test@test.com",
+                EmailPreferences = true,
+                UserName = "test",
+                Active = true,
+                AddressLineOne = "818 45th St NE",
+                AddressLineTwo = "test address line two",
+                City = "Test New York",
+                State = "TT",
+                Zip = "66666"
+            };
+
+
+            throw new ApplicationException("Unable to find user " + userId);
+
+
+            //return newUser;
         }
 
 

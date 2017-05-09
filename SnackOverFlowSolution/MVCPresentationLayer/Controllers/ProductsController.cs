@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataObjects;
 using MVCPresentationLayer.Models;
 using LogicLayer;
+using System.Diagnostics;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -23,6 +24,9 @@ namespace MVCPresentationLayer.Controllers
     public class ProductsController : Controller
     {
         IProductManager _productManager;
+        private IUserCartManager _userCartManager;
+        private IProductOrderManager _orderManager;
+
         public int PageSize = 10; // change in v2?
 
         /// <summary>
@@ -32,9 +36,11 @@ namespace MVCPresentationLayer.Controllers
         /// 2017/04/29
         /// </summary>
         /// <param name="productManager"></param>
-        public ProductsController(IProductManager productManager)
+        public ProductsController(IProductManager productManager, IProductOrderManager orderManager, IUserCartManager userCartManager)
         {
             _productManager = productManager;
+            _userCartManager = userCartManager;
+            _orderManager = orderManager;
         }
 
         /// <summary>
@@ -46,6 +52,10 @@ namespace MVCPresentationLayer.Controllers
         /// Skyler Hiscock
         /// Updated:
         /// 2017/04/20
+        /// 
+        /// Michael Takrama
+        /// Updated:
+        /// 2017/05/09
         /// 
         ///  GET: Products
         /// </summary>
@@ -90,7 +100,8 @@ namespace MVCPresentationLayer.Controllers
                 },
                 SearchPhrase = search,
                 CurrentCategory = category,
-                Categories = categories
+                Categories = categories,
+                CartPageModel = ExtractCartInformation()
             };
             return View(products);
         }
@@ -177,6 +188,47 @@ namespace MVCPresentationLayer.Controllers
 
             return PartialView(navViewModel);
 
+        }
+
+        /// <summary>
+        /// Created by Michael Takrama
+        /// 05/09/2017
+        /// 
+        /// Populates Product/Index flyout
+        /// </summary>
+        /// <returns></returns>
+        public CartPageModel ExtractCartInformation()
+        {
+            var userName = User.Identity.Name;
+            var pageModel = new CartPageModel();
+
+            try
+            {
+                pageModel.ItemsInCart = _userCartManager.RetrieveUserCart(userName);
+                pageModel.SavedOrderList = _orderManager.RetrieveSaveOrders(userName);
+            }
+            catch
+            {
+                Debug.WriteLine("Cart Load Failed");
+                return new CartPageModel
+                {
+                    ItemsInCart = new List<UserCartLine>(),
+                    SavedOrderList = new List<int>()
+                };
+            }
+
+            if (pageModel != null)
+            {
+                return pageModel;
+            }
+            else
+            {
+                return new CartPageModel
+                {
+                    ItemsInCart = new List<UserCartLine>(),
+                    SavedOrderList = new List<int>()
+                };
+            }
         }
 
         //// GET: Products/Create

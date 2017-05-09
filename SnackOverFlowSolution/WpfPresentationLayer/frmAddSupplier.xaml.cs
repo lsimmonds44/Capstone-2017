@@ -532,7 +532,7 @@ namespace WpfPresentationLayer
             {
                 Int32.Parse(txtFarmTaxId.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw new ApplicationException("Please enter a valid farm tax ID");

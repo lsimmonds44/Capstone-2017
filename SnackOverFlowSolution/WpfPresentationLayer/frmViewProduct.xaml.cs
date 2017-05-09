@@ -79,7 +79,7 @@ namespace WpfPresentationLayer
                 txtPrice.Text = currentProduct.DeliveryChargePerUnit.ToString();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("There was an error retrieving product details");
             }

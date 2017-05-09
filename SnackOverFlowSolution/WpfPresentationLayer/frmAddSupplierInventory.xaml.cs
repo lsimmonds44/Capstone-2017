@@ -30,7 +30,7 @@ namespace WpfPresentationLayer
     public partial class frmAddSupplierInventory : Window
     {
         ISupplierInventoryManager _supplyInventorymanager;
-        IAgreementManager _agreementManager;
+        //IAgreementManager _agreementManager;
         List<Agreement> _agreementList;
 
         /// <summary>

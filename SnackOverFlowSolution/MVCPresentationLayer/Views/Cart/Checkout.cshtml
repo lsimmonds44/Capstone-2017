@@ -23,27 +23,27 @@
                     <hr />
                     <div class="row">
                         <div class="input-container col-md-12">
-                            @Html.TextBoxFor(m => m.Line1, new { @class = "small-input white-bg", @name = "billing-street-address", @id = "billing-street-address", @placeholder = "Address Line 1" })
+                            @Html.TextBoxFor(m => m.Line1, new { @class = "form-control small-input white-bg", @name = "billing-street-address", @id = "billing-street-address", @placeholder = "Address Line 1" })
                             @Html.ValidationMessageFor(m => m.Line1, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="input-container col-md-12">
-                            @Html.TextBoxFor(m => m.Line2, new { @class = "small-input white-bg", @name = "billing-street-address", @id = "billing-street-address", @placeholder = "Address Line 2" })
+                            @Html.TextBoxFor(m => m.Line2, new { @class = "form-control small-input white-bg", @name = "billing-street-address", @id = "billing-street-address", @placeholder = "Address Line 2" })
                             @Html.ValidationMessageFor(m => m.Line2, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="input-container col-md-6">
-                            @Html.TextBoxFor(m => m.City, new { @class = "small-input white-bg", @name = "billing-city", @id = "billing-city", @placeholder = "City" })
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control small-input white-bg", @name = "billing-city", @id = "billing-city", @placeholder = "City" })
                             @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="input-container col-md-6">
-                            @Html.TextBoxFor(m => m.State, new { @class = "small-input white-bg", @name = "billing-state", @id = "billing-state", @placeholder = "State" })
+                            @Html.TextBoxFor(m => m.State, new { @class = "form-control small-input white-bg", @name = "billing-state", @id = "billing-state", @placeholder = "State" })
                             @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="input-container col-md-6">
-                            @Html.TextBoxFor(m => m.Zip, new { @class = "small-input white-bg", @name = "billing-postcode", @id = "billing-postcode", @placeholder = "Zip" })
+                            @Html.TextBoxFor(m => m.Zip, new { @class = "form-control small-input white-bg", @name = "billing-postcode", @id = "billing-postcode", @placeholder = "Zip" })
                             @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "text-danger" })
                         </div>
 

@@ -11,7 +11,6 @@ namespace LogicLayer
 {
     public class EmployeeManager : IEmployeeManager
     {
-        Employee _employee;
         public List<Employee> employees { get; set; }
 
         /// <summary>
