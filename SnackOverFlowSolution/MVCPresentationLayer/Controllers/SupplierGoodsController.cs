@@ -63,10 +63,10 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ethan Jorgensen
+        /// Dan Brown
         /// 
         /// Created: 
-        /// 2017/04/29
+        /// 2017/05/06
         /// 
         ///GET: /SupplierGoods/Details/5
         /// </summary>
@@ -101,17 +101,37 @@ namespace MVCPresentationLayer.Controllers
         }
 
         /// <summary>
-        /// Ethan Jorgensen
+        /// Dan Brown
         /// 
         /// Created:
-        /// 2017/04/29
+        /// 2017/05/09
         /// 
         /// GET: /SupplierGoods/Create
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
+            Supplier sup;
+            try
+            {
+                sup = supMgr.RetrieveSupplierByUserId(userId);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            SupplierProductLot lot = new SupplierProductLot();
+            lot.SupplierId = sup.SupplierID;
+            lot.ExpirationDate = DateTime.Now;
+
+            List<Product> productList = new List<Product>();
+            ProductManager prodMgr = new ProductManager();
+            productList = prodMgr.ListProducts();
+            ViewBag.products = productList;
+           
+            return View(lot);
         }
 
         
