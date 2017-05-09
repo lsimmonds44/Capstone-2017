@@ -29,13 +29,13 @@ namespace LogicLayerTestProject
         {
             //arange
             _product = new Product() { Active = true, DeliveryChargePerUnit = 20, Description = "A test product", Name = "Test Product", Price = 15, UnitOfMeasurement = "lbs", UnitPrice = 5, ImageBinary = new byte[1], ImageName = "Test Image"};
-            int expectedResult = 1;
+            int unexpectedResult = 0;
 
             //act
             int result = _productManager.CreateProduct(_product);
 
             //assert
-            Assert.AreEqual(expectedResult, result);
+            Assert.AreNotEqual(unexpectedResult, result);
             removeTestProductData();
         }
 

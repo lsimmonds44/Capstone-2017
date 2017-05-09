@@ -10,6 +10,7 @@ using DataObjects;
 using MVCPresentationLayer.Models;
 using LogicLayer;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 namespace MVCPresentationLayer.Controllers
 {
@@ -50,6 +51,7 @@ namespace MVCPresentationLayer.Controllers
             try
             {
                 sup = supMgr.RetrieveSupplierByUserId(userId);
+                Debug.WriteLine("Supplier fetched: here's some pointless data about it " + sup.FarmTaxID);
             }
             catch
             {
@@ -58,6 +60,10 @@ namespace MVCPresentationLayer.Controllers
             if (sup == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            foreach (SupplierProductLot whatever in plMgr.RetrieveSupplierProductLotsBySupplier(sup))
+            {
+                Debug.WriteLine(whatever.ProductName + " " + whatever.Price);
             }
             return View(plMgr.RetrieveSupplierProductLotsBySupplier(sup));
         }
@@ -204,7 +210,7 @@ namespace MVCPresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Edit
+                //plMgr.UpdateSupplierProductLot(lot);
                 plMgr.DeleteSupplierProductLot(lot);
                 plMgr.CreateSupplierProductLot(lot);
                 return RedirectToAction("Index");

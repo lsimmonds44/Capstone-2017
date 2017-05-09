@@ -30,7 +30,9 @@ VALUES
 	('Francis', 'Zak', '9707422225', 'fzak@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'fzak', 1, "6309 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
 	('Celine', 'Dion', '9707422225', 'celinedion@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'cdion', 1, "6303 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
 	('Will', 'Smith', '9707422225', 'wsmith@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'wsmith', 1, "6315 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
-	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, "6308 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404)
+	('Cust-John', 'Aaron', '9707422225', 'custaaron@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jaaron', 1, "6308 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Billy', 'Speed', '3197422229', 'bspeed@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'bspeed', 1, "6305 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404),
+	('Jerry', 'Slow', '3197422227', 'jslow@gmail.com', 1, 'f8ed27280564f0e7f945c463e483b800b1f2c6d44f6e9d400a44b2c9bacf0af9', 'ADMIN', 'jslow', 1, "6305 Kirkwood Blvd", NULL, "Cedar Rapids", "IA", 52404)
 GO
 
 print '' print '*** Inserting Customer Test Data ***'
@@ -66,7 +68,9 @@ VALUES
 	(10001, 35700, 1, '1965-08-10'),
 	(10002, 29000, 1, '1988-01-10'),
 	(10003, 55000, 1, '1973-11-30'),
-	(10004, 45500, 1, '1992-04-26')
+	(10004, 45500, 1, '1992-04-26'),
+	(10007, 48500, 1, '1994-01-20'),
+	(10008, 41500, 1, '1991-05-16')
 GO
 
 print '*** Creating Inventory/Warehouse Test Data ***'
@@ -251,10 +255,9 @@ GO
 INSERT INTO [dbo].[Driver]
 	(Driver_ID, DRIVER_LICENSE_NUMBER, LICENSE_EXPIRATION, ACTIVE)
 VALUES
-	(10000, "123AB3123", "2018-04-12", 1),
-	(10001, "123AB3123", "2018-04-12", 1),
-	(10002, "123AB3123", "2018-04-12", 1),
-	(10003, "123AB3123", "2018-04-12", 1)
+	(10005, "123AB3123", "2018-04-12", 1),
+	(10006, "123AB3123", "2018-04-12", 1)
+	
 	GO
 
 /*Vehicle Test Data */
@@ -441,9 +444,9 @@ GO
 INSERT INTO [dbo].[PICKUP]
 	(SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, EMPLOYEE_ID, COMPANY_ORDER_ID)
 VALUES
-	(10000, 10000, 10000, 10000, 10000),
-	(10001, 10000, 10000, 10000, 10001),
-	(10000, 10000, 10000, 10000, 10000)
+	(10000, 10000, 10005, 10000, 10000),
+	(10001, 10000, 10005, 10000, 10001),
+	(10000, 10000, 10006, 10001, 10000)
 GO
 
 print '*** Inserting Pickup Line Test Data ***'
@@ -479,9 +482,9 @@ GO
 INSERT INTO [dbo].[ROUTE]
 	(DRIVER_ID, VEHICLE_ID, ASSIGNED_DATE)
 VALUES
-	(10000, 10000, '2028-04-20'),
-	(10000, 10001, '2018-04-13'),
-	(10001, 10002, '2018-04-10')
+	(10005, 10000, '2028-04-20'),
+	(10005, 10001, '2018-04-13'),
+	(10006, 10002, '2018-04-10')
 GO
 
 print '*** Inserting Delivery Test Data ***'
