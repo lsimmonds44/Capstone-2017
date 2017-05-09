@@ -3,6 +3,6 @@ namespace LogicLayer
 {
     public interface ISupplierOrderManager
     {
-        int createSupplierOrder(int supplierId);
+        int createSupplierOrder(int supplierId, int employeeId);
     }
 }

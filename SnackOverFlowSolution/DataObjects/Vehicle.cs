@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace DataObjects
         public string Color { get; set; }
         public bool Active { get; set; }
         public DateTime? LatestRepair { get; set; }
+        
         public int? LastDriver { get; set; }
         public string VehicleTypeID { get; set; }
         public List<Repair> RepairList { get; set; }

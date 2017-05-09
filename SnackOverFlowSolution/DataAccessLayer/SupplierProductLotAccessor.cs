@@ -173,6 +173,7 @@ namespace DataAccessLayer
                             Price = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5)
                         };
 
+                        supplierProductLots.Add(lot);
                     }
                 }
             }
@@ -232,6 +233,58 @@ namespace DataAccessLayer
 
             return supplierProducts;
         }
+
+        /// <summary>
+        /// Ethan Jorgensen
+        /// Created:
+        /// 2017/05/09
+        /// 
+        /// Updates a supplier product lot
+        /// </summary>
+        /// <remarks>
+        /// Ethan Jorgensen
+        /// Updated: 
+        /// 2017/05/09
+        /// 
+        /// Standardize method.
+        /// </remarks>
+        public static bool UpdateSupplierProductLot(SupplierProductLot oldLot, SupplierProductLot newLot)
+        {
+            var result = false;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = "sp_update_supplier_product_lot";
+
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@old_PRODUCT_LOT_ID", oldLot.SupplierProductLotId);
+            cmd.Parameters.AddWithValue("@old_SUPPLIER_ID", oldLot.SupplierId);
+            cmd.Parameters.AddWithValue("@new_SUPPLIER_ID", newLot.SupplierId);
+            cmd.Parameters.AddWithValue("@old_PRODUCT_ID", oldLot.ProductId);
+            cmd.Parameters.AddWithValue("@new_PRODUCT_ID", newLot.ProductId);
+            cmd.Parameters.AddWithValue("@old_QUANTITY", oldLot.Quantity);
+            cmd.Parameters.AddWithValue("@new_QUANTITY", newLot.Quantity);
+            cmd.Parameters.AddWithValue("@old_EXPIRATION_DATE", oldLot.ExpirationDate);
+            cmd.Parameters.AddWithValue("@new_EXPIRATION_DATE", newLot.ExpirationDate);
+
+            try
+            {
+                conn.Open();
+                result = cmd.ExecuteNonQuery() == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Aaron Usher
         /// Updated: 

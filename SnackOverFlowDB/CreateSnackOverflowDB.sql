@@ -2480,6 +2480,25 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_create_supplier_pickup'
+GO
+CREATE PROCEDURE sp_create_supplier_pickup
+(
+	@SUPPLIER_ID[INT],
+	@WAREHOUSE_ID[INT],
+	@DRIVER_ID[INT]= NULL,
+	@COMPANY_ORDER_ID[INT]
+)
+AS
+	BEGIN
+		INSERT INTO PICKUP 
+			(SUPPLIER_ID, WAREHOUSE_ID, DRIVER_ID, COMPANY_ORDER_ID)
+		VALUES
+			(@SUPPLIER_ID, @WAREHOUSE_ID, @DRIVER_ID, @COMPANY_ORDER_ID)
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_create_pickup_line'
 GO
 CREATE PROCEDURE sp_create_pickup_line
@@ -2498,6 +2517,26 @@ AS
 		RETURN @@ROWCOUNT
 	END
 GO
+
+/* print '' print  '*** Creating procedure sp_create_supplier_pickup_line'
+GO
+CREATE PROCEDURE sp_create_supplier_pickup_line
+(
+	@PICKUP_ID[INT],
+	@PRODUCT_ID[INT],
+	@PRODUCT_NAME[NVARCHAR](),
+	@QUANTITY[INT],
+	@PICK_UP_STATUS[BIT]
+)
+AS
+	BEGIN
+		INSERT INTO PICKUP_LINE 
+			(PICKUP_ID, PRODUCT_ID, QUANTITY, PICK_UP_STATUS)
+		VALUES
+			(@PICKUP_ID, @PRODUCT_ID, @QUANTITY, @PICK_UP_STATUS)
+		RETURN @@ROWCOUNT
+	END
+GO */
 
 print '' print '*** Creating sp_create_product'
 GO
@@ -3129,17 +3168,18 @@ print '' print  '*** Creating procedure sp_create_supplier_order'
 GO
 CREATE PROCEDURE sp_create_supplier_order
 (
-	@SUPPLIER_ID[INT]
+	@SUPPLIER_ID[INT],
+	@EMPLOYEE_ID[INT]
 )
 AS
 	BEGIN
 	DECLARE @return_value[int]
 	
-	INSERT INTO SUPPLIER_ORDER 
-		(SUPPLIER_ID)
+	INSERT INTO COMPANY_ORDER 
+		(SUPPLIER_ID, EMPLOYEE_ID, AMOUNT, ORDER_DATE)
 	VALUES
-		(@SUPPLIER_ID)
-	SELECT IDENT_CURRENT('SUPPLIER_ORDER')
+		(@SUPPLIER_ID, @EMPLOYEE_ID, 0, GETDATE())
+	SELECT IDENT_CURRENT('COMPANY_ORDER')
 
 	END
 GO
@@ -4063,23 +4103,22 @@ AS
 	END
 GO
 
-print '' print  '*** Creating procedure sp_insert_supplier_order_line'
+print '' print  '*** Creating procedure sp_create_supplier_order_line'
 GO
-CREATE PROCEDURE sp_insert_supplier_order_line
+CREATE PROCEDURE sp_create_supplier_order_line
 (
-	@SUPPLIER_ORDER_ID [INT],
+	@COMPANY_ORDER_ID [INT],
 	@PRODUCT_ID [INT],
 	@PRODUCT_NAME [NVARCHAR] (100),
-	@QUANTITY [INT],
-	@PRICE [DECIMAL](6,2)
+	@QUANTITY [INT]
 )
 AS
 BEGIN	
-	INSERT INTO SUPPLIER_ORDER_LINE 
-		(SUPPLIER_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, PRICE)
+	INSERT INTO COMPANY_ORDER_LINE 
+		(COMPANY_ORDER_ID, PRODUCT_ID, PRODUCT_NAME, QUANTITY, UNIT_PRICE, TOTAL_PRICE)
 	VALUES 
-		(@SUPPLIER_ORDER_ID, @PRODUCT_ID, @PRODUCT_NAME, @QUANTITY, @PRICE)	
-	SELECT IDENT_CURRENT('SUPPLIER_ORDER_LINE')
+		(@COMPANY_ORDER_ID, @PRODUCT_ID, @PRODUCT_NAME, @QUANTITY, 0, 0)	
+	SELECT IDENT_CURRENT('COMPANY_ORDER_LINE')
 END
 GO
 
@@ -4392,8 +4431,11 @@ GO
 CREATE PROCEDURE sp_retrieve_company_order_list
 AS
 	BEGIN
-		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, company_order.SUPPLIER_ID, AMOUNT, 
+			ORDER_DATE, HAS_ARRIVED, company_order.ACTIVE, SUPPLIER.FARM_NAME
 		FROM company_order
+		INNER JOIN SUPPLIER
+			ON SUPPLIER.SUPPLIER_ID = company_order.SUPPLIER_ID
 	END
 GO
 
@@ -4405,9 +4447,10 @@ CREATE PROCEDURE sp_retrieve_company_order_list_by_supplier_id
 )
 AS
 	BEGIN
-		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, SUPPLIER_ID, AMOUNT, ORDER_DATE, HAS_ARRIVED, ACTIVE
+		SELECT COMPANY_ORDER_ID, EMPLOYEE_ID, company_order.SUPPLIER_ID, 
+				AMOUNT, ORDER_DATE, HAS_ARRIVED, company_order.ACTIVE
 		FROM company_order
-		WHERE SUPPLIER_ID = @SUPPLIER_ID
+		WHERE company_order.SUPPLIER_ID = @SUPPLIER_ID
 	END
 GO
 
@@ -7746,6 +7789,33 @@ AS
 	END
 GO
 
+print '' print  '*** Creating procedure sp_update_product_lot'
+GO
+CREATE PROCEDURE sp_update_product_lot
+(
+	@old_PRODUCT_LOT_ID[INT],
+	@old_SUPPLIER_ID[INT],
+	@new_SUPPLIER_ID[INT],
+	@old_PRODUCT_ID[INT],
+	@new_PRODUCT_ID[INT],
+	@old_QUANTITY[INT],
+	@new_QUANTITY[INT],
+	@old_EXPIRATION_DATE[DATETIME],
+	@new_EXPIRATION_DATE[DATETIME]
+)
+AS
+	BEGIN
+		UPDATE supplier_product_lot
+		SET SUPPLIER_ID = @new_SUPPLIER_ID, PRODUCT_ID = @new_PRODUCT_ID, QUANTITY = @new_QUANTITY, EXPIRATION_DATE = @new_EXPIRATION_DATE
+		WHERE (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
+		AND (SUPPLIER_ID = @old_SUPPLIER_ID)
+		AND (PRODUCT_ID = @old_PRODUCT_ID)
+		AND (QUANTITY = @old_QUANTITY)
+		AND (EXPIRATION_DATE = @old_EXPIRATION_DATE)
+		RETURN @@ROWCOUNT
+	END
+GO
+
 print '' print  '*** Creating procedure sp_update_product_lot_available_quantity'
 GO
 CREATE PROCEDURE sp_update_product_lot_available_quantity
@@ -8519,3 +8589,5 @@ AS
 		WHERE @DELIVERY_ID = DELIVERY_ID
 	END
 GO
+
+

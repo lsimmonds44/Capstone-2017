@@ -17,7 +17,7 @@ namespace LogicLayer
         /// </summary>
         /// <param name="vehicleId">Vehicle Id of the new maintenance schedule</param>
         /// <returns>int of 1 if successful, 0 if fail</returns>
-        public int createMaintenanceSchedule(int vehicleId)
+        public int CreateMaintenanceSchedule(int vehicleId)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace LogicLayer
             }
         }
 
-        public MaintenanceSchedule retrieveMaintenanceScheduleByVehicleId(int vehicleId)
+        public MaintenanceSchedule RetrieveMaintenanceScheduleByVehicleId(int vehicleId)
         {
             try
             {

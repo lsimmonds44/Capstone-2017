@@ -17,7 +17,7 @@ namespace DataAccessLayer
         /// 
         /// <param name="productOrder">The order to add to the database.</param>
         /// <returns>The auto-generated order id from the database.</returns>
-        public static int CreateSupplierOrder(int supplierId)
+        public static int CreateSupplierOrder(int supplierId, int employeeID)
         {
             int orderId = 0;
 
@@ -27,6 +27,8 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierId);
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", employeeID);
+
             //cmd.Parameters.AddWithValue("@AMOUNT", supplierOrder.Amount);
 
             try
