@@ -20,5 +20,6 @@ namespace LogicLayer
 
         SupplierProductLot RetrieveSupplierProductLotById(int id);
 
+        bool UpdateSupplierProductLot(SupplierProductLot oldLot, SupplierProductLot newLot);
     }
 }

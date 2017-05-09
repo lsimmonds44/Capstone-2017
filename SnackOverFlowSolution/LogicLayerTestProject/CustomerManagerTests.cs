@@ -62,46 +62,6 @@ namespace LogicLayerTestProject
             RemoveTestCommercialCustomerData(testCustomer);
         }
 
-        [TestMethod]
-        public void TestRetrieveCommercialCustomers()
-        {
-            //Arrange
-            User user;
-            List<CommercialCustomer> result = new List<CommercialCustomer>();
-            CommercialCustomer testCustomer;
-            UserManager userMgr = new UserManager();
-
-
-            string password = "password";
-            string password2 = "password";
-
-
-            //Act
-            user = new User()
-            {
-                UserName = "Test",
-                FirstName = "Test",
-                LastName = "Test",
-                Phone = "0000000000",
-                EmailAddress = "test@test.com"
-            };
-
-            userMgr.CreateNewUser(user, password, password2);
-            user = userMgr.RetrieveUserByUserName("Test");
-
-            testCustomer = new CommercialCustomer() { Active = true, IsApproved = false, FederalTaxId = 123456789, UserId = user.UserId, ApprovedBy = 99999 };
-
-            _customerMgr.CreateCommercialAccount(testCustomer);
-
-            result = _customerMgr.RetrieveCommercialCustomers();
-
-            //Assert
-            Assert.IsTrue(result.Count > 0);
-            RemoveTestUserData();
-            RemoveTestCommercialCustomerData(testCustomer);
-
-
-        }
 
         [TestMethod]
         public void TestRetrieveCommercialCustomerByCorrectUserId()

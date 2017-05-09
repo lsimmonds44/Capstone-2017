@@ -22,7 +22,6 @@
                 <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.CommercialInvoiceId)</th>
-                    <th>@Html.DisplayNameFor(model => model.CommercialId)</th>
                     <th>@Html.DisplayNameFor(model => model.OrderId)</th>
                     <th>@Html.DisplayNameFor(model => model.InvoiceDate)</th>
                     <th>@Html.DisplayNameFor(model => model.SubTotal)</th>
@@ -39,7 +38,6 @@
                 {
                     <tr>
                         <td>@Html.ActionLink(item.CommercialInvoiceId.ToString(), "Details", new { id = item.CommercialInvoiceId })</td>
-                        <td>@Html.DisplayFor(modelItem => item.CommercialId)</td>
                         <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
                         <td>@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
                         <td>@Html.DisplayFor(modelItem => item.SubTotal)</td>
