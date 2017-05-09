@@ -61,5 +61,9 @@ namespace DataObjects
         public decimal DeliveryChargePerUnit { get; set; }
         public byte[] ImageBinary { get; set; }
         public string GradeId { get; set; }
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

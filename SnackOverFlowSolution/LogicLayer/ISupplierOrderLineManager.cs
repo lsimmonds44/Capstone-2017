@@ -4,6 +4,6 @@ namespace LogicLayer
     public interface ISupplierOrderLineManager
     {
         int CreateOrderLine(DataObjects.SupplierOrderLine supplierOrderLine);
-        System.Collections.Generic.List<DataObjects.SupplierOrderLine> RetrieveSupplierOrderLines(int SupplierProductOrderId);
+        //System.Collections.Generic.List<DataObjects.SupplierOrderLine> RetrieveSupplierOrderLines(int SupplierProductOrderId);
     }
 }

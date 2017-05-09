@@ -38,5 +38,6 @@ namespace DataObjects
         [Display(Name = "Arrived")]
         public bool HasArrived { get; set; }
         public bool  Active { get; set; }
+        public string SupplierName { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace DataObjects
 {
     public class PickupLineAndProductName : PickupLine
     {
+
         public string ProductName { get; set; }
     }
 }

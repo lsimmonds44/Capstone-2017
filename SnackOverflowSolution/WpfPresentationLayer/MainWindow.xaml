@@ -619,13 +619,12 @@
                     </Grid>
                     <!--End of Create Order Information Grid-->
                     <!--Order Lines Data Grid-->
-                    <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" Grid.Row="1" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="10 0 10 0">
+                    <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="20,111,0.2,0" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
-                            <DataGridTextColumn Header="Order Line ID" Binding="{Binding OrderLineID}" Width="*"/>
-                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" Width="*"/>
+                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding TotalPrice}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Order Lines Data Grid-->
@@ -680,7 +679,54 @@
                 </Grid>
                 <!--End of Supplier Order Grid-->
             </TabItem>
-            <!--End of Supplier Order Tab-->
+            <!--End of Supplier Orders Tab-->
+            <!--Supplier Pickup Tab-->
+            <TabItem Name="tabSupplierPickup" Header="Supplier Pickup" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected ="SupplierPickupTabSelected">
+                <!--Supplier Pickup Grid-->
+                <Grid Background="#FFE5E5E5">
+                    <!--Grid Definitions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--End of Grid Definitions-->
+                    <!--Supplier Pickup Data Grid -->
+                    <DataGrid x:Name="dgSupplierPickup" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
+                               AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Supplier Name" Width="200" Binding="{Binding SupplierName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier ID" Width="150" Binding="{Binding SupplierId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order ID" Width="150" Binding="{Binding CompanyOrderID}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--End of Product Data Grid-->
+                    <!--Supplier Pickup Controls Grid-->
+                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                        <!--Grid Definitions-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!--End of Grid Definitions-->
+                        <!--Supplier Pickup Controls-->
+                        <Button Name="btnAssignToDriver" Grid.Row="0" Grid.Column="2" Content="Assign to Driver" Margin="10 0 5 0" VerticalAlignment="Top" />
+                        <ComboBox Name="cboDrivers" Grid.Row="0" Grid.Column="1" Width="200"></ComboBox>
+                    </Grid>
+                    <!--End of Supplier Pickup Controls Grid-->
+                </Grid>
+                <!--End of Supplier Pickup Grid-->
+            </TabItem>
+            <!--End of Supplier Pickup Tab-->
             <!--Open Orders Tab-->
             <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabOpenOrders_Selected">
                 <Grid Margin="0">
