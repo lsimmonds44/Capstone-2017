@@ -2,50 +2,58 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AccountsLayout.cshtml";
 }
 
-<h2>Invoice #@(null==Model.CommercialInvoice?"":Model.CommercialInvoice.CommercialInvoiceId.ToString())</h2>
-<p class="error">@ViewBag.ErrorMessage</p>
+@*Start Main Header*@
+<header class="main-header custom-bg41 parallax" data-stellar-background-ratio="0.5" id="top">
+    <div class="logo-container align-center style2">
+        <a href="#" class="logo">
+            <img src="~/Images/slider-images/lolgobg2.png" alt="Snack Overflow Logo" />
+        </a>
+        <h1 style="color: white;">Order Details</h1>
+    </div>
+</header>
+@*End of Main Header*@
 
-<div>
-    <hr />
-    <table class="table">
-        <tr>
-            <th>
-                Product:
-            </th>
-            <th>
-                Quantity:
-            </th>
-            <th>
-                Individual Price:
-            </th>
-            <th>
-                Discount:
-            </th>
-            <th>
-                Subtotal:
-            </th>
-        </tr>
+<section class="store-cart style3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 align-left" style="margin-bottom: 20px;">
+                <h2>Invoice #@(null == Model.CommercialInvoice ? "" : Model.CommercialInvoice.CommercialInvoiceId.ToString())</h2>
+                <p class="error">@ViewBag.ErrorMessage</p>
+            </div>
+        </div>
 
-        @foreach (var item in Model.CommercialInvoiceLines??new List<DataObjects.CommercialInvoiceLine>())
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantitySold)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PriceEach)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemDiscount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemTotal)
-                </td>
-            </tr>
-        }
-</div>
+        <div class="cart-items wow fadeInDown">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Product</td>
+                        <td>Quantity:</td>
+                        <td>Individual Price:</td>
+                        <td>Discount:</td>
+                        <td>Subtotal:</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.CommercialInvoiceLines ?? new List<DataObjects.CommercialInvoiceLine>())
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuantitySold)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PriceEach)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ItemDiscount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ItemTotal)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="col-md-12 align-right">
+                <hr />
+                <h3>@Html.ActionLink("Back", "Index", "CommercialInvoice")</h3>
+            </div>
+        </div>
+    </div>
+</section>
