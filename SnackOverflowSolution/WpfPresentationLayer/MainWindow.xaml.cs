@@ -154,16 +154,18 @@ namespace WpfPresentationLayer
                 _supplierList = _supplierManager.ListSuppliers();
 
                 var filteredSupplierList = _supplierList;
-                if (cboSupplierStatus.SelectedItem != null)
+                if (cboSupplierStatus.SelectedValue == null)
                 {
-                    if ((string)cboSupplierStatus.SelectedValue == "Pending")
-                    {
-                        filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == false);
-                    }
-                    else if ((string)cboSupplierStatus.SelectedValue == "Approved")
-                    {
-                        filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == true);
-                    }
+                    cboSupplierStatus.SelectedValue = "Approved";
+                }
+
+                if ((string)cboSupplierStatus.SelectedValue == "Pending")
+                {
+                    filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == false);
+                }
+                else if ((string)cboSupplierStatus.SelectedValue == "Approved")
+                {
+                    filteredSupplierList = _supplierList.FindAll(s => s.IsApproved == true);
                 }
 
                 dgSuppliers.ItemsSource = filteredSupplierList;

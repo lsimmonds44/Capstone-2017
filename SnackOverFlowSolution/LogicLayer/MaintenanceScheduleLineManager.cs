@@ -10,7 +10,7 @@ namespace LogicLayer
 {
     public class MaintenanceScheduleLineManager
     {
-        public int createMaintenanceScheduleLine(MaintenanceScheduleLine newMaintenanceScheduleLine)
+        public int CreateMaintenanceScheduleLine(MaintenanceScheduleLine newMaintenanceScheduleLine)
         {
             try
             {
