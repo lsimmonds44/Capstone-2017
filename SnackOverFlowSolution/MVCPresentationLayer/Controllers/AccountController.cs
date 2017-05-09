@@ -811,9 +811,20 @@ namespace MVCPresentationLayer.Controllers
 
             DataObjects.User usr = null;
 
+
+
+            User userFound = null;
             try
             {
-                usr = _appUserManager.RetrieveUserByUserName(model.UserName);
+                userFound = _appUserManager.AuthenticateWebUser(model.UserName, model.Password); //uses only email
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                usr = _appUserManager.RetrieveUserByUserName(userFound.UserName);
             }
             catch (Exception ex)
             {
@@ -828,17 +839,6 @@ namespace MVCPresentationLayer.Controllers
             if (user != null && usr.EmailAddress != null)
             {
                 model.UserName = usr.EmailAddress;
-
-            }
-
-
-            User userFound = null;
-            try
-            {
-                userFound = _appUserManager.AuthenticateWebUser(model.UserName, model.Password); //uses only email
-            }
-            catch
-            {
 
             }
 
