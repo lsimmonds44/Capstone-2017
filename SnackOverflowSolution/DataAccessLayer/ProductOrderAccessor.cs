@@ -126,11 +126,11 @@ namespace DataAccessLayer
                         OrderTypeId = reader.IsDBNull(2) ? null : reader.GetString(2),
                         AddressType = reader.IsDBNull(3) ? null : reader.GetString(3),
                         DeliveryTypeId = reader.IsDBNull(4) ? null : reader.GetString(4),
-                        Amount = reader.IsDBNull(5) ? 0 : reader.GetDecimal(5),
-                        OrderDate = reader.GetDateTime(6),
-                        DateExpected = reader.GetDateTime(7),
-                        Discount = reader.GetDecimal(8),
-                        OrderStatusId = reader.GetString(9),
+                        Amount = reader.IsDBNull(5) ? (decimal?)null : reader.GetDecimal(5),
+                        OrderDate = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6),
+                        DateExpected = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7),
+                        Discount = reader.IsDBNull(8) ? (decimal?)null : reader.GetDecimal(8),
+                        OrderStatusId = reader.IsDBNull(9) ? null :  reader.GetString(9),
                         UserAddressId = reader.IsDBNull(10) ? (int?)null : reader.GetInt32(10),
                         HasArrived = reader.GetBoolean(11)
                     };
