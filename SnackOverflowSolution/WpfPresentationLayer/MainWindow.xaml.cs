@@ -62,7 +62,7 @@ namespace WpfPresentationLayer
         private List<SupplierInvoice> _supplierInvoiceList;
         private List<string> _supplierApplicationStatus = null;
         private List<User> _userList = null;
-        private List<PickupLine> _pickupsList = null;
+        private List<PickupLineAndProductName> _pickupsList = null;
         private List<SupplierCatalogViewModel> _parsedSupplierCatalogueData = null;
 
         private Employee _employee = null;

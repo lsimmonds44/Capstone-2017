@@ -16,7 +16,7 @@ namespace LogicLayer
 
         PickupLine RetrievePickupLineById(int? pickupLineId);
 
-        List<PickupLine> RetrievePickupLinesReceived();
+        List<PickupLineAndProductName> RetrievePickupLinesReceived();
 
         Pickup RetrievePickupById(int? pickupId);
 

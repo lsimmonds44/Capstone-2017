@@ -140,9 +140,9 @@ namespace LogicLayer
         /// Retrieves a list of pickup lines, adding only those picked up
         /// </summary>
         /// <returns></returns>
-        public List<PickupLine> RetrievePickupLinesReceived()
+        public List<PickupLineAndProductName> RetrievePickupLinesReceived()
         {
-            List<PickupLine> pickupList = new List<PickupLine>();
+            List<PickupLineAndProductName> pickupList = new List<PickupLineAndProductName>();
             bool pickupStatus = true;
 
             try

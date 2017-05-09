@@ -103,6 +103,7 @@
     <Compile Include="PackageLine.cs" />
     <Compile Include="Pickup.cs" />
     <Compile Include="PickupLine.cs" />
+    <Compile Include="PickupLineAndProductName.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductCategory.cs" />

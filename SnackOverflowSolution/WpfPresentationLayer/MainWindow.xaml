@@ -840,7 +840,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Pickup ID" Binding="{Binding PickupId}" Width="*"/>
                             <DataGridTextColumn Header="Pickup Item ID" Binding="{Binding PickupLineId}" Width="*"/>
-                            <DataGridTextColumn Header="Product" Binding="{Binding ProductId }" Width="*"/>
+                            <DataGridTextColumn Header="Product" Binding="{Binding ProductName }" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
                             <!--<DataGridTextColumn Header="Status" Binding="{Binding PickupStatus}" Width="*"/>-->
                         </DataGrid.Columns>

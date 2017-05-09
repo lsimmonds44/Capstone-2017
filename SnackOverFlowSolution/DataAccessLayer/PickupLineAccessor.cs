@@ -200,9 +200,9 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public static List<PickupLine> RetrievePickupLinesReceived(bool? status)
+        public static List<PickupLineAndProductName> RetrievePickupLinesReceived(bool? status)
         {
-            var lines = new List<PickupLine>();
+            var lines = new List<PickupLineAndProductName>();
 
             var conn = DBConnection.GetConnection();
             var cmdText = @"sp_retrieve_pickup_line_pickups_receieved";
@@ -220,13 +220,14 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        lines.Add(new PickupLine()
+                        lines.Add(new PickupLineAndProductName()
                         {
                             PickupLineId = reader.GetInt32(0),
                             PickupId = reader.GetInt32(1),
                             ProductId = reader.GetInt32(2),
                             Quantity = reader.GetInt32(3),
-                            PickupStatus = reader.GetBoolean(4)
+                            PickupStatus = reader.GetBoolean(4),
+                            ProductName = reader.GetString(5)
                         });
                     }
                 }
