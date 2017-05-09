@@ -29,5 +29,6 @@ namespace DataObjects
         public DateTime? DateReceived { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public String ProductName { get; set; }
+     
     }
 }

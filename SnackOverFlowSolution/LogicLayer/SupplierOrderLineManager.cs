@@ -43,18 +43,18 @@ namespace LogicLayer
         /// </summary>
         /// <param name="SupplierProductOrderId"></param>
         /// <returns></returns>
-        public List<SupplierOrderLine> RetrieveSupplierOrderLines(int SupplierProductOrderId)
-        {
-            List<SupplierOrderLine> result = null;
-            try
-            {
-                result = SupplierOrderLineAccessor.RetrieveOrderLinesBySupplierOrderId(SupplierProductOrderId);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return result;
-        }
+        //public List<SupplierOrderLine> RetrieveSupplierOrderLines(int SupplierProductOrderId)
+        //{
+        //    List<SupplierOrderLine> result = null;
+        //    try
+        //    {
+        //        result = SupplierOrderLineAccessor.RetrieveOrderLinesBySupplierOrderId(SupplierProductOrderId);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return result;
+        //}
     }
 }

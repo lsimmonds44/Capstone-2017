@@ -21,7 +21,6 @@ namespace DataObjects
         public int? ProductId { get; set; }
         public int? PickupId { get; set; }
         public int? PickupLineId { get; set; }
-
         public string productName { get; set; }
     }
 }
