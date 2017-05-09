@@ -75,6 +75,8 @@
     <Compile Include="ProductAccessor.cs" />
     <Compile Include="ProductCategoryAccessor.cs" />
     <Compile Include="ProductOrderAccessorMvc.cs" />
+    <Compile Include="SupplierOrderAccessor.cs" />
+    <Compile Include="SupplierOrderLineAccessor.cs" />
     <Compile Include="SupplierProductLotAccessor.cs" />
     <Compile Include="ProductLotAccessor.cs" />
     <Compile Include="ProductOrderAccessor.cs" />

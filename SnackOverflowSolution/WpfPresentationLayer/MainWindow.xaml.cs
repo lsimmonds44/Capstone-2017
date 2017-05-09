@@ -41,6 +41,8 @@ namespace WpfPresentationLayer
         private ICharityManager _charityManager;
         private IPreferenceManager _preferenceManager;
         private ISupplierInventoryManager _supplierInventoryManager;
+        private ISupplierOrderManager _supplierOrderManager = new SupplierOrderManager();
+        private ISupplierOrderLineManager _supplierOrderLineManager = new SupplierOrderLineManager();
         private ILocationManager _locationManager;
 		private IRouteManager _routeManager = new RouteManager();
         private IPackageManager _packageManager = new PackageManager();
@@ -72,6 +74,7 @@ namespace WpfPresentationLayer
         private User _user = null;
         private Role _role = null;
         private ProductLotSearchCriteria _productLotSearchCriteria;
+        private Product _selectedProduct;
 
         public MainWindow()
         {
@@ -1683,6 +1686,206 @@ namespace WpfPresentationLayer
             }
             GlobalRefresh();
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created: 2017/05/04
+        /// 
+        /// Action for start order button click
+        /// </summary>
+        /// <param name = "sender" ></ param >
+        /// < param name="e"></param>
+        private void StartOrderClick(object sender, RoutedEventArgs e)
+        {
+            // var supplierOrder = validateOrder();
+            if (btnStartOrder.Content.ToString() == "Start Order")
+            {
+                if (txtSupplierID.Text.Count() == 5)
+                {
+                    try
+                    {
+                        int supplierID;
+                        int.TryParse(txtSupplierID.Text, out supplierID);
+                        txtOrderNumber.Text = _supplierOrderManager.createSupplierOrder(supplierID).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to initialize an order. " + ex);
+                    }
+
+                    try
+                    {
+                        SupplierProductLotManager supplierProduct = new SupplierProductLotManager();
+
+                        List<Product> _productLots = _productManager.RetrieveProducts();
+                        if (_productLots.Count < 1)
+                        {
+                            MessageBox.Show("No available products");
+                        }
+                        else
+                        {
+                            foreach (var product in _productLots)
+                            {
+                                cboProducts.Items.Add(product);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error retrieving products" + ex);
+                    }
+
+                    btnAddOrderLine.IsEnabled = true; btnStartOrder.Content = "Finalize Order";
+
+                    cboProducts.IsEnabled = true;
+                    //displaySupplierProducts();          
+                }
+                else
+                {
+                    MessageBox.Show("There must be a 5 digit supplierId in the supplier id field make sure you have the correct name in the supplier name field.");
+                }
+            }
+            else
+            {
+                btnStartOrder.Content = "Start Order";
+                txtSupplierName.Clear();
+                txtSupplierID.Clear();
+                txtOrderNumber.Clear();
+                dgOrderLines.ItemsSource = null;
+                cboProducts.IsEnabled = false;
+                btnAddOrderLine.IsEnabled = false;
+                cboProducts.Items.Clear();
+                txtQty.Clear();
+            }
+
+        }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/05/05
+        /// 
+        /// Gets an updated list of suppliers 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupplierOrdersTabSelected(object sender, RoutedEventArgs e)
+        {
+            _supplierList = _supplierManager.ListSuppliers();
+
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// 2017/05/04
+        /// keyup event for txtSupplierName
+        /// Uses lambda expression to look for a supplier as the supplier's name is typed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        List<Supplier> _foundSuppliers = new List<Supplier>();
+        int _selectedSupplierIndex = 0;
+        private void txtSupplierName_KeyUp(object sender, KeyEventArgs e)
+        {
+            // search from list of suppliers for supplier name as it's typed
+
+            if (txtSupplierName.Text.Count() > 2 && e.Key != Key.Back && e.Key != Key.Left && e.Key != Key.Right && e.Key != Key.Up && e.Key != Key.Down && e.Key != Key.Delete && e.Key != Key.LeftShift && e.Key != Key.RightShift)
+            {
+                _foundSuppliers = _supplierList.Where(s => s.FarmName.ToLower().Where
+                                     (a => s.FarmName.ToLower().Contains(txtSupplierName.Text.ToLower())).Any()).ToList();
+                if (_foundSuppliers.Count > 0)
+                {
+                    if (_foundSuppliers.Count > 1)
+                    {
+                        lblAvailableoptions.Content = _foundSuppliers.Count;
+                    }
+
+                    txtSupplierName.Text = _foundSuppliers.First().FarmName;
+                    txtSupplierName.SelectionStart = txtSupplierName.Text.Count();
+                    txtSupplierName.MaxLength = _foundSuppliers.First().FarmName.Length;
+                    txtSupplierID.Text = _foundSuppliers.First().SupplierID.ToString();
+                }
+
+            }
+            else if (txtSupplierName.Text.Count() < 2)
+            {
+                txtSupplierID.Text = "";
+                lblAvailableoptions.Content = "";
+            }
+            if (e.Key == Key.Up && _foundSuppliers.Count > _selectedSupplierIndex + 1)
+            {
+                _selectedSupplierIndex++;
+                txtSupplierName.Text = _foundSuppliers[_selectedSupplierIndex].FarmName;
+                txtSupplierID.Text = _foundSuppliers[_selectedSupplierIndex].SupplierID.ToString();
+            }
+            else if (e.Key == Key.Down && _selectedSupplierIndex > 0)
+            {
+                _selectedSupplierIndex--;
+                txtSupplierName.Text = _foundSuppliers[_selectedSupplierIndex].FarmName;
+                txtSupplierID.Text = _foundSuppliers[_selectedSupplierIndex].SupplierID.ToString();
+            }
+
+        }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/05/05
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void productSelected(object sender, EventArgs e)
+        {
+            _selectedProduct = (Product)cboProducts.SelectedItem;
+
+        }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/05/05
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddOrderLineClick(object sender, RoutedEventArgs e)
+        {
+            SupplierOrderLine orderLine = new SupplierOrderLine();
+            orderLine.SupplierProductOrderID = parseToInt(txtOrderNumber.Text);
+            orderLine.ProductID = _selectedProduct.ProductId;
+            orderLine.ProductName = _selectedProduct.Name;
+            orderLine.Quantity = parseToInt(txtQty.Text);
+            orderLine.Price = 0;
+            try
+            {
+                SupplierOrderLineManager orderLineManager = new SupplierOrderLineManager();
+
+                orderLineManager.CreateOrderLine(orderLine);
+                dgOrderLines.ItemsSource = orderLineManager.RetrieveSupplierOrderLines(parseToInt(txtOrderNumber.Text));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Eric Walton
+        /// Created: 2017/02/06
+        /// 
+        /// Helper method to parse a string to an int
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private int parseToInt(String input)
+        {
+            int result;
+
+            int.TryParse(input, out result);
+            return result;
+        }
+
+
         /// <summary>
         /// Created by Natacha Ilunga
         /// 2017/3/09
@@ -1716,9 +1919,10 @@ namespace WpfPresentationLayer
                     MessageBox.Show(ex.Message);
                 }
             }
-
-
         }
+
+
+        //}
         /// <summary>
         /// Created by Natacha Ilunga
         /// 03/09/2017

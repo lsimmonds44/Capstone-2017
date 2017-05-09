@@ -187,6 +187,51 @@ namespace DataAccessLayer
 
             return supplierProductLots;
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created 2017/05/05
+        /// </remarks>
+        /// 
+        /// <returns>A list of all supplier product lots.</returns>
+        public static List<SupplierProductLot> RetrieveSupplierProducts(int supplierId)
+        {
+            var supplierProducts = new List<SupplierProductLot>();
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_retrieve_supplier_product";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", supplierId);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        supplierProducts.Add(new SupplierProductLot()
+                        {
+                            ProductName = reader.GetString(0),
+                            ProductId = reader.GetInt32(1),
+                            Price = reader.IsDBNull(2) ? (decimal?)null : reader.GetDecimal(2)
+                        });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return supplierProducts;
+        }
         /// <summary>
         /// Aaron Usher
         /// Updated: 
