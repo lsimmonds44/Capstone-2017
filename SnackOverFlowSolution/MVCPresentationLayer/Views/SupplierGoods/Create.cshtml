@@ -32,7 +32,7 @@
                         @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger" })
                     </div>
                     <div class="input-container col-md-6">
-                        @Html.EditorFor(model => model.ProductId, new {htmlAttributes = new { @class = "form-control small-input white-bg", placeholder = "Product ID" }})
+                        @Html.DropDownListFor(model => model.ProductId, new SelectList(ViewBag.products, "ProductID", "Name"))
                         @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
                     </div>
                     <div class="input-container col-md-6">
@@ -40,7 +40,7 @@
                         @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                     </div>
                     <div class="input-container col-md-6">
-                        @Html.EditorFor(model => model.SupplierId, new {htmlAttributes = new { @class = "form-control small-input white-bg", placeholder = "Supplier ID" }})
+                        @Html.EditorFor(model => model.SupplierId, new { htmlAttributes = new { @class = "form-control small-input white-bg", @readonly = "readonly", placeholder = "Supplier ID" } })
                         @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
                     </div>
                     <div class="input-container col-md-6">
