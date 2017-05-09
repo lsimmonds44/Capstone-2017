@@ -139,5 +139,17 @@ namespace LogicLayer
             }
 
         }
+
+        /// <summary>
+        ///  Ethan Jorgensen
+        ///  
+        /// 05/09/2017
+        /// </summary>
+        /// <param name="oldLot"></param>
+        /// <param name="newLot"></param>
+        public bool UpdateSupplierProductLot(SupplierProductLot oldLot, SupplierProductLot newLot)
+        {
+            return SupplierProductLotAccessor.UpdateSupplierProductLot(oldLot, newLot);
+        }
     }
 }

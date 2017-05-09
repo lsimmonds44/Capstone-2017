@@ -15,7 +15,7 @@
         <h4>Product Lot</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ProductLotId)
+        @Html.HiddenFor(model => model.SupplierProductLotId)
         <div class="form-group">
             @Html.LabelFor(model => model.SupplierProductLotId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ExpirationDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpirationDate)
+                @Html.TextBoxFor(model => model.ExpirationDate, htmlAttributes: new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.ExpirationDate)
             </div>
         </div>
