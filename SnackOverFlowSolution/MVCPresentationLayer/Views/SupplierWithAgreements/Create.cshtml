@@ -27,21 +27,6 @@
                     <h3>Personal Information</h3>
                 </div>
 
-                <div class="input-container col-md-12">
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control small-input white-bg", @placeholder = "Username" })
-                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="input-container col-md-6">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control small-input white-bg", @placeholder = "Password" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="input-container col-md-6">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control small-input white-bg", @placeholder = "Confirm Password" })
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-
                 <div class="input-container col-md-6">
                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control small-input white-bg", @placeholder = "First Name" })
                     @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
@@ -85,6 +70,21 @@
                 <div class="input-container col-md-6">
                     @Html.TextBoxFor(m => m.Zip, new { @class = "form-control small-input white-bg", @placeholder = "Zip" })
                     @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-12">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control small-input white-bg", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control small-input white-bg", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="input-container col-md-6">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control small-input white-bg", @placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

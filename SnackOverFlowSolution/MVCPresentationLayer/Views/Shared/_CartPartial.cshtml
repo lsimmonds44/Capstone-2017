@@ -1,32 +1,27 @@
-﻿<div class="cart-container clearfix">
-    
-    <a href="#" class="cart-link"><span></span></a>
+﻿@model MVCPresentationLayer.Models.CartPageModel
+
+<div class="cart-container clearfix">
+    <a href="#" class="cart-link"><span>@Model.ItemsInCart.Count()</span></a>
 
     <div class="cart-items">
         <div class="cart-counter">
-            @*<h5><span><span>2</span> Items</span>In Cart</h5>*@
+            <h5><span><span>@Model.ItemsInCart.Count()</span> Items</span> In Cart</h5>
         </div>
-        <a href="" class="remove-items"><i class="fa fa-times-circle"></i></a>
         <ul>
-
-            @*<li>
-                <div class="item-container clearfix">
-                    <figure><img src="~/Images/Gallery/gallery-1.jpg"/></figure>
-                    <p class="food-name"><a href="#">Eggs</a>
-                    </p>
-                    <p class="food-price">$27</p>
-                </div>
-            </li>
-
-            <li>
-                <div class="item-container clearfix">
-                    <figure><img src="~/Images/Gallery/gallery-2.jpg"/></figure>
-                    <p class="food-name"><a href="#">Eggs</a>
-                    </p>
-                    <p class="food-price">$24</p>
-                </div>
-            </li>*@
-
+            @foreach (var a in Model.ItemsInCart)
+            {
+                <li>
+                    <div class="item-container clearfix">
+                        <figure>
+                            <img src="@Url.Action("PictureOf", "Products", new {id = a.ProductID})" width="100" height="100" alt="Product Image" />
+                        </figure>
+                        <p class="food-name">
+                            <a href="#">@a.Name</a>
+                        </p>
+                        <p class="food-price">@a.Total</p>
+                    </div>
+                </li>
+            }
         </ul>
 
         @Html.ActionLink("View Cart", "ViewCart", "Account", null, new { @class = "button view-cart-btn" })
