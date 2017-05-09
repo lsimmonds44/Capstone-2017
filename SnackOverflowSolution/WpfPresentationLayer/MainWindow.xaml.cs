@@ -66,6 +66,7 @@ namespace WpfPresentationLayer
         private List<User> _userList = null;
         private List<PickupLineAndProductName> _pickupsList = null;
         private List<SupplierCatalogViewModel> _parsedSupplierCatalogueData = null;
+        private CompanyOrderManager _companyOrderManager = new CompanyOrderManager();
 
         private Employee _employee = null;
         private Supplier _supplier = null;
@@ -1706,7 +1707,8 @@ namespace WpfPresentationLayer
                     {
                         int supplierID;
                         int.TryParse(txtSupplierID.Text, out supplierID);
-                        txtOrderNumber.Text = _supplierOrderManager.createSupplierOrder(supplierID).ToString();
+                        int empId = (int)_employee.EmployeeId;
+                        txtOrderNumber.Text = _supplierOrderManager.createSupplierOrder(supplierID, empId).ToString();
                     }
                     catch (Exception ex)
                     {
@@ -1859,8 +1861,7 @@ namespace WpfPresentationLayer
                 SupplierOrderLineManager orderLineManager = new SupplierOrderLineManager();
 
                 orderLineManager.CreateOrderLine(orderLine);
-                dgOrderLines.ItemsSource = orderLineManager.RetrieveSupplierOrderLines(parseToInt(txtOrderNumber.Text));
-
+                dgOrderLines.ItemsSource = _companyOrderManager.RetrieveCompanyOrderLinesByOderId(parseToInt(txtOrderNumber.Text));
             }
             catch (Exception)
             {
@@ -3322,6 +3323,11 @@ namespace WpfPresentationLayer
                 MessageBox.Show("Please select a user to edit.");
             }
             
+        }
+
+        private void SupplierPickupTabSelected(object sender, RoutedEventArgs e)
+        {
+            dgSupplierPickup.ItemsSource = _companyOrderManager.RetrieveCompanyOrders();
         }
 
         

@@ -53,7 +53,8 @@ namespace DataAccessLayer
                             Amount = reader.GetDecimal(3),
                             OrderDate = reader.GetDateTime(4),
                             HasArrived = reader.GetBoolean(5),
-                            Active = reader.GetBoolean(6)
+                            Active = reader.GetBoolean(6),
+                            SupplierName = reader.GetString(7)
                         };
                         orders.Add(order);
                     }
