@@ -114,7 +114,7 @@ INSERT INTO [dbo].[Category]
 VALUES
 	('Vegetable', 'A plant or part of a plant as used in food'),
 	('Fruit', 'Seed-bearing structure in flowering plants'),
-	('Root Product', 'Tuberous items such as potatos and whatnot'),
+	('Root', 'Tuberous items such as potatos and whatnot'),
 	('Spice', 'Seasonings and such')
 GO
 
@@ -125,7 +125,11 @@ VALUES
 	(10001, 'Fruit'),
 	(10002, 'Vegetable'),
 	(10003, 'Vegetable'),
-	(10004, 'Vegetable')
+	(10004, 'Vegetable'),
+	(10005, 'Vegetable'),
+	(10006, 'Vegetable'),
+	(10007, 'Root'),
+	(10008, 'Fruit')
 GO
 
 print '*** Inserting Grade Test Data ***'
@@ -162,7 +166,11 @@ VALUES
 	(10000,10001,10000,10001,10000,3000,500,'2012-08-08','2120-01-01','Grade B'),
 	(10000,10002,10000,10002,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
 	(10000,10003,10000,10003,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10004,10000,3000,500,'2012-08-08','2120-01-01','Grade A')
+	(10000,10003,10000,10004,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10005,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10006,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10007,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
+	(10000,10003,10000,10008,10000,3000,500,'2012-08-08','2120-01-01','Grade A')
 GO
 
 print '*** Inserting Product_Grade_Price Test Data ***'
@@ -174,7 +182,11 @@ VALUES
 	(10001, 'Grade B', 600),
 	(10002, 'Grade A', 800),
 	(10003, 'Grade A', 900),
-	(10004, 'Grade A', 100)
+	(10004, 'Grade A', 100),
+	(10005, 'Grade A', 100),
+	(10006, 'Grade B', 150),
+	(10007, 'Grade A', 120),
+	(10008, 'Grade A', 110)
 GO
 
 print '*** Inserting Status Test Data ***'

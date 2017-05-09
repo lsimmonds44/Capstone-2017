@@ -26,6 +26,8 @@ namespace MVCPresentationLayer.Models
 
         public IEnumerable<string> Categories { get; set; }
 
+        public CartPageModel CartPageModel { get; set; }
+
     }
 
     /// <summary>
