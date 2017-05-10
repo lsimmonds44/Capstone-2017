@@ -23,5 +23,8 @@ namespace LogicLayer
         bool DeletePickupLine(PickupLine pickupLine);
 
         List<PickupLine> RetrievePickupLinesByPickupId(int? pickupId);
+
+        int CreatePickup(Pickup pickup);
+
     }
 }

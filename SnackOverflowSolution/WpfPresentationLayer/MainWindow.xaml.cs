@@ -3326,10 +3326,71 @@ namespace WpfPresentationLayer
             }
             
         }
-
+        /// <summary>
+        /// Laura Simmonds
+        /// Created:
+        /// 2017/05/10
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SupplierPickupTabSelected(object sender, RoutedEventArgs e)
         {
-            dgSupplierPickup.ItemsSource = _companyOrderManager.RetrieveCompanyOrders();
+            
+            try
+            {
+                dgSupplierPickup.ItemsSource = _companyOrderManager.RetrieveCompanyOrders();
+                IDriverManager _driverManager = new DriverManager();
+                List<Driver> drivers = _driverManager.RetrieveAllDrivers();
+                cboDrivers.Items.Clear();
+                foreach (Driver driver in drivers)
+                {
+                    User driverUser = _userManager.RetrieveUser((int)_employeeManager.RetrieveEmployee((int)driver.DriverId).UserId);
+                    
+                    cboDrivers.Items.Add(driverUser);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        /// <summary>
+        /// Laura Simmonds
+        /// Created:
+        /// 2017/05/10
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAssignDriver(object sender, RoutedEventArgs e)
+        {
+            if (dgSupplierPickup.SelectedIndex < 0 || cboDrivers.SelectedIndex < 0)
+            {
+                MessageBox.Show("An order and a driver must be selected!");
+            }
+            else
+            {
+                int pickupId = 0;
+                Pickup pickup = new Pickup();
+                User selectedDriver = (User)cboDrivers.SelectedItem;
+                CompanyOrder selectedOrder = (CompanyOrder)dgSupplierPickup.SelectedItem;
+                pickup.SupplierId = selectedOrder.SupplierId;
+                pickup.EmployeeId = selectedOrder.EmployeeId;
+                pickup.DriverId = _employeeManager.RetrieveEmployeeByUserName(selectedDriver.UserName).EmployeeId;
+                pickup.CompanyOrderId = selectedOrder.CompanyOrderID;
+                pickup.WarehouseId = 10000;
+                try
+                {
+                    pickupId = _pickupManager.CreatePickup(pickup);
+                    MessageBox.Show("Pickup: " + pickupId + " has been assigned to " + selectedDriver);
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+                
+            }
         }
 
         

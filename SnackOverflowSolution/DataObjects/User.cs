@@ -56,5 +56,11 @@ namespace DataObjects
         public string PasswordHash { get; set; }
 
         public string PasswordSalt { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
+
     }
 }

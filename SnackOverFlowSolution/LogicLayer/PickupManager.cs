@@ -214,5 +214,26 @@ namespace LogicLayer
 
             return result;
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created: 2017/05/10
+        /// </summary>
+        /// <param name="pickup"></param>
+        /// <returns></returns>
+        public int CreatePickup(Pickup pickup)
+        {
+            int pickupID = 0;
+            try
+            {
+                pickupID = PickupAccessor.CreatePickup(pickup);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return pickupID;
+        }
+
     }
 }

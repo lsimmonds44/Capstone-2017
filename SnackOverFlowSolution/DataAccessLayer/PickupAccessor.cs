@@ -146,5 +146,46 @@ namespace DataAccessLayer
 
             return pickup;
         }
+
+        /// <summary>
+        /// Laura Simmonds
+        /// Created:
+        /// 2017/05/10
+        /// </summary>
+        /// <param name="pickup"></param>
+        /// <returns></returns>
+        public static int CreatePickup(Pickup pickup)
+        {
+            int orderId = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_pickup";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SUPPLIER_ID", pickup.SupplierId);
+            cmd.Parameters.AddWithValue("@WAREHOUSE_ID", pickup.WarehouseId);
+            cmd.Parameters.AddWithValue("@DRIVER_ID", pickup.DriverId);
+            cmd.Parameters.AddWithValue("@EMPLOYEE_ID", pickup.EmployeeId);
+            cmd.Parameters.AddWithValue("@COMPANY_ORDER_ID", pickup.CompanyOrderId);
+
+            try
+            {
+                conn.Open();
+                object Id = cmd.ExecuteScalar();
+                decimal someStupidValue = (decimal)Id;
+                orderId = (int)someStupidValue;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return orderId;
+        }
+
     }
 }

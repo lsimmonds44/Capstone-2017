@@ -719,7 +719,7 @@
                         </Grid.RowDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Supplier Pickup Controls-->
-                        <Button Name="btnAssignToDriver" Grid.Row="0" Grid.Column="2" Content="Assign to Driver" Margin="10 0 5 0" VerticalAlignment="Top" />
+                        <Button Name="btnAssignToDriver" Grid.Row="0" Grid.Column="2" Content="Assign to Driver" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnAssignDriver" />
                         <ComboBox Name="cboDrivers" Grid.Row="0" Grid.Column="1" Width="200"></ComboBox>
                     </Grid>
                     <!--End of Supplier Pickup Controls Grid-->
