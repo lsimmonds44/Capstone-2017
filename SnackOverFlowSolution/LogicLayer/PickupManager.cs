@@ -235,5 +235,26 @@ namespace LogicLayer
             return pickupID;
         }
 
+        /// <summary>
+        /// Eric Walton
+        /// 5/10/2017
+        /// </summary>
+        /// <param name="pickupLine"></param>
+        /// <returns></returns>
+        public int CreatePickupLine(PickupLine pickupLine)
+        {
+            int pickupLineId = 0;
+            try
+            {
+                pickupLineId = PickupLineAccessor.CreatePickupLine(pickupLine);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return pickupLineId;
+        }
+
+
     }
 }

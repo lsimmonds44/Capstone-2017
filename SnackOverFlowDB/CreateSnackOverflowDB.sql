@@ -2511,11 +2511,12 @@ CREATE PROCEDURE sp_create_pickup_line
 )
 AS
 	BEGIN
+	DECLARE @return_value[int]
 		INSERT INTO PICKUP_LINE 
 			(PICKUP_ID, PRODUCT_ID, QUANTITY, PICK_UP_STATUS)
 		VALUES
 			(@PICKUP_ID, @PRODUCT_ID, @QUANTITY, @PICK_UP_STATUS)
-		RETURN @@ROWCOUNT
+		SELECT IDENT_CURRENT('PICKUP')
 	END
 GO
 
@@ -7790,32 +7791,7 @@ AS
 	END
 GO
 
-print '' print  '*** Creating procedure sp_update_product_lot'
-GO
-CREATE PROCEDURE sp_update_product_lot
-(
-	@old_PRODUCT_LOT_ID[INT],
-	@old_SUPPLIER_ID[INT],
-	@new_SUPPLIER_ID[INT],
-	@old_PRODUCT_ID[INT],
-	@new_PRODUCT_ID[INT],
-	@old_QUANTITY[INT],
-	@new_QUANTITY[INT],
-	@old_EXPIRATION_DATE[DATETIME],
-	@new_EXPIRATION_DATE[DATETIME]
-)
-AS
-	BEGIN
-		UPDATE supplier_product_lot
-		SET SUPPLIER_ID = @new_SUPPLIER_ID, PRODUCT_ID = @new_PRODUCT_ID, QUANTITY = @new_QUANTITY, EXPIRATION_DATE = @new_EXPIRATION_DATE
-		WHERE (PRODUCT_LOT_ID = @old_PRODUCT_LOT_ID)
-		AND (SUPPLIER_ID = @old_SUPPLIER_ID)
-		AND (PRODUCT_ID = @old_PRODUCT_ID)
-		AND (QUANTITY = @old_QUANTITY)
-		AND (EXPIRATION_DATE = @old_EXPIRATION_DATE)
-		RETURN @@ROWCOUNT
-	END
-GO
+
 
 print '' print  '*** Creating procedure sp_update_product_lot_available_quantity'
 GO
