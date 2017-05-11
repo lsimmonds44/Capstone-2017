@@ -210,8 +210,8 @@
                     <!--Charity Data Grid-->
                     <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" GridLinesVisibility="Horizontal" Name="dgCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
-                            <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="80"  Header="Charity ID" Binding="{Binding CharityID}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="150" Header="Charity Name" Binding="{Binding CharityName}"></DataGridTextColumn >
                             <DataGridTextColumn Width="*"/>
                             <!--<DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >-->
                         </DataGrid.Columns>
@@ -404,7 +404,7 @@
                             <DataGridTextColumn Header="State" Binding="{Binding FarmState}" Width="*"/>
                             <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Is Approved" Binding="{Binding IsApproved}" Width="auto"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedBy}" Width="*"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedByName}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active"  Binding="{Binding Active}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>

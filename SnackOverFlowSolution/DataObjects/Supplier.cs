@@ -57,6 +57,7 @@ namespace DataObjects
         public string FarmState { get; set; }
         public bool Active { get; set; }
 
+        public string ApprovedByName { get; set; }
         /// <summary>
         /// Skyler Hiscock
         /// created:

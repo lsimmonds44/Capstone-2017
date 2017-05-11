@@ -165,6 +165,30 @@ namespace LogicLayer
             try
             {
                 suppliers = SupplierAccessor.RetrieveSuppliers();
+                IEmployeeManager employeeManager = new EmployeeManager();
+                IUserManager userManager = new UserManager();
+                foreach (var supplier in suppliers)
+                {
+                    if (supplier.ApprovedBy == null)
+                    {
+                        supplier.ApprovedByName = " ";
+                    }
+                    else
+                    {
+                        User user = userManager.RetrieveUser((int)employeeManager.RetrieveEmployee((int)supplier.ApprovedBy).UserId);
+                        supplier.ApprovedByName = user.LastName + ", " + user.FirstName; 
+                    }
+
+                //        int lotSupplierid = (int)lot.SupplierId;
+                //        Supplier supplier = supplierManager.RetrieveSupplierBySupplierID(lotSupplierid);
+                //        lot.SupplierName = supplier.FarmName;
+                //    }
+                //    catch
+                //    {
+                //        lot.SupplierName = "Unable to find farm name";
+
+
+                }
             }
             catch (SqlException ex)
             {
