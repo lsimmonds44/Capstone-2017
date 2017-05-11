@@ -85,6 +85,12 @@ namespace LogicLayer
         /// 2017/02/27
         /// 
         /// Gets a list of product lots from the database
+        /// 
+        /// Update 
+        /// Bobby Thorne
+        /// 5/10/2017
+        /// 
+        /// Added the farm name to the product lot data object so it can be used in the data grid
         /// </summary>
         /// <returns></returns>
         public List<ProductLot> RetrieveProductLots()

@@ -13,6 +13,13 @@ namespace DataObjects
     /// 2017/02/20
     /// 
     /// The DTO for a Product Lot
+    /// 
+    /// Update 
+    /// Bobby Thorne
+    /// 5/10/2017
+    /// Added SupplierName to be able to use it 
+    /// in the datagrid
+    /// 
     /// </summary>
     public class ProductLot
     {
@@ -29,6 +36,7 @@ namespace DataObjects
         public DateTime? DateReceived { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public String ProductName { get; set; }
+
         public string SupplierName { get; set; }
 
     }

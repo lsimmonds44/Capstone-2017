@@ -262,6 +262,16 @@ namespace LogicLayer
             return result;
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/11/2017
+        /// 
+        /// Validates password input of the create user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
         private string ValidateUser(User user, string password, string confirmPassword)
         {
             if (password.Length < 7)
@@ -275,6 +285,17 @@ namespace LogicLayer
             return ValidateUser(user);
         }
 
+        /// <summary>
+        /// Bobby Thorne
+        /// 2/11/2017
+        /// 
+        /// Validates the Created User and makes sure 
+        /// Username is not used, names are at least 2 char long
+        /// That it is a valid Email and that the email is not a 
+        /// duplicate.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private string ValidateUser(User user)
         {
             if (user.UserName.Length > 20 || user.UserName.Length < 4)
@@ -344,15 +365,6 @@ namespace LogicLayer
             {
                 throw;
             }
-        }
-
-
-
-
-
-        public string LogIn(string p1, string p2)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -455,6 +467,15 @@ namespace LogicLayer
             return user;
         }
 
+        /// <summary>
+        /// Bobby Thorne 
+        /// 2/12/2017
+        /// Checks that the phone number is a 10 digits
+        /// and that it can be parsed
+        /// 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         private static bool IsPhoneNumber(string number)
         {
 
@@ -502,6 +523,11 @@ namespace LogicLayer
             roles[2] = (supp != null && supp.Active && supp.IsApproved);
 
             return roles;
+        }
+
+        public string LogIn(string p1, string p2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

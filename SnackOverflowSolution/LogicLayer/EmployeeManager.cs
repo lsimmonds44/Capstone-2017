@@ -67,6 +67,13 @@ namespace LogicLayer
         /// Created 02/08/2017
         /// 
         /// retrieve a list of all active employees
+        /// 
+        /// Update 
+        /// Bobby Thorne
+        /// 5/7/2017
+        /// 
+        /// Foreach loop adds a first name, last name to the data object employee so 
+        /// It can be used in the employee data grid in replace of the userId
         /// </summary>
         /// <returns>A list of Employee objects</returns>
         public List<Employee> RetrieveEmployeeList()
@@ -79,18 +86,6 @@ namespace LogicLayer
                 foreach (Employee e in employees)
                 {
                     e.EmployeeName = userManager.RetrieveUser(e.UserId).LastName + ", " + userManager.RetrieveUser(e.UserId).FirstName;
-                    //if (e.ApprovedBy != null)
-                    //{
-                    //    var approvalUser = userManager.RetrieveUser(e.ApprovedBy);
-                    //    if (approvalUser.FirstName.Equals("") && approvalUser.LastName.Equals(""))
-                    //    {
-                    //        e.ApprovedByName = "";
-                    //    }
-                    //    else
-                    //    {
-                    //        e.ApprovedByName = approvalUser.LastName + ", " + approvalUser.FirstName;
-                    //    }
-                    //}
                 }
             }
             catch (Exception ex)
