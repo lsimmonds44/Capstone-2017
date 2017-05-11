@@ -244,7 +244,7 @@
                     <DataGrid Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  Grid.ColumnSpan="5" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" Width="100"/>
-                            <DataGridTextColumn Header="UserID" Binding="{Binding UserId}" Width="100"/>
+                            <DataGridTextColumn Header="UserID" Binding="{Binding EmployeeName}" Width="100"/>
                             <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" Width="100"/>
                             <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="50"/>
                             <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}" Width="150"/>

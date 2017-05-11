@@ -71,10 +71,27 @@ namespace LogicLayer
         /// <returns>A list of Employee objects</returns>
         public List<Employee> RetrieveEmployeeList()
         {
+            UserManager userManager = new UserManager();
             List<Employee> employees = null;
             try
             {
                 employees = EmployeeAccessor.RetrieveEmployeeList();
+                foreach (Employee e in employees)
+                {
+                    e.EmployeeName = userManager.RetrieveUser(e.UserId).LastName + ", " + userManager.RetrieveUser(e.UserId).FirstName;
+                    //if (e.ApprovedBy != null)
+                    //{
+                    //    var approvalUser = userManager.RetrieveUser(e.ApprovedBy);
+                    //    if (approvalUser.FirstName.Equals("") && approvalUser.LastName.Equals(""))
+                    //    {
+                    //        e.ApprovedByName = "";
+                    //    }
+                    //    else
+                    //    {
+                    //        e.ApprovedByName = approvalUser.LastName + ", " + approvalUser.FirstName;
+                    //    }
+                    //}
+                }
             }
             catch (Exception ex)
             {
