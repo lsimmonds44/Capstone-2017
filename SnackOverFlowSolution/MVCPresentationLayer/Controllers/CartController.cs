@@ -112,9 +112,10 @@ namespace MVCPresentationLayer.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var test = "breaker";
+            
+                //var test = "breaker";
             }
             return RedirectToAction("Details", "Products", new { id = productId, supplierId = Request.Params["supplierId"] });
         }
