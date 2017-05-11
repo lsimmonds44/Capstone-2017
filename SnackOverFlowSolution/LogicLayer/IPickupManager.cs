@@ -26,5 +26,6 @@ namespace LogicLayer
 
         int CreatePickup(Pickup pickup);
 
+        int CreatePickupLine(PickupLine pickupLine);
     }
 }

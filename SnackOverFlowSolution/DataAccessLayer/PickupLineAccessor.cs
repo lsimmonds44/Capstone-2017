@@ -276,7 +276,45 @@ namespace DataAccessLayer
             return result;
         }
 
-        
+        /// <summary>
+        /// Eric Walton
+        /// 5/10/2017
+        /// </summary>
+        /// <param name="pickupLine"></param>
+        /// <returns></returns>
+        public static int CreatePickupLine(PickupLine pickupLine)
+        {
+            int pickupLineId = 0;
+
+            var conn = DBConnection.GetConnection();
+            var cmdText = @"sp_create_pickup_line";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PICKUP_ID", pickupLine.PickupId);
+            cmd.Parameters.AddWithValue("@PRODUCT_ID", pickupLine.ProductId);
+            cmd.Parameters.AddWithValue("@QUANTITY", pickupLine.Quantity);
+            cmd.Parameters.AddWithValue("PICK_UP_STATUS", pickupLine.PickupStatus);
+
+            try
+            {
+                conn.Open();
+                //int.TryParse(cmd.ExecuteScalar().ToString(), out orderLineID);
+                decimal id = (decimal)cmd.ExecuteScalar();
+                pickupLineId = (int)id;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return pickupLineId;
+        }
 
     }
 }
