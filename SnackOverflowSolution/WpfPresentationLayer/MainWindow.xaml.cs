@@ -2742,7 +2742,7 @@ namespace WpfPresentationLayer
                     newItem.DeliveryDate = item.DeliveryDate;
                     newItem.StatusId = item.StatusId;
                     newItem.DeliveryTypeId = item.DeliveryTypeId;
-                    newItem.VehicleId = _deliveryManager.RetrieveVehicleByDelivery(item.DeliveryId.Value).VehicleID;
+                    newItem.VehicleId = _deliveryManager.RetrieveVehicleByDelivery(item.DeliveryId.Value).VIN;
                     deliveriesWithVehicleId.Add(newItem);
                 }
                 lvDeliveries.Items.Clear();
@@ -3293,15 +3293,15 @@ namespace WpfPresentationLayer
                     dynamic newItem = new ExpandoObject();
                     User driverUser = _userManager.RetrieveUser((int)_employeeManager.RetrieveEmployee((int)item.DriverId).UserId);
                     newItem.Driver = driverUser.FirstName + " " + driverUser.LastName;
-                    newItem.VehicleId = item.VehicleId;
+                    newItem.VehicleId = _vehicleManager.RetreiveVehicleById(item.VehicleId.Value).VIN;
                     newItem.AssignedDate = item.AssignedDate;
                     routesDisplayList.Add(newItem);
                 }
-                lvRoutes.Items.Clear();
+                dgRoutes.Items.Clear();
 
                 for (int i = 0; i < _routes.Count; i++)
                 {
-                    lvRoutes.Items.Add(routesDisplayList[i]);
+                    dgRoutes.Items.Add(routesDisplayList[i]);
                 }
             }
             catch (Exception ex)

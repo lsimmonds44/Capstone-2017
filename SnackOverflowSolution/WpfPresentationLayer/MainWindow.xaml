@@ -100,7 +100,6 @@
                     <!--Customer Date Grid-->
                     <DataGrid Name="dgCustomer" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="Customer_Selected" Grid.ColumnSpan="4">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" MaxWidth="100" Width="*"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding name}" MaxWidth="200" Width="*"/>
                             <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FederalTaxId}" MaxWidth="200" Width="*"/>
                             <DataGridCheckBoxColumn Header="Approved" Binding="{Binding IsApproved}" MaxWidth="200" Width="auto"/>
@@ -155,7 +154,6 @@
                     <!--Users Data Grid-->
                     <DataGrid Name="dgUsers" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="*"/>
                             <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"  Width="*"/>
                             <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
                             <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
@@ -163,7 +161,7 @@
                             <DataGridTextColumn Header="State" Binding="{Binding State}" Width="*"/>
                             <DataGridTextColumn Header="Zip" Binding="{Binding Zip}" Width="*"/>
                             <DataGridTextColumn Header="Email Address" Binding="{Binding EmailAddress}" Width="*"/>
-                            <DataGridCheckBoxColumn Header="Email Preferences" Binding="{Binding EmaiPreferences}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Email Notices?" Binding="{Binding EmaiPreferences}" Width="*"/>
                             <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="auto"/>
                         </DataGrid.Columns>
@@ -210,9 +208,9 @@
                     <!--Charity Data Grid-->
                     <DataGrid Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" GridLinesVisibility="Horizontal" Name="dgCharity" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="80"  Header="Charity ID" Binding="{Binding CharityID}"></DataGridTextColumn >
-                            <DataGridTextColumn Width="150" Header="Charity Name" Binding="{Binding CharityName}"></DataGridTextColumn >
-                            <DataGridTextColumn Width="*"/>
+                            <!--<DataGridTextColumn Width="80"  Header="Charity ID" Binding="{Binding CharityID}"></DataGridTextColumn >-->
+                            <DataGridTextColumn Width="*" Header="Charity Name" Binding="{Binding CharityName}"></DataGridTextColumn >
+
                             <!--<DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >-->
                         </DataGrid.Columns>
                     </DataGrid>
@@ -231,7 +229,7 @@
                 <Grid Name="grdEmployee" Background="#FFE5E5E5">
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
-               
+
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -244,13 +242,12 @@
                     <!--Employee Data Grid-->
                     <DataGrid Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  Grid.ColumnSpan="3" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Grid.RowSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" MinWidth="100" Width="auto"/>
                             <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" MinWidth="200" Width="auto"/>
                             <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" MinWidth="100" Width="auto"/>
                             <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}" MinWidth="150" Width="auto"/>
                             <DataGridTextColumn Header="Active" Binding="{Binding Active}" MinWidth="50" Width="auto"/>
                             <DataGridTextColumn Width="*"/>
-                            
+
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Employee Data Grid-->
@@ -276,7 +273,15 @@
                     <!--End of Grid Definitions-->
                     <!--Product Data Grid-->
                     <DataGrid Name="dgProduct" IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                              ItemsSource="{Binding}" IsReadOnly="True">
+                              ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                            <DataGridTextColumn Header="Unit" Binding="{Binding UnitOfMeasurement}"/>
+                            <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice}" />
+                            <DataGridTextColumn Header="Delivery Charge Per Unit" Binding="{Binding DeliveryChargePerUnit}"/>
+                            <DataGridTextColumn Header="Active" Binding="{Binding Active}"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
                     <!--Product Controls Grid-->
@@ -322,7 +327,6 @@
                     <DataGrid x:Name="dgProductLots" Grid.Row="0"  Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
                                AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_Mouse_Double_Click" Grid.ColumnSpan="3" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ProductLotId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Product" Width="2*" Binding="{Binding ProductName}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Warehouse" Width="*" Binding="{Binding WarehouseId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Supplier" Width="1.5*" Binding="{Binding SupplierName}"></DataGridTextColumn>
@@ -333,8 +337,6 @@
                             <DataGridTextColumn Header="Date Expiring" Width="2*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grade" Width="*" Binding="{Binding Grade}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"></DataGridTextColumn>
-                            
-
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
@@ -396,8 +398,6 @@
                     <DataGrid Name="dgSuppliers" Grid.Row="1" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
                     	CanUserDeleteRows="False" >
                         <DataGrid.Columns>
-
-                            <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="*"/>
                             <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="*"/>
                             <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddress}" Width="*"/>
                             <DataGridTextColumn Header="City" Binding="{Binding FarmCity}" Width="*"/>
@@ -530,7 +530,6 @@
                       IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
                       CanUserReorderColumns="False" CanUserDeleteRows="False" IsReadOnly="True" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding SupplierID}" Width="50*"/>
                             <DataGridTextColumn Header="Farm Name" Binding="{Binding FarmName}" Width="100*"/>
                             <DataGridTextColumn Header="Farm Address" Binding="{Binding FarmAddressString}" Width="100*"/>
                             <DataGridTextColumn Header="Tax ID" Binding="{Binding FarmTaxID}" Width="75*"/>
@@ -629,7 +628,6 @@
                     <DataGrid ItemsSource="{Binding}" Name="dgOrderLines" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Margin="20,111,0.2,0" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
-                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
                             <DataGridTextColumn Header="Price" Binding="{Binding TotalPrice}" Width="*"/>
                         </DataGrid.Columns>
@@ -701,13 +699,11 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Supplier Pickup Data Grid -->
-                    <DataGrid x:Name="dgSupplierPickup" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
+                    <DataGrid Name="dgSupplierPickup" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
                                AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Supplier Name" Width="200" Binding="{Binding SupplierName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Supplier ID" Width="150" Binding="{Binding SupplierId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Order ID" Width="150" Binding="{Binding CompanyOrderID}"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
@@ -761,18 +757,15 @@
                     </Grid>
                     <!--End of Open Orders Grid-->
                     <!--List View Open Orders-->
-                    <ListView Name="lvOpenOrders" Grid.Row="1"  MouseDoubleClick="lvOpenOrders_Mouse_Double_Click" SelectionChanged="lvOpenOrders_SelectionChanged">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="120" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
-                                <GridViewColumn Width="120" Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}"/>
-                                <GridViewColumn Width="200" Header="Order Date" DisplayMemberBinding="{Binding OrderDate}"/>
-                                <GridViewColumn Width="200" Header="Date Expected" DisplayMemberBinding="{Binding DateExpected}"/>
-                                <GridViewColumn Width="200" Header="Order Status" DisplayMemberBinding="{Binding OrderStatusId}"/>
-                                
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <DataGrid Name="lvOpenOrders" IsReadOnly="True" GridLinesVisibility="Horizontal" Grid.Row="1"  MouseDoubleClick="lvOpenOrders_Mouse_Double_Click" SelectionChanged="lvOpenOrders_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="120" Header="Order Id" Binding="{Binding OrderId}"/>
+                            <DataGridTextColumn Width="120" Header="Customer Id" Binding="{Binding CustomerId}"/>
+                            <DataGridTextColumn Width="200" Header="Order Date" Binding="{Binding OrderDate}"/>
+                            <DataGridTextColumn Width="200" Header="Date Expected" Binding="{Binding DateExpected}"/>
+                            <DataGridTextColumn Width="200" Header="Order Status" Binding="{Binding OrderStatusId}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <!--End of List View Open Orders-->
                     <!--Open Orders Bottom Grid-->
                     <Grid Grid.Row="2" Background="#FFE5E5E5">
@@ -879,7 +872,18 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Vehicle Data Grid-->
-                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_Mouse_Double_Click">
+                    <DataGrid Name="dgVehicle" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" IsSynchronizedWithCurrentItem="True"  SelectionMode="Single" IsReadOnly="True" MouseDoubleClick="dgVehicle_Mouse_Double_Click" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="VIN" Binding="{Binding VIN}"/>
+                            <DataGridTextColumn Header="Make" Binding="{Binding Make}"/>
+                            <DataGridTextColumn Header="Mileage" Binding="{Binding Mileage}"/>
+                            <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                            <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+                            <DataGridTextColumn Header="Vehicle Type" Binding="{Binding VehicleTypeID}"/>
+                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}"/>
+                            <DataGridCheckBoxColumn Header="Checked Out" Binding="{Binding CheckedOut}"/>
+                            <DataGridTextColumn Header="Last Checkout Time" Binding="{Binding CheckedOutTimeDate}"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Vehicle Data Grid-->
                     <!--Vehicle Management Control Grid-->
@@ -918,18 +922,14 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Deliveries List View-->
-                    <ListView Name="lvDeliveries" MouseDoubleClick="lvDeliveries_Mouse_Double_Click">
-                        <ListView.View>
-                            <GridView>
-                                <GridView.Columns>
-                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding DeliveryDate}"/>
-                                    <GridViewColumn Header="VehicleId" Width="60" DisplayMemberBinding="{Binding VehicleId}"/>
-                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding StatusId}"/>
-                                    <GridViewColumn Header="DeliveryType" Width="75" DisplayMemberBinding="{Binding DeliveryTypeId}"/>
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <DataGrid Name="lvDeliveries" IsReadOnly="True" GridLinesVisibility="Horizontal" MouseDoubleClick="lvDeliveries_Mouse_Double_Click">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Date" Binding="{Binding DeliveryDate}"/>
+                            <DataGridTextColumn Header="VIN" Width="60" Binding="{Binding VehicleId}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding StatusId}"/>
+                            <DataGridTextColumn Header="Delivery Type" Width="75" Binding="{Binding DeliveryTypeId}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <!--End of Deliveries List View-->
                 </Grid>
                 <!--End of Deliveries Grid-->
@@ -950,17 +950,14 @@
                     </Grid.RowDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Routes List View-->
-                    <ListView Name="lvRoutes" >
-                        <ListView.View>
-                            <GridView>
-                                <GridView.Columns>
-                                    <GridViewColumn Header="Driver" Width="150" DisplayMemberBinding="{Binding Driver}"/>
-                                    <GridViewColumn Header="Vehicle ID" Width="150" DisplayMemberBinding="{Binding VehicleId}"/>
-                                    <GridViewColumn Header="Assigned Date" Width="150" DisplayMemberBinding="{Binding AssignedDate}"/>
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <DataGrid Name="dgRoutes" GridLinesVisibility="Horizontal" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Driver" Width="150" Binding="{Binding Driver}"/>
+                            <DataGridTextColumn Header="Vehicle" Width="150" Binding="{Binding VehicleId}"/>
+                            <DataGridTextColumn Header="Assigned Date" Width="*" Binding="{Binding AssignedDate}"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <!--End of Routes List View-->
                     <!--Routes Buttons Grid-->
                     <Grid Grid.Row="1" Background="#FFE5E5E5">
