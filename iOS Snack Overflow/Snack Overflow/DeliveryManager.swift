@@ -52,7 +52,7 @@ class DeliveryManager : NSObject{
             do{
                 if let jsonData = data, let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? Bool{
                     let result = jsonObject
-                    completion(result,"Test")
+                    completion(result,"Success")
                 }
                 
             }catch{
