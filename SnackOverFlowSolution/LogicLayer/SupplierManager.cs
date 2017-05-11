@@ -363,6 +363,30 @@ namespace LogicLayer
         }
 
         /// <summary>
+        /// Skyler Hiscock
+        /// Created:
+        /// 2017/05/11
+        /// 
+        /// Returns a list a supplier's agreements with product name included
+        /// </summary>
+        /// 
+        /// <returns></returns>
+        public List<AgreementWithProductName> RetrieveAgreementsBySupplierID(int supplierID)
+        {
+            var suppliersWithAgreements = new List<AgreementWithProductName>();
+
+            try
+            {
+                suppliersWithAgreements = AgreementAccessor.RetrieveAgreementsWithProductNameBySupplierId(supplierID);
+            }
+            catch
+            {
+            }
+            suppliersWithAgreements = suppliersWithAgreements.GroupBy(s => s.ProductName).Select(s => s.First()).ToList();
+            return suppliersWithAgreements;
+        }
+
+        /// <summary>
         /// Christian Lopez
         /// 2017/04/27
         /// 

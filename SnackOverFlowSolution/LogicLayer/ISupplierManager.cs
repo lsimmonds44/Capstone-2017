@@ -115,6 +115,19 @@ namespace LogicLayer
         SupplierWithAgreements RetrieveSupplierWithAgreementsByUserId(int userId);
 
 
+
+        /// <summary>
+        /// Skyler Hiscock
+        /// Created:
+        /// 2017/05/11
+        /// 
+        /// Method signature to retrieve a list of AgreementWithProductName
+        /// </summary>
+        /// 
+        /// <returns></returns>
+        List<AgreementWithProductName> RetrieveAgreementsBySupplierID(int supplierID);
+
+
         bool DenySupplier(Supplier _supplier, int _userid);
 
         bool ApproveSupplier(Supplier _supplier, int _userid);

@@ -1708,13 +1708,13 @@ namespace WpfPresentationLayer
         private void StartOrderClick(object sender, RoutedEventArgs e)
         {
             // var supplierOrder = validateOrder();
+            int supplierID = 0;
             if (btnStartOrder.Content.ToString() == "Start Order")
             {
                 if (txtSupplierID.Text.Count() == 5)
                 {
                     try
                     {
-                        int supplierID;
                         int.TryParse(txtSupplierID.Text, out supplierID);
                         int empId = (int)_employee.EmployeeId;
                         txtOrderNumber.Text = _supplierOrderManager.createSupplierOrder(supplierID, empId).ToString();
@@ -1728,7 +1728,7 @@ namespace WpfPresentationLayer
                     {
                         SupplierProductLotManager supplierProduct = new SupplierProductLotManager();
 
-                        List<Product> _productLots = _productManager.RetrieveProducts();
+                        var _productLots = _supplierManager.RetrieveAgreementsBySupplierID(supplierID);
                         if (_productLots.Count < 1)
                         {
                             MessageBox.Show("No available products");
@@ -1737,7 +1737,7 @@ namespace WpfPresentationLayer
                         {
                             foreach (var product in _productLots)
                             {
-                                cboProducts.Items.Add(product);
+                                cboProducts.Items.Add(product.ProductName);
                             }
                         }
                     }
@@ -1846,8 +1846,7 @@ namespace WpfPresentationLayer
         /// <param name="e"></param>
         private void productSelected(object sender, EventArgs e)
         {
-            _selectedProduct = (Product)cboProducts.SelectedItem;
-
+            _selectedProduct = _productManager.RetrieveProducts().Find(p => p.Name == cboProducts.SelectedItem.ToString());
         }
 
         /// <summary>
