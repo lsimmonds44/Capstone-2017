@@ -3339,6 +3339,8 @@ namespace WpfPresentationLayer
             try
             {
                 dgSupplierPickup.ItemsSource = _companyOrderManager.RetrieveCompanyOrders();
+    
+                
                 IDriverManager _driverManager = new DriverManager();
                 List<Driver> drivers = _driverManager.RetrieveAllDrivers();
                 cboDrivers.Items.Clear();
@@ -3348,14 +3350,20 @@ namespace WpfPresentationLayer
                     
                     cboDrivers.Items.Add(driverUser);
                 }
+                refreshPickups();
+
             }
-            catch (Exception)
+
+            catch (Exception ex)
             {
                 
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
         
+
+
+
         /// <summary>
         /// Laura Simmonds
         /// Created:
@@ -3380,6 +3388,7 @@ namespace WpfPresentationLayer
                 pickup.DriverId = _employeeManager.RetrieveEmployeeByUserName(selectedDriver.UserName).EmployeeId;
                 pickup.CompanyOrderId = selectedOrder.CompanyOrderID;
                 pickup.WarehouseId = 10000;
+                
                 PickupLine pLine;
                 try
                 {
@@ -3397,7 +3406,7 @@ namespace WpfPresentationLayer
                         pLine.PickupLineId = _pickupManager.CreatePickupLine(pLine);
                     }
 
-
+                    refreshPickups();
                     MessageBox.Show("Pickup: " + pickupId + " has been assigned to " + selectedDriver);
                 }
                 catch (Exception ex)
@@ -3408,6 +3417,22 @@ namespace WpfPresentationLayer
             }
         }
 
+        private void driverSelected(object sender, EventArgs e)
+        {
+            refreshPickups();
+        }
+
+        private void refreshPickups()
+        {
+            try
+            {
+                dgAssignedPickups.ItemsSource = _pickupManager.RetrieveUnpickedupPickupsForDriver(_employeeManager.RetrieveEmployeeByUserName(((User)cboDrivers.SelectedItem).UserName).EmployeeId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         
     } // end of class
 } // end of namespace 

@@ -696,19 +696,31 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Supplier Pickup Data Grid -->
                     <DataGrid Name="dgSupplierPickup" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
                                AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Supplier Name" Width="200" Binding="{Binding SupplierName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Order ID" Width="150" Binding="{Binding CompanyOrderID}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier Name" Width="*" Binding="{Binding SupplierName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Order ID" Width="*" Binding="{Binding CompanyOrderID}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
+                    <DataGrid Name="dgAssignedPickups" Grid.Row="0" Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Order ID" Width="*" Binding="{Binding CompanyOrderId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier ID" Width="*" Binding="{Binding SupplierId}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Driver ID" Width="*" Binding="{Binding DriverId}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Pickup ID" Width="*" Binding="{Binding PickupId}">
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <!--Supplier Pickup Controls Grid-->
-                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                    <Grid Background="#FFE5E5E5" Grid.Row="1" Grid.ColumnSpan="2">
                         <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -724,7 +736,7 @@
                         <!--End of Grid Definitions-->
                         <!--Supplier Pickup Controls-->
                         <Button Name="btnAssignToDriver" Grid.Row="0" Grid.Column="2" Content="Assign to Driver" Margin="10 0 5 0" VerticalAlignment="Top" Click="btnAssignDriver" />
-                        <ComboBox Name="cboDrivers" Grid.Row="0" Grid.Column="1" Width="200"></ComboBox>
+                        <ComboBox Name="cboDrivers" Grid.Row="0" Grid.Column="1" Width="200" SelectedIndex="0" DropDownClosed="driverSelected"></ComboBox>
                     </Grid>
                     <!--End of Supplier Pickup Controls Grid-->
                 </Grid>
