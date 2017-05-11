@@ -157,6 +157,13 @@ namespace LogicLayer
         /// Created 2017/03/03
         /// 
         /// Logic for returning a list of suppliers.
+        /// 
+        /// Update 
+        /// Bobby Thorne
+        /// 5/10/2017
+        /// 
+        /// Added a foreach loop to fill an ApprovedByName
+        /// to be used in the supplier datagrid 
         /// </summary>
         /// <returns></returns>
         public List<Supplier> ListSuppliers()
@@ -178,16 +185,6 @@ namespace LogicLayer
                         User user = userManager.RetrieveUser((int)employeeManager.RetrieveEmployee((int)supplier.ApprovedBy).UserId);
                         supplier.ApprovedByName = user.LastName + ", " + user.FirstName; 
                     }
-
-                //        int lotSupplierid = (int)lot.SupplierId;
-                //        Supplier supplier = supplierManager.RetrieveSupplierBySupplierID(lotSupplierid);
-                //        lot.SupplierName = supplier.FarmName;
-                //    }
-                //    catch
-                //    {
-                //        lot.SupplierName = "Unable to find farm name";
-
-
                 }
             }
             catch (SqlException ex)

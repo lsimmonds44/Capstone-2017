@@ -26,6 +26,12 @@ namespace DataObjects
     /// 2017/04/29
     /// 
     /// Standarized Comment
+    /// 
+    /// Update
+    /// Bobby Thorne
+    /// 5/10/2017
+    /// Added ApprovedByName to be used in the datagrid
+    /// instead of the approved by id
     /// </remarks>
     public class Supplier
     {
@@ -58,6 +64,7 @@ namespace DataObjects
         public bool Active { get; set; }
 
         public string ApprovedByName { get; set; }
+
         /// <summary>
         /// Skyler Hiscock
         /// created:

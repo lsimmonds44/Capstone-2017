@@ -44,6 +44,12 @@ namespace LogicLayer
         /// Retrieves a list of all commercial customers
         /// If succesful returns list
         /// If unsuccesful throws error
+        /// 
+        /// Update 
+        /// Bobby Thorne
+        /// 5/7/2017
+        /// Adds an ApprovedByName to the CommercailCustomer
+        /// To fill the datagrid.
         /// </summary>
         /// <returns></returns>
         public List<CommercialCustomer> RetrieveCommercialCustomers()

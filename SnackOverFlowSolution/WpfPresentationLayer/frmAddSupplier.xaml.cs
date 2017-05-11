@@ -43,6 +43,12 @@ namespace WpfPresentationLayer
         /// Created on 2017/01/31
         /// 
         /// Constructor for the form
+        /// 
+        /// Update
+        /// Bobby Thorne
+        /// 5/11/2017
+        /// 
+        /// Hide the submit button when in view mode
         /// </summary>
         /// <param name="currentEmp">The current User</param>
         /// <param name="userManager">Something implementing the IUserManager interface</param>
