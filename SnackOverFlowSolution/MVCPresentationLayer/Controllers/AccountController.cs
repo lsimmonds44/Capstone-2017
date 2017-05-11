@@ -824,7 +824,12 @@ namespace MVCPresentationLayer.Controllers
             }
             try
             {
-                usr = _appUserManager.RetrieveUserByUserName(userFound.UserName);
+                if (_appUserManager.AuthenticateUser(model.UserName, model.Password))
+                {
+                    usr = _appUserManager.RetrieveUserByUserName(model.UserName);
+                }
+                //usr = _appUserManager.RetrieveUserByUserName(userFound.UserName);
+                
             }
             catch (Exception ex)
             {
@@ -835,6 +840,13 @@ namespace MVCPresentationLayer.Controllers
             var user = context.Users.FirstOrDefault(x => x.Email == model.UserName) ??
                        context.Users.FirstOrDefault(x => x.UserName == model.UserName);
 
+            if (user == null || usr == null)
+            {
+                model.Password = "";
+                ModelState.AddModelError("Password", "Incorrect username or password");
+                return false;
+            }
+
             //Force email
             if (user != null && usr.EmailAddress != null)
             {
@@ -842,17 +854,17 @@ namespace MVCPresentationLayer.Controllers
 
             }
 
-            if (null == userFound)
-            {
-                model.Password = "";
-                ModelState.AddModelError("Password", "Incorrect username or password");
-            }
+            //if (null == userFound)
+            //{
+            //    model.Password = "";
+            //    ModelState.AddModelError("Password", "Incorrect username or password");
+            //}
 
             //var identityUserRoles = user.Roles;
             //if (identityUserRoles.Count != 0)
             //    return true;
 
-            if (null != userFound)
+            if (null != usr)
             {
                 var identityUserRoles = user.Roles;
                 if (identityUserRoles.Count != 0)
@@ -861,7 +873,7 @@ namespace MVCPresentationLayer.Controllers
                 bool[] roles = null;
                 try
                 {
-                    roles = _appUserManager.GetUserRoles(userFound.UserId);
+                    roles = _appUserManager.GetUserRoles(usr.UserId);
                 }
                 catch (Exception ex)
                 {
