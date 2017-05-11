@@ -72,6 +72,9 @@ namespace WpfPresentationLayer
 
                 _type = type;
                 supplierFound = true;
+                btnSubmit.Visibility = Visibility.Collapsed;
+                btnCancel.HorizontalAlignment = HorizontalAlignment.Center;
+                
             }
             
             _usernames = _userManager.RetrieveFullUserList().Select(u => u.UserName).ToList();

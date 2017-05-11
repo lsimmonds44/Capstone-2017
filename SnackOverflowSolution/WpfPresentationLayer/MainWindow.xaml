@@ -26,21 +26,21 @@
         <!--Menu Group Controls -->
         <Menu Grid.Row="0" Background="#FF7A876F" Foreground="White">
             <MenuItem  Header="File" >
-                <MenuItem Name="mnuQuit" Header="Quit" HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
+                <MenuItem Name="mnuQuit" Header="Quit" Background="#FF7A876F"  HorizontalAlignment="Left" Width="120" Click="mnuQuit_Click"/>
             </MenuItem>
             <MenuItem Header="Edit" >
-                <MenuItem Name="mnuPrefernces" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuPrefernces" Header="Preferences" Background="#FF7A876F" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="User Settings">
-                <MenuItem Name="mnuRequestUsername" Header="Request Username" Click="mnuRequestUsername_OnClick" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuRequestUsername" Header="Request Username" Background="#FF7A876F"  Click="mnuRequestUsername_OnClick" HorizontalAlignment="Left" Width="Auto"/>
                 <MenuItem Name="mnuChangePassword" Header="Change Password" Visibility="Collapsed" Click="mnuChangePassword_OnClick" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Help" >
-                <MenuItem Name="mnuHelp" Header="Help" HorizontalAlignment="Left" Width="Auto"/>
-                <MenuItem Name="mnuAbout" Header="About" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuHelp" Header="Help" Background="#FF7A876F"  HorizontalAlignment="Left" Width="118"/>
+                <MenuItem Name="mnuAbout" Header="About" Background="#FF7A876F"  HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Inventory Settings" >
-                <MenuItem Name="mnuPreferences" Click="MnuPreferences_OnClick" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
+                <MenuItem Name="mnuPreferences" Background="#FF7A876F"  Click="MnuPreferences_OnClick" Header="Preferences" HorizontalAlignment="Left" Width="Auto"/>
             </MenuItem>
         </Menu>
         <!--End of Menu Controls-->
@@ -84,7 +84,7 @@
             <!--Commercial Customer Tab Controls -->
             <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Margin="0" Width="Auto" GotFocus="tabCommercialCustomer_GotFocus"  >
                 <!--Commercial Customer Tab Grid-->
-                <Grid>
+                <Grid >
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -100,12 +100,13 @@
                     <!--Customer Date Grid-->
                     <DataGrid Name="dgCustomer" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" SelectionChanged="Customer_Selected" Grid.ColumnSpan="4">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" Width="*"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
-                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FederalTaxId}" Width="*"/>
-                            <DataGridCheckBoxColumn Header="Approved" Binding="{Binding IsApproved}" Width="auto"/>
-                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedByName}" Width="*"/>
+                            <DataGridTextColumn Header="Commercial ID" Binding="{Binding CommercialId}" MaxWidth="100" Width="*"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding name}" MaxWidth="200" Width="*"/>
+                            <DataGridTextColumn Header="Federal Tax ID" Binding="{Binding FederalTaxId}" MaxWidth="200" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Approved" Binding="{Binding IsApproved}" MaxWidth="200" Width="auto"/>
+                            <DataGridTextColumn Header="Approved By" Binding="{Binding ApprovedByName}" MaxWidth="200" Width="*"/>
                             <DataGridCheckBoxColumn Header="Active" Binding="{Binding Active}" Width="auto"/>
+                            <DataGridTextColumn Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Customer Data Grid -->
@@ -155,7 +156,7 @@
                     <DataGrid Name="dgUsers" ItemsSource="{Binding}" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="*"/>
-                            <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*"/>
+                            <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"  Width="*"/>
                             <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
                             <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*"/>
                             <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
@@ -193,11 +194,11 @@
             <!--Charity Tab-->
             <TabItem Header="Charity" Selector.Selected="tabCharity_Selected">
                 <!--Charity Grid-->
-                <Grid>
+                <Grid Background="#FFE5E5E5">
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="8*"></RowDefinition>
-                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -211,6 +212,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="80"  Header="ID" Binding="{Binding CharityID}"></DataGridTextColumn >
                             <DataGridTextColumn Width="150" Header="Name" Binding="{Binding CharityName}"></DataGridTextColumn >
+                            <DataGridTextColumn Width="*"/>
                             <!--<DataGridTextColumn Width="100" Header="Status" Binding="{Binding Status}"></DataGridTextColumn >-->
                         </DataGrid.Columns>
                     </DataGrid>
@@ -226,34 +228,35 @@
             <!--Employee Tab-->
             <TabItem Header="Employee" Name="tabEmployee"  Selector.Selected="tabEmployee_Selected">
                 <!--Employee Grid-->
-                <Grid Name="grdEmployee">
+                <Grid Name="grdEmployee" Background="#FFE5E5E5">
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="8*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+               
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="296*"></ColumnDefinition>
-                        <ColumnDefinition Width="12*"></ColumnDefinition>
-                        <ColumnDefinition Width="285*"/>
-                        <ColumnDefinition Width="296*"></ColumnDefinition>
-                        <ColumnDefinition Width="297*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Employee Data Grid-->
-                    <DataGrid Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  Grid.ColumnSpan="5" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  Grid.ColumnSpan="3" Name="dgEmployee" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Grid.RowSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" Width="100"/>
-                            <DataGridTextColumn Header="UserID" Binding="{Binding EmployeeName}" Width="100"/>
-                            <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" Width="100"/>
-                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" Width="50"/>
-                            <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}" Width="150"/>
+                            <DataGridTextColumn Header="EmployeeID" Binding="{Binding EmployeeId}" MinWidth="100" Width="auto"/>
+                            <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" MinWidth="200" Width="auto"/>
+                            <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" MinWidth="100" Width="auto"/>
+                            <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}" MinWidth="150" Width="auto"/>
+                            <DataGridTextColumn Header="Active" Binding="{Binding Active}" MinWidth="50" Width="auto"/>
+                            <DataGridTextColumn Width="*"/>
+                            
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Employee Data Grid-->
                     <!--Employee Controls-->
-                    <Button Name="btnAddEmployee" Grid.Row="1" Grid.Column="3" Width="180" Margin="58,0" VerticalAlignment="Bottom" Click="btnAddEmployee_Click">Add</Button>
-                    <Button Grid.Row="1" Grid.Column="4" Content="Update Employee Information" Width="180" Margin="59,0,58,0" VerticalAlignment="Bottom" Click="Update_Employee_Button_Click"  />
+                    <Button Name="btnAddEmployee" Grid.Row="2" Grid.Column="1" Width="auto" Margin="10 0 0 0" VerticalAlignment="Bottom" Content="Add Employee" Click="btnAddEmployee_Click" />
+                    <Button Grid.Row="2" Grid.Column="2" Content="Update Employee Information" Width="180" Margin="10 0 0 0" VerticalAlignment="Bottom" Click="Update_Employee_Button_Click"  />
                 </Grid>
                 <!--End of Employee Grid-->
             </TabItem>
@@ -310,17 +313,19 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="210*"/>
+                        <ColumnDefinition Width="1047*"/>
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Product Lot Data Grid -->
-                    <DataGrid x:Name="dgProductLots" Grid.Row="0" Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
-                               AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_Mouse_Double_Click" >
+                    <DataGrid x:Name="dgProductLots" Grid.Row="0"  Grid.Column="0" GridLinesVisibility="Horizontal"  SelectionMode="Extended"
+                               AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dgProductLots_Mouse_Double_Click" Grid.ColumnSpan="3" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ProductLotId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Product" Width="2*" Binding="{Binding ProductName}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Warehouse" Width="*" Binding="{Binding WarehouseId}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Supplier" Width="*" Binding="{Binding SupplierId}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Supplier" Width="1.5*" Binding="{Binding SupplierName}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Location" Width="*" Binding="{Binding LocationId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Supply Manager" Width="2*" Binding="{Binding SupplyManagerId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity}"></DataGridTextColumn>
@@ -328,11 +333,13 @@
                             <DataGridTextColumn Header="Date Expiring" Width="2*" Binding="{Binding ExpirationDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grade" Width="*" Binding="{Binding Grade}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"></DataGridTextColumn>
+                            
+
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
                     <!--Product Lot Controls Grid-->
-                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                    <Grid Background="#FFE5E5E5" Grid.Row="1" Grid.ColumnSpan="3">
                         <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -418,10 +425,10 @@
                         <!--End of Grid Definitions-->
                         <!--Suppliers Controls-->
                         <Button Name="btnSupplierApproval" Grid.Row="0" Grid.Column="1" Content="Supplier Approval" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnSupplierApproval_Click"/>
-                        <Button Name="btnViewOpenApps" Grid.Row="0" Grid.Column="3" Content="View Application Details" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnViewOpenApps_Click" Height="22" VerticalAlignment="Bottom"/>
+                        <Button Name="btnViewOpenApps" Grid.Row="0" Grid.Column="3" Content="View Application Details" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnViewOpenApps_Click" VerticalAlignment="Bottom"/>
                         <Button Name="btnAddSupplier" Grid.Row="0" Grid.Column="4" Content="Create Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnCreateSupplier_Click"/>
-                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="5" Content="Edit Supplier" Margin="10 0 5 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
-                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="2" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" Height="20" VerticalAlignment="Top" />
+                        <Button Name="btnEditSupplier" Grid.Row="0" Grid.Column="5" Content="Edit Supplier" Margin="10 0 0 0" HorizontalAlignment="left" Click="btnEditSupplier_Click"/>
+                        <Button Name="btnApplyForSupplierAct" Grid.Row="0" Grid.Column="2" Content="Apply for Account" Margin="10,0,0,0" HorizontalAlignment="Left" Click="btnApplyForSupplierAct_Click" VerticalAlignment="Top" />
                         <!--End of Suppliers Controls-->
                     </Grid>
                     <!--End of Suppliers Controls Grid-->
@@ -700,6 +707,7 @@
                             <DataGridTextColumn Header="Supplier Name" Width="200" Binding="{Binding SupplierName}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Supplier ID" Width="150" Binding="{Binding SupplierId}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Order ID" Width="150" Binding="{Binding CompanyOrderID}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Product Data Grid-->
@@ -728,17 +736,16 @@
             </TabItem>
             <!--End of Supplier Pickup Tab-->
             <!--Open Orders Tab-->
-            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabOpenOrders_Selected">
+            <TabItem Name="tabOpenOrders" Header="Open Orders" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabOpenOrders_Selected">
                 <Grid Margin="0">
                     <!--Open Orders Grid-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Open Order Top Controls Grid-->
@@ -754,7 +761,7 @@
                     </Grid>
                     <!--End of Open Orders Grid-->
                     <!--List View Open Orders-->
-                    <ListView Name="lvOpenOrders" Grid.Row="1" Margin="10,10,10,39" MouseDoubleClick="lvOpenOrders_Mouse_Double_Click" SelectionChanged="lvOpenOrders_SelectionChanged">
+                    <ListView Name="lvOpenOrders" Grid.Row="1"  MouseDoubleClick="lvOpenOrders_Mouse_Double_Click" SelectionChanged="lvOpenOrders_SelectionChanged">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="120" Header="Order Id" DisplayMemberBinding="{Binding OrderId}"/>
@@ -762,24 +769,25 @@
                                 <GridViewColumn Width="200" Header="Order Date" DisplayMemberBinding="{Binding OrderDate}"/>
                                 <GridViewColumn Width="200" Header="Date Expected" DisplayMemberBinding="{Binding DateExpected}"/>
                                 <GridViewColumn Width="200" Header="Order Status" DisplayMemberBinding="{Binding OrderStatusId}"/>
+                                
                             </GridView>
                         </ListView.View>
                     </ListView>
                     <!--End of List View Open Orders-->
                     <!--Open Orders Bottom Grid-->
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Background="#FFE5E5E5">
                         <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
                             <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Open Order Bottom Controls-->
-                        <Button Name="btnCreateDeliveries" Grid.Column="1" Margin="5" Content="Create Deliveries" Click="btnCreateDeliveries_Click"/>
+                        <Button Name="btnCreateDeliveries" Grid.Column="1"  Content="Create Deliveries" Click="btnCreateDeliveries_Click"/>
                     </Grid>
                     <!--Open Orders Bottom Controls Grid-->
                     <!--Open Orders Status Control-->
-                    <Label Name="lblStatus" Grid.Row="3" Content="Status: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="552"/>
+                    <Label Name="lblStatus" Grid.Row="0" Content="Status: " HorizontalAlignment="right" VerticalAlignment="Top" Width="552"/>
                     <!--End of Open Orders Status Control-->
                 </Grid>
                 <!--End of Open Orders Grid-->
@@ -910,7 +918,7 @@
                     </Grid.ColumnDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Deliveries List View-->
-                    <ListView Name="lvDeliveries" Margin="10 10 10 39" MouseDoubleClick="lvDeliveries_Mouse_Double_Click">
+                    <ListView Name="lvDeliveries" MouseDoubleClick="lvDeliveries_Mouse_Double_Click">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -938,11 +946,11 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <!--End of Grid Definitions-->
                     <!--Routes List View-->
-                    <ListView Name="lvRoutes" Margin="10">
+                    <ListView Name="lvRoutes" >
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -955,15 +963,15 @@
                     </ListView>
                     <!--End of Routes List View-->
                     <!--Routes Buttons Grid-->
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Background="#FFE5E5E5">
                         <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
                             <ColumnDefinition />
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
 
-                        <Button Name="btnCreateRoute" Grid.Column="2" Margin="5" Content="Create Route" Click="btnCreateRoute_Click"  />
+                        <Button Name="btnCreateRoute" Grid.Column="2" Content="Create Route" Click="btnCreateRoute_Click"  />
                     </Grid>
                     <!--End of Routes Buttons Grid-->
                 </Grid>
@@ -972,7 +980,7 @@
             <!--End of Routes Tab-->
 
             <!--Pickups Tab-->
-            <TabItem Name="tabPickups" Header="Pickups" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabPickups_Selected" >
+            <TabItem Name="tabPickups" Header="Pickups" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabPickups_Selected" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -986,10 +994,11 @@
                               IsSynchronizedWithCurrentItem="True" GridLinesVisibility="Horizontal" CanUserReorderColumns="False" ItemsSource="{Binding}" CanUserDeleteRows="False" IsReadOnly="True"
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Pickup ID" Binding="{Binding PickupId}" Width="*"/>
-                            <DataGridTextColumn Header="Pickup Item ID" Binding="{Binding PickupLineId}" Width="*"/>
-                            <DataGridTextColumn Header="Product" Binding="{Binding ProductName }" Width="*"/>
-                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                            <DataGridTextColumn Header="Pickup ID" Binding="{Binding PickupId}" Width="auto" MinWidth="150"/>
+                            <DataGridTextColumn Header="Pickup Item ID" Binding="{Binding PickupLineId}" Width="auto" MinWidth="150"/>
+                            <DataGridTextColumn Header="Product" Binding="{Binding ProductName }" Width="auto" MinWidth="150"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="auto" MinWidth="150"/>
+                            <DataGridTextColumn Width="*"/>
                             <!--<DataGridTextColumn Header="Status" Binding="{Binding PickupStatus}" Width="*"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
@@ -998,13 +1007,10 @@
                         <!--Grid Definitions-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
-                        <Button Name="btnCreateLotFromPickup" Grid.Row="1" Grid.Column="4" Margin="15 0 15 0" Content="Create Product Lot" Click="btnCreateLotFromPickup_Click"  />
+                        <Button Name="btnCreateLotFromPickup" Grid.Row="1" Grid.Column="4" Margin="10,0,0,0"  Content="Create Product Lot" Click="btnCreateLotFromPickup_Click"  />
                     </Grid>
                 </Grid>
             </TabItem>
@@ -1012,7 +1018,7 @@
             <!--Warehouse Tab-->
             <TabItem Name="tabWarehouse" Header="Warehouse" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabWarehouse_Selected">
                 <!--Warehouse Grid-->
-                <Grid Background="#FFE5E5E5">
+                <Grid >
                     <!--Grid Definitions-->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -1027,7 +1033,7 @@
                     	ItemsSource="{Binding}" IsReadOnly="True" CanUserDeleteRows="False" />
                     <!--End of warehouse Data Grid-->
                     <!--Warehouse Control Grid-->
-                    <Grid Background="#FFE5E5E5" Grid.Row="1">
+                    <Grid Grid.Row="1" Background="#FFE5E5E5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>

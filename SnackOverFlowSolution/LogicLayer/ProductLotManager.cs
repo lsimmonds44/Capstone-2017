@@ -94,10 +94,23 @@ namespace LogicLayer
             {
                 lots = ProductLotAccessor.RetrieveProductLots();
                 IProductManager productManager = new ProductManager();
+                ISupplierManager supplierManager = new SupplierManager();
                 foreach (var lot in lots)
                 {
                     var productInLot = productManager.RetrieveProductById((int)lot.ProductId);
                     lot.ProductName = productInLot.Name;
+                    try
+                    {
+                        
+                        int lotSupplierid = (int)lot.SupplierId;
+                        Supplier supplier = supplierManager.RetrieveSupplierBySupplierID(lotSupplierid);
+                        lot.SupplierName = supplier.FarmName;
+                    }
+                    catch
+                    {
+                        lot.SupplierName = "Unable to find farm name";
+                    }
+
                 }
             }
             catch (SqlException ex)
