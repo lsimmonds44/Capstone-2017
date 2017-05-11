@@ -3355,6 +3355,7 @@ namespace WpfPresentationLayer
                 throw;
             }
         }
+        
         /// <summary>
         /// Laura Simmonds
         /// Created:
@@ -3379,17 +3380,31 @@ namespace WpfPresentationLayer
                 pickup.DriverId = _employeeManager.RetrieveEmployeeByUserName(selectedDriver.UserName).EmployeeId;
                 pickup.CompanyOrderId = selectedOrder.CompanyOrderID;
                 pickup.WarehouseId = 10000;
+                PickupLine pLine;
                 try
                 {
                     pickupId = _pickupManager.CreatePickup(pickup);
+                    List<CompanyOrderLine> companyOrderLines = _companyOrderManager.RetrieveCompanyOrderLinesByOderId(selectedOrder.CompanyOrderID);
+
+                    foreach (CompanyOrderLine coLine in companyOrderLines)
+                    {
+                        pLine = new PickupLine();
+                        pLine.PickupId = pickupId;
+                        pLine.PickupStatus = false;
+                        pLine.ProductId = coLine.ProductId;
+                        pLine.productName = coLine.ProductName;
+                        pLine.Quantity = coLine.Quantity;
+                        pLine.PickupLineId = _pickupManager.CreatePickupLine(pLine);
+                    }
+
+
                     MessageBox.Show("Pickup: " + pickupId + " has been assigned to " + selectedDriver);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
-                    throw;
+                    MessageBox.Show("Error: " + ex.Message);
                 }
-                
+
             }
         }
 
