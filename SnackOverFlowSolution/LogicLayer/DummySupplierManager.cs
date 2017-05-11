@@ -74,6 +74,11 @@ namespace LogicLayer
             throw new NotImplementedException();
         }
 
+        public List<AgreementWithProductName> RetrieveAgreementsBySupplierID(int supplierId)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public SupplierWithAgreements RetrieveSupplierWithAgreementsByUserId(int userId)
         {

@@ -132,9 +132,7 @@ namespace MVCPresentationLayer.Controllers
             lot.SupplierId = sup.SupplierID;
             lot.ExpirationDate = DateTime.Now;
 
-            List<Product> productList = new List<Product>();
-            ProductManager prodMgr = new ProductManager();
-            productList = prodMgr.ListProducts();
+            var productList = supMgr.RetrieveAgreementsBySupplierID(sup.SupplierID);
             ViewBag.products = productList;
            
             return View(lot);
