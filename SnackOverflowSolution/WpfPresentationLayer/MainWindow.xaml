@@ -82,7 +82,7 @@
         <Image Name="MainImage" Grid.Row="2" Visibility="Collapsed" Stretch="UniformToFill" />
         <TabControl Name="tabSetMain" Grid.Row="2" >
             <!--Commercial Customer Tab Controls -->
-            <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Margin="0" Width="Auto" GotFocus="tabCommercialCustomer_GotFocus"  >
+            <TabItem Name="tabCommercialCustomer" Header="Customer" HorizontalAlignment="Left" Margin="0" Width="Auto" GotFocus="tabCommercialCustomer_GotFocus"  Selector.Selected="tabCustomer_Selected">
                 <!--Commercial Customer Tab Grid-->
                 <Grid >
                     <!--Grid Definitions-->
@@ -126,7 +126,7 @@
                         </Grid.RowDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Customer Controls -->
-                        <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerType_Selected" Initialized="cboCustomerType_Initialized" />
+                        <ComboBox Name="cboCustomerType" Grid.Row="0" Grid.Column="2" Width="200" DropDownClosed="cboCustomerType_Selected" Initialized="cboCustomerType_Initialized" Visibility="Collapsed"/>
                         <Button Name="btnCreateOrder" Content="Create Order" Grid.Row="0" Grid.Column="3" Margin="10 0 0 0" HorizontalAlignment="Left" Click="btnCreateOrder_Click" IsEnabled="False"/>
                         <Button Name="btnCreateCCAccount" Grid.Row="0" Grid.Column="4" Content="Create Account" Margin="10 0 0 0" HorizontalAlignment="left"  Click="Create_CommercialCustomer_Button_Click"/>
                         <Button Name="btnEditCCAccount" Grid.Row="0" Grid.Column="5" Content="Edit Account" Margin="10 0 0 0" HorizontalAlignment="left" IsEnabled="False"/>
@@ -437,7 +437,7 @@
             </TabItem>
             <!--End of Suppliers tab -->
             <!--Supplier Catalog Tab-->
-            <TabItem Name="tabSupplierCatalog" Header="Supplier Catalog" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierCatalog_Selected">
+            <TabItem Name="tabSupplierCatalog" Header="Supplier Catalog" HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="Auto" Selector.Selected="tabSupplierCatalog_Selected" Visibility="Collapsed">
                 <Grid Background="#FFE5E5E5">
                     <!--Grid Definitions-->
                     <Grid.ColumnDefinitions>
@@ -629,7 +629,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding TotalPrice}" Width="*"/>
+                            <!--<DataGridTextColumn Header="Price" Binding="{Binding TotalPrice}" Width="*"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
                     <!--End of Order Lines Data Grid-->

@@ -43,7 +43,7 @@ CREATE TABLE [dbo].[APP_USER] (
 	[FIRST_NAME]		  [NVARCHAR](150) 							  NOT NULL			,
 	[LAST_NAME]			  [NVARCHAR](100)		 						  	  			,
 	[PHONE]				  [NVARCHAR](15) 							  NOT NULL			,
-	[PREFERRED_ADDRESS_ID][INT]							  						     	,--Will be removed later, but could break things now if it is.
+	[PREFERRED_ADDRESS_ID][INT]							  						     	,
 	[ADDRESS1]	 		  [NVARCHAR](100) 												,
 	[ADDRESS2]	 		  [NVARCHAR](100)											    ,
 	[CITY]		  		  [NVARCHAR](50) 											    ,
@@ -1012,15 +1012,6 @@ ALTER TABLE [dbo].[AGREEMENT] WITH NOCHECK
   ON UPDATE CASCADE
   ON DELETE CASCADE
 GO
-
-/*print '' print '*** Creating Foreign Key APP_USER_PREFERRED_ADDRESS_ID'
-GO
-ALTER TABLE [dbo].[APP_USER] WITH NOCHECK
-  ADD CONSTRAINT[fk_APP_USER_PREFERRED_ADDRESS_ID] FOREIGN KEY ([PREFERRED_ADDRESS_ID])
-  REFERENCES [dbo].[USER_ADDRESS](USER_ADDRESS_ID)
-  ON UPDATE CASCADE
-  ON DELETE CASCADE
-GO*/
 
 print '' print '*** Creating Foreign Key BACKORDER_PREORDER_ORDER_ID'
 GO

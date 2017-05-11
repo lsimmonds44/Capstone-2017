@@ -153,28 +153,28 @@ GO
 INSERT INTO [dbo].[Supplier]
 	(User_ID, IS_Approved, Approved_BY, Farm_Name, Farm_Address, Farm_City, Farm_State, Farm_Tax_ID,Active)
 VALUES
-	(10002,1,10001,'Glasgow Foods', '6309 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
-	(10003,1,10001,'Trapp Foods', '6301 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
-	(10004,1,10001,'Browmich Foods', '6310 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
-	(10005,1,10001,'Hench Foods', '6306 Kirkwood Blvd', "Cedar Rapids", 'IA', '2322',1),
-	(10006,0,null,'Parker Produce', '6321 Kirkwood Blvd', "Cedar Rapids", 'IA', '2452',1),
-	(10007,0,null,'Marion Farms', '6306 Kirkwood Blvd', 'Marion', 'IA', '2782',1)
+	(10002,1,10001,'Glasgow Foods', '6309 Kirkwood Blvd', "Cedar Rapids", 'IA', '232263189',1),
+	(10003,1,10001,'Trapp Foods', '6301 Kirkwood Blvd', "Cedar Rapids", 'IA', '232241967',1),
+	(10004,1,10001,'Browmich Foods', '6310 Kirkwood Blvd', "Cedar Rapids", 'IA', '232229674',1),
+	(10005,1,10001,'Hench Foods', '6306 Kirkwood Blvd', "Cedar Rapids", 'IA', '232219684',1),
+	(10006,0,null,'Parker Produce', '6321 Kirkwood Blvd', "Cedar Rapids", 'IA', '245239607',1),
+	(10007,0,null,'Marion Farms', '6306 Kirkwood Blvd', 'Marion', 'IA', '278296857',1)
 GO
 
 print '*** Inserting Product Test Data ***'
 GO
 INSERT INTO [dbo].[Product_Lot]
-	(Warehouse_ID, Supplier_ID, Location_ID,Product_ID, Supply_Manager_ID, Quantity, Available_Quantity, Date_Received, Expiration_Date, Grade)
+	(Warehouse_ID, Supplier_ID, Location_ID,Product_ID, Supply_Manager_ID, Quantity, Available_Quantity, Date_Received, Expiration_Date, Grade, Price)
 VALUES
-	(10000,10000,10000,10000,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10001,10000,10001,10000,3000,500,'2012-08-08','2120-01-01','Grade B'),
-	(10000,10002,10000,10002,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10003,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10004,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10005,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10006,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10007,10000,3000,500,'2012-08-08','2120-01-01','Grade A'),
-	(10000,10003,10000,10008,10000,3000,500,'2012-08-08','2120-01-01','Grade A')
+	(10000,10000,10000,10000,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10001,10000,10001,10000,3000,500,'2012-08-08','2120-01-01','Grade B', 1),
+	(10000,10002,10000,10002,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10003,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10004,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10005,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10006,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10007,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1),
+	(10000,10003,10000,10008,10000,3000,500,'2012-08-08','2120-01-01','Grade A', 1)
 GO
 
 print '*** Inserting Product_Grade_Price Test Data ***'

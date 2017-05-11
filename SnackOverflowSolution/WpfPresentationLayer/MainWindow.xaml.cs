@@ -85,7 +85,7 @@ namespace WpfPresentationLayer
                  UriKind.RelativeOrAbsolute);
             var uriMain = new Uri(AppDomain.CurrentDomain.BaseDirectory + "../../Images/wpfMainImage.png",
                  UriKind.RelativeOrAbsolute);
-
+            
             //StatusNotification.Content = uri.ToString();
 
             this.Icon = BitmapFrame.Create(uriIcon);
@@ -197,6 +197,13 @@ namespace WpfPresentationLayer
             {
                 datagrid.Items.Refresh();
             }
+            refreshCustomerList();
+            refreshPickups();
+        }
+
+        private void tabCustomer_Selected(object sender, RoutedEventArgs e)
+        {
+            refreshCustomerList();
         }
 
         /// <summary>
@@ -3344,6 +3351,7 @@ namespace WpfPresentationLayer
                 IDriverManager _driverManager = new DriverManager();
                 List<Driver> drivers = _driverManager.RetrieveAllDrivers();
                 cboDrivers.Items.Clear();
+                dgAssignedPickups.ItemsSource = null;
                 foreach (Driver driver in drivers)
                 {
                     User driverUser = _userManager.RetrieveUser((int)_employeeManager.RetrieveEmployee((int)driver.DriverId).UserId);
@@ -3357,7 +3365,7 @@ namespace WpfPresentationLayer
             catch (Exception ex)
             {
                 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
         }
         
@@ -3426,11 +3434,15 @@ namespace WpfPresentationLayer
         {
             try
             {
-                dgAssignedPickups.ItemsSource = _pickupManager.RetrieveUnpickedupPickupsForDriver(_employeeManager.RetrieveEmployeeByUserName(((User)cboDrivers.SelectedItem).UserName).EmployeeId);
+                if (cboDrivers.SelectedItem != null)
+                {
+                    dgAssignedPickups.ItemsSource = _pickupManager.RetrieveUnpickedupPickupsForDriver(_employeeManager.RetrieveEmployeeByUserName(((User)cboDrivers.SelectedItem).UserName).EmployeeId);
+                }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
         
