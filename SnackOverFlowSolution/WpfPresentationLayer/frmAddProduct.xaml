@@ -130,7 +130,7 @@
                         </Grid.ColumnDefinitions>
                         <!--End of Grid Definitions-->
                         <!--Product Description Controls-->
-                        <TextBox Name="txtProductDescription" Height="120" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 0"/>
+                        <TextBox Name="txtProductDescription" Height="120" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 0 0 0" TextWrapping="Wrap"/>
                         <!--End of Product Description Controls-->
                     </Grid>
                     <!--End of Product Description Grid-->

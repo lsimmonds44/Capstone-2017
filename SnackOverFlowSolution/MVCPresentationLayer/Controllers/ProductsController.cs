@@ -27,7 +27,6 @@ namespace MVCPresentationLayer.Controllers
         private IUserCartManager _userCartManager;
         private IProductOrderManager _orderManager;
 
-        public int PageSize = 10; // change in v2?
 
         /// <summary>
         /// Ariel Sigo
@@ -63,6 +62,9 @@ namespace MVCPresentationLayer.Controllers
         /// <returns>View(ProductS)</returns>
         public ActionResult Index(string category, string search = "", int page = 1)
         {
+
+
+            int PageSize = 9; // change in v2?
 
             var productsList = _productManager.RetrieveProductsToBrowseProducts();
 
@@ -134,7 +136,8 @@ namespace MVCPresentationLayer.Controllers
             {
                 return HttpNotFound();
             }
-            if (errored.Equals("runout")) {
+            if (errored.Equals("runout"))
+            {
                 ViewBag.Error = "Out of stock";
             }
             return View(product);
@@ -180,7 +183,8 @@ namespace MVCPresentationLayer.Controllers
         public PartialViewResult NavMenu(IEnumerable<string> categories, string searchPhrase = "", string selectedCategory = "")
         {
 
-            var navViewModel = new NavMenuViewModel {
+            var navViewModel = new NavMenuViewModel
+            {
                 Categories = categories,
                 SearchPhrase = searchPhrase,
                 SelectedCategory = selectedCategory
