@@ -111,6 +111,10 @@ namespace MVCPresentationLayer.Controllers
         /// 
         /// Created:
         /// 2017/05/09
+        /// /// <remarks>
+        /// Skyler Hiscock
+        /// Updated: 2017/05/17
+        /// </remarks>
         /// 
         /// GET: /SupplierGoods/Create
         /// </summary>
@@ -118,10 +122,12 @@ namespace MVCPresentationLayer.Controllers
         public ActionResult Create()
         {
             var userId = usrMgr.RetrieveUserByUserName(User.Identity.GetUserName()).UserId;
+            List<AgreementWithProductName> productList;
             Supplier sup;
             try
             {
                 sup = supMgr.RetrieveSupplierByUserId(userId);
+                productList = supMgr.RetrieveAgreementsBySupplierID(sup.SupplierID);
             }
             catch
             {
@@ -132,7 +138,6 @@ namespace MVCPresentationLayer.Controllers
             lot.SupplierId = sup.SupplierID;
             lot.ExpirationDate = DateTime.Now;
 
-            var productList = supMgr.RetrieveAgreementsBySupplierID(sup.SupplierID);
             ViewBag.products = productList;
            
             return View(lot);

@@ -377,12 +377,11 @@ namespace LogicLayer
 
             try
             {
-                suppliersWithAgreements = AgreementAccessor.RetrieveAgreementsWithProductNameBySupplierId(supplierID);
+                suppliersWithAgreements = AgreementAccessor.RetrieveAgreementsWithProductNameBySupplierId(supplierID).GroupBy(s => s.ProductName).Select(s => s.First()).ToList();
             }
             catch
             {
             }
-            suppliersWithAgreements = suppliersWithAgreements.GroupBy(s => s.ProductName).Select(s => s.First()).ToList();
             return suppliersWithAgreements;
         }
 
